@@ -1,0 +1,119 @@
+$\chi^2$ goodness of fit tests are used to test whether the counts of observations belonging to two or more categories differ from those under an expected model. For example, what is the likelihood of a sample of 60 women and 40 men in a class coming from a population where the sex ratio is actually 1:1? In this example, there is a single categorical variable of sex, with two categories of male and female.
+<br>
+
+![](Goodness_of_fit_test_image.jpg)  
+
+<br>
+The test statistic is: 
+
+$\chi^{2} = \sum_{i=1}^{k} \frac{(O_{i}-E_{i})^2}{E_{i}}$
+
+
+<br>
+where *O* and *E* are the observed and expected numbers in each of the categories from 1 to k.
+
+The observed numbers come from your actual observations, in this example 60 and 40.The expected numbers are from a theoretical expectation of the frequencies under the model being tested. In this example, if you were testing against an expectation of a male:female ratio of 1:1, then you would expect 50 women and 50 men in a sample of 100 people.    
+For this example, 
+
+$\chi^2 = \frac{(60-50)^2}{50}+\frac{(40-50)^2}{50}$
+<br><br>
+
+### Running the analysis
+<br>
+You can calculate $\chi^2$ pretty easily with a calculator. You would then need to determine the probability of obtaining that $\chi^2$ value from the known probability distribution of $\chi^2$.
+
+```{r, eval = FALSE}
+pchisq(x, df,lower.tail = FALSE)
+```
+
+with *x* = your value of $\chi^2$, and degrees of freedom (*df*) = number of categories-1. The `lower.tail = FALSE` bit gives you the probability that $\chi^2$ is greater than your value.
+
+Alternatively, you can do all of this in one go with the `chisq.test` function. 
+
+```{r, eval = FALSE}
+chisq.test(x, p) 
+```
+    
+where *x* = the observed data (i.e., counts in each category) and *p* are the expected probabilities for each category.
+
+In this example we would use:
+
+```{r, eval = FALSE}
+chisq.test(x = c(60,40), p = c(0.5,0.5))
+```
+
+where *x* is the observed range of numbers and *p* has the expected probabilities.
+
+Note that it is very important that you use the actual counts as your observed data, not their proportions (i.e., 60 and 40, not 0.6 and 0.4). This makes sense if you understand that a sex ratio of 6:4 in a sample of 10 people is more likely to occur by chance when sampling from an equal sex ratio than a ratio of 600:400 in a sample of 1000 people.  
+
+You are not constrained to just two categories, or an expectation that the counts in each are equal. For example, to test whether the counts 10, 20 and 70 in three categories came from a population with expected frequencies of 0.25, 0.25 and 0.5, you would use:
+
+```{r, eval = FALSE}
+chisq.test(x = c(10,20,70), p = c(0.25,0.25,0.5))
+```
+<br><br>
+
+### Interpreting the results
+<br>
+The output from a goodness of fit test is very simple: the value of $\chi^2$, the degrees of freedom (number of categories - 1) and the p-value. The p-value gives the likelihood of your observed counts coming from a population with the expected frequencies that you specified.
+
+```{r, echo = FALSE}
+chisq.test(x = c(60,40), p = c(0.5,0.5))
+```
+
+In the sex ratio example, you should have obtained a p-value of 0.0455, which tells us that it is unlikely to obtain a sample of 60 women and 40 men from a population with an equal sex ratio. We would then conclude that they were likely to be sampled from a population that did not have an equal sex ratio.  
+
+To explore which of the categories had more observations than expected, or had fewer observations than expected, look at the standardised residuals. 
+
+```{r, eval = FALSE}
+chisq.test(x = c(60,40), p = c(0.5,0.5))$residuals
+```
+
+These are the differences between the observed and expected, standardised by the square root of the expected. These are standardised because any contrast of the absolute differences (observed - expected) can be misleading when the size of the expected values vary. For example, a difference of 5 from an expectation of 10 is an increase of 50%, but a difference of 5 from an expectation of 100 is only a 5% change.  
+
+Exploring the residuals becomes important when there are more than two categories in the test, as the $\chi^2$ test will only tell you if the observed frequencies differ from the expected across all categories, not which particular category is over- or under-represented.
+<br><br>
+
+### Assumptions to check
+<br>
+**Independence.** The $\chi^2$ test assumes that the observations are classfied into each category independently of each other. This is a sampling design issue and is usually avoided by random sampling. In the sex ratio example, there would be problems is you deliberately chose women to add to your sample if you thought that you had enough men already.  
+
+**Sample size.** The $\chi^2$ statistic can only be reliably compared to the $\chi^2$ distribution if sample sizes are sufficiently large. You should check that at least 20% of the expected frequencies are larger than 5. You can see the expected counts for each category by adding <font face="monospace">$expected</font> to the end of your $\chi^2$ test. For example,
+
+
+```{r, eval = FALSE}
+chisq.test(x = c(60,40), p = c(0.5,0.5))$expected
+```
+
+
+If this assumption has not been met, you could combine categories (if you have more than two), run a randomisation test or consider log-linear modelling.
+<br><br>
+
+### Communicating the results
+<br>
+**Written.** The results of a $\chi^2$ goodness of fit test can be easily presented in the text of a results section. For example, "The sex ratio of the class of 100 students differed significantly from a 1:1 ratio ("$\chi^2$ = 4, df = 1, P = 0.0455)."  
+
+**Visual.** Count data are best presented as a bar plot with the counts on the Y axis and the categories on the X axis 
+
+```{r}
+barplot(c(60,40),xlab = 'Sex', ylab = 'Count', names=c('Female','Male'))
+```
+
+See the graphing modules for making better versions of these figures that are suitable for reports or publications.
+<br><br>
+
+### Further help
+<br>
+Type `?chisq.test` to get the R help for this function. 
+
+Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Chapter 14. Analyzing frequencies.
+
+McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Chapter 20.2 Comparing observed and expected frequencies: the chi-square test for goodness of fit.
+<br><br>
+
+**Author**: Alistair Poore
+<br>
+Last updated:
+```{r,echo=F}
+date()
+```

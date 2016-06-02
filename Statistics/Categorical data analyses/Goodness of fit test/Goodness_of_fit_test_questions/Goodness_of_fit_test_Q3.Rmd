@@ -1,0 +1,56 @@
+
+```{r, echo=FALSE}
+# If instructor copy, use INST = TRUE to see inline code output.
+library(knitr)
+INST = TRUE
+
+if (INST == TRUE) opts_chunk$set(fig.keep = 'all', results = 'markup', echo = TRUE)
+if (INST == FALSE) opts_chunk$set(fig.keep = 'none', results = 'hide', echo = FALSE)
+
+```
+
+![](Goodness_of_fit_test_Q3_image.jpg)
+
+Behavioural scientists recently analysed the decision making of soccer goalkeepers when faced with penalty kicks (reported in the journal *Progress in Brain Research*, 2009). They viewed 311 penalty kicks and recorded the direction the direction that the goal keeper moved (left, centre or right of goalkeeper) to try to stop the ball. 
+
+Direction of keeper's movement 
+Left, 153
+Centre, 20
+Right, 138
+
+
+They then analysed the direction of the kicks to examine whether goalkeepers were making rational decisions about how to save the goal. 100 of the kicks went to the left, 89 of the kicks were in the centre, and 122 were to the right (direction from the goal keeper's perspective).
+
+
+**Q1**  What statistical test could test the hypothesis that goalkeeper movements were in proportion to the likelihood that the ball is heading in that direction? 
+
+
+**Q2**  What are the expected movements if the goal keepers are making entirely rational decisions, with their movements related to the likelihood of the ball heading in each direction? 
+
+```{r}
+#Left = 100, Centre = 89, Right = 122
+```
+
+
+**Q3**  Conduct the test, and give the value of the test statistic.
+
+
+```{r, warning = FALSE}
+chisq.test(x = c(153,20,138), p = c(100/311,89/311,122/311))
+# {1:NUMERICAL:=84.2675:0.01} and P value {1:MULTICHOICE:=<0.001~>0.01~>0.01~>0.05}
+
+```
+
+
+**Q4**  Is your null hypothesis rejected or retained? 
+
+**Q5**  The study's authors suggested that the highly paid soccer players were reluctant to stand still (i.e., the centre movement) because it would look like they weren't trying to save the ball. Does your analysis support this conclusion? Give reasons for your answer.
+
+
+
+```{r, warning = FALSE}
+chisq.test(x = c(153,20,183), p = c(100/311,89/311,122/311))$residuals
+
+```
+
+

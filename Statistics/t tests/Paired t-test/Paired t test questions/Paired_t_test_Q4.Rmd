@@ -1,0 +1,68 @@
+
+```{r, echo=FALSE}
+# If instructor copy, use INST = TRUE to see inline code output.
+library(knitr)
+INST = TRUE
+
+if (INST == TRUE) opts_chunk$set(fig.keep = 'all', results = 'markup', echo = TRUE)
+if (INST == FALSE) opts_chunk$set(fig.keep = 'none', results = 'hide', echo = FALSE)
+
+```
+
+![](Paired_t_test_Q4_image.jpg)
+
+
+Male fiddler crabs have one normal-sized claw and one extremely enlarged one. Whether it is the left or the right claw that is enlarged appears to be random, with 49% in the population having bigger left claws and 51% having bigger right claws. A behavioural ecologist wishes to know whether the duration of fights among fiddler crabs (a measure of the energetic cost involved) is independent of the side of the major claw of a crab relative to his opponent.
+
+She did a series of replicate trials in which she took a male and placed him into an arena with either a crab with a claw on the same side or on the opposite side as his claw. She then gave the male 2 days break and conducted another trial with an opponent of the other type. The order of the treatments was randomised for each of the 14 replicate trials. The times for the contests were as follows:
+
+Opponents claw (relative to focal male)
+
+Male|Same side|Opposite side
+-|-|-
+1|117|66
+2|102|54
+3|137|100
+4|55|61
+5|185|22
+6|39|50
+7|67|75
+8|96|86
+9|181|204
+10|152|108
+11|223|172
+12|190|100
+13|83|52
+14|75|82
+
+<br><br>
+
+
+```{r}
+fiddler = read.csv(file = "Fiddler_crabs.csv", header = T)
+```
+
+Firstly, visualise the differences in fighting times between treatments.
+
+```{r}
+boxplot(Duration~Side, data = fiddler)
+```
+
+
+**Q1.** How would you test the null hypothesis "fights between males with claws on the same side last longer than those between males with claws on opposite sides"?
+
+```{r}
+# {1:MULTICHOICE:=Paired t test~Two sample t test~Contingency table~Linear regression}
+```
+
+
+
+**Q2.** Conduct the test, and give the value of the test statistic and P value.
+
+
+```{r}
+t.test(Duration~Side, data = fiddler, paired = TRUE)
+# {1:NUMERICAL:=2.549:0.01~%100%-2.549:0.01}
+# {1:NUMERICAL:=0.02422:0.01}
+```
+

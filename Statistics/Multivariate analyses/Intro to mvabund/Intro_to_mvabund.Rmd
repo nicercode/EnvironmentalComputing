@@ -1,0 +1,149 @@
+<span style="color:red">Model-based multivariate analysis: *mvabund*
+========================================================
+
+Multivariate data is common in community ecology, what do we do when we don't have one response variable, but seven? Or even 100? We will use the package *mvabund* which allows us to specify and fit multivariate statistical models to our data to test hypotheses. How does this method differ from other multivariate analyses?
+
+Many currently used multivariate analyses (e.g. *PERMANOVA*, *ANOSIM*, *CCA*, *RDA* etc.) are "distance-based analyses". This means the first step of the analysis is to take a multivariate dataset and make it into a univariate dataset by calculating pairwise differences between each combination of samples. For example, in this exercise we use 100 samples of macroalgae, for each sample we counted the abundance of seven species of marine herbivores (seven response variables). We can reduce this into a univariate dataset with 4950 (100*99/2) pairwise differences (one response variable). Then resampling is used to test hypotheses about the data. 
+
+There are a couple of problems with these kinds of analysis. First, their statistical power is very low, except for species with high variance. This means that for species which are less variable, they are less likely to detect a treatment effect. Second, they do not account for a very important property of multivariate data, which is the mean-variance relationship. If you think about variance as variability in count data, this just means that typically in multivariate datasets counts for rare species will have many zeros, giving them a lower overall variability than more abundant species. 
+
+The *mvabund* approach improves power across a range of species with different variances and includes an assumption of a mean-variance relationship. It does this by fitting a single generalised linear model (GLM) to each different response variable with a common set of predictor variables. We can then use resampling to test for significant community level or species level responses our predictors. Also, the model-based framework makes it easier to check our assumptions and interpret uncertainty around our findings.    
+
+![](Rick-Astley.jpg)
+
+```{r results='hide', message=FALSE, warning=FALSE}
+library(mvabund)
+library(reshape)
+library(ggplot2)
+```
+
+### Getting to know your data's properties
+
+We will use the same dataset that we used in the <span style="color:red">Multi-dimensional scaling (MDS)</span> worksheet, which contains an example where researchers wanted to contrast the feeding specificity of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of five species of macroalgae were collected from Sydney Harbour, 10 collected at night and 10 during the day. For each individual macroalga collected (n=100), the abundance of seven species of herbivorous crustacean were recorded (a raw data matrix of 100 samples x 7 variables, data from Poore et al. 2000). First, we will read in the data. 
+
+```{r}
+Herbivores = read.csv(file="Herbivore_specialisation.csv", header=T, stringsAsFactors=F)
+head(Herbivores)
+```
+
+Using the `head()` function, we can see that the first 3 columns give us categorical information: *Habitat* (the species of macroalgae sampled), *Day.night* (whether the sample was taken during the day or at night) and *Sample* (the unique ID given to each sample taken). The next seven columns give us the abundance data, in this case, how many of the seven focal species of marine herbivores were counted on each algal sample. 
+
+We will now use the abundance data and convert it to the *mvabund object* format used by the *mvabund* package. 
+
+```{r}
+sp <- mvabund(Herbivores[,4:ncol(Herbivores)])
+```
+
+We can have a quick look at the spread of our data using the `boxplot.mvabund()` function. 
+
+```{r message=FALSE, warning=FALSE}
+boxplot.mvabund(sp)
+```
+
+It looks like some species of marine herbivores (e.g. *Cymadusa munnu*) are much more abundant and variable than others (e.g. *Ampithoe ngana*). It's probably a good idea to check our mean-variance relationship then! We can do this using the `meanvar.plot()` function:
+
+```{r message=FALSE, warning=FALSE}
+meanvar.plot(sp)
+```
+
+Yup, it certainly looks like variance increases with abundance. We can deal with this relationship by choosing a family of GLMs with an appropriate mean-variance assumption. The default family used by *mvabund* when fitting multivariate GLMs is *negative binomial* which assumes a quadratic mean-variance relationship and a log-linear relationship between the response variables and any continuous variables (in this example we only have categorical variables so that one's not too important). If you are unsure of these relationships, don't worry, we can check our model fit later. 
+
+Now let's get back to our research questions. Are there differences in the feeding habitats of the seven marine herbivores sampled? Do some of them specialise on particular types of algae while others are more generalised feeders? Which species? Let's start by eyeballing the data.  
+
+There is a 'quick and dirty' built-in plotting function in the *mvabund* package that allows us to view transformed abundances according to the predictor variables of our choice. We can alternatively include the argument `transformation="no"` to look at the raw abundance data. Because this plot is based on the base plotting language in R, you can add extra arguments to customise the graph. We have made the axis text (`cex.axis=0.8`) and the symbols (`cex=0.8`) smaller so that we can better see what's going on.
+
+```{r message=FALSE, warning=FALSE}
+plot(sp~factor(Herbivores$Habitat), cex.axis=0.8, cex=0.8)
+```
+
+It is quite a messy graph but a couple of things jump out at us. It looks like the herbivore *A. ngana* is very abundant and will eat just about anything, though potentially it's not a huge fan of *Colpomenia peregrina* and the *Sargassum* genus may be a preferred algal habitat. On the other hand, *C. munnu* and *Plumithoe quadrimanus* are quite rare, but if they are around, they'll be found on either *C. peregrina* or *Zonaria diesingiana* algae. So overall, we might say there's evidence that A. ngana, A. caddi and A. kava and *Exampithoe kutti* are generalised feeders whereas *Perampithoe parmerong* and *P. quadrimanus* are specialised feeders. With *C. munnu* perhaps it is too rare to tell. Let's see if the models support our observations. The model syntax below fits our response variable `sp` (100 counts of 7 marine herbivore species) to the predictor variables `Habitat` (type of algae) as well as `Day.night` (when the sample was collected). In the first line we select a "reference level" or "intercept" for our model for our factors. The factor `Day.night` only has two levels (Day & Night), so it doesn't matter which one we compare the other to, the differences will be the same. For our algae it is a little trickier. We don't have a particular "reference" habitat, for example, if we were looking at some alage near a sewerage outlet and other algae in pristine waters. Here we are just interested in the differences among different algal species so our choice will depend on our particular knowledge and interest in our study system. For this exercise, we will use the common algae *Dictyopteris acrostichoides* as our reference level:
+
+
+```{r}
+Herbivores$Habitat <- relevel(factor(Herbivores$Habitat), "Dictyopteris_acrostichoides")
+mod1 <- manyglm(sp~ Herbivores$Habitat + Herbivores$Day.night, family="negative.binomial")
+```
+
+Remember how we talked about checking our assumptions? We can do that now that we have fit the model using *mvabund*'s `plot()` function. This generates a residuals plot, in the simplest terms a residuals plot shows the difference between the *predicted* values from our model and the original *observed* vaues we put into the model. If the model is a good fit, we should see a random scatter of points. What we don't want to see is a relationship, either linear or curvilinear, this could mean that one of our assumptions was wrong: either our mean-variance relationship was wrongly specified, or our assumed relationship between our response and predictors was incorrect. Or we could have missed a key explaining variable in our model which leaves a lot of unexplained variance. We can fix these issues by choosing a new model family, or by adding more covariates to our model. 
+
+```{r message=FALSE, warning=FALSE}
+plot(mod1)
+```
+
+In this instance the residuals plot looks alright, there is a random spread of points and they are mostly contained between -3 and 3. So we can go on with our model inference. So, are there differences in the feeding habits of our seven marine herbivores? Let's begin to address this question by first asking: do communities of marine herbivores change across different algal substrates? We can use the `anova()` function to compute an analysis of deviance table where we use likelihood ratio tests and resampled p values to look for a significant effect of *Habitat* on marine herbivore communities. 
+
+```{r}
+anova(mod1)
+```
+
+We can see from this table that there is a significant community effect for Habitat (LRT=625, P=0.001), meaning we will find different assemblages of marine herbivores on different types of algae. It also appears that whether the samples were collected during the day or at night had little effect of marine herbivore communities found (LRT=6.2, P=0.574). This is a good start, we now know that on different species of larvae we are likely to find different communities of marine herbivores, however, which herbivore species are more likely to be found on which algae? Are some herbivores found on all algae and others only on a select few? Using the `p.uni="adjusted"` argument in our anova function, we can calculate significance of the treatment effect (*Habitat*) for each marine herbivore species separately. The "adjusted" part of the argument refers to the resampling method used to compute the p values that takes into account correlation between the response variables. This correlation is often found in ecological systems where different species will interact with eachother, competing with or facilitating each others' resource use.
+
+```{r}
+anova(mod1, p.uni="adjusted")
+```
+
+From our univariate tests, we can see that all of the marine herbivore species are significantly related to Habitat. Now we want to know *how* they are related to Habitat, which species are more or less likely to be found on any given algal species. We can use the `coef()` function to find out whether our marine herbivores are positively or negatively associated with different types of algae. 
+
+```{r}
+coef(mod1)
+```
+
+So we can see that, for exammple, *Zonaria diesingiana* is not likely preferred habitat of *P. parmerong*, but is likely to be a preferred habitat of *P. quadrimanus*. It is also important to understand how sure we are about our coefficient estimates, we can do this by calculating 95% confidence intervals around our coefficients:
+
+
+```{r}
+coefs <- melt(coef(mod1)[2:5,]) #reshape the modeled coefficients into long format
+se <- melt(mod1$stderr.coefficients[2:5,]) #get coefficient standard errors and reshape to the same format 
+mod.df <- cbind(coefs, se[,3])
+colnames(mod.df) <- c("Habitat", "Herbivore", "Coefficient", "SE")
+mod.df$CIhi <- mod.df$Coefficient + mod.df$SE*(-qnorm((1-0.95)/2))
+mod.df$CIlo <- mod.df$Coefficient - mod.df$SE*(-qnorm((1-0.95)/2))
+```
+
+
+### Communicating the results
+
+*Written*  
+
+If we were writing a paper about the differences in habitat use by marine herbivores, we may write the following: 
+
+There were different marine herbivores communities on different algal substrates (LRT = 625, P < 0.001), but marine herbivore communities did not differ between day and night (LRT = 6, P = 0.580). We can be more descriptive about the community differences by using a graphical respresentation of our results.   
+
+*Visual*  
+
+We can communicate a lot of multivariate information to our audience very quickly with a graph. Below we use the package *ggplot2* to help us make a custom graph. You can learn more about graphing with *ggplot2* in our worksheets in <span style="color:red">Graphical techniques - Plotting with gglpot</span>. Here, we will graph our modelled coefficients and 95% confidence intervals to give our audience an overall picture of how our marine herbivore communities use different types of algae. 
+
+```{r}
+levels(mod.df$Habitat) <- c("Cp", "Sl", "Sv", "Zd")
+ p = ggplot(mod.df, aes(col=Habitat)) + 
+  geom_pointrange(aes(x = Herbivore, y = Coefficient, 
+                      ymin = CIlo, ymax = CIhi), size=0.35,
+                      position = position_dodge(width = 3/4)) +
+  geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+  theme_bw()+ xlab("Marine Herbivores") + ylab("Modelled Coefficient") + 
+  theme(axis.title.x = element_text(size=10, face="bold", vjust=-1),
+                axis.title.y = element_text(size=10, face="bold", vjust=1.5),
+                axis.text.x = element_text(size=10),
+                axis.text.y = element_text(size=10),
+                panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank(),
+                plot.margin=unit(c(1.5,3,1.5,1.5),"cm")) + 
+  geom_vline(xintercept=c(1.5, 2.5, 3.5, 4.5, 5.5, 6.5), linetype="solid") +
+  coord_flip(ylim = c(-8,8))
+print(p)
+```
+
+We have limited the x-axis (Coefficients) to -8 to 8 so that we can see more detail. Looking at our graph, we can say that we are 95% certain that *P. parmerong* will forage on *S. linearifolium* (Sl) more than *D. acrostichoides*. We are also 95% certain that *E. kutti* will forage on *S. linearifolium* (Sl) less than *D. acrostichoides*. As you can see, for *P. quaderimanus* and *C. mannu*, we are not very sure of our modeled responses at all. 
+
+### Further help
+
+If you're interested in this method, watch the introductory video NOW! You won't regret it, it is both hilarious and informative [Introducing mvabund and why multivariate statistics in ecology is a bit like Rick Astley...](http://eco-stats.blogspot.com/2012/03/introducing-mvabund-package-and-why.html). This method was created by UNSW's very own world-renowned Ecostats research group, you can keep up with their latest research on their [blog](http://eco-stats.blogspot.com/). They have been updating the mvabund package with many new exciting features, including block resampling and fourth corner analyses. Finally, you may like to try reading the paper that introduces the *mvabund* package - I think you'll find it surprisingly accessible!
+
+Wang, Y., Naumann, U., Wright, S.T. & Warton, D.I. (2012) mvabund - an R package for model-based analysis of multivariate abundance data. *Methods in Ecology and Evolution*, 3, 471–474.
+
+**Authors**: Rachel V. Blakey & Andrew Letten (coefficent plot)
+
+Last updated:
+```{r,echo=F}
+date()
+```

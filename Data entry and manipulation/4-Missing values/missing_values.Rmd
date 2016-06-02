@@ -1,0 +1,104 @@
+---
+output: html_document
+---
+<span style="color:red"> Missing data, what to do?!
+========================================================
+### Usage 
+There is a large literature of statistical methods for dealing with missing data. Here we briefly review some key concepts and the inbuilt functions in which R deals with missing values. 
+<br/>
+
+### More on missing data 
+It is important to think *why* data may be missing. Is the data 'randomly' missing (i.e., as a result of illegible writing within data sheet) or is it non random missingness (i.e., Unable to get some measure because animals died). In the first scenario analysis based on the available data(though a smaller sample size) will tend to be unbiased. In the second scenario, the animal death may be related to the treatment and such data cannot be ignored in the sense that the analysis of the available data alone will typically be biased. 
+
+The following outlines the main approached to dealing with missing data.
+
+1. Analyse only the data that is available (i.e. ignore the missing data).
+2. Impute the missing data with replacement values and treat these as if they were observed (e.g. last observation, imputing and assumed out come, imputing the mean, imputing based on predicted values from a regression analysis) 
+3. those describe in number 2) but adjusting to the standard error).
+4. Using statistical models that allow for missing data, making assumptions about their relationship with the available data. 
+
+Option 1 is appropriate if the available data can be assumed to be missing at random. Option 2 Is an attempt to address non random missing values, it simple to put into practice but fails to acknowledge uncertainty (use caution when simply replacing missing values with other values). 
+
+Option 3 and 4 also attempt to address non random missing data but requires involved statistical knowledge. 
+<br/>
+
+### Identifying missing values in R 
+When importing data into R, blank cells within your raw data will be represented by the symbol NA, NA is not a string or numeric but an indicator of missingness. You will also see NA when you try certain operations that are illegal or don't make sense (like coercing a character to a numeric or trying to calculate the variance of a single number).
+
+Note, `R` will sometimes call a missing value within a character/factor a level. If you define missing values as NA using `na.strings = ""` whilst importing the data you will avoid this problem(for more on importing data and data types see modules Data Cleaning and Data structure and types).
+
+Feeding behaviour data will be used to look at the missing values. 
+
+```{r, collapse= T}
+snl.fed <- read.csv("feeding_behaviour.csv", sep = ",", header = T, strip.white = T, na.strings = "")
+
+```
+
+```{r, echo = F, eval = T, warning = F} 
+# cleaning up the data, code from data cleaning module. 
+snl.fed <- snl.fed[, colSums(is.na(snl.fed)) != nrow(snl.fed)]
+snl.fed <- snl.fed[rowSums(is.na(snl.fed)) != ncol(snl.fed), ]
+snl.fed$snail.ID <- as.factor(snl.fed$snail.ID)
+snl.fed$distance <- as.numeric(as.character(snl.fed$distance)) 
+snl.fed[682,"distance"] <- 0.356452
+snl.fed[755,"distance"]<- 0.42336
+snl.fed[which(snl.fed$gender == "males" | snl.fed$gender == "Male"), 2] <- "male"
+snl.fed[which(snl.fed$gender == "female s"), 2] <- "female"
+snl.fed$gender <- factor(snl.fed$gender)
+snl.fed[which(snl.fed$depth > 2),6] <- 1.62
+```
+
+```{r, collapse= T}
+summary(snl.fed)
+```
+Looking at the output from `summary(snl.fed)` it list how many missing values are within each variable. Temp has 6 and size has 1. The first thing you need to do is confirm that your missing values are actually missing values. `which()` and `is.na()` allows you to identify the row number of the missing values, check these against your datasheets.  
+
+```{r, collapse= T}
+which(is.na(snl.fed$temp))
+which(is.na(snl.fed$size))
+```
+**NaNs:** In addition to NA, R has special value NaNs (not a number). 0/0 is an example of a calculation that will produce NaNs. NaNs generally behave like NAs and can be treated as so. 
+<br/>
+
+### Na options in R
+`R` has inbuilt options for dealing with NAS, examples include 
+
+1. `na.omit()` and `na.exclude()` returns objects with observations (rows) removed if they contain any missing value. If na.exclude is used some functions will pad residuals and predictions to the correct length by inserting NAs for omitted cases.
+2. `na.pass()` returns the object unchanged
+3. `na.fail()` returns the object only if it is without missing values. 
+<br/>
+ 
+Look what happens when we count the row length of our data frame for each of the above functions. Na omit and Na exclude do not include NAs within the count whereas na.pass counts the NAs and na.fail returns an Error.
+
+```{r, error = TRUE, collapse= T}
+nrow(snl.fed) # the number of rows without using any na functions. 
+nrow(na.omit(snl.fed))
+nrow(na.exclude(snl.fed))
+nrow(na.pass(snl.fed))
+na.fail(snl.fed)
+```
+<br/>
+
+#### Options within functions
+Most functions in R offer options for dealing with missing values.  For example if you look at the help file `?mean`, there is an `na.rm` argument. likewise the `lm()` function also has a listed `na.action` within the help file `?lm`. By default it will use the `na.action` specified in the R options. If you wish to use a different `na.action` you can indicate within the lm command. 
+
+```{r, collapse= T, eval= F}
+mean(snl.fed$temp, na.rm = T)
+(lm(snl.fed$temp ~ snl.fed$distance, na.action = "na.exclude"))
+```
+<br/>
+
+### Non random missing values = Difficult! 
+The above options obviously cover primarily random missing values. How you deal with non-random missingness is highly dependent on your variable and the analysis.  Some functions and packages have higher level na.options for example, the gam package has an `na.gam.replace()`option which replaces numerical NAs with the mean and creates another NA factor for categorical data.  
+
+For an excellent discussion on Missing values and how to deal with them (including more complex imputation methods) read this chapter - [Missing data imputation](http://www.stat.columbia.edu/~gelman/arm/missing.pdf).
+<br/>
+
+#### More resources on missing values 
+1. [Donders et al (2006) - a gentle introduction to data imputation of missing values](http://www.researchgate.net/profile/Geert_Van_der_Heijden/publication/6814409_Review_a_gentle_introduction_to_imputation_of_missing_values/links/0fcfd50c0538211f5b000000.pdf)
+2. [Quick R missing data ](http://www.statmethods.net/input/missingdata.html)
+
+
+
+
+

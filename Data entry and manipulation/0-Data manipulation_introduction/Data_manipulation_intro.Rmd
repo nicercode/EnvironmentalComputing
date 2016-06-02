@@ -1,0 +1,23 @@
+Having skills in importing, organising and summarising data is crucial for students and researchers in all sciences. On these pages, we give some guidance for data entry and manipulation that can save a lot of time when it comes to analysing data and making effective figures. 
+
+![](Data_manipulation_image.jpg)
+
+
+* [Data entry](http://environmentalcomputing.net/data-entry/) - organising data when first entering it into a spreadsheet.  
+* [Importing data](http://environmentalcomputing.net/importing-data/) into R  
+* [Data types and structure](http://environmentalcomputing.net/data-types-and-structure/) - better understanding data objects in R  
+* [Reshaping data](http://environmentalcomputing.net/reshaping-data/) between wide and long formats  
+
+Data manipulation using the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html)
+
+* [Subsetting data](http://environmentalcomputing.net/subsetting-data/) - selecting rows and columns  
+* [Summarising data](http://environmentalcomputing.net/summarising-data/) - extracting summary statistics  
+* [Combining data sets](http://environmentalcomputing.net/combining-data-sets/) - joining entire data sets, or parts by matching rows  
+<br><br>
+
+**Author**: Alistair Poore
+<br>
+Last updated:
+```{r,echo=F}
+date()
+```

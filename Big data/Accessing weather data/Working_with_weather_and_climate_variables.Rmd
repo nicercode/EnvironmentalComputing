@@ -1,0 +1,146 @@
+<span style="color:red">Working with weather and climate variables
+========================================================
+
+Weather and climate are often important predictors of ecological processes. The term "weather" refers to short time processes like daily temperature, humdiity and rainfall, whereas "climate" refers to longer-scale trends in these processes usually over periods of at least 10 years. Weather and climate influence ecological systems differently. For example, warmer more humid climates are likely to have a greater *diversity* of insects than cool temperate regions while weather may influence the local *abundance* of insects flying, for example on a cool rainy night, few insects will be flying. 
+
+As with the <span style="color:red">Subsetting rows and columns with dplyr</span> worksheet, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees ("bat.dat.csv"). For more details on this data, see the aforementioned worksheet.
+Our aim is to add daily maximum temperature data for each sampling night and 30-year average maximum temperature for each site sampled. In this way we are accounting for *temporal* variation of nightly temperatures and *spatial* variation of longer-term temperature.
+
+First up, we will load in our bat data and also the *raster* package allows us to work with gridded datasets and the *dplyr* package that makes joining datasets easy.
+
+```{r results='hide', message=FALSE, warning=FALSE}
+bats = read.csv("bats.dat2.csv", header=T, stringsAsFactors=F)
+library(raster)
+library(dplyr)
+```
+
+##Finding Australian weather and climate data
+
+Now to get our climate data: you can get a whole lot of Australian weather and climate data from [http://www.bom.gov.au/climate/data/](Australia's Bureau of Meteorology) (BOM). For this worksheet we will work with daily maximum temperature for one station (Kerang - 080023) over two years (*w.maxT.2012*, *w.maxT.2013*) at [www.bom.gov.au/climate/data/](www.bom.gov.au/climate/data/) and also 30-year maximum temperature (1961-1990) (*c.maxT*) available at [http://www.bom.gov.au/climate/averages/maps.shtml](http://www.bom.gov.au/climate/averages/maps.shtml). For daily weather data, there is a useful map function on the website to allow you to choose the closest or most suitable weather station for your dataset, you can also enter the co-ordinates of your field site to find the nearest station. The 30-year climate data comes as a national dataset, so you need to extact the areas relevant to you. 
+
+After downloading the weather data, we will unzip the folders and then read the data tables into R. Because the weather data has the same structure and we will be using both 2012 and 2013 observations, we can bind them together into one dataframe using `rbind()`:
+
+```{r}
+w.maxT.2012 <- read.csv("IDCJAC0010_080023_2012_Data.csv", stringsAsFactors=F)
+w.maxT.2013 <- read.csv("IDCJAC0010_080023_2013_Data.csv", stringsAsFactors=F)
+w.maxT <- rbind(w.maxT.2012, w.maxT.2013)
+```
+
+For the climate data, we will unzip the folders and then rename the file extensions from ".txt" to ".asc". Next, we use the `raster()` command to read in our spatial grid. We will specify the code for coordinate reference system which is GDA94 ("+init=epsg:4283") using the *crs* argument. 
+
+```{r}
+c.maxT <- raster("maxann.asc", crs="+init=epsg:4283")
+```
+
+We can see that our weather data is a data frame consisting of 731 rows and 8 columns. We have one measurement of maximum temperature (named "Maximum.temperature..Degree.C") for each day of 2012 and 2013 (731 days) and date is given in 3 columns named "Year", "Month" & "Day".
+
+```{r}
+class(w.maxT)
+dim(w.maxT)
+head(w.maxT)
+```
+
+The climate data is structured a little differently. It is a raster layer consisting of a 1361 X 1681 grid of pixels, each with a value of maximum temperature over the 30-year period. By plotting our raster, we can see, as expected, that maximum annual temperatures range from around 10&deg;C in the south-east to 35&deg;C.  
+
+```{r}
+class(c.maxT)
+dim(c.maxT)
+plot(c.maxT)
+```
+
+##Joining daily weather data to our dataset
+
+We will use commands from the <span style="color:red">Combining datasets with dplyr</span> worksheet to join our weather data to our bat dataset. We want to join our temperature observations to our survey nights, so we will need a column to match them with. At this stage our bat data shows date in the "dd/mm/yyyy" format, whereas our temperature data expresses date in three separate columns. We will do this is several steps. First we need to change the *Day* and *Month* columns in the weather datset to 2-digit format, for exammple January would be *01* instead of *1*. We can use the `sprintf()` command to do this, specifying the 2-digit format (fmt) using the code "%02s", and we will make new columns (*Day2*, *Month2*) for our outputs. 
+
+```{r}
+w.maxT$Day2 = sprintf(fmt="%02s", w.maxT$Day)
+w.maxT$Month2 = sprintf(fmt="%02s", w.maxT$Month)                      
+```
+
+Next, we will make the *Year* into a 2-digit column using the `substr()` function, where we specify the index where we want to start and stop within a vector. In this case we want the last two digits of the 4-digit year (3 and 4) and we will place this into a new column (*Year2*).
+
+```{r}
+w.maxT$Year2 = substr(w.maxT$Year, 3, 4)
+```
+
+Now we can join the new columns together using the `paste0()` function to make a new date column in our temperature dataset in the "dd/mm/yyyy" format. 
+
+```{r}
+w.maxT$date = paste0(w.maxT$Day2, "/", w.maxT$Month2, "/", w.maxT$Year2)
+```
+
+Finally, we can use the `left_join()` function to join our temperature data to our bat data based on the date column in each dataset. 
+
+```{r}
+bats.temp <- left_join(bats, w.maxT, by="date")
+dim(bats.temp)
+head(bats.temp)
+```
+
+We can see that the bats data now has 11 more columns and that we have successfully added all of the columns from the temperature data. Let's clean it up by getting rid of unwanted colunms and renaming the maximum temperature column to something snappier. 
+
+```{r}
+bats.temp2 <- bats.temp[,c(1:12,18)]
+colnames(bats.temp2)[13] <- "nightly.maxT"
+head(bats.temp2)
+```
+
+##Extracting 30-year climate data and joining to our dataset 
+
+Now it's time to extract our 30-year average annual maximum temperature data from our raster, this will require us to learn some new spatial skills. We will run through these skills quite quickly but you can learn more in the <span style="color:red">Spatial data in R</span> worksheets. First, we will load in our bat sites (geo) and then convert our bat sites into a spatial points data frame using the *sp* package (which loads with the *raster* package). We will use the `SpatialPointsDataFrame()` function which requires our xy coordinates (our lats and longs in this case), our accompanying data frame (here we will have our site names), as well as our coordinate reference system (CRS), which for us is GDA94. 
+
+```{r}
+geo = read.csv("geo.dat.csv", header=T, stringsAsFactors=F)
+bat.sites = SpatialPointsDataFrame(coords=cbind(geo$lon, geo$lat), 
+                                   proj4string=CRS("+init=epsg:4283"),
+                                   data=geo)
+```
+
+Conveniently our annual maximum temperature climate data is in the same CRS as our bat sites, making spatial computations easy (note: if you have data in two different coordinate reference systems, you can check out the `spTransform()` function in the *sp* package). We can now plot our sites and maximum temperature layers together in R. For example, we can plot our points over the top of the Australia-wide maximum temperature map. 
+
+```{r}
+plot(c.maxT)
+plot(bat.sites, add=T)
+```
+
+We can see that the points line up around where we expect them (along the River Murray north of Melbourne) and that the annual maximum temperatures in that region are somewhere between 25 and 30. We can also zoom in on a section of the raster and plot our points to get a better idea of how maximum temperature varies across our sites using the `crop()` tool and specifying the desired extent (xmin, xmax, ymin, ymax). 
+
+```{r}
+plot(crop(c.maxT, extent(143.9,144.5,-36,-35.4)))
+plot(bat.sites, add=T)
+```
+
+Based on this plot the maximum temperatures of our sites do not vary too much, maybe from around 22.5&deg;C in the north-west to 23&deg;C in the south-west. Let's check this by extracting our maximum temperature values for each site using the `extract()` function. 
+
+```{r}
+maxT.vals <- extract(x=c.maxT, y=bat.sites, method='simple')
+min(maxT.vals)
+max(maxT.vals)
+```
+
+We can see that our estimated values fit well with the minimum and maximum values extracted. Now to join our measures of long-term annual maximum temperature to our bat dataset. First step will be to add the site names onto our extracted values, then, as with the nightly maximum temperature, we can join the two data frames using `left_join()`.
+
+```{r}
+c.maxT.vals <- data.frame(site=bat.sites$site, long.term.maxT=maxT.vals, stringsAsFactors=F)
+bats.final <- left_join(bats.temp2, c.maxT.vals, by="site")
+```
+
+If we plot our weather data (nightly maximum temperature) against our climate data (long-term maximum temperature), we can see that they are not at all correlated. This means that they give us very different information about maximum temperature which may influence the ecology of our bats differently.
+
+```{r}
+plot(bats.final$long.term.maxT, bats.final$nightly.maxT, 
+     xlab="climate (degrees C)", ylab="weather (degrees C)")
+```
+
+### Further help
+
+As well as historical (observed) climate data, there is a wealth of data available simulating future climates online, if you are interested in climate change. For example, check out the [regional climate model predictions for NSW](http://www.climatechange.environment.nsw.gov.au/Climate-projections-for-NSW/Download-datasets/What-can-you-download). Make sure you get this data while you can, because [Australia's world-class climate research has been gutted by the short-sighted policies of the Australian Liberal government](http://www.nature.com/news/job-cuts-in-australia-target-climate-scientists-1.19313).
+
+The skills you've learned here not only help you integrate weather and climate data into your research, but will also help you to add all sorts of covariates to your dataset. See [the NSW Office of Environment and Heritage mapping portal](http://mapdata.environment.nsw.gov.au/geonetwork/srv/en/main.home) to search for environmental data that interests you.
+
+**Author**: Rachel V. Blakey (all views expressed are soley the author's).
+
+Last updated:
+```{r,echo=F}
+date()
+```

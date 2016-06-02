@@ -1,0 +1,78 @@
+# load Y, the original dataset  
+
+Y = read.table(file.choose())
+
+# load D, made up by substracting column values (Thalassia-Galaxaura and Galaxaura-Dictyota)
+
+D = read.table(file.choose())
+
+Y = as.matrix(Y)
+n = nrow(Y)
+K = ncol(Y)
+
+
+Y.Means = colMeans(Y)
+Y.bar = as.matrix(Y.Means)
+# Transposes the vector as a column
+
+Y.cov = cov(Y)
+# Calculates the covariance matrix
+
+invY.cov = solve(Y.cov)
+# Function 'solve' creates inverse of Y.cov
+
+D = as.matrix(D)
+# need to lead matrix made up of substracting  the nth corrected-mean from the preceding n-1 corrected means
+n2 = nrow(D)
+K2 = ncol(D)
+
+D.Means = colMeans(D)
+D.bar = as.matrix(D.Means)
+
+D.cov = cov(D)
+invD.cov = solve(D.cov)
+
+pi.0=rep(0,K2)
+# creates a column vector with '0'which is K2 elements long.
+
+T = n*t(D.bar-pi.0)%*%invD.cov%*%(D.bar-pi.0)
+
+# THIS WILL BE THE HOTELLING T2 VALUE
+
+critT = ((K2-1)*(n2-1)/(n-K2+1))*qf(0.05,K-1,n-K+1,lower.tail=FALSE)
+# According to Lockwood, THIS THE CRITICAL T2 (Value that T needs to be larger than)
+
+F = ((n2-K2)/(K2*(n2-1)))*T
+
+prob = pf(F,K2,n2-K2, lower.tail=FALSE)
+# Should return P value
+
+df = c(K2, n2-K2)
+
+# THIS IS FOR CONFIDENCE INTERVALS/ POST-HOC COMPARISONS BETWEEN GROUPS
+# Ncomp = (K*(K-1))/2
+
+a1.2 = as.matrix(c(1,-1,0))
+a1.3 = as.matrix(c(1,0,-1))
+a2.3 = as.matrix(c(0,1,-1))
+
+Q1.2=(((n-1)*(K-1)/(n*(n-K+1)))*(t(a1.2)%*%Y.cov%*%a1.2)*(qf(0.05,K-1,n-K+1, lower.tail=FALSE)))^(1/2)
+Q1.3=(((n-1)*(K-1)/(n*(n-K+1)))*(t(a1.3)%*%Y.cov%*%a1.3)*(qf(0.05,K-1,n-K+1, lower.tail=FALSE)))^(1/2)
+Q2.3=(((n-1)*(K-1)/(n*(n-K+1)))*(t(a2.3)%*%Y.cov%*%a2.3)*(qf(0.05,K-1,n-K+1, lower.tail=FALSE)))^(1/2)
+
+# Create confidence intervals. Differences between treatments are significant at 5% level if the confidence interval around the estimation of the difference does not contain zero.
+
+CI1.2 = c((t(a1.2)%*%Y.bar-Q1.2),(t(a1.2)%*%Y.bar+Q1.2))
+CI1.3 = c((t(a1.3)%*%Y.bar-Q1.3),(t(a1.3)%*%Y.bar+Q1.3))
+CI2.3 = c((t(a2.3)%*%Y.bar-Q2.3),(t(a2.3)%*%Y.bar+Q2.3))
+
+cat(T)
+cat(F)
+cat(prob)
+cat(df)
+cat(prob)
+cat(CI1.2)
+cat(CI1.3)
+cat(CI2.3)
+
+

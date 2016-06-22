@@ -13,25 +13,25 @@ In addition to the choice of distance measure there are a number of different cl
 
 ### Running the analysis
 <br>
-Your data should be formatted so that each sample is a row and each variable is a column. Dowload the [herbivore specialisation](http://environmentalcomputing.net/wp-content/uploads/2016/05/Herbivore_specialisation.csv) data set to see the desired format.
+Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](http://environmentalcomputing.net/wp-content/uploads/2016/05/Herbivore_specialisation.csv) data set to see the desired format.
 
 ```{r, echo = FALSE}
 Herbivores = read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
 ```
 
-The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is a unique label for each sample.
+The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.
 
 To contrast the habitats or day vs night on the ordination plot, we will need to take out the habitat variable (column 1) and the day/night variable (column 2) and store them in new objects in R. We will use these later on to colour code the points on the graph.
 
 ```{r}
 Habitat <- Herbivores$Habitat
-Day_night <- Herbivores$Day.night
+DayNight <- Herbivores$DayNight
 ```
 
 We then need to make a new data frame that has just the community data that we want to analyse (columns 4-10).
 
 ```{r}
-Herb_community <- Herbivores[,4:10]
+Herb_community <- Herbivores[,5:11]
 ```
 
 Creating a MDS plot involves two steps:  
@@ -47,10 +47,10 @@ library(vegan)
 The function `metaMDS` combines these two steps in a single function.
 
 ```{r}
-Herb_community.mds <- metaMDS(comm = Herb_community, distance = "bray", trace = FALSE)
+Herb_community.mds <- metaMDS(comm = Herb_community, distance = "bray", trace = FALSE, autotransform = FALSE)
 ```
 
-where `comm = Herb_community` specifies the data frame holding the community data, `distance = "bray"` indicates you want to use a Bray-Curtis distance measure and `trace = FALSE` indicates you wish to ignore in progress output of results.
+where `comm = Herb_community` specifies the data frame holding the community data, `distance = "bray"` indicates you want to use a Bray-Curtis distance measure and `trace = FALSE` indicates you wish to ignore in progress output of results. `autotransform = FALSE` stops vegan from automatically transforming the data (see below for advice on transformation).
 
 Calling the `plot` function on the x-y coordinates of the `metaMDS` output creates an MDS ordination plot.
 
@@ -63,7 +63,7 @@ To plot samples from each habitat type (macroalgal species) as a different colou
 ```{r,,fig.width = 6, fig.height = 6}
 plot(Herb_community.mds$points, col = Habitat, pch = 16)
 Habitat.uni <- unique(Habitat)
-legend(x = -1.9, y = 1.25, Habitat.uni, pch=16, col = 1:5, cex = 0.8)
+legend(x = -2.5, y = -1.5, Habitat.uni, pch=16, col = 1:5, cex = 0.8)
 ```
 <br><br>
 
@@ -76,8 +76,8 @@ If there is any grouping of samples according to categories of samples, then you
 In contrast, if we colour our samples by time of day, you will see that these two groups of samples are mixed on the plot. This suggests no difference in species composition between the two sampling times.
 
 ```{r, fig.keep = "last", fig.width = 6, fig.height = 6}
-plot(Herb_community.mds$points, col = Day_night, pch = 16) 
-legend(x = -1.8, y = 1.2, c("Day","Night"), pch=16, col = 1:5, cex = 0.8)
+plot(Herb_community.mds$points, col = DayNight, pch = 16) 
+legend(x = -2.5, y = -1.5, c("Day","Night"), pch=16, col = 1:5, cex = 0.8)
 ```
 <br><br>
 

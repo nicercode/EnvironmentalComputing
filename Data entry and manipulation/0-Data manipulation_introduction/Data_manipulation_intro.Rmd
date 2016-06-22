@@ -15,6 +15,11 @@ Data manipulation using the package [dplyr](https://cran.r-project.org/web/packa
 * [Combining data sets](http://environmentalcomputing.net/combining-data-sets/) - joining entire data sets, or parts by matching rows  
 <br><br>
 
+###Further help
+<br>
+The British Ecological Society's [Guide to Data Management in Ecology and Evolution](http://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf)
+<br><br>
+
 **Author**: Alistair Poore
 <br>
 Last updated:

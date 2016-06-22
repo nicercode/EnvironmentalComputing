@@ -3,3 +3,6 @@ Mixed models are those with a mixture of fixed and random effects. Random effect
 * [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/): Linear mixed models with one random effect  
 * [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/): Linear mixed models with several random effects  
 * [Mixed models 3](http://environmentalcomputing.net/mixed-models-3/): Generalised linear mixed models
+
+![](Mixed_models_intro_image.jpg)
+Photo: N. Murray

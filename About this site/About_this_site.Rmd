@@ -1,0 +1,27 @@
+This site is a brief introduction to techniques for data organisation, graphics and analyses, including:
+
+* how to organise your data during [data entry](http://environmentalcomputing.net/data-entry/) 
+* how to [manipulate and manage your data](http://environmentalcomputing.net/data-manipulation/) so there is transparency and version control 
+* instructions for running [statistical analyses](http://environmentalcomputing.net/statistics/) with sample code in R or other relevant software (first see [Getting started with R](http://environmentalcomputing.net/getting-started-with-r/)) 
+* the rationale for the technique in plain language (why is it used) 
+* how to interpret the results and assumptions that you need to check 
+* [visualisation](http://environmentalcomputing.net/graphics/) of your results and ways to effectively communicate the results in scientific reports or publications
+* where to go for further help 
+
+This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
+
+Some resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](http://www.bees.unsw.edu.au/) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to Associate Professor Alistair Poore, Dr Will Cornwell, Professor Iain Suthers and Professor Richard Kingsford.
+
+
+**Site administrators:**
+
+[Associate Professor Alistair Poore](http://www.eerc.unsw.edu.au/alistair_poore/home.html) 
+
+[Dr Will Cornwell](http://willcornwell.org/)
+
+**Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Will Cornwell, James Lavender, Andrew Letten, Shaun Nielsen, Alistair Poore, Gordana Popovic and Fiona Robinson.
+
+Last updated:
+```{r,echo=F}
+date()
+```

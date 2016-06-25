@@ -6,8 +6,8 @@ To demonstrate a few of the commonly used functions in R for doing this, let's c
 
 Download the data set, [Herbivore_specialisation.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Herbivore_specialisation.csv), and load into R.
 
-```{r, echo = FALSE}
-Herbivores = read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
+```{r}
+Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
 ```
 
 The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.

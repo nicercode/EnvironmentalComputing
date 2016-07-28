@@ -19,7 +19,7 @@ Some resources were developed initially to assist with teaching quantitative ski
 
 [Dr Will Cornwell](http://willcornwell.org/)
 
-**Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Will Cornwell, James Lavender, Andrew Letten, Shaun Nielsen, Alistair Poore, Gordana Popovic and Fiona Robinson.
+**Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Will Cornwell, James Lavender, Andrew Letten, Shaun Nielsen, Alistair Poore, Gordana Popovic, Fiona Robinson and Jakub Stoklosa.
 
 Last updated:
 ```{r,echo=F}

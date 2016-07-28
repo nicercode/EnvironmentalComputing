@@ -1,4 +1,4 @@
-Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see Data entry module). For some types of variables, however, there are choices to be made about how you input the data.
+Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](http://environmentalcomputing.net/data-entry/)). For some types of variables, however, there are choices to be made about how you input the data.
 
 For example, it is very common in the biological sciences that we record the abundance of many species of organisms from each of our replicate observations (transects, quadrats, surveys etc). We then have two choices for how to input that data:  
 1. a separate column for every species that records its abundance, or,  
@@ -20,20 +20,83 @@ This data frame is arranged in a **long format** with one variable that identifi
 
 This format is efficient for data entry as you only need to have rows for the species that were present in that particular transect, and don't have to keep adding columns every time a new species is recorded. You would need the data in this format if you wanted to use a plot to contrast the abundance of fish among the three species.
 
-If, however, you would like to contrast the abundance of one of the species or calculate the total abundance per transect, the data will need to be manipulated in some way.
+If, however, you would like to contrast the abundance of one of the species, or create a species by sample matrix that is required by the various multivariate analyses that contrast species composition, the data will need to be manipulated in some way.
 
 Fortunately, there are some very handy packages in R that make this possible. If you have ever used pivot tables in Excel, they are doing similar things.
 <br><br>
 
 ### Reshaping from long to wide format
 <br>
-In this example, we will use the package [reshape2](https://cran.r-project.org/web/packages/reshape2/) to convert this data frame to a **wide format** that will allow further data exploration. First, install and load the package.
+In this example, we will use the package [tidyr](https://cran.r-project.org/web/packages/tidyr/index.html) to convert this data frame to a **wide format** that will allow further data exploration. First, install and load the package.
 
 ```{r,warning=F}
+library(tidyr)
+```
+
+To convert this data set into a wide format with a separate column for each fish species, we use the function `spread`.
+
+```{r}
+ReefFish.wide <- spread(ReefFish, Species, Abundance, fill = 0)
+```
+
+The arguments of `spread` are:  
+* The data frame you would like to convert (in this case, ReefFish)  
+* The variable whose levels are being converted to new columns (in this case, Species)  
+* The variable that holds the values that will fill in the new columns (in this case, Abundance)  
+* `fill=0` tells `spread` to fill in a zero for when a species was missing from a given transect.
+
+
+```{r,echo =F}
+head(ReefFish.wide)
+```
+
+Note that the wide format of this data now has a column for each species with all the abundance values. You would get as many columns as you had unique levels in the Species column. You get as many rows as you have unique combinations of the variables that are not being split up (Site, Month and Transect in this example).
+
+You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the `select` function of dplyr (see [Subsetting data](http://environmentalcomputing.net/subsetting-data/)).
+
+*Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of "none". If you didn't, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.
+<br><br>
+
+### Reshaping from wide to long format
+<br>
+The function `gather` will convert data from the wide format to a long format.
+
+Here, we can use this code to get our original data set back from the wide format data set we just made.
+
+```{r}
+ReefFish.long <- gather(ReefFish.wide, Species, Abundance, 4:6)
+```
+
+```{r,echo =F}
+head(ReefFish.long)
+```
+
+The arguments of `gather` are:  
+* The data frame that we would like to convert  
+* key - the name of the new variable that will hold the names of the variables being gathers (in this case, Species)  
+* value - the name of the new variable that will hold the values from the variables being gathered (in this case, Abundance)  
+* the names of the columns to be gathered (by name or by column number)  
+
+In that code, we chose the three variables with the species data by their column numbers (4 to 6). We could also just use their names, or the first and last column in a sequence of columns. For example,
+
+```{r,eval=F}
+ReefFish.long <- gather(ReefFish.wide, Species, Abundance, BlackFish, BlueFish, RedFish)
+
+ReefFish.long <- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
+```
+
+We have now recreated our original data set. The only difference is that the rows have been sorted and that species that were absent from a given transect have their own row with an abundance value of zero.
+<br><br>
+
+### Reshaping with reshape2
+<br>
+The package [reshape2](https://cran.r-project.org/web/packages/reshape2/) also allows us to reshape data, and has a few extra capabilities that are not present in tidyr. 
+
+```{r,warning=F,message=F}
 library(reshape2)
 ```
 
-To convert this data set into a wide format with a separate column for each fish species, we use the function `dcast`.
+Instead of `spread`, `dcast` is used to go from a long to wide format. This code will do the same as we saw above.
 
 ```{r}
 ReefFish.wide <- dcast(ReefFish,
@@ -49,62 +112,7 @@ The arguments of `dcast` are:
 * `fill=0` tells `dcast` to fill in zeroes for when a species was missing from a given transect.
 
 
-```{r,echo =F}
-head(ReefFish.wide)
-```
-
-Note that the wide format of this data now has a column for each species with all the abundance values. You would get as many columns as you had unique labels in the Species column. You get as many rows as you have unique combinations of the variables that are not being split up (Site, Month and Transect in this example).
-
-You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns.
-
-*Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of "none". If you didn't, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.
-<br><br>
-
-### Summarising data as you reshape from long to wide
-<br>
-In the above example, there was only one row that belonged to each combination of Site, Month and Transect. If there are duplicate rows for each combination of the variables that you want to keep in the new data frame (the ones to the left of the ~) you need to tell `dcast` how you would like to deal with the duplicates (e.g., add them up or calculate their mean)
-
-For example, if we wanted to pool the transects from each survey, we could remove Transect from the list of variables to include in the new data frame and add an argument (`fun.aggregate = sum`) to tell `dcast` that we would like to add up the values from the three transects in each Site/Month combination. 
-
-```{r}
-ReefFish.wide2 <- dcast(ReefFish,
-                       Site + Month ~ Species,
-                       value.var = "Abundance", fun.aggregate = sum, fill = 0)
-```
-
-
-```{r,echo =F}
-head(ReefFish.wide2)
-```
-
-If we wanted the mean of the three transects, we can use `fun.aggregate = mean`).
-
-```{r}
-ReefFish.wide3 <- dcast(ReefFish,
-                       Site + Month ~ Species,
-                       value.var = "Abundance", fun.aggregate = mean, fill = 0)
-```
-
-You can also put more complex expressions in the reshape formula to create new variables that are combinations of old ones. For example, you could create a new column for each of the combinations of Species and Month by adding both variables to the right of the ~
-
-```{r}
-ReefFish.wide4 <- dcast(ReefFish,
-                       Site + Transect ~ Species + Month,
-                       value.var = "Abundance", fill = 0)
-```
-
-```{r,echo =F}
-head(ReefFish.wide4[,1-4])
-```
-<br><br>
-
-
-### Reshaping from wide to long format
-<br>
-
-The function `melt` will convert data from the wide format to a long format.
-
-Here, we can use this to get our original data set back from the wide format data sets we just made.
+Instead of `gather`, `melt` is used to go from a wide to long format.
 
 ```{r}
 ReefFish.long <- melt(ReefFish.wide,
@@ -113,22 +121,60 @@ ReefFish.long <- melt(ReefFish.wide,
                     variable.name = "Species", value.name = "Abundance")
 ```
 
-```{r,echo =F}
-head(ReefFish.long)
+The arguments of `melt` are:  
+* The data frame that we would like to convert  
+* `id.vars` specifies the columns that remain unchanged (here the predictor variables that label each replicate observation)  
+* `measure.vars` specifies which variables hold the data that will go into the new column 
+* `variable.name` and `value.name` provide the names of the new column.  
+
+
+What reshape2 can do that tidyr cannot is the ability to **summarise data as you reshape from long to wide**.
+
+In the above example, there was only one row that belonged to each combination of Site, Month and Transect. If there are duplicate rows for each combination of the variables that you want to keep in the new data frame (the ones to the left of the ~) you need to tell `dcast` how you would like to deal with the duplicates (e.g., add them up or calculate their mean)
+
+For example, if we wanted to pool the transects from each survey, we could remove Transect from the list of variables to include in the new data frame and add an argument (`fun.aggregate = sum`) to tell `dcast` that we would like to add up the values from the three transects in each Site/Month combination. 
+
+```{r}
+ReefFish.wide_sum <- dcast(ReefFish,
+                       Site + Month ~ Species,
+                       value.var = "Abundance",
+                       fun.aggregate = sum, fill = 0)
 ```
 
-The arguments of <font face="monospace">melt</font> are:  
-* The data frame that we would like to convert  
-* `id.vars`> specifies the columns that remain unchanged (here the predictor variables that label each replicate observation)  
-* `measure.vars` specifies which variables hold the data that will go into the new column  
-* `variable.name` provides the name of the new column.  
+```{r,echo =F}
+head(ReefFish.wide_sum)
+```
 
-We have now recreated our original data set. The only difference is that species that were absent from a given transect have their own row with an abundance value of zero.
+If we wanted the mean of the three transects, we can use `fun.aggregate = mean`.
+
+```{r}
+ReefFish.wide_mean <- dcast(ReefFish,
+                       Site + Month ~ Species,
+                       value.var = "Abundance", fun.aggregate = mean, fill = 0)
+```
+
+You can also put more complex expressions in the reshape formula to create new variables that are combinations of old ones. For example, you could create a new column for each of the combinations of Species and Month by adding both variables to the right of the ~
+
+```{r}
+ReefFish.wide_combined <- dcast(ReefFish,
+                       Site + Transect ~ Species + Month,
+                       value.var = "Abundance", fill = 0)
+```
+
+```{r,echo =F}
+head(ReefFish.wide_combined[,1-4])
+```
 <br><br>
 
 ### Further help
 <br>
-Type `?reshape2` to get the R help for this package.
+Type `?gather` and `?spread` to get the R help for these tidyr functions.
+
+Type `?dcast` and `?melt` to get the R help for these reshape2 functions.
+
+[Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio.
+
+[Data wrangling with dplyr and tidyr](https://rpubs.com/bradleyboehmke/data_wrangling)
 
 [An introduction to reshape2](http://seananderson.ca/2013/10/19/reshape.html)
 <br><br>

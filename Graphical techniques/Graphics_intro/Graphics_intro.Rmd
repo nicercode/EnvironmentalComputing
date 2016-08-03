@@ -4,6 +4,7 @@ These pages have a brief introduction to:
 
 * [Basic plotting in R](http://environmentalcomputing.net/basic-plotting-in-r/)
 * [More advanced plotting with ggplot](http://environmentalcomputing.net/plotting-with-ggplot/)
-* [Visualising multivariate data](http://environmentalcomputing.net/visualising-multivariate-data/) 
+* [Visualising multivariate data](http://environmentalcomputing.net/visualising-multivariate-data/)
+* [Visualising spatial data (incl. mapping)](http://environmentalcomputing.net/visualising-spatial-data/)
 
 

@@ -1,0 +1,6 @@
+R has a very wide range of functions and packages for visualising spatial data. This page will link to a series of tutorials for handling spatial data and making maps.  
+
+* [Making simple maps](http://environmentalcomputing.net/making-simple-maps/)  
+* More soon...
+
+![](Visualising_spatial_data_intro_image.jpg)

@@ -1,6 +1,6 @@
 **Linear mixed models with one random effect**
 
-You will need to use mixed effect models is you have a random factor in your experimental design. A random factor 
+You will need to use mixed effect models if you have a random factor in your experimental design. A random factor 
 
  * is categorical  
  * has a large number of levels  

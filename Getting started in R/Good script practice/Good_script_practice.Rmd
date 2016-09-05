@@ -111,7 +111,7 @@ The following guide is based on the [Google's R style guide](https://google-styl
 <br>
 When naming your project folders, data files, script files, or any other files for that matter, there are number of things that need to be considered.  Files may be copied or transferred across different operating systems (e.g Windows, Mac,  or UNIX ) and we need to name our files for transfer-ability. In addition, file names must be unique and indicative of what the file contains. Consider the following rules when naming your own folders and files.
 
-Firstly, avoid "special" characters. Special characters include things such as file separators (e.g.  colons,  forward-slash, and  backslash), non-alphabetical and non-numerical symbols ( e.g., ¢ T $ ®), punctuation marks ( e.g., full stops, commas, parentheses, quotations marks, and operators ) and, the most common mistake, avoid white space characters (spaces, tabs, new lines and embedded returns).
+Firstly, avoid "special" characters. Special characters include things such as file separators (e.g.  colons,  forward-slash, and  backslash), non-alphabetical and non-numerical symbols ( e.g., ? T $ ?), punctuation marks ( e.g., full stops, commas, parentheses, quotations marks, and operators ) and, the most common mistake, avoid white space characters (spaces, tabs, new lines and embedded returns).
 
 Give your files meaningful names; avoid filenames such as "project1" and "project2" or "data1.csv" and "data2.csv", instead use things like "bird_movement.csv", "snail_feeding.csv" or "diurnal_movement_data.csv" and "yearly_movement_data.csv". For R scripts, file names should end in .R (i.e., "predict_diurnal_movements.R").
 
@@ -340,7 +340,6 @@ bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)),
   10:ncols(bird.mvments)]  # align with the square brackets. 
 ```
 <br><br>
-
 
 ### Further help
 <br>

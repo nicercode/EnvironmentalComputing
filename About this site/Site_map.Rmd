@@ -2,7 +2,8 @@
 
 [**Getting started with R**](Getting started with R and R Studio](http://environmentalcomputing.net/getting-started-with-r/))
 
-* [Good practice with scripts](http://environmentalcomputing.net/good-practice-for-writing-scripts/)   
+* [Good practice with scripts](http://environmentalcomputing.net/good-practice-for-writing-scripts/)  
+* [Basic project management](http://environmentalcomputing.net/basic-project-management)  
 * [Writing simple functions](http://environmentalcomputing.net/Writing-simple-functions/)  
 
 [**Data manipulation**](http://environmentalcomputing.net/data-manipulation/)

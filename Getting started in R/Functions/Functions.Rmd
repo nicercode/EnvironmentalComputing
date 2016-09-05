@@ -1,4 +1,4 @@
-A function is a self contained piece of code which has it's own local variables and performs a specified task. Think of them as "mini-scripts" that can be written separately from the main script.
+A function is a self contained piece of code which has its own local variables and performs a specified task. Think of them as "mini-scripts" that can be written separately from the main script.
 
 Writing functions are a good way of organising your analytical methods into self contained packages and can be useful simply as a way of dividing a big problem into smaller problems. If you haven't already started writing functions this is a good place to start. 
 <br><br>

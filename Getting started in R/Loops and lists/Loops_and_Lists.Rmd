@@ -1,7 +1,11 @@
 <span style="color:red">Loops, lists and if/else statements
 ========================================================
 
-Do you find yourself cutting and pasting R code a lot? Then using loops might help you streamline things! We often want to do repetitive tasks in Ecology: we may like to check whether multiple variables are correlated, or calculate descriptive statistics for multiple variables. Be aware that there are many packages in *R* with functions that will do all of the hard work for you (e.g. check out *reshape*, *plyr* and *dplyr*). However, there are always occasions when you need something specific done and only a list will do.
+Do you find yourself cutting and pasting R code a lot? 
+
+This usually will create problems for yourself later.  One principle of good coding is to try and reduce repitition to the minimum possible.  There are two approaches/skills to both make your code organized and save you work.  The first one is [fucntions](http://environmentalcomputing.net/writing-simple-functions/) and the second one (covered below) is loops.  
+
+We often want to do repetitive tasks in Ecology: we may like to loop through a list of files and do the same thing over and over. Be aware that there are many packages in `R` with functions that will do all of the hard work for you (e.g. check out `reshape`, `plyr` and `dplyr` covered [here](http://environmentalcomputing.net/summarising-data/)). The `dplyr` approach works well if your data is "tidy"--in a data frame--if your data is in many different files, then a loop may be a quicker solution.  
 
 ![](Vespadelus_vulturnus_and_regulus.jpg)
 
@@ -57,7 +61,7 @@ for (i in 1:10) {
 
 ```
 
-The other option is to make a blank vector or dataframe of known dimensions and then place the results into it directly. This is computationally much faster so it is good to get into the habitat of using this method.
+The other option is to make a blank vector or dataframe of known dimensions and then place the results into it directly. 
 
 ```{r}
 length(1:10)            #if we have 10 values of 'i' we need a vector with a length of 10
@@ -110,9 +114,15 @@ output.sorted <- output[order(output$correlation),] #sorts the output table in o
 
 Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.  
 
+##END HERE
+
+
+
 ## Using lists in loops
 
-In the above example, we iterated between columns in a dataframe, using *i* to call in the column we were interested in. A dataframe is a type of list, being a list of columns of the same length. However a list can be a list of any types of objects, for example we could make a list of a vector, a dataframe and a plot. We pull out items in the list using the double square brackets [[]]. 
+In the above example, we iterated between columns in a dataframe, using *i* to call in the column we were interested in. That can be a bit annoying to remember sometime, and there is a more flexible data structure in R called a list.  
+
+A dataframe is a type of list, being a list of columns of the same length. However a list can be a list of any types of objects, for example we could make a list of a vector, a dataframe and a plot. We pull out items in the list using the double square brackets [[]]. 
 
 ```{r}
 a <- 1:10                                               #creates a vector

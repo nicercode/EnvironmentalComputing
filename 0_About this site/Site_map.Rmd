@@ -73,5 +73,7 @@
 * [Categorical data analyses](http://environmentalcomputing.net/categorical-data-analyses/)
     + [Goodness of fit tests](???http://environmentalcomputing.net/goodness-of-fit-tests)
     + [Contingency tables](http://environmentalcomputing.net/contingency-tables/)
+    
+* [Introduction to mvabund](http://environmentalcomputing.net/introduction-to-mvabund/)  
 
 * [Forecasting with time series](http://environmentalcomputing.net/forecasting-time-series/)

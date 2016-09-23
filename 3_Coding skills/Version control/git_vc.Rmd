@@ -42,9 +42,9 @@ To begin tracking files for a project, we need to set up a project repository th
 
 To take full advantage of version control, we want to have both a local (on your computer) and remote (cloud) copy of our repository. There are a number of hosting sites that will allow you to create an cloud repository including [GitHub](https://github.com) and [BitBucket](https://bitbucket.org). Bitbucket allows you to create private repositories for free, whereas anything on GitHub is open (although you can pay for private repositories). To set up a remote server you will need to first create an account on one of these hosting sites. Once you have finished that you will also need to download and install [Git](https://git-scm.com) (if using the command line), which is the version control system we'll be using. Creating a repository on line is easy, log on to your account and go to `Repositories` -> `Create new repository`. Give it a name and then that's it, if you're on bitbucket it will literally tell you what to do next on the command line (Figure 1 & 2).
 
-![**Figure 1** - Setting up a repository for a project on Bitbucket](./photos/fig1.png)
+![**Figure 1** - Setting up a repository for a project on Bitbucket](photos/fig1.png)
 
-![**Figure 2** - Bitbuckets explanation of how to link the repository on the server to a local repository. See also Figure 4 below](./photos/fig1B.png)
+![**Figure 2** - Bitbuckets explanation of how to link the repository on the server to a local repository. See also Figure 4 below](photos/fig1B.png)
 
 If you're using the command line, you can literally just navigate to the place you want the folder and type in the commands in Figure 2 above. It will also take you through a few important steps on how Git works, but we'll get to those later. The **key component** from this repository that is needed to set it up and connect it to a folder on your computer is the ssh or http pathname: 
 
@@ -58,7 +58,7 @@ This will effectively copy down from the server your entire repository in the lo
 
 Creating a repository in SourceTree is also quite easy. Once you have the pathname for your repository, go into source tree, click ```New Repository``` -> ```Clone from URL``` (Figure 3). Add in the ssh or http:// pathname, decide where you want the repository to live on your computer and then click ```clone```. This will then bring down the contents of the repository (if it is not empty) and set this connection up in SourceTree for you to begin tracking and pushing to the server. If the repository already exists on your computer and you want to add it to SourceTree, just click ```Add existing local repository``` instead of ```Clone from URL```.
 
-![**Figure 3** - Setting up a repository in your computer in SourceTree](./photos/fig31.png)
+![**Figure 3** - Setting up a repository in your computer in SourceTree](photos/fig31.png)
 
 ## *Tracking files and pushing to the cloud*
 
@@ -85,11 +85,11 @@ Now that you are set up and have cloned or initiated a repository in a local fol
 
 The step-by-step procedures above is used whenever you want to track changes, and these commands are literally typed in the command line in the order presented (See Figure 4).  Step 2 is only needed when beginning work in the directory, and will pull any changes that collaborators may have made that you do not yet know about. If you're the only one working on the project and you only use one computer, then step 2 is optional because your local directory will always have the most up-to-date files. 
 
-![**Figure 4** - Example of sequence of steps in the Terminal window. The commands are highlighted in blue, and demonstrate how to initialize a new repository, checkout untracked files, add these files and commit and push these to the server.](./photos/fig3.png)
+![**Figure 4** - Example of sequence of steps in the Terminal window. The commands are highlighted in blue, and demonstrate how to initialize a new repository, checkout untracked files, add these files and commit and push these to the server.](photos/fig3.png)
 
 SourceTree makes the above way easier by just providing you with a bunch of click boxes and buttons that you can use to do all this very quickly. To add a file to be tracked just click the boxes of the relevant files (or all of them) in the "Unstaged files" area (Figure 5). Once you have clicked all the boxes, the files will be in the "Staged files" area. This is equivalent to *```git add```* from the command line. They are now ready to be committed, and you can leave a commit message in the window at the bottom of the screen and click the ```Commit``` button in the right corner. This is equivalent to the ```git commit -m "message"``` in the command line. 
 
-![**Figure 5** - Example of how add, commit and push in SourceTree](./photos/fig4.png)
+![**Figure 5** - Example of how add, commit and push in SourceTree](photos/fig4.png)
 
 Once your files have been committed, the files that are ready to be pushed will show up in the "Push" button at the top of the screen (Figure 5). Click this and they will be moved to the server. As you edit and add files, new files will appear in the staging area and you can just repeat the above sequence to add, commit and push these to the server. The "Pull" button corresponds to step two in the Git sequence above and should always be used at the start of a day if you're working with collaborators.
 
@@ -97,7 +97,7 @@ Once your files have been committed, the files that are ready to be pushed will 
 
 In many cases there will be files within a project that you do not want to track. This could be because they are not necessary for the reproducibility of the project, or are just files for you and not needed for your collaborators. These could include helpful notes relevant only to you, papers you are interested in or even large output files. Files such as these don't need to be tracked - for example, there may be no need to track figures and tables as in many instances these can be re-generated from the project code and they take a lot of space on the server. Ignoring these files is easy using what is called a ```.gitignore``` file. The "." in front of the file means that it is hidden and will not be shown in a normal working directory. Fortunately, Git and SourceTree will recognize these files. The ```.gitignore``` is a file that remains in the main directory of your project folder and is usually tracked. You can create a ```.gitignore``` file in the command line easily using a few lines of code (Figure 6). 
 
-![**Figure 6** - Example of how create a .gitignore file and ignore the photos/ folder of the imaginary Git repository](./photos/fig5.png)
+![**Figure 6** - Example of how create a .gitignore file and ignore the photos/ folder of the imaginary Git repository](photos/fig5.png)
 
 In Figure 6, I've ignored a "photos/" folder. We can see that this now disappears (compare with Figure 4) from our staging area in the Terminal window. We can just add any file or folder we don't want tracked here before adding it so that Git ignores them. If we want to start tracking a file we have ignore, just open the .gitignore file up in a text editor and remove the file you want to track. Save the .gitignore file and then add, commit and push this as above.
 
@@ -105,6 +105,6 @@ In Figure 6, I've ignored a "photos/" folder. We can see that this now disappear
 
 Version control systems, and Git in particular, can do quite a lot more then what we have covered above. We have just provided an brief introduction on how to get started and use Git to track your project files. If you want to know more about how to create branches, deal with conflicts and many other useful features you can visit the [Git](https://git-scm.com) web page where you can fins all the relevant information to do more advanced stuff.
 
-```r{eval = TRUE, echo = FALSE}
+```{r eval = TRUE, echo = FALSE}
 paste0("Last updated: ", Sys.time())
 ```

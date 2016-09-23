@@ -29,6 +29,8 @@ Some simple [hypothesis tests](http://environmentalcomputing.net/t-tests/) with 
 * [Goodness of fit tests](http://environmentalcomputing.net/goodness-of-fit-tests/)  
 * [Contingency tables](http://environmentalcomputing.net/contingency-tables/)
 
+[Power analyses](http://environmentalcomputing.net/power-analysis/): calculating power and deciding on sample sizes
+
 [Introduction to mvabund](http://environmentalcomputing.net/introduction-to-mvabund/): model-based analysis of multivariate abundance data
 
 [Forecasting with time series](http://environmentalcomputing.net/forecasting-time-series/)

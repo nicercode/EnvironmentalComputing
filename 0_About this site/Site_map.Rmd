@@ -23,6 +23,7 @@
 * [Using loops](http://environmentalcomputing.net/using-loops/)
 * [Lists]()
 * [Logical control]()
+* [Version control](http://environmentalcomputing.net/version-control/)
 
 [**Graphics**](http://environmentalcomputing.net/graphics/)
 

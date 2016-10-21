@@ -1,3 +1,10 @@
+---
+title: Installing R and R Studio
+author: "Alistair Poore and Will Cornwell"
+date: "October 2, 2016"
+output: html_document
+---
+
 <br>
 ![](blue-125.png)
 <br><br>
@@ -61,7 +68,7 @@ library(maptools)
 ### Further help
 <br>
 
-Our help modules on [Good practice for writing scripts](http:environmentalcomputing.net/Good-practice-for-writing-scripts/) and [Importing data and data cleaning](http:environmentalcomputing.net/Importing-data-and-data-cleaning/)
+Our help modules on [Good practice for writing scripts](http:environmentalcomputing.net/Good-practice-for-writing-scripts/) and [Importing data and data cleaning](http://environmentalcomputing.net/importing-data/)
 
 [Online help with R Studio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 

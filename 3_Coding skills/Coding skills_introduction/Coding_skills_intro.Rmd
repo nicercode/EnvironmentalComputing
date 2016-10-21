@@ -5,8 +5,9 @@ On these pages, we give some advice for writing effective code and some of the v
 * [Good practice for writing scripts](http:environmentalcomputing.net/Good-practice-for-writing-scripts/)
 * [Writing simple functions](http://environmentalcomputing.net/Writing-simple-functions/)  
 * [Using loops](http://environmentalcomputing.net/Using-oops/)
-* Using [Lists]..coming soon
-* [Logical control]..coming soon
+* Using Lists..coming soon
+* Logical control..coming soon
+* [Version control](http://environmentalcomputing.net/version-control/)
 <br><br>
 
 ![](Coding_image.jpg)

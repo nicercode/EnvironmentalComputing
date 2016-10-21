@@ -57,6 +57,7 @@ If you have mutiple R project files, you can easily swap between them by clickin
 ### Further help
 <br>
 R Studio's help with [using projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
+Our introduction to [version control](http://environmentalcomputing.net/version-control/) for keeping track of revisions to project files.
 <br><br>
 
 **Author**: Alistair Poore & Will Cornwell

@@ -1,53 +1,34 @@
----
-title: "Interpreting linear model coefficients"
-author: "Gordana Popovic"
-date: "October 5, 2016"
-output: html_document
----
-## 3 things you should know about interpreting regression output (and probably don't) 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-set.seed(1)
-```
-
-## Interpreting coefficients in linear models
 
 ### Conditional and marginal interpretation
 
-
-The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about linear models, and marginal vs. conditional interpretations of model parameters. In this example we are modelling plant height as a function of altitude and temperature. These variables are negatively correlated, it is colder the higher you go. We start by simulating some data to reflect this.
-
-```{r,echo=FALSE}
-set.seed(1)
-```
-
+The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about marginal vs. conditional interpretations of model parameters. In this example, we model plant height as a function of altitude and temperature. These variables are negatively correlated: it is colder the higher you go. We start by simulating some data to reflect this.
 
 ```{r}
 library(mvabund)
 library(mvtnorm)
-N=1000
-rho=-0.4#correlation between altitude and temperature
+N = 1000
+rho = -0.4 #correlation between altitude and temperature
 #this next line simulates correlated variables
-X=rmvnorm(N,mean=c(0,0),sigma=matrix(c(1,rho,rho,1),2,2))
-temp=X[,1]
-alt=X[,2]
-plot(temp,alt)
+X = rmvnorm(N, mean = c(0, 0), sigma = matrix(c(1, rho, rho, 1), 2, 2))
+temp = X[,1]
+alt = X[,2]
+plot(temp, alt)
 ```
 
-Now we simulate some data for height of plants. Here we say that the mean height of plants is 2 (when all the other variables are 0), as temperature increased by one unit (holding altitude constant), the mean of height will increase by 1 unit (`beta[2]=1`), and similarly as you increase altitude by 1 unit (holding temperature constant) then mean height decreases by 1 (`beta[3]=-1`). Height is then normally distributed with this mean and stander deviation 2.
+Now we simulate some data for height of plants. Here we say that the mean height of plants is 2 (when all the other variables are 0), as temperature increases by one unit (holding altitude constant), the mean of height will increase by 1 unit (`beta[2] = 1`), and similarly as you increase altitude by 1 unit (holding temperature constant) then mean height decreases by 1 (`beta[3] = -1`). Height is then normally distributed with this mean and stander deviation 2.
 
 ```{r}
-beta=c(2,1,-1)
-mu=beta[1]+beta[2]*temp+beta[3]*alt
-height=rnorm(N,mu,sd = 2)
+beta = c(2, 1, -1)
+mu = beta[1]+beta[2]*temp+beta[3] * alt
+height = rnorm(N, mu, sd = 2)
 ```
 
 If we use a linear model to find the coefficients we get what we expect. 
 
 ```{r}
-lm_both=lm(height~temp+alt)
-data.frame(estimated=round(lm_both$coefficients,2),true=beta)
+lm_both = lm(height~temp+alt)
+data.frame(estimated = round(lm_both$coefficients, 2), true = beta)
 ```
 
 The interpretation of these coefficients is that if you hold everything else in the model constant (i.e. temperature) and add 1 to altitude, then the estimated mean height will decrease by 1.09. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter. The intercept is the predicted value when all the other variables are set to 0, which sometimes makes sense (here it would be the height of plants at sea level and 0 temperature). Other times 0 is not a meaningful value, and if you would like to interpret the intercept it might make sense to rescale your other variables so that their mean is 0. If you do this, then the intercept is the predicted value when all other variables are at their mean level.
@@ -55,7 +36,7 @@ The interpretation of these coefficients is that if you hold everything else in 
 What if now we had a model with just temperature? 
 
 ```{r}
-lm1=lm(height~temp)
+lm1 = lm(height~temp)
 lm1$coefficients
 ```
 
@@ -68,9 +49,9 @@ Note: When statisticians talk about this, they use the words conditional and mar
 This distinction has a lot of consequences for modelling as well as testing hypothesis. Lets generate some data where altitude predicts height, and temperature has no (additional) information, and then test for temperature.
 
 ```{r}
-mu=2-1*alt
-height=rnorm(N,mu,sd = 2)
-mod_temp=lm(height~temp)
+mu = 2-1*alt
+height = rnorm(N, mu, sd = 2)
+mod_temp = lm(height~temp)
 summary(mod_temp)
 anova(mod_temp)
 ```
@@ -80,7 +61,7 @@ The output of this model is telling us there is an effect of temperature, even t
 But what about altitude? We know the temperature effect we observe is because it is correlated with altitude, temperature does not directly predict height. If we want to know if there is an effect of temperature after controlling for altitude (holding altitude constant, so conditional), then we fit the model with altitude and then test for temperature.
 
 ```{r}
-mod_temp_alt=lm(height~alt+temp)
+mod_temp_alt = lm(height~alt+temp)
 summary(mod_temp_alt)
 anova(mod_temp_alt)
 ```
@@ -94,11 +75,11 @@ Note: The distinction between conditional and marginal interpretations is also t
 When we have categorical covariates (for example treatment), there are a number of ways to code the model, which will give different interpretations for the coefficients.
 
 ```{r}
-N=120
-trt.n=rep(c(-1,0,1),N/3)#effect of treatment
-mu=2+1*trt.n
-trt=factor(rep(c("low","med","high"),N/3))#group labels
-Y=rnorm(N,mu,sd=2)
+N = 120
+trt.n = rep(c(-1, 0, 1), N/3)#effect of treatment
+mu = 2+1*trt.n
+trt = factor(rep(c("low", "med", "high"), N/3))#group labels
+Y = rnorm(N, mu, sd = 2)
 boxplot(Y~trt)
 ```
 
@@ -106,7 +87,7 @@ If we put treatment in as a covariate the normal way, the model will choose a re
 
 
 ```{r}
-cat_lm=lm(Y~trt)
+cat_lm = lm(Y~trt)
 summary(cat_lm)
 ```
 
@@ -114,24 +95,24 @@ So here group "high" has a mean of 2.65, and the difference between the means of
 
 
 ```{r}
-trt=relevel(trt, ref="low")
-cat_lm=lm(Y~trt)
+trt = relevel(trt, ref = "low")
+cat_lm = lm(Y~trt)
 summary(cat_lm)
 ```
 Now the intercept is the mean of group "low", and all the other coefficients are the differences between group "low" and the others. Another thing you can do is to get rid of the intercept, and just have the means of each group as coefficients.
 
 
 ```{r}
-cat_lm=lm(Y~trt-1)
+cat_lm = lm(Y~trt-1)
 summary(cat_lm)
 ```
 
 So now we have three coefficients, where each is the mean of the groups. We can also look at contrasts; these are the difference between all pairs of groups.
 
 
-```{r}
+```{r, message = FALSE}
 library(multcomp)
-cont=glht(cat_lm,linfct=mcp(trt="Tukey"))
+cont = glht(cat_lm, linfct = mcp(trt = "Tukey"))
 summary(cont)
 
 ```
@@ -168,24 +149,24 @@ $$  log(\lambda_0) = \beta_0 + \beta_1 x_0 $$
 
 If we now increase the covariate by 1, we get a new mean $\lambda_1$,
 
-$$  log(\lambda_1) = \beta_0 + \beta_1 (x_0 +1) = \beta_0 + \beta_1 x_0 +\beta_1= log(\lambda_0) + \beta_1$$
+$$  log(\lambda_1) = \beta_0 + \beta_1 (x_0 +1) = \beta_0 + \beta_1 x_0 +\beta_1 = log(\lambda_0) + \beta_1$$
 
 So the log of the mean of Y increases by $\beta_1$ when we increase x by 1. But we are not really interested in how the log mean changes, we would like to know on average how Y changes. If we take the exponential of both sides 
 
-$$  \lambda_1= \lambda_0 exp(\beta_1)$$
+$$  \lambda_1 = \lambda_0 exp(\beta_1)$$
 
 So the mean of Y is multiplied by $exp( \beta_1 )$ when we increase $x$ by 1 unit.
 
 ```{r}
-x=rnorm(N)
-mu=exp(1+0.2*x)
-Y=rpois(N,lambda = mu)
-glm1=glm(Y~x,family = poisson)
+x = rnorm(N)
+mu = exp(1+0.2*x)
+Y = rpois(N, lambda = mu)
+glm1 = glm(Y~x, family = poisson)
 glm1$coefficients
 exp(glm1$coefficients[2])
 ```
 
-So here increasing $x$ by 1 unit multiplies the mean value of Y by $exp( \beta_1 )=1.25$. The same thing is true for negative binomial glms as they have the same link function.
+So here increasing $x$ by 1 unit multiplies the mean value of Y by $exp( \beta_1 ) = 1.25$. The same thing is true for negative binomial glms as they have the same link function.
 
 
 ### Binomial GLMs
@@ -195,21 +176,21 @@ So here increasing $x$ by 1 unit multiplies the mean value of Y by $exp( \beta_1
 
 Things become much more complicated in binomial glms. The model here is actually a model of log odds, so we need to start with an explanation of those. The odds of an event are the probability success divided by the probability of failure. So if the probability of success is $p$ then the odds are:
 
-$$\text{Odds}=\frac{p}{1-p} $$
+$$\text{Odds} = \frac{p}{1-p} $$
 
 As p increases, so do the odds. The equation for a logistic regression looks like this:
 
 $$ Y \sim \text{binomial} (p) $$
-$$  log\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 x $$
+$$  log\left(\frac{p}{1-p}\right)  =  \beta_0 + \beta_1 x $$
 
 Skipping some maths that is very similar to the above, we can obtain an interpretation for the coefficient of $x$ in the model in terms of the odds. When we increase $x$ by one unit the odds are multiplied by $exp( \beta_1 )$. Odds are not the most intuitive thing to interpret, but they do increase when p increases, so that if your coefficient $\beta_1$ is positive, increasing $x$ will increase your probability. 
 
 ```{r}
-bY=Y>0 #turning counts into presence absence
-bin1=glm(bY~x,family=binomial)
+bY = Y>0 #turning counts into presence absence
+bin1 = glm(bY~x,family = binomial)
 summary(bin1)
 ```
-So when we increase $x$ by one unit, the odds of Y are multiplied by $exp( \beta_1 )=2.11$
+So when we increase $x$ by one unit, the odds of Y are multiplied by $exp( \beta_1 ) = 2.11$
 
 
 
@@ -224,34 +205,39 @@ In that case you can interpret your coefficients in a similar way as the Poisson
 
 
 ```{r}
-bin2=manyglm(bY~x,family=binomial(link="cloglog"))
+bin2 = manyglm(bY~x, family = binomial(link = "cloglog"))
 coef(bin2)
 ```
 The interpretation is now the same as in the Poisson case, when we increase $x$ by 1, the mean of the underlying count is multiplied by $exp( \beta_1 )$.
 
 
 #### Log binomial model
-It is possible to use a log link function with the binomial distribution `family=binomial(link=log)`. In this case you can interpret the coefficients as multiplying the probabilities by $exp( \beta_1 )$, however these models can give you predicted probabilities greater than 1, and often don't converge (don't give an answer).
+It is possible to use a log link function with the binomial distribution `family = binomial(link = log)`. In this case you can interpret the coefficients as multiplying the probabilities by $exp( \beta_1 )$, however these models can give you predicted probabilities greater than 1, and often don't converge (don't give an answer).
 
 ## Offsets
 Sometimes we know the effect of a particular variable (call it $z$) on the response is proportional, so that when we double $z$ we expect the response to double on average. The most common time you see this is with sampling intensity. If you sample soil and count critters, all other things being equal, you would expect twice the critters in twice the amount of soil. If you have a variable like this it is tempting to divide your response (count) by the amount of soil to standardise the data. Unfortunately this will take counts, which we know how to model with glms, and turn them into something we do not know how to model. Fortunately this situation is easily dealt with using offsets. 
 
 ```{r}
-soil=exp(rbeta(N,shape1 = 8,shape2 = 1))
-depth=rnorm(N)
-mu=soil*exp(0.5+0.5*depth)
-Y=rpois(N,lambda = mu)
-off_mod=glm(Y~depth+offset(log(soil)),family = poisson)
+soil = exp(rbeta(N, shape1 = 8, shape2 = 1))
+depth = rnorm(N)
+mu = soil*exp(0.5+0.5*depth)
+Y = rpois(N, lambda = mu)
+off_mod = glm(Y~depth+offset(log(soil)), family = poisson)
 summary(off_mod)
 ```
 
 If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the conditional/marginal section above. The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you're not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response. 
 
 ```{r}
-coef_mod=glm(Y~depth+log(soil),family = poisson)
+coef_mod = glm(Y~depth+log(soil), family = poisson)
 summary(coef_mod)
 ```
 The coefficient the model estimated is close to 1, which would be equivalent to an offset.
 
-
+**Author**: Gordana Popovic
+<br>
+Last updated:
+```{r, echo = F}
+date()
+```
 

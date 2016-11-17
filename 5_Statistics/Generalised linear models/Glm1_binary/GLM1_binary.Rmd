@@ -126,6 +126,8 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 <p style="margin-left: .5in; text-indent: -.5in;">Faraway, JJ. 2005. *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC press.</p>
 
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 20074. *Analysing ecological data*. Springer Science & Business Media, 2007.</p>
+
+More advice on [interpreting coefficients in glms](http://environmentalcomputing.net/interpreting-coefficients-in-glms/)
 <br><br>
 
 **Author**: Gordana Popovic

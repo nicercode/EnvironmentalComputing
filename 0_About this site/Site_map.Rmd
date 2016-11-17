@@ -1,12 +1,12 @@
 [**About this site**](http://environmentalcomputing.net/about-this-site/)
 
-[**Getting started with R**](http://environmentalcomputing.net/getting-started_intro/)  
+[**Getting started with R**](http://environmentalcomputing.net/getting-started-with-r/)  
 
 * [Getting started with R](http://environmentalcomputing.net/getting-started-with-r/)
 * [Basic project management](http://environmentalcomputing.net/basic-project-management)  
 * [Data entry ](http://environmentalcomputing.net/data-entry/)
 * [Importing data and data cleaning](http://environmentalcomputing.net/importing-data/)
-* [Data types & structure](http://environmentalcomputing.net/data-types_and-structure/)
+* [Data types & structure](http://environmentalcomputing.net/data-types-and-structure/)
 
 [**Data manipulation**](http://environmentalcomputing.net/data-manipulation/)  
 
@@ -60,6 +60,7 @@
     + [Analysis of variance (one-way)](http://environmentalcomputing.net/analysis-variance-single-factor/)
     + [Analysis of variance (factorial)](http://environmentalcomputing.net/analysis-variance-factorial/)
     + [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
+    + [Interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
 
 * [Generalised linear models](http://environmentalcomputing.net/generalised-linear-models/)
     + [GLM 1: introduction/binomial data](http://environmentalcomputing.net/generalised-linear-models-1/)

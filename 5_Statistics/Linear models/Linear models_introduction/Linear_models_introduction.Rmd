@@ -12,6 +12,7 @@ abline(model, col = "red")
 * [Analysis of variance: single factor](http://environmentalcomputing.net/analysis-variance-single-factor/)
 * [Analysis of variance: factorial](http://environmentalcomputing.net/analysis-variance-factorial/)  
 * [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
+* [Interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
 
 <br><br>
 

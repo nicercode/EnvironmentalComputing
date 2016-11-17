@@ -107,6 +107,8 @@ Type `?lm` to get the R help for this function.
 <p style="margin-left: .5in; text-indent: -.5in;">Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Ch. 5 Correlation and regression.</p>
 
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 17 Regression.</p>
+
+More advice on [interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
 <br><br>
 
 **Author**: Andrew Letten

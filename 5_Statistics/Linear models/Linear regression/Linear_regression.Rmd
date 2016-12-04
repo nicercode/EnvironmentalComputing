@@ -1,3 +1,7 @@
+---
+output: html_notebook
+---
+
 Linear regression is the one of the most widely used statistical techniques in the life and earth sciences. It is used to model the relationship between a response (also called dependent) variable $y$ and one or more explanatory (also called independent or predictor) variables $x_{1}$,$x_{2}$...$x_{n}$. For example, we could use linear regression to test whether temperature (the explanatory variable) is a good predictor of plant height (the response variable).
 
 ![](Linear_regression_image.jpg)

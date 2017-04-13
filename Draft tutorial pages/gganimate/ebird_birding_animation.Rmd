@@ -1,0 +1,205 @@
+---
+title: "Corey's Australia Birding Road Trip"
+author: "C.T. Callaghan et al."
+date: "February 10, 2017"
+output: html_document
+---
+Here is a walkthrough to make a map showing my recent roadtrip throughout parts of New South Wales and southern Queensland. It was inspired by watching [David Robinson's plotcon introduction/tutorial on gganimate](https://www.youtube.com/watch?v=9Y7Y1s4-VdA). I thought I'd have a play with it and demonstrate its use. I highly recommend watching the video, linked above, to fully see the utility of the package. 
+
+## Downloading Necessary packages and software
+
+gganimate calls a number of different dependencies in order to work. Here are the steps you should follow before you begin the tutorial.
+
+### **First:** install gganimate
+
+As mentioned, __gganimate__ is the main package used to produce the animation at the end of this tutorial. Personally, I had a little bit of trouble when first trying to install this (because I had some outdated packages). So, I'll provide the solution that worked for me. Depending on what you already have downloaded on your machine, you may or may not have any issues.
+
+```{r Installing gganimate, eval=FALSE}
+# be sure to install these packages if not already installed
+library(devtools)
+library(RCurl)
+library(httr)
+set_config( config( ssl_verifypeer = 0L ) )
+devtools::install_github("RcppCore/Rcpp")
+devtools::install_github("dgrtwo/gganimate")
+
+
+```
+
+If you still run into problems, see these two Stackoverflow questions ( [here](http://stackoverflow.com/questions/31293325/r-install-github-fails) and [here](http://stackoverflow.com/questions/37387664/unable-to-install-gganimate-package-from-github-both-automatically-and-manually/37496693#37496693)) for troubleshooting.
+
+### **Second:** download and install ImageKick
+
+This is a program that __gganimate__ uses to create a gif.
+
+This should be able to be installed by typing:
+
+```{r eval=FALSE}
+library(installr) # this should already be installed as it was necessary for the installation of gganimate
+install.ImageMagick() # this should install the latest version, by default
+```
+
+You will have to accept the dependencies as it asks to be installed on your machine.
+
+### **Third:** You will need to install '[FFMPEG](https://en.wikipedia.org/wiki/FFmpeg)'. 
+This can be downloaded [here](https://ffmpeg.org/download.html). 
+After this, you should follow [these detailed instructions](https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg), or [this explanation with images](http://www.wikihow.com/Install-FFmpeg-on-Windows).
+
+### **Fourth:## Load the other necessary packages for the tutorial
+
+```{r warning=FALSE, message=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(maps)
+library(mapdata)
+library(lubridate)
+library(ggmap)
+```
+
+
+
+## Data Preparation
+
+###Read in data 
+```{r Preparing Data, message=FALSE, warning=FALSE}
+my_ebird <- read_csv("C:/Users/CTC/Desktop/eBird_Animation/ebird_1486623144023/MyEBirdData.csv")
+colnames(my_ebird) <- gsub(" ", "_", colnames(my_ebird))
+colnames(my_ebird) <- gsub("/", "_", colnames(my_ebird))
+colnames(my_ebird) <- gsub("\\(", "", colnames(my_ebird))
+colnames(my_ebird) <- gsub("\\)", "", colnames(my_ebird))
+my_ebird$Date <- as.Date(my_ebird$Date, format="%m-%d-%Y")
+```
+
+###I only want to select data from my road trip.
+```{r}
+Aussie_road_trip <- my_ebird %>%
+  filter(grepl("^AU", State_Province)) %>%
+  filter(Date >= "2016-12-19" & Date <="2016-12-30")
+  
+```
+
+Before we get started, let's just make a quick map. See [this post here on Environmental Computing](http://environmentalcomputing.net/making-simple-maps/) for an overview of using ggmap. Here, I produce a map based on 'ozdata.rda', found [on this site](http://www.elaliberte.info/code).
+
+
+####Once downloaded, load the data.
+```{r}
+load("ozdata.rda")
+
+```
+
+
+###Quick Map
+```{r}
+ggplot()+
+  geom_polygon(data=ozdata, aes(x=long, y=lat, group=group), color="lightgray")+
+  coord_fixed() # don't forget to include the coord_fixed to make the map look correct!
+```
+
+
+
+## Plot the points on the map.
+
+####First, make a dataframe that contains all unique checklists (or places I made an observation from).
+
+```{r}
+checklists <- Aussie_road_trip %>%
+  group_by(Submission_ID, Latitude, Longitude, Protocol, Duration_Min, Date) %>%
+  summarise(total_species=length(Common_Name)) %>%
+  mutate(day=day(Date)) # This will be important for later, when we animate
+```
+
+
+
+###Put the points on the map
+
+```{r}
+ggplot()+
+  geom_polygon(data=ozdata, aes(x=long, y=lat, group=group), color="springgreen4", fill="gray79")+
+  geom_point(data=checklists, aes(x=Longitude, y=Latitude, size=total_species), shape=19, color='red')+
+  geom_path(data=checklists, aes(x=Longitude, y=Latitude))+
+  coord_fixed()
+```
+
+Nice, now we can see the general track we took on the roadtrip. **geom_path** is useful here.
+
+## Now, let's animate it!
+
+
+The main call in gganimate is the __frame__ argument. Here, we added day to the dataframe above, so our frame argument will be day here. This means we'll create a separate frame for each day of the trip. Theoretically, this could be done at a broader or finer temporal resolution.
+
+```{r warning=FALSE}
+map1 <- ggplot()+ 
+  geom_polygon(data=ozdata, aes(x=long, y=lat, group=group), color="springgreen4", fill="gray79")+
+  geom_path(data=checklists, aes(x=Longitude, y=Latitude, frame=day, cumulative=TRUE), size=1.34)+ # cumulative=TRUE makes the path cumulative over time
+  geom_point(data=checklists, aes(x=Longitude, y=Latitude, size=total_species, frame=day, cumulative=TRUE), shape=19, color='red')+
+  coord_fixed()+
+## Adjusting the theme of the plot to my liking
+  xlab('Longitude')+
+  ylab('Latitude')+
+  theme_bw()+
+  theme(axis.title.x = element_text(size=14),
+        axis.title.y = element_text(size=14),
+        axis.text.x = element_text(size=12, color='black'),
+        axis.text.y = element_text(size=12, color='black'),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+
+
+
+
+## Creating and saving .gif to directory of my choice
+  
+pa <- gganimate(map1, title_frame=FALSE) # note the title_frame=FALSE here, which turns off the title of 'day' for each frame
+gganimate_save(pa, 
+               "C:/Users/CTC/Desktop/eBird_Animation/animated_plot1.gif",
+               saver="mp4")
+```
+
+
+We can also make the same map on a different background, by doing the following.
+
+
+
+####First, get the map
+```{r warning=FALSE}
+mybox <- make_bbox(lon=Aussie_road_trip$Longitude, lat=Aussie_road_trip$Latitude, f=.1)
+
+my_map <- get_map(location=mybox, maptype="hybrid", source="google", zoom=6)
+
+ggmap(my_map)
+```
+
+Now, we have a map that covers the extent of our road trip (as best as possible; __get_map__ is finicky and tough to work with). Let's plot the points and animate it, as above.
+
+```{r warning=FALSE}
+map2 <- ggmap(my_map)+
+  geom_path(data=checklists, aes(x=Longitude, y=Latitude, frame=day, cumulative=TRUE), size=1.34)+ # cumulative=TRUE makes the path cumulative over time
+  geom_point(data=checklists, aes(x=Longitude, y=Latitude, size=total_species, frame=day, cumulative=TRUE), shape=19, color='red')+
+  coord_fixed()+
+## Adjusting the theme of the plot to my liking
+  xlab('Longitude')+
+  ylab('Latitude')+
+  theme_bw()+
+  theme(axis.title.x = element_text(size=14),
+        axis.title.y = element_text(size=14),
+        axis.text.x = element_text(size=12, color='black'),
+        axis.text.y = element_text(size=12, color='black'),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+
+pa2 <- gganimate(map2, title_frame=FALSE, interval=3) # note the title_frame=FALSE here, which turns off the title of 'day' for each frame
+gganimate_save(pa2, 
+               "C:/Users/CTC/Desktop/eBird_Animation/animated_plot2.gif",
+               saver="mp4")
+```
+
+
+
+
+
+
+

@@ -24,7 +24,7 @@ The goal in linear regression is obtain the best estimates for the model coeffic
 For this worked example, download a data set on plant heights around the world, [Plant_height.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Plant_height.csv), and import into R.
 
 ```{r}
-Plant_height <- read.csv(file = "Plant_Height.csv", header = TRUE)
+Plant_height <- read.csv(file = "Plant_height.csv", header = TRUE)
 ```
 
 The main argument to `lm` is the model formula `y ~ x`, where the response variable is on the left of the tilde (~) and the explanatory variable is on the right. `lm` also has an optional data argument that lets you specify a data frame from which the variables will be taken.

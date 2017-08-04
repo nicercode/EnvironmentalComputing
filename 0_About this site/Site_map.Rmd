@@ -3,6 +3,7 @@
 [**Getting started with R**](http://environmentalcomputing.net/getting-started-with-r/)  
 
 * [Getting started with R](http://environmentalcomputing.net/getting-started-with-r/)
+* [Using RStudio notebooks](http://environmentalcomputing.net/using-rstudio-notebooks/)
 * [Basic project management](http://environmentalcomputing.net/basic-project-management)  
 * [Data entry ](http://environmentalcomputing.net/data-entry/)
 * [Importing data and data cleaning](http://environmentalcomputing.net/importing-data/)

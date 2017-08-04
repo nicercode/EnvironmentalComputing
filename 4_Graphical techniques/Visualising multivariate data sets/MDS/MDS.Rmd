@@ -21,17 +21,10 @@ Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
 
 The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.
 
-To contrast the habitats or day vs night on the ordination plot, we will need to take out the habitat variable (column 1) and the day/night variable (column 2) and store them in new objects in R. We will use these later on to colour code the points on the graph.
+To contrast the species composition across habitats or time of sampling, we first need to make a dataframe with only the abundance values for each sample (columns 5 to 11).
 
 ```{r}
-Habitat <- Herbivores$Habitat
-DayNight <- Herbivores$DayNight
-```
-
-We then need to make a new data frame that has just the community data that we want to analyse (columns 4-10).
-
-```{r}
-Herb_community <- Herbivores[,5:11]
+Herb_community <- Herbivores[5:11]
 ```
 
 Creating a MDS plot involves two steps:  
@@ -39,6 +32,7 @@ Creating a MDS plot involves two steps:
 * creating an ordination plot from that dissimilarity matrix  
 
 These can be done in the package [vegan](https://cran.r-project.org/web/packages/vegan/index.html). First, install and load the package.
+
 
 ```{r, message=FALSE, warning=FALSE}
 library(vegan)
@@ -54,16 +48,30 @@ where `comm = Herb_community` specifies the data frame holding the community dat
 
 Calling the `plot` function on the x-y coordinates of the `metaMDS` output creates an MDS ordination plot.
 
-```{r,eval=FALSE}
-plot(Herb_community.mds$points, col = Habitat, pch = 16) 
+```{r}
+plot(Herb_community.mds$points) 
 ```
 
-To plot samples from each habitat type (macroalgal species) as a different colour, we can use the vector we created earlier that identifies which rows belong to which habitat types of the community matrix. We can also use this vector of habitats to add a legend (with the function `unique` collecting the five labels from the habitat vector).
+This is not informative until we plot samples from each habitat type (macroalgal species) as a different colour. 
 
-```{r,,fig.width = 6, fig.height = 6}
-plot(Herb_community.mds$points, col = Habitat, pch = 16)
-Habitat.uni <- unique(Habitat)
-legend(x = -2.5, y = -1.5, Habitat.uni, pch=16, col = 1:5, cex = 0.8)
+To do this we can extract the x and y coordinates from the MDS plot into a new data frame.
+
+```{r}
+MDS_xy <- data.frame(Herb_community.mds$points)
+```
+
+Then, we can add our habitat and day vs night factors to those coordinates (i.e. the first two columns of the original data set.
+
+```{r}
+MDS_xy$Habitat <- Herbivores$Habitat
+MDS_xy$DayNight <- Herbivores$DayNight
+```
+
+To plot those points, color coded by Habitat, we can use:
+
+```{r}
+library(ggplot2)
+ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) + geom_point() + theme_bw()
 ```
 <br><br>
 
@@ -75,9 +83,8 @@ If there is any grouping of samples according to categories of samples, then you
 
 In contrast, if we colour our samples by time of day, you will see that these two groups of samples are mixed on the plot. This suggests no difference in species composition between the two sampling times.
 
-```{r, fig.keep = "last", fig.width = 6, fig.height = 6}
-plot(Herb_community.mds$points, col = DayNight, pch = 16) 
-legend(x = -2.5, y = -1.5, c("Day","Night"), pch=16, col = 1:5, cex = 0.8)
+```{r}
+ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) + geom_point() + theme_bw()
 ```
 <br><br>
 
@@ -100,10 +107,11 @@ If the stress value is greater than 0.2, it is advisable to include an additiona
 ```{r,eval=FALSE}
 Herb_community.sq <- sqrt(Herb_community)
 Herb_community.sq.mds <- metaMDS(comm = Herb_community.sq, distance = "bray", trace = FALSE)
-plot(Herb_community.sq.mds$points, col = Habitat, pch = 16) 
 ```
 
-Standardising samples or variables (by their mean or totals) may also be done, to create plots where all variables have equal influence, or plots where the differences among samples is purely based on relative values not their magnitude. Remember that any of these modifications do actually change your question. If the example above was done with samples standardised by total abundance, then the plot would represent a contrast of species composition with no influence of the different abundances found on the different habitats.
+Standardising samples or variables (by their mean or totals) may also be done, to create plots where all variables have equal influence, or plots where the differences among samples is purely based on relative values not their magnitude. Several common methods of standardisation used for community data sets are provided in the vegan function `decostand`.
+
+Remember that any of these modifications do actually change your question. If the example above was done with samples standardised by total abundance, then the plot would represent a contrast of species composition with no influence of the different abundances found on the different habitats.
 
 Please also note that ordination based on distances has been criticised for failing to account for the mean-variance relationships that are commonplace in abundance data sets like the one used here, and for lacking an underlying statistical model - see Hui *et al.* (2014) Model-based approaches to unconstrained ordination. *Methods in Ecology and Evolution* 6:399-411. [link](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12236/abstract). 
 <br><br>

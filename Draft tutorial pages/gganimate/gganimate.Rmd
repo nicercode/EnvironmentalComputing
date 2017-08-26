@@ -1,9 +1,7 @@
 ---
-title: "Corey's Australia Birding Road Trip"
-author: "C.T. Callaghan et al."
-date: "February 10, 2017"
 output: html_document
 ---
+
 Here is a walkthrough to make a map showing my recent roadtrip throughout parts of New South Wales and southern Queensland. It was inspired by watching [David Robinson's plotcon introduction/tutorial on gganimate](https://www.youtube.com/watch?v=9Y7Y1s4-VdA). I thought I'd have a play with it and demonstrate its use. I highly recommend watching the video, linked above, to fully see the utility of the package. 
 
 ## Downloading Necessary packages and software
@@ -22,8 +20,6 @@ library(httr)
 set_config( config( ssl_verifypeer = 0L ) )
 devtools::install_github("RcppCore/Rcpp")
 devtools::install_github("dgrtwo/gganimate")
-
-
 ```
 
 If you still run into problems, see these two Stackoverflow questions ( [here](http://stackoverflow.com/questions/31293325/r-install-github-fails) and [here](http://stackoverflow.com/questions/37387664/unable-to-install-gganimate-package-from-github-both-automatically-and-manually/37496693#37496693)) for troubleshooting.

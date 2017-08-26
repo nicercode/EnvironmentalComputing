@@ -1,0 +1,32 @@
+---
+output: html_notebook
+---
+
+
+```{r Installing gganimate, eval=FALSE}
+# be sure to install these packages if not already installed
+library(devtools)
+library(RCurl)
+library(httr)
+set_config( config( ssl_verifypeer = 0L ) )
+devtools::install_github("RcppCore/Rcpp")
+devtools::install_github("dgrtwo/gganimate")
+```
+
+
+
+```{r eval=FALSE}
+library(installr)
+install.ImageMagick()
+```
+
+
+```{r warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(gganimate)
+library(maps)
+library(mapdata)
+library(lubridate)
+library(ggmap)
+```

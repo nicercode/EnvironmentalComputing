@@ -1,4 +1,4 @@
-Bar plots with error bars are very frequently used in the environmental sciences to contrast a continuous variable across levels of one or more categorical variables. These are not always straightforward to make with the base functions in R. This page introduces you to making these plots with the package ggplot2.
+Bar plots with error bars are very frequently used in the environmental sciences to represent the variation in a continuous variable within one or more categorical variables. These are not always straightforward to make with the base functions in R. This page introduces you to making these plots with the package ggplot2.
 
 Before you get started, read the page on the [basics](http://environmentalcomputing.net/plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
 
@@ -34,13 +34,15 @@ Iris_summary <- iris %>% # the names of the new data frame and the data frame to
 We can now make a bar plot of means vs species, with standard deviations or standard errors as the error bar. The following code uses the standard deviations.
 
 ```{r}
-IrisPlot <- ggplot(Iris_summary, aes(Species, mean_PL)) + geom_bar(stat="identity") +  geom_errorbar(aes(ymin=mean_PL-sd_PL, ymax=mean_PL+sd_PL),width=0.2)
+IrisPlot <- ggplot(Iris_summary, aes(Species, mean_PL)) + 
+  geom_col() +  
+  geom_errorbar(aes(ymin=mean_PL-sd_PL, ymax=mean_PL + sd_PL), width=0.2)
 
-print(IrisPlot + labs(y="Petal length (cm) ± s.d.", x = "Species") + theme_classic())
+IrisPlot + labs(y="Petal length (cm) +/- s.d.", x = "Species") + theme_classic()
 ```
 
 
-In the `geom_bar` code, `stat="identity"` tells ggplot to use the value of the y variable (mean_PL) as the height of the bars. Otherwise, the default is `stat_bin`, which counts the number of values.
+`geom_col` uses the value of the y variable (mean_PL) as the height of the bars. 
 
 In the `geom_errorbar` code, `ymin` and `ymax` are the top and bottom of the error bars (defined here as mean +/- sd), and `width` defines how wide the error bars are.
 
@@ -58,7 +60,7 @@ A useful cheat sheet on commonly used functions can be downloaded [here](https:/
 <p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with online help on making bar and line graphs with error bars [here](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/)</p>
 <br><br>
 
-**Author**: Alistair Poore
+**Author**: Alistair Poore (small edits by Will Cornwell)
 <br>
 Last updated:
 ```{r,echo=F}

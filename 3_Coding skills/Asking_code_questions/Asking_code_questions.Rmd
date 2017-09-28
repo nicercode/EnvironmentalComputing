@@ -15,10 +15,10 @@ This tutorial is intended to 'go back to the basics' a little bit, and learn how
 <br>
 You probably already have your data in a nice fancy excel document and, as such, there may seem like no good reason to 'make up' data. There are, however, a number of good reasons that this can come in handy:
 
-**1.) To work on small-scale problems before using all your data  
-**2.) You might want to run some sort of simulation study  
-**3.) You might want to simulate data you expect to collect, to ensure you have the right methods listed in your proposal  
-**4.) You might get stuck and want to ask for help  
+**1. To work on small-scale problems before using all your data  
+**2. You might want to run some sort of simulation study  
+**3. You might want to simulate data you expect to collect, to ensure you have the right methods listed in your proposal
+**4. You might get stuck and want to ask for help  
 
 The focus here will be on the last point. It is pretty inevitable you'll get stuck with some sort of coding problem. We all do! When this happens, and you want to send some code to a friend, colleague, or even ask a question on the internet, you need to provide a [reproducible example](https://stackoverflow.com/help/mcve)! 
 
@@ -102,6 +102,18 @@ data <- as.data.frame(sample(10))
 
 **Creating data from a known distribution**
 
+```rnorm``` creates data from a normal distribution
+
+```{r}
+data <- rnorm(100)
+```
+
+By default, ```rnorm``` draws from a population with mean = 0, and sd = 1. We can change either of these to get a sample from a normal distribution with specified mean and standard deviaition. For example, to get 100 numbers from a normal distribution with a mean of 25 and s.d. of 1.5:
+
+```{r}
+data <- rnorm(100, mean=25, sd=1.5)
+```
+
 ```runif``` creates data from a uniform distribution
 
 ```{r}
@@ -110,17 +122,13 @@ data <- runif(100)
 head(data)
 ```
 
-```rnorm``` creates data from a normal distribution
+Similarly to above, ```runif``` draws from a distribution with min=0 and max=1. We can change this to whatever we want. For example, to get 100 random numbers between -10 and 5:
 
 ```{r}
-data <- rnorm(100)
+data <- runif(100, min=-10, max=-5)
+
 ```
 
-By default, both functions draw from a population with mean = 0, and sd = 1. We can change either of these to get a sample from a normal distributed with specified mean and standard deviaition. For example,
-
-```{r}
-data <- rnorm(100, mean=25, sd=1.5)
-```
 
 Luckily, R has just about every distribution built in to draw from. This is really helpful if you are theorizing data before you start collection of data! A comprehensive list is [here](http://www.stat.umn.edu/geyer/old/5101/rlook.html). 
 <br><br>
@@ -228,6 +236,11 @@ This tutorial is mainly intended for new R users, and it is likely the tips and 
 sessionInfo()
 ```
 <br><br>
+
+**Other important notes**
+1. Be sure to clearly define what you are after. Do you have a purely statistics question, or do you have a coding question?
+2. It is a good idea to include any neccessary packages that you are using in which the problem occurs.
+3. You should always note what you have already tried, as far as code, and/or any reference sites you are using.
 
 **Concluding remarks**  
 1. There are a number of reasons we may want to use fake data.  

@@ -25,6 +25,7 @@
 * [Lists]()
 * [Logical control]()
 * [Version control](http://environmentalcomputing.net/version-control/)
+* [Asking code questions](http://environmentalcomputing.net/version-control/)
 
 [**Graphics**](http://environmentalcomputing.net/graphics/)
 

@@ -1,0 +1,277 @@
+---
+output:
+  html_document: default
+---
+
+Many data in the environmental sciences do not fit simple linear models and are best described by "wiggly models", also known as Generalised Additive Models (GAMs). 
+
+```{r, echo=F, fig.height=5, fig.width=5, warning=FALSE, message=FALSE}
+library(ggplot2)
+ggplot(mpg, aes(displ, hwy)) +   geom_point() + geom_smooth(span = 0.3) + theme_void()
+```
+
+Let's start with a famous [tweet](https://twitter.com/ucfagls/status/842444686513991680) by one Gavin Simpson, which amounts to:  
+1. GAMs are just GLMs  
+2. GAMs fit wiggly terms  
+3. use ```+ s(x)``` not ```x``` in your syntax  
+4. use ```method = "REML"```  
+5. always look at ```gam.check()```  
+
+This is basically all there is too it - an extension of [generalised linear models (GLMs)](http://environmentalcomputing.net/generalised-linear-models/) with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say ```lmer``` or ```glmer```, but we use them all the time without reservation! 
+<br><br>
+
+### GAMs in a nutshell
+<br>
+Let's start with an equation for a Gaussian [linear model](http://environmentalcomputing.net/linear-regression/):
+$$y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+What changes in a GAM is the presence of a smoothing term:
+$$y = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+This simply means that the contribution to the linear predictor is now some function $f$. This is not that dissimilar conceptually to using a quadratic ($x_1^2$) or cubic term ($x_1^3$) as your predictor.
+
+The function $f$ can be something more funky or kinky - here, we're going to focus on splines. In the old days, it might have been something like piecewise linear functions. 
+
+You can have combinations of linear and smooth terms in your model, for example
+$$y = \beta_0 + x_1\beta_1 + f(x_2) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+or we can fit generalised distributions and random effects, for example
+$$ln(y) = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim Poisson(\lambda)$$
+$$ln(y) = \beta_0 + f(x_1) + z_1\gamma + \varepsilon, \quad \varepsilon \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)$$
+<br><br>
+
+### A simple example
+<br>
+Lets try a simple example. First, let's create a data frame and fill it with some simulated data with an obvious non-linear trend and compare how well some models fit to that data. 
+
+```{r}
+x <- seq(0, pi * 2, 0.1)
+sin_x <- sin(x)
+y <- sin_x + rnorm(n = length(x), mean = 0, sd = sd(sin_x / 2))
+Sample_data <- data.frame(y,x)
+```
+
+
+```{r}
+library(ggplot2)
+ggplot(Sample_data, aes(x, y)) + geom_point()
+```
+
+Try fitting a normal linear model:
+
+```{r}
+lm_y <- lm(y ~ x, data = Sample_data)
+```
+
+and plotting the fitted line with data using ```geom_smooth``` in ```ggplot```
+
+```{r}
+ggplot(Sample_data, aes(x, y)) + geom_point() + geom_smooth(method = lm)
+```
+
+Looking at the plot or ```summary(lm_y)```, you might think the model fits nicely, but look at the residual plot - eek!
+```{r}
+plot(lm_y, which = 1)
+```
+
+Clearly, the residuals are not evenly spread across values of $x$, and we need to consider a better model.
+<br><br>
+
+### Running the analysis
+<br>
+Before we consider a GAM, we need to load the package [mgcv](https://cran.r-project.org/web/packages/mgcv/index.html) - *the* choice for running GAMs in R.
+
+```{r, results='hide', message=F}
+library(mgcv)
+```
+
+To run a GAM, we use:
+```{r}
+gam_y <- gam(y ~ s(x), method = "REML")
+```
+
+To see the fitted line, we can change the method used by ```geom_smooth```, specifying the model formula.
+
+```{r}
+ggplot(Sample_data, aes(x, y)) + geom_point() + geom_smooth(method = "gam", formula = y ~s(x))
+```
+
+You can see the model is better fit to the data, but always check the diagnostics.
+
+```check.gam``` is quick and easy to view the residual plots.
+
+```{r}
+par(mfrow = c(2,2))
+gam.check(gam_y)
+```
+
+Using ```summary``` with the model object will give you ?????? and the variance explained. In this example, a pretty decent fit.
+
+```{r}
+summary(gam_y)
+```
+<br><br>
+
+### Smooth terms
+<br>
+As mentioned above, we'll focus on splines, as they are the smooth functions that are most commonly implemented (and are pretty quick and stable). So what was actually going on when we specified ```s(x)```?
+
+Well, this is where we say we want to fit $y$ as a linear function of some set of functions of $x$. The default in ```mgcv``` is a thin plate regression spline - the two common ones you'll probably see are these, and cubic regression splines. Cubic regression splines have the traditional *knots* that we think of when we talk about splines - they're evenly spread across the covariate range in this case. We'll just stick to thin plate regression splines, since I figure Simon made them the default for a reason,
+
+**Basis functions**
+OK, so here's where we see what the wiggle bit is really made of. We'll start with the fitted model, then we'll look at it from first principles (not really). Remembering that the smooth term is the sum of some number of functions (I'm not sure how well this equation really represents the smooth term, but you get the point),
+$$f(x_1) = \sum_{j=1}^kb_j(x_1)\beta_j$$
+First we extract the set of *basis functions* (that is, the $b_j(x_j)$ part of the smooth term). Then we can plot say the first and second basis functions.
+```{r}
+model_matrix <- predict(gam_y, type = "lpmatrix")
+plot(y ~ x)
+abline(h = 0)
+lines(x, model_matrix[, "s(x).1"], type = "l", lty = 2)
+lines(x, model_matrix[, "s(x).2"], type = "l", lty = 2)
+```
+
+Let's plot all of the basis functions now, and then add that to the predictions from the GAM (```y_pred```) on top again.
+```{r}
+plot(y ~ x)
+abline(h = 0)
+
+x_new <- seq(0, max(x), length.out = 100)
+y_pred <- predict(gam_y, data.frame(x = x_new)) 
+
+matplot(x, model_matrix[,-1], type = "l", lty = 2, add = T)
+lines(y_pred ~ x_new, col = "red", lwd = 2)
+```
+
+Now, it's difficult at first to see what has happened, but it's easiest to think about it like this - each of those dotted lines represents a function ($b_j$) for which ```gam``` estimates a coefficient ($\beta_j$), and when you sum them you get the contribution for the corresponding $f(x)$ (i.e. the previous equation). It's nice and simple for this example, because we model $y$ only as a function of the smooth term, so it's fairly relatable. As an aside, you can also just use ```plot.gam``` to plot the smooth terms.
+```{r}
+plot(gam_y)
+```
+
+OK, now let's look a little closer at how the basis functions are constructed. You'll see that the construction of the functions is separate to the response data. Just to prove it, we'll use ```smoothCon```.
+```{r}
+x_sin_smooth <- smoothCon(s(x), data = data.frame(x), absorb.cons = TRUE) 
+X <- x_sin_smooth[[1]]$X
+
+par(mfrow = c(1,2))
+matplot(x, X, type = "l", main = "smoothCon()")
+matplot(x, model_matrix[,-1], type = "l", main = "predict(gam_y)")
+```
+
+And now to prove that you can go from the basis functions and the estimated coefficients to the fitted smooth term. Again note that this is simplified here because the model is just one smooth term. If you had more terms, we would need to add up all of the terms in the linear predictor.
+
+```{r}
+betas <- gam_y$coefficients
+linear_pred <- model_matrix %*% betas
+
+par(mfrow = c(1,2))
+plot(y ~ x, main = "manual from basis/coefs")
+lines(linear_pred ~ x, col = "red", lwd = 2)
+plot(y ~ x, main = "predict(gam_y)")
+lines(y_pred ~ x_new, col = "red", lwd = 2)
+```
+
+Out of interest, take a look at the following plot, remembering that ```X``` is the matrix of basis functions.
+```{r}
+par(mfrow = c(1,2))
+plot(y ~ x)
+plot(y ~ rowSums(X))
+```
+
+Not so scary huh? Of course this is not quite the whole story - see ```gam.models``` and ```smooth.terms``` to see all of the options for types of smoothers, how the basis functions are constructed (penalisation etc.), types of models we can specify (random effects, linear functionals, interactions, penalisation) plus much more.
+<br><br>
+
+## A quick real example
+<br>
+![](Mauna_Loa.jpg)
+
+We'll now look at a quick real example - we'll just scratch the surface, and in a future tutorial we will look at it in more detail. We're going to look at some CO$_2$ data from Manua Loa (it's used elsewhere in this series). We will fit a couple GAMs to the data to try and pick apart the intra- and inter-annual trends.
+
+First load the data - you can download it [here](http://environmentalcomputing.net/wp-content/uploads/2017/10/manua_loa_co2.csv).
+```{r}
+CO2 <- read.csv("mauna_loa_co2.csv")
+```
+
+We want to look at inter-annual trend first, so let's convert the date into a continuous time variable (take a subset for visualisation).
+
+```{r}
+CO2$time <- as.integer(as.Date(CO2$Date, format = "%d/%m/%Y"))
+CO2_dat <- CO2
+CO2 <- CO2[CO2$year %in% (2000:2010),]
+```
+
+OK, so let's plot it and look at a smooth term for time.
+$$y = \beta_0 + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+```{r}
+ggplot(CO2_dat, aes(time, co2)) + geom_line()
+```
+
+We can fit a GAM for these data using:
+
+```{r}
+CO2_time <- gam(co2 ~ s(time), data = CO2, method = "REML")
+```
+
+and do what ??????
+```{r}
+plot(CO2_time)
+```
+
+Note how the smooth term actually reduces to a 'normal' linear term here - that's the nice thing about penalised regression splines. But if we check the model, then we see something is amuck. 
+```{r, results='hide', fig.keep='all'}
+par(mfrow = c(2,2))
+gam.check(CO2_time)
+```
+
+?????? describe what is wrong with the residual plots. 
+Let's try again, and introduce something called a cyclical smoother.
+$$y = \beta_0 + f_{\mathrm{intrannual}}(month) + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+The cyclical smooth term, $f_{\mathrm{intrannual}}(month)$, is comprised of basis functions just the same as we have seen already, except that the end points of the spline are constrained to be equal - which makes sense when we're modelling a variable that is cyclical (across months/years).
+
+We'll now see the ```bs = ``` argument to choose the type of smoother, and the ```k = ``` argument to choose the number of knots, because cubic regression splines have a set number of knots. We use 12 knots, because there are 12 months.
+```{r}
+CO2_season_time <- gam(co2 ~ s(month, bs = 'cc', k = 12) + s(time), data = CO2, method = "REML")
+```
+
+Again, check the residual plots:
+```{r}
+par(mfrow = c(1,2))
+plot(CO2_season_time)
+```
+
+Now looking at both smooth terms, we can see that the monthly smoother is picking up that monthy rise and fall of CO$_2$ - looking at the relative magnitudes, we can see how important it is to disintangle the components of the time series. Let's see how the model diagnostics look now:
+```{r, results='hide', fig.keep='all'}
+par(mfrow = c(2,2))
+gam.check(CO2_season_time)
+```
+
+Much better. Let's look at how the seasonal component stacks up against the full long term trend.
+```{r}
+CO2_season_time <- gam(co2 ~ s(month, bs = 'cc', k = 12) + s(time), data = CO2_dat, method = "REML")
+par(mfrow = c(1,2))
+plot(CO2_season_time)
+```
+
+There's more to the story - pephaps spatial autocorrelations of some kind? ```gam``` can make use of the spatial autocorrelation structures available in the ```nlme``` package, more on that next time. Hopefully for the meantime GAMs now don't seem qutie so scary or magical, and you can start to make use of what is really an inrecibly flexible and powerful modelling framework.
+<br><br>
+
+### Communicating the results
+<br>
+**Written**  ????? measures of model fit??
+
+**Visual** ????
+
+```{r}
+ggplot(CO2_dat, aes(time, co2)) + geom_point() + geom_smooth(method = gam, formula = co2 ~ s(month, bs = 'cc', k = 12) + s(time))
+```
+<br><br>
+
+### Further help
+<br>
+Type `?gam` to get the R help for this function. 
+
+??????
+
+<br>
+**Author**: Mitchell Lyons
+<br>
+Last updated:
+```{r, eval=TRUE, echo=F}
+format(Sys.time(), "%a %b %d %Y")
+```

@@ -1,0 +1,116 @@
+---
+title: "curtis1998_tree"
+author: "ML"
+date: "25/10/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#install.packages("devtools","fulltxt")
+#library(readxl)
+update.packages("fulltxt")
+library(fulltext)
+#devtools::install_github("ropensci/rotl", dependencies = TRUE, build_vignette=TRUE)
+#install.packages("rotl")
+library(rotl)
+library(metafor)
+library(ape)
+
+rm(list=ls())
+sessionInfo() #R version 3.2.4 (2016-03-10)
+options(scipen=100)
+```
+
+For the dataset dat.curtis1998 (included in the metafor package) create tree using rotl - an R package (https://peerj.com/preprints/1471/) to access synthetic phylogenetic tree available at Open Tree of Life database (https://opentree.wikispaces.com/). Note: crashes on some species lists.
+
+```{r load data}
+dat <- get(data(dat.curtis1998))
+str(dat) # 102 rows
+head(dat)
+tail(dat)
+```
+
+#The function tnrs_match_names returns a data frame that lists the Open Tree identifiers as
+#well as other information to help users ensure that the taxa matched are the correct ones
+
+```{r create species list}
+species <- paste(dat$genus, dat$species, sep=" ") 
+str(species)
+species <- unique(tolower(species))
+length(species) #37
+species #note: "populusx euramericana" should be same as "populus euramericana"
+species <- gsub("populusx euramericana", "populus euramericana", species)
+species <- unique(tolower(species))
+length(species) #36
+```
+
+```{r match species list to otl taxa list}
+taxa <- tnrs_match_names(names = species)
+head(taxa)
+dim(taxa) #36
+```
+
+#Now that the taxon names are matched to the Open Tree identifiers, we can pass them to the
+#function tol_induced_subtree to retrieve the relationships among these taxa. In turn, the tree
+#can be plotted directly as it is returned as an ape::phylo object (Figure1).
+
+```{r get tree for taxa}
+tree <- tol_induced_subtree(ott_ids= taxa[["ott_id"]]) 
+#The following OTT ids were not found: [3915043].
+taxa[taxa$ott_id==3915043,] #populus euramericana Populus x canadensis             FALSE 3915043       TRUE HYBRID
+#note: Populus × canadensis, known as Canadian poplar or Carolina poplar, is a naturally occurring hybrid of Populus nigra and Populus deltoides
+```
+
+```{r fix species list}
+populus <- tnrs_match_names(names = ("populus deltoides"))
+populus
+#replace populus euramericana with populus deltoides (note 2 versions of the name)
+species <- gsub("populus euramericana", "populus deltoides", species)
+```
+
+```{r get tree again}
+taxa <- tnrs_match_names(names = species)
+head(taxa)
+dim(taxa) #36
+
+tree <- tol_induced_subtree(ott_ids= taxa[["ott_id"]]) 
+str(tree)
+```
+
+```{r plot tree }
+plot(tree, cex=.8, label.offset =.1, no.margin = TRUE)
+```
+
+```{r strip ott numbers}
+tree$tip.label <- gsub("\\_ott.*","", tree$tip.label)
+tree$tip.label <- gsub("_"," ", tree$tip.label)
+tree$tip.label
+```
+
+```{r replace back populus hybrid }
+#replace populus euramericana with populus deltoides
+tree$tip.label <- gsub( "Populus deltoides", "Populus euramericana", tree$tip.label)
+```
+
+```{r check tree}
+is.binary.tree(tree) #FALSE (i.e. there are polytomies)
+is.ultrametric(tree) #the tree has no branch lengths
+```
+
+Polytomies are present within and between Acer Betula Quercus Fraxinus.
+
+```{r resolve polytomies at random}
+set.seed(2017) #making it replicable
+tree_random <- multi2di(tree,random=TRUE)
+is.binary.tree(tree_random) #TRUE
+```
+
+Plot the tree:
+```{r plot tree_random, fig.width=10, fig.height=5, echo=TRUE, message=FALSE}
+plot(tree_random)
+```
+
+
+#Make sure that species names match exactly tree tip.labals

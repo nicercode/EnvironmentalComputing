@@ -235,7 +235,7 @@ par(mfrow = c(1,2))
 plot(CO2_season_time)
 ```
 
-Now looking at both smooth terms, we can see that the monthly smoother is picking up that monthy rise and fall of CO$_2$ - looking at the relative magnitudes, we can see how important it is to disintangle the components of the time series. Let's see how the model diagnostics look now:
+Now looking at both smooth terms, we can see that the monthly smoother is picking up that monthly rise and fall of CO$_2$ - looking at the relative magnitudes, we can see how important it is to disintangle the components of the time series. Let's see how the model diagnostics look now:
 ```{r, results='hide', fig.keep='all'}
 par(mfrow = c(2,2))
 gam.check(CO2_season_time)

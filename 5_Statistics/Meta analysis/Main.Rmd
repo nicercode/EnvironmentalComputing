@@ -1,0 +1,415 @@
+---
+output: html_document
+---
+### Background
+
+What is a meta-analysis?
+
+> A meta-analysis is a quantitative summary of studies on the same topic. 
+
+Why do we want to perform a meta-analysis?
+
+a. Finding generalities
+b. Increasing power and precision
+c. Exploring differences between studies
+d. Settling controversies from conflicting studies (testing hypotheses)
+e. Generating new hypotheses
+
+![](4666102_orig.jpg)
+
+**The process of meta-analysis**
+
+How many steps involved in meta-analysis?
+
+One answer is 5 steps
+
+i. Formulating questions & hypothesis or finding a topic
+ii. Literature search & paper collection
+iii. Data extraction & coding
+iv. Meta-analysis & publication bias tests
+v. Reporting & publication
+
+We only consider the step iv in this tutorial. You will need to learn the other steps elsewhere. To get you started, we recently wrote an overview paper which divides the process of meta-analysis into 10 questions [(Nakagawa *et al.* 2017)](https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-017-0357-7). The 10 questions will guide you through judging quality of a meta-analysis. 
+
+1. Is the search systematic and transparently documented?
+2. What question and what effect size?
+3. Is non-independence taken into account?
+4. Which meta-analytic model?
+5. Is the level of consistency among studies reported?
+6. Are the causes of variation among studies investigated?
+7. Are effects interpreted in terms of biological importance?
+8. Has publication bias been considered?
+9. Are results really robust and unbiased?
+10. Is the current state (and lack) of knowledge summarized?
+
+
+## Metafor for meta-analysis
+
+I think the R package [metafor](http://www.metafor-project.org/doku.php) (Viechtbauer 2010) is the most comprehensive meta-analytic software and the author [Wolfgang Viechtbauer](http://www.wvbauer.com/doku.php), who I have to say, has the coolest name among my friends, is still actively developing it.
+
+First, install and load the `metafor` package.
+
+```{r setup, tidy=TRUE, cache=TRUE, message=FALSE}
+library(metafor)
+```
+
+Have a look at the data set named `dat.curtis1998` included in the package. If you have to see the other data sets included in this package, try `help(package="metafor")`.
+
+```{r}
+dat <- get(data(dat.curtis1998))
+str(dat)
+```
+
+This data set is from the paper by Curtis and Wang (1998). They looked at the effect of increased CO$_2$ on plant traits (mainly changes in biomass). So we have information on control group (1) and experimental group (2) (m = mean, sd = standard deviation) along with species information and experimental details. In meta-analysis, these variables are often referred to as 'moderators' (we will get to this a bit later). 
+
+### Calculating 'standardized' effect sizes
+
+To compare the effect of increased CO$_2$ across multiple studies, we first need to calculate an effect size for each study - a metric that quantifies the difference between our control and experimental groups.
+
+There are several 'standardized' effect sizes, which are unit-less. When we have two groups to compare, we use two types of effect size statistics. The first one is standardized mean difference (SMD or also known as Cohen's $d$ or Hedge's $d$ or $g$; some subtle differences between them, but we do not worry about them for now):
+
+\begin{equation}
+\mathrm{SMD}=\frac{\bar{x}_{E}-\bar{x}_{C}}{\sqrt{\frac{(n_{C}-1)sd^2_{C}+(n_{E}-1)sd^2_{E}}{n_{C}+n_{E}-2}}}
+\end{equation}
+where $\bar{x}_{C}$ and $\bar{x}_{E}$ are the means of the control and experimental group, respectively, $sd$ is sample standard deviation ($sd^2$ is sample variance) and $n$ is sample size. 
+
+And its sample error variance is:
+
+\begin{equation}
+se^2_{\mathrm{SMD}}= \frac{n_{C}+n_{E}}{n_{C}n_{E}}+\frac{\mathrm{SMD}^2}{2(n_{C}+n_{E})}
+\end{equation}
+
+The square root of this is referred to as 'standard error' (or the standard deviation of the estimate -- confused?). The inverse of this ($1/se^2$) is used as 'weight', but things are bit more complicated than this as we will find out below. 
+
+Another common index is called 'response ratio', which is usually presented in its natural logarithm form (lnRR):
+
+\begin{equation}
+\mathrm{lnRR}=\ln\left({\frac{\bar{x}_{E}}{\bar{x}_{C}}}\right)
+\end{equation}
+
+And its sampling error variance is:
+
+\begin{equation}
+se^2_\mathrm{lnRR}=\frac{sd^2_{C}}{n_{C}\bar{x}^2_{C}}+\frac{sd^2_{E}}{n_{E}\bar{x}^2_{E}}
+\end{equation}
+
+Let's get these using the function `escalc` in `metafor`. To obtain the standardised mean difference, we use:
+
+```{r effect-size, tidy=TRUE, cache=TRUE}
+#SMD
+SMD<- escalc(measure = "SMD",n1i = dat$n1i, n2i = dat$n2i,
+               m1i = dat$m1i, m2i = dat$m2i,
+               sd1i = dat$sd1i, sd2i = dat$sd2i)
+```
+
+where `n1i` and `n2i` are the sample sizes, `m1i` and `m2i` are the means, and `sd1i` and `sd2i` the standard deviations from each study.
+
+The oject created now has an effect size (`yi`) and its variance (vi) for each study
+
+```{r,echo=F}
+head(SMD)
+```
+
+
+#lnRR - "ROM" for the log transformed ratio of means
+
+lnRR<- escalc(measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
+               m1i = dat$m1i, m2 = dat$m2i,
+               sd1i = dat$sd1i, sd2i = dat$sd2i)
+head(lnRR)
+```
+
+The original paper used lnRR so we use it, but you may want to repeat analysis below using SMD to see whether results are consistent. 
+
+```{r merage, tidy=TRUE, cache=TRUE}
+dat<-cbind(dat,data.frame(lnRR))
+# we should see yi (effec size) and vi (sampling variance) are added
+str(dat)
+```
+
+We can visualize point estimates (effect size) and their 95% confidence intervals, CIs (based on sampling error variance) by using the `forest` function, which draws a forest plot for us.  
+
+```{r forest, tidy=TRUE, cache=TRUE}
+forest(dat$yi, dat$vi)
+```
+
+The problem you see is that when there are many studies, a forest plot does not really work (unless you have very large screen!). Let's look at just the first 12 studies. 
+
+```{r forest2, tidy=TRUE, cache=TRUE}
+forest(dat$yi[1:12], dat$vi[1:12])
+```
+
+We can calculate many different kinds of effect sizes with `escalc`; other common effect size statistics include $Zr$ (Fisher's z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio -- mouthful!), which compare variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of `metafor`, let you do this with `escalc`-- [github page](https://github.com/cran/metafor). lnCVR is called "CVR" in `escalc`. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight! 
+
+
+
+### Fixed-effect and random-effects models
+
+There are two main models of meta-analysis: 1) the fixed-effect model and 2) the random-effect model (actually we say 3 types, but the third one is the extension of the second model). Because fixed effects mean something different in another context, this naming is a bit confusing. So people now call the first model 'common-effect' model. You can see a visual representation of these two models (from Figure 4 in Nakagawa et al. 2017). 
+
+```{r fig1, echo = FALSE}
+knitr::include_graphics(c("Fixed.png","Random.png"))
+```
+
+A math representation for the common-effect model is:
+
+\begin{equation}
+y_i=b_0+e_i,
+\\
+e_i\sim \mathcal{N}(0,v_i),\
+\end{equation}
+
+where $y_i$ is the $i$th effect size (from $i$th study), $b_0$ is the overall mean (or meta-analytic mean), $e_i$ is a deviation from the overall mean and it is normally distributed with $v_i$, which is the study specific sampling variance (you can get this from formulas above). Note that weights for this model are $1/v_i$. As you can see, this is a very simple model; basically, we are estimating the mean considering weights.
+
+Importantly, this model is assuming that there is a common mean for all studies included. Is this realistic? Probably not, especially, if you are combining different species!
+
+The random-effects model can be written as:
+
+\begin{equation}
+y_i=b_0+s_i+e_i,
+\\
+s_i\sim \mathcal{N}(0,\tau^2),\
+\\
+e_i\sim \mathcal{N}(0,v_i),\
+\end{equation}
+
+where $s_i$ is a study-specific deviation from the overall mean for $i$th study, it is normally distributed with the between-study variance, often referred to as  $\tau^2$, and the others are the same as above. Unlike the common-effect model, a random-effect model assumes that different studies have different means. Note that weights for this model are $1/(\tau^2+v_i)$. We revisit this point, as it turns out to be quite important. 
+
+### Running a common-effect model
+
+Let's use the function `rma` to run a common-effect model.
+
+```{r re-library, echo = FALSE, message = FALSE}
+library(metafor)
+```
+
+```{r common, tidy=TRUE, cache=TRUE}
+# note that we are setting method = "FE" - fixed-effect
+common_m<-rma(yi = yi, vi = vi, method = "FE", data = dat)
+summary(common_m)
+```
+
+OK, it was easy! The overall mean is statistically significant and it's around 0.2. What does 0.2 mean? let's make this into the original scale. 
+
+```{r back, tidy=TRUE, cache=TRUE}
+# coverting lnRR to RR (without log)
+exp(0.2)
+```
+
+This means a plant trait (e.g. mass) was 22% larger in the experimental  (RR$=\bar{x}_{E}/\bar{x}_{C}$), which seems like a pretty large effect to me (remember we need to interpret our results in a biological meaningful way). Note that [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality) states that this is a bit of wrong but we do not get into this today. 
+
+### Running a randm-effects model
+
+Now, we move onto the random-effects model - a more realistic model. Again, we use the `rma` function.
+
+```{r random, tidy=TRUE, cache=TRUE}
+# REML which is the default and the best method for the random-effect meta-analysis
+random_m<-rma(yi = yi, vi = vi, method = "REML", data = dat)
+summary(random_m)
+```
+
+Compare the overall mean from this model with the common-effect model. Oh, the overall mean of the random-effects model is actually bigger than that of the fixed-effect model. OK, that sometimes happens (we will find out that this probably is an over-estimation later). We expect 95% CI is wider (i.e. more realistic) in this random-effects model as this model has a better assumption than the common-effect model. 
+
+### Understating heterogeniety
+
+For this output from the random-effects model has more things than that of the common-effect model. We have `tau^2` ($\tau^2$) and `I^2` ($I^2$), two very common measure of heterogeneity (note that `H^2`, or $H^2$ is a transformation of $I^2$). 
+
+> Heterogeneity is variation in effet sizes, which is not accounted by the sampling error variance.  
+
+In other words, real variation in the data. I think $I^2$ is a quite important index as it can tell the percentage of real variation in your meta-analytic data. It can be given by (which you saw within the figure of the random-effects model above): 
+
+\begin{equation}
+I^2=\frac{\tau^2}{(\tau^2+\bar{v})},
+\end{equation}
+
+where $\bar{v}$ is a representative value of $v_i$ (or think $\bar{v}$ as the average of $v_i$ although it is not quite it). Note that the denominator is the whole variance which exists in the data. The benchmark values for $I2$ are 25, 50 and 75% for low, moderate and high heterogeneity, respectively (Higgins et al. 2003).
+
+Our $I^2$ value is 88.9% so very high and this value is, as you expect, statistically significant, tested with the $Q$ value (which follows a $\chi^2$ distribution defined by the df value, in this case $df = 101$). 
+
+We recently did a meta-analysis of meta-analyses (a secondary meta-analysis) looking at what is the average value of $I^2$ in the field of ecology and evolution (Senior et al. 2016). The average value was 92%! So this indicates that we should really be fitting the random-effects model rather than the common-effect model because the latter assumes heterogeneity to be zero or $\tau^2=0$ and $I^2 = 0$. Or is it really? We find this out later. 
+
+### Meta-regression (the random-effects model)
+
+The existence of heterogeneity sets a scene for meta-regression. This means that we now put predictors ('moderators' in the meta-analytic terminology) into our model to explain heterogeneity (equivalent to normal regression models). Fitting meta-regression is pretty straightforward too. We fit three moderators collected by the authors: 1) `time` (how long the experiment was), 2) `method` (different ways of increasing CO$_2$), and 3) `fungroup` (functional group, i.e., angiosperm, gymnosperm or N$_2$ fixer).
+
+```{r regression, tidy=TRUE, cache=TRUE}
+# REML which is the default and the best method for the random-effect meta-analysis
+metareg<-rma(yi = yi, vi = vi, mod=~time +  method + fungrp, method = "REML", data = dat)
+summary(metareg)
+```
+
+Well, they do not explain anything! Look at the $R^2$ value and, as you expect, the test for moderators (again the Q value) say they are not significant. A terrible model! So we give up here (in a real meta-analysis, you need to do this more systematically, preferably based on your priori hypotheses). 
+
+### Checking for publication bias
+
+OK, it seems like an CO$_2$ increase promotes plant growth (which may not be surprising), but we are assuming the data set we have does not suffer form publication bias. 
+
+> Publication bias in its simplest form is that signficant results are more likely to be published than non-signficant results.
+
+So if publication bias exists in this topic, we are a bit stuffed as our results will be biased. How can we check it? Actually, the problem is that we never really know how many non-significant results are missing from our data set as they are missing!
+
+But there are several methods, which people have been using. The two commonest methods, often used as a set, are: 1) funnel plot, which one uses to detect a funnel asymmetry (a sign of publication bias), and 2) Egger's regression test with which you test funnel asymmetry statistically.  
+
+```{r funnel, tidy=TRUE, cache=TRUE}
+funnel(random_m)
+```
+
+```{r egger, tidy=TRUE, cache=TRUE}
+# Note that the orignal Egger's test is regtest(random_m, model="lm")
+regtest(random_m)
+```
+
+The funnel plot and Egger's test both suggest funnel asymmetry. But we need to be careful. Funnel asymmetry cannot be caused not only by publication bias but also by heterogeneity (one or more undetected moderators are distorting a funnel shape). Given we have a lot of unexplained variance (i.e. heterogeneity), we are not sure which is causing this asymmetry. But we have some evidence for publication bias. A relating point is that if meta-regression explains a lot of heterogeneity, you should use that meta-regression model in the function `regrest` (in our case `regrest(metareg)`, but I did not do it as our model `metareg` did not explain anything).
+
+There is an alternative method, which has a cool name, the trim-and-fill method. You will see the reason why. We can use this method by using the function `trimfill`.  
+
+```{r trimfill, tidy=TRUE, cache=TRUE}
+# Note that we are using the defult estimator ("L0"), but there are two others availablere
+tf_m<-trimfill(random_m)
+tf_m
+funnel(tf_m)
+```
+
+As you can see this method uses the asymmetry to add more points and provide a revised overall mean, which is smaller than that of the original random-effect model. Although this effect is still significant, this method could turn a significant overall mean into a non-significant one. But rather than taking this is a real estimate of the overall mean, we need to see this as a part of sensitivity analysis. 
+
+There are more methods for publication bias tests, none of which are perfect, but we do need to do some of these tests (see more for Nakagawa et al. 2017 and references therein). 
+
+### Another model (I did not know), but important!
+
+I recently learned that there is another meta-analytic model (neither common nor random), which is more robust to publication bias. Remember what I said above.
+
+1. The random-effect model is a more realistic model so we should use this model.
+2. The random-effect model has the weight of $1/(\tau^2+v_i)$.
+3. $I^2$ is very large in ecological and evolutionary meta-data sets so this means $\tau^2$ is very large, meaning $1/(\tau^2+v_i) \approx 1/\tau^2$ as $v_i$ is negligible
+4. Then, all data points having the same weight $1/\tau^2$ and basically it becomes an unweighted model! 
+
+This is problematic because under publication bias like we saw it just above, effect sizes with small sample sizes (very high $v_i$) should get small weights compared to effect sizes with large sample sizes (low $v_i$). When there exists publication bias, the random-effect model could provide us with a biased estimate... What could we do? Can we use the weight of $1/v_i$ like the common-effect model, but use the structure of the random-effects model? It turns out you can!
+
+```{r weight, tidy=TRUE, cache=TRUE}
+# We make weights, which is 1/vi and stick that into the argument, weights
+dat[,"wi"]<-1/dat$vi
+weight_m<-rma(yi = yi, vi = vi, weights = wi, method = "REML", data = dat)
+summary(weight_m)
+```
+
+Actually, this point estimate is the exactly the same as that of the common-effect model (this is not just a coincidence as this model calculates the overall mean like the common-effect model). But it is important to notice this model has a wider 97% CI than the common-effect model and this level of uncertainty is more realistic (just like the random-effects model). Basically, this model has got the best of both worlds!
+
+This model is based on the paper by Henmi and Copas (2010). Although it is more robust to publication bias, I do not know any meta-analyses in the field of ecology and evolution, which uses this model. Probably we should be using this model rather than a random-effect model? I think so - let's call this model the 'robust' model. I think we should use this robust model for meta-regression too. I acknowledge Wolfgang telling me about this model to me.  
+
+### More complex models
+
+Up to now, we completely ignored non-independence among effect sizes. We assumed that we have one effect size from one study (or paper). But in reality, a paper usually contains multiple effect sizes. These effect sizes from the same studies are not independent of each other. Let's consider model where we have several effect sizes from single studies like our data set. First, I give you a math representation:
+
+\begin{equation}
+y_{ij}=b_0+s_i+u_{ij}+e_{ij}
+\\
+s_i\sim \mathcal{N}(0,\tau^2)\
+\\
+u_{ij}\sim \mathcal{N}(0,\sigma^2)\
+\\
+e_{ij}\sim \mathcal{N}(0,v_i)\
+\end{equation}
+
+where $u_{ij}$ is a deviation from $s_i$ (the within-study effect; the $j$th effect size from the $i$th study),it is normally distributed with $\sigma^2$ (other notations are comparable as above).
+
+We can visualize this (again Figure 4 from Nakagawa et al. 2017). And we can see why this model is called, a 'multilevel' meta-analytic model, an extension of the random-effects model. 
+
+```{r fig2, echo = FALSE }
+knitr::include_graphics(c("Legend.png","Multi.png"))
+```
+
+We can fit an equivalent model using the function `rma.mv`. We need to add `paper` (the between-study effect) and `id` (the )  in our data set to the multilevel model as random factors.
+
+```{r multilevel, tidy=TRUE, cache=TRUE}
+
+multilevel_m<-rma.mv(yi = yi, V = vi, random = list(~1|paper, ~1|id), method = "REML", data = dat)
+summary(multilevel_m)
+```
+
+OK, this does not have $I^2$. We have actually proposed a multilevel-model version of $I^2$ (Nakagawa & Santos 2012), which, in this case, can be written as:
+
+\begin{equation}
+I^2=\frac{\tau^2+\sigma^2}{(\tau^2+\sigma^2+\bar{v})},
+\end{equation}
+
+Note that we do have $\tau^2$ and $\sigma^2$, which are `sigma^2.1` and `sigma^2.2` in the output above, respectively. Using this formula, we have the total heterogeneity $I^2$ of 88.93% (the $\bar{v} = 0.0033$ for our data set; see Nakagawa & Santos 2012 for how to get this). As you might expect, this value is nearly identical to what we got from the random-effect model (88.9%). But this model is better as we are explicitly dealing with non-independence arising from effect sizes from the same studies (although it turns out the problem is not completely solved...). 
+
+As you could probably imagine, we can add more levels to this multilevel models. For example, we could add `genus` in the data set, as related species are probably more similar to each other. But it is better to model this taxonomic non-independence using phylogeny (which is the topic of the next section). Note that we can also run meta-regression using `rma.mv`; more complex models (different versions of a multilevel model) are explained in Nakagawa & Santos (2012).
+
+### Phylogenetic meta-analysis
+
+As I just mentioned, we have, so far, also ignored another type of non-independence, i.e. phylogenetic relatedness. Chuck Darwin unfortunately (or fortunately) found out all species on earth are related so we need to deal with this issue. Actually, we just need to model phylogenetic non-independence by adding the degree of relatedness among species as a correlation matrix. The term, phylogeny or `phylo`, which we will create below, can be added as a random factor to a multilevel model. This means that we need a phylogenetic tree for our data set. We have already prepared for it so we can use that [file](https://www.dropbox.com/s/d5pzkb9ezgx6798/tree_curtis1998.tre?dl=0). But it is not that difficult to get a tree together by using the package called `rotl`. We load our phylogeny and make a correlation matrix (a relatedness matrix among species).
+
+```{r prep1, tidy=TRUE, cache=TRUE}
+#install.packages("ape")
+library(ape)
+tree<-read.tree(file="tree_curtis1998.tre")
+plot(tree, cex = 0.7)                
+# sorry I skip explantions of these operations - other than saying we have a correlation matrix to fit to the model
+tree<-compute.brlen(tree)
+cor<-vcv(tree, cor=T)
+```
+We need a bit more preparation as we do not a column which has the whole species names (we call it `phylo`). Also, it turns out that we need to correct some typos in `genus` and `species` columns in our data.
+
+```{r prep2, tidy=TRUE, message = FALSE}
+#install.packages("Hmisc")
+library(Hmisc)
+phylo <- tolower(paste(dat$genus, dat$species, sep="_"))
+#note: "populusx_euramericana" should be same as "populus_euramericana"
+phylo <- gsub("populusx_euramericana", "populus_euramericana", phylo)
+# these two species are the two different names of the same species
+phylo <- gsub("nothofagus_fusca", "fuscospora_fusca", phylo)
+phylo <- capitalize(phylo)
+dat[,"phylo"]<-phylo
+```
+
+We now have our phylogenetic correlation `cor` and a column with species names `phylo`.
+
+```{r phylo, tidy=TRUE, cache=TRUE}
+# now putting phylogenetic effect and the correlation matrix 
+phylo_m<-rma.mv(yi = yi, V = vi, random = list(~1|phylo, ~1|paper, ~1|id), R = list(phylo = cor), method = "REML", data = dat)
+summary(phylo_m)
+```
+All this effort, there is no variation due to phylogeny! So we do not need this phylogeny term (i.e. `phylo`). 
+
+Also, this multilevel model can be considered as a comparative phylogenetic method. There are quite a few things you need to know and to be careful of, which I cannot cover (e.g. we assumed that the Brownian-motion model of evolution in the model above - what does this even mean?). But Will and I have written a nice 'primer' so please read that primer -- Cornwell & Nakagawa (2017) 
+
+Unfortunately, there are other types of non-independence from what covered here. We summaries all types in our recent paper -- Noble et al. (2017). So read this as well if you are interested. 
+
+### Complex robust models (the last section!)
+
+We have a multilevel version of the robust model too. It is easy to fit using the function `rma.mv` (we do not include `phylo` as it did not explain any variance).
+
+```{r robustml, tidy=TRUE, cache=TRUE}
+# you can put a marix or vector to W which is equivalent to 'weights' in rma
+robustml_m<-rma.mv(yi = yi, V = vi, W = wi, random = list(~1|paper, ~1|id), method = "REML", data = dat)
+summary(robustml_m)
+```
+
+I think this is the model we have been looking for, i.e. our final model. At least for this data set. 
+
+Any questions? Or email me (s(-dot-)nakagawa(-at-)unsw(-dot-)edu(-dot-)au). Also visit our [website](http://www.i-deel.org/)
+
+## Further help (references)
+
+Go to the metafor package's [website](http://www.metafor-project.org/doku.php). There you find many worked examples.
+
+Cornwell, W., and S. Nakagawa. 2017. Phylogenetic comparative methods. *Current Biology* 27:R333-R336.
+
+Curtis, P. S., and X. Z. Wang. 1998. A meta-analysis of elevated CO2 effects on woody plant mass, form, and physiology. *Oecologia* 113:299-313.
+
+Henmi, M., and J. B. Copas. 2010. Confidence intervals for random effects meta-analysis and robustness to publication bias. *Statistics in Medicine* 29:2969-2983.
+
+Higgins, J. P. T., S. G. Thompson, J. J. Deeks, and D. G. Altman. 2003. Measuring inconsistency in meta-analyses. *British Medical Journal* 327:557-560.
+
+Nakagawa, S., R. Poulin, K. Mengersen, K. Reinhold, L. Engqvist, M. Lagisz, and A. M. Senior. 2015. Meta-analysis of variation: ecological and evolutionary applications and beyond. *Methods in Ecology and Evolution* 6:143-152.
+
+Nakagawa, S., D. W. A. Noble, A. M. Senior, and M. Lagisz. 2017. Meta-evaluation of meta-analysis: ten appraisal questions for biologists. *BMC Biology* 15:18.
+
+Nakagawa, S., and E. S. A. Santos. 2012. Methodological issues and advances in biological meta-analysis. *Evolutionary Ecology* 26:1253-1274.
+
+Noble, D. W. A., M. Lagisz, R. E. O'Dea, and S. Nakagawa. 2017. Nonindependence and sensitivity analyses in ecological and evolutionary meta-analyses. *Molecular Ecology* 26:2410-2425.
+
+Senior, A. M., C. E. Grueber, T. Kamiya, M. Lagisz, K. O'Dwyer, E. S. A. Santos, and S. Nakagawa. 2016. Heterogeneity in ecological and evolutionary meta-analyses: its magnitude and implications. *Ecology* 97:3293-3299.
+
+Viechtbauer, W. 2010. Conducting meta-analyses in R with the metafor package. *Journal of Statistical Software* 36:1-48.

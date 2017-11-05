@@ -35,6 +35,13 @@ Some simple [hypothesis tests](http://environmentalcomputing.net/t-tests/) with 
 
 [Forecasting with time series](http://environmentalcomputing.net/forecasting-time-series/)
 
+
+[Meta-analyses](http://environmentalcomputing.net/meta-analyses/) 
+
+* [Meta-analyses 1](http://environmentalcomputing.net/meta-analyses-1/): Introduction and calculating effect sizes  
+* [Meta-analyses 2](http://environmentalcomputing.net/meta-analyses-2/): Fixed effect and random effect models  
+* [Meta-analyses 3](http://environmentalcomputing.net/meta-analyses-3/): More complex models 
+
 <br>
 Last updated:
 ```{r,echo=F}

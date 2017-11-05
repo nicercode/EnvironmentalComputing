@@ -1,0 +1,7 @@
+Meta-analyses are increasing used in ecology, evolution and the environmental sciences to find general patterns among many studies, settle controversies among conflicting studies and to generate new hypotheses. These tutorials provide an introduction to running meta-analyses with the R package [metafor](http://www.metafor-project.org/doku.php).
+
+* [Meta-analyses 1](http://environmentalcomputing.net/meta-analyses-1/): Introduction and calculating effect sizes  
+* [Meta-analyses 2](http://environmentalcomputing.net/meta-analyses-2/): Fixed effect and random effect models  
+* [Meta-analyses 3](http://environmentalcomputing.net/meta-analyses-3/): More complex models 
+
+![](4666102_orig.jpg)

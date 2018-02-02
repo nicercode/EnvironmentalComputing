@@ -29,7 +29,7 @@ iii. Data extraction & coding
 iv. Meta-analysis & publication bias tests
 v. Reporting & publication
 
-We only consider the step iv in this tutorial. You will need to learn the other steps elsewhere. To get you started, we recently wrote an overview paper which divides the process of meta-analysis into 10 questions [(Nakagawa *et al.* 2017)](https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-017-0357-7). The 10 questions will guide you through judging quality of a meta-analysis. 
+We only consider the step iv in this tutorial. You will need to learn the other steps elsewhere. To get you started, we recently wrote an overview paper which divides the process of meta-analysis into 10 questions [(Nakagawa *et al.* 2017)](https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-017-0357-7). The 10 questions will guide you through judging the quality of a meta-analysis. 
 
 1. Is the search systematic and transparently documented?
 2. What question and what effect size?
@@ -45,7 +45,7 @@ We only consider the step iv in this tutorial. You will need to learn the other 
 
 ### Metafor for meta-analysis
 
-I think the R package [metafor](http://www.metafor-project.org/doku.php) (Viechtbauer 2010) is the most comprehensive meta-analytic software and the author [Wolfgang Viechtbauer](http://www.wvbauer.com/doku.php), who I have to say, has the coolest name among my friends, is still actively developing it.
+I think the R package [metafor](http://www.metafor-project.org/doku.php) (Viechtbauer 2010) is the most comprehensive meta-analytic software and the author [Wolfgang Viechtbauer](http://www.wvbauer.com/doku.php), who, I have to say, has the coolest name among my friends, is still actively developing it.
 
 First, install and load the `metafor` package.
 
@@ -123,7 +123,7 @@ The original paper used lnRR so we will use it, but you may want to repeat analy
 
 Add the effect sizes to the original data set with `cbind` or `bind_cols` from the package `dplyr`
 
-```{r, tidy=TRUE, cache=TRUE, message=FALSE}
+```{r, tidy=TRUE, cache=TRUE, message=FALSE, warning=FALSE}
 library(dplyr)
 dat <- bind_cols(dat,lnRR)
 ```

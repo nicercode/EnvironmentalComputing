@@ -15,7 +15,7 @@ s_i\sim \mathcal{N}(0,\tau^2)\
 \\
 u_{ij}\sim \mathcal{N}(0,\sigma^2)\
 \\
-e_{ij}\sim \mathcal{N}(0,v_i)\
+e_{ij}\sim \mathcal{N}(0,v_{ij})\
 \end{equation}
 
 where $u_{ij}$ is a deviation from $s_i$ (the within-study effect; the $j$th effect size from the $i$th study),it is normally distributed with $\sigma^2$ (other notations are comparable as above).
@@ -76,7 +76,7 @@ tree <- compute.brlen(tree)
 cor <- vcv(tree, cor=T)
 ```
 
-We need a bit more preparation as we do not a column which has the whole species names (we call it `phylo`). Also, it turns out that we need to correct some typos in `genus` and `species` columns in our data.
+We need a bit more preparation as we do have not a column which has the whole species names (we call it `phylo`). Also, it turns out that we need to correct some typos in `genus` and `species` columns in our data.
 
 ```{r prep3, tidy=TRUE, message = FALSE, warning=FALSE}
 library(Hmisc)

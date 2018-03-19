@@ -74,6 +74,8 @@
     + [Mixed models 2: Linear mixed models with several random effects](http://environmentalcomputing.net/mixed-models-2/)
     + [Mixed models 3: Generalised linear mixed models](http://environmentalcomputing.net/mixed-models-3/)
     
+* [Generalised additive models](http://environmentalcomputing.net/gams/)
+    
 * [Categorical data analyses](http://environmentalcomputing.net/categorical-data-analyses/)
     + [Goodness of fit tests](???http://environmentalcomputing.net/goodness-of-fit-tests)
     + [Contingency tables](http://environmentalcomputing.net/contingency-tables/)

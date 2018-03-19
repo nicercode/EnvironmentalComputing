@@ -24,6 +24,8 @@ Some simple [hypothesis tests](http://environmentalcomputing.net/t-tests/) with 
 * [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/): Linear mixed models with several random effects  
 * [Mixed models 3](http://environmentalcomputing.net/mixed-models-3/): Generalised linear mixed models  
 
+[Generalised additive models](http://environmentalcomputing.net/gams/)
+
 [Categorical data analyses](http://environmentalcomputing.net/categorical-data-analyses/):
 
 * [Goodness of fit tests](http://environmentalcomputing.net/goodness-of-fit-tests/)  

@@ -48,6 +48,7 @@
     + [Heat maps](http://environmentalcomputing.net/heat-maps/)
 
 * [Visualising spatial data](http://environmentalcomputing.net/visualising-spatial-data/)
+    + [Making maps of your study sites](http://environmentalcomputing.net/making-maps-of-your-study-sites/)
     + [Making simple maps](http://environmentalcomputing.net/making-simple-maps/)
 
 [**Statistics**](http://environmentalcomputing.net/statistics/)

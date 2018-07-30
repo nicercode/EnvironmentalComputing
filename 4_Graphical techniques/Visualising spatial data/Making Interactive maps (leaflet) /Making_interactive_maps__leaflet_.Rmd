@@ -27,7 +27,7 @@ leaflet() %>%
 
 The Leaflet R package has been designed to be used with pipes (`%>%`), which makes it easy to add layers and controls such as a scale bar and a mini map.
 
-Most of the time however we will have an area or a study site that we are interested that we want to view:
+Most of the time however we will have an area or a study site that we are interested in that we want to view:
 
 ```{r b2,fig.width=8}
 leaflet() %>% 

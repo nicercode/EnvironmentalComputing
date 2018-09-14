@@ -115,12 +115,11 @@ make_plot_spatial(stats_spatial)
 save_output(stats_species)
 ```
 
-Here all the functions like `fit_model_species` are one's you've written yourself
+Here all the functions like `fit_model_species` are ones that you've written yourself.
 
 Wow, how much easier is that to engage with, than some long script with 100's of lines?
 
 ![](Functions_image.jpg)
-
 
 
 ### Reuse code (a.k.a. "Don't repeat yourself")
@@ -129,7 +128,7 @@ Not only is using the `mean` function more informative (its easier to tell what 
 
 To further highlight this, we will go through an example of writing our own function to calculate the standard error of a bunch of variables. R has built in functions for the mean of a vector (`mean(x)`) and standard deviation (`sd(x)`) but not the standard error.  To calculate standard error,
 
-$$SE_\bar{x}= \sqrt{\frac{sd}{n}}$$ 
+$$SE_\bar{x}= \sqrt{\frac{var}{n}}$$ 
 
 we need the **variance** and sample size, **n**. These are relatively easy to calculate using other base functions in R.  `var` will calculate the variance and `length` gives the length of the vector and thus the sample size (n). 
 
@@ -139,9 +138,9 @@ Let's say we first wanted the mean and standard error of height. This is given b
 sqrt(var(algae$height) / length(algae$height))
 ```
 
-Imagine now that you wanted to calculate these same statistics on a different variable (e.g., dry weight). When faced with wanting to use this piece of code twice, we may be tempted to just copy-and-paste it to a new place, thus having two copies of the above snippet in our code. However, a much better approach is to make it into a function and call that function twice. 
+Imagine now that you wanted to calculate these same statistics on a different variable (e.g., dry weight). When faced with wanting to use this piece of code twice, we may be tempted to just copy-and-paste it to a new place, thus having two copies of the above snippet in our code. However, a much more elegant (and benifitial in the long-term) approach is to make it into a function and call that function twice. 
 
-If we first define a function for standard error, 
+If we first define a function for standard error: 
 
 ```{r,}
 standard_error <- function (x){
@@ -171,7 +170,7 @@ sqrt(var(algae$dryweight) / length(algae$dryweight))
 sqrt(var(algae$length) / length(algae$dryweight))
 ```
 
-Did you notice the mistake? I forgot to change the second variable on the third line!!!!! The code will run but give the wrong results. This is less likely if we write 
+Did you notice the mistake? I forgot to change the second variable on the third line!!!!! The code will run but give the wrong results. This is less likely if we write: 
 
 ```{r,}
 standard_error(algae$height)
@@ -187,14 +186,14 @@ n <- length(algae$height)
 sqrt( var_x / n )
 ```
 
-Note you now have two new objects in your environment: `var_x` and `n`. 
+Note you now have two new objects in your environment: `var_x` and `n`:
 
 ```{r, eval=TRUE}
 var_x
 n
 ```
 
-You can get rid of them by running 
+You can get rid of them by running: 
 
 ```{r, eval=TRUE}
 rm(var_x, n)
@@ -213,12 +212,14 @@ standard_error <- function (x){
   sqrt( var_x / n )
 }
 ```
-When you run
+
+When you run:
 
 ```{r, eval=TRUE}
 standard_error(algae$height)
 ```
-the result is returned but variables `var_x` and `n` are no where to be seen. That's because they were automatically cleaned up when the function exited. 
+
+The result is returned but variables `var_x` and `n` are nowhere to be seen. That's because they were automatically cleaned up when the function exited. 
 
 Any variables created within a function get automatically cleaned up at the end of the function. So using functions leaves us with a nice clean workspace. Moreover, the environment within the function is much safer than the global env, because we're less likely to grab random variables from elsewhere.
 
@@ -238,8 +239,6 @@ As a general rule, **a good function does one thing well**. If that  one thing i
 
 Now let's look more closely at the mechanics of writing a function.
 
-
-
 ### The syntax of a function 
 
 A function definition has the following form:
@@ -251,14 +250,13 @@ function_name <- function (arg1, arg2, ...){
 }
 ```
 
-**function_name**: The function's name. Can be any valid text, but you should avoid using names that are used elsewhere in R. Check to see if your name is already used as a keyword by asking for the help page `?function_name` (no 100% guarantee, but a good check). Also, aim for names that describe what the function does. A long name like `calculate_standard_error` is much better than something short and unintuitive like `f`.
+**function_name**: The function's name. Can be any valid text *without a space*, but you should avoid using names that are used elsewhere in R. Check to see if your name is already used as a keyword by asking for the help page `?function_name` (no 100% guarantee, but a good check). Also, aim for names that describe what the function does. A long name like `calculate_standard_error` is much better than something short and unintuitive like `f`.
 
 **arg1, arg2, ...**: The arguments of the function. You can write a function with any number of arguments, with those being any R objects (numeric, strings, characters, data.frames, matrices, other functions).
 
 **function body**: The code between the `{}` is the function body and run every time the function is called. This is the code that is doing all the useful stuff and is called the function body.
 
-**return value**: The last line of code is the object to be returned. Some times you'll see people write `return(object)`, though it's enough to write `object`.
-
+**return value**: The last line of code is the object to be returned. Some times you'll see people write `return(object)`, though it's enough to write `object`.  
 
 Using this format, a function to calculate the standard error of the values in the object `x` would be:  
 
@@ -273,7 +271,6 @@ To be able to use the function, you need to run that code into your console. Onc
 ```{r}
 standard_error(algae$height)
 ```
-
 
 ### Default arguments
 
@@ -295,7 +292,7 @@ or just
 mean(algae$height)
 ```
 
-The first version makes it explicitly that the values in `x=algae$height`. Then  from the functions perspective, `height` is `x`. The second version works because R takes the values of `height` and maps it onto the functions variable `x`. It does this because it assigns the first unnamed argument in our function call onto the first unnamed argument in the function definition. So the following will also work
+The first version makes it explicit that the values in `algae$height` outside of the function are *passed* to the variable `x` within the function. The second version does the same thing, but less explictly.  It works because R takes the values of `height` and maps it onto the first unnamed argument in our function call onto the first unnamed argument in the function definition. So the following will also work:
 
 ```{r, results="hide"}
 mean(na.rm=TRUE, x=algae$height)
@@ -402,9 +399,8 @@ my_plot <- function (...){
 }
 ```
 
-
-
 ### Adding comments to your function 
+
 Before you are finished, there is one last thing to do. It is a good idea to add comments your function, as this will save you from a world of pain when you go back to fix something later on. Function comments should contain, a brief description of the function (one sentence), a list of function arguments with a description of each (including data type) and a description of the return value.  Function comments should be written immediately above or below the function definition line.
 
 ```{r, eval = FALSE, echo = T}
@@ -417,14 +413,11 @@ standard_error <- function (x, na.rm){
   #
   # Return:
   #  The standard error of x
-  SE <- sqrt(var(x, na.rm = na.rm) / sum(!is.na(x)))
-  return (SE)
+  sqrt(var(x, na.rm = na.rm) / sum(!is.na(x)))
 }
-
 ```
 
 Another common way to annotate functions is using the [roxygen2 syntax](http://kbroman.org/pkg_primer/pages/docs.html). 
-
 
 ### Storing and using functions
 
@@ -448,7 +441,7 @@ source("R/plots.R")
 
 It's a matter of preference whether you use a single or multiple files.
 
-## Writing functions to work with pipes `%>%` 
+### Writing functions to work with pipes `%>%` 
 
 For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](http://environmentalcomputing.net/data-manipulation/)).
 
@@ -458,22 +451,67 @@ Importantly, you can write functions that work with the pipe operator. All you n
 algae$height %>% standard_error()
 ```
 
+### Returning multiple arguments
+
+The examples above all return a single item. What if I want to return multiple items from a function? The answer is to return a `list` object. Lists are helpful because you can bundle together many different items. 
+
+For example, we could write a function that returns several statistics of a variable:
+
+```{r,}
+summary_stats <- function(x, na.rm = TRUE) {
+
+	list(mean = mean(x, na.rm=na.rm),
+	 		 var = var(x, na.rm=na.rm),
+	 		 n = sum(!is.na(x))
+	 		)
+}
+```
+
+If we run this function, we receive an object that has named elements:
+
+
+```{r,}
+height_stats <- summary_stats(algae$height)
+
+names(height_stats)
+
+height_stats$mean
+
+height_stats$var
+
+height_stats$n
+```
+
+In fact many functions do this, e.g. `lm()` (for fitting a linear model). Fitting a model we can check it's a list, then ask for a name of the returned elements, and start calling them by name:
+
+```{r,}
+fit <- lm(algae$height ~ algae$dryweight)
+
+is.list(fit)
+
+names(fit)
+
+fit$coefficients
+```
 
 ## What makes a good function
 
-Ideally each function does one thing well. Often this means lots of short functions. The code in the function body can be more complex, but short functions are extremely useful. Here's a few tips:
+Finally, let's recap a few pointers on what makes a good function. 
 
 **It's short**
 <!-- 
 <blockquote class="twitter-tweet"><p>If you've written a function whose body is 2,996 lines of code, you're doing it wrong.</p>&mdash; M Butcher (@technosophos) <a href="https://twitter.com/technosophos/status/322392537983746049">April 11, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
  -->
-**Performs a single operation**
+
+Ideally each function does one thing well. Often this means lots of short functions. Short functions are extremely useful. Even if the code in the function body is more complex, ideally it still does one thing well. 
+
+**It does one thing well**
 <!-- 
 <blockquote class="twitter-tweet"><p>The reason for writing a function is not to reuse its code, but to name the operation it performs.</p>&mdash; Tim Ottinger (@tottinge) <a href="https://twitter.com/tottinge/status/293776089099153408">January 22, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
  -->
-**Uses intuitive names**
+**It has an intuitive name**
 <!-- 
 <blockquote class="twitter-tweet"><p>"The name of a variable, function, or class, should answer all the big questions." - Uncle Bob Martin, Clean Code</p>&mdash; Gustavo Rod. Baldera (@gbaldera) <a href="https://twitter.com/gbaldera/status/327063173721100288">April 24, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -488,7 +526,7 @@ You can find more help on functions at
 - The [official R intro material on writing your own functions](http://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-R-intro.html#Writing-your-own-functions)
 
 
-**Author**: Original by Keryn F Bain; revised and expanded by [Daniel S Falster](https://twitter.com/adaptive_plant)
+**Author**: Original by Keryn F Bain; revised and substantially expanded by [Daniel S Falster](https://twitter.com/adaptive_plant)
 
 <br>
 Last updated:

@@ -274,7 +274,7 @@ ggplot(CO2_pred, aes(x = time)) +
 <br>
 The R help ```?gam``` is very good, and there is masses of information to read
 Check out ```?gamm```, ```?gamm4``` and ```?bam```
-Use ```citation("mgcv")``` for a range of papers with more tehcnical explanations - the book on GAMs with R is particularly good (there's a 2017 version)
+Use ```citation("mgcv")``` for a range of papers with more technical explanations - the book on GAMs with R is particularly good (there's a 2017 version)
 A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/
 
 <br>

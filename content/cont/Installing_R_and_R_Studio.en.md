@@ -2,7 +2,7 @@
 title: Installing R and R Studio
 author: "Alistair Poore and Will Cornwell"
 date: "October 2, 2016"
-output: html_document
+weight: 10
 ---
 
 <br>

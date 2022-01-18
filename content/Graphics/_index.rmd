@@ -1,5 +1,7 @@
 ---
 title: 'Graphics'
+weight: 5
+output: html_document
 ---
 
 ```{r setup, include=FALSE}

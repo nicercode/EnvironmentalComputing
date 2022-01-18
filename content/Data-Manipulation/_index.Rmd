@@ -1,5 +1,7 @@
 ---
+weight: 2
 title: "Data Manipulation"
+output: html_document
 ---
 
 

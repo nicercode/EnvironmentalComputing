@@ -1,6 +1,7 @@
 ---
 date: "2016-04-09T16:50:16+02:00"
 title: "About This Site"
+weight: 1
 ---
 
 This section to techniques for graphics and analyses, including:

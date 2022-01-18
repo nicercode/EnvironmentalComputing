@@ -1,6 +1,8 @@
 ---
+weight: 5
 title: "Importing Data"
 author: "Keryn Bain"
+output: html_document
 ---
 
 Before we can run any data analyses or create figures in R, we need to import that data into R. Preparing and cleaning the data for analyses is essential and often more time consuming than the statistical analyses themselves. It is unusual for raw data to be in the correct format and without errors. Data cleaning is the process of identifying and fixing any problems so data can be analysed easily. 

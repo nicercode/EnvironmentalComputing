@@ -1,5 +1,7 @@
 ---
 title: 'Statistics'
+weight: 6
+output: html_document
 ---
 
 ```{r setup, include=FALSE}

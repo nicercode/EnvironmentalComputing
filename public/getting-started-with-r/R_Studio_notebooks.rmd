@@ -1,6 +1,8 @@
 ---
+weight: 2
 title: "Using R Notebooks"
 author: "Alistair Poore"
+output: html_document
 ---
 
 ```{r,echo=F,message=F}

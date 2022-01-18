@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.91.2" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Installing R and R Studio :: Environmental Computing</title>
+
+    
+    <link href="/css/nucleus.css?1642487863" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1642487863" rel="stylesheet">
+    <link href="/css/hybrid.css?1642487863" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1642487863" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1642487863" rel="stylesheet">
+    <link href="/css/auto-complete.css?1642487863" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1642487863" rel="stylesheet">
+    <link href="/css/theme.css?1642487863" rel="stylesheet">
+    <link href="/css/tabs.css?1642487863" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1642487863" rel="stylesheet">
+    
+    <link href="/css/theme-green.css?1642487863" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1642487863"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/getting-started-with-r/installing_r_and_r_studio/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/'>
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<g>
+	<path d="M35,0c9.6,0,17.9,3.4,24.7,10.3c6.8,6.8,10.3,15,10.3,24.7c0,9.7-3.4,17.9-10.3,24.7c-6.8,6.8-15,10.3-24.7,10.3
+		c-9.7,0-17.9-3.4-24.7-10.3C3.4,52.8,0,44.6,0,34.9c0-9.6,3.4-17.9,10.3-24.7C17.1,3.4,25.3,0,35,0z M22.3,63.7
+		c0.3-7.4,0.3-14.7,0-22.1c-2.1-0.4-4-0.4-5.9,0c-0.2,0.8-0.2,2.5-0.1,4.9c0.1,2.3,0,3.9-0.3,4.8c-1.7-0.6-2.7-2.1-3.1-4.6
+		c-0.1-0.7-0.1-3.3-0.1-8c0-14.5-0.1-23-0.3-25.6c-3.6,4.1-5.6,7-5.9,8.5v10.9c0,4.5,0.1,8.1,0.2,10.9c0,0.4,0,1.3-0.1,2.8
+		c-0.1,1.2,0,2.1,0.1,2.6c0.1,0.6,1.1,2.1,2.8,4.7C13.2,58.7,17.5,62.2,22.3,63.7z M44.6,65.4c0.3-5,0.2-12.9-0.1-23.6
+		c-2.1-0.3-4.1-0.3-5.9,0c-0.2,2-0.2,5.1-0.1,9.5c0.1,4.3,0,7.5-0.1,9.5c-2.9,0.4-5,0.3-6.2-0.1c-0.2-5.6-0.2-15.2-0.1-28.7
+		c0.1-12.4,0-21.8-0.3-28.3c-2.4,0.1-4.3,0.6-5.7,1.3c-0.1,7.7-0.2,17.7-0.1,30.1c0,16.5,0,26.6,0,30.3c2.3,1.1,5.4,1.7,9.4,1.7
+		C38.9,66.9,42.1,66.4,44.6,65.4z M48.1,64.1c9.7-4.6,15.7-12,18-22.2c-1.8-0.2-3.8-0.3-6.1-0.3c-1.6,3.9-2.6,6.3-3.2,7.2
+		c-1.1,1.7-2,2.5-2.7,2.5C54,46,54,39.1,54,30.5c0-11.5,0-18.4,0-20.9c-1.4-1.4-3.3-2.5-5.7-3.4C48.1,6.3,48,6.4,48,6.7
+		c0,3.5,0,13.1,0,28.8C47.9,47.2,48,56.8,48.1,64.1z"/>
+</g>
+<g>
+	<path d="M116.6,51.3h-29c-0.5,0-0.9-0.1-1.3-0.2c-0.4-0.2-0.7-0.4-1-0.7c-0.3-0.3-0.5-0.6-0.7-1c-0.2-0.4-0.2-0.8-0.2-1.3V16.3h6.3
+		V45h25.8V51.3z"/>
+	<path d="M154.8,51.3h-22.9c-0.9,0-1.8-0.2-2.9-0.5c-1-0.3-2-0.8-2.9-1.5c-0.9-0.7-1.6-1.6-2.2-2.8c-0.6-1.1-0.9-2.5-0.9-4.2V19.5
+		c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2h28.6v6.3h-25.4v19.8
+		c0,0.8,0.2,1.5,0.7,1.9s1.1,0.7,1.9,0.7h22.9V51.3z M151.9,37h-20v-6.4h20V37z"/>
+	<path d="M197.3,51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6,0.4-4.9,1.3-7.1s2.1-4,3.7-5.5c1.6-1.5,3.4-2.8,5.5-3.6
+		c2.1-0.9,4.5-1.3,7-1.3h14.3c0.4,0,0.9,0.1,1.2,0.2c0.4,0.2,0.7,0.4,1,0.7s0.5,0.6,0.7,1c0.2,0.4,0.2,0.8,0.2,1.2V51.3z
+		 M168.7,36.4H191V22.6h-11.2c-0.2,0-0.6,0-1.2,0.1c-0.6,0.1-1.4,0.2-2.2,0.4c-0.8,0.2-1.7,0.6-2.6,1c-0.9,0.5-1.8,1.1-2.5,2
+		c-0.8,0.8-1.4,1.9-1.9,3.1c-0.5,1.2-0.7,2.8-0.7,4.5V36.4z"/>
+	<path d="M241.7,28.1c0,1.4-0.2,2.7-0.5,3.9c-0.4,1.1-0.8,2.1-1.5,3c-0.6,0.9-1.3,1.6-2.1,2.2c-0.8,0.6-1.6,1.1-2.5,1.5
+		c-0.9,0.4-1.8,0.7-2.6,0.9c-0.9,0.2-1.7,0.3-2.5,0.3l13.3,11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c0.8-0.1,1.5-0.2,2.2-0.5
+		c0.7-0.3,1.2-0.6,1.7-1.1c0.5-0.5,0.9-1,1.1-1.6c0.3-0.6,0.4-1.4,0.4-2.2v-4c0-0.4,0-0.6-0.1-0.8c-0.1-0.2-0.2-0.3-0.3-0.4
+		c-0.1-0.1-0.3-0.1-0.4-0.2c-0.2,0-0.3,0-0.4,0h-20.9v28.7h-6.3V19.5c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1
+		c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2H234c1.4,0,2.6,0.3,3.6,0.8s1.8,1.2,2.4,1.9c0.6,0.8,1,1.6,1.3,2.5
+		c0.3,0.9,0.4,1.7,0.4,2.5V28.1z"/>
+	<path d="M285.1,48.6c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.4,0.7-0.7,1c-0.3,0.3-0.6,0.5-1,0.7c-0.4,0.2-0.8,0.2-1.2,0.2
+		c-0.4,0-0.8-0.1-1.2-0.2c-0.4-0.1-0.8-0.4-1.1-0.7l-23.2-24.2v24.7h-6.3V19c0-0.7,0.2-1.2,0.5-1.8c0.4-0.5,0.8-0.9,1.4-1.2
+		c0.6-0.2,1.2-0.3,1.9-0.2s1.2,0.4,1.6,0.9l23.2,24.2V16.3h6.3V48.6z"/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1642487863"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1642487863"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1642487863"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/about-this-site/" title="About This Site" class="dd-item
+        
+        
+        
+        ">
+      <a href="/about-this-site/">
+          About This Site
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/" title="Getting Started with R" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/getting-started-with-r/">
+          Getting Started with R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/getting-started-with-r/installing_r_and_r_studio/" title="Installing R and R Studio" class="dd-item active">
+        <a href="/getting-started-with-r/installing_r_and_r_studio/">
+        Installing R and R Studio
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/getting-started-with-r/r_studio_notebooks/" title="Using R Notebooks" class="dd-item ">
+        <a href="/getting-started-with-r/r_studio_notebooks/">
+        Using R Notebooks
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/getting-started-with-r/basic_project_managment/" title="Basic Project Management" class="dd-item ">
+        <a href="/getting-started-with-r/basic_project_managment/">
+        Basic Project Management
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/getting-started-with-r/data_entry/" title="Data Entry" class="dd-item ">
+        <a href="/getting-started-with-r/data_entry/">
+        Data Entry
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/getting-started-with-r/importing-data/" title="Importing Data" class="dd-item ">
+        <a href="/getting-started-with-r/importing-data/">
+        Importing Data
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/getting-started-with-r/data_typesstructure/" title="Data Types &#43; Structure" class="dd-item ">
+        <a href="/getting-started-with-r/data_typesstructure/">
+        Data Types &#43; Structure
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/" title="Data Manipulation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/">
+          Data Manipulation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/data-manipulation/making_new_variables/" title="Making New Variables" class="dd-item ">
+        <a href="/data-manipulation/making_new_variables/">
+        Making New Variables
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/" title="Coding Skills" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/">
+          Coding Skills
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/" title="Graphics" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/">
+          Graphics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/" title="Statistics" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/">
+          Statistics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/getting-started-with-r/Installing_R_and_R_Studio.html" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Learn Theme for Hugo</a> > <a href='/getting-started-with-r/'>Getting Started with R</a> > Installing R and R Studio
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Installing R and R Studio
+            </h1>
+          
+
+        
+
+
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><br>
+<img src="Install/blue-125.png" />
+<br><br>
+We recommend using R Studio as a user friendly interface for using R.</p>
+<p>First, install the latest version of <strong>R</strong> - download from <a href="http://cran.rstudio.com/">here</a><br>
+Second, install the latest version of <strong>R Studio</strong> - download from <a href="http://www.rstudio.com/products/rstudio/download/">here</a>
+<br><br></p>
+<div id="setting-the-working-directory" class="section level3">
+<h3>Setting the working directory</h3>
+<p><br>
+Once you have installed R and R Studio, you need to set the working directory. This is the location on your computer where any data files to imported can be found, and where any R scripts (the files that save your code) will be saved.</p>
+<p>In R studio, you can set the working directory with the menus (<em>Session &gt;&gt; Set Working Directory &gt;&gt; Choose Directory</em>) or with a line of code that gives the path of the folder on your computer:</p>
+<pre class="r"><code>setwd(&quot;Drive:/Folder1/Folder2&quot;)</code></pre>
+<p>If you are working with any of the example data files on this site, you will first need to download them to a folder on your computer and specify that folder as the working directory.
+<br><br></p>
+</div>
+<div id="the-layout-of-r-studio" class="section level3">
+<h3>The layout of R Studio</h3>
+<p><br>
+<img src="Install/Installing_R_and_R_Studio_image.jpg" /></p>
+<p>R Studio has four panels:</p>
+<p>The top left panel is the editor (or script window) you can view your R script. Running code from here is a simple as Ctrl+Enter when the cursor is on the line or lines of code that you want to execute.</p>
+<p>The bottom left panel is the console (or command window) where you can also run lines of code (write code next to &gt; and press Enter), but also where any text or numerical output will appear.</p>
+<p>The top right is the workspace window that lists the various R objects that you are currently using. These can be data sets or objects created by various analyses.</p>
+<p>The panel on the bottom right has:
+<em>lists of the files in your working directory
+</em>the R packages that you are currently using
+<em>any graphical output in the Plots window
+</em>help files (accessed by ? preceding any bit of code)</p>
+<p>You can change the size of these by dragging the edges of the windows.
+<br><br></p>
+</div>
+<div id="saving-your-code-in-a-script" class="section level3">
+<h3>Saving your code in a script</h3>
+<p><br>
+You should save all the code you use for a given analysis or graphic. Use the menus in R Studio to create a new R script (<em>File &gt;&gt; New &gt;&gt; R script</em>) and save that with the disk icon or menu (<em>File &gt;&gt; Save</em>). See <a href="http:environmentalcomputing.net/Good-practice-for-writing-scripts/">Good practice for writing scripts</a> for advice on how to structure these files.
+<br><br></p>
+</div>
+<div id="installing-r-packages" class="section level3">
+<h3>Installing R packages</h3>
+<p><br></p>
+<p>If your required analyses or graphics need a package that is not in the initial installation of R, then new packages can be installed from the menus (<em>Tools &gt;&gt; Install packages</em>) or from the panel on the bottom right. Once installed, they can be loaded with the <code>library</code> function (recommended) or by ticking the little box next to the package name (not recommended). It is better practice to use the <code>library</code> function in your script as that will remind you what packages need to be loaded.</p>
+<p>For example, this code will load the package <code>maptools</code> if it is installed on your computer.</p>
+<pre class="r"><code>library(maptools)</code></pre>
+<p><br><br></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p><br></p>
+<p>Our help modules on <a href="http:environmentalcomputing.net/Good-practice-for-writing-scripts/">Good practice for writing scripts</a> and <a href="http://environmentalcomputing.net/importing-data/">Importing data and data cleaning</a></p>
+<p><a href="https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio">Online help with R Studio</a></p>
+<p><a href="http://www.rstudio.com/training/online-learning/">Online training in R</a>
+<br><br></p>
+<p><strong>Author</strong>: Alistair Poore
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 18 17:29:51 2022&quot;</code></pre>
+</div>
+
+
+<footer class="footline">
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/getting-started-with-r/" title="Getting Started with R"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/getting-started-with-r/r_studio_notebooks/" title="Using R Notebooks" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1642487863"></script>
+    <script src="/js/perfect-scrollbar.min.js?1642487863"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1642487863"></script>
+    <script src="/js/jquery.sticky.js?1642487863"></script>
+    <script src="/js/featherlight.min.js?1642487863"></script>
+    <script src="/js/highlight.pack.js?1642487863"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1642487863"></script>
+    <script src="/js/learn.js?1642487863"></script>
+    <script src="/js/hugo-learn.js?1642487863"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1642487863"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
+

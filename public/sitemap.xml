@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>/about-this-site/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url><url>
+    <loc>/getting-started-with-r/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/installing_r_rstudio/</loc>
+  </url><url>
+    <loc>/data-manipulation/making_new_variables/</loc>
+  </url><url>
+    <loc>/data-manipulation/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/project_managment/</loc>
+  </url><url>
+    <loc>/coding-skills/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/data_entry/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/importing-data/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/data_types_structure/</loc>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2016-04-09T16:50:16+02:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+  </url><url>
+    <loc>/tags/</loc>
+  </url>
+</urlset>

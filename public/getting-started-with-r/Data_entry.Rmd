@@ -1,8 +1,6 @@
 ---
-weight: 4
 title: "Data Entry"
 author: "Andrew Letten"
-output: html_document
 ---
 
 Data is the life-blood of science. As part of the scientific process, we invest an enormous amount of time collecting, analysing and presenting data. Before we can analyse data, however, we typically need to get it into a format that can be interpreted by others, and more importantly by the software used for analysis. Do this well and you can save yourself a lot of time; do this badly and you may end up wasting considerable time 'cleaning' and structuring the data to make it usable. 

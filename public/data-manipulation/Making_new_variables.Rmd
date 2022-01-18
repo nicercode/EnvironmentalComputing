@@ -1,8 +1,6 @@
 ---
-weight: 1
 title: "Making New Variables"
 author: "Alistair Poore"
-output: html_document
 ---
 
 Being able to make new variables from those already in your data set is an essential skill for data manipulation prior to making graphs or doing analyses. These new variables could be a transformed variable that you would like to analyse, a new variable that is a function of existing ones, or a new set of labels for your samples.

@@ -1,7 +1,5 @@
 ---
-weight: 1
 title: "Getting Started with R"
-output: html_document
 ---
 
 Throughout this site, instructions for statistical analyses, data management and graphical techniques are provided in the software language R. R is a free, open source language that has rapidly become standard usage in the biological and environmental sciences. Apart from the cost, the language has the benefits of being able to explicitly share methods with colleague, and a very active community of people who are developing packages that will run very many types of analyses and graphics.

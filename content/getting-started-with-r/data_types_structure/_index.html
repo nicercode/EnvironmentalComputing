@@ -1,8 +1,6 @@
 ---
-weight: 6
 title: "Data Types + Structure"
 author: "Keryn Bain"
-output: html_document
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -14,8 +12,8 @@ output: html_document
 <br><br></p>
 <div id="one-dimensional-data-vectors" class="section level3">
 <h3>One dimensional data (vectors)</h3>
-<p><br>
-The most basic data structure in R is a vector, a one-dimensional set of numbers or characters. This is the data structure that you will work with the most, albeit from within a data frame (see below). Vectors can be either atomic or list, atomic vectors differ to lists in that all elements within an atomic vector must be of the <strong>same</strong> type (see below). For the most part we work with atomic vector and the following help file refers to this type of data.<br />
+<p><br></p>
+<p>The most basic data structure in R is a vector, a one-dimensional set of numbers or characters. This is the data structure that you will work with the most, albeit from within a data frame (see below). Vectors can be either atomic or list, atomic vectors differ to lists in that all elements within an atomic vector must be of the <strong>same</strong> type (see below). For the most part we work with atomic vector and the following help file refers to this type of data.<br />
 <br><br></p>
 <div id="common-types-of-vectors" class="section level4">
 <h4>Common types of vectors</h4>
@@ -68,12 +66,10 @@ As all elements within an atomic vector must be the same type, combining differe
 <pre class="r"><code>eg_coerced &lt;- c(&quot;tricks&quot;, 1, 2, 3, 4)
 class(eg_coerced)
 ## [1] &quot;character&quot;</code></pre>
-<p><br><br></p>
 </div>
 <div id="coercing-data" class="section level4">
 <h4>Coercing data</h4>
-<p><br>
-If you find your data is the wrong type, you can use the <code>as</code> functions to coerce data from one type to another. Be aware of what happens to your data after coercion. For example, coercing logical to numeric replaces F with 0s and Ts with 1s and any nonsensical coercion (like trying to make character “NSW” into a numeric) will result in NAs.</p>
+<p>If you find your data is the wrong type, you can use the <code>as</code> functions to coerce data from one type to another. Be aware of what happens to your data after coercion. For example, coercing logical to numeric replaces F with 0s and Ts with 1s and any nonsensical coercion (like trying to make character “NSW” into a numeric) will result in NAs.</p>
 <pre class="r"><code>as.numeric(eg_logical)
 ## [1] 1 1 1 0 0
 as.numeric(eg_character)
@@ -142,5 +138,5 @@ and <a href="http://www.statmethods.net/input/datatypes.html">here</a>
 <p><strong>Author</strong>: Keryn Bain
 <br>
 Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 18 18:26:28 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Tue Jan 18 19:27:20 2022&quot;</code></pre>
 </div>

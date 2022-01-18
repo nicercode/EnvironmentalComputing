@@ -1,8 +1,6 @@
 ---
-weight: 6
 title: "Data Types + Structure"
 author: "Keryn Bain"
-output: html_document
 ---
 
 ![](Data_types_structure_image.jpg)
@@ -14,6 +12,7 @@ The terms 'structure' and 'type' are often used interchangable. To avoid confusi
  
 ### One dimensional data (vectors)
 <br>
+
 The most basic data structure in R is a vector, a one-dimensional set of numbers or characters. This is the data structure that you will work with the most, albeit from within a data frame (see below). Vectors can be either atomic or list, atomic vectors differ to lists in that all elements within an atomic vector must be of the **same** type (see below). For the most part we work with atomic vector and the following help file refers to this type of data.   
 <br><br>
 
@@ -75,10 +74,9 @@ As all elements within an atomic vector must be the same type, combining differe
 eg_coerced <- c("tricks", 1, 2, 3, 4)
 class(eg_coerced)
 ```
-<br><br>
 
 #### Coercing data
-<br>
+
 If you find your data is the wrong type, you can use the `as` functions to coerce data from one type to another. Be aware of what happens to your data after coercion. For example, coercing logical to numeric replaces F with 0s and Ts with 1s and any nonsensical coercion (like trying to make character "NSW" into a numeric) will result in NAs. 
 
 ```{r, collapse = T}

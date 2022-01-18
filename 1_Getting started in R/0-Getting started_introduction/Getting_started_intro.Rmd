@@ -9,7 +9,7 @@ Before you get started with making graphics and doing analyses, you will need to
 ###Data entry
 <br>
 
-![](Sampling.jpg)
+![](images/Sampling.jpg)
 <br>
 
 After collecting data, being able to enter those data and import into various software packages are obviously essential skills for students and researchers in the environmental sciences. You might think that you just write the numbers in a spreadsheet package and open that file in another piece of software, but there is actually quite a bit to be learnt about tidy ways to enter the data and import that data without errors.

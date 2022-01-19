@@ -25,7 +25,7 @@ On these pages, we give some guidance for data entry that will save a lot of tim
 * [Importing data](http://environmentalcomputing.net/importing-data/) into R  
 * [Data types and structure](http://environmentalcomputing.net/data-types-and-structure/) - better understanding data objects in R  
 
-![](Data_entry_image.jpg)
+![](data-entry/Data_entry_image.jpg)
 
 ### Further help
 <br>

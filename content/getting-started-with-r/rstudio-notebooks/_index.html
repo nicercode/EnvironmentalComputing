@@ -17,15 +17,17 @@ output: html_document
 <p>This can get messy if you have lots of comments, so we recommend looking at <a href="http://rmarkdown.rstudio.com/r_notebooks.html">RStudio notebooks</a> as a very clean way of writing your code with associated comments.</p>
 <p>RStudio notebooks are a form of markdown document, a widely used format for exporting text and code to various report formats. All web pages on this site start their life as markdown files with all the text, code needed to make the html file. Rstudio notebooks have the added benefits of displaying the output from your code directly in the document.
 <br><br></p>
-<p>###Creating a new notebook
-<br>
+<div id="creating-a-new-notebook" class="section level3">
+<h3>Creating a new notebook</h3>
+<p><br>
 Creating a new notebook is as simple as clicking <strong>File, New File, R Notebook</strong> from the RStudio menu. You will need a recent version of RStudio (1.0 or higher), so update that if necessary.</p>
 <p>Save the file in a folder on your computer. This folder will become the working directory for any code in your notebook and there is no need to set the working directory.</p>
 <p>Edit the title at the top, have a quick read of the notes then delete the template provided (from “This is an [R Markdown]…”” onwards). Make sure you leave the first few lines in between the — marks.</p>
 <p>Your notebook is now just a big blank page for you to start writing down all the steps involved in your work. For example, you might want to start with a brief description of the project.
 <br><br></p>
-<p>###Adding code to your notebook
-<br></p>
+</div>
+<div id="adding-code-to-your-notebook" class="section level3">
+<h3>Adding code to your notebook</h3>
 <p><img src="Menu1.png" /></p>
 <p>Executable code is added to your notebook in what are called chunks. To do this, click on <strong>Insert, R</strong> from the top right of your notebook (or use <strong>Ctrl + Alt + I</strong> on the keyboard). This will add an empty chunk that looks like this:</p>
 <p><img src="Chunk1.png" /></p>
@@ -33,8 +35,10 @@ Creating a new notebook is as simple as clicking <strong>File, New File, R Noteb
 <p><img src="Chunk2.png" /></p>
 <p>Be careful not to delete the ``` marks as the text will no longer be recognised as code.
 <br><br></p>
-<p>###Running the code
-<br>
+</div>
+<div id="running-the-code" class="section level3">
+<h3>Running the code</h3>
+<p><br>
 Running all the code in your chunk is done by clicking the little green arrow at the top right of your chunk. Just like in a script you can still run individual lines of code by entering <em>Ctrl+Enter</em> with your cursor on that line.</p>
 <p>Use the chunks to organise your workflow, grouping code that does a particular task within a chunk and preceding these by plain text comments that explain what each chunk will do. Avoid putting every single line of code in a separate chunk and avoid having very many lines of code that do different things within the same chunk.</p>
 <p>Output from your code will appear directly below the code chunk rather than in the console below or the plots pane to the right. For example, a plot of plant height vs temperature from the data set used in our <a href="http://environmentalcomputing.net/linear-regression/">linear regression tutorial</a>.</p>
@@ -46,8 +50,10 @@ Running all the code in your chunk is done by clicking the little green arrow at
 <p><img src="Menu3.png" /></p>
 <p>This is easily done by clicking <strong>Run, Run all</strong>. Also very useful when you are part way through a document is <strong>Run All Chunks Above</strong> to ensure everything is refreshed and running correctly.
 <br><br></p>
-<p>###Exporting your notebook to other formats
-<br>
+</div>
+<div id="exporting-your-notebook-to-other-formats" class="section level3">
+<h3>Exporting your notebook to other formats</h3>
+<p><br>
 In addition to being a visually appealing way to combine code and comments, notebooks can also be used to create reports in various formats (html, pdf and word).</p>
 <p><img src="Menu4.png" /></p>
 <p>Clicking on <strong>Preview</strong> will give you a sneak preview of what this might look like. To make the documents, you would then choose <strong>Knit to HTML</strong> for example to make an html file.</p>
@@ -56,8 +62,10 @@ In addition to being a visually appealing way to combine code and comments, note
 <p>When you first look at your html file, you may also realise that there are some unwanted parts (e.g., warning messages) and that the formatting could improved. To fix these, you need to learn a bit more about controlling the behaviour of code chunks, and some basic formatting.</p>
 <p>These are nicely detailed on RStudio’s <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">R Markdown cheatsheet</a>. Here are a just few of the more useful options:
 <br><br>.</p>
-<p>###Some basic markdown formatting
-<br></p>
+</div>
+<div id="some-basic-markdown-formatting" class="section level3">
+<h3>Some basic markdown formatting</h3>
+<p><br></p>
 <table>
 <colgroup>
 <col width="55%" />
@@ -100,16 +108,6 @@ In addition to being a visually appealing way to combine code and comments, note
 </tr>
 </tbody>
 </table>
-<div id="header-1" class="section level1">
-<h1>Header 1</h1>
-<div id="header-2" class="section level2">
-<h2>Header 2</h2>
-<div id="header-3" class="section level3">
-<h3>Header 3</h3>
-<p><em>italics</em><br />
-<strong>bold</strong><br />
-Inserting an image</p>
-</div>
 </div>
 <div id="controlling-chunk-behaviour" class="section level2">
 <h2>Controlling chunk behaviour</h2>
@@ -129,7 +127,7 @@ Choose to run code in the output or not</p>
 <p>To change the size of any plots:</p>
 <pre class="r"><code>#```{r, fig.height=3, fig.width=10}
 ggplot(Plant_height, aes(temp, loght)) + geom_point()</code></pre>
-<p><img src="/getting-started-with-r/rstudio_notebooks/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<p><img src="/getting-started-with-r/rstudio-notebooks/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
 <p>These can also be set once at the top of the document rather than individually for each chunk (termed Global options). For example, to set the size of all figures, we would use:</p>
 <p><br><br></p>
 <div id="further-help" class="section level3">
@@ -143,7 +141,6 @@ RStudio’s <a href="http://rmarkdown.rstudio.com/r_notebooks.html">introduction
 <p><strong>Author</strong>: Alistair Poore
 <br>
 Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 18 18:24:15 2022&quot;</code></pre>
-</div>
+<pre><code>## [1] &quot;Wed Jan 19 11:00:35 2022&quot;</code></pre>
 </div>
 </div>

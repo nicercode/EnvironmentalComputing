@@ -1,6 +1,6 @@
 ---
 weight: 1
-title: "Good practice for code"
+title: "Good Practices for Code"
 author: "Keryn F Bain"
 output: html_document
 ---

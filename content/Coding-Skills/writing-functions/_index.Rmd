@@ -1,3 +1,10 @@
+---
+weight: 2
+title: "Writing Functions"
+author: "Keryn F Bain and Daniel Falster"
+output: html_document
+---
+
 <!-- ## Goals for this post
 1. Understand *why* to move code from in-place into a function.
 2. Understand R's function syntax (argument lists, defaults, return
@@ -20,7 +27,7 @@ To illustrate our examples, we will use a sample data set containing a series of
 
 ```{r, message=FALSE, warning=FALSE, results="hide"}
 library(tidyverse)
-algae <-  read_csv("http://environmentalcomputing.net/wp-content/uploads/2016/05/Algal_traits.csv")
+algae <-  read_csv("Algal_traits.csv")
 ```
 
 (or if you like download the data set, [Algal_traits.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Algal_traits.csv)). 
@@ -460,10 +467,10 @@ For example, we could write a function that returns several statistics of a vari
 ```{r,}
 summary_stats <- function(x, na.rm = TRUE) {
 
-	list(mean = mean(x, na.rm=na.rm),
-	 		 var = var(x, na.rm=na.rm),
-	 		 n = sum(!is.na(x))
-	 		)
+  list(mean = mean(x, na.rm=na.rm),
+       var = var(x, na.rm=na.rm),
+       n = sum(!is.na(x))
+      )
 }
 ```
 

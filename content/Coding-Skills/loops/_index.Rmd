@@ -1,5 +1,5 @@
 ---
-weight: 2
+weight: 3
 title: "Using Loops"
 author: "Rachel V. Blakey"
 output: html_document

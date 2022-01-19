@@ -7,7 +7,7 @@ output: html_document
 
 Having skills in organising and summarising data is crucial for students and researchers in all sciences. On these pages, we give some guidance for manipulating data in ways that can save a lot of time when it comes to analysing data and making effective figures. 
 
-![](Data_entry_image.jpg)
+![](images/Data_entry_image.jpg)
 
 Data manipulation using the packages [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/) and [reshape2](https://cran.r-project.org/web/packages/reshape2/).
 

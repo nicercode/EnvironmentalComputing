@@ -1,9 +1,8 @@
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Making interactive maps in R with leaflet
+---
+title: 'Interactive maps in R'
+weight: 1
+output: html_document
+---
 
 Being able to produce interactive maps on the fly can greatly speed up exploratory analysis and is a useful tool for displaying data that would be less informative on a [static map](/making-simple-maps).
 

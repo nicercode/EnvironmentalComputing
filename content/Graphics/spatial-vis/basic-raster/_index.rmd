@@ -1,9 +1,8 @@
 ---
-output:
-  html_document: default
-  pdf_document: default
+title: 'The Basics of Rasters'
+weight: 2
+output: html_document
 ---
-## Basic spatial data manipulaton in R
 
 This tutorial is focused on introducing the bascis of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with [this tutorial](http://environmentalcomputing.net/making-simple-maps/). 
 

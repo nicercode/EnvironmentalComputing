@@ -1,0 +1,26 @@
+---
+title: 'Basic Plotting in R'
+weight: 2
+output: html_document
+---
+
+```{r,echo=F,fig.width=6, fig.height=2.5}
+Plant_height = read.csv(file = "data/Plant_Height.csv", header = TRUE)
+
+par(mfrow=c(1,3)) 
+
+hist(Plant_height$height,main=NULL,xlab="Plant heigth (cm)",col="red")
+
+model = lm(loght ~ temp, data = Plant_height)
+plot(loght ~ temp, data = Plant_height, xlab = "Temperature (C)", ylab = "log(Plant height)",pch=16,col="darkgreen")
+abline(model, col = "red")
+
+boxplot(loght~hemisphere, data = Plant_height, ylab = "log(Plant height)",xlab = "Hemisphere", names = c("South","North"),col="lightblue")
+```
+
+R has a very wide range of functions and packages for visualising data. Here is some help for some very simple plots using the base functions in R for data with:  
+
+* [one continuous variable](http://environmentalcomputing.net/one-continuous-variable/) - histograms and box plots  
+* [two continuous variables](http://environmentalcomputing.net/two-continuous-variables/) - scatter plots  
+* [one continuous vs categorical variables](http://environmentalcomputing.net/single-continuous-vs-categorical-variables/) - box plots and bar plots  
+

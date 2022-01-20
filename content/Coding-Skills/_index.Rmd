@@ -14,9 +14,8 @@ On these pages, we give some advice for writing effective code and some of the v
 * Using Lists...coming soon
 * Logical control...coming soon
 * [Version control](http://environmentalcomputing.net/version-control/)
-<br><br>
 
-![](images/Coding_image.jpg)
+![](Coding_image.jpg)
 
 **Author**: Alistair Poore & Will Cornwell
 

@@ -18,10 +18,10 @@ First, download the data set, [Bats_data.csv](http://environmentalcomputing.net/
 ```{r}
 Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)
 ```
-<br><br>
+
 
 ### Basics of subsetting in R
-<br>
+
 Check the structure after you have loaded the data with the `str` function.
 
 Now that we have some idea of the dataset we are working with, we can use the `[]` and `$` operators to select rows and columns in a dataframe. It's quite simple: we place the name of the dataframe we want to select from before the square brackets and inside the square brackets we place a comma. Numbers to the left of the comma represent rows we'd like to select and numbers to the left of the comma represent columns we'd like to select. 
@@ -55,10 +55,10 @@ Rather than working out which variable is in which numbered column, it is often 
 ```{r, eval =F}
 Bats$Site
 ```
-<br><br>
+
 
 ### Subsetting rows in dplyr 
-<br>
+
 ![](Subsetting_data_image1.jpg)
 
 The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has many convenient functions for subsetting that can be more intuitive and quick for you. First, install then load the package:
@@ -142,10 +142,10 @@ nrow(Bats.distinct)
 ```
 
 In this case, the dataframes are identical because our data doesn't have any duplicate rows. 
-<br><br>
+
 
 ### Subsetting columns in dplyr
-<br>
+
 ![](Subsetting_data_image2.jpg)
 
 As discussed above, you can select one column `$` or one or more by indexing with `[]`. dplyr has the function `select` which allows you to select columns by name or by using useful helper functions.
@@ -213,16 +213,16 @@ select(data, num_range("var", 1:3))
 <br><br>
 
 ### Further help
-<br>
+
 This tutorial was based on the excellent [Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio. Images were sourced from the same document.
 
 You can type `?dplyr` to get help with this package.
 
 [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html)
-<br><br>
+
 
 **Author**: Rachel V. Blakey
-<br>
+
 Last updated:
 ```{r,echo=F}
 date()

@@ -1,6 +1,6 @@
 ---
 title: 'Multidimensional Scaling'
-weight: 1
+weight: 2
 output: html_document
 ---
 
@@ -62,7 +62,7 @@ As a rank-based approach NMDS, is comparatively robust to non-linearity between 
 <p><strong>Stress.</strong> Not an assumption of the process, but the most important factor to consider after generating an MDS plot is the ‘stress’. The stress provides a measure of the degree to which the distance between samples in reduced dimensional space (usually 2-dimensions) corresponds with the actual multivariate distance between the samples. Lower stress values indicate greater conformity and therefore are desirable. High stress values indicate that there was no 2-dimensional arrangement of your points that reflect their similarities. A rule of thumb is that stress values should ideally be less than 0.2 or even 0.1.</p>
 <p>You can obtain the stress value from your plot with:</p>
 <pre class="r"><code>Herb_community.mds$stress</code></pre>
-<pre><code>## [1] 0.1488795</code></pre>
+<pre><code>## [1] 0.1485342</code></pre>
 <p>If the stress value is greater than 0.2, it is advisable to include an additional dimension, but remember that human brains are not very well equipped to visualise objects in more than 2-dimensions.</p>
 <p><strong>Transformation and standardisation.</strong> Transforming data sets prior to creating a MDS plot is often desirable, not to meet assumptions of normality, but to reduce the influence of extreme values. For example,</p>
 <pre class="r"><code>Herb_community.sq &lt;- sqrt(Herb_community)
@@ -92,6 +92,6 @@ McKillup, S (2012) <em>Statistics explained. An introductory guide for life scie
 <p><strong>Author:</strong> Andrew Letten
 <br>
 Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 14:15:01 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Jan 20 14:18:08 2022&quot;</code></pre>
 </div>
 </div>

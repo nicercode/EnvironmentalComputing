@@ -1,6 +1,6 @@
 ---
 title: 'Multidimensional Scaling'
-weight: 1
+weight: 2
 output: html_document
 ---
 

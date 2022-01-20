@@ -1,6 +1,6 @@
 ---
 title: 'Plotting in R with ggplot2'
-weight: 2
+weight: 1
 output: html_document
 ---
 

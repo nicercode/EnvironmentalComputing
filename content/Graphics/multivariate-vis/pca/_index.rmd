@@ -1,6 +1,6 @@
 ---
 title: 'Principal Component Analysis'
-weight: 3
+weight: 2
 output: html_document
 editor_options: 
   chunk_output_type: console

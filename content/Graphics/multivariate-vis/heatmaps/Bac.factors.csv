@@ -1,0 +1,16 @@
+,Treatment_ID,Density,Species,pch1,pch2,legend
+DC1,DC,Dense,Caulerpa,16,4,U - Unvegetated
+DC2,DC,Dense,Caulerpa,16,22,SZ - Sparse Zostera 
+DC3,DC,Dense,Caulerpa,16,21,SC - Sparse Caulerpa
+DS1,DS,Dense,Seagrass,15,15,DS - Dense Zostera
+DS2,DS,Dense,Seagrass,15,16,DC - Dense Caulerpa
+DS3,DS,Dense,Seagrass,15,NA,
+SC1,SC,Sparse,Caulerpa,21,NA,
+SC2,SC,Sparse,Caulerpa,21,NA,
+SC3,SC,Sparse,Caulerpa,21,NA,
+SS1,SS,Sparse,Seagrass,22,NA,
+SS2,SS,Sparse,Seagrass,22,NA,
+SS3,SS,Sparse,Seagrass,22,NA,
+U1,U,Other,Other,4,NA,
+U2,U,Other,Other,4,NA,
+U3,U,Other,Other,4,NA,

@@ -1,6 +1,6 @@
 ---
 title: 'Basic Plotting in R'
-weight: 2
+weight: 1
 output: html_document
 ---
 

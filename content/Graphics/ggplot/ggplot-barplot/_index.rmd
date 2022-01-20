@@ -1,6 +1,6 @@
 ---
 title: 'Barplot with Errorbars'
-weight: 6
+weight: 5
 output: html_document
 ---
 

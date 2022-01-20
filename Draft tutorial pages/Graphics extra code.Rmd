@@ -1,0 +1,88 @@
+---
+title: "Single continuous vs single categorical"
+output: html_document
+---
+
+
+### Multiple datasets on one plot
+Plotting multiple datasets on one graph can help visualise the difference between relationships.The easiest way to do this is to plot the first relationship, and then add the additional information and relationships to the plot. Adding additional information can be done using 'points', and changing the colour using 'col' helps to differentiate between the two relationships. 
+
+```{r,eval=FALSE}
+#Plot Species1
+plot(Species1$MR~Species1$Mass)
+abline(lm(Species1$MR~Species1$Mass))
+#Add Species 2 in different colour
+points(Species2$MR~Species2$Mass,col="red")
+abline(lm(Species2$MR~Species2$Mass),col="red")
+```
+
+
+
+
+
+**Add axis and title labels:**
+<br>
+
+Axis labels for plots are referred to as 'xlab' and 'ylab'.
+```{r,eval=FALSE}
+#First subplot
+boxplot(Length~Management,data=Fish,
+        xlab='Managment Zone',ylab='Fish Length (cm)',
+        main='Fish length across zones')
+#Second subplot
+boxplot(Length~Shore,data=test,
+        xlab='Shore',ylab='Fish Length (cm)',
+        main='Fish length across shores')
+```
+
+**Edit axis limits:**
+Axis limits are set by 'xlim' and 'ylim', where a vector of the minimum and maximum limits are required.
+```{r,eval=FALSE}
+#First subplot
+boxplot(Length~Management,data=test,
+        xlab='Managment Zone',ylab='Fish Length (cm)',
+        main='Fish length across zones',
+        ylim=c(0,40))
+#Second subplot
+boxplot(Length~Shore,data=test,
+        xlab='Shore',ylab='Fish Length (cm)',
+        main='Fish length across shores',
+        ylim=c(0,40))
+```
+
+**Add colour:**
+Colour can be added to any part of the plot (axis, fonts etc.) using 'col', here we will change the colour of the boxplot. There are over 600 colours that can be plotted, see `colors()` for the whole range.
+```{r,eval=FALSE}
+#First subplot
+boxplot(Length~Management,data=test,
+        xlab='Managment Zone',ylab='Fish Length (cm)',
+        main='Fish length across zones',
+        col='grey')
+#Second subplot
+boxplot(Length~Shore,data=test,
+        xlab='Shore',ylab='Fish Length (cm)',
+        main='Fish length across shores',
+        col='grey')
+```
+
+**Symbol style:**
+Edit the outliers to be a filled in circle. The choice of symbols to use in plotting are extensive and are accessed using 'pch' in the graphical parameters.
+```{r}
+#First subplot
+boxplot(Length~Management,data=test,
+        xlab='Managment Zone',ylab='Fish Length (cm)',
+        main='Fish length across zones',col='grey')
+#Second subplot
+boxplot(Length~Shore,data=test,
+        xlab='Shore',ylab='Fish Length (cm)',
+        main='Fish length across shores',
+        col='grey',
+        pch=19)
+```
+
+
+### Further help
+Type the following queries to get help for the functions used above
+?hist
+?boxplot
+?par

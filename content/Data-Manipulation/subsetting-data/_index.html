@@ -14,11 +14,9 @@ of our dataset, or to pull out observations with particular properties. We may c
 <p>The dataset includes measurements of total number of bat calls (“Activity”) and number of bat calls that indicate foraging behaviour (“Foraging”) recorded over one night for 47 sites and 173 sampling nights in total. Variables relating to forest thinning have been collected and are listed as columns ending in “thinned”. As the forest studied was in a floodplain, covariates relating to water availability were also collected and are listed in columns ending “water”.</p>
 <p>First, download the data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Bats_data.csv">Bats_data.csv</a>, and load into R.</p>
 <pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)</code></pre>
-<p><br><br></p>
 <div id="basics-of-subsetting-in-r" class="section level3">
 <h3>Basics of subsetting in R</h3>
-<p><br>
-Check the structure after you have loaded the data with the <code>str</code> function.</p>
+<p>Check the structure after you have loaded the data with the <code>str</code> function.</p>
 <p>Now that we have some idea of the dataset we are working with, we can use the <code>[]</code> and <code>$</code> operators to select rows and columns in a dataframe. It’s quite simple: we place the name of the dataframe we want to select from before the square brackets and inside the square brackets we place a comma. Numbers to the left of the comma represent rows we’d like to select and numbers to the left of the comma represent columns we’d like to select.</p>
 <p>For example, if we wanted to select only data from the first three rows and all columns, we would use:</p>
 <pre class="r"><code>Bats[1:3,]</code></pre>
@@ -30,12 +28,10 @@ Check the structure after you have loaded the data with the <code>str</code> fun
 <pre class="r"><code>Bats[c(6,1:3), c(2,7:10)]</code></pre>
 <p>Rather than working out which variable is in which numbered column, it is often easier to use the variable names in a data frame and select the variable using <code>$</code> operator. For example, to choose only the Site variable:</p>
 <pre class="r"><code>Bats$Site</code></pre>
-<p><br><br></p>
 </div>
 <div id="subsetting-rows-in-dplyr" class="section level3">
 <h3>Subsetting rows in dplyr</h3>
-<p><br>
-<img src="Subsetting_data_image1.jpg" /></p>
+<p><img src="Subsetting_data_image1.jpg" /></p>
 <p>The package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> has many convenient functions for subsetting that can be more intuitive and quick for you. First, install then load the package:</p>
 <pre class="r"><code>library(dplyr)</code></pre>
 <p><strong>Subsetting by row numbers</strong></p>
@@ -87,13 +83,11 @@ print(Bats.top)</code></pre>
 <pre><code>## [1] 173</code></pre>
 <pre class="r"><code>nrow(Bats.distinct)</code></pre>
 <pre><code>## [1] 173</code></pre>
-<p>In this case, the dataframes are identical because our data doesn’t have any duplicate rows.
-<br><br></p>
+<p>In this case, the dataframes are identical because our data doesn’t have any duplicate rows.</p>
 </div>
 <div id="subsetting-columns-in-dplyr" class="section level3">
 <h3>Subsetting columns in dplyr</h3>
-<p><br>
-<img src="Subsetting_data_image2.jpg" /></p>
+<p><img src="Subsetting_data_image2.jpg" /></p>
 <p>As discussed above, you can select one column <code>$</code> or one or more by indexing with <code>[]</code>. dplyr has the function <code>select</code> which allows you to select columns by name or by using useful helper functions.</p>
 <p><strong>Selecting columns by name</strong></p>
 <p>For example, to select just the Site column from the data frame, or both the Site and Date columns:</p>
@@ -123,13 +117,10 @@ Bats_subset4 &lt;- select(bats, matches(&quot;water$&quot;))</code></pre>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document.</p>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document.</p>
 <p>You can type <code>?dplyr</code> to get help with this package.</p>
-<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a>
-<br><br></p>
-<p><strong>Author</strong>: Rachel V. Blakey
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Wed Jan 19 12:13:25 2022&quot;</code></pre>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></p>
+<p><strong>Author</strong>: Rachel V. Blakey</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Thu Jan 20 12:11:55 2022&quot;</code></pre>
 </div>

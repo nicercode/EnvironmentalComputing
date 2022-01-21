@@ -1,0 +1,94 @@
+
+```{r, echo=FALSE}
+# If instructor copy, use INST = TRUE to see inline code output.
+library(knitr)
+INST = TRUE
+
+if (INST == TRUE) opts_chunk$set(fig.keep = 'all', results = 'markup', echo = TRUE)
+if (INST == FALSE) opts_chunk$set(fig.keep = 'none', results = 'hide', echo = FALSE)
+
+```
+
+![](Two_sample_t_test_Q3_image.jpg)
+
+An environmental scientist was interested in how land management affected water quality in rivers. She compared the salinity of 10 rivers in areas of farmland to 10 rivers in forested areas and received the following data (measured as EC, electrical conductivity):
+
+Landscape EC
+Forest  307
+Forest	298
+Forest	478
+Forest	687
+Forest	523
+Forest	380
+Forest	475
+Forest	463
+Forest	391
+Forest	370
+Farmland	850
+Farmland	551
+Farmland	639
+Farmland	567
+Farmland	403
+Farmland	578
+Farmland	601
+Farmland	490
+Farmland	647
+Farmland	612
+
+
+
+```{r}
+RiverEC = read.csv(file = "RiverEC.csv", header = T)
+
+```
+
+Firstly, visualise the differences in electrical conductivity abundance between the two types of rivers.
+
+```{r}
+boxplot(EC~Landscape, data = RiverEC)
+```
+
+
+**A)** What statistical test would be suitable to contrast the salinity between the two types of rivers?
+
+```{r}
+# {1:MULTICHOICE:=Two sample t test~Contingency table~Goodness of fit test~Paired t test}
+```
+
+
+
+**B)** After checking the assumptions of your test, conduct the test, and give the value of the test statistic and P value.
+
+```{r}
+hist(RiverEC$EC)
+
+t.test(EC~Landscape, data = RiverEC)
+
+```
+
+**C)** Is there any evidence that salinity varied between the rivers in farmland and forest?
+
+
+```{r}
+# {1:MULTICHOICE:=Yes~No}
+```
+
+
+Samples were also classified into those that were above or below the limit recommended by the World Health Organisation for drinking water (EC= 800). 
+
+**Q4** What analysis could you use to test the whether the 20 samples differed from previous sampling in the same area that had found 40% of samples unsuitable for drinking?
+
+```{r}
+#{1:MULTICHOICE:=Goodness of fit test~Two sample t test~Contingency table~~Paired t test}
+sum(RiverEC$EC >= 800) # Counts how many observation over 800
+chisq.test(x=c(1,19),p=c(0.4,0.6))
+
+```
+
+**E)** Present the value of the test statistic chosen and state whether the null hypothesis is rejected or retained.
+
+```{r}
+# {1:MULTICHOICE:=Rejected~Retained}
+```
+
+

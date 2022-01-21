@@ -1,6 +1,6 @@
 ---
 title: 'Graphics'
-weight: 4
+weight: 5
 output: html_document
 ---
 

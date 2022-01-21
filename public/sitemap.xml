@@ -5,23 +5,87 @@
     <loc>/about-this-site/</loc>
     <lastmod>2016-04-09T16:50:16+02:00</lastmod>
   </url><url>
+    <loc>/graphics/basic-plotting/</loc>
+  </url><url>
+    <loc>/coding-skills/good-practice/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/installing-r-rstudio/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/interactive/</loc>
+  </url><url>
+    <loc>/data-manipulation/making-new-variables/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/mds/</loc>
+  </url><url>
+    <loc>/graphics/basic-plotting/one-continuous/</loc>
+  </url><url>
+    <loc>/statistics/t-tests/one-sample/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/</loc>
+  </url><url>
+    <loc>/statistics/t-tests/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-basics/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-appearance/</loc>
+  </url><url>
     <loc>/getting-started-with-r/</loc>
   </url><url>
-    <loc>/getting-started-with-r/installing_r_rstudio/</loc>
+    <loc>/graphics/multivariate-vis/pca/</loc>
   </url><url>
-    <loc>/data-manipulation/making_new_variables/</loc>
+    <loc>/data-manipulation/subsetting-data/</loc>
+  </url><url>
+    <loc>/graphics/basic-plotting/two-continuous/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/rstudio-notebooks/</loc>
+  </url><url>
+    <loc>/coding-skills/writing-functions/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/project-managment/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/cluster-analysis/</loc>
   </url><url>
     <loc>/data-manipulation/</loc>
   </url><url>
-    <loc>/getting-started-with-r/project_managment/</loc>
+    <loc>/graphics/basic-plotting/one-continuous-one-factor/</loc>
+  </url><url>
+    <loc>/data-manipulation/summarising-data/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-labels/</loc>
+  </url><url>
+    <loc>/coding-skills/loops/</loc>
   </url><url>
     <loc>/coding-skills/</loc>
   </url><url>
-    <loc>/getting-started-with-r/data_entry/</loc>
+    <loc>/graphics/ggplot/ggplot-colour-shapes/</loc>
+  </url><url>
+    <loc>/data-manipulation/combining-datasets/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/data-entry/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/heatmaps/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/basic-raster/</loc>
+  </url><url>
+    <loc>/coding-skills/version-control/</loc>
+  </url><url>
+    <loc>/coding-skills/asking-code-questions/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-barplot/</loc>
+  </url><url>
+    <loc>/graphics/</loc>
   </url><url>
     <loc>/getting-started-with-r/importing-data/</loc>
   </url><url>
-    <loc>/getting-started-with-r/data_types_structure/</loc>
+    <loc>/data-manipulation/reshaping-data/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/data-types-structure/</loc>
+  </url><url>
+    <loc>/statistics/</loc>
   </url><url>
     <loc>/</loc>
     <lastmod>2016-04-09T16:50:16+02:00</lastmod>

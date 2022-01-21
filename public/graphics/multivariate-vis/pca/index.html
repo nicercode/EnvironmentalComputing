@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.91.2" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <title>Principal Component Analysis :: Environmental Computing</title>
+
+    
+    <link href="/css/nucleus.css?1642740826" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1642740826" rel="stylesheet">
+    <link href="/css/hybrid.css?1642740826" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1642740826" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1642740826" rel="stylesheet">
+    <link href="/css/auto-complete.css?1642740826" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1642740826" rel="stylesheet">
+    <link href="/css/theme.css?1642740826" rel="stylesheet">
+    <link href="/css/tabs.css?1642740826" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1642740826" rel="stylesheet">
+    
+    <link href="/css/theme-green.css?1642740826" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1642740826"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/graphics/multivariate-vis/pca/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/'>
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<g>
+	<path d="M35,0c9.6,0,17.9,3.4,24.7,10.3c6.8,6.8,10.3,15,10.3,24.7c0,9.7-3.4,17.9-10.3,24.7c-6.8,6.8-15,10.3-24.7,10.3
+		c-9.7,0-17.9-3.4-24.7-10.3C3.4,52.8,0,44.6,0,34.9c0-9.6,3.4-17.9,10.3-24.7C17.1,3.4,25.3,0,35,0z M22.3,63.7
+		c0.3-7.4,0.3-14.7,0-22.1c-2.1-0.4-4-0.4-5.9,0c-0.2,0.8-0.2,2.5-0.1,4.9c0.1,2.3,0,3.9-0.3,4.8c-1.7-0.6-2.7-2.1-3.1-4.6
+		c-0.1-0.7-0.1-3.3-0.1-8c0-14.5-0.1-23-0.3-25.6c-3.6,4.1-5.6,7-5.9,8.5v10.9c0,4.5,0.1,8.1,0.2,10.9c0,0.4,0,1.3-0.1,2.8
+		c-0.1,1.2,0,2.1,0.1,2.6c0.1,0.6,1.1,2.1,2.8,4.7C13.2,58.7,17.5,62.2,22.3,63.7z M44.6,65.4c0.3-5,0.2-12.9-0.1-23.6
+		c-2.1-0.3-4.1-0.3-5.9,0c-0.2,2-0.2,5.1-0.1,9.5c0.1,4.3,0,7.5-0.1,9.5c-2.9,0.4-5,0.3-6.2-0.1c-0.2-5.6-0.2-15.2-0.1-28.7
+		c0.1-12.4,0-21.8-0.3-28.3c-2.4,0.1-4.3,0.6-5.7,1.3c-0.1,7.7-0.2,17.7-0.1,30.1c0,16.5,0,26.6,0,30.3c2.3,1.1,5.4,1.7,9.4,1.7
+		C38.9,66.9,42.1,66.4,44.6,65.4z M48.1,64.1c9.7-4.6,15.7-12,18-22.2c-1.8-0.2-3.8-0.3-6.1-0.3c-1.6,3.9-2.6,6.3-3.2,7.2
+		c-1.1,1.7-2,2.5-2.7,2.5C54,46,54,39.1,54,30.5c0-11.5,0-18.4,0-20.9c-1.4-1.4-3.3-2.5-5.7-3.4C48.1,6.3,48,6.4,48,6.7
+		c0,3.5,0,13.1,0,28.8C47.9,47.2,48,56.8,48.1,64.1z"/>
+</g>
+<g>
+	<path d="M116.6,51.3h-29c-0.5,0-0.9-0.1-1.3-0.2c-0.4-0.2-0.7-0.4-1-0.7c-0.3-0.3-0.5-0.6-0.7-1c-0.2-0.4-0.2-0.8-0.2-1.3V16.3h6.3
+		V45h25.8V51.3z"/>
+	<path d="M154.8,51.3h-22.9c-0.9,0-1.8-0.2-2.9-0.5c-1-0.3-2-0.8-2.9-1.5c-0.9-0.7-1.6-1.6-2.2-2.8c-0.6-1.1-0.9-2.5-0.9-4.2V19.5
+		c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2h28.6v6.3h-25.4v19.8
+		c0,0.8,0.2,1.5,0.7,1.9s1.1,0.7,1.9,0.7h22.9V51.3z M151.9,37h-20v-6.4h20V37z"/>
+	<path d="M197.3,51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6,0.4-4.9,1.3-7.1s2.1-4,3.7-5.5c1.6-1.5,3.4-2.8,5.5-3.6
+		c2.1-0.9,4.5-1.3,7-1.3h14.3c0.4,0,0.9,0.1,1.2,0.2c0.4,0.2,0.7,0.4,1,0.7s0.5,0.6,0.7,1c0.2,0.4,0.2,0.8,0.2,1.2V51.3z
+		 M168.7,36.4H191V22.6h-11.2c-0.2,0-0.6,0-1.2,0.1c-0.6,0.1-1.4,0.2-2.2,0.4c-0.8,0.2-1.7,0.6-2.6,1c-0.9,0.5-1.8,1.1-2.5,2
+		c-0.8,0.8-1.4,1.9-1.9,3.1c-0.5,1.2-0.7,2.8-0.7,4.5V36.4z"/>
+	<path d="M241.7,28.1c0,1.4-0.2,2.7-0.5,3.9c-0.4,1.1-0.8,2.1-1.5,3c-0.6,0.9-1.3,1.6-2.1,2.2c-0.8,0.6-1.6,1.1-2.5,1.5
+		c-0.9,0.4-1.8,0.7-2.6,0.9c-0.9,0.2-1.7,0.3-2.5,0.3l13.3,11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c0.8-0.1,1.5-0.2,2.2-0.5
+		c0.7-0.3,1.2-0.6,1.7-1.1c0.5-0.5,0.9-1,1.1-1.6c0.3-0.6,0.4-1.4,0.4-2.2v-4c0-0.4,0-0.6-0.1-0.8c-0.1-0.2-0.2-0.3-0.3-0.4
+		c-0.1-0.1-0.3-0.1-0.4-0.2c-0.2,0-0.3,0-0.4,0h-20.9v28.7h-6.3V19.5c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1
+		c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2H234c1.4,0,2.6,0.3,3.6,0.8s1.8,1.2,2.4,1.9c0.6,0.8,1,1.6,1.3,2.5
+		c0.3,0.9,0.4,1.7,0.4,2.5V28.1z"/>
+	<path d="M285.1,48.6c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.4,0.7-0.7,1c-0.3,0.3-0.6,0.5-1,0.7c-0.4,0.2-0.8,0.2-1.2,0.2
+		c-0.4,0-0.8-0.1-1.2-0.2c-0.4-0.1-0.8-0.4-1.1-0.7l-23.2-24.2v24.7h-6.3V19c0-0.7,0.2-1.2,0.5-1.8c0.4-0.5,0.8-0.9,1.4-1.2
+		c0.6-0.2,1.2-0.3,1.9-0.2s1.2,0.4,1.6,0.9l23.2,24.2V16.3h6.3V48.6z"/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1642740826"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1642740826"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1642740826"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/about-this-site/" title="About This Site" class="dd-item
+        
+        
+        
+        ">
+      <a href="/about-this-site/">
+          About This Site
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/" title="Getting Started with R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/">
+          Getting Started with R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/installing-r-rstudio/" title="Installing R and R Studio" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/installing-r-rstudio/">
+          Installing R and R Studio
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/rstudio-notebooks/" title="Using R Notebooks" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/rstudio-notebooks/">
+          Using R Notebooks
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/project-managment/" title="Basic Project Management" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/project-managment/">
+          Basic Project Management
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/data-entry/" title="Data Entry" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/data-entry/">
+          Data Entry
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/importing-data/" title="Importing Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/importing-data/">
+          Importing Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/data-types-structure/" title="Data Types &#43; Structure" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/data-types-structure/">
+          Data Types &#43; Structure
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/" title="Data Manipulation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/">
+          Data Manipulation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/making-new-variables/" title="Making New Variables" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/making-new-variables/">
+          Making New Variables
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/subsetting-data/" title="Subsetting data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/subsetting-data/">
+          Subsetting data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/summarising-data/" title="Summarising data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/summarising-data/">
+          Summarising data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/combining-datasets/" title="Combining datasets" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/combining-datasets/">
+          Combining datasets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/reshaping-data/" title="Reshaping data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/reshaping-data/">
+          Reshaping data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/" title="Coding Skills" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/">
+          Coding Skills
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/good-practice/" title="Good Practices for Code" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/good-practice/">
+          Good Practices for Code
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/writing-functions/" title="Writing Functions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/writing-functions/">
+          Writing Functions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/loops/" title="Using Loops" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/loops/">
+          Using Loops
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/version-control/" title="Version Control" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/version-control/">
+          Version Control
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/asking-code-questions/" title="Asking code questions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/asking-code-questions/">
+          Asking code questions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/" title="Graphics" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/graphics/">
+          Graphics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/" title="Basic Plotting in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/">
+          Basic Plotting in R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/one-continuous/" title="One Continuous Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/one-continuous/">
+          One Continuous Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/two-continuous/" title="Two Continuous Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/two-continuous/">
+          Two Continuous Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/one-continuous-one-factor/" title="One Continuous and One Categorical Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/one-continuous-one-factor/">
+          One Continuous and One Categorical Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/" title="Plotting in R with ggplot2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/">
+          Plotting in R with ggplot2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-basics/" title="The Basics of ggplot2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-basics/">
+          The Basics of ggplot2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-appearance/" title="Customising your ggplot" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-appearance/">
+          Customising your ggplot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-labels/" title="Titles and Axes Labels" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-labels/">
+          Titles and Axes Labels
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-colour-shapes/" title="Colours and Shapes" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-colour-shapes/">
+          Colours and Shapes
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-barplot/" title="Barplot with Errorbars" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-barplot/">
+          Barplot with Errorbars
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/" title="Multivariate Data" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/">
+          Multivariate Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/mds/" title="Multidimensional Scaling" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/mds/">
+          Multidimensional Scaling
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/pca/" title="Principal Component Analysis" class="dd-item
+        parent
+        active
+        
+        ">
+      <a href="/graphics/multivariate-vis/pca/">
+          Principal Component Analysis
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/cluster-analysis/" title="Cluster Analysis" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/cluster-analysis/">
+          Cluster Analysis
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/heatmaps/" title="Heatmaps" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/heatmaps/">
+          Heatmaps
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/" title="Spatial Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/">
+          Spatial Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive maps in R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/" title="Statistics" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/">
+          Statistics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/" title="T-tests" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/">
+          T-tests
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/one-sample/" title="One Sample T-test" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/one-sample/">
+          One Sample T-test
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/graphics/multivariate-vis/pca/_index.html" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/graphics/'>Graphics</a> > <a href='/graphics/multivariate-vis/'>Multivariate Data</a> > Principal Component Analysis
+          
+        
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Principal Component Analysis
+            </h1>
+          
+
+        
+
+
+
+	
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Principal Components Analysis (PCA) is the one of the most widely used multivariate statistical techniques. The primary motivation behind PCA is to reduce, or summarize, a large number of variables into a smaller number of derived variables that may be readily visualised in 2- or 3-dimensional space. For example, PCA might be used to compare the chemistry of different watersheds based on multiple variables or to quantify phenotypic variation amongst species based on multiple morphological measurements.</p>
+<p>The new set of variables created by PCA can be used in other analyses, but most commonly as a new set of axes on which to plot your multivariate data.</p>
+<p>The first principal component (PC) is fitted such that it explains the maximum amount of variation in the data. Think of this as a line of best fit in multivariate space, as close as possible to all the points with the variation maximised along the line and minimised on the perpindicular away from the line. The second PC is fitted at right angles to the first (i.e., orthogonally, with with no correlation) such that it explains as much of the remaining variation as possible. Additional PCs, which must be orthogonal to existing PCs, can then be fitted by the same iterative process.</p>
+<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
+<p>Visualising this in two dimensions helps to understand the approach. The data points will be plotted on the new blue axes (the principal components) rather than the original black axes. Now imagine fitting those lines in more than three dimensions!</p>
+<p>Consider a plant physiologist attempting to quantify differences in leaf shape between two species of tree. She recorded total length (leaf + petiole), leaf length, width at the widest point, width half way along the leaf and petiole length from ten leaves of each species. These data are five dimensional (i.e., five measured variables) and we can use PCA to extract two new variables that will allow us to visualise the data in fewer dimensions.</p>
+<p><img src="PCA_image.png" /></p>
+<p>It is highly likely that there are strong relationships between variables in our example data set (e.g., leaf length vs total length). This means that the principal components are likely to explain a fair bit of the variation (imagine fitting a straight line along a sausage-shaped collection of points in multivariate space). If all variables were completely uncorrelated with each other, then PCA is not going to work very well (imagine trying to fit a line of best best fit a ball-shaped collection of points in multivariate space).
+<br><br></p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><br>
+Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Leafshape.csv">Leafshape.csv.</a>, and import into R to see the required format.</p>
+<pre class="r"><code>Leaf_shape &lt;- read.csv(file = &quot;Leafshape.csv&quot;, header = TRUE)</code></pre>
+<p>The first column is a categorical variable that labels the leaves by species (A or B). We need to extract that to a new object (Species) that we can use later for plotting, and make a new data frame (Leaf_data) with just the variables to be analysed by PCA (columns 2-6).</p>
+<pre class="r"><code>Species &lt;- Leaf_shape$Species
+Leaf_data &lt;- Leaf_shape[,2:6]</code></pre>
+<p>There are a number of function and packages in R available for conducting PCA, one of the simplest of which is the <code>princomp</code> function in base stats. To run a PCA, we simply use:</p>
+<pre class="r"><code>Leaf_PCA &lt;- princomp(Leaf_data, cor = FALSE)</code></pre>
+<p>Calling the <code>plot</code> function on the scores of the <code>princomp</code> output produces a score plot. This is the ordination of all 20 leaf samples in the new two-dimensional space defined by PC1 and PC2. Here, we can also label the samples by species with the colour argument, and add a legend.</p>
+<pre class="r"><code>plot(Leaf_PCA$scores, pch = 16, col = as.factor(Species))
+legend(0,0.4,c(&quot;Species A&quot;,&quot;Species B&quot;),pch=16,col=c(&quot;black&quot;,&quot;red&quot;))</code></pre>
+<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<br><br></p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p><br></p>
+<p>The interpretation of the score plot is the same as for any ordination plot: points that are close together have similar values of the original variables (in this case, would have been close together in five dimensional space if you can imagine that).</p>
+<p>Principal components analysis produces a lot of graphical and numerical output. To fully interpret the results you need to understand several things:</p>
+<p><strong>1)</strong> How much variance is explained by each component? This can be found by using the <code>summary</code> object produced by the PCA.</p>
+<pre class="r"><code>summary(Leaf_PCA)</code></pre>
+<pre><code>## Importance of components:
+##                           Comp.1     Comp.2     Comp.3    Comp.4       Comp.5
+## Standard deviation     0.8302248 0.22418865 0.11987329 0.1035367 0.0089705579
+## Proportion of Variance 0.9013599 0.06572552 0.01879107 0.0140183 0.0001052315
+## Cumulative Proportion  0.9013599 0.96708539 0.98587647 0.9998948 1.0000000000</code></pre>
+<p>The proportion explained independently by each component is provided in the second row of the output from <code>summary</code>. In this example, PC1 explains 90% of the variation between the two species with PC2 2 explaining a further 6.6%. Together, those two axes (the ones you are now plotting on) explain 96.7% of the variance (the cumulative proportion row in the output). This means that those original data in five dimensions can be placed almost perfectly on this new two-dimensional plane.</p>
+<p>The relative contribution of each component can also also visualised by a scree plot. Note that the Y-axis presented is not the % of variation explained. The contributions always decline with the number of the component, and ideally we would want as much variation as possible explained by the first two, as these are the ones we are using to visualise the data.</p>
+<pre class="r"><code>screeplot(Leaf_PCA, type = &#39;lines&#39;)</code></pre>
+<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><strong>2</strong> How are the original variables related to the principal components?</p>
+<p>These relationships can obtained numerically by extracting the loadings from the object produced by the PCA.</p>
+<pre class="r"><code>loadings(Leaf_PCA)</code></pre>
+<pre><code>## 
+## Loadings:
+##                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5
+## Total_length           0.772  0.244         0.582
+## Petiole_length         0.458 -0.169  0.647 -0.586
+## Leaf_length            0.320  0.428 -0.627 -0.564
+## Width1         -0.949  0.160 -0.215 -0.163       
+## Width2         -0.300 -0.259  0.826  0.400       
+## 
+##                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5
+## SS loadings       1.0    1.0    1.0    1.0    1.0
+## Proportion Var    0.2    0.2    0.2    0.2    0.2
+## Cumulative Var    0.2    0.4    0.6    0.8    1.0</code></pre>
+<p>The loadings are simple correlations between the principal components and the original variables (Pearson’s <em>r</em>). Values closest to 1 (positive) or -1 (negative) will represent the strongest relationships, with zero being uncorrelated.</p>
+<p>In this example, you can see that PC1 is positively correlated with the two width variables. R doesn’t bother printing very low correlations, so you can also see that PC1 is uncorrelated with the three length variables. Given the the two species are split along the x-axis in the score plot (PC1), we now know that species A with high values of PC1 has wider leaves than species B with low values of PC1. We also know that leaves toward the top of the plot are the longest due to the positive correlations between PC2 and the three length variables (but this does not separate the two species on the plot).</p>
+<p>You can also produce a biplot with the relationships between the original variables and the principal components overlaid on the score plot. The original variables (in red) will have a strong relationship with one of the principal components if they are parallel to that component (eg Width 1 and PC1) and longer arrows represent stronger correlations.</p>
+<pre class="r"><code>biplot(Leaf_PCA)</code></pre>
+<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<br><br></p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p><br>
+<strong>Linearity.</strong> PCA works best when the relationship between variables are approximately linear. In the absence of linearity it is best to transform variables (e.g., log transform) prior to the analysis.</p>
+<p><strong>Correlation vs covariance matrices.</strong> You can run PCA using a covariance matrix, which is appropriate when all variables are measured on the same scale, or a correlation matrix, which is appropriate if variables are measured on very different scales. These will produce different output because using a covariance matrix is affected by differences in the size of variances among the variables. Researchers also commonly standardise variables prior to the analysis if they would like variables that were measured on different scales to have an equal influence on the output.</p>
+<p>Change between these two options with the <code>cor</code> argument in the <code>princomp</code> function.</p>
+<pre class="r"><code>Leaf_PCA = princomp(Leaf_data, cor = FALSE) # uses a covariance matrix
+Leaf_PCA2 = princomp(Leaf_data, cor = TRUE) # uses a correlation matrix</code></pre>
+<p><strong>Outliers.</strong> Outliers can have big influence on the results of PCA, especially when using a covariance matrix.</p>
+<p><strong>Rotating axes.</strong> The <code>princomp</code> function produces an unrotated principal components analysis. There are options in other R packages for rotating the principal components after they have been derived with the aim of an output that is easier to interpret (e.g., where the loadings within a component are close to one or zero). There are several methods for doing this, and you would need to read more than this help module before attempting such methods.<br />
+<br><br></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><br>
+<strong>Written.</strong> In the results section, it would be typical to state the amount of variation explained by the first two (or three) PCs and the contribution of different variables to those PCs. In this example, you would state that the first principal component explained 90% of the variation in leaf morphology and was most strongly related to leaf width at the widest point.</p>
+<p><strong>Visual.</strong> PCA results are best presented visually as a 2-dimensional or, rarely, a 3-dimensional ordination plot (see above) where the position of each observation represents is position in relation to the first two (or three) principal components. It is common to label the points in some way to seek patterns on the plot (like how we labelled leaves by species above).
+<br><br></p>
+</div>
+<div id="further-help" class="section level2">
+<h2>Further help</h2>
+<p><br>
+Type <code>?princomp</code> to get the R help for this function.</p>
+<p>An nice interactive page to help you understand what PCA is doing can be found <a href="http://setosa.io/ev/principal-component-analysis/">here</a>.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Quinn, GP and MJ Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Ch. 17. Principal Components and Correspondence Analysis.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+McKillup, S (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.
+</p>
+<p><br><br></p>
+<p><strong>Author</strong>: Andrew Letten
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Thu Jan 20 14:38:50 2022&quot;</code></pre>
+</div>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/graphics/multivariate-vis/mds/" title="Multidimensional Scaling"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/graphics/multivariate-vis/cluster-analysis/" title="Cluster Analysis" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1642740826"></script>
+    <script src="/js/perfect-scrollbar.min.js?1642740826"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1642740826"></script>
+    <script src="/js/jquery.sticky.js?1642740826"></script>
+    <script src="/js/featherlight.min.js?1642740826"></script>
+    <script src="/js/highlight.pack.js?1642740826"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1642740826"></script>
+    <script src="/js/learn.js?1642740826"></script>
+    <script src="/js/hugo-learn.js?1642740826"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1642740826"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

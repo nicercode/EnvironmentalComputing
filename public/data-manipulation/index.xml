@@ -6,15 +6,5 @@
     <description>Recent content in Data Manipulation on Environmental Computing</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="/data-manipulation/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Making New Variables</title>
-      <link>/data-manipulation/making_new_variables/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/data-manipulation/making_new_variables/</guid>
-      <description>Being able to make new variables from those already in your data set is an essential skill for data manipulation prior to making graphs or doing analyses. These new variables could be a transformed variable that you would like to analyse, a new variable that is a function of existing ones, or a new set of labels for your samples.
-To demonstrate a few of the commonly used functions in R for doing this, let’s consider a data set on the feeding specificity of marine herbivores on five species of macroalgae.</description>
-    </item>
-    
   </channel>
 </rss>

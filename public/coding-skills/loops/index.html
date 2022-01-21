@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.91.2" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <title>Using Loops :: Environmental Computing</title>
+
+    
+    <link href="/css/nucleus.css?1642740826" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1642740826" rel="stylesheet">
+    <link href="/css/hybrid.css?1642740826" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1642740826" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1642740826" rel="stylesheet">
+    <link href="/css/auto-complete.css?1642740826" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1642740826" rel="stylesheet">
+    <link href="/css/theme.css?1642740826" rel="stylesheet">
+    <link href="/css/tabs.css?1642740826" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1642740826" rel="stylesheet">
+    
+    <link href="/css/theme-green.css?1642740826" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1642740826"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/coding-skills/loops/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/'>
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<g>
+	<path d="M35,0c9.6,0,17.9,3.4,24.7,10.3c6.8,6.8,10.3,15,10.3,24.7c0,9.7-3.4,17.9-10.3,24.7c-6.8,6.8-15,10.3-24.7,10.3
+		c-9.7,0-17.9-3.4-24.7-10.3C3.4,52.8,0,44.6,0,34.9c0-9.6,3.4-17.9,10.3-24.7C17.1,3.4,25.3,0,35,0z M22.3,63.7
+		c0.3-7.4,0.3-14.7,0-22.1c-2.1-0.4-4-0.4-5.9,0c-0.2,0.8-0.2,2.5-0.1,4.9c0.1,2.3,0,3.9-0.3,4.8c-1.7-0.6-2.7-2.1-3.1-4.6
+		c-0.1-0.7-0.1-3.3-0.1-8c0-14.5-0.1-23-0.3-25.6c-3.6,4.1-5.6,7-5.9,8.5v10.9c0,4.5,0.1,8.1,0.2,10.9c0,0.4,0,1.3-0.1,2.8
+		c-0.1,1.2,0,2.1,0.1,2.6c0.1,0.6,1.1,2.1,2.8,4.7C13.2,58.7,17.5,62.2,22.3,63.7z M44.6,65.4c0.3-5,0.2-12.9-0.1-23.6
+		c-2.1-0.3-4.1-0.3-5.9,0c-0.2,2-0.2,5.1-0.1,9.5c0.1,4.3,0,7.5-0.1,9.5c-2.9,0.4-5,0.3-6.2-0.1c-0.2-5.6-0.2-15.2-0.1-28.7
+		c0.1-12.4,0-21.8-0.3-28.3c-2.4,0.1-4.3,0.6-5.7,1.3c-0.1,7.7-0.2,17.7-0.1,30.1c0,16.5,0,26.6,0,30.3c2.3,1.1,5.4,1.7,9.4,1.7
+		C38.9,66.9,42.1,66.4,44.6,65.4z M48.1,64.1c9.7-4.6,15.7-12,18-22.2c-1.8-0.2-3.8-0.3-6.1-0.3c-1.6,3.9-2.6,6.3-3.2,7.2
+		c-1.1,1.7-2,2.5-2.7,2.5C54,46,54,39.1,54,30.5c0-11.5,0-18.4,0-20.9c-1.4-1.4-3.3-2.5-5.7-3.4C48.1,6.3,48,6.4,48,6.7
+		c0,3.5,0,13.1,0,28.8C47.9,47.2,48,56.8,48.1,64.1z"/>
+</g>
+<g>
+	<path d="M116.6,51.3h-29c-0.5,0-0.9-0.1-1.3-0.2c-0.4-0.2-0.7-0.4-1-0.7c-0.3-0.3-0.5-0.6-0.7-1c-0.2-0.4-0.2-0.8-0.2-1.3V16.3h6.3
+		V45h25.8V51.3z"/>
+	<path d="M154.8,51.3h-22.9c-0.9,0-1.8-0.2-2.9-0.5c-1-0.3-2-0.8-2.9-1.5c-0.9-0.7-1.6-1.6-2.2-2.8c-0.6-1.1-0.9-2.5-0.9-4.2V19.5
+		c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2h28.6v6.3h-25.4v19.8
+		c0,0.8,0.2,1.5,0.7,1.9s1.1,0.7,1.9,0.7h22.9V51.3z M151.9,37h-20v-6.4h20V37z"/>
+	<path d="M197.3,51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6,0.4-4.9,1.3-7.1s2.1-4,3.7-5.5c1.6-1.5,3.4-2.8,5.5-3.6
+		c2.1-0.9,4.5-1.3,7-1.3h14.3c0.4,0,0.9,0.1,1.2,0.2c0.4,0.2,0.7,0.4,1,0.7s0.5,0.6,0.7,1c0.2,0.4,0.2,0.8,0.2,1.2V51.3z
+		 M168.7,36.4H191V22.6h-11.2c-0.2,0-0.6,0-1.2,0.1c-0.6,0.1-1.4,0.2-2.2,0.4c-0.8,0.2-1.7,0.6-2.6,1c-0.9,0.5-1.8,1.1-2.5,2
+		c-0.8,0.8-1.4,1.9-1.9,3.1c-0.5,1.2-0.7,2.8-0.7,4.5V36.4z"/>
+	<path d="M241.7,28.1c0,1.4-0.2,2.7-0.5,3.9c-0.4,1.1-0.8,2.1-1.5,3c-0.6,0.9-1.3,1.6-2.1,2.2c-0.8,0.6-1.6,1.1-2.5,1.5
+		c-0.9,0.4-1.8,0.7-2.6,0.9c-0.9,0.2-1.7,0.3-2.5,0.3l13.3,11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c0.8-0.1,1.5-0.2,2.2-0.5
+		c0.7-0.3,1.2-0.6,1.7-1.1c0.5-0.5,0.9-1,1.1-1.6c0.3-0.6,0.4-1.4,0.4-2.2v-4c0-0.4,0-0.6-0.1-0.8c-0.1-0.2-0.2-0.3-0.3-0.4
+		c-0.1-0.1-0.3-0.1-0.4-0.2c-0.2,0-0.3,0-0.4,0h-20.9v28.7h-6.3V19.5c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1
+		c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2H234c1.4,0,2.6,0.3,3.6,0.8s1.8,1.2,2.4,1.9c0.6,0.8,1,1.6,1.3,2.5
+		c0.3,0.9,0.4,1.7,0.4,2.5V28.1z"/>
+	<path d="M285.1,48.6c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.4,0.7-0.7,1c-0.3,0.3-0.6,0.5-1,0.7c-0.4,0.2-0.8,0.2-1.2,0.2
+		c-0.4,0-0.8-0.1-1.2-0.2c-0.4-0.1-0.8-0.4-1.1-0.7l-23.2-24.2v24.7h-6.3V19c0-0.7,0.2-1.2,0.5-1.8c0.4-0.5,0.8-0.9,1.4-1.2
+		c0.6-0.2,1.2-0.3,1.9-0.2s1.2,0.4,1.6,0.9l23.2,24.2V16.3h6.3V48.6z"/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1642740826"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1642740826"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1642740826"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/about-this-site/" title="About This Site" class="dd-item
+        
+        
+        
+        ">
+      <a href="/about-this-site/">
+          About This Site
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/" title="Getting Started with R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/">
+          Getting Started with R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/installing-r-rstudio/" title="Installing R and R Studio" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/installing-r-rstudio/">
+          Installing R and R Studio
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/rstudio-notebooks/" title="Using R Notebooks" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/rstudio-notebooks/">
+          Using R Notebooks
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/project-managment/" title="Basic Project Management" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/project-managment/">
+          Basic Project Management
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/data-entry/" title="Data Entry" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/data-entry/">
+          Data Entry
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/importing-data/" title="Importing Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/importing-data/">
+          Importing Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/data-types-structure/" title="Data Types &#43; Structure" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/data-types-structure/">
+          Data Types &#43; Structure
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/" title="Data Manipulation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/">
+          Data Manipulation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/making-new-variables/" title="Making New Variables" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/making-new-variables/">
+          Making New Variables
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/subsetting-data/" title="Subsetting data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/subsetting-data/">
+          Subsetting data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/summarising-data/" title="Summarising data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/summarising-data/">
+          Summarising data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/combining-datasets/" title="Combining datasets" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/combining-datasets/">
+          Combining datasets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/reshaping-data/" title="Reshaping data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/reshaping-data/">
+          Reshaping data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/" title="Coding Skills" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/coding-skills/">
+          Coding Skills
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/good-practice/" title="Good Practices for Code" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/good-practice/">
+          Good Practices for Code
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/writing-functions/" title="Writing Functions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/writing-functions/">
+          Writing Functions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/loops/" title="Using Loops" class="dd-item
+        parent
+        active
+        
+        ">
+      <a href="/coding-skills/loops/">
+          Using Loops
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/version-control/" title="Version Control" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/version-control/">
+          Version Control
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/asking-code-questions/" title="Asking code questions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/asking-code-questions/">
+          Asking code questions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/" title="Graphics" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/">
+          Graphics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/" title="Basic Plotting in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/">
+          Basic Plotting in R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/one-continuous/" title="One Continuous Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/one-continuous/">
+          One Continuous Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/two-continuous/" title="Two Continuous Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/two-continuous/">
+          Two Continuous Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/one-continuous-one-factor/" title="One Continuous and One Categorical Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/one-continuous-one-factor/">
+          One Continuous and One Categorical Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/" title="Plotting in R with ggplot2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/">
+          Plotting in R with ggplot2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-basics/" title="The Basics of ggplot2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-basics/">
+          The Basics of ggplot2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-appearance/" title="Customising your ggplot" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-appearance/">
+          Customising your ggplot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-labels/" title="Titles and Axes Labels" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-labels/">
+          Titles and Axes Labels
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-colour-shapes/" title="Colours and Shapes" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-colour-shapes/">
+          Colours and Shapes
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-barplot/" title="Barplot with Errorbars" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-barplot/">
+          Barplot with Errorbars
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/" title="Multivariate Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/">
+          Multivariate Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/mds/" title="Multidimensional Scaling" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/mds/">
+          Multidimensional Scaling
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/pca/" title="Principal Component Analysis" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/pca/">
+          Principal Component Analysis
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/cluster-analysis/" title="Cluster Analysis" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/cluster-analysis/">
+          Cluster Analysis
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/heatmaps/" title="Heatmaps" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/heatmaps/">
+          Heatmaps
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/" title="Spatial Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/">
+          Spatial Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive maps in R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/" title="Statistics" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/">
+          Statistics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/" title="T-tests" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/">
+          T-tests
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/one-sample/" title="One Sample T-test" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/one-sample/">
+          One Sample T-test
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/coding-skills/loops/_index.html" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/coding-skills/'>Coding Skills</a> > Using Loops
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Using Loops
+            </h1>
+          
+
+        
+
+
+
+	
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Do you find yourself cutting and pasting R code a lot?</p>
+<p>This usually will create problems for yourself later. One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use <a href="http://environmentalcomputing.net/writing-simple-functions/">functions</a> and the second one, covered here, is to use loops.</p>
+<p>We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> and <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> covered <a href="http://environmentalcomputing.net/data-manipulation/">here</a>. The dplyr approach works well if your data is “tidy” and in a data frame. If your data are in many different files, then a loop may be a quicker solution.<br />
+<br><br></p>
+<p>###Basic syntax of loops
+<br>
+The syntax of loops is relatively simple - the essential components are <code>for(){}</code> with the the <code>for()</code> part dicating how often operations within the <code>{}</code> part are done.</p>
+<p>Consider the loop below. The first time we run through the loop, the value <em>i</em> will be equal to 1, and this value will be displayed with the <code>print</code> function. It will then repeat with <em>i</em> = 2, all the way up to <em>i = 10</em>, doing whatever task is within the <code>{}</code> each time.</p>
+<pre class="r"><code>for (i in 1:10) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>We can change the range of numbers (1:10) to anything we like, they don’t have to be a sequence or integers, or even numbers. You can also change <em>i</em> to anything you like.</p>
+<pre class="r"><code>nums &lt;- c(3.2, 890, 0.0001, 400)
+
+for (bat in nums) {
+  print(bat)
+}</code></pre>
+<pre><code>## [1] 3.2
+## [1] 890
+## [1] 1e-04
+## [1] 400</code></pre>
+<pre class="r"><code>chars &lt;- c(&quot;a&quot;, &quot;o&quot;, &quot;u&quot;, &quot;z&quot;)
+
+for (bat in chars) {
+  print(bat)
+}</code></pre>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;o&quot;
+## [1] &quot;u&quot;
+## [1] &quot;z&quot;</code></pre>
+<p>Of the most interest to us is changing what is within the <code>{}</code> or the operation we are performing on our data. We can insert anything we like in here. Here is a loop that will print the square and the square root of the numbers 1 to 10.</p>
+<pre class="r"><code>for (i in 1:10) {
+  print(i^2)
+  print(sqrt(i))
+}</code></pre>
+<p>Often we will want to keep the results that we get back from our loop. The first option is to make a blank vector or data frame and append the results to it. This takes longer to run, but doesn’t really matter with simple loops, but can increase your wait times for longer and more complicated loop structures.</p>
+<p>Here is code that will store the square of the numbers 1 to 10 in a new vector called x</p>
+<pre class="r"><code>x &lt;- vector()         # makes a blank vector
+
+for (i in 1:10) {
+  y &lt;- i^2            # performs an operation 
+  x &lt;- append(x,y)    # overwrites &#39;x&#39; with y appended to it
+}</code></pre>
+<p>Here is code that will store both the square and the square root of the numbers 1 to 10 in two columns of a new data frame called x2</p>
+<pre class="r"><code>x2 &lt;- data.frame(col1=vector(), col2=vector())   # makes a blank data frame with two columns
+
+for (i in 1:10) {
+  col1 &lt;- i^2                # performs first operation
+  col2 &lt;- sqrt(i)            # performs second operation 
+  x2 &lt;- rbind(x2, cbind(col1, col2))  # overwrites &#39;x2&#39; values including the new row
+}</code></pre>
+<p>The second option is to make a blank vector or dataframe of known dimensions and then place the results into it directly. For example, if we had a loop with 10 elements, we could store the results of each operation in a vector with a length of 10</p>
+<pre class="r"><code>x &lt;- vector(length=10)  # makes a blank vector with a length of 10
+
+for (i in 1:10) {
+  y &lt;- i^2             
+  x[i] &lt;- y             # places the output in position i in the vector x
+}</code></pre>
+<p>Alternatively, store the results of multiple operations in a new data frame.</p>
+<pre class="r"><code>x2 &lt;- data.frame(col1=vector(length=10),col2=vector(length=10)) # makes a blank data frame with two columns and 10 rows
+
+for (i in 1:10) {
+  col1 &lt;- i^2                   # performs first operation
+  col2 &lt;- sqrt(i)               # performs second operation 
+  x2[i,1] &lt;- col1               # places the first result into row i, column 1
+  x2[i,2] &lt;- col2               # places the second result into row i, column 2
+}</code></pre>
+<p><br><br></p>
+<p>###An ecological example
+<br></p>
+<p><img src="Subsetting_data_image.jpg" /></p>
+<p>Now we can use your new loop skills in an ecological context. As with the <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a> tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
+<pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)
+str(Bats)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    173 obs. of  10 variables:
+##  $ Site                 : chr  &quot;CC02A1&quot; &quot;CC02A1&quot; &quot;CC02A1&quot; &quot;CC02A2&quot; ...
+##  $ Activity             : int  299 276 530 356 571 631 144 124 220 468 ...
+##  $ Foraging             : int  0 6 14 5 3 17 3 0 7 8 ...
+##  $ Date                 : chr  &quot;9/01/2013&quot; &quot;8/01/2013&quot; &quot;7/01/2013&quot; &quot;8/01/2013&quot; ...
+##  $ Treatment.thinned    : chr  &quot;medium-term&quot; &quot;medium-term&quot; &quot;medium-term&quot; &quot;medium-term&quot; ...
+##  $ Area.thinned         : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ Time.since.thinned   : int  7 7 7 7 7 7 7 7 7 7 ...
+##  $ Exclusion.thinned    : num  25.1 25.1 25.1 25.1 25.1 ...
+##  $ Distance.murray.water: num  190 190 190 216 216 ...
+##  $ Distance.creek.water : num  444 444 444 885 885 ...</code></pre>
+<p>Having a look at the structure of this data, we have two response variables: activity (no. of bat calls recorded in a night) and foraging (no. of bat feeding calls recorded in a night). These data were collected over a total of 173 survey nights and at 47 different sites. There are eight potential predictor variables in the dataframe, one of which is a factor (Treatment.thinned), and seven of which are continuous variables (Area.thinned, Time.since.thinned, Exclusion.thinned, Distance.murray.water, Distance.creek.water, Mean.T, Mean.H).</p>
+<p>Let’s say we are exploring our data and we would like to know how well bat activity correlates with our continuous covariates. We’d like to calculate Pearson’s correlation coefficient for activity and each of the covariates separately. Pearson’s correlation coefficient, calculated with the function <code>cor</code>, ranges from -1 (perfect negative correlation) to 1 (perfect positive correlation) with 0 being no correlation. We will store all our correlations in a new data frame called Correlations.</p>
+<p>First, use <code>select</code> from dplyr to make a subset of the data with the response variable (activity) and the 5 predictor variables.</p>
+<pre class="r"><code>library(dplyr)
+
+Bats_subset &lt;- select(Bats, Activity, Area.thinned:Distance.creek.water)</code></pre>
+<p>Next, make an empty data frame with two columns (the name of the variable and the correlation) and the number of rows needed to store all the correlations.</p>
+<pre class="r"><code>rows &lt;- ncol(Bats_subset)-1                    # the number of rows needed in our output dataframe
+
+Correlations &lt;- data.frame(variable=character(length=rows), 
+                 correlation=numeric(length=rows), 
+                 stringsAsFactors=F)       </code></pre>
+<p>Finally, we can use a loop to calculate each of the correlations and store the output in our new dataframe.</p>
+<pre class="r"><code>for (i in 1:rows) {
+  temp1 &lt;- colnames(Bats_subset[i+1])       # retrieves the name of predictor variable
+  temp2 &lt;- cor(Bats_subset[,1], Bats_subset[,i+1], method=&quot;pearson&quot;)
+                                           # calculates the correlation between activity and predictor variable
+  Correlations[i,1] &lt;- temp1               # places the variable name into row i, column 1
+  Correlations[i,2] &lt;- temp2               # places the correlation into row i, column 2
+}</code></pre>
+<pre><code>##                variable correlation
+## 1          Area.thinned -0.40890389
+## 2    Time.since.thinned -0.02135752
+## 3     Exclusion.thinned  0.17562438
+## 4 Distance.murray.water -0.18071570
+## 5  Distance.creek.water -0.09130258</code></pre>
+<p>Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.<br />
+<br><br></p>
+<p>###Further help
+<br></p>
+<p><a href="https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r#gs.8KE0Nx4">DataCamp’s tutorial on loops</a></p>
+<p>You can find some more good examples of loops, lists and if/else statements on the BEES R User group GitHub site <a href="https://github.com/mitchest/BEES-ecocomp/blob/master/introToLoops.R">loops and lists by Mitch</a>.
+<br><br></p>
+<p><strong>Author</strong>: Rachel V. Blakey</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Wed Jan 19 16:45:35 2022&quot;</code></pre>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/coding-skills/writing-functions/" title="Writing Functions"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/coding-skills/version-control/" title="Version Control" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1642740826"></script>
+    <script src="/js/perfect-scrollbar.min.js?1642740826"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1642740826"></script>
+    <script src="/js/jquery.sticky.js?1642740826"></script>
+    <script src="/js/featherlight.min.js?1642740826"></script>
+    <script src="/js/highlight.pack.js?1642740826"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1642740826"></script>
+    <script src="/js/learn.js?1642740826"></script>
+    <script src="/js/hugo-learn.js?1642740826"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1642740826"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

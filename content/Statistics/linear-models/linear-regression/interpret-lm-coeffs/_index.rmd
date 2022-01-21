@@ -1,6 +1,6 @@
 ---
 weight: 1
-title: "Interpreting Linear Regression Coefficients"
+title: "Interpreting Linear Regressions"
 output: html_document
 ---
 The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about **marginal vs. conditional interpretations** of model parameters. 

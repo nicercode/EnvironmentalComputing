@@ -1,3 +1,11 @@
+---
+weight: 8
+title: "Multivariate Analysis with mvabund"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 Multivariate data are common in the environmental sciences, occurring when ever we measure several response variables from each replicate sample. Questions like how does the species composition of a community vary across sites, or how does the shape of trees (as measured by several morphological traits) vary with altitude are multivariate questions.
 
 We will use the package [mvabund](https://cran.r-project.org/web/packages/mvabund/index.html) to specify and fit multivariate statistical models to these sorts of data.
@@ -68,7 +76,7 @@ Now let's get back to our research questions. Are there differences in the speci
 There is a 'quick and dirty' built-in plotting function in the *mvabund* package that allows us to contrast transformed abundances to the predictor variables of our choice. To contrast abundances against habitat, we would use:
 
 ```{r message=FALSE, warning=FALSE}
-plot(Herb_spp~Herbivores$Habitat, cex.axis=0.8, cex=0.8)
+plot(Herb_spp~as.factor(Herbivores$Habitat), cex.axis=0.8, cex=0.8)
 ```
 
 Alternatively, we can include the argument `transformation="no"` to look at the raw abundance data. Because this plot is based on the base plotting language in R, you can add extra arguments to customise the graph. We have made the axis text (`cex.axis=0.8`) and the symbols (`cex=0.8`) smaller so that we can better see what's going on.

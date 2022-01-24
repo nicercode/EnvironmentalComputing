@@ -1,6 +1,6 @@
 ---
 title: 'The Basics of Rasters'
-weight: 2
+weight: 1
 output: html_document
 ---
 

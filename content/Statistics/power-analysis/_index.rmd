@@ -5,7 +5,6 @@ output: html_document
 ---
 
 ### What is power analysis and why is it important?
-<br>
 You collect data to answer a question, usually with the aim of detecting a particular effect (e.g., treatment effect). The power of your test is *the probability of detecting an effect (i.e., getting a p-value less than 0.05) with the experimental design you have and the effect size that you expect or consider meaningful*. 
 
 I'll start by simulating a dataset which has an effect (a difference between the control and treatment), and we'll see if we can detect the effect. We'll do a simple [two sample t-test](http://environmentalcomputing.net/independent-samples-t-test/) for illustration.

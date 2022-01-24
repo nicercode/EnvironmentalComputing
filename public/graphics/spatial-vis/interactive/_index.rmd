@@ -1,6 +1,6 @@
 ---
-title: 'Interactive maps in R'
-weight: 1
+title: 'Interactive Maps in R'
+weight: 3
 output: html_document
 ---
 

@@ -1,0 +1,105 @@
+---
+title: 'Simple Maps with ggmap'
+weight: 2
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Being able to make a simple map is a very useful skill for all sorts of applications. Here, we will introduce some of the basics of working with spatial data, and use R to produce simple and easy maps. You could use the same technique to make a map for a presentation, or a figure for a report or publication.</p>
+<p>There are many packages that are useful for plotting and manipulating spatial data in R. For simplicity, we’re going to solely use the package <a href="https://cran.r-project.org/web/packages/ggmap/index.html">ggmap</a> for this exercise. To get started, install this package and load into R.</p>
+<pre class="r"><code>library(ggmap)</code></pre>
+<div id="setting-up-ggmap" class="section level2">
+<h2>Setting up ggmap</h2>
+<p>The ggmap package “makes it easy to retrieve raster map tiles from popular online mapping services like Google Maps and Stamen Maps and plot them using the ggplot2 framework”.</p>
+<p><strong>To use the package you’ll need to setup an API key to google maps.</strong> For information on how to do this see the <a href="https://github.com/dkahle/ggmap">package homepage on GitHub</a>. An aletrantive interface to OpenStreetMap can also be used with slightly different functions.</p>
+<div id="making-your-first-map" class="section level3">
+<h3>Making your first map</h3>
+<p>In this example, let’s say we collected data from five sites near Royal National Park in New South Wales, Australia, and want to display the locations we visited.</p>
+<p>Using the function <code>get_map</code>, we can download an image from Google maps at any named location:</p>
+<pre class="r"><code>basemap &lt;- get_map(&#39;Royal National Park&#39;, zoom=12)</code></pre>
+<p>and then plot it with the function <code>ggmap</code>:</p>
+<pre class="r"><code>ggmap(basemap)</code></pre>
+<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The argument of <code>get_map</code> is simply any place searchable on Google Maps (in this case ‘Royal National Park’) - easy!</p>
+<p>To add point data for our five survey sites, we first need to make a new data frame holding the place name, latitude and longitude of each site (or import this data from a spreadsheet).</p>
+<pre class="r"><code>ptdata &lt;- data.frame(&quot;PlaceName&quot; = c(&quot; Hacking R. &quot;, &quot; Cabbage Tree Ck. &quot;, 
+                                     &quot; Marley Ck. &quot;, &quot; Wattamolla Ck. &quot;, 
+                                     &quot; Waratah R. &quot;), 
+                     &quot;Long&quot; = c(151.054823, 151.124566, 151.139216, 
+                             151.115645, 150.960431), 
+                     &quot;Lat&quot; = c(-34.074918, -34.090796, -34.111972, 
+                             -34.136046, -34.172308))                       </code></pre>
+<p>We can add these points to our map based on the Latitude (y) and Longitude (x) coordinates. It is important that the points and the other features on the map work on the same scale - or ‘projection’. These locations were estimated from Google Maps data for this reason - estimate your own via <a href="http://latlong.net">LatLong.net</a>).</p>
+<pre class="r"><code>ggmap(basemap) + geom_point(data=ptdata, aes(x=Long, y=Lat))</code></pre>
+<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Well done -you made your first map with R! Easy! You may have noticed that <code>ggmap</code> uses familiar graphics code from the package ggplot (see <a href="http://environmentalcomputing.net/plotting-with-ggplot/">plotting with ggplot</a>).</p>
+</div>
+<div id="making-a-presentation-ready-map" class="section level3">
+<h3>Making a presentation-ready map</h3>
+<p>By tweaking a few options, we can make this look more suitable for a presentation.</p>
+<p>First, adjust some of the options in <code>get_map</code>:</p>
+<ul>
+<li>use <code>bound</code> to choose the extent/bounding box of the map. Here, we are using the minimum and maximum values of latitude and longitude from our site coordinates</li>
+<li>try <code>maptype = "hybrid"</code> to see the satellite imagery and roads data<br />
+</li>
+<li>increase the <code>zoom</code> level to improve detail</li>
+</ul>
+<pre class="r"><code>bound &lt;- c(left = min(ptdata$Long) - 0.05, bottom = min(ptdata$Lat) - 0.05, 
+           right = max(ptdata$Long) + 0.05 , top = max(ptdata$Lat) + 0.05)</code></pre>
+<pre class="r"><code>Pres_basemap &lt;- get_map(bound, zoom = 11, maptype = &quot;hybrid&quot;)</code></pre>
+<p>Second, adjust some of the options for plotting:</p>
+<p><code>geom_point</code> tweaks for the dots at each site location:
+* use <code>colour = "white"</code> to have the points stand out<br />
+* use <code>size</code> to change point size</p>
+<p><code>geom_text</code> tweaks for the labels for each site:</p>
+<ul>
+<li>use <code>size</code> to change text size</li>
+<li>use <code>colour = "white"</code> to have the labels stand out</li>
+<li>use <code>hjust</code> and <code>vjust</code> adjust the horizontal and vertical position of labels<br />
+</li>
+<li>use <code>labs</code> to define the <em>x</em> and <em>y</em> axis labels</li>
+</ul>
+<pre class="r"><code>ggmap(Pres_basemap) + 
+  geom_point(data = ptdata, aes(x=Long, y=Lat), 
+             colour = &quot;white&quot;) +
+  geom_text(data = ptdata, 
+            aes(x=Long, y=Lat, label = PlaceName),
+            size = 4, 
+            colour = &quot;white&quot;,
+            hjust = &quot;inward&quot;) +
+  labs(x = &quot;Longitude&quot;, y = &quot;Latitude&quot;)</code></pre>
+<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="making-a-publication-ready-map" class="section level3">
+<h3>Making a publication-ready map</h3>
+<p>For a paper or report, you probably want a simpler black and white map.</p>
+<ul>
+<li>use <code>bound</code> to set the extent as above<br />
+</li>
+<li>try <code>get_stamenmap</code> to get an austere basemap (eg. Stamen “toner-lite”)<br />
+</li>
+<li>use <code>theme_bw()</code> from ggplot to get a stripped-back theme</li>
+</ul>
+<pre class="r"><code>Pub_basemap &lt;- get_stamenmap(bound, zoom = 13, maptype = &quot;toner-lite&quot;)</code></pre>
+<pre class="r"><code>ggmap(Pub_basemap) + 
+  geom_point(data = ptdata, aes(x=Long, y=Lat, label=PlaceName)) +
+  geom_text(data = ptdata, 
+            aes(x=Long, y=Lat, label = PlaceName),
+            size = 4,
+            fontface = &quot;bold&quot;,
+            hjust = &quot;right&quot;) +
+  theme_bw() +
+  theme(axis.title = element_blank())</code></pre>
+<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>Read the <a href="https://cran.r-project.org/web/packages/ggmap/index.html">ggmap</a> documentation for more examples and ideas.</p>
+<p><a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf">ggmap cheat sheet</a> from the National Centre for Ecological Analysis and Synthesis.</p>
+<p><strong>Author</strong>: Kingsley Griffin and edits by Daniel Falster</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Mon Jan 24 15:55:21 2022&quot;</code></pre>
+</div>
+</div>

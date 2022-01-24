@@ -13,7 +13,7 @@ params:
   disableLandingPageButton: yes
   disableMermaid: no
   disableNextPrev: no
-  editURL: https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/
+  editURL: https://github.com/nicercode/EnvironmentalComputing/edit/develop/content/
   showVisitedLinks: yes
   titleSeparator: '::'
   themeVariant: 'green'

@@ -1,0 +1,125 @@
+---
+title: "Subsetting data"
+weight: 2
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>We often want to subset our data, whether it’s to examine particular rows or columns
+of our dataset, or to pull out observations with particular properties. We may conduct subsetting at the data exploration stage to investigate whether our response variable differs in its relationship to a particular predictor variable across categories (e.g., to look for an interaction). We may also like to pull out elements of our dataset for separate analyses.</p>
+<p><img src="Subsetting_data_image.jpg" /></p>
+<p>In this exercise, we will load a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
+<p>The dataset includes measurements of total number of bat calls (“Activity”) and number of bat calls that indicate foraging behaviour (“Foraging”) recorded over one night for 47 sites and 173 sampling nights in total. Variables relating to forest thinning have been collected and are listed as columns ending in “thinned”. As the forest studied was in a floodplain, covariates relating to water availability were also collected and are listed in columns ending “water”.</p>
+<p>First, download the data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Bats_data.csv">Bats_data.csv</a>, and load into R.</p>
+<pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)</code></pre>
+<div id="basics-of-subsetting-in-r" class="section level3">
+<h3>Basics of subsetting in R</h3>
+<p>Check the structure after you have loaded the data with the <code>str</code> function.</p>
+<p>Now that we have some idea of the dataset we are working with, we can use the <code>[]</code> and <code>$</code> operators to select rows and columns in a dataframe. It’s quite simple: we place the name of the dataframe we want to select from before the square brackets and inside the square brackets we place a comma. Numbers to the left of the comma represent rows we’d like to select and numbers to the left of the comma represent columns we’d like to select.</p>
+<p>For example, if we wanted to select only data from the first three rows and all columns, we would use:</p>
+<pre class="r"><code>Bats[1:3,]</code></pre>
+<p>If we wanted only the last four columns and all rows, we would use:</p>
+<pre class="r"><code>Bats[,7:10]</code></pre>
+<p>In combination, this would select data from only the first three rows from the last four columns:</p>
+<pre class="r"><code>Bats[1:3, 7:10]</code></pre>
+<p>If the row and column numbers that you want do not form a sequence, we can use the <code>&gt;c()</code> function to concatenate row or column indices. For example, let’s add the sixth row and the 2<sup>nd</sup> column to our selection from above:</p>
+<pre class="r"><code>Bats[c(6,1:3), c(2,7:10)]</code></pre>
+<p>Rather than working out which variable is in which numbered column, it is often easier to use the variable names in a data frame and select the variable using <code>$</code> operator. For example, to choose only the Site variable:</p>
+<pre class="r"><code>Bats$Site</code></pre>
+</div>
+<div id="subsetting-rows-in-dplyr" class="section level3">
+<h3>Subsetting rows in dplyr</h3>
+<p><img src="Subsetting_data_image1.jpg" /></p>
+<p>The package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> has many convenient functions for subsetting that can be more intuitive and quick for you. First, install then load the package:</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<p><strong>Subsetting by row numbers</strong></p>
+<p>If you know the row numbers that you are interested in subsetting, you can easily select these rows either using square brackets as discussed above or the <code>slice</code> function in dplyr.</p>
+<p>For example, to select just rows 10-12 in the dataframe, you would use:</p>
+<pre class="r"><code>Bats.slice &lt;- slice(Bats, 10:12)</code></pre>
+<p><strong>Selecting rows that meet certain criteria</strong></p>
+<p>We can subset these rows using the <code>filter</code> function. For example, if wanted only the rows where foraging activity was recorded, we could select for rows where the count of foraging calls was greater than zero.</p>
+<pre class="r"><code>Bats.foraging &lt;- filter(Bats, Foraging &gt; 0)</code></pre>
+<p>You can experiment with a range of logical operators when using the <code>filter</code> function<br />
+<font face="monospace">&lt;</font> less than<br />
+<font face="monospace">&gt;</font>greater than<br />
+<font face="monospace">==</font>equal to<br />
+<font face="monospace">&lt;=</font>less than or equal to<br />
+<font face="monospace">&gt;=</font>greater than or equal to<br />
+<font face="monospace">!=</font>not equal to<br />
+<font face="monospace">in.NA=</font>is NA<br />
+<font face="monospace">!is.na=</font>is not NA<br />
+and more.</p>
+<p>You can use the commands <code>?base::Logic</code> and <code>?Comparison</code> to learn more about these operators.</p>
+<p>You will notice that while using the above functions, we have mostly assigned them to new objects, e.g., <code>Bats.foraging &lt;-...</code> . This gives us the option to use the newly subsetted data for further computations.</p>
+<p><strong>Taking a random selection of rows</strong></p>
+<p>We may want to randomly select a number or fraction of rows in our dataset to validate our models. For example, we could take 50% of the data to build the model and then 50% of the model to test it against observed data. Random selection of rows is important if we are going to split the data up this way, because we don’t want to bias our data to any particular properties or categories. Here we make a new dataframe “Bats.50p” which has half the number of rows of the initial dataset:</p>
+<pre class="r"><code>Bats.50p &lt;- sample_frac(Bats, size = 0.5, replace=FALSE)</code></pre>
+<p>Similarly, we could ask for a certain number of rows to be randomly sampled from the data set. For example, to randomly sample 100 rows, we would use:</p>
+<pre class="r"><code>Bats.100r &lt;- sample_n(Bats, 100, replace=FALSE)</code></pre>
+<p><strong>Selecting rows with the highest values</strong></p>
+<p>dplyr has a neat function for selecting <em>n</em> rows with the highest values of any given column: <code>top_n</code>. Below, we identify the three rows of data which contain the greatest total bat activity per night:</p>
+<pre class="r"><code>Bats.top &lt;- top_n(Bats, 3, Activity)
+print(Bats.top)</code></pre>
+<pre><code>##     Site Activity Foraging      Date Treatment.thinned Area.thinned
+## 1 CC04A1      802        9 7/01/2013        short-term            0
+## 2 PC32A2     1070       66 7/01/2013       medium-term            0
+## 3 PC32A2      944       52 8/01/2013       medium-term            0
+##   Time.since.thinned Exclusion.thinned Distance.murray.water
+## 1                  0         11.932831              143.9868
+## 2                  8          7.150972              429.2099
+## 3                  8          7.150972              429.2099
+##   Distance.creek.water
+## 1             102.5009
+## 2             694.7085
+## 3             694.7085</code></pre>
+<p>Wow, over 1000 bat calls in one night!</p>
+<p><strong>Removing duplicate rows</strong></p>
+<p>Another useful function is to remove duplicate rows, for example if we have accidentally entered data twice.</p>
+<pre class="r"><code>Bats.distinct &lt;- distinct(Bats)</code></pre>
+<p>We can compare the number of rows between our original dataset and our new dataset with duplicates removed and our old dataset using &lt;<code>nrow</code>:</p>
+<pre class="r"><code>nrow(Bats)</code></pre>
+<pre><code>## [1] 173</code></pre>
+<pre class="r"><code>nrow(Bats.distinct)</code></pre>
+<pre><code>## [1] 173</code></pre>
+<p>In this case, the dataframes are identical because our data doesn’t have any duplicate rows.</p>
+</div>
+<div id="subsetting-columns-in-dplyr" class="section level3">
+<h3>Subsetting columns in dplyr</h3>
+<p><img src="Subsetting_data_image2.jpg" /></p>
+<p>As discussed above, you can select one column <code>$</code> or one or more by indexing with <code>[]</code>. dplyr has the function <code>select</code> which allows you to select columns by name or by using useful helper functions.</p>
+<p><strong>Selecting columns by name</strong></p>
+<p>For example, to select just the Site column from the data frame, or both the Site and Date columns:</p>
+<pre class="r"><code>Bats_subset1 &lt;- select(Bats, Site)
+Bats_subset2 &lt;- select(Bats, Site, Date)</code></pre>
+<p><strong>Selecting several columns by their position</strong></p>
+<p>To select a group of columns adjacent to each other use the first and last names separated by :. For example, this selects all columnns between Site and Date.</p>
+<pre class="r"><code>Bats_subset3 &lt;- select(Bats, Site:Date)</code></pre>
+<p><strong>Selecting columns by their properties</strong></p>
+<p>The in-built helper functions within <code>select</code> allow you to select particular columns according to their properties.</p>
+<p>For example, we could select the two columns (Distance.murray.water &amp; Distance.creek.water) by the start of the column names, or the end of the column names:</p>
+<pre class="r"><code>Bats_subset4 &lt;- select(Bats, starts_with(&quot;Distance&quot;))
+Bats_subset4 &lt;- select(Bats, ends_with(&quot;water&quot;))</code></pre>
+<p>If you are familiar with regular expressions, you can use the <code>match</code> helper function. For example, to select those same two columns, we could use <code>^</code> to indicate the column name starts with the following characters and <code>$</code> to indicate the column name ends with the preceding characters.</p>
+<pre class="r"><code>Bats_subset4 &lt;- select(bats, matches(&quot;^Distance&quot;))
+Bats_subset4 &lt;- select(bats, matches(&quot;water$&quot;))</code></pre>
+<p>We can use <code>contains</code> when we want to select columns that contain certain characters or words in their name.</p>
+<pre class="r"><code>Bats_subset4 &lt;- select(Bats, contains(&quot;water&quot;))</code></pre>
+<p>The helper function <code>one_of</code> will select columns that belong to a list of column names, remembering to use <code>c()</code> to concatenate the list of names.</p>
+<pre class="r"><code>Bats_subset4 &lt;- select(bats, one_of(c(&quot;Distance.murray.water&quot;, &quot;Distance.creek.water&quot;)))</code></pre>
+<p>Note that all the last 6 uses of <code>select</code> did exactly the same thing - pulled out the two columns, Distance.murray.water and Distance.creek.water.</p>
+<p>You can also name particular columns that you want to exclude from the selection using a minus in fron of the column name to be excluded. For example, to make a data frame that no longer has the Foraging variable:</p>
+<pre class="r"><code>Bats_subset5 &lt;- select(Bats, -Foragaing)</code></pre>
+<p>Finally, if you have numbered columns, we can use the <code>numrange</code> helper function to select particular columns. For example, this code would select for columns named var1, var2, &amp; var3.</p>
+<pre class="r"><code>select(data, num_range(&quot;var&quot;, 1:3))</code></pre>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document.</p>
+<p>You can type <code>?dplyr</code> to get help with this package.</p>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></p>
+<p><strong>Author</strong>: Rachel V. Blakey</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:42:50 2022&quot;</code></pre>
+</div>

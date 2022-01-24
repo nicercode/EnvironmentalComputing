@@ -1,0 +1,87 @@
+---
+weight: 2
+title: "Contingency Tables"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Contingency tables are used to test for associations between two or more categorical variables. The data take the form of counts of observations that have been classified by these categorical variables.</p>
+<p><img src="Contingency_tables_image.jpg" /></p>
+<p>For example, consider the bill and face colours of the endangered Gouldian Finch (<em>Erythrura gouldiae</em>) living in the savannahs of northern Australia. They are polymorphic, having either red, yellow or black faces. Their bills are also either red, yellow or black, but bill colour is not always the same as face colour. All birds in a sample could be classified into all nine combinations of face and bill colour and the counts of each held in a two-way table:</p>
+<pre><code>##             Black face Red face Yellow face
+## Black bill          16        5           6
+## Red bill            19       20           6
+## Yellow bill         18       22          22</code></pre>
+<p>To test whether one variable is associated with the other we contrast the observed counts to the expected counts if there was no association (in other words if the two variables were entirely independent of each other). In this example, we would be testing whether bill colour varied independently from face colour.</p>
+<p>The counts expected under this null model are calculated from the row and column totals of the table holding the observed data. For each cell in the table, the expected count is:</p>
+<p><em>(row total x column total)/grand total</em></p>
+<p>When we do this for each cell, we obtain a new table with all expected values:</p>
+<pre><code>##             Black face  Red face Yellow face
+## Black bill    10.67910  9.470149    6.850746
+## Red bill      17.79851 15.783582   11.417910
+## Yellow bill   24.52239 21.746269   15.731343</code></pre>
+<p>These are the expected counts if the null hypothesis is true. In this example, if the numbers of black, red and yellow faced birds are in the same proportions for each of the bill colours.</p>
+<p>The observed counts are then contrasted to the expected counts with the <span class="math inline">\(\chi^2\)</span> test statistic,</p>
+<p><span class="math inline">\(\chi^{2} = \sum_{i=1}^{k} \frac{(O_{i}-E_{i})^2}{E_{i}}\)</span></p>
+<p>where <em>O</em> and <em>E</em> are the observed and expected numbers in each of the cells of the table.</p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p>With a calculator, you could calculate <span class="math inline">\(\chi^2\)</span> and then determine the probability of obtaining that <span class="math inline">\(\chi^2\)</span> value from a table of the known probability distribution of <span class="math inline">\(\chi^2\)</span>. In R, we can obtain that probability by:</p>
+<pre class="r"><code>pchisq(x, df,lower.tail = FALSE)</code></pre>
+<p>with <em>x</em> = your value of <span class="math inline">\(\chi^2\)</span>, and degrees of freedom (<em>df</em>) = (number of row-1) x (number of columns-1). The <code>lower.tail = FALSE</code> bit gives you the probability that <span class="math inline">\(\chi^2\)</span> is greater than your value.</p>
+<p>Easier, is to run the whole analysis in R. Firstly, you would need to enter the observed counts as a matrix.</p>
+<pre class="r"><code>Gfinch &lt;- matrix(c(16,19,18,5,20,22,6,6,22), nrow=3, dimnames = list(c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;), c(&quot;Black face&quot;, &quot;Red face&quot;, &quot;Yellow face&quot;)))</code></pre>
+<p><code>nrow</code> tells R how many rows you have. <code>dimnames</code> labels the rows and columns.</p>
+<p>Check that you have entered the data correctly by simply entering the name of the matrix you just made.</p>
+<pre class="r"><code>Gfinch</code></pre>
+<p>Run the contingency analysis with the <code>chisq.test</code> function.</p>
+<pre class="r"><code>chisq.test(x, correct = F)</code></pre>
+<p>where <em>x</em> is the name of the matrix holding the observed data (for this example use the object Gfinch)</p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p>The output from a contingency table is very simple: the value of <span class="math inline">\(\chi^2\)</span>, the degrees of freedom and the <em>p</em>-value. The <em>p</em>-value gives the likelihood of your observed counts coming from a population where the null hypothesis was true.</p>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  Gfinch
+## X-squared = 12.881, df = 4, p-value = 0.01187</code></pre>
+<p>In this example, the probability that the observed counts are derived from a population where the null hypothesis was true is 0.01187. We would then reject the null hypothesis and conclude that there was an association between bill and face colour.</p>
+<p>It is important to remember that this is not testing either of the variables in isolation (e.g., whether black faced birds are more commonly encountered that red or yellow faced birds), but an association between both variables (i.e., whether bill colour is independent of face colour).</p>
+<p>To explore which of the cells is the table had more observations than expected, or had fewer observations than expected, look at the standardised residuals. These are the differences between the observed and expected, standardised by the square root of the expected. These are standardised because contrast of the absolute differences (observed - expected) can be misleading when the size of the expected values vary. For example, a difference of 5 from an expectation of 10 is an increase of 50%, but a difference of 5 from an expectation of 100 is only a 5% change).</p>
+<pre class="r"><code>chisq.test(Gfinch)$residuals</code></pre>
+<pre><code>##             Black face    Red face Yellow face
+## Black bill    1.628236 -1.45259188  -0.3250357
+## Red bill      0.284793  1.06130659  -1.6033875
+## Yellow bill  -1.317120  0.05441038   1.5804894</code></pre>
+<p>In this example, you can see that birds with a black face are more likely to have a black bill than expected by chance, and less likely to have a yellow bill.</p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p><strong>Independence.</strong> The <span class="math inline">\(\chi^2\)</span> test assumes that the observations are classfied into each category independently of each other. This is a sampling design issue and is usually avoided by random sampling. In this example, there would be problems is you deliberately chose birds with a combination of bill and face colour if you were missing that combination in the birds already sampled.</p>
+<p><strong>Sample size.</strong> The <span class="math inline">\(\chi^2\)</span> statistic can only be reliably compared to the <span class="math inline">\(\chi^2\)</span> distribution if sample sizes are sufficiently large. You should check that at least 20% of the expected frequencies are larger than 5. You can see the expected counts for each category by adding <font face="monospace">$expected</font> to the end of your <span class="math inline">\(\chi^2\)</span> test. For example,</p>
+<pre class="r"><code>chisq.test(Gfinch)$expected</code></pre>
+<p>If this assumption has not been met, you could combine categories (if you have more than two and makes sense to do so), run a randomisation test or consider log-linear modelling.</p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><strong>Written.</strong> The results of analysing a contingency table can be easily presented in the text of a results section. For example, “There was a significant association between the bill colour and the face colour of Gouldian finches (<span class="math inline">\(\chi^2\)</span> = 12.88, df = 2, P = 0.01).”</p>
+<p><strong>Visual.</strong> Count data are best presented as a bar plot with the counts on the Y axis and the categories on the X axis.</p>
+<pre class="r"><code>barplot(Gfinch,beside=T,ylab=&quot;Count&quot;,xlab=&quot;Face colour&quot;,col=c(&quot;black&quot;,&quot;red&quot;,&quot;yellow&quot;))
+legend(&quot;topright&quot;,inset=0.15,c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;),pch=15,col=c(&quot;black&quot;,&quot;red&quot;,&quot;yellow&quot;))</code></pre>
+<p><img src="/statistics/catagorical/contingency-tabs/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>See the graphing modules for making better versions of these figures that are suitable for reports or publications.</p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>Type <code>chisq.test</code> to get the R help for this function.</p>
+<p>Quinn and Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Chapter 14. Analyzing frequencies.</p>
+<p>McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 20.3 Comparing proportions among two or more independent samples.</p>
+<p><strong>Author</strong>: Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:08 2022&quot;</code></pre>
+</div>

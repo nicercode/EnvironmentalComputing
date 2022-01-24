@@ -4,6 +4,54 @@ weight: 6
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+These pages have some introductions to a wide range of commonly used statistical analyses in the environmental sciences.
+
+Some simple [hypothesis tests](http://environmentalcomputing.net/t-tests/) with the *t* statistic:
+
+* [One sample t tests](http://environmentalcomputing.net/one-sample-t-test/) - contrasting a single sample parameter to a population parameter  
+* [Independent samples](http://environmentalcomputing.net/independent-samples-t-test/) - contrasting the means of two samples
+* [Paired t-tests](http://environmentalcomputing.net/paired-t-tests/) - contrasting two groups when data are paired  
+
+[Linear models](http://environmentalcomputing.net/linear-models/):
+
+* [Linear regression](http://environmentalcomputing.net/linear-regression/)
+* [Analysis of variance: single factor](http://environmentalcomputing.net/analysis-variance-single-factor/)
+* [Analysis of variance: factorial](http://environmentalcomputing.net/analysis-variance-factorial/)  
+* [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
+
+[Generalised linear models](http://environmentalcomputing.net/generalised-linear-models/):
+
+* [Generalised linear models 1](http://environmentalcomputing.net/generalised-linear-models-1/): Introduction and binomial data  
+* [Generalised linear models 2](http://environmentalcomputing.net/generalised-linear-models-2/): Count data  
+
+[Mixed models](http://environmentalcomputing.net/mixed-models/):
+
+* [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/): Linear mixed models with one random effect  
+* [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/): Linear mixed models with several random effects  
+* [Mixed models 3](http://environmentalcomputing.net/mixed-models-3/): Generalised linear mixed models  
+
+[Generalised additive models](http://environmentalcomputing.net/gams/)
+
+[Categorical data analyses](http://environmentalcomputing.net/categorical-data-analyses/):
+
+* [Goodness of fit tests](http://environmentalcomputing.net/goodness-of-fit-tests/)  
+* [Contingency tables](http://environmentalcomputing.net/contingency-tables/)
+
+[Power analyses](http://environmentalcomputing.net/power-analysis/): calculating power and deciding on sample sizes
+
+[Introduction to mvabund](http://environmentalcomputing.net/introduction-to-mvabund/): model-based analysis of multivariate abundance data
+
+[Forecasting with time series](http://environmentalcomputing.net/forecasting-time-series/)
+
+
+[Meta-analyses](http://environmentalcomputing.net/meta-analyses/) 
+
+* [Meta-analyses 1](http://environmentalcomputing.net/meta-analyses-1/): Introduction and calculating effect sizes  
+* [Meta-analyses 2](http://environmentalcomputing.net/meta-analyses-2/): Fixed effect and random effect models  
+* [Meta-analyses 3](http://environmentalcomputing.net/meta-analyses-3/): More complex models 
+
+ 
+Last updated:
+```{r,echo=F}
+date()
 ```

@@ -1,4 +1,0 @@
-Some commonly used tests for contrasting the counts of observations across categorical variables.
-
-* [Goodness of fit tests](http://environmentalcomputing.net/goodness-of-fit-tests/)  
-* [Contingency tables](http://environmentalcomputing.net/contingency-tables/)  

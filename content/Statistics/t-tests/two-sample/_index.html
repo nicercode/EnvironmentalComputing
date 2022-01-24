@@ -1,0 +1,88 @@
+---
+weight: 2
+title: "Two Sample T-test"
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>An independent samples <em>t</em>-test aka a two sample <em>t</em>-test is one of the most commonly used statistical tests. It is used for comparing whether the means of two samples are statistically different from each other (e.g., control vs. treatment, site A vs site B etc). For example, consider the simple case of whether a sample of pH measurements from one river differs from a sample of pH measurements from a second river.</p>
+<p><img src="Independent_samples_t_test_image.jpg" /></p>
+<p>The null hypothesis is that the population means from which the two samples are taken are equal <span class="math display">\[H_o: \mu_1=\mu_2\]</span>.</p>
+<p>The test statistic, <em>t</em>, is:</p>
+<p><span class="math display">\[t = \frac{\bar{x_{1}}-\bar{x_{2}}}{s_{\bar{y_{1}}-\bar{y_{2}}}}\]</span></p>
+<p>where the denominator is the standard error of the difference between the two means.</p>
+<p><span class="math display">\[\sqrt{\frac{(n_{1}-1)s_{1}^{2}+(n_{2}-1)s_{2}^{2}}{n_{1}+n_{2}-2}{(\frac{1}{n_{1}}}+\frac{1}{n_{2}})}\]</span></p>
+<p>Note that the size of test statistic depends on two things: 1) how different the two means are (the numerator) and 2) how much variation is present within each sample (the denominator).</p>
+<p>This equation is for the pooled variance <em>t</em>-test. For a separate variances <em>t</em>-test (also known as Welch’s <em>t</em> test), which does not assume equal variances, the denominator is:</p>
+<p><span class="math display">\[\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\]</span></p>
+<p>Note that a <em>t</em> test is a special case of a linear model with a single continuous response variable and a single categorical predictor variable that has two levels.
+<br><br></p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><br>
+An independent samples <em>t</em>-test can be run with the same <code>t.test</code> function as used for <a href="http://environmentalcomputing.net/one-sample-t-test/">one sample</a> or <a href="http://environmentalcomputing.net/paired-t-tests/">paired <em>t</em>-tests</a>. For an independent samples <em>t</em>-test assuming equal variances, we would use:</p>
+<pre class="r"><code>t.test(x &lt;- my_sample1, y = my_sample2, var.equal = TRUE)</code></pre>
+<p>where <em>my_sample1</em> and <em>my_sample2</em> are vectors containing the measurements from each sample.</p>
+<p>More commonly, we would use a data frame with the response and predictor variables as separate columns. You can then use a formula statement, <code>y ~ x</code>, to specify the response and predictor variables rather than the code above. Consider the simple example where you wanted to compare the pH of two rivers. Ten replicate pH measures were taken from each river.</p>
+<p>Download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/River_pH.csv">River_pH.csv</a>, and import into R.</p>
+<pre class="r"><code>River_pH = read.csv(file = &quot;River_pH.csv&quot;, header = TRUE)</code></pre>
+<p>The <em>t</em>-test is run with the <code>t.test</code> function, with the arguments specifying the response variable (pH) to the left of the ~, the predictor variable (River_name) to the right of the ~, and the data frame to be used.</p>
+<pre class="r"><code>t.test(pH ~ River_name, data = River_pH, var.equal = TRUE)</code></pre>
+<p>The argument <code>var.equal = TRUE</code> specifies that we are assuming equal variances. Note the default <code>t-test</code> argument for the alternative hypothesis is a two-tailed test. If you want to conduct a one-tailed test you must add an argument to the function specifying <code>alternative = "greater"</code> or <code>alternative = "less"</code>.<br />
+<br><br></p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p><br></p>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  River_pH$pH by River_pH$River_name
+## t = 6.9788, df = 18, p-value = 1.618e-06
+## alternative hypothesis: true difference in means between group A and group B is not equal to 0
+## 95 percent confidence interval:
+##  1.574706 2.931168
+## sample estimates:
+## mean in group A mean in group B 
+##        8.661497        6.408560</code></pre>
+<p>The output of a <em>t</em>-test is straight-forward to interpret. In the above output, the test statistic <em>t</em> = 6.9788 with 18 degrees of freedom, and a very low <em>p</em> value (<em>p</em> &lt; 0.001). We can therefore reject the null hypothesis that the two rivers have the same pH.</p>
+<p>You also get the means from the two samples (needed to know which one is larger if the test is significant), and the 95% confidence interval for the difference between the two means (this will not overlap zero when the test is signficant).
+<br><br></p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p><br>
+<em>t</em>-tests are parametric tests, which implies we can specify a probability distribution for the population of the variable from which samples were taken. Parametric (and non-parametric) tests have a number of assumptions. If these assumptions are violated we can no longer be sure that the test statistic follows a <em>t</em> distribution, in which case <em>p</em>-values may be inaccurate.</p>
+<p><strong>Normality</strong>. The data are normally distributed. Note however that <em>t tests</em> are reasonably robust to violations of normality (although watch out for the influence of outliers).</p>
+<p><strong>Equal variance</strong>. The variances of each sample are assumed to be approximately equal. <em>t tests</em> are also reasonably robust to violations of equal variance if sample sizes are the same but can be problematic when sample sizes are very different.</p>
+<p>In the event of unequal variances, it may be better to perform a Welch’s <em>t</em> test which does not assume equal variances. To conduct a Welch test in R, the <code>var.equal</code> argument in <code>t.test</code> function should be changed to <code>var.equal=FALSE</code>. This is in fact the default argument for <code>t.test</code> if not specified.</p>
+<p><strong>Independence</strong>. The observations should have been sampled randomly from the population so that the two sample means are unbiased estimates of the population means. If individual replicates are linked in any way, then the assumption of independence will be violated.
+<br><br></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><br>
+<strong>Written.</strong> As a minimum, the observed <em>t</em> statistic, the P-value and the number of degrees of freedom should be reported. For example, you could write “the pH was significantly higher in River A than River B (independent samples <em>t</em>-test: <em>t</em> = 6.98, df = 18, P &lt; 0.001)”.</p>
+<p><strong>Visual.</strong> Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.</p>
+<pre class="r"><code>boxplot(pH~River_name, data = River_pH, xlab = &quot;River name&quot;, ylab = &quot;pH&quot;)</code></pre>
+<p><img src="/statistics/t-tests/two-sample/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<br><br></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p><br>
+Type <code>?t.test</code> to get the R help for this function.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Quinn and Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Chapter 3: Hypothesis testing.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.
+</p>
+<p><br><br></p>
+<p><strong>Author</strong>: Alistair Poore
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Fri Jan 21 15:58:29 2022&quot;</code></pre>
+</div>

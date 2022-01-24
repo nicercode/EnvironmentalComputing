@@ -53,10 +53,10 @@ t.test(control,treatment)
 ```
 
 This time we did detect an effect. This always happens, no matter what your experimental design, if an effect is present, you have some chance of detecting it, this is called power. So as not to waste time and money, we should only conduct experiments that have high power, i.e. high probability of detecting an effect if there is one. We can calculate the power of this experiment.
-<br><br>
+  
 
 ### Simple power analysis with 'pwr'
-<br>
+ 
 There are various packages which do power analysis in R. [pwr](https://cran.r-project.org/web/packages/pwr/index.html) does simple stuff up to `lm` and [simR](https://cran.r-project.org/web/packages/simr/index.html) does more complex [mixed models](http://environmentalcomputing.net/mixed-models/) and [glms](http://environmentalcomputing.net/generalised-linear-models/).
 
 First, download and install the package.
@@ -115,10 +115,10 @@ Function       | Description
 It is generally a bit tricky to specify effect size, you can find a good guide for this package [here](http://www.statmethods.net/stats/power.html).
 
 Note that specifying effect size is not a statistical question, it's an ecological question of what effect size is meaningful for your particular study? For example, do you want to be able to detect a 10% decline in the abundance of a rare animal or would you be happy with a sampling design able to detect a 25% decline?
-<br><br>
+  
 
 ### Analysis with linear and mixed models with 'simr'
-<br>
+ 
 If you are conducting an experiment with random factors, and you need to do a [mixed model](http://environmentalcomputing.net/mixed-models/) and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package [simR](https://cran.r-project.org/web/packages/simr/index.html) is designed to do this.
 
 Download and install the package.
@@ -217,26 +217,26 @@ powerSim(full3, fixed("modification", "lr"), nsim=50)
 ```
 
 This gives 75% power, which is midway between the others. So in this case it is again better to add more sites than more observations per site. This is by no means always true, and depended to a large extent on the variability within and between sites, your experimental design, your question.
-<br><br>
+  
 
 ### Some notes
-<br>
+ 
 Power analysis give the probability of detecting a particular effect (of a particular strength), at a particular alpha level (usually 0.05) if this effect is present. If you are interested in multiple questions from the same data, to do power analysis you generally have to chose a question of primary interest.
 
 You need to specify the level of the effect that you want to be able to detect, if you use the estimated level from a pilot study, this is called an "observed power" calculation, and is not a valid use of power analysis.
-<br><br>
+  
 
 ### Further information
-<br>
+ 
 [Some more examples from pilot studies from the simR package](https://cran.r-project.org/web/packages/simr/vignettes/examples.html)
 
 [Power analysis from scratch with no pilot study](https://cran.r-project.org/web/packages/simr/vignettes/fromscratch.html)
 
 More on [specifying effect size](http://www.statmethods.net/stats/power.html)
-<br><br>
+  
 
 **Author**: Gordana Popovic
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

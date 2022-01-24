@@ -77,13 +77,11 @@ boxplot(cbind(control,treatment))</code></pre>
 ## sample estimates:
 ##   mean of x   mean of y 
 ## -0.08359522  0.22675982</code></pre>
-<p>This time we did detect an effect. This always happens, no matter what your experimental design, if an effect is present, you have some chance of detecting it, this is called power. So as not to waste time and money, we should only conduct experiments that have high power, i.e. high probability of detecting an effect if there is one. We can calculate the power of this experiment.
-<br><br></p>
+<p>This time we did detect an effect. This always happens, no matter what your experimental design, if an effect is present, you have some chance of detecting it, this is called power. So as not to waste time and money, we should only conduct experiments that have high power, i.e. high probability of detecting an effect if there is one. We can calculate the power of this experiment.</p>
 </div>
 <div id="simple-power-analysis-with-pwr" class="section level3">
 <h3>Simple power analysis with ‘pwr’</h3>
-<p><br>
-There are various packages which do power analysis in R. <a href="https://cran.r-project.org/web/packages/pwr/index.html">pwr</a> does simple stuff up to <code>lm</code> and <a href="https://cran.r-project.org/web/packages/simr/index.html">simR</a> does more complex <a href="http://environmentalcomputing.net/mixed-models/">mixed models</a> and <a href="http://environmentalcomputing.net/generalised-linear-models/">glms</a>.</p>
+<p>There are various packages which do power analysis in R. <a href="https://cran.r-project.org/web/packages/pwr/index.html">pwr</a> does simple stuff up to <code>lm</code> and <a href="https://cran.r-project.org/web/packages/simr/index.html">simR</a> does more complex <a href="http://environmentalcomputing.net/mixed-models/">mixed models</a> and <a href="http://environmentalcomputing.net/generalised-linear-models/">glms</a>.</p>
 <p>First, download and install the package.</p>
 <pre class="r"><code>library(pwr)</code></pre>
 <p>To do power calculations in pwr, you leave one of the values as NULL and enter all the others. It then gives you the value for the one you left out.</p>
@@ -171,13 +169,11 @@ abline(h=0.8)</code></pre>
 </tbody>
 </table>
 <p>It is generally a bit tricky to specify effect size, you can find a good guide for this package <a href="http://www.statmethods.net/stats/power.html">here</a>.</p>
-<p>Note that specifying effect size is not a statistical question, it’s an ecological question of what effect size is meaningful for your particular study? For example, do you want to be able to detect a 10% decline in the abundance of a rare animal or would you be happy with a sampling design able to detect a 25% decline?
-<br><br></p>
+<p>Note that specifying effect size is not a statistical question, it’s an ecological question of what effect size is meaningful for your particular study? For example, do you want to be able to detect a 10% decline in the abundance of a rare animal or would you be happy with a sampling design able to detect a 25% decline?</p>
 </div>
 <div id="analysis-with-linear-and-mixed-models-with-simr" class="section level3">
 <h3>Analysis with linear and mixed models with ‘simr’</h3>
-<p><br>
-If you are conducting an experiment with random factors, and you need to do a <a href="http://environmentalcomputing.net/mixed-models/">mixed model</a> and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package <a href="https://cran.r-project.org/web/packages/simr/index.html">simR</a> is designed to do this.</p>
+<p>If you are conducting an experiment with random factors, and you need to do a <a href="http://environmentalcomputing.net/mixed-models/">mixed model</a> and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package <a href="https://cran.r-project.org/web/packages/simr/index.html">simR</a> is designed to do this.</p>
 <p>Download and install the package.</p>
 <pre class="r"><code>library(simr)
 simrOptions(progress=FALSE)</code></pre>
@@ -285,7 +281,7 @@ fixef(Pilot.mod)[&quot;modification3&quot;] &lt;- 0.2</code></pre>
 ## Based on 50 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 18
 ## 
-## Time elapsed: 0 h 0 m 5 s</code></pre>
+## Time elapsed: 0 h 0 m 4 s</code></pre>
 <pre class="r"><code>#this is a small number of sims for demonstration, the default of 1000 is more appropriate</code></pre>
 <p>So we expect power of around 45% for a likelihood ratio test for ‘modification’ with the current number of observations. This is quite low, we would like to see power above 80%, so let’s see how increasing sample size affects that.</p>
 <p><strong>How can we increase power?</strong>
@@ -368,25 +364,19 @@ xtabs(~site,data=attributes(full3)$newData)</code></pre>
 ## alpha = 0.05, nrow = 72
 ## 
 ## Time elapsed: 0 h 0 m 5 s</code></pre>
-<p>This gives 75% power, which is midway between the others. So in this case it is again better to add more sites than more observations per site. This is by no means always true, and depended to a large extent on the variability within and between sites, your experimental design, your question.
-<br><br></p>
+<p>This gives 75% power, which is midway between the others. So in this case it is again better to add more sites than more observations per site. This is by no means always true, and depended to a large extent on the variability within and between sites, your experimental design, your question.</p>
 </div>
 <div id="some-notes" class="section level3">
 <h3>Some notes</h3>
-<p><br>
-Power analysis give the probability of detecting a particular effect (of a particular strength), at a particular alpha level (usually 0.05) if this effect is present. If you are interested in multiple questions from the same data, to do power analysis you generally have to chose a question of primary interest.</p>
-<p>You need to specify the level of the effect that you want to be able to detect, if you use the estimated level from a pilot study, this is called an “observed power” calculation, and is not a valid use of power analysis.
-<br><br></p>
+<p>Power analysis give the probability of detecting a particular effect (of a particular strength), at a particular alpha level (usually 0.05) if this effect is present. If you are interested in multiple questions from the same data, to do power analysis you generally have to chose a question of primary interest.</p>
+<p>You need to specify the level of the effect that you want to be able to detect, if you use the estimated level from a pilot study, this is called an “observed power” calculation, and is not a valid use of power analysis.</p>
 </div>
 <div id="further-information" class="section level3">
 <h3>Further information</h3>
-<p><br>
-<a href="https://cran.r-project.org/web/packages/simr/vignettes/examples.html">Some more examples from pilot studies from the simR package</a></p>
+<p><a href="https://cran.r-project.org/web/packages/simr/vignettes/examples.html">Some more examples from pilot studies from the simR package</a></p>
 <p><a href="https://cran.r-project.org/web/packages/simr/vignettes/fromscratch.html">Power analysis from scratch with no pilot study</a></p>
-<p>More on <a href="http://www.statmethods.net/stats/power.html">specifying effect size</a>
-<br><br></p>
-<p><strong>Author</strong>: Gordana Popovic
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 24 15:53:06 2022&quot;</code></pre>
+<p>More on <a href="http://www.statmethods.net/stats/power.html">specifying effect size</a></p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:48:08 2022&quot;</code></pre>
 </div>

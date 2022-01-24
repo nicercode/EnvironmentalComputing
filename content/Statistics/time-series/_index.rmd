@@ -133,10 +133,10 @@ plot(fit4_forecast)
 ```
 
 Bad news! The forecast is for decreasing rainforest area in the Amazon.
-<br><br>
+  
 
 ###Models incorporating seasonal variability
-<br>
+ 
 Let's try another example that incorporates not only long-term trends but also seasonal variability. We will use an example used in Rob Hyndman and George Athanasopoulos' [online textbook](https://www.otexts.org/fpp) and included in the *forecast* package: Australian monthly gas production. We will start by plotting the historical data from 1956 to 1995. If we plot the data, we can see two patterns: an overall positive trend and a zig-zagging seasonal pattern. 
 
 ```{r}
@@ -182,10 +182,10 @@ plot(fit_gas1_forecast, main="Simple exponential model")
 plot(fit_gas2_forecast, main="Seasonal trend model") 
 plot(fit_gas3_forecast, main="Best model (lowest AIC)")
 ```
-<br><br>
+  
 
 ###Further help
-<br>
+ 
 Type `?forecast` for the R help with the package forecast.
 
 For more details on the package and time-series forecasting in general, 

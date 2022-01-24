@@ -14,10 +14,10 @@ Two factors are **crossed** when every category (level) of one factor co-occurs 
 A factor is **nested** within another factor when each category of the first factor co-occurs with only one category of the other. In other words, an observation has to be within one category of Factor 2 in order to have a specific category of Factor 1. All combinations of categories are not represented.
 
 There are also intermediate designs that are partially crossed, where some levels of one factor occur in several (but not all) levels of the second factor. These designs have often been taught as separate problems with different ways to carry out analyses of variance (ANOVAs) depending on if you have crossed or nested factors. Using mixed models with the package lme4, we can think if all of these in one framework, where nested and crossed designs are modelled in the same way. Thinking about factors as crossed or nested is simplified to careful labelling of factor levels - more on this later.
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 We will use the package [lme4](https://cran.r-project.org/web/packages/lme4/index.html) for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, load the package:
 
 ```{r,warning=FALSE,message=FALSE}
@@ -89,10 +89,10 @@ summary(fit.wrong )
 The only place we can see an obvious difference is under the Random effects table. For the correct model we have <font face="monospace">Number of obs: 52, groups:  SiteWithin, 26; Estuary, 7</font> while the wrong model tells us we have only 4 sites, which we know is incorrect. 
 
 Note: fit.wrong would be correct if we had crossed factors
-<br><br>
+  
 
 ### Checking assumptions
-<br>
+ 
 The assumptions are the same as for one random factor, but it doesn't hurt to list them again
 
 1. The observed $y$ are independent, conditional on some predictors $x$  
@@ -101,7 +101,7 @@ The assumptions are the same as for one random factor, but it doesn't hurt to li
 4. There is a straight line relationship between $y$ and the predictors $x$ and random effects $z$  
 5. Random effects $z$ are independent of $y$.  
 6. Random effects $z$ are normally distributed  
-<br><br>
+  
 
 See [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/) for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.  
 
@@ -122,10 +122,10 @@ scatter.smooth(residuals(fit.mod)~fitted(fit.mod)) #residual plot
 ```
 
 This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it's not of great concern. 
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 **Hypothesis test for the fixed effect**
 
 We can use the `anova` as before to obtain approximate p-values for fixed effects.
@@ -157,10 +157,10 @@ for(iBoot in 1:nBoot)
 mean(lrStat>lrObs) #P-value for test of Estuary effect
 ```
 The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.
-<br><br>
+  
 
 ## Communicating results
-<br>
+ 
 **Written.** Results of linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the `anova` function) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g., "There is strong evidence (p<0.001) of negative effect of modification on total abundance". For multiple predictors it's best to display the results in a table. 
 
 **Visual.** The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility. There is a little bit of code that is required for such a plot, and it will be a little different for your data and model. 
@@ -182,10 +182,10 @@ stripchart(Est.means~ sort(unique(SiteWithin)),data=Estuaries,pch=18,col="red",v
 ```
 
 Alternatively, you can plot by Estuary as before (see [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/)).
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 You can type `?lmer` into R for help with these functions.
 
 [Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4.
@@ -193,10 +193,10 @@ You can type `?lmer` into R for help with these functions.
 <p style="margin-left:.5in;text-indent:-.5in">Faraway, JJ (2005) *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC Press.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">Zuur, A, EN Ieno and GM Smith (2007) *Analysing ecological data*. Springer Science & Business Media.</p>
-<br><br>
+  
 
 **Author**: Gordana Popovic
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

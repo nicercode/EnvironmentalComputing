@@ -6,10 +6,10 @@ output: html_document
 In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.
 
 For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for [binary](http://environmentalcomputing.net/generalised-linear-models-1/) and [count](http://environmentalcomputing.net/generalised-linear-models-1/) data page on [interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/).
-<br><br>
+  
 
 ### Poisson and negative binomial GLMs
-<br>
+ 
 In Poisson and negative binomial glms, we use a log link. The actual model we fit with one covariate $x$ looks like this
 
 $$ Y \sim \text{Poisson} (\lambda) $$
@@ -40,12 +40,12 @@ exp(glm1$coefficients[2])
 ```
 
 So here increasing $x$ by 1 unit multiplies the mean value of Y by $exp( \beta_1 ) = 1.25$. The same thing is true for negative binomial glms as they have the same link function.
-<br><br>
+  
 
 ### Binomial GLMs
-<br>
+ 
 #### Logistic regression
-<br>
+ 
 Things become much more complicated in binomial glms. The model here is actually a model of log odds, so we need to start with an explanation of those. The odds of an event are the probability success divided by the probability of failure. So if the probability of success is $p$ then the odds are:
 
 $$\text{Odds} = \frac{p}{1-p} $$
@@ -63,10 +63,10 @@ bin1 <- glm(bY~x,family = binomial)
 summary(bin1)
 ```
 So when we increase $x$ by one unit, the odds of Y are multiplied by $exp( \beta_1 ) = 2.11$
-<br><br>
+  
 
 #### Complementary log-log
-<br>
+ 
 Possibly a more intuitive model is a binomial regression with a complementary log-log link function. This link function is based on the assumption that you have some counts, which are Poisson distributed, but you've decided to turn them into presence/absence. 
 
 $$ Y \sim \text{binomial} (p) $$
@@ -81,15 +81,15 @@ coef(bin2)
 ```
 
 The interpretation is now the same as in the Poisson case, when we increase $x$ by 1, the mean of the underlying count is multiplied by $exp( \beta_1 )$.
-<br><br>
+  
 
 #### Log binomial model
-<br>
+ 
 It is possible to use a log link function with the binomial distribution `family = binomial(link = log)`. In this case you can interpret the coefficients as multiplying the probabilities by $exp( \beta_1 )$, however these models can give you predicted probabilities greater than 1, and often don't converge (don't give an answer).
-<br><br>
+  
 
 ### Offsets
-<br>
+ 
 Sometimes we know the effect of a particular variable (call it $z$) on the response is proportional, so that when we double $z$ we expect the response to double on average. The most common time you see this is with sampling intensity. 
 
 ![](glm_coefficients_image.jpg)
@@ -118,10 +118,10 @@ summary(coef_mod)
 ```
 
 The coefficient the model estimated is close to 1, which would be equivalent to an offset.
-<br><br>
+  
 
 **Author**: Gordana Popovic
-<br>
+ 
 Last updated:
 ```{r, echo = F}
 date()

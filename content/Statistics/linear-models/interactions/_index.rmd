@@ -114,17 +114,17 @@ IntPlots_figG = filter(IntPlots, Figure =="IntG")
 plotIG <- ggplot(IntPlots_figG, aes(pH, Growth, group=Temperature, col=Temperature)) + geom_line(size=1.5) + geom_point() + scale_colour_manual(values=c("blue","orange","red"))
 ```                                                                                                                                   
 In this figure, there is an effect of pH (reduced growth in the acid treatment) in the warm and hot temperature treatments, but not the control temperature. Coral growth was always reduced in the hot treatment, but in the warm treatment, growth was slowed relative to the control only in the acid treatment.
-<br><br>
+  
 
 ### Communicating results
-<br>
+ 
 **Written.** If you have significant interaction between two factors in your design, then communicating your results requires text that describes how the effects of one factor depend on the other. In the examples with interactions above, you could not simply say that "ocean acidification reduced the growth of corals" because this result varied across the temperature treatments.
 
 In designs with categorical factors, post-hoc tests are commonly used to test which means differ from which (i.e., compare all four combinations of temperature and pH in the design above). The results from these can be placed in the text or onto figures to show which means differ from which. You would then have statistical support for statements that contrast particular treatments. A sentence for the results section for the top left figure in the interactions plots above would be something like "Temperature interacted with pH to affect the growth of corals (Table 1), with reduced growth in the warm treatment only (Fig. 1)" where Table 1 would hold the statistical details of the given test (e.g., factorial ANOVA).
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

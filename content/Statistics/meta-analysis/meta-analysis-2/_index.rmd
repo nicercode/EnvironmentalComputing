@@ -193,7 +193,7 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 <p style="margin-left:.5in;text-indent:-.5in">Senior, A. M., C. E. Grueber, T. Kamiya, M. Lagisz, K. O'Dwyer, E. S. A. Santos, and S. Nakagawa. 2016. Heterogeneity in ecological and evolutionary meta-analyses: its magnitude and implications. *Ecology* 97:3293-3299.</p>
 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

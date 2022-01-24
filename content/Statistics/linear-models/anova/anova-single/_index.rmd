@@ -28,10 +28,10 @@ ANOVA partitions the total variance into a component that can be explained by th
 $$F = \frac{MS_{among}}{MS_{within}}$$
 
 where *MS* are the mean squares, a measure of variation. The probability of obtaining the observed value of *F* is calculated from the known probability distribution of *F*, with two degrees of freedom (one for the numerator = the number of levels -1) and one for the denominator (number of replicates per level - 1 x number of levels).
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, *y*, and a corresponding column for the categorical variable, *x*. Download the sample data set for the turtle hatching example, [Turtles.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Turtles.csv), import into R and check that temperature variable is a factor with the `str` function.
 
 ```{r,eval=FALSE}
@@ -63,10 +63,10 @@ Exactly the same analysis can be reproduced using the linear model function `lm`
 Turtles.lm = lm(Days ~ Temperature,data=Turtles)
 summary(Turtles.lm)
 ```
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 ```{r,echo=FALSE}
 Turtles = read.csv(file = "Turtles.csv",header=TRUE)
 Turtles$Temperature = factor(Turtles$Temperature)
@@ -82,7 +82,7 @@ The sums of squares and mean squares are measures of variation. The *F* statisti
 
 The main thing to look at in the ANOVA table is whether your predictor variable had a significant effect on your response variable. In this example, the probability that all four incubation temperatures are equal is <0.001. This is very unlikely and much less than 0.05. We would conclude that there is a difference in hatching times between the temperatures. We are also interested in the R^2 value which tells us how much variation was explained by the model.
 
-If you use the `lm` function, you get a bit more information from the summary of the linear model output.<Br>
+If you use the `lm` function, you get a bit more information from the summary of the linear model output. 
 ```{r,echo=FALSE}
 Turtles.lm = lm(Days ~ Temperature,data=Turtles)
 summary(Turtles.lm)
@@ -95,10 +95,10 @@ If you detect any significant differences in the ANOVA, we are then interested i
 ```{r}
 TukeyHSD(Turtles.aov)
 ```
-<br><br>
+  
 
 ### Assumptions to check
-<br>
+ 
 The important assumptions of ANOVA are independence, homegeneity of variance and normality. We advocate a qualitative evalutation of the normality and homogeneity of variance assumptions, by examining the patterns of variation in the residuals, rather than a formal test such has Cochran's test. Linear models in general are quite 'robust' for violating these assumptions (heterogeneity and normality), within reason.
 
 **Normality.** The assumption of normality can be checked by a frequency histogram of the residuals or by using a quantile plot where the residuals are plotted against the values expected from a normal distribution. The histogram of residuals should follow a normal distribution. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Both of these plots can be obtained from the model object created by the `aov` function.
@@ -122,10 +122,10 @@ Heterogenous variances are indicated by non-random pattern in the residuals vs. 
 **Independence.** ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the turtle eggs measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with both temperature and time as factors).
 
 There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed-model](http://environmentalcomputing.net/mixed-models-1/).
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written.**  The results of a one-way ANOVA are usually expressed in text as a short sentence, e.g., "Turtle hatching time differed among the four incubation temperatures (*F* = 15.98, *df* = 3,36, *p* < 0.001)". A significant effect would be followed by a written description of the post-hoc test results (i.e., exactly which temperatures differed from which). The results from post-hoc tests can also be added to the figure (e.g, by labelling which levels differed).
 
 **Visual.**  A boxplot or column graph with error bars are suitable for contrasting a continuous variable across levels of categorical variable. See the graphics help for making publication ready versions of these figures.
@@ -133,10 +133,10 @@ There are a variety of measures for dealing with non-independence. These include
 ```{r}
 boxplot(Days~Temperature, data=Turtles, ylab = "Hatching time (days)", xlab = "Temperature (°C)")
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?aov` or `?lm` to get the R help for these functions.
 
 <p style="margin-left:.5in;text-indent:-.5in">Quinn and Keough (2002) *Experimental design and data analysis for biologists.* Cambridge University Press. Ch. 8 Comparing groups or treatments - analysis of variance.</p>
@@ -144,10 +144,10 @@ Type `?aov` or `?lm` to get the R help for these functions.
 <p style="margin-left:.5in;text-indent:-.5in">McKillup (2012) *Statistics explained. An introductory guide for life scientists* Cambridge University Press. Ch. 11. Single-factor analysis of variance.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">Underood, AJ (1997) *Experiments in ecology: Their logical design and interpretation using analysis of variance.* Cambridge University Press.</p>
-<br><br>
+  
 
 **Author**: James Lavender
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

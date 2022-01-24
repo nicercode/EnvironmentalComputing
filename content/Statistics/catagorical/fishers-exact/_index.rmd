@@ -72,7 +72,7 @@ fisher.test(possum)
 
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

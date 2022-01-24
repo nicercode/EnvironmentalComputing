@@ -6,10 +6,10 @@ output: html_document
 **Count data**
 
 This is a continuation of [Generalised linear models 1](http://environmentalcomputing.net/generalised-linear-models-1/) which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM's for count data and briefly introduce how they can be used for other data types you may have.
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 
 ![](GLM2_counts_image.jpg)
 
@@ -39,10 +39,10 @@ ft.sol.pois = manyglm(Soleolifera~Treatment, family="poisson", data=Reveg)
 ```
 
 where Soleolifera is the response variable, and Treatment is the predictor variable (with two levels, control and revegetated).
-<br><br>
+  
 
 ### Assumptions to check
-<br>
+ 
 Before we look at the results, we need to look at the residual plot to check the assumptions.
 
 ```{r,out.width = '500px'}
@@ -64,10 +64,10 @@ plot(ft.sol.nb)
 ```
 
 This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 If all the assumption checks are okay, we can have a look at the results the model gave us with the same two functions for inference as used for linear models: `summary` and `anova`.
 
 ```{r}
@@ -84,10 +84,10 @@ ft.sol.nb$coefficients
 The default link function for Poisson and negative binomial models is $log()$. If we write the mean count as $\lambda$  
 
 $$ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}$$
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written.** Results of GLM's are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g. "There is strong evidence of positive effect of bush regeneration on the abundance of slugs from the order Soleolifera (p < 0.001)". For multiple predictors it's best to display the results in a table. You should also indicate which distribution was used (e.g. negative-binomial) and if resampling was used for inference. " We used a negative-binomial generalised linear model due to overdispersion evident in the data. Inference was carried out using bootstrap resampling with 1000 resamples (default when using manyglm)."
 
 **Visual.** In this example, a boxplot would be an effective way to visualse the differences in slug counts between control and revegetated sites.
@@ -95,17 +95,17 @@ $$ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}$$
 ```{r,out.width = '500px'}
 boxplot(Soleolifera~Treatment,ylab = "Count", xlab = "Treatment", data=Reveg)
 ```
-<br><br>
+  
 
 ### Other types of data
-<br>
+ 
 If you have continuous positive data with zeros, like biomass data, the `tweedie` distribution might be able to model this, although it does have some quite restrictive assumptions. You can use `family="tweedie"` with the `manyglm` function. Be sure to look at residual plots for violations of assumptions. 
 
 For strictly positive continuous data a `gamma` distribution can be used. This is available in the `glm` function using `family=gamma`. 
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 You can type `?glm` and `?manyglm` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Faraway, JJ. 2005. *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC press.</p>
@@ -113,10 +113,10 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 20074. *Analysing ecological data*. Springer Science & Business Media, 2007.</p>
 
 More advice on [interpreting coefficients in glms](http://environmentalcomputing.net/interpreting-coefficients-in-glms/)
-<br><br>
+  
 
 **Author**: Gordana Popovic
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

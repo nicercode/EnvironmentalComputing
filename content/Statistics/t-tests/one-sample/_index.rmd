@@ -25,10 +25,10 @@ $$t = \frac{\bar{x}-\mu}{SE}$$
 where $\bar{x}$ is the sample mean, $\mu$ is the population mean and *SE* is the standard error of the sample.
 
 Note that the size of test statistic depends on two things: 1) how different the sample mean is to the population mean (the numerator) and 2) how much variation is present within the sample (the denominator). The null hypothesis is that the population mean from which the sample was taken is the known value, i.e., $H_o: \mu=125$.
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 The test statistic *t* is relatively straightforward to manually calculate. The test statistic can then checked against a *t* distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true.
 
 To calculate the probability associated with a given value of t in R, use
@@ -54,10 +54,10 @@ For our crime scene example, we could assign our ten measurements to an object c
 pollen <- c(94,135,78,98,137,114,114,101,112,121)
 t.test(pollen, mu = 125)
 ```
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 ```{r,echo=FALSE}
 pollen = c(94,135,78,98,123,114,114,101,112,121)
 t.test(pollen, mu = 125)
@@ -66,19 +66,19 @@ t.test(pollen, mu = 125)
 The output of a one sample *t*-test is straight-forward to interpret. In the above output, the test statistic *t* = -3.0691 with 9 degrees of freedom, and a low *p* value (*p* = 0.013). We can therefore reject the null hypothesis and conclude that it was unlikely that the soil samples from the crime scene came from the nearby pine forest.
 
 You also get the mean of your sample (109) and the 95% confidence interval for population mean estimated from that sample (this will not overlap your hypothesised mean when the test is significant).
-<br><br>
+  
 
 ### Assumptions to check       
-<br>
+ 
 *t*-tests are parametric tests, which implies we can specify a probability distribution for the population of the variable from which samples were taken. Parametric (and non-parametric) tests have a number of assumptions. If these assumptions are violated we can no longer be sure that the test statistic follows a *t* distribution, in which case *p*-values may be inaccurate.   
 
 **Normality**. The *t* distribution describes paramaters sampled from a normal population, so assumes that the data are normally distributed. Note however that *t tests* are reasonably robust to violations of normality (although watch out for the influence of outliers).  
 
 **Independence**. The observations should have been sampled randomly from a defined population so that sample mean is an unbiased estimate of the population mean. If individual replicates are linked in any way, then the assumption of independence will be violated.
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written.** As a minimum, the observed *t* statistic, the *p* value and the number of degrees of freedom should be reported. For example, you could write "The mean pollen count from the footprints (109 ) was significantly lower than expected if it was derived from the nearby forest with an average count of 125 (*t* = 3.07, df = 9, P = 0.01)". 
 
 **Visual.** Box plots or frequency histograms can be used to visualise the variation in a single variable. In this example, you might use a line or arrow to indicate the single value (125) that you were comparing the sample to.
@@ -89,19 +89,19 @@ abline(v=125,col="red")
 boxplot(pollen,xlab = "Pollen count",horizontal =TRUE)
 abline(v=125,col="red")
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?t.test` to get the R help for this function. 
 
 <p style="margin-left:.5in;text-indent:-.5in">Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Chapter 3: Hypothesis testing.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.</p>
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

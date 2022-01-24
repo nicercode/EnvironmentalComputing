@@ -18,10 +18,10 @@ Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
 ```
 
 The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.
-<br><br>
+  
 
 ### Adding a new variable
-<br>
+ 
 ![](Making_new_variables_image.jpg)
 
 Adding a new variable to an existing data frame can be done by assigning the outcome of a given function to a new variable name in the following fashion.
@@ -67,19 +67,19 @@ The arguments of `mutate` are simply the name of the data frame followed by any 
 In the above examples, note that the new variables have been added to the existing data frame, and all old variables have been kept. You can use `transmute` if you want to drop the original variables.
 
 These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](http://environmentalcomputing.net/subsetting-data/) and [summarising](http://environmentalcomputing.net/summarising-data/) data. 
-<br><br>
+  
 
 ### Renaming a variable
-<br>
+ 
 dplyr offers a straightforward function, `rename`, to change the name of any variable. For example, to change Mass to Biomass, we simply use:
 
 ```{r}
 Herbivores <- rename(Herbivores, Biomass = Mass)
 ```
-<br><br>
+  
 
 ### Uniting several columns into one
-<br>
+ 
 ![](Unite_image.jpg)
 
 Combining the content of several columns into a single column can be useful to provide a different set of labels for rows in your data set, or new levels of a categorical variable that you may want to use in graphs. The function `unite` in the package [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/) allows us to do this very easily. First, install and load this package into R.
@@ -105,10 +105,10 @@ View the data frame again and you will notice the new variable, and the fact tha
 ```{r}
 Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep="_", remove=FALSE)
 ```
-<br><br>
+  
 
 ### Separating one column into several
-<br>
+ 
 ![](Separate_image.jpg)
 
 Separating content from one column into several separate variables is also very useful if the levels of categorical variables in the original data set are actually combinations of more than one variable. The function `separate` in tidyr does this.
@@ -127,19 +127,19 @@ The arguments of `separate' are:
 * the `remove=FALSE` means we keep the variable being separated in the new version of the data frame 
 
 Note that this was only possible because there was a character separating the two variables in the text of the one to be separated (e.g., we couldn't do this is if the species names in the Habitat variable were originally GenusSpecies, rather than Genus_species).
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?mutate`, `?unite`, and `?separate` for the R help for these functions.
 
 [Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio. Some images above were sourced from this document.
 
 [Introducing tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/)
-<br><br>
+  
 
 **Author:** Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

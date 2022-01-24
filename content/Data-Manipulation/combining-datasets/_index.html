@@ -18,12 +18,10 @@ output: html_document
 <pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)
 Geo &lt;- read.csv(file=&quot;Geo_data.csv&quot;, header=T, stringsAsFactors=F)
 Weather &lt;- read.csv(file=&quot;Weather_vars.csv&quot;, header=T, stringsAsFactors=F)</code></pre>
-<p>You’ll notice that we used the argument <code>stringsAsFactors=F</code>. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as “character” vectors.
-<br><br></p>
+<p>You’ll notice that we used the argument <code>stringsAsFactors=F</code>. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as “character” vectors.</p>
 <div id="joining-data" class="section level3">
 <h3>Joining data</h3>
-<p><br>
-dplyr has a function for simply adding all columns from one data set (z) to another (y):</p>
+<p>dplyr has a function for simply adding all columns from one data set (z) to another (y):</p>
 <pre class="r"><code>bind_cols(y,z)</code></pre>
 <p>This is only useful if the two data sets have the same number of rows and the rows are arranged in the same order (it just matches up rows by their position).</p>
 <p>In this case, we have two quite different datasets that we want to join to our main dataset on bat abundance. The data set of geographic locations has been measured at the site-scale, so each separate site has a separate measurement of latitude and longitude.</p>
@@ -38,13 +36,11 @@ dplyr has a function for simply adding all columns from one data set (z) to anot
 dim(Bats_withGeoWeather)
 colnames(Bats_withGeo)
 colnames(geo.weather.join)</code></pre>
-<p>You will see that the new dataset, Bats_withGeoWeather has the same number of rows as the original, Bats, but an additional four columns: “Latitude”, “Longitude”, “Mean_temperature” and “Mean_humidity”.
-<br><br></p>
+<p>You will see that the new dataset, Bats_withGeoWeather has the same number of rows as the original, Bats, but an additional four columns: “Latitude”, “Longitude”, “Mean_temperature” and “Mean_humidity”.</p>
 </div>
 <div id="dealing-with-messy-datasets" class="section level3">
 <h3>Dealing with messy datasets</h3>
-<p><br>
-That was a nice neat example, where we have all of the codes in our main dataset (Bats) matching up to codes in the data sets we wanted to join on. There are also a series of functions that help with messier data situations.</p>
+<p>That was a nice neat example, where we have all of the codes in our main dataset (Bats) matching up to codes in the data sets we wanted to join on. There are also a series of functions that help with messier data situations.</p>
 <p>Let’s simulate a couple of messy datasets. Imagine you have bat activity data for five sites and tree density data for five sites, but only two of those sites (D and E) contain measurements for both variables. This may happen when you are using datasets collected by different people or for different purposes in the same study.</p>
 <pre class="r"><code>Bat_sim &lt;- as.data.frame(cbind(Site = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;),
                                Activity =c(62,29,30,23,24)),stringsAsFactors = F)
@@ -106,13 +102,11 @@ print(Bat_withTree_inn.join)</code></pre>
 ## 1    A       62
 ## 2    B       29
 ## 3    C       30</code></pre>
-<p><br><br></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document. You can use <code>?dplyr</code> to get help with this package.</p>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document. You can use <code>?dplyr</code> to get help with this package.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Wed Jan 19 12:13:50 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Tue Jan 25 09:42:40 2022&quot;</code></pre>
 </div>

@@ -1,0 +1,52 @@
+---
+weight: 3
+title: "Fisher's Exact Test"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><img src="Fishers_exact_test_Q1_image.jpg" /></p>
+<p>Some people notice a distinctive smell from their urine after eating asparagus, while others never notice the smell. These differences could arise from variation among people in the chemical profile of the urine (i.e., how compounds from asparagus are metabolised), or from variation in the ability of different people to detect the smell.</p>
+<p>A paper (Pelchat <em>et al.</em> 2010 <em>Chemical Senses</em>) reviewed these studies and presented the following data that described variation among four study populations:</p>
+<p>Israel (Lison et al. 1980), 328, 0
+China (Hoffenberg 1983), 96, 2
+USA (Sugarman and Neelon 1985), 10, 5
+USA (Lison et al. 1980), 11, 10</p>
+<pre class="r"><code>asparagus = matrix(c(328,96,10,11,0,2,5,10), nrow=4, dimnames = list(c(&quot;Israel&quot;, &quot;China&quot;, &quot;USA.1&quot;, &quot;USA.2&quot;), c(&quot;Can detect odour&quot;,&quot;Cannot detect odour&quot;)))
+asparagus</code></pre>
+<pre><code>##        Can detect odour Cannot detect odour
+## Israel              328                   0
+## China                96                   2
+## USA.1                10                   5
+## USA.2                11                  10</code></pre>
+<p><strong>Q1</strong> What numbers of people would be expected to smell the odour in each population if all study populations had the same proportion of people able to detect the odour?</p>
+<pre class="r"><code>chisq.test(asparagus, correct=F)$expected</code></pre>
+<pre><code>## Warning in chisq.test(asparagus, correct = F): Chi-squared approximation may be
+## incorrect</code></pre>
+<pre><code>##        Can detect odour Cannot detect odour
+## Israel        315.93074          12.0692641
+## China          94.39394           3.6060606
+## USA.1          14.44805           0.5519481
+## USA.2          20.22727           0.7727273</code></pre>
+<p><strong>Q2</strong> What statistical test could you use to detect differences among populations in the perception of the odour? Ensure you check that the assumptions of the test are met.</p>
+<p><strong>Q3</strong> Run your chosen test. What is your P value?</p>
+<pre class="r"><code>fisher.test(asparagus)</code></pre>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  asparagus
+## p-value &lt; 2.2e-16
+## alternative hypothesis: two.sided</code></pre>
+<p><img src="Fishers_exact_test_Q2_image.jpg" /></p>
+<p>You are a behavioural ecologist studying the diet of common ringtail possums (<em>Pseudocheirus peregrinus</em>) at two sites (sites A and B) dominated by two species of Eucalyptus, (<em>E. ovata</em> and <em>E. sideroxylon</em>).</p>
+<p>You notice that possums at site A tend to eat <em>E. ovata</em> and that at location B they mostly eat <em>E. sideroxylon</em>. To test whether the populations at each site differ in the feeding preferences, you attach radio collars to seven possums at location A and eight possums at location B. You track each possum and note the species of the first tree that you observe it eating leaves from.</p>
+<p>At location A you see six possums eat <em>E. ovata</em> and one (1) eat <em>E. sideroxylon</em>. At location B, none eat <em>E. ovata</em> and you see all eight eat <em>E. sideroxylon</em>.</p>
+<p><strong>Q1</strong> What is the exact probability of observing this or a more extreme pattern by chance alone?</p>
+<p><strong>Q2</strong> Is there evidence to suggest that the possums at site A and B differ in their use of food trees?</p>
+<p><strong>Author</strong>: Alistair Poore
+<br>
+Last updated:</p>

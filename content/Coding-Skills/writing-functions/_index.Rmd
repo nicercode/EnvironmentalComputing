@@ -535,7 +535,7 @@ You can find more help on functions at
 
 **Author**: Original by Keryn F Bain; revised and substantially expanded by [Daniel S Falster](https://twitter.com/adaptive_plant)
 
-<br>
+ 
 Last updated:
 ```{r,echo=FALSE}
 date()

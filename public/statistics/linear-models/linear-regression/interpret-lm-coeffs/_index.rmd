@@ -1,0 +1,165 @@
+---
+weight: 1
+title: "Interpreting Linear Regressions"
+output: html_document
+---
+The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about **marginal vs. conditional interpretations** of model parameters. 
+
+![](Linear_regression_image.jpg)
+<br>
+
+In this example, we model plant height as a function of altitude and temperature. These variables are negatively correlated: it is colder the higher you go. We start by simulating some data to reflect this.
+
+
+```{r, warning=F}
+library(mvtnorm)
+
+# Specify the sample size
+N <- 1000
+
+# Specify the correlation between altitude and temperature
+rho <- -0.4
+
+# This line of code creates two correlated variables
+X = rmvnorm(N, mean = c(0, 0), sigma = matrix(c(1, rho, rho, 1), 2, 2))
+
+# Extract the first and second columns to vectors named temp and alt and plot
+temp <- X[,1]
+alt <- X[,2]
+plot(temp, alt)
+```
+
+Now we can simulate some data for height of plants. Here we say that the mean height of plants is 2 (when all the other variables are 0), as temperature increases by one unit (holding altitude constant), the mean of height will increase by 1 unit (`beta[2] = 1`), and similarly as you increase altitude by 1 unit (holding temperature constant) then mean height decreases by 1 (`beta[3] = -1`). Height is then normally distributed with this mean and standard deviation of 2.
+
+```{r}
+beta <- c(2, 1, -1)
+mu <- beta[1]+beta[2]*temp+beta[3] * alt
+height <- rnorm(N, mu, sd = 2)
+```
+
+If we use a linear model to find the coefficients we get what we expect, estimates very close to the true values. 
+
+```{r}
+lm_both <- lm(height ~ temp + alt)
+data.frame(estimated = round(lm_both$coefficients, 2), true = beta)
+```
+
+The interpretation of these coefficients is that if you hold everything else in the model constant (i.e., temperature) and add 1 to altitude, then the estimated mean height will decrease by 1.09. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter.
+
+The intercept is the predicted value when all the other variables are set to 0, which sometimes makes sense (here it would be the height of plants at sea level and 0 temperature). Other times 0 is not a meaningful value, and if you would like to interpret the intercept it might make sense to rescale your other variables so that their mean is 0. If you do this, then the intercept is the predicted value when all other variables are at their mean level.
+
+What if now we had a model with just temperature? 
+
+```{r}
+lm1 <- lm(height ~ temp)
+lm1$coefficients
+```
+
+The coefficient of temperature is now 1.38, what's going on? Altitude is an important predictor of plant height, and some of the information about altitude is contained in temperature (remember they are correlated, so as altitude increases temperature decreases). The model accounts for this by changing the effect of temperature to take account of the information it contains about altitude. Notice the coefficient of temperature is wrong by approximately 0.4, the amount of correlation between the variables. 
+
+Note: When statisticians talk about this, they use the words **conditional** and **marginal**. Conditional is the effect of a variable when others are held constant (as in lm_both), while marginal is the overall effect (as in lm1).
+Note: If you use the code above to simulate your own data sets, you will get slightly different values for the coefficients.
+<br><br>
+
+### Testing hypotheses
+<br>
+This distinction has a lot of consequences for modelling as well as testing hypothesis. Let's generate some data where altitude predicts height, and temperature has no (additional) information, and then test for temperature.
+
+```{r}
+mu <- 2-1*alt
+height <- rnorm(N, mu, sd = 2)
+
+mod_temp <- lm(height ~ temp)
+summary(mod_temp)
+anova(mod_temp)
+```
+
+The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by 0.45 (remember the correlation was 0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
+
+But what about altitude? We know the temperature effect we observe is because it is correlated with altitude, temperature does not directly predict height. If we want to know if there is an effect of temperature after controlling for altitude (holding altitude constant, so conditional), then we fit the model with altitude and then test for temperature.
+
+```{r}
+mod_temp_alt <- lm(height ~ alt + temp)
+summary(mod_temp_alt)
+anova(mod_temp_alt)
+```
+
+The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.
+
+Note: The distinction between conditional and marginal interpretations is also true for generalised linear models and mixed models.
+<br><br>
+
+### Categorical covariates
+<br>
+When we have categorical covariates (for example treatment), there are a number of ways to code the model, which will give different interpretations for the coefficients. Let's simulate 120 data points with 40 in each of three levels of a categorical treatment.
+
+```{r}
+N <- 120
+# The effect of treatment
+trt.n <- rep(c(-1, 0, 1), N/3)
+mu <- 2+1*trt.n
+
+# Labels for the treatment
+treatment <- factor(rep(c("low", "med", "high"), N/3))#group labels
+
+# Create, Y, a normally distributed response variable and plot against treatment
+Y <- rnorm(N, mu, sd = 2)
+boxplot(Y ~ treatment)
+```
+
+If we put treatment in as a covariate the normal way, the model will choose a reference treatment (here it will be high as the levels get sorted alphabetically), so that the intercept will be the mean of this reference group. The other coefficients will be the differences between the other groups and the reference group.
+
+```{r}
+cat_lm <- lm(Y ~ treatment)
+summary(cat_lm)
+```
+
+So here group "high" has a mean of 2.65, and the difference between the means of group "low" and group "high" is -0.66, and the difference between group "med" and group "high" is -1.48. If you would like to have another group as the reference group, you can use `relevel` to recode your treatment factor.
+
+
+```{r}
+treatment <- relevel(treatment, ref = "low")
+cat_lm <- lm(Y ~ treatment)
+summary(cat_lm)
+boxplot(Y ~ treatment)
+```
+
+Now the intercept is the mean of group "low", and all the other coefficients are the differences between group "low" and the others. Another thing you can do is to put `-1` in the model to get rid of the intercept, and just have the means of each group as coefficients.
+
+
+```{r}
+cat_lm <- lm(Y ~ treatment - 1)
+summary(cat_lm)
+```
+
+Now, the three coefficients are the mean of the groups. 
+
+**Contrasting the coefficients** We can also look at contrasts; these are the difference between all pairs of groups. Load the package [multcomp](https://cran.r-project.org/web/packages/multcomp/index.html) and use `glht` (general linear hypotheses) to examine all pair-wise differences.
+
+```{r, message = FALSE, warning=F}
+library(multcomp)
+
+cont <- glht(cat_lm, linfct = mcp(treatment = "Tukey"))
+
+summary(cont)
+```
+
+Each line of this output compares two groups against one another. The first line, for example, compares the "high" group to the "low" group. So the difference between the means of the "high" and "low" groups is 1.84. The p-values and the confidence intervals given by` glht` control for multiple testing, which is handy. If you want to see the confidence intervals for the differences between the groups. 
+
+```{r}
+confint(cont)
+```
+
+Note: In a model with multiple covariates, the same rules still apply in terms of conditional and marginal interpretations of coefficients.
+<br><br>
+
+**Interpreting coefficients in generalised linear models** In linear models, the interpretation of model parameters is linear, as discussed above. For generalised linear models, now read the tutorial page on [interpreting coefficients in those models](http://environmentalcomputing.net/interpreting-coefficients-in-glms/).
+<br><br>
+
+**Author**: Gordana Popovic
+<br>
+Last updated:
+```{r, echo = F}
+date()
+```
+

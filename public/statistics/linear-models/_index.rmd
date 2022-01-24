@@ -1,0 +1,30 @@
+---
+weight: 2
+title: "Linear Models"
+output: html_document
+---
+
+These pages have some introductions to commonly used linear models that test the response of a continuous dependent variable against one or more predictor variables that may be continuous or categorical. Note that these are only named as different techniques (e.g., regression vs ANOVA) due to common usage in the literature that you will encounter - they all involve the same linear modelling framework.
+
+
+```{r,echo=F}
+Plant_height = read.csv(file = "data/Plant_Height.csv", header = TRUE)
+model <- lm(loght ~ temp, data = Plant_height)
+plot(loght ~ temp, data = Plant_height, col="darkgreen",xlab = "Temperature (C)", ylab = "log(Plant height)",pch=16)
+abline(model, col = "red")
+```
+
+* [Linear regression](http://environmentalcomputing.net/linear-regression/)
+* [Analysis of variance: single factor](http://environmentalcomputing.net/analysis-variance-single-factor/)
+* [Analysis of variance: factorial](http://environmentalcomputing.net/analysis-variance-factorial/)  
+* [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
+* [Interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
+
+<br><br>
+
+**Author**: Alistair Poore
+<br>
+Last updated:
+```{r,echo=F}
+date()
+```

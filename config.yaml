@@ -24,3 +24,8 @@ outputs:
     - JSON
 
 
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

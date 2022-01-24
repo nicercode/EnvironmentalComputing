@@ -1,0 +1,165 @@
+---
+weight: 3
+title: "Multilevel Models"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>First read our <a href="http://environmentalcomputing.net/meta-analysis-1">introduction to meta analysis</a> and become familiar with <a href="http://environmentalcomputing.net/meta-analysis-2">commonly used statistical models for meta-analysis</a>. Now, we consider more complex models.</p>
+<div id="more-complex-models" class="section level3">
+<h3>More complex models</h3>
+<p>Up to now, we have completely ignored non-independence among effect sizes. We assumed that we have one effect size from one study (or paper). But in reality, a paper usually contains multiple effect sizes. These effect sizes from the same studies are not independent of each other. Let’s consider a model where we have several effect sizes from single studies like our data set. First, I give you a math representation:</p>
+<p><span class="math display">\[\begin{equation}
+y_{ij}=b_0+s_i+u_{ij}+e_{ij}
+\\
+s_i\sim \mathcal{N}(0,\tau^2)\
+\\
+u_{ij}\sim \mathcal{N}(0,\sigma^2)\
+\\
+e_{ij}\sim \mathcal{N}(0,v_{ij})\
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(u_{ij}\)</span> is a deviation from <span class="math inline">\(s_i\)</span> (the within-study effect; the <span class="math inline">\(j\)</span>th effect size from the <span class="math inline">\(i\)</span>th study),it is normally distributed with <span class="math inline">\(\sigma^2\)</span> (other notations are comparable as above).</p>
+<p>We can visualize this (again Figure 4 from Nakagawa <em>et al.</em> 2017). And we can see why this model is called, a ‘multilevel’ meta-analytic model, an extension of the random-effects model.</p>
+<p><img src="Legend.png" width="228" /><img src="Multi.png" width="255" /></p>
+<p>We can fit an equivalent model using the function <code>rma.mv</code>. We need to add <code>paper</code> (the between-study effect) and <code>id</code> (different effect sizes; the within-study effect) in our data set to the multilevel model as random factors.</p>
+<pre class="r"><code>multilevel_m &lt;- rma.mv(yi = yi, V = vi, random = list(~1 | paper, ~1 | id), method = &quot;REML&quot;,
+    data = dat)
+summary(multilevel_m)</code></pre>
+<pre><code>## 
+## Multivariate Meta-Analysis Model (k = 102; method: REML)
+## 
+##   logLik  Deviance       AIC       BIC      AICc 
+##   7.1102  -14.2204   -8.2204   -0.3750   -7.9730   
+## 
+## Variance Components:
+## 
+##             estim    sqrt  nlvls  fixed  factor 
+## sigma^2.1  0.0015  0.0392     29     no   paper 
+## sigma^2.2  0.0248  0.1573    102     no      id 
+## 
+## Test for Heterogeneity:
+## Q(df = 101) = 769.0185, p-val &lt; .0001
+## 
+## Model Results:
+## 
+## estimate      se     zval    pval   ci.lb   ci.ub 
+##   0.2578  0.0222  11.6046  &lt;.0001  0.2142  0.3013  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>OK, this does not have <span class="math inline">\(I^2\)</span>. We have actually proposed a multilevel-model version of <span class="math inline">\(I^2\)</span> (Nakagawa &amp; Santos 2012), which, in this case, can be written as:</p>
+<p><span class="math display">\[\begin{equation}
+I^2=\frac{\tau^2+\sigma^2}{(\tau^2+\sigma^2+\bar{v})},
+\end{equation}\]</span></p>
+<p>Note that we do have <span class="math inline">\(\tau^2\)</span> and <span class="math inline">\(\sigma^2\)</span>, which are <code>sigma^2.1</code> and <code>sigma^2.2</code> in the output above, respectively. Using this formula, we have the total heterogeneity <span class="math inline">\(I^2\)</span> of 88.93% (the <span class="math inline">\(\bar{v} = 0.0033\)</span> for our data set; see Nakagawa &amp; Santos 2012 for how to get this). As you might expect, this value is nearly identical to what we got from the random-effect model (88.9%). But this model is better as we are explicitly dealing with non-independence arising from effect sizes from the same studies (although it turns out the problem is not completely solved…).</p>
+<p>As you could probably imagine, we can add more levels to this multilevel models. For example, we could add <code>genus</code> in the data set, as related species are probably more similar to each other. But it is better to model this taxonomic non-independence using phylogeny (which is the topic of the next section). Note that we can also run meta-regression using <code>rma.mv</code>; more complex models (different versions of a multilevel model) are explained in Nakagawa &amp; Santos (2012).</p>
+</div>
+<div id="phylogenetic-meta-analysis" class="section level3">
+<h3>Phylogenetic meta-analysis</h3>
+<p>As I just mentioned, we have, so far, also ignored another type of non-independence, i.e. phylogenetic relatedness. Chuck Darwin unfortunately (or fortunately) found out all species on earth are related so we need to deal with this issue.</p>
+<p>Actually, we just need to model phylogenetic non-independence by adding the degree of relatedness among species as a correlation matrix. The term, phylogeny or <code>phylo</code>, which we will create below, can be added as a random factor to a multilevel model.</p>
+<p>This means that we need a phylogenetic tree for our data set. For this data set, we have prepared a tree for you to download <a href="https://www.dropbox.com/s/d5pzkb9ezgx6798/tree_curtis1998.tre?dl=0">here</a>. But it is not that difficult to get a tree together by using the package called <code>rotl</code>.</p>
+<p>First install and load the package <a href="http://ape-package.ird.fr/">ape</a> that we will use to import the tree file and visualise the phylogeny.</p>
+<pre class="r"><code>library(ape)
+tree &lt;- read.tree(file = &quot;tree_curtis1998.tre&quot;)
+plot(tree, cex = 0.7)</code></pre>
+<p><img src="/statistics/meta-analysis/meta-analysis-3/_index_files/figure-html/prep1-1.png" width="672" /></p>
+<p>We can then make a correlation matrix (a relatedness matrix among species). I’ve skipped explantions of these operations - other than saying we have a correlation matrix to fit to the model</p>
+<pre class="r"><code>tree &lt;- compute.brlen(tree)
+cor &lt;- vcv(tree, cor = T)</code></pre>
+<p>We need a bit more preparation as we do have not a column which has the whole species names (we call it <code>phylo</code>). Also, it turns out that we need to correct some typos in <code>genus</code> and <code>species</code> columns in our data.</p>
+<pre class="r"><code>library(Hmisc)
+phylo &lt;- tolower(paste(dat$genus, dat$species, sep = &quot;_&quot;))
+# note: &#39;populusx_euramericana&#39; should be same as &#39;populus_euramericana&#39;
+phylo &lt;- gsub(&quot;populusx_euramericana&quot;, &quot;populus_euramericana&quot;, phylo)
+# these two species are the two different names of the same species
+phylo &lt;- gsub(&quot;nothofagus_fusca&quot;, &quot;fuscospora_fusca&quot;, phylo)
+phylo &lt;- capitalize(phylo)
+dat[, &quot;phylo&quot;] &lt;- phylo</code></pre>
+<p>We now have our phylogenetic correlation <code>cor</code> and a column with species names <code>phylo</code>, and can run our meta-analysis again with a phylogenetic effect.</p>
+<pre class="r"><code>phylo_m &lt;- rma.mv(yi = yi, V = vi, random = list(~1 | phylo, ~1 | paper, ~1 | id),
+    R = list(phylo = cor), method = &quot;REML&quot;, data = dat)
+summary(phylo_m)</code></pre>
+<pre><code>## 
+## Multivariate Meta-Analysis Model (k = 102; method: REML)
+## 
+##   logLik  Deviance       AIC       BIC      AICc 
+##   7.1102  -14.2204   -6.2204    4.2401   -5.8037   
+## 
+## Variance Components:
+## 
+##             estim    sqrt  nlvls  fixed  factor    R 
+## sigma^2.1  0.0000  0.0000     36     no   phylo  yes 
+## sigma^2.2  0.0015  0.0392     29     no   paper   no 
+## sigma^2.3  0.0248  0.1573    102     no      id   no 
+## 
+## Test for Heterogeneity:
+## Q(df = 101) = 769.0185, p-val &lt; .0001
+## 
+## Model Results:
+## 
+## estimate      se     zval    pval   ci.lb   ci.ub 
+##   0.2578  0.0222  11.6046  &lt;.0001  0.2142  0.3013  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>All this effort, there is no variation due to phylogeny! So we do not need this phylogeny term (i.e. <code>phylo</code>).</p>
+<p>Also, this multilevel model can be considered as a comparative phylogenetic method. There are quite a few things you need to know and to be careful of, which I cannot cover (e.g. we assumed that the Brownian-motion model of evolution in the model above - what does this even mean?). But Will and I have written a nice ‘primer’ so please read that primer – Cornwell &amp; Nakagawa (2017)</p>
+<p>Unfortunately, there are other types of non-independence from what covered here. We summaries all types in our recent paper – Noble et al. (2017). So read this as well if you are interested.</p>
+</div>
+<div id="complex-robust-models-the-last-section" class="section level3">
+<h3>Complex robust models (the last section!)</h3>
+<p>We have a multilevel version of the robust model too. It is easy to fit using the function <code>rma.mv</code> (we do not include <code>phylo</code> as it did not explain any variance).</p>
+<pre class="r"><code># you can put a marix or vector to W which is equivalent to &#39;weights&#39; in rma
+robustml_m &lt;- rma.mv(yi = yi, V = vi, W = wi, random = list(~1 | paper, ~1 | id),
+    method = &quot;REML&quot;, data = dat)
+summary(robustml_m)</code></pre>
+<pre><code>## 
+## Multivariate Meta-Analysis Model (k = 102; method: REML)
+## 
+##   logLik  Deviance       AIC       BIC      AICc 
+##   4.6819   -9.3639   -3.3639    4.4815   -3.1165   
+## 
+## Variance Components:
+## 
+##             estim    sqrt  nlvls  fixed  factor 
+## sigma^2.1  0.0015  0.0392     29     no   paper 
+## sigma^2.2  0.0248  0.1573    102     no      id 
+## 
+## Test for Heterogeneity:
+## Q(df = 101) = 769.0185, p-val &lt; .0001
+## 
+## Model Results:
+## 
+## estimate      se    zval    pval   ci.lb   ci.ub 
+##   0.2088  0.0483  4.3200  &lt;.0001  0.1141  0.3036  *** 
+## 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>I think this is the model we have been looking for, i.e. our final model. At least for this data set.</p>
+</div>
+<div id="further-help-references" class="section level2">
+<h2>Further help (references)</h2>
+<p>Any questions? Or email me (s(-dot-)nakagawa(-at-)unsw(-dot-)edu(-dot-)au). Also visit our <a href="http://www.i-deel.org/">website</a></p>
+<p>Go to the metafor package’s <a href="http://www.metafor-project.org/doku.php">website</a>. There you find many worked examples.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Cornwell, W., and S. Nakagawa. 2017. Phylogenetic comparative methods. <em>Current Biology</em> 27:R333-R336.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Nakagawa, S., D. W. A. Noble, A. M. Senior, and M. Lagisz. 2017. Meta-evaluation of meta-analysis: ten appraisal questions for biologists. <em>BMC Biology</em> 15:18.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Nakagawa, S., and E. S. A. Santos. 2012. Methodological issues and advances in biological meta-analysis. <em>Evolutionary Ecology</em> 26:1253-1274.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Noble, D. W. A., M. Lagisz, R. E. O’Dea, and S. Nakagawa. 2017. Nonindependence and sensitivity analyses in ecological and evolutionary meta-analyses. <em>Molecular Ecology</em> 26:2410-2425.
+</p>
+<p><strong>Authors</strong>: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Mon Jan 24 13:04:16 2022&quot;</code></pre>
+</div>

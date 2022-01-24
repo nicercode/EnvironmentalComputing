@@ -1,8 +1,0 @@
-Mixed models are those with a mixture of fixed and random effects. Random effects are categorical factors where the levels have been selected from many possible levels and the investigator would like to make inferences beyond just the levels chosen. Tricky concept, but imagine contrasting two habitat types (forest and grassland) by sampling five sites within each, and five replicate measures within each site. Habitat type is a fixed factor with the researcher only interested in those two levels of habitat type. If the five sites were chosen from a larger collection of possible sites, then site is considered a random effect with 10 levels.
-
-* [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/): Linear mixed models with one random effect  
-* [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/): Linear mixed models with several random effects  
-* [Mixed models 3](http://environmentalcomputing.net/mixed-models-3/): Generalised linear mixed models
-
-![](Mixed_models_intro_image.jpg)
-Photo: N. Murray

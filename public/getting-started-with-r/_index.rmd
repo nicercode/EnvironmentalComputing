@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 2
 title: "Getting Started with R"
 output: html_document
 ---
@@ -10,11 +10,11 @@ Before you get started with making graphics and doing analyses, you will need to
 
 * [Install R and learn the basics of using R](http://environmentalcomputing.net/getting-started-with-r/)  
 * Think about [project management](http://environmentalcomputing.net/basic-project-management) to plan how you are going to organise your files 
-<br>
+ 
 
 ### Data entry
 
-![](/images/Sampling.jpg)
+![](images/Sampling.jpg)
 
 
 After collecting data, being able to enter those data and import into various software packages are obviously essential skills for students and researchers in the environmental sciences. You might think that you just write the numbers in a spreadsheet package and open that file in another piece of software, but there is actually quite a bit to be learnt about tidy ways to enter the data and import that data without errors.
@@ -25,15 +25,15 @@ On these pages, we give some guidance for data entry that will save a lot of tim
 * [Importing data](http://environmentalcomputing.net/importing-data/) into R  
 * [Data types and structure](http://environmentalcomputing.net/data-types-and-structure/) - better understanding data objects in R  
 
-![](Data_entry_image.jpg)
+![](data-entry/Data_entry_image.jpg)
 
 ### Further help
-<br>
+ 
 The British Ecological Society's [Guide to Data Management in Ecology and Evolution](http://www.britishecologicalsociety.org/wp-content/uploads/Publ_Data-Management-Booklet.pdf)
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

@@ -1,0 +1,221 @@
+---
+weight: 5
+title: "Generalised Additive Models (GAMs)"
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Many data in the environmental sciences do not fit simple linear models and are best described by “wiggly models”, also known as Generalised Additive Models (GAMs).</p>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
+<p>Let’s start with a famous <a href="https://twitter.com/ucfagls/status/842444686513991680">tweet</a> by one Gavin Simpson, which amounts to:<br />
+1. GAMs are just GLMs<br />
+2. GAMs fit wiggly terms<br />
+3. use <code>+ s(x)</code> not <code>x</code> in your syntax<br />
+4. use <code>method = "REML"</code><br />
+5. always look at <code>gam.check()</code></p>
+<p>This is basically all there is too it - an extension of <a href="http://environmentalcomputing.net/generalised-linear-models/">generalised linear models (GLMs)</a> with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say <code>lmer</code> or <code>glmer</code>, but we use them all the time without reservation!</p>
+<div id="gams-in-a-nutshell" class="section level3">
+<h3>GAMs in a nutshell</h3>
+<p>Let’s start with an equation for a Gaussian <a href="http://environmentalcomputing.net/linear-regression/">linear model</a>:
+<span class="math display">\[y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
+What changes in a GAM is the presence of a smoothing term:
+<span class="math display">\[y = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
+This simply means that the contribution to the linear predictor is now some function <span class="math inline">\(f\)</span>. This is not that dissimilar conceptually to using a quadratic (<span class="math inline">\(x_1^2\)</span>) or cubic term (<span class="math inline">\(x_1^3\)</span>) as your predictor.</p>
+<p>The function <span class="math inline">\(f\)</span> can be something more funky or kinky - here, we’re going to focus on splines. In the old days, it might have been something like piecewise linear functions.</p>
+<p>You can have combinations of linear and smooth terms in your model, for example
+<span class="math display">\[y = \beta_0 + x_1\beta_1 + f(x_2) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
+or we can fit generalised distributions and random effects, for example
+<span class="math display">\[ln(y) = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim Poisson(\lambda)\]</span>
+<span class="math display">\[ln(y) = \beta_0 + f(x_1) + z_1\gamma + \varepsilon, \quad \varepsilon \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)\]</span></p>
+</div>
+<div id="a-simple-example" class="section level3">
+<h3>A simple example</h3>
+<p>Lets try a simple example. First, let’s create a data frame and fill it with some simulated data with an obvious non-linear trend and compare how well some models fit to that data.</p>
+<pre class="r"><code>x &lt;- seq(0, pi * 2, 0.1)
+sin_x &lt;- sin(x)
+y &lt;- sin_x + rnorm(n = length(x), mean = 0, sd = sd(sin_x / 2))
+Sample_data &lt;- data.frame(y,x)</code></pre>
+<pre class="r"><code>library(ggplot2)
+ggplot(Sample_data, aes(x, y)) + geom_point()</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Try fitting a normal linear model:</p>
+<pre class="r"><code>lm_y &lt;- lm(y ~ x, data = Sample_data)</code></pre>
+<p>and plotting the fitted line with data using <code>geom_smooth</code> in <code>ggplot</code></p>
+<pre class="r"><code>ggplot(Sample_data, aes(x, y)) + geom_point() + geom_smooth(method = lm)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Looking at the plot or <code>summary(lm_y)</code>, you might think the model fits nicely, but look at the residual plot - eek!</p>
+<pre class="r"><code>plot(lm_y, which = 1)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Clearly, the residuals are not evenly spread across values of <span class="math inline">\(x\)</span>, and we need to consider a better model.</p>
+</div>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p>Before we consider a GAM, we need to load the package <a href="https://cran.r-project.org/web/packages/mgcv/index.html">mgcv</a> - <em>the</em> choice for running GAMs in R.</p>
+<pre class="r"><code>library(mgcv)</code></pre>
+<p>To run a GAM, we use:</p>
+<pre class="r"><code>gam_y &lt;- gam(y ~ s(x), method = &quot;REML&quot;)</code></pre>
+<p>To extract the fitted values, we can use <code>predict</code> just like normal:</p>
+<pre class="r"><code>x_new &lt;- seq(0, max(x), length.out = 100)
+y_pred &lt;- predict(gam_y, data.frame(x = x_new))</code></pre>
+<p>But for simple models, we can also utilise the <code>method =</code> argument in <code>geom_smooth</code>, specifying the model formula.</p>
+<pre class="r"><code>ggplot(Sample_data, aes(x, y)) + geom_point() + geom_smooth(method = &quot;gam&quot;, formula = y ~s(x))</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>You can see the model is better fit to the data, but always check the diagnostics.</p>
+<p><code>check.gam</code> is quick and easy to view the residual plots.</p>
+<pre class="r"><code>par(mfrow = c(2,2))
+gam.check(gam_y)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre><code>## 
+## Method: REML   Optimizer: outer newton
+## full convergence after 6 iterations.
+## Gradient range [-4.949037e-10,3.945209e-10]
+## (score 31.82689 &amp; scale 0.1156574).
+## Hessian positive definite, eigenvalue range [2.264662,30.7132].
+## Model rank =  10 / 10 
+## 
+## Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
+## indicate that k is too low, especially if edf is close to k&#39;.
+## 
+##        k&#39;  edf k-index p-value
+## s(x) 9.00 5.91    1.15    0.83</code></pre>
+<p>Using <code>summary</code> with the model object will give you the significance of the smooth term (along with any parametric terms, if you’ve included them), along with the variance explained. In this example, a pretty decent fit. The ‘edf’ is the estimated degrees of freedom - essentially, the larger the number, the more wiggly the fitted model. Values of around 1 tend to be close to a linear term. You can read about penalisation and shrinkage for more on what the edf reflects.</p>
+<pre class="r"><code>summary(gam_y)</code></pre>
+<pre><code>## 
+## Family: gaussian 
+## Link function: identity 
+## 
+## Formula:
+## y ~ s(x)
+## 
+## Parametric coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  0.06261    0.04285   1.461     0.15
+## 
+## Approximate significance of smooth terms:
+##        edf Ref.df     F p-value    
+## s(x) 5.907  7.066 39.11  &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## R-sq.(adj) =  0.816   Deviance explained = 83.4%
+## -REML = 31.827  Scale est. = 0.11566   n = 63</code></pre>
+</div>
+<div id="smooth-terms" class="section level3">
+<h3>Smooth terms</h3>
+<p>As mentioned above, we’ll focus on splines, as they are the smooth functions that are most commonly implemented (and are pretty quick and stable). So what was actually going on when we specified <code>s(x)</code>?</p>
+<p>Well, this is where we say we want to fit <span class="math inline">\(y\)</span> as a linear function of some set of functions of <span class="math inline">\(x\)</span>. The default in <code>mgcv</code> is a thin plate regression spline - the two common ones you’ll probably see are these, and cubic regression splines. Cubic regression splines have the traditional <em>knots</em> that we think of when we talk about splines - they’re evenly spread across the covariate range in this case. We’ll just stick to thin plate regression splines, since I figure Simon made them the default for a reason,</p>
+<p><strong>Basis functions</strong>
+OK, so here’s where we see what the wiggle bit is really made of. We’ll start with the fitted model, then we’ll look at it from first principles (not really). Remembering that the smooth term is the sum of some number of functions (I’m not sure how well this equation really represents the smooth term, but you get the point),
+<span class="math display">\[f(x_1) = \sum_{j=1}^kb_j(x_1)\beta_j\]</span>
+First we extract the set of <em>basis functions</em> (that is, the <span class="math inline">\(b_j(x_j)\)</span> part of the smooth term). Then we can plot say the first and second basis functions.</p>
+<pre class="r"><code>model_matrix &lt;- predict(gam_y, type = &quot;lpmatrix&quot;)
+plot(y ~ x)
+abline(h = 0)
+lines(x, model_matrix[, &quot;s(x).1&quot;], type = &quot;l&quot;, lty = 2)
+lines(x, model_matrix[, &quot;s(x).2&quot;], type = &quot;l&quot;, lty = 2)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Let’s plot all of the basis functions now, and then add that to the predictions from the GAM (<code>y_pred</code>) on top again.</p>
+<pre class="r"><code>plot(y ~ x)
+abline(h = 0)
+
+x_new &lt;- seq(0, max(x), length.out = 100)
+y_pred &lt;- predict(gam_y, data.frame(x = x_new)) 
+
+matplot(x, model_matrix[,-1], type = &quot;l&quot;, lty = 2, add = T)
+lines(y_pred ~ x_new, col = &quot;red&quot;, lwd = 2)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Now, it’s difficult at first to see what has happened, but it’s easiest to think about it like this - each of those dotted lines represents a function (<span class="math inline">\(b_j\)</span>) for which <code>gam</code> estimates a coefficient (<span class="math inline">\(\beta_j\)</span>), and when you sum them you get the contribution for the corresponding <span class="math inline">\(f(x)\)</span> (i.e. the previous equation). It’s nice and simple for this example, because we model <span class="math inline">\(y\)</span> only as a function of the smooth term, so it’s fairly relatable. As an aside, you can also just use <code>plot.gam</code> to plot the smooth terms.</p>
+<pre class="r"><code>plot(gam_y)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>OK, now let’s look a little closer at how the basis functions are constructed. You’ll see that the construction of the functions is separate to the response data. Just to prove it, we’ll use <code>smoothCon</code>.</p>
+<pre class="r"><code>x_sin_smooth &lt;- smoothCon(s(x), data = data.frame(x), absorb.cons = TRUE) 
+X &lt;- x_sin_smooth[[1]]$X
+
+par(mfrow = c(1,2))
+matplot(x, X, type = &quot;l&quot;, main = &quot;smoothCon()&quot;)
+matplot(x, model_matrix[,-1], type = &quot;l&quot;, main = &quot;predict(gam_y)&quot;)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>And now to prove that you can go from the basis functions and the estimated coefficients to the fitted smooth term. Again note that this is simplified here because the model is just one smooth term. If you had more terms, we would need to add up all of the terms in the linear predictor.</p>
+<pre class="r"><code>betas &lt;- gam_y$coefficients
+linear_pred &lt;- model_matrix %*% betas
+
+par(mfrow = c(1,2))
+plot(y ~ x, main = &quot;manual from basis/coefs&quot;)
+lines(linear_pred ~ x, col = &quot;red&quot;, lwd = 2)
+plot(y ~ x, main = &quot;predict(gam_y)&quot;)
+lines(y_pred ~ x_new, col = &quot;red&quot;, lwd = 2)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Out of interest, take a look at the following plot, remembering that <code>X</code> is the matrix of basis functions.</p>
+<pre class="r"><code>par(mfrow = c(1,2))
+plot(y ~ x)
+plot(y ~ rowSums(X))</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Not so scary huh? Of course this is not quite the whole story - see <code>gam.models</code> and <code>smooth.terms</code> to see all of the options for types of smoothers, how the basis functions are constructed (penalisation etc.), types of models we can specify (random effects, linear functionals, interactions, penalisation) plus much more.</p>
+</div>
+<div id="a-quick-real-example" class="section level2">
+<h2>A quick real example</h2>
+<p><img src="Mauna_Loa.jpg" /></p>
+<p>We’ll now look at a quick real example - we’ll just scratch the surface, and in a future We’ll now look at a quick real example - we’ll just scratch the surface, and in a future tutorial we will look at it in more detail. We’re going to look at some CO<span class="math inline">\(_2\)</span> data from Manua Loa. We will fit a couple GAMs to the data to try and pick apart the intra- and inter-annual trends.</p>
+<p>First load the data - you can download it <a href="http://environmentalcomputing.net/wp-content/uploads/2017/10/manua_loa_co2.csv">here</a>.</p>
+<pre class="r"><code>CO2 &lt;- read.csv(&quot;mauna_loa_co2.csv&quot;)</code></pre>
+<p>We want to look at inter-annual trend first, so let’s convert the date into a continuous time variable (take a subset for visualisation).</p>
+<pre class="r"><code>CO2$time &lt;- as.integer(as.Date(CO2$Date, format = &quot;%d/%m/%Y&quot;))
+CO2_dat &lt;- CO2
+CO2 &lt;- CO2[CO2$year %in% (2000:2010),]</code></pre>
+<p>OK, so let’s plot it and look at a smooth term for time.
+<span class="math display">\[y = \beta_0 + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span></p>
+<pre class="r"><code>ggplot(CO2_dat, aes(time, co2)) + geom_line()</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>We can fit a GAM for these data using:</p>
+<pre class="r"><code>CO2_time &lt;- gam(co2 ~ s(time), data = CO2, method = &quot;REML&quot;)</code></pre>
+<p>which fits a model with a single smooth term for time. We can look at the predicted values for this:</p>
+<pre class="r"><code>plot(CO2_time)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Note how the smooth term actually reduces to a ‘normal’ linear term here (with an edf of 1) - that’s the nice thing about penalised regression splines. But if we check the model, then we see something is amuck.</p>
+<pre class="r"><code>par(mfrow = c(2,2))
+gam.check(CO2_time)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>The residual plots have a very odd looking rise-and-fall pattern - clearly there is some dependance structure (and we can probably guess it has something to do with intra-annual fluctuations). Let’s try again, and introduce something called a cyclical smoother.
+<span class="math display">\[y = \beta_0 + f_{\mathrm{intrannual}}(month) + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
+The cyclical smooth term, <span class="math inline">\(f_{\mathrm{intrannual}}(month)\)</span>, is comprised of basis functions just the same as we have seen already, except that the end points of the spline are constrained to be equal - which makes sense when we’re modelling a variable that is cyclical (across months/years).</p>
+<p>We’ll now see the <code>bs =</code> argument to choose the type of smoother, and the <code>k =</code> argument to choose the number of knots, because cubic regression splines have a set number of knots. We use 12 knots, because there are 12 months.</p>
+<pre class="r"><code>CO2_season_time &lt;- gam(co2 ~ s(month, bs = &#39;cc&#39;, k = 12) + s(time), data = CO2, method = &quot;REML&quot;)</code></pre>
+<p>Let’s look at the fitted smooth terms:</p>
+<pre class="r"><code>par(mfrow = c(1,2))
+plot(CO2_season_time)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Looking at both smooth terms, we can see that the monthly smoother is picking up that monthly rise and fall of CO<span class="math inline">\(_2\)</span> - looking at the relative magnitudes (i.e. monthly fluctuation vs. long-term trend), we can see how important it is to disintangle the components of the time series. Let’s see how the model diagnostics look now:</p>
+<pre class="r"><code>par(mfrow = c(2,2))
+gam.check(CO2_season_time)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Much better. Let’s look at how the seasonal component stacks up against the full long term trend.</p>
+<pre class="r"><code>CO2_season_time &lt;- gam(co2 ~ s(month, bs = &#39;cc&#39;, k = 12) + s(time), data = CO2_dat, method = &quot;REML&quot;)
+par(mfrow = c(1,2))
+plot(CO2_season_time)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>There’s more to the story - pephaps spatial autocorrelations of some kind? <code>gam</code> can make use of the spatial autocorrelation structures available in the <code>nlme</code> package, more on that next time. Hopefully for the meantime GAMs now don’t seem qutie so scary or magical, and you can start to make use of what is really an inrecibly flexible and powerful modelling framework.</p>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p>You can essentially present model results from a GAM as if it were any other linear model, the main difference being that for the smooth terms, there is no single coefficient you can make inference from (i.e. negative, positive, effect size etc.). So you need to rely on either interpretting the parital effects of the smooth terms visually (e.g. from a call to <code>plot(gam_model)</code>) or make inference from the predicted values. You can of course include normal linear terms in the model (either continuous or categorical, and in an ANOVA type framework even) and make inference from them like you normally would. Indeed, GAMs are often useful for accounting for a non-linear phenomonon that is not directly of interest, but needs to be acocunted for when making inferece about other variables.</p>
+<p>You can plot the partial effects by calling the <code>plot</code> function on a fitted gam model, and you can look at the parametric terms too, possibly using the <code>termplot</code> function too. You can use <code>ggplot</code> for simple models like we did earlier in this tutorial, but for more complex models, it’s good to know how to make the data using <code>predict</code>. We just use the existing time-series here, but you would generate your own data for the <code>newdata=</code> argument.</p>
+<pre class="r"><code>CO2_pred &lt;- data.frame(time = CO2_dat$time,
+                       co2 = CO2_dat$co2,
+                       predicted_values = predict(CO2_season_time, newdata = CO2_dat))
+ggplot(CO2_pred, aes(x = time)) +
+  geom_point(aes(y = co2), size = 1, alpha = 0.5) + geom_line(aes(y = predicted_values), colour = &quot;red&quot;)</code></pre>
+<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>The R help <code>?gam</code> is very good, and there is masses of information to read
+Check out <code>?gamm</code>, <code>?gamm4</code> and <code>?bam</code>
+Use <code>citation("mgcv")</code> for a range of papers with more technical explanations - the book on GAMs with R is particularly good (there’s a 2017 version)
+A great blog with lots of stuff on GAMs: <a href="https://www.fromthebottomoftheheap.net/" class="uri">https://www.fromthebottomoftheheap.net/</a></p>
+<p><strong>Author</strong>: Mitchell Lyons</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 2022&quot;</code></pre>
+</div>
+</div>

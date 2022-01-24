@@ -1,0 +1,155 @@
+---
+weight: 3
+title: "Interpreting GLMs"
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.</p>
+<p>For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for <a href="http://environmentalcomputing.net/generalised-linear-models-1/">binary</a> and <a href="http://environmentalcomputing.net/generalised-linear-models-1/">count</a> data page on <a href="http://environmentalcomputing.net/how-to-interpret-linear-models/">interpreting coefficients in linear models</a>.</p>
+<div id="poisson-and-negative-binomial-glms" class="section level3">
+<h3>Poisson and negative binomial GLMs</h3>
+<p>In Poisson and negative binomial glms, we use a log link. The actual model we fit with one covariate <span class="math inline">\(x\)</span> looks like this</p>
+<p><span class="math display">\[ Y \sim \text{Poisson} (\lambda) \]</span>
+<span class="math display">\[  log(\lambda) = \beta_0 + \beta_1 x \]</span></p>
+<p>here <span class="math inline">\(\lambda\)</span> is the mean of Y. So if we have an initial value of the covariate <span class="math inline">\(x_0\)</span>, then the predicted value of the mean <span class="math inline">\(\lambda_0\)</span> is given by</p>
+<p><span class="math display">\[  log(\lambda_0) = \beta_0 + \beta_1 x_0 \]</span></p>
+<p>If we now increase the covariate by 1, we get a new mean <span class="math inline">\(\lambda_1\)</span>,</p>
+<p><span class="math display">\[  log(\lambda_1) = \beta_0 + \beta_1 (x_0 +1) = \beta_0 + \beta_1 x_0 +\beta_1 = log(\lambda_0) + \beta_1\]</span></p>
+<p>So the log of the mean of Y increases by <span class="math inline">\(\beta_1\)</span> when we increase x by 1. But we are not really interested in how the log mean changes, we would like to know on average how Y changes. If we take the exponential of both sides</p>
+<p><span class="math display">\[  \lambda_1 = \lambda_0 exp(\beta_1)\]</span></p>
+<p>So the mean of Y is multiplied by <span class="math inline">\(exp( \beta_1 )\)</span> when we increase <span class="math inline">\(x\)</span> by 1 unit.</p>
+<pre class="r"><code>N &lt;- 120
+x &lt;- rnorm(N)
+mu &lt;- exp(1+0.2*x)
+Y &lt;- rpois(N, lambda = mu)
+glm1 &lt;- glm(Y~x, family = poisson)
+glm1$coefficients</code></pre>
+<pre><code>## (Intercept)           x 
+##   0.9294763   0.2079128</code></pre>
+<pre class="r"><code>exp(glm1$coefficients[2])</code></pre>
+<pre><code>##        x 
+## 1.231106</code></pre>
+<p>So here increasing <span class="math inline">\(x\)</span> by 1 unit multiplies the mean value of Y by <span class="math inline">\(exp( \beta_1 ) = 1.25\)</span>. The same thing is true for negative binomial glms as they have the same link function.</p>
+</div>
+<div id="binomial-glms" class="section level3">
+<h3>Binomial GLMs</h3>
+<div id="logistic-regression" class="section level4">
+<h4>Logistic regression</h4>
+<p>Things become much more complicated in binomial glms. The model here is actually a model of log odds, so we need to start with an explanation of those. The odds of an event are the probability success divided by the probability of failure. So if the probability of success is <span class="math inline">\(p\)</span> then the odds are:</p>
+<p><span class="math display">\[\text{Odds} = \frac{p}{1-p} \]</span></p>
+<p>As p increases, so do the odds. The equation for a logistic regression looks like this:</p>
+<p><span class="math display">\[ Y \sim \text{binomial} (p) \]</span>
+<span class="math display">\[  log\left(\frac{p}{1-p}\right)  =  \beta_0 + \beta_1 x \]</span></p>
+<p>Skipping some maths that is very similar to the above, we can obtain an interpretation for the coefficient of <span class="math inline">\(x\)</span> in the model in terms of the odds. When we increase <span class="math inline">\(x\)</span> by one unit the odds are multiplied by <span class="math inline">\(exp( \beta_1 )\)</span>. Odds are not the most intuitive thing to interpret, but they do increase when p increases, so that if your coefficient <span class="math inline">\(\beta_1\)</span> is positive, increasing <span class="math inline">\(x\)</span> will increase your probability.</p>
+<pre class="r"><code>bY &lt;- Y&gt;0 #turning counts into presence absence
+bin1 &lt;- glm(bY~x,family = binomial)
+summary(bin1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = bY ~ x, family = binomial)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4717   0.2731   0.3437   0.4443   0.7586  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   2.6882     0.4023   6.683 2.35e-11 ***
+## x             0.6293     0.3803   1.655   0.0979 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 63.932  on 119  degrees of freedom
+## Residual deviance: 60.975  on 118  degrees of freedom
+## AIC: 64.975
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<p>So when we increase <span class="math inline">\(x\)</span> by one unit, the odds of Y are multiplied by <span class="math inline">\(exp( \beta_1 ) = 2.11\)</span></p>
+</div>
+<div id="complementary-log-log" class="section level4">
+<h4>Complementary log-log</h4>
+<p>Possibly a more intuitive model is a binomial regression with a complementary log-log link function. This link function is based on the assumption that you have some counts, which are Poisson distributed, but you’ve decided to turn them into presence/absence.</p>
+<p><span class="math display">\[ Y \sim \text{binomial} (p) \]</span>
+<span class="math display">\[  log(-log(1-p)) = \beta_0 + \beta_1 x \]</span></p>
+<p>In that case you can interpret your coefficients in a similar way as the Poisson regression. When you increase <span class="math inline">\(x\)</span> by 1, the mean of your underlying count (which you have turned into presence/absence) is multiplied by <span class="math inline">\(exp( \beta_1 )\)</span>.</p>
+<pre class="r"><code>library(mvabund)
+bin2 &lt;- manyglm(bY~x, family = binomial(link = &quot;cloglog&quot;))
+coef(bin2)</code></pre>
+<pre><code>##                    bY
+## (Intercept) 1.0034863
+## x           0.2435299</code></pre>
+<p>The interpretation is now the same as in the Poisson case, when we increase <span class="math inline">\(x\)</span> by 1, the mean of the underlying count is multiplied by <span class="math inline">\(exp( \beta_1 )\)</span>.</p>
+</div>
+<div id="log-binomial-model" class="section level4">
+<h4>Log binomial model</h4>
+<p>It is possible to use a log link function with the binomial distribution <code>family = binomial(link = log)</code>. In this case you can interpret the coefficients as multiplying the probabilities by <span class="math inline">\(exp( \beta_1 )\)</span>, however these models can give you predicted probabilities greater than 1, and often don’t converge (don’t give an answer).</p>
+</div>
+</div>
+<div id="offsets" class="section level3">
+<h3>Offsets</h3>
+<p>Sometimes we know the effect of a particular variable (call it <span class="math inline">\(z\)</span>) on the response is proportional, so that when we double <span class="math inline">\(z\)</span> we expect the response to double on average. The most common time you see this is with sampling intensity.</p>
+<p><img src="glm_coefficients_image.jpg" /></p>
+<p>If you sample soil and count critters, all other things being equal, you would expect twice the critters in twice the amount of soil. If you have a variable like this it is tempting to divide your response (count) by the amount of soil to standardise the data. Unfortunately this will take counts, which we know how to model with glms, and turn them into something we do not know how to model. Fortunately this situation is easily dealt with using offsets. First, let’s simulate some data for amount of soil, depth (our predictor variable) and count data (with a poisson distribution) where the couunts depend on how much soil was sampled.</p>
+<pre class="r"><code>soil &lt;- exp(rbeta(N, shape1 = 8, shape2 = 1))
+depth &lt;- rnorm(N)
+mu &lt;- soil*exp(0.5+0.5*depth)
+count &lt;- rpois(N, lambda = mu)</code></pre>
+<p>Now, we can model counts with depth as our predictor and soil quantity as an offset.</p>
+<pre class="r"><code>off_mod &lt;- glm(Y~depth+offset(log(soil)), family = poisson)
+summary(off_mod)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Y ~ depth + offset(log(soil)), family = poisson)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4292  -0.5598  -0.1631   0.4918   2.7799  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)  0.05444    0.05689   0.957    0.339
+## depth       -0.05346    0.05635  -0.949    0.343
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 132.38  on 119  degrees of freedom
+## Residual deviance: 131.49  on 118  degrees of freedom
+## AIC: 447.13
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations <a href="http://environmentalcomputing.net/how-to-interpret-linear-models/">here</a>. The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you’re not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response.</p>
+<pre class="r"><code>coef_mod &lt;- glm(Y~depth+log(soil), family = poisson)
+summary(coef_mod)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Y ~ depth + log(soil), family = poisson)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4018  -0.6221  -0.1937   0.4344   1.9682  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  1.61229    0.48329   3.336  0.00085 ***
+## depth       -0.04786    0.05650  -0.847  0.39695    
+## log(soil)   -0.75103    0.54487  -1.378  0.16809    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 124.53  on 119  degrees of freedom
+## Residual deviance: 121.90  on 117  degrees of freedom
+## AIC: 439.54
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>The coefficient the model estimated is close to 1, which would be equivalent to an offset.</p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:30 2022&quot;</code></pre>
+</div>

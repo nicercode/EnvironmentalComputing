@@ -6,54 +6,5 @@
     <description>Recent content in Getting Started with R on Environmental Computing</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language><atom:link href="/getting-started-with-r/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Installing R and R Studio</title>
-      <link>/getting-started-with-r/installing_r_rstudio/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/getting-started-with-r/installing_r_rstudio/</guid>
-      <description>We recommend using R Studio as a user friendly interface for using R.
-First, install the latest version of R - download from here
-Second, install the latest version of R Studio - download from here Setting the working directory 
-Once you have installed R and R Studio, you need to set the working directory. This is the location on your computer where any data files to imported can be found, and where any R scripts (the files that save your code) will be saved.</description>
-    </item>
-    
-    <item>
-      <title>Basic Project Management</title>
-      <link>/getting-started-with-r/project_managment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/getting-started-with-r/project_managment/</guid>
-      <description>Having your data files, R scripts and outputs organised is very helpful for keeping track of what you are working on and for sharing data or scripts with colleagues or supervisors. Try and avoid a folder on your computer that is a big mix of spreadsheets, images, word processing documents etc. How you organise your files is your choice, but a little bit of planning and project organization at the beginning will pay lots of dividends down the road.</description>
-    </item>
-    
-    <item>
-      <title>Data Entry</title>
-      <link>/getting-started-with-r/data_entry/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/getting-started-with-r/data_entry/</guid>
-      <description>Data is the life-blood of science. As part of the scientific process, we invest an enormous amount of time collecting, analysing and presenting data. Before we can analyse data, however, we typically need to get it into a format that can be interpreted by others, and more importantly by the software used for analysis. Do this well and you can save yourself a lot of time; do this badly and you may end up wasting considerable time ‘cleaning’ and structuring the data to make it usable.</description>
-    </item>
-    
-    <item>
-      <title>Importing Data</title>
-      <link>/getting-started-with-r/importing-data/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/getting-started-with-r/importing-data/</guid>
-      <description>Before we can run any data analyses or create figures in R, we need to import that data into R. Preparing and cleaning the data for analyses is essential and often more time consuming than the statistical analyses themselves. It is unusual for raw data to be in the correct format and without errors. Data cleaning is the process of identifying and fixing any problems so data can be analysed easily.</description>
-    </item>
-    
-    <item>
-      <title>Data Types &#43; Structure</title>
-      <link>/getting-started-with-r/data_types_structure/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/getting-started-with-r/data_types_structure/</guid>
-      <description>One of the most common sources of frustration for beginners in R is dealing with different data structures and types. Here is an overview of the most important data structures, types and how to check and manipulate them.
-The terms ‘structure’ and ‘type’ are often used interchangable. To avoid confusion, for this help page, data structure refers whether the data is a vector, matrix or data frame etc. and type refers to whether the data or variable is an integer, character or numeric etc.</description>
-    </item>
-    
   </channel>
 </rss>

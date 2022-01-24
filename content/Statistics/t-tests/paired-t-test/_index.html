@@ -1,0 +1,87 @@
+---
+weight: 3
+title: "Paired T-test"
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Paired <em>t</em>-tests are used to compare the means of two groups of measurements when individual objects are measured twice, once for each type of measurement. Data could be paired in various ways: if the same measure is taken from a single object in two different treatments or at two different times, or if different types of measures are being contrasted from the same object.</p>
+<p><img src="Paired_t_test_image.jpg" /></p>
+<p>For example, to contrast the photosynthetic performance of ten plants in two environments in a greenhouse (shady and sunny), we could measure performance in each individual plant twice, once in the shade and once in the sun. The measures are paired by belonging to the same individual plant.</p>
+<p>For this experimental design, we would use a paired <em>t</em>-test to compare the measurements taken in the two environments. The 20 individual measurements are not independent of each other because we would expect the pair of measurements taken from the same individual to be more similar to each other than if randomly sampled from all available plants. We are thus unable to use an <a href="http://environmentalcomputing.net/two-sample-t-test/">independent samples <em>t</em> test</a> - that test would be appropriate if each plant was used only once, with some plants measured in the shady treatment and different set of plants measured in the sunny treatment.</p>
+<p>Pairing data like this is usually done to reduce the likely variation among measurements with the aim of better detecting differences between groups. In this example, the difference between the two measures of photosynthetic performance on a given plant should reflect mostly the effect of sunlight, while in an independent samples design, the difference between a plant in the shade and another plant in the sun will reflect both differences in the effects of sunlight and differences between the individual plants.</p>
+<p>For a paired <em>t</em>-test, the test statistic, <em>t</em> is:</p>
+<p><span class="math display">\[t = \frac{\bar{d}}{SE_{d}}\]</span></p>
+<p>Where the <span class="math inline">\(\bar{d}\)</span> is the mean of the differences between values for each pair, and <em>SE<sub>d</sub></em> is the standard error of that set of differences.</p>
+<p>Note that this equation is identical to a <a href="http://environmentalcomputing.net/one-sample-t-test/">One sample <em>t</em>-test</a>, used to contrast any sample mean (<span class="math inline">\(\bar{x}\)</span>) to a known population mean (<span class="math inline">\(\mu\)</span>) or hypothesised value. What you are doing here is testing whether your sample of differences is likely to have come from a population of differences that have a mean of zero (another way of saying that your groups are the same).</p>
+<p><span class="math display">\[t = \frac{\bar{x}-\mu}{SE}\]</span>
+<br><br></p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><br>
+The test statistic <em>t</em> is relatively straightforward to calculate manually. The test statistic can then checked against a <em>t</em> distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true. In R, to calculate the probability associated with a given value of <em>t</em> use:</p>
+<pre class="r"><code>pt(q, df = your.df, lower.tail = FALSE)*2</code></pre>
+<p>where <em>q</em> is your value of t, <em>your.df</em> is the degrees of freedom (the number of pairs-1). The <code>lower.tail = FALSE</code> ensures that you are calculating the probability of getting a <em>t</em> value larger than yours (i.e the upper tail, P[X &gt; x]). Note that the critical value for <em>t</em> (<span class="math inline">\(\alpha = 0.05\)</span>) varies depending on the number of degrees of freedom - larger degrees of freedom = smaller critical value of <em>t</em>.</p>
+<p>The <code>t.test</code> function gives you the test statistic and its associated probability in one output. For an paired <em>t</em>-test, we would use:</p>
+<pre class="r"><code>t.test(x = my_sample1, y = my_sample2, paired = TRUE)</code></pre>
+<p>where <em>my_sample1</em> and <em>my_sample2</em> are vectors containing the measurements from each sample. You would need to make sure the two vectors have the same number of values and that data from each pair were in the matching rows.</p>
+<p>Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, <code>y ~ x</code>, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).</p>
+<p>Download a sample data set in this format, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Greenhouse.csv/">Greenhouse.csv</a>, and import into R</p>
+<pre class="r"><code>Greenhouse = read.csv(file = &quot;Greenhouse.csv&quot;, header = TRUE)</code></pre>
+<p>The paired <em>t</em>-test is run with the <code>t.test</code> function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired <em>t</em>-test.</p>
+<pre class="r"><code>t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)</code></pre>
+<p><br><br></p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p><br></p>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  Performance by Treatment
+## t = -18.812, df = 9, p-value = 1.557e-08
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.2111674 -0.1658326
+## sample estimates:
+## mean of the differences 
+##                 -0.1885</code></pre>
+<p>The important output of a paired <em>t</em>-test includes the test statistic <em>t</em>, in this case 18.8, the degrees of freedom (in this case 9) and the probability associated with that value of <em>t</em>. In this case, we have a very low <em>p</em> value (<em>p</em> &lt; 0.001) and can reject the null hypothesis that the plants can photosynthesise with the same performance in the two light environments.</p>
+<p>You also get the mean and 95% confidence intervals for the differences between measurements in each pair (this will not overlap zero when the test is significant).
+<br><br></p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p><br>
+<em>t</em>-tests are parametric tests, which implies we can specify a probability distribution for the population of the variable from which samples were taken. Parametric (and non-parametric) tests have a number of assumptions. If these assumptions are violated we can no longer be sure that the test statistic follows a <em>t</em> distribution, in which case <em>p</em>-values may be inaccurate.</p>
+<p><strong>Normality.</strong> For a paired <em>t</em>-test, it is assumed the the sample of differences is normally distributed. If these are highly skewed, transformations may be used to achieve a distribution closer to normal.</p>
+<p><strong>Independence.</strong> The paired design takes into account that the two measures from each pair are not independent. It is still important, however, that each pair of objects measured are independent from other pairs. If they are linked in any way (e.g., groups of plants sharing a water tray) then more complex analytical design that account for additional factors may be required.
+<br><br></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><br>
+<strong>Written.</strong> As a minimum, the observed <em>t</em> statistic, the P-value and the number of degrees of freedom should be reported. For example, you could write “The photosynthetic performance of plants was significantly greater in sunny environments in contrast to shady environments (paired <em>t</em>-test: <em>t</em> = 18.81, df = 9, P &lt; 0.001)”.</p>
+<p><strong>Visual.</strong> Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.</p>
+<pre class="r"><code>boxplot(Performance~Treatment, data = Greenhouse, xlab = &quot;Light environment&quot;, ylab = &quot;Photosynthetic performance (FvFm)&quot;)</code></pre>
+<p><img src="/statistics/t-tests/paired-t-test/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<br><br></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p><br>
+Type <code>?t.test</code> to get the R help for this function.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Quinn and Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Chapter 9: Hypothesis testing.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.
+</p>
+<p><br><br></p>
+<p><strong>Author</strong>: Alistair Poore
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Fri Jan 21 15:59:54 2022&quot;</code></pre>
+</div>

@@ -1,0 +1,85 @@
+---
+title: 'Cluster Analysis'
+weight: 3
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Cluster analysis is a method of classification, aimed at grouping objects based on the similarity of their attributes. It is commonly used to group a series of samples based on multiple variables that have been measured from each sample. The procedure produces a tree-like diagram (a dendrogram) that illustrates the relationships between all the samples based on a defined measure of similarity.</p>
+<p><img src="Cluster_analysis_image.jpg" /></p>
+<p>There are many methods available for clustering (agglomerative, divisive, non hierarchical etc.). Here are some instructions for one of the more commonly used methods, agglomerative hierarchical clustering. This procedure involves a series of steps:</p>
+<ul>
+<li>calculate a matrix that holds all pair-wise similarities among all objects<br />
+</li>
+<li>join together the pair of objects that are most similar<br />
+</li>
+<li>recalculate the similarity matrix for that cluster vs all remaining objects<br />
+</li>
+<li>repeat last two steps until all objects are joined</li>
+</ul>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><img src="Cluster_analysis_image2.jpg" /></p>
+<p>In this example, we will use cluster analysis to visualise differences in the composition of metal contaminants in the seaweeds of Sydney Harbour (data from <a href="http://www.sciencedirect.com/science/article/pii/S026974910800033X">(Roberts <em>et al.</em> 2008)</a>.). Download the data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Harbour_metals.csv">Harbour_metals.csv</a>, and load into R.</p>
+<pre class="r"><code>Harbour_metals &lt;- read.csv(file=&quot;Harbour_metals.csv&quot;, header=TRUE)</code></pre>
+<p>These data have the concentrations of seven metals measured from 60 samples, half from the seaweed <em>Padina crassa</em> and half from the <em>Sargassum linearifolium</em></p>
+<p>The first two columns are categorical variables that group samples by site and seaweed species. The third column has unique labels for each replicate sample and the remaining columns are the metal concentrations.</p>
+<p>The cluster analysis runs on the response variables only so we need to make a data frame with just the metal concentrations (columns 4-8).</p>
+<pre class="r"><code>Harbour_metals2 &lt;- Harbour_metals[,4:8]</code></pre>
+<p>To help interpret the graph, we can add the sample labels as row names in this data frame</p>
+<pre class="r"><code>rownames(Harbour_metals2) &lt;- Harbour_metals$Rep</code></pre>
+<p>To perform the cluster analysis, we need to make a matrix that quantifies the similarity between each pair of samples. Here we will use the Euclidean distance as our similarity coefficient, but there are others to choose from (see below).</p>
+<pre class="r"><code>H_metals.sim &lt;- dist(Harbour_metals2, method = &quot;euclidean&quot;)</code></pre>
+<p>We then use <code>hclust</code> function with an argument that specifies the linkage method (here we will use the single linkage method).</p>
+<pre class="r"><code>H_metals.cluster &lt;- hclust(H_metals.sim, method = &quot;single&quot;)</code></pre>
+<p>Finally, plot the object that was created by the <font face="monospace">hclust</font> function.</p>
+<pre class="r"><code>plot(H_metals.cluster)</code></pre>
+<p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>We can make this a bit neater with all the samples lined up along the bottom by converting it to a dendrogram object (the <code>as.dendrogram</code> function) and plotting that (although this default plot is still a bit ugly and would need work with labels and axes before being ready for publication).</p>
+<pre class="r"><code>plot(as.dendrogram(H_metals.cluster),ylab = &quot;Euclidean distance&quot;)</code></pre>
+<p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p>A dendrogram has a branch for each sample joined at nodes that relate to the value of the similarity coefficient that joined the two objects. Interpretation of all the relationships comes from examination of the branching structure (which objects join most closely with each other) and from the similarities at which they join. Objects that join together close the tips of the branches are more similar to each other than those that join further toward the base of the tree (note that the default dendogram in R is like an upside down tree with the branches at the bottom and trunk at the top).</p>
+<p>Strong evidence for distinct groups would be evident if there were clusters where the samples within a cluster are much more similar to each other than samples in other clusters.</p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p>Before running a cluster analysis to create a dendrogram, you need to consider:</p>
+<p><strong>What measure of similarity to use.</strong> Dendograms can be created from any similarity matrix. There are many distance measures that can be used to describe the similarity between samples. The <code>dist</code> fuction in R has <code>"euclidean"</code>, <code>"maximum"</code>, <code>"manhattan"</code>, <code>"canberra"</code>, <code>"binary"</code> or <code>"minkowski"</code> (specified in the method argument of <code>dist</code>). Other measures are available in other packages (e.g., the Bray-Curtis measure which is recommended for analyses of species composition data is available in the package vegan).</p>
+<p><strong>Whether the data need transforming or standardising.</strong> If the variables are measured on very different scales, or if there are outliers, then the structure of the dendrogram will be strongly influenced by the values of the largest values in the data set. Variables can be transformed or standardised to lessen the influence of large values (i.e., treat all variables on a more equal footing).</p>
+<p><strong>What method will be used to create the dendrogram.</strong> The structure of dendrograms can also be sensitive to algorithm used to construct the tree (the linkage method). In the previous example, you used the single linkage method. The <code>hclust</code> function in R has several available: <code>"ward"</code>, <code>"single"</code>, <code>"complete"</code>, <code>"average"</code>, <code>"mcquitty"</code>, <code>"median"</code> and <code>"centroid"</code>.</p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><strong>Written.</strong> The interpretation of the dendrogram would be described in the text of a Results section (i.e, were there any obvious clusters of samples? were there any samples that were very different from the rest?). There are no numerical results to report.</p>
+<p><strong>Visual.</strong> Results from cluster analyses are communicated visually with the dendrogram. It is important to label the axis to show what measure of similarity was used in the analysis.</p>
+<p>If there are pre-determined groups of samples (e.g., samples grouped by species in the example above) samples are usually labelled or provided with colour-coded symbols to allow patterns in the dendrogram to be more easily seen. With large data sets individual labels for each sample (as we did here) make for very plots.</p>
+<p>With many samples in your dendrogram it is often necessary to label them in some way (e.g., by colour) to help see patterns. The package <a href="https://cran.r-project.org/web/packages/dendextend/vignettes/FAQ.html">dendextend</a> allows you to do this. Here is some code to produce the same dendrogram with the samples colour coded by location.</p>
+<pre class="r"><code>library(dendextend)
+dend &lt;- as.dendrogram(H_metals.cluster)
+sample_colours &lt;- as.numeric(Harbour_metals$Location)
+sample_colours &lt;- sample_colours[order.dendrogram(dend)]
+labels_colors(dend) &lt;- sample_colours
+plot(dend,ylab = &quot;Euclidean distance&quot;)</code></pre>
+<p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>You can access R help for the main functions used here by typing <code>?hclust</code>, <code>?dist</code> or <code>?as.dendrogram</code>. There are many R packages associated with the many different types of cluster analysis. See a long list of possibly useful packages <a href="http://cran.cnr.berkeley.edu/web/views/Cluster.html">here</a>.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Quinn, GP and MJ Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Ch. 18. Multidimensional scaling and cluster analysis.
+</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+McKillup, S (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.
+</p>
+<p><a href="http://rpubs.com/gaston/dendrograms">Visualizing dendrograms in R</a></p>
+<p><strong>Author</strong>: Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:45:41 2022&quot;</code></pre>
+</div>

@@ -1,0 +1,155 @@
+---
+weight: 1
+title: "Introduction"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="background" class="section level3">
+<h3>Background</h3>
+<p>What is a meta-analysis?</p>
+<blockquote>
+<p>A meta-analysis is a quantitative summary of studies on the same topic.</p>
+</blockquote>
+<p>Why do we want to perform a meta-analysis?</p>
+<ol style="list-style-type: lower-alpha">
+<li>Finding generalities</li>
+<li>Increasing power and precision</li>
+<li>Exploring differences between studies</li>
+<li>Settling controversies from conflicting studies (testing hypotheses)</li>
+<li>Generating new hypotheses</li>
+</ol>
+<p><img src="4666102_orig.jpg" /></p>
+<p><strong>The process of meta-analysis</strong></p>
+<p>How many steps involved in meta-analysis?</p>
+<p>One answer is 5 steps</p>
+<ol style="list-style-type: lower-roman">
+<li>Formulating questions &amp; hypothesis or finding a topic</li>
+<li>Literature search &amp; paper collection</li>
+<li>Data extraction &amp; coding</li>
+<li>Meta-analysis &amp; publication bias tests</li>
+<li>Reporting &amp; publication</li>
+</ol>
+<p>We only consider the step iv in this tutorial. You will need to learn the other steps elsewhere. To get you started, we recently wrote an overview paper which divides the process of meta-analysis into 10 questions <a href="https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-017-0357-7">(Nakagawa <em>et al.</em> 2017)</a>. The 10 questions will guide you through judging the quality of a meta-analysis.</p>
+<ol style="list-style-type: decimal">
+<li>Is the search systematic and transparently documented?</li>
+<li>What question and what effect size?</li>
+<li>Is non-independence taken into account?</li>
+<li>Which meta-analytic model?</li>
+<li>Is the level of consistency among studies reported?</li>
+<li>Are the causes of variation among studies investigated?</li>
+<li>Are effects interpreted in terms of biological importance?</li>
+<li>Has publication bias been considered?</li>
+<li>Are results really robust and unbiased?</li>
+<li>Is the current state (and lack) of knowledge summarized?</li>
+</ol>
+</div>
+<div id="metafor-for-meta-analysis" class="section level3">
+<h3>Metafor for meta-analysis</h3>
+<p>I think the R package <a href="http://www.metafor-project.org/doku.php">metafor</a> (Viechtbauer 2010) is the most comprehensive meta-analytic software and the author <a href="http://www.wvbauer.com/doku.php">Wolfgang Viechtbauer</a>, who, I have to say, has the coolest name among my friends, is still actively developing it.</p>
+<p>First, install and load the <code>metafor</code> package.</p>
+<pre class="r"><code>library(metafor)</code></pre>
+<p>Have a look at the data set named <code>dat.curtis1998</code> included in the package. If you have to see the other data sets included in this package, try <code>help(package="metafor")</code>.</p>
+<pre class="r"><code>dat &lt;- data(dat.curtis1998)</code></pre>
+<pre><code>## Warning in data(dat.curtis1998): data set &#39;dat.curtis1998&#39; not found</code></pre>
+<pre class="r"><code>str(dat)</code></pre>
+<pre><code>##  chr &quot;dat.curtis1998&quot;</code></pre>
+<p>This data set is from the paper by Curtis and Wang (1998). They looked at the effect of increased CO<span class="math inline">\(_2\)</span> on plant traits (mainly changes in biomass). So we have information on control group (1) and experimental group (2) (m = mean, sd = standard deviation) along with species information and experimental details. In meta-analysis, these variables are often referred to as ‘moderators’ (we will get to this a bit later).</p>
+<p><img src="Linear_regression_image.jpg" /></p>
+</div>
+<div id="calculating-standardized-effect-sizes" class="section level3">
+<h3>Calculating ‘standardized’ effect sizes</h3>
+<p>To compare the effect of increased CO<span class="math inline">\(_2\)</span> across multiple studies, we first need to calculate an effect size for each study - a metric that quantifies the difference between our control and experimental groups.</p>
+<p>There are several ‘standardized’ effect sizes, which are unit-less. When we have two groups to compare, we use two types of effect size statistics. The first one is standardized mean difference (SMD or also known as Cohen’s <span class="math inline">\(d\)</span> or Hedge’s <span class="math inline">\(d\)</span> or <span class="math inline">\(g\)</span>; some subtle differences between them, but we do not worry about them for now):</p>
+<p><span class="math display">\[\begin{equation}
+\mathrm{SMD}=\frac{\bar{x}_{E}-\bar{x}_{C}}{\sqrt{\frac{(n_{C}-1)sd^2_{C}+(n_{E}-1)sd^2_{E}}{n_{C}+n_{E}-2}}}
+\end{equation}\]</span>
+where <span class="math inline">\(\bar{x}_{C}\)</span> and <span class="math inline">\(\bar{x}_{E}\)</span> are the means of the control and experimental group, respectively, <span class="math inline">\(sd\)</span> is sample standard deviation (<span class="math inline">\(sd^2\)</span> is sample variance) and <span class="math inline">\(n\)</span> is sample size.</p>
+<p>And its sample error variance is:</p>
+<p><span class="math display">\[\begin{equation}
+se^2_{\mathrm{SMD}}= \frac{n_{C}+n_{E}}{n_{C}n_{E}}+\frac{\mathrm{SMD}^2}{2(n_{C}+n_{E})}
+\end{equation}\]</span></p>
+<p>The square root of this is referred to as ‘standard error’ (or the standard deviation of the estimate – confused?). The inverse of this (<span class="math inline">\(1/se^2\)</span>) is used as ‘weight’, but things are bit more complicated than this as we will find out below.</p>
+<p>Another common index is called ‘response ratio’, which is usually presented in its natural logarithm form (lnRR):</p>
+<p><span class="math display">\[\begin{equation}
+\mathrm{lnRR}=\ln\left({\frac{\bar{x}_{E}}{\bar{x}_{C}}}\right)
+\end{equation}\]</span></p>
+<p>And its sampling error variance is:</p>
+<p><span class="math display">\[\begin{equation}
+se^2_\mathrm{lnRR}=\frac{sd^2_{C}}{n_{C}\bar{x}^2_{C}}+\frac{sd^2_{E}}{n_{E}\bar{x}^2_{E}}
+\end{equation}\]</span></p>
+<p>Let’s get these using the function <code>escalc</code> in <code>metafor</code>. To obtain the standardised mean difference, we use:</p>
+<pre class="r"><code># SMD
+SMD &lt;- escalc(measure = &quot;SMD&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2i = dat$m2i,
+    sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
+<p>where <code>n1i</code> and <code>n2i</code> are the sample sizes, <code>m1i</code> and <code>m2i</code> are the means, and <code>sd1i</code> and <code>sd2i</code> the standard deviations from each study.</p>
+<p>The oject created now has an effect size (yi) and its variance (vi) for each study</p>
+<pre><code>##           yi        vi
+## 1  1.8221544 0.7408487
+## 2  0.5921892 0.4175344
+## 3  1.3285699 0.4882549
+## 4 -0.3798237 0.4072133
+## 5  0.3320563 0.5068913
+## 6  2.5136955 0.9282499</code></pre>
+<p>To obtain the response ratio (log transformed ratio of menas), we would use:</p>
+<pre class="r"><code>lnRR &lt;- escalc(measure = &quot;ROM&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2 = dat$m2i,
+    sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
+<p>The original paper used lnRR so we will use it, but you may want to repeat analysis below using SMD to see whether results are consistent.</p>
+<p>Add the effect sizes to the original data set with <code>cbind</code> or <code>bind_cols</code> from the package <code>dplyr</code></p>
+<pre class="r"><code>library(dplyr)
+dat &lt;- bind_cols(dat, lnRR)</code></pre>
+<p>You should see yi (effec size) and vi (sampling variance) are added.</p>
+<pre><code>## &#39;data.frame&#39;:    102 obs. of  22 variables:
+##  $ id      : int  21 22 27 32 35 38 44 63 86 87 ...
+##  $ paper   : int  44 44 121 121 121 121 159 183 209 209 ...
+##  $ genus   : chr  &quot;ALNUS&quot; &quot;ALNUS&quot; &quot;ACER&quot; &quot;QUERCUS&quot; ...
+##  $ species : chr  &quot;RUBRA&quot; &quot;RUBRA&quot; &quot;RUBRUM&quot; &quot;PRINUS&quot; ...
+##  $ fungrp  : chr  &quot;N2FIX&quot; &quot;N2FIX&quot; &quot;ANGIO&quot; &quot;ANGIO&quot; ...
+##  $ co2.ambi: num  350 350 350 350 350 350 350 395 350 350 ...
+##  $ co2.elev: num  650 650 700 700 700 700 700 795 700 700 ...
+##  $ units   : chr  &quot;ul/l&quot; &quot;ul/l&quot; &quot;ppm&quot; &quot;ppm&quot; ...
+##  $ time    : int  47 47 59 70 64 50 730 365 365 365 ...
+##  $ pot     : chr  &quot;0.5&quot; &quot;0.5&quot; &quot;2.6&quot; &quot;2.6&quot; ...
+##  $ method  : chr  &quot;GC&quot; &quot;GC&quot; &quot;GH&quot; &quot;GH&quot; ...
+##  $ stock   : chr  &quot;SEED&quot; &quot;SEED&quot; &quot;SEED&quot; &quot;SEED&quot; ...
+##  $ xtrt    : chr  &quot;FERT&quot; &quot;FERT&quot; &quot;NONE&quot; &quot;NONE&quot; ...
+##  $ level   : chr  &quot;HIGH&quot; &quot;CONTROL&quot; &quot;.&quot; &quot;.&quot; ...
+##  $ m1i     : num  6.82 2.6 2.99 5.91 4.61 ...
+##  $ sd1i    : num  1.77 0.667 0.856 1.742 1.407 ...
+##  $ n1i     : int  3 5 5 5 4 5 3 3 20 16 ...
+##  $ m2i     : num  3.94 2.25 1.93 6.62 4.1 ...
+##  $ sd2i    : num  1.116 0.328 0.552 1.631 1.257 ...
+##  $ n2i     : int  5 5 5 5 4 3 3 3 20 16 ...
+##  $ yi      : num  0.547 0.143 0.438 -0.113 0.117 ...
+##   ..- attr(*, &quot;ni&quot;)= int [1:102] 8 10 10 10 8 8 6 6 40 32 ...
+##   ..- attr(*, &quot;measure&quot;)= chr &quot;ROM&quot;
+##  $ vi      : num  0.0385 0.0175 0.0328 0.0295 0.0468 ...</code></pre>
+<p><strong>Visualising effect size.</strong> We can visualize point estimates (effect size) and their 95% confidence intervals, CIs (based on sampling error variance) by using the <code>forest</code> function, which draws a forest plot for us.</p>
+<pre class="r"><code>forest(dat$yi, dat$vi)</code></pre>
+<p><img src="/statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest-1.png" width="672" /></p>
+<p>The problem you see is that when there are many studies, a forest plot does not really work (unless you have very large screen!). Let’s look at just the first 12 studies.</p>
+<pre class="r"><code>forest(dat$yi[1:12], dat$vi[1:12])</code></pre>
+<p><img src="/statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest2-1.png" width="672" /></p>
+<p>We can calculate many different kinds of effect sizes with <code>escalc</code>; other common effect size statistics include <span class="math inline">\(Zr\)</span> (Fisher’s z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio – mouthful!), which compares the variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of <code>metafor</code>, let you do this with <code>escalc</code>– <a href="https://github.com/cran/metafor">github page</a>. lnCVR is called “CVR” in <code>escalc</code>. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight!</p>
+<p>Once you have calculated effect sizes, move on to the next page: <a href="http://environmentalcomputing.net/meta-analysis-2">Meta-analysis 2: fixed-effect and random-effect models</a></p>
+</div>
+<div id="further-help-references" class="section level3">
+<h3>Further help (references)</h3>
+<p>Go to the metafor package’s <a href="http://www.metafor-project.org/doku.php">website</a>. There you find many worked examples.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Curtis, P. S., and X. Z. Wang. 1998. A meta-analysis of elevated CO2 effects on woody plant mass, form, and physiology. <em>Oecologia</em> 113:299-313.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Nakagawa, S., R. Poulin, K. Mengersen, K. Reinhold, L. Engqvist, M. Lagisz, and A. M. Senior. 2015. Meta-analysis of variation: ecological and evolutionary applications and beyond. <em>Methods in Ecology and Evolution</em> 6:143-152.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Viechtbauer, W. 2010. Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em> 36:1-48.
+</p>
+<p><strong>Authors</strong>: Shinichi Nakagawa and Malgorzata (Losia) Lagisz</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:51:19 2022&quot;</code></pre>
+</div>

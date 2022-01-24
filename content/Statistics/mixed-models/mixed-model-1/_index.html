@@ -1,0 +1,194 @@
+---
+weight: 1
+title: "Introduction"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><strong>Linear mixed models with one random effect</strong></p>
+<p>You will need to use mixed effect models if you have a random factor in your experimental design. A random factor</p>
+<ul>
+<li>is categorical<br />
+</li>
+<li>has a large number of levels<br />
+</li>
+<li>only a random subsample of levels is included in your design<br />
+</li>
+<li>you want to make inference in general, and not only for the levels you observed.</li>
+</ul>
+<p>This is a tough concept to get your head around, and is best explained with an example. The data we will analyse here are counts of invertebrates at 3-4 sites in each of 7 (randomly chosen) estuaries. Here the estuaries are the random effect, as there are a large number of possible estuaries, and we only sample from a random few of them, but we would like to make inference about estuaries in general.</p>
+<p><img src="Mixed_models_1_image.jpg" /></p>
+<p>We will introduce mixed models in three parts</p>
+<ol style="list-style-type: decimal">
+<li><p>Mixed models 1 (this page) is an introduction to mixed models for a <strong>continuous</strong> response with <strong>one random effect</strong>. You will learn how to check assumptions and do inference, including the parametric bootstrap.</p></li>
+<li><p><a href="http://environmentalcomputing.net/mixed-models-2/">Mixed models 2</a> extends this to <strong>multiple random effects</strong> with a continuous response. We look into how to model nested and crossed random effects.</p></li>
+<li><p><a href="http://environmentalcomputing.net/mixed-models-3/">Mixed models 3</a> teaches you how to model <strong>discrete data</strong>, including counts and binary data, with random effects.</p></li>
+</ol>
+<p>All three pages will use the same data for illustration.</p>
+<p><br><br></p>
+<p><strong>Properties of mixed models</strong>
+<br>
+<strong>Assumptions</strong>. Mixed models make some important assumptions (we’ll check these later for our examples)</p>
+<ol style="list-style-type: decimal">
+<li>The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>The response <span class="math inline">\(y\)</span> are normally distributed conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>The response <span class="math inline">\(y\)</span> has constant variance, conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>There is a straight line relationship between <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span><br />
+</li>
+<li>Random effects <span class="math inline">\(z\)</span> are independent of <span class="math inline">\(y\)</span>.<br />
+</li>
+<li>Random effects <span class="math inline">\(z\)</span> are normally distributed
+<br><br></li>
+</ol>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><br>
+We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, install and load this package:</p>
+<pre class="r"><code>library(lme4)</code></pre>
+<p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data is continuous. Later on in <a href="http://environmentalcomputing.net/mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
+<p>Download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<pre class="r"><code>Estuaries = read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
+<p><strong>Fitting a model with a fixed and random effect</strong></p>
+<p>In this data set, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). We can use the <code>lmer</code> function to fit a model for any dependent variables with a continuous distribution. To fit a model for total abundance, we would use:</p>
+<pre class="r"><code>ft.estu = lmer(Total ~ Modification + (1|Estuary),data=Estuaries, REML=T)</code></pre>
+<p>where Total is the dependent variable (left of the ~), Modification is the fixed effect, and Estuary is the random effect.</p>
+<p>Note the syntax for one random effect is <code>(1|Estuary)</code> - this is fitting a different intercept (hence <code>1</code>) for each Estuary.</p>
+<p>This model can be fit by maximum likelihood (<code>REML=F</code>) or restricted maximum likelihood (<code>&gt;REML=T</code>). For fitting models it’s best to use REML, as it is less biased (unbiased for balanced samples), particularly in small samples. However to use the <code>anova</code> function below we need to refit with maximum likelihood.
+<br><br></p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p><br>
+Before we look at the results of our analysis, it’s important to check that our data met the assumptions of the model we used. Let’s look at all the assumptions in order.</p>
+<p><strong>Assumption 1</strong>: The observed <span class="math inline">\(y\)</span> are independent, conditional on some fixed effects <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
+<p>We can’t check this assumption, but you can ensure it’s true by taking a random sample within each level of the random effect in your experimental design.</p>
+<p><strong>Assumption 2</strong>: The response <span class="math inline">\(y\)</span> are normally distributed conditional on some predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
+<p>This assumption is only critical when we have a small sample size or very skewed data. We can check it with a normal quantile plot of residuals.</p>
+<pre class="r"><code>qqnorm(residuals(ft.estu))</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-5-1.png" width="500px" /></p>
+<p>We are looking for a straight line relationship. Here, the assumption of normality seems reasonable.</p>
+<p><strong>Assumption 3</strong>: The response <span class="math inline">\(y\)</span> has constant variance, conditional on some fixed effects <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
+<p>Like a linear model, a mixed model assumes constant variance. We can check this by looking for a fan shape in the residual plot (residuals vs fitted values).</p>
+<pre class="r"><code>scatter.smooth(residuals(ft.estu)~fitted(ft.estu))</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
+<p>This residual plot seems reasonable, there are differences in variability between estuaries, but variability does not increase with the mean. Note, that the function <code>scatter.smooth</code> is just a scatter plot with a fitted, smoothed curve.</p>
+<p><strong>Assumption 4</strong>: There is a straight line relationship between <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
+<p>To check this assumption, we check the residual plot again for non-linearity, or a U-shape. In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the <code>poly</code> function.</p>
+<p><strong>Assumption 5</strong>: Random effects <span class="math inline">\(z\)</span> are independent of <span class="math inline">\(y\)</span>.</p>
+<p>We can’t check this assumption, but you can ensure it’s true by taking a random sample of estuaries.</p>
+<p><strong>Assumption 6</strong>: Random effects <span class="math inline">\(z\)</span> are normally distributed.</p>
+<p>This assumption is not crucial (and difficult) to check.
+<br><br></p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p><br></p>
+<p><strong>Hypothesis test for the fixed effect</strong></p>
+<p>The package <code>lme4</code> won’t give you p-values for fixed effects as part of the output in <code>summary</code>. This is because the p-values from Wald tests (using <code>summary</code>) and likelihood ratio tests (using <code>anova</code>) are only approximate in mixed models.</p>
+<p>Nevertheless, we will use the <code>anova</code> function to test for an effect of modification on the total abundance of invertebrates, taking into account the random effect of estuary.</p>
+<p>First, we fit the full model by maximum likelihood, and a second model that lacks the fixed effect of Modification</p>
+<pre class="r"><code>ft.estu = lmer(Total ~ Modification + (1|Estuary), data=Estuaries, REML=F)
+ft.estu.0 = lmer(Total ~ (1|Estuary), data=Estuaries, REML=F)</code></pre>
+<p>Then, we compare these two models with a likelihood ratio test, using the <code>anova</code> function.</p>
+<pre class="r"><code>anova(ft.estu.0,ft.estu)</code></pre>
+<pre><code>## Data: Estuaries
+## Models:
+## ft.estu.0: Total ~ (1 | Estuary)
+## ft.estu: Total ~ Modification + (1 | Estuary)
+##           npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+## ft.estu.0    3 415.02 420.99 -204.51   409.02                       
+## ft.estu      4 411.92 419.87 -201.96   403.92 5.1055  1    0.02385 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We find that there is evidence of an effect of Modification (p = 0.02385).</p>
+<p>We can also calculate confidence intervals for each model parameter using the <code>confint</code> function.</p>
+<pre class="r"><code>confint(ft.estu)</code></pre>
+<pre><code>## Computing profile confidence intervals ...</code></pre>
+<pre><code>##                           2.5 %    97.5 %
+## .sig01                 2.718166 12.538348
+## .sigma                 7.676352 11.522837
+## (Intercept)           31.918235 49.981321
+## ModificationPristine -26.360731 -2.538241</code></pre>
+<p>This also provides evidence for an effect of Modification as this parameter (i.e., the difference between the modified and pristine estuaries) has 95% confidence intervals that do not overlap zero.</p>
+<p><strong>Hypothesis test for random effects</strong></p>
+<p>You can use the <code>anova</code> function to test for random effects, but the p-values are very approximate and we do not recommend this procedure. Instead we will use a parametric bootstrap. This is a simulation based method which involves a fair chunk of code, but there’s not much about the code you have to change for different models, it’s mostly just a matter of copy-paste.</p>
+<p>Parametric bootstrap</p>
+<pre class="r"><code>nBoot=1000
+lrStat=rep(NA,nBoot)
+ft.null = lm(Total~Modification,data=Estuaries)#null model
+ft.alt = lmer(Total~Modification+(1|Estuary),data=Estuaries,REML=F)#alternate model
+lrObs = 2*logLik(ft.alt) - 2*logLik(ft.null) #observed test stat
+for(iBoot in 1:nBoot)
+{
+  Estuaries$TotalSim=unlist(simulate(ft.null)) #resampled data
+  bNull = lm(TotalSim~Modification,data=Estuaries)#null model
+  bAlt = lmer(TotalSim~Modification+(1|Estuary),data=Estuaries,REML=F)#alternate model
+  lrStat[iBoot] = 2*logLik(bAlt) - 2*logLik(bNull)#resampled test stat
+}
+mean(lrStat&gt;lrObs) #P-value for test of Estuary effect</code></pre>
+<pre><code>## [1] 0.001</code></pre>
+<p>There is strong evidence for including estuary in your model (p = 0.001). You could use similar code to test for the effect of Modification with a parametric bootstrap.
+<br><br></p>
+<p>###FAQ for mixed models
+<br>
+<strong>1.</strong> Do I need balanced samples to fit a mixed model?</p>
+<p>No, unbalanced designs are fine. Balanced designs will generally give you better power though, so they are good to aim for.</p>
+<p><strong>2</strong>. Should I sample many levels of the random effect, or lots of observations within each level?</p>
+<p>This depends on what you are interested in. In our example, we are interested in the effect of modification. In the study design, estuaries fall directly below modification, so we need a lot of estuaries within each level of Modification to make good inference about the effects of modification. This is true in general, you need lots of samples in the level below the level you are primarily interested in.</p>
+<p><strong>3.</strong> Does my random factor have to be a random effect?</p>
+<p>Not necessarily. If you have a random factor (i.e., you have a random sample of categories from a categorical variable) and you want to make inferences about that variable in general, not just at the categories you observed, then include it as a random effect. If you are happy making inference about just the levels you observed, then you can include it as a fixed effect. In our example we wanted to make inference about modification in general, i.e. in every modified and unmodified estuary, so we included estuary as a random effect. If we had treated Estuary as a fixed factor, we would have been restricted to making conclusions about only the estuaries we sample.</p>
+<p><strong>4.</strong> What if the levels of my factor aren’t really random?</p>
+<p>This might be a problem as assumption 4 may not hold. You should always sample the random effect randomly to avoid bias and incorrect conclusions.
+<br><br></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><br>
+<strong>Written.</strong> Results of linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code> function) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance. For multiple predictors it’s best to display the results in a table.</p>
+<p><strong>Visual.</strong> The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility. There is a little bit of code that is required for such a plot, and it will be a little different for your data and model.</p>
+<pre class="r"><code>ModEst=unique(Estuaries[c(&quot;Estuary&quot;, &quot;Modification&quot;)]) #find which Estuaries are modified
+
+# Prepare a vector of colors with specific color by modification levels
+myColors &lt;- ifelse(unique(ModEst$Modification)==&quot;Modified&quot; , rgb(0.1,0.1,0.7,0.5) , 
+              ifelse(unique(ModEst$Modification)==&quot;Pristine&quot;, rgb(0.8,0.1,0.3,0.6),
+              &quot;grey90&quot; ) )
+
+boxplot(Total~ Estuary,data=Estuaries,col=myColors,xlab=&quot;Estuary&quot;,ylab=&quot;Total invertebrates&quot;)
+legend(&quot;bottomleft&quot;, inset=.02,
+   c(&quot; Modified &quot;,&quot; Pristine &quot;), fill=unique(myColors), horiz=TRUE, cex=0.8)
+
+ #0 if Modified, 1 if Pristine
+is.mod = ifelse(unique(ModEst$Modification)==&quot;Modified&quot; , 0 , 
+              ifelse(unique(ModEst$Modification)==&quot;Pristine&quot;, 1, NA))
+
+Est.means=coef(ft.estu)$Estuary[,1]+coef(ft.estu)$Estuary[,2]*is.mod #Model means</code></pre>
+<pre><code>## Warning in coef(ft.estu)$Estuary[, 2] * is.mod: longer object length is not a
+## multiple of shorter object length</code></pre>
+<pre class="r"><code>stripchart(Est.means~ sort(unique(Estuary)),data=Estuaries,pch=18,col=&quot;red&quot;,vertical = TRUE,add=TRUE)</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<br><br></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p><br>
+You can type <code>?lmer</code> into R for help with these functions.</p>
+<p><a href="http://lme4.r-forge.r-project.org/book/Ch2.pdf">Draft book chapter</a> from the authors of lme4.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Faraway, JJ. <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC press, 2005.
+</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Zuur, A, EN Ieno and GM Smith. <em>Analysing ecological data</em>. Springer Science &amp; Business Media, 2007.
+</p>
+<p><br><br></p>
+<p><strong>Author</strong>: Gordana Popovic
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Mon Jan 24 12:21:01 2022&quot;</code></pre>
+</div>

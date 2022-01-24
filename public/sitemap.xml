@@ -5,23 +5,149 @@
     <loc>/about-this-site/</loc>
     <lastmod>2016-04-09T16:50:16+02:00</lastmod>
   </url><url>
+    <loc>/graphics/basic-plotting/</loc>
+  </url><url>
+    <loc>/coding-skills/good-practice/</loc>
+  </url><url>
+    <loc>/statistics/catagorical/goodness-of-fit/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/installing-r-rstudio/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/linear-regression/interpret-lm-coeffs/</loc>
+  </url><url>
+    <loc>/statistics/meta-analysis/meta-analysis-1/</loc>
+  </url><url>
+    <loc>/statistics/mixed-models/mixed-model-1/</loc>
+  </url><url>
+    <loc>/statistics/glms/glm-1/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/linear-regression/</loc>
+  </url><url>
+    <loc>/data-manipulation/making-new-variables/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/mds/</loc>
+  </url><url>
+    <loc>/graphics/basic-plotting/one-continuous/</loc>
+  </url><url>
+    <loc>/statistics/t-tests/one-sample/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/anova/anova-single/</loc>
+  </url><url>
+    <loc>/statistics/t-tests/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-basics/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/basic-raster/</loc>
+  </url><url>
+    <loc>/statistics/catagorical/contingency-tabs/</loc>
+  </url><url>
+    <loc>/statistics/glms/glm-2/</loc>
+  </url><url>
+    <loc>/statistics/mixed-models/mixed-model-2/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-appearance/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/anova/anova-factorial/</loc>
+  </url><url>
+    <loc>/statistics/meta-analysis/meta-analysis-2/</loc>
+  </url><url>
     <loc>/getting-started-with-r/</loc>
   </url><url>
-    <loc>/getting-started-with-r/installing_r_rstudio/</loc>
+    <loc>/statistics/linear-models/</loc>
   </url><url>
-    <loc>/data-manipulation/making_new_variables/</loc>
+    <loc>/graphics/multivariate-vis/pca/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/simple-maps/</loc>
+  </url><url>
+    <loc>/data-manipulation/subsetting-data/</loc>
+  </url><url>
+    <loc>/graphics/basic-plotting/two-continuous/</loc>
+  </url><url>
+    <loc>/statistics/t-tests/two-sample/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/rstudio-notebooks/</loc>
+  </url><url>
+    <loc>/coding-skills/writing-functions/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/anova/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/project-managment/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/cluster-analysis/</loc>
   </url><url>
     <loc>/data-manipulation/</loc>
   </url><url>
-    <loc>/getting-started-with-r/project_managment/</loc>
+    <loc>/statistics/catagorical/fishers-exact/</loc>
+  </url><url>
+    <loc>/statistics/glms/</loc>
+  </url><url>
+    <loc>/statistics/mixed-models/mixed-model-3/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/interactive/</loc>
+  </url><url>
+    <loc>/statistics/glms/interpret-glm-coeffs/</loc>
+  </url><url>
+    <loc>/statistics/meta-analysis/meta-analysis-3/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/anova/anova-nested/</loc>
+  </url><url>
+    <loc>/graphics/basic-plotting/one-continuous-one-factor/</loc>
+  </url><url>
+    <loc>/statistics/t-tests/paired-t-test/</loc>
+  </url><url>
+    <loc>/data-manipulation/summarising-data/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-labels/</loc>
+  </url><url>
+    <loc>/coding-skills/loops/</loc>
   </url><url>
     <loc>/coding-skills/</loc>
   </url><url>
-    <loc>/getting-started-with-r/data_entry/</loc>
+    <loc>/graphics/ggplot/ggplot-colour-shapes/</loc>
+  </url><url>
+    <loc>/data-manipulation/combining-datasets/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/data-entry/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/heatmaps/</loc>
+  </url><url>
+    <loc>/statistics/mixed-models/</loc>
+  </url><url>
+    <loc>/graphics/multivariate-vis/</loc>
+  </url><url>
+    <loc>/statistics/linear-models/interactions/</loc>
+  </url><url>
+    <loc>/coding-skills/version-control/</loc>
+  </url><url>
+    <loc>/coding-skills/asking-code-questions/</loc>
+  </url><url>
+    <loc>/graphics/ggplot/ggplot-barplot/</loc>
+  </url><url>
+    <loc>/statistics/gams/</loc>
+  </url><url>
+    <loc>/graphics/</loc>
   </url><url>
     <loc>/getting-started-with-r/importing-data/</loc>
   </url><url>
-    <loc>/getting-started-with-r/data_types_structure/</loc>
+    <loc>/data-manipulation/reshaping-data/</loc>
+  </url><url>
+    <loc>/graphics/spatial-vis/</loc>
+  </url><url>
+    <loc>/statistics/catagorical/</loc>
+  </url><url>
+    <loc>/getting-started-with-r/data-types-structure/</loc>
+  </url><url>
+    <loc>/statistics/</loc>
+  </url><url>
+    <loc>/statistics/power-analysis/</loc>
+  </url><url>
+    <loc>/statistics/mvabund/</loc>
+  </url><url>
+    <loc>/statistics/time-series/</loc>
+  </url><url>
+    <loc>/statistics/meta-analysis/</loc>
   </url><url>
     <loc>/</loc>
     <lastmod>2016-04-09T16:50:16+02:00</lastmod>

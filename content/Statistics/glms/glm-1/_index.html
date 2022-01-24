@@ -1,0 +1,145 @@
+---
+weight: 1
+title: "Introduction and Binary Data"
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><strong>Introduction and binomial data</strong></p>
+<p><a href="http://environmentalcomputing.net/linear-models/">Linear models</a> (e.g., linear regression) are used to model the relationship between a <strong>continuous</strong> response variable <span class="math inline">\(y\)</span> and one or more explanatory variables <span class="math inline">\(x_1, x_2, \cdots\)</span>. When we have a <strong>discrete</strong> response we use generalised linear models (GLM’s).</p>
+<p><img src="GLM1_binary_image.jpg" /></p>
+<p>For example, if had surveyed a beach and wanted to analyse how the presence of a crab varied with time and distance from the water line, the response variable is discrete: the presence or absence of a crab in a given replicate. The first few rows of the data set would look like this:</p>
+<pre><code>##   X Dist Time CrabPres
+## 1 1    0    5        0
+## 2 2    0    5        1
+## 3 3    0    5        1
+## 4 4    0    5        0
+## 5 5    0    5        0
+## 6 6    2    5        0</code></pre>
+<p><strong>Properties of GLM’s.</strong> Discrete response data, like counts and presence/absence data, generally exhibit a mean-variance relationship. For example; for counts that are on average 5, we would expect most samples to be between about 1 and 9, but for counts that are on average 500, most of the observations will tend to be between 450 and 550, giving us a much larger variance when the mean is large.</p>
+<p>Linear models assume constant variance. You might have learned to transform count data and then fit a linear model. This can reduce the mean variance relationship, but it won’t get rid of it completely, especially if you have a lot of zeros in your data. To analyse discrete data accurately we need to use GLM’s.</p>
+<p>A GLM makes some important assumptions (we’ll check these later for our examples)</p>
+<ol style="list-style-type: decimal">
+<li>The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>The response <span class="math inline">\(y\)</span> come from a known distribution with a known mean-variance relationship<br />
+</li>
+<li>There is a straight line relationship between a known function <span class="math inline">\(g\)</span> of the mean of <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span></li>
+</ol>
+<p><span class="math display">\[ g(\mu_y) = \alpha + \beta_1 x_1 + \beta_2 x_2 + \cdots \]</span></p>
+<p>Note: link functions <code>g()</code> are an important part of fitting GLM’s, but beyond the scope of this introductory tutorial. All you need to know is that the default link for binomial data is the <code>logit()</code> and for count data it’s <code>log()</code>. For more information see <code>?family</code>.</p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><strong>Binomial data</strong></p>
+<p>First, we will show you how to fit a model to binomial data, i.e., presence/absence data or data as 0/1. Fitting GLM’s uses very similar syntax to fitting linear models. We use the <code>glm</code> function instead of <code>lm</code>. We also need to add a <code>?family</code> argument to specify whether your data are counts, binomial etc.</p>
+<p>For this worked example, download the sample data set on the presence and absence of crabs on the beach, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Crabs.csv">Crabs.csv</a> and import into R.</p>
+<pre class="r"><code>Crab_PA = read.csv(&quot;Crabs.csv&quot;, header = T)</code></pre>
+<p>To test whether the probability of crab presence changes with time (a factor) and distance (a continuous variable), we fit the following model. The response variable (presence/absence of crabs) is binomial, so we use <code>family=binomial</code>.</p>
+<pre class="r"><code>ft.crab = glm(CrabPres ~ Time*Dist, family=binomial, data=Crab_PA)</code></pre>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p>Before we look at the results of our analysis it’s important to check that our data met the assumptions of the model we used. Let’s look at all the assumptions in order.</p>
+<p><strong>Assumption 1 : The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span></strong></p>
+<p>We can’t check this assumption from the results, but you can ensure it’s true by taking a random sample for your experimental design. If your experimental design involves any pseudo-replication, this assumption will be violated. For certain types of pseudo-replication you can use mixed models instead.</p>
+<p><strong>Assumption 2 : The response <span class="math inline">\(y\)</span> come from a known distribution with a known mean-variance relationship</strong></p>
+<p>The mean variance relationship is the main reason we use GLM’s instead of linear models. We need to check that the distribution models the mean-variance relationship of our data well. For binomial data this is not a big concern, but later on when we analyse count data it’ll be very important. To check this assumption we look at a plot of residuals, and try to see if there is a fan shape.</p>
+<pre class="r"><code>plot(ft.crab,which=1)</code></pre>
+<p><img src="/statistics/glms/glm-1/_index_files/figure-html/unnamed-chunk-4-1.png" width="500px" /></p>
+<p>Unfortunately the <code>glm</code> plot function gives us a very odd looking plot due to the discreteness of the data (i.e., many points on top of each other).</p>
+<p>For a more useful plot we can instead fit the model using the <code>manyglm</code> function in the <a href="https://cran.r-project.org/web/packages/mvabund/index.html">mvabund</a> package. We need a slight change to the family argument, for <code>manyglm</code> we write <code>family = "binomial"</code>.</p>
+<pre class="r"><code>library(mvabund)
+ft.crab.many = manyglm(CrabPres ~ Time*Dist, family=&quot;binomial&quot;, data=Crab_PA)
+plot(ft.crab.many)</code></pre>
+<p><img src="/statistics/glms/glm-1/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
+<p>Now we can look for a fan shape in the residual plot. For these data, there doesn’t seem to be a fan shape, so we can conclude the mean-variance assumption the model made was reasonable for our data. The residuals in this plot have a random component. If you see a pattern it’s best to repeat the plot a few times to see if the pattern is real.</p>
+<p><strong>Assumption 3 : There is a straight line relationship between a known function <span class="math inline">\(g\)</span> of the mean of <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span></strong></p>
+<p>To check this assumption, we check the residual plot above for non-linearity, or a U-shape. In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the <code>poly</code> function.</p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p>If all the assumption checks are okay, we can have a look at the results the model gave us. The two main functions for inference are the same as for linear models: <code>summary</code> and <code>anova</code>.</p>
+<p>The p-values these give you if you use <code>glm</code> for fitting the model work well in large samples, although they are still approximate. For binomial models in particular the p-values from the <code>summary</code> function can be funny, and we prefer to use the <code>anova</code> function to see if predictors are significant. The <code>summary()</code> function is still useful to look at the model equation.</p>
+<pre class="r"><code>anova(ft.crab,test=&quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: CrabPres
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##           Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)   
+## NULL                         56     71.097            
+## Time       1   6.6701        55     64.427 0.009804 **
+## Dist       1   0.7955        54     63.631 0.372448   
+## Time:Dist  1   0.1647        53     63.466 0.684852   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The p-value for Time is small (P&lt;0.01), so we conclude there is an effect of time on the presence of crabs, but no effect of distance or an interaction between time and distance. This sample is reasonably large, so these p-values should be a good approximation. For a small sample it is often better to use resampling to calculate p-values. When you use <code>manyglm</code> the <code>summary</code> and <code>anova</code> functions use resampling by default.</p>
+<pre class="r"><code>anova(ft.crab.many)</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 0 sec</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: CrabPres ~ Time * Dist
+## 
+## Multivariate test:
+##             Res.Df Df.diff   Dev Pr(&gt;Dev)  
+## (Intercept)     56                         
+## Time            55       1 6.670    0.011 *
+## Dist            54       1 0.795    0.370  
+## Time:Dist       53       1 0.165    0.700  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Arguments: P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
+<p>In this case the results are quite similar, but in small samples it can often make a big difference.</p>
+<p>You can also use <code>summary</code> with either the <code>glm</code> or <code>manyglm</code> function. This is interpreted in a similar manner as for linear regression, but we need to include the link function, <code>g</code>.</p>
+<pre class="r"><code>summary(ft.crab)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = CrabPres ~ Time * Dist, family = binomial, data = Crab_PA)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.3518  -0.6457  -0.5890   1.0125   1.9390  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)  
+## (Intercept) -3.00604    1.47469  -2.038   0.0415 *
+## Time         0.25835    0.17439   1.481   0.1385  
+## Dist        -0.03193    0.23923  -0.133   0.8938  
+## Time:Dist    0.01143    0.02830   0.404   0.6863  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 71.097  on 56  degrees of freedom
+## Residual deviance: 63.466  on 53  degrees of freedom
+## AIC: 71.466
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>If <span class="math inline">\(p\)</span> is the probability of crab presence, this output tells us</p>
+<p><span class="math display">\[ logit(p) = -3.01 + 0.26 \times \text{Time} -0.03 \times \text{Dist} +0.01 \times \text{Time} \times \text{Dist}\]</span></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p>Results of GLM’s are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g., “There is strong evidence that the presence of crabs varies with time (p = 0.01). For multiple predictors it’s best to display the results in a table. You should also indicate which distribution was used (e.g. Binomial for presence/absence, Poisson or negative-binomial for counts) and if resampling was used for inference.</p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>You can type <code>?glm</code> and <code>?manyglm</code> into R for help with these functions.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Faraway, JJ. 2005. <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC press.
+</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Springer Science &amp; Business Media, 2007.
+</p>
+<p>More advice on <a href="http://environmentalcomputing.net/interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:23 2022&quot;</code></pre>
+</div>

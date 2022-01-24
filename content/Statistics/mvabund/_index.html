@@ -1,0 +1,171 @@
+---
+weight: 8
+title: "Multivariate Analysis with mvabund"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Multivariate data are common in the environmental sciences, occurring when ever we measure several response variables from each replicate sample. Questions like how does the species composition of a community vary across sites, or how does the shape of trees (as measured by several morphological traits) vary with altitude are multivariate questions.</p>
+<p>We will use the package <a href="https://cran.r-project.org/web/packages/mvabund/index.html">mvabund</a> to specify and fit multivariate statistical models to these sorts of data.</p>
+<p><strong>How does this method differ from other multivariate analyses?</strong>
+Many commonly used analyses for multivariate data sets (e.g. PERMANOVA, ANOSIM, CCA, RDA etc.) are “distance-based analyses”. This means the first step of the analysis is to calculate a measure of similarity between each pair of samples, thus converting a multivariate dataset into a univariate one.</p>
+<p>There are a couple of problems with these kinds of analysis. First, their statistical power is very low, except for variables with high variance. This means that for variables which are less variable, the analyses are less likely to detect a treatment effect. Second, they do not account for a very important property of multivariate data, which is the mean-variance relationship. Typically, in multivariate datasets like species-abundance data sets, counts for rare species will have many zeros with little variance, and the higher counts for more abundant species will be more variable.</p>
+<p>The mvabund approach improves power across a range of species with different variances and includes an assumption of a mean-variance relationship. It does this by fitting a single <a href="http://environmentalcomputing.net/generalised-linear-models/">generalised linear model</a> (GLM) to each response variable with a common set of predictor variables. We can then use resampling to test for significant community level or species level responses to our predictors.</p>
+<p>Also, the model-based framework makes it easier to check our assumptions and interpret uncertainty around our findings.</p>
+<p>If you’re interested in this method, watch the introductory video, <a href="http://eco-stats.blogspot.com/2012/03/introducing-mvabund-package-and-why.html">Introducing mvabund and why multivariate statistics in ecology is a bit like Rick Astley…</a></p>
+<p><img src="Rick-Astley.jpg" /></p>
+<p>In this example, we use a data set where researchers wanted to contrast the species composition of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of seven species of macroalgae were collected from Sydney Harbour, and the abundance of seven species of herbivorous crustacean recorded from each replicate (data from <a href="http://www.int-res.com/abstracts/meps/v208/p183-196/">Poore <em>et al</em>. 2000)</a>. The data are multivariate because seven response variables (the species) were measured from each of the samples.</p>
+<p><img src="MDS_image.jpg" /></p>
+<p>We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our <a href="http://environmentalcomputing.net/multidimensional-scaling/">multi-dimensional scaling</a> example) or test hypotheses about groups of samples by resampling these differences.</p>
+<p>Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models.
+<br><br></p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><br>
+First, install and load the mvabund package.</p>
+<pre class="r"><code>library(mvabund)</code></pre>
+<p>Your data should be formatted so that each sample is a row and each variable is a column. Download the <a href="http://environmentalcomputing.net/wp-content/uploads/2016/07/Herbivore_specialisation.csv">herbivore specialisation</a> data set, and import into R to see the desired format.</p>
+<pre class="r"><code>Herbivores &lt;- read.csv(file = &quot;Herbivore_specialisation.csv&quot;, header = TRUE)</code></pre>
+<p>The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.</p>
+<p>We will now use the just the abundance data (in columns 5 to 11) and convert it to an mvabund object format used by the mvabund package.</p>
+<pre class="r"><code>Herb_spp &lt;- mvabund(Herbivores[,5:11])</code></pre>
+<p>We can have a quick look at the spread of our data using the <code>boxplot</code> function.</p>
+<pre class="r"><code>par(mar=c(2,10,2,2)) # adjusts the margins
+boxplot(Herbivores[,5:11],horizontal = TRUE,las=2, main=&quot;Abundance&quot;)</code></pre>
+<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>It looks like some species of marine herbivores (e.g. <em>Ampithoe ngana</em>) are much more abundant and variable than others (e.g. <em>Cymadusa munnu</em>). It’s probably a good idea to check our mean-variance relationship then! We can do this using the <code>meanvar.plot</code> function:</p>
+<pre class="r"><code>meanvar.plot(Herb_spp)</code></pre>
+<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>You can clearly see that the species with high means (on the <em>x</em> axis) also have high variances (<em>y</em> axis).</p>
+<p>We can deal with this relationship by choosing a family of GLMs with an appropriate mean-variance assumption. The default family used by <em>mvabund</em> when fitting multivariate GLMs is <em>negative binomial</em> which assumes a quadratic mean-variance relationship and a log-linear relationship between the response variables and any continuous variables. In this example, we only have categorical variables so that one’s not too important. If you are unsure of these relationships, don’t worry, we can check our model fit later.</p>
+<p>Now let’s get back to our research questions. Are there differences in the species composition of the seven marine herbivores sampled? Do some of them specialise on particular types of algae while others are more generalised feeders? Which species? Let’s start by eyeballing the data.</p>
+<p>There is a ‘quick and dirty’ built-in plotting function in the <em>mvabund</em> package that allows us to contrast transformed abundances to the predictor variables of our choice. To contrast abundances against habitat, we would use:</p>
+<pre class="r"><code>plot(Herb_spp~as.factor(Herbivores$Habitat), cex.axis=0.8, cex=0.8)</code></pre>
+<pre><code>## 
+##  PIPING TO 2nd MVFACTOR</code></pre>
+<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Alternatively, we can include the argument <code>transformation="no"</code> to look at the raw abundance data. Because this plot is based on the base plotting language in R, you can add extra arguments to customise the graph. We have made the axis text (<code>cex.axis=0.8</code>) and the symbols (<code>cex=0.8</code>) smaller so that we can better see what’s going on.</p>
+<p>It is quite a messy graph but a couple of things jump out at us. It looks like the herbivore <em>Ampithoe ngana</em> is very abundant and will eat just about anything. On the other hand, <em>Cymadusa munnu</em> and <em>Plumithoe quadrimana</em> are quite rare. <em>Ampithoe ngana</em>, <em>A. caddi</em>, <em>A. kava</em> and <em>Exampithoe kutti</em> are generalist feeders whereas <em>Perampithoe parmerong</em> is largely specialised to the two species of <em>Sargassum</em>.</p>
+<p>Let’s now contrast the species composition across algal species to see if the models support our observations.</p>
+<p>The model syntax below fits our response variable (the mvabund object Herb_spp with the 100 counts of 7 species) to the predictor variable Habitat (type of algae).</p>
+<pre class="r"><code>mod1 &lt;- manyglm(Herb_spp ~ Herbivores$Habitat, family=&quot;poisson&quot;)</code></pre>
+<p><br><br></p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p><br>
+Before we examine the output, we need to check our model assumptions. We can use the <code>plot</code> function to generate a plot of residuals.</p>
+<pre class="r"><code>plot(mod1)</code></pre>
+<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>If the model is a good fit, we should see a random scatter of points. What we don’t want to see is a relationship, either linear or curvilinear, or a fan shape. This could mean that one of our assumptions was wrong: either our mean-variance relationship was wrongly specified, or our assumed relationship between our response and predictors was incorrect. Or, we could have missed a key explaining variable in our model which leaves a lot of unexplained variance.</p>
+<p>In this example, we see a clear fan shape in the residual plot, this means we have misspecified our mean-variance relationship. We can use the <code>family</code> argument to choose a distribution which is better suited to our data. For count data which does not fit the <code>'poisson</code> distribution, we can use the <code>negative_binomial</code> distribution.</p>
+<pre class="r"><code>mod2 &lt;- manyglm(Herb_spp ~ Herbivores$Habitat, family=&quot;negative_binomial&quot;)
+plot(mod2)</code></pre>
+<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
+## caption, : Only the first 7 colors will be used for plotting.</code></pre>
+<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>This residual plot is much better, there is now no discernible fan shape and we will use this model for all further analysis.
+<br><br></p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p><br>
+We can test the multivariate hypothesis of whether species composition varied across the habitats by using the <code>anova</code> function. This gives an analysis of deviance table where we use likelihood ratio tests and resampled p values to look for a significant effect of Habitat on the community data.</p>
+<pre class="r"><code>anova(mod2)</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 7 sec</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: Herb_spp ~ Herbivores$Habitat
+## 
+## Multivariate test:
+##                    Res.Df Df.diff   Dev Pr(&gt;Dev)    
+## (Intercept)            99                           
+## Herbivores$Habitat     95       4 625.2    0.001 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Arguments:
+##  Test statistics calculated assuming uncorrelated response (for faster computation) 
+##  P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
+<p>We can see from this table that there is a significant effect of Habitat (LRT = 625, P = 0.001), meaning that the species composition of herbivores clearly differs between the species of algae that they are found on.</p>
+<p>To examine this further, and see which herbivore species are more likely to be found on which algal species, we can run univariate tests for each species separately.</p>
+<p>This is done by using the <code>p.uni="adjusted"</code> argument in the <code>anova</code> function. The “adjusted” part of the argument refers to the resampling method used to compute the p values, taking into account the correlation between the response variables. This correlation is often found in ecological systems where different species will interact with each other, competing with or facilitating each others’ resource use.</p>
+<pre class="r"><code>anova(mod2, p.uni=&quot;adjusted&quot;)</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 7 sec</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: Herb_spp ~ Herbivores$Habitat
+## 
+## Multivariate test:
+##                    Res.Df Df.diff   Dev Pr(&gt;Dev)    
+## (Intercept)            99                           
+## Herbivores$Habitat     95       4 625.2    0.001 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Univariate Tests:
+##                    Peramphithoe_parmerong          Ampithoe_caddi         
+##                                       Dev Pr(&gt;Dev)            Dev Pr(&gt;Dev)
+## (Intercept)                                                               
+## Herbivores$Habitat                148.716    0.001         91.659    0.001
+##                    Ampithoe_kava          Ampithoe_ngana         
+##                              Dev Pr(&gt;Dev)            Dev Pr(&gt;Dev)
+## (Intercept)                                                      
+## Herbivores$Habitat        85.366    0.001         90.221    0.001
+##                    Cymadusa_munnu          Exampithoe_kutti         
+##                               Dev Pr(&gt;Dev)              Dev Pr(&gt;Dev)
+## (Intercept)                                                         
+## Herbivores$Habitat         21.452    0.001          107.254    0.001
+##                    Plumithoe_quadrimana         
+##                                     Dev Pr(&gt;Dev)
+## (Intercept)                                     
+## Herbivores$Habitat               80.575    0.001
+## Arguments:
+##  Test statistics calculated assuming uncorrelated response (for faster computation) 
+## P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
+<p>Even after adjusting for multiple testing, there is an effect of habitat on all species.</p>
+<p>So far, we have considered just one predictor variable of habitat. By altering the formula in mvabund, we can test more complex models. For example, to fit a model with both habitat and day or night, we would use:</p>
+<pre class="r"><code>mod3 &lt;- manyglm(Herb_spp ~ Herbivores$Habitat*Herbivores$DayNight, family=&quot;negative_binomial&quot;)
+anova(mod3)</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 23 sec</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: Herb_spp ~ Herbivores$Habitat * Herbivores$DayNight
+## 
+## Multivariate test:
+##                                        Res.Df Df.diff   Dev Pr(&gt;Dev)    
+## (Intercept)                                99                           
+## Herbivores$Habitat                         95       4 625.2    0.001 ***
+## Herbivores$DayNight                        94       1   6.2    0.581    
+## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.474    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Arguments:
+##  Test statistics calculated assuming uncorrelated response (for faster computation) 
+##  P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
+<p>You can see that the species composition of herbivores varies with habitat, but not between day and night.
+<br><br></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><br>
+<strong>Written.</strong> If we were writing a paper about the differences in habitat use by marine herbivores, we may write the following: There were different marine herbivores communities on different algal substrates (LRT = 625, P &lt; 0.001). We can be more descriptive about the community differences by using a graphical representation of our results.</p>
+<p><strong>Visual.</strong> Multivariate data are best visualised by ordination plots. See the <a href="https://cran.r-project.org/web/packages/boral/index.html">boral</a> package for model based ordination. To get started, watch <a href="https://www.youtube.com/watch?v=XmrVVMG1HXI">this</a> video.
+<br><br></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p><br>
+This method was created by UNSW’s Ecostats research group, you can keep up with their latest research on their <a href="http://eco-stats.blogspot.com/">blog</a>. They have been updating the mvabund package with many new exciting features, including block resampling and fourth corner analyses.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Wang, Y, U Naumann, ST Wright &amp; DI Warton (2012) mvabund - an R package for model-based analysis of multivariate abundance data. <em>Methods in Ecology and Evolution</em> 3: 471-474.
+</p>
+<p><br><br></p>
+<p><strong>Authors</strong>: Rachel V. Blakey &amp; Andrew Letten
+<br>
+Last updated:</p>
+<pre><code>## [1] &quot;Mon Jan 24 12:47:34 2022&quot;</code></pre>
+</div>

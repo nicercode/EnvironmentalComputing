@@ -10,17 +10,17 @@ output: html_document
 One of the most common sources of frustration for beginners in R is dealing with different data structures and types. Here is an overview of the most important data structures, types and how to check and manipulate them. 
 
 The terms 'structure' and 'type' are often used interchangable. To avoid confusion, for this help page, data structure refers whether the data is a vector, matrix or data frame etc. and type refers to  whether the data or variable is an integer, character or numeric etc. 
-<br><br>
+  
  
 ### One dimensional data (vectors)
-<br>
+ 
 The most basic data structure in R is a vector, a one-dimensional set of numbers or characters. This is the data structure that you will work with the most, albeit from within a data frame (see below). Vectors can be either atomic or list, atomic vectors differ to lists in that all elements within an atomic vector must be of the **same** type (see below). For the most part we work with atomic vector and the following help file refers to this type of data.   
-<br><br>
+  
 
 #### Common types of vectors
-<br>
+ 
 Common types of atomic vectors are logical, integer, numeric (i.e., double), character and factor. You can easily create each of these data types by using `c()`. In the integer example, the L forces R to consider those numbers as integers rather than numerical.
-<br>
+ 
 
 ```{r}
 eg_logical <- c(T, T, T, F, F) 
@@ -29,10 +29,10 @@ eg_numeric <- c(0, 2.3, 2.45, 2.99, -1.1)
 eg_character <- c("things", "in", "apostrophe" ,"are", "characters")
 eg_factor <- factor(c("NSW", "NSW", "ACT", "WA", "WA"))
 ```
-<br><br>
+  
   
 #### Factors (a special data type)
-<br>
+ 
 
 Notice how I couldn't just use the `c()` to create a factor. Though factors look (and behave for the most part) like characters, they are actually a special type of integer with predefined categories, known as levels. The factor in this example has three levels: NSW, ACT and WA.
 
@@ -54,10 +54,10 @@ sizes
 ```
 
 See [here](http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_levels_of_a_factor/) for more info on ordered factors. 
-<br><br>
+  
 
 #### Checking data types
-<br>
+ 
 You can check the data type of any vector using the `class` or `is` functions.
 
 ```{r, collapse= T}
@@ -65,35 +65,35 @@ class(eg_logical)
 is.integer(eg_integer)
 is.factor(eg_factor)
 ```
-<br><br>
+  
 
 #### Automatic coercion 
-<br>
+ 
 As all elements within an atomic vector must be the same type, combining different types will coerce the data to the most flexible. Types from least to most flexible are: logical, integer, double, and character. For example, combining and integers and character will produce a character vector. This is something to be aware whilst manipulating your own data, especially when merging data frames. 
 
 ```{r, collapse= T}
 eg_coerced <- c("tricks", 1, 2, 3, 4)
 class(eg_coerced)
 ```
-<br><br>
+  
 
 #### Coercing data
-<br>
+ 
 If you find your data is the wrong type, you can use the `as` functions to coerce data from one type to another. Be aware of what happens to your data after coercion. For example, coercing logical to numeric replaces F with 0s and Ts with 1s and any nonsensical coercion (like trying to make character "NSW" into a numeric) will result in NAs. 
 
 ```{r, collapse = T}
 as.numeric(eg_logical)
 as.numeric(eg_character)
 ```
-<br><br>
+  
 
 ### Two dimensional data (matrices and data frames)
-<br>
+ 
 For the most part, we tend to work with two dimensional data containing both columns and rows. Like the one dimensional vectors, they come in two forms: matrices, where all vectors must be of all the same type of data, and data frames, which can be made up of vectors containing different data types.
-<br><br>
+  
 
 #### Matrices
-<br>
+ 
 Matrices are easily constructed in R and can you check if its a matrix using the `class` function. For example, to make a matrix with 3 rows and 2 columns with 6 values:
 
 ```{r}
@@ -112,10 +112,10 @@ Think of matrices as atomic vectors with dimensions; the number of rows and colu
 is.logical(eg_matrix)
 as.numeric(eg_logical)
 ``` 
-<br><br>
+  
 
 #### Data frames
-<br>
+ 
 The most common data structure we work with is the data frame. Data frames are just a collection of atomic vectors of equal length stuck together. They are different to matrices as they can contain vectors of different types.
 
 To make a simple data frame that combines three of the vectors we made above, we could use:
@@ -146,16 +146,16 @@ str(eg_data_frame$eg_character)
 levels(eg_data_frame$eg_factor)
 is.numeric(eg_data_frame$numeric)
 ``` 
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Further information on data types in R can be found [here](https://www.stat.auckland.ac.nz/~paul/ItDT/HTML/node64.html)
 and [here](http://www.statmethods.net/input/datatypes.html)
-<br><br>
+  
 
 **Author**: Keryn Bain
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

@@ -10,10 +10,10 @@ editor_options:
 You will need to read [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/) and [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/) as an introduction to mixed models for continuous data, as well as the help pages on [Generalised linear models](http://environmentalcomputing.net/generalised-linear-models/) as an introduction to modelling discrete data. 
 
 This page will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).
-<br><br>
+  
 
 **Properties of mixed models**
-<br>
+ 
 **Assumptions**. The assumptions of generalised linear mixed models are a combination of the assumptions of GLMs and mixed models. 
 
 1. The observed $y$ are independent, conditional on some predictors $x$  
@@ -21,10 +21,10 @@ This page will combine the two to allow you to model discrete data (e.g., presen
 3. There is a straight line relationship between some known function (link) of the mean of $y$ and the predictors $x$ and random effects $z$  
 4. Random effects $z$ are independent of $y$.  
 5. Random effects $z$ are normally distributed  
-<br><br>
+  
 
 ###Running the analysis
-<br>
+ 
 We will analyse the same data set as the first two mixed model tutorials. This data set aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. In the first two tutorials, we analysed the total count of invertebrates, which we assumed to be continuous as the total counts were large. Here, we will analyse the counts and presence/absences of individual species, which require generalised linear mixed models. 
 
 We will use the package [lme4](https://cran.r-project.org/web/packages/lme4/index.html) for all our mixed effect modelling. It allows us to model both continuous and discrete data with one or more random effects. There are however some limitations for discrete data.
@@ -179,10 +179,10 @@ Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunat
 **Hypothesis test for random effects**
 
 As before you could run hypothesis tests on the random effects using a parametric bootstrap. See [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/) and [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/) for code that you could modify for this situation.
-<br><br>
+  
 
 ###Communicating results
-<br>
+ 
 **Written.** Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the `anova`) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. "There is strong evidence (p<0.001) of negative effect of modification on total abundance". For multiple predictors it's best to display the results in a table. 
 
 **Visual.** The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility. 
@@ -201,10 +201,10 @@ legend("topleft", inset=.02,
 Est.means <- summarize(means,Estuaries$Estuary, mean)$means #extract means by Estuary
 stripchart(Est.means~ sort(unique(Estuary)),data=Estuaries,pch=18,col="red",vertical = TRUE,add=TRUE) #plot means by estuary
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 You can type `?glmer` into R for help with this function.
 
 [Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4.
@@ -212,10 +212,10 @@ You can type `?glmer` into R for help with this function.
 <p style="margin-left:.5in;text-indent:-.5in">Faraway, JJ (2005) *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC Press.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">Zuur, A, EN Ieno and GM Smith (2007) *Analysing ecological data*. Springer Science & Business Media.</p>
-<br><br>
+  
 
 **Author**: Gordana Popovic
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

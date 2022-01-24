@@ -8,10 +8,10 @@ output: html_document
 When you started to learn R, one of the first things you probably figured out was how to get your data into R. You had to use some method to read your lovely excel datasets into R so you could achieve what you wanted. Maybe ```read.csv``` or ```read.table```, or maybe you use Hadley Wickham's recent package ```readr```.
 
 This tutorial is intended to 'go back to the basics' a little bit, and learn how to 'create' our own data.
-<br><br>
+  
 
 ### Why would you want to create your own data?
-<br>
+ 
 You probably already have your data in a nice fancy excel document and, as such, there may seem like no good reason to 'make up' data. There are, however, a number of good reasons that this can come in handy:
 
 **1. To work on small-scale problems before using all your data  
@@ -28,10 +28,10 @@ It's important to note here that in order for someone to help you, they don't ne
 ![](help-me-help-you.gif)
 
 This tutorial is intended to help people who are relatively new to R create a reproducible example and also make fake data for other purposes.
-<br><br>
+  
 
 ### So, how do you create a 'fake' dataset?
-<br>
+ 
 In the simplest case, you can create multiple [vectors](http://www.r-tutor.com/r-introduction/vector) and then combine them into a data.frame.
 
 ```{r}
@@ -130,7 +130,7 @@ data <- runif(100, min=-10, max=-5)
 
 
 Luckily, R has just about every distribution built in to draw from. This is really helpful if you are theorizing data before you start collection of data! A comprehensive list is [here](http://www.stat.umn.edu/geyer/old/5101/rlook.html). 
-<br><br>
+  
 
 ### What if your problem is a little more complicated?
 
@@ -157,10 +157,10 @@ site <- rep(c("a", "b", "c", "d"), length=50)
 ```
 
 This becomes increasingly valuable as you increase the number of repetitions and/or factors to include!
-<br><br>
+  
 
 ### Creating all combinations of multiple categorical factors
-<br>
+ 
 ```expand.grid``` is very useful for creating a data frame that has every combination of all levels from multiple factors. For example, if we had sampled four sites from each of four regions in each of three states, we could use this to create 
 
 ```{r}
@@ -175,10 +175,10 @@ study$richness <- rnorm(nrow(study), mean=15, sd=3)
 ```
 
 The ```nrow``` argument is used in order to replace the correct amount of data into the dataframe (in this case, 48, the number of rows in your study design).
-<br><br>
+  
 
 ### What are some other options to make a reproducible example?
-<br>
+ 
 You could use a built in dataset that is loaded in base R, in order to reproduce your problem. You can quickly see the list of built-in datasets.
 
 ```{r}
@@ -224,16 +224,16 @@ dput(tmp)
 ```
 
 This is a really great way to send code to someone to ask for help!
-<br><br>
+  
 
 ### What about really complex problems?
-<br>
+ 
 This tutorial is mainly intended for new R users, and it is likely the tips and tricks above will help other people to help you a large majority of the time. However, in the case it doesn't, it might be necessary to give some extra information.```sessionInfo()``` gives a summary of the R version currently running, the operating system and which packages are loaded
 
 ```{r}
 sessionInfo()
 ```
-<br><br>
+  
 
 **Other important notes**
 1. Be sure to clearly define what you are after. Do you have a purely statistics question, or do you have a coding question?
@@ -246,19 +246,19 @@ sessionInfo()
 3. If you send the easiest possible reproducible example to someone, the greater the likelihood they will help you, and more efficiently.  
 4. A lot of the time, by simplifying the problem, you may even solve it yourself!  
 5. Learn how to use ```dput```, but don't forget to name the object when copying the code from the R console.  
-<br><br>
+  
 
 ## Where can you get further help?
-<br>
+ 
 All of this information isn't really useful unless you have someone to answer your question after you've made your nice reproducible example. One alternative to asking for help from colleagues and friends is to use online websites, such as [Stack Overflow](https://stackoverflow.com/). The tips in this tutorial will help you to ask a question that is not removed or banned. Also, when you [ask a question](http://www.wikihow.com/Ask-a-Question-on-Stack-Overflow) be sure to show you have done previous research.
 
 <center>![](stack.png)</center>
 
 There is more help on the web for making reproducible examples. For instance, see [here](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example), [here](http://clayford.github.io/dwir/dwr_12_generating_data.html), [here](http://adv-r.had.co.nz/Reproducibility.html), or [here](https://www.r-bloggers.com/minimal-reproducible-examples/). 
-<br><br>
+  
 
 **Author**: Corey T. Callaghan
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

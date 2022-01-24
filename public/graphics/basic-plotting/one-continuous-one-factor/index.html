@@ -11,22 +11,22 @@
     <title>One Continuous and One Categorical Variable :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2425,21 +2483,17 @@
 <p>We will use sample data from an experiment that contrasted the metabolic rate of two species of prawns and introduce two commonly used types of plots for this purpose: boxplots and bar plots.</p>
 <p>Firstly, download the sample data file, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Prawns_MR.csv">Prawns_MR.csv</a>, and import into R.</p>
 <pre class="r"><code>Prawns &lt;- read.csv(file = &quot;Prawns_MR.csv&quot;)</code></pre>
-<p><br><br></p>
 <div id="boxplots" class="section level3">
 <h3>Boxplots</h3>
-<p><br>
-Boxplots are easily made with the <code>boxplot</code> function. Boxplots show the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.</p>
+<p>Boxplots are easily made with the <code>boxplot</code> function. Boxplots show the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.</p>
 <p>To contrast metabolic rate across the two species, we would use:</p>
 <pre class="r"><code>boxplot(Metabolic_rate ~ Species, data = Prawns)</code></pre>
 <p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>The continuous variable is on the left of the tilde (~) and the categorical variable is on the right. Straight away you can see that species B has a higher metabolic rate than species A.
-<br><br></p>
+<p>The continuous variable is on the left of the tilde (~) and the categorical variable is on the right. Straight away you can see that species B has a higher metabolic rate than species A.</p>
 </div>
 <div id="bar-plots" class="section level3">
 <h3>Bar plots</h3>
-<p><br>
-These sorts of data are also commonly visualised with a bar plot that displays the means of the continuous variable for each level of the categorical variable, with error bars displaying some measures of variation within each category. The error bars could be the standard deviation, standard error or 95% confidence intervals.</p>
+<p>These sorts of data are also commonly visualised with a bar plot that displays the means of the continuous variable for each level of the categorical variable, with error bars displaying some measures of variation within each category. The error bars could be the standard deviation, standard error or 95% confidence intervals.</p>
 <p>While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the <code>summarise</code> and <code>group_by</code> functions from the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> to calculate the means and measures of variation for each level of your categorical variable (see <a href="http://environmentalcomputing.net/summarising-data/">Summarising data</a>).</p>
 <p>Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see <a href="http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/">bar plots with error bars</a>).</p>
 <pre class="r"><code>library(dplyr)
@@ -2457,13 +2511,11 @@ Species.summary &lt;- Prawns %&gt;% # the names of the new data frame and the da
 
 arrows(Prawn.plot, Species.summary$lower, Prawn.plot, Species.summary$upper, angle=90, code=3)</code></pre>
 <p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Note that plots of means and error bars can be misleading as they hide the true distributions of the data. Means can also be misleading when data are very skewed, and calculations for error bars using <em>t</em> statistics (e.g., 95% confidence intervals) assume the data are normally distributed.
-<br><br></p>
+<p>Note that plots of means and error bars can be misleading as they hide the true distributions of the data. Means can also be misleading when data are very skewed, and calculations for error bars using <em>t</em> statistics (e.g., 95% confidence intervals) assume the data are normally distributed.</p>
 </div>
 <div id="formatting-plots" class="section level3">
 <h3>Formatting plots</h3>
-<p><br>
-Box plots and bar plots can be formatted using the basic R formatting in the base graphics package. The code below details some of the more commonly used formatting commands for these plots. These commands can be used for any plotting function in the graphics package.</p>
+<p>Box plots and bar plots can be formatted using the basic R formatting in the base graphics package. The code below details some of the more commonly used formatting commands for these plots. These commands can be used for any plotting function in the graphics package.</p>
 <p><strong>Add axis labels or titles</strong><br />
 Axis labels are produced with the <code>xlab</code> and <code>ylab</code> arguments. Titles are provided with the <code>main</code> argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.</p>
 <pre class="r"><code>boxplot(Metabolic_rate~Species, data = Prawns, xlab = &#39;Species&#39;, ylab = &#39;Metabolic rate&#39;)</code></pre>
@@ -2482,18 +2534,14 @@ Colour can be added to any part of the plots (axis, fonts etc.) using <code>col<
 <p>Here we will simply change the colour of the bars in the bar plot to red.</p>
 <pre class="r"><code>barplot(Species.summary$mean, names.arg = Species.summary$Species,
         ylab=&quot;Metabolic rate&quot;, xlab = &quot;Species&quot;,ylim=c(0,1),col=&#39;red&#39;)</code></pre>
-<p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?boxplot</code> and <code>?barplot</code> to get the R help for these functions.
-<br><br></p>
-<p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 13:22:50 2022&quot;</code></pre>
+<p>Type <code>?boxplot</code> and <code>?barplot</code> to get the R help for these functions.</p>
+<p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:44:57 2022&quot;</code></pre>
 </div>
 
 
@@ -3176,42 +3224,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3227,35 +3239,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3277,40 +3260,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3388,25 +3337,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3422,27 +3352,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3545,6 +3458,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3673,6 +3737,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3734,19 +3814,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3762,5 +3842,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

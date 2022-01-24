@@ -11,22 +11,22 @@
     <title>Two Continuous Variable :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2420,24 +2478,19 @@
 
 
 <p>Visualising the relationship between two continuous variables is one of the most commonly used graphical techniques in the sciences. This page details how to produce simple scatterplots to display how one continuous variable is related to another.</p>
-<p><img src="Two_continuous_variables_image.jpg" />
-<br><br></p>
+<p><img src="Two_continuous_variables_image.jpg" /></p>
 <p>For this worked example, download a data set on plant heights around the world, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Plant_height.csv">Plant_height.csv</a>, and import into R.</p>
 <pre class="r"><code>Plant_height &lt;- read.csv(file = &quot;Plant_height.csv&quot;, header = TRUE)</code></pre>
-<p><br><br></p>
-<p>###Scatterplots###
-<br>
-To visualise how plant height varies with temperature, we can use a simple scatterplot, using the <code>plot</code> function. Place the Y variable on the left of the tilde (~) and the X variable on the right. The <code>data=Plant_height</code> argument tells R to look in the data frame Plant_height for those two variables.</p>
+<p>###Scatterplots###</p>
+<p>To visualise how plant height varies with temperature, we can use a simple scatterplot, using the <code>plot</code> function. Place the Y variable on the left of the tilde (~) and the X variable on the right. The <code>data=Plant_height</code> argument tells R to look in the data frame Plant_height for those two variables.</p>
 <pre class="r"><code>plot(height ~ temp, data = Plant_height)</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>If the two variables you would like to plot are in different objects in R, you would simply use:</p>
 <pre class="r"><code>plot(y ~ x)</code></pre>
-<p>where <em>y</em> and <em>X</em> are two vectors of equal length.
-<br><br></p>
+<p>where <em>y</em> and <em>X</em> are two vectors of equal length.</p>
 <div id="formatting-plots" class="section level3">
 <h3>Formatting plots</h3>
-<p><br>
-Scatterplots can be formatted using the basic R formatting in the graphics package. The code below details some of the more commonly used formatting commands for simple scatterplots. These commands can be used for any plotting function in the graphics package.</p>
+<p>Scatterplots can be formatted using the basic R formatting in the graphics package. The code below details some of the more commonly used formatting commands for simple scatterplots. These commands can be used for any plotting function in the graphics package.</p>
 <p><strong>Add axis labels or titles</strong>
 Axis labels are produced with the <code>xlab</code> and <code>ylab</code> arguments. Titles are provided with the <code>main</code> argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.</p>
 <pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;,main=&#39;Plant height vs temperature&#39;)</code></pre>
@@ -2451,30 +2504,24 @@ The choice of symbols to use in plotting is extensive and choices are accessed u
 <p>A solid circles <code>pch=16</code> or <code>pch=19</code> are often the neatest way to display data on a scatterplot.</p>
 <pre class="r"><code>plot(height~temp,data=Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;, ylim = c(0,80),pch=16)</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p><strong>Adding colour</strong>
-<br>
-Colour can be added to any part of the plots (axis, fonts etc.) using <code>col</code> argument. There are over 600 colours that can be plotted, type <code>colours()</code> for the whole range.</p>
+<p><strong>Adding colour</strong></p>
+<p>Colour can be added to any part of the plots (axis, fonts etc.) using <code>col</code> argument. There are over 600 colours that can be plotted, type <code>colours()</code> for the whole range.</p>
 <p>Here we will simply change the colour of the symbols to blue.</p>
 <pre class="r"><code>plot(height~temp,data=Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;, pch=16, col=&quot;blue&quot;)</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p><strong>Adding a line of best fit</strong>
-<br>
-To further explore the relationship between two variables you can add a line of best fit. For example, to add the line of best fit from a simple linear regression, we would use the linear modelling function, <code>lm</code>, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter <code>abline</code>.</p>
+<p><strong>Adding a line of best fit</strong></p>
+<p>To further explore the relationship between two variables you can add a line of best fit. For example, to add the line of best fit from a simple linear regression, we would use the linear modelling function, <code>lm</code>, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter <code>abline</code>.</p>
 <p>See the page on <a href="http://environmentalcomputing.net/linear-regression/">linear regression</a> for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:</p>
 <pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;log(Plant height)&#39;,pch=16)
 abline(lm(loght ~ temp, data = Plant_height))</code></pre>
-<p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?plot</code> and <code>?abline</code> to get the R help for these functions.</p>
-<p><br><br></p>
-<p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 13:19:54 2022&quot;</code></pre>
+<p>Type <code>?plot</code> and <code>?abline</code> to get the R help for these functions.</p>
+<p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:45:04 2022&quot;</code></pre>
 </div>
 
 
@@ -3157,42 +3204,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3208,35 +3219,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3258,40 +3240,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3369,25 +3317,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3403,27 +3332,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3526,6 +3438,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3654,6 +3717,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3715,19 +3794,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3743,5 +3822,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

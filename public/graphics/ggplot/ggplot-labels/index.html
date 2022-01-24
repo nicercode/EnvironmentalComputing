@@ -11,22 +11,22 @@
     <title>Titles and Axes Labels :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2423,41 +2481,34 @@
 <p>This page provides help for adding titles, legends and axis labels.</p>
 <p>Before you get started, read the page on the <a href="http://environmentalcomputing.net/plotting-with-ggplot-the-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
-<p><br><br></p>
 <p><img src="ggplot1_basics_image.JPG" /></p>
 <p>In these examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
 <pre class="r"><code>data(iris)</code></pre>
 <p>The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial:</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() </code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="adding-a-title" class="section level3">
 <h3>Adding a title</h3>
-<p><br>
-To add a title to your plot, add the code <code>+ggtitle("Your Title Here")</code> to your line of basic ggplot code. Ensure you have quotation marks at the start and end of your title.</p>
+<p>To add a title to your plot, add the code <code>+ggtitle("Your Title Here")</code> to your line of basic ggplot code. Ensure you have quotation marks at the start and end of your title.</p>
 <pre class="r"><code>print(IrisPlot + ggtitle(&quot;Petal and sepal length of iris&quot;))</code></pre>
 <p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>If you have a particulary long title that would work better on two lines, use <code>\n</code> for a new line. Make sure to use the correct slash.</p>
 <pre class="r"><code>print(IrisPlot + ggtitle(&quot;Petal and sepal length \nof three species of iris&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="changing-axis-labels" class="section level3">
 <h3>Changing axis labels</h3>
-<p><br>
-To alter the labels on the axis, add the code <code>+labs(y= "y axis name", x = "x axis name")</code> to your line of basic ggplot code.</p>
+<p>To alter the labels on the axis, add the code <code>+labs(y= "y axis name", x = "x axis name")</code> to your line of basic ggplot code.</p>
 <pre class="r"><code>print(IrisPlot + labs(y=&quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;))</code></pre>
 <p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Note: You can also use <code>+labs(title = "Title")</code> which is equivalent to <code>ggtitle</code>.</p>
 <p>For example:</p>
 <pre class="r"><code>print(IrisPlot + labs(title= &quot;Petal and Sepal Length \nof Iris&quot;,
                       y=&quot;Petal Length (cm)&quot;, x = &quot;Sepal Length (cm)&quot;))</code></pre>
-<p><br><br></p>
 </div>
 <div id="changing-the-legend-title" class="section level3">
 <h3>Changing the legend title</h3>
-<p><br>
-In the same way you edited the title and axis names, you can alter the legend title by adding <code>+labs(colour = "Legend Title")</code> to the end of your basic plot code. Note: This will only work if you have actually added an extra variable to your basic <code>aes</code> code (in this case, using <code>colour=Species</code> to group the points by Species).</p>
+<p>In the same way you edited the title and axis names, you can alter the legend title by adding <code>+labs(colour = "Legend Title")</code> to the end of your basic plot code. Note: This will only work if you have actually added an extra variable to your basic <code>aes</code> code (in this case, using <code>colour=Species</code> to group the points by Species).</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point()
 
 print(IrisPlot + labs(colour = &quot;Iris species&quot;))</code></pre>
@@ -2465,12 +2516,10 @@ print(IrisPlot + labs(colour = &quot;Iris species&quot;))</code></pre>
 <p>Note: If you are using a histogram, boxplot or bar graph then it is slightly different. You must use <code>fill</code> instead of <code>colour</code>.</p>
 <pre class="r"><code>IrisBox &lt;- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot()
 print(IrisBox+ labs(fill = &quot;Iris species&quot;))</code></pre>
-<p><br><br></p>
 </div>
 <div id="altering-the-text-style-of-your-legend-axis-or-title" class="section level3">
 <h3>Altering the text style of your legend, axis or title</h3>
-<p><br>
-The font, colour, size and emphasis of your labels and text can all be altered. To do this, use the code <code>theme()</code> and customise with <code>element_text()</code> to alter these properties.</p>
+<p>The font, colour, size and emphasis of your labels and text can all be altered. To do this, use the code <code>theme()</code> and customise with <code>element_text()</code> to alter these properties.</p>
 <p>The basic format is: <code>mytheme &lt;- theme(title type = element_text(your formats))</code></p>
 <p>Where “title type” specifies which particular text you want to edit. These can be:</p>
 <ul>
@@ -2482,8 +2531,7 @@ The font, colour, size and emphasis of your labels and text can all be altered. 
 </li>
 <li>legend categories - <code>legend.text = element_text()</code><br />
 </li>
-<li>appearance of axis values/numbers. - <code>axis.text = element_text()</code><br />
-<br><br></li>
+<li>appearance of axis values/numbers. - <code>axis.text = element_text()</code></li>
 </ul>
 <p><strong>Formatting choices</strong>
 The font, colour, size and emphasis of any of these labels can be altered by arguments within <code>element_text(your format)</code>.</p>
@@ -2495,14 +2543,12 @@ The font, colour, size and emphasis of any of these labels can be altered by arg
 </li>
 <li>colour. - the colour can be changed to any of the colours listed <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a>. Remember to include “” before and after the colour name. For example, <code>colour = "steelblue2"</code>.<br />
 </li>
-<li>size. - the size of the text. This is specified by entering a number. For example, <code>size = (3)</code>.<br />
-<br><br></li>
+<li>size. - the size of the text. This is specified by entering a number. For example, <code>size = (3)</code>.</li>
 </ul>
 </div>
 <div id="example-code" class="section level3">
 <h3>Example code</h3>
-<p><br>
-Here is an example of a theme that customises the title, the legend, the axis labels and specifies the font, emphasis, size and colour of each of these. The figure is then plotted with this theme and further code that provides the content of the title and axis labels:</p>
+<p>Here is an example of a theme that customises the title, the legend, the axis labels and specifies the font, emphasis, size and colour of each of these. The figure is then plotted with this theme and further code that provides the content of the title and axis labels:</p>
 <pre class="r"><code>mynamestheme &lt;- theme(plot.title = element_text(family = &quot;Helvetica&quot;, face = &quot;bold&quot;, size = (15)), 
                  legend.title = element_text(colour = &quot;steelblue&quot;,  face = &quot;bold.italic&quot;, family = &quot;Helvetica&quot;), 
                  legend.text = element_text(face = &quot;italic&quot;, colour=&quot;steelblue4&quot;,family = &quot;Helvetica&quot;), 
@@ -2510,13 +2556,11 @@ Here is an example of a theme that customises the title, the legend, the axis la
                   axis.text = element_text(family = &quot;Courier&quot;, colour = &quot;cornflowerblue&quot;, size = (10)))
   
 print(IrisPlot + mynamestheme + labs( title= &quot;Petal and sepal \nlength of iris&quot;, y=&quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="removing-a-label" class="section level3">
 <h3>Removing a label</h3>
-<p><br>
-Another option is to remove the text from the plot entirely. To do this you use the code <code>= element_blank()</code>, remembering those open and closed brackets. The following code would remove the legend title and axis text.</p>
+<p>Another option is to remove the text from the plot entirely. To do this you use the code <code>= element_blank()</code>, remembering those open and closed brackets. The following code would remove the legend title and axis text.</p>
 <pre class="r"><code>myblanktheme &lt;- theme(plot.title = element_text(family = &quot;Helvetica&quot;, face = &quot;bold&quot;, size = (15)), 
                  legend.title = element_blank(), 
                  legend.text = element_text(face = &quot;italic&quot;, colour=&quot;steelblue4&quot;,family = &quot;Helvetica&quot;), 
@@ -2524,10 +2568,8 @@ Another option is to remove the text from the plot entirely. To do this you use 
                   axis.text = element_blank())
   
 print(IrisPlot +myblanktheme + labs( title= &quot;Petal and sepal \nlength of iris&quot;, y=&quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;))</code></pre>
-<p><br><br></p>
-<p>###Further help
-<br>
-To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
+<p>###Further help</p>
+<p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
 * <a href="http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/">altering overall appearance</a>.<br />
 * <a href="http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/">colours and symbols</a>.</p>
 <p>Help on all the ggplot functions can be found at the <a href="http://docs.ggplot2.org/current/">The master ggplot help site</a>.</p>
@@ -2535,11 +2577,9 @@ To further customise the aesthetics of the graph, including colour and formattin
 <p style="margin-left: .5in; text-indent: -.5in;">
 Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with quite a bit of help online <a href="http://www.cookbook-r.com/Graphs/">here</a>
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Fiona Robinson
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 13:40:57 2022&quot;</code></pre>
+<p><strong>Author</strong>: Fiona Robinson</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:45:37 2022&quot;</code></pre>
 </div>
 
 
@@ -3225,42 +3265,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3276,35 +3280,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3326,40 +3301,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3437,25 +3378,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3471,27 +3393,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3594,6 +3499,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3722,6 +3778,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3783,19 +3855,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3811,5 +3883,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

@@ -11,22 +11,22 @@
     <title>Contingency Tables :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2437,12 +2495,10 @@
 <p>These are the expected counts if the null hypothesis is true. In this example, if the numbers of black, red and yellow faced birds are in the same proportions for each of the bill colours.</p>
 <p>The observed counts are then contrasted to the expected counts with the <span class="math inline">\(\chi^2\)</span> test statistic,</p>
 <p><span class="math inline">\(\chi^{2} = \sum_{i=1}^{k} \frac{(O_{i}-E_{i})^2}{E_{i}}\)</span></p>
-<p>where <em>O</em> and <em>E</em> are the observed and expected numbers in each of the cells of the table.
-<br><br></p>
+<p>where <em>O</em> and <em>E</em> are the observed and expected numbers in each of the cells of the table.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p><br>
-With a calculator, you could calculate <span class="math inline">\(\chi^2\)</span> and then determine the probability of obtaining that <span class="math inline">\(\chi^2\)</span> value from a table of the known probability distribution of <span class="math inline">\(\chi^2\)</span>. In R, we can obtain that probability by:</p>
+<p>With a calculator, you could calculate <span class="math inline">\(\chi^2\)</span> and then determine the probability of obtaining that <span class="math inline">\(\chi^2\)</span> value from a table of the known probability distribution of <span class="math inline">\(\chi^2\)</span>. In R, we can obtain that probability by:</p>
 <pre class="r"><code>pchisq(x, df,lower.tail = FALSE)</code></pre>
 <p>with <em>x</em> = your value of <span class="math inline">\(\chi^2\)</span>, and degrees of freedom (<em>df</em>) = (number of row-1) x (number of columns-1). The <code>lower.tail = FALSE</code> bit gives you the probability that <span class="math inline">\(\chi^2\)</span> is greater than your value.</p>
 <p>Easier, is to run the whole analysis in R. Firstly, you would need to enter the observed counts as a matrix.</p>
@@ -2452,13 +2508,11 @@ With a calculator, you could calculate <span class="math inline">\(\chi^2\)</spa
 <pre class="r"><code>Gfinch</code></pre>
 <p>Run the contingency analysis with the <code>chisq.test</code> function.</p>
 <pre class="r"><code>chisq.test(x, correct = F)</code></pre>
-<p>where <em>x</em> is the name of the matrix holding the observed data (for this example use the object Gfinch)
-<br><br></p>
+<p>where <em>x</em> is the name of the matrix holding the observed data (for this example use the object Gfinch)</p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
-<p><br>
-The output from a contingency table is very simple: the value of <span class="math inline">\(\chi^2\)</span>, the degrees of freedom and the <em>p</em>-value. The <em>p</em>-value gives the likelihood of your observed counts coming from a population where the null hypothesis was true.</p>
+<p>The output from a contingency table is very simple: the value of <span class="math inline">\(\chi^2\)</span>, the degrees of freedom and the <em>p</em>-value. The <em>p</em>-value gives the likelihood of your observed counts coming from a population where the null hypothesis was true.</p>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -2472,40 +2526,32 @@ The output from a contingency table is very simple: the value of <span class="ma
 ## Black bill    1.628236 -1.45259188  -0.3250357
 ## Red bill      0.284793  1.06130659  -1.6033875
 ## Yellow bill  -1.317120  0.05441038   1.5804894</code></pre>
-<p>In this example, you can see that birds with a black face are more likely to have a black bill than expected by chance, and less likely to have a yellow bill.
-<br><br></p>
+<p>In this example, you can see that birds with a black face are more likely to have a black bill than expected by chance, and less likely to have a yellow bill.</p>
 </div>
 <div id="assumptions-to-check" class="section level3">
 <h3>Assumptions to check</h3>
-<p><br>
-<strong>Independence.</strong> The <span class="math inline">\(\chi^2\)</span> test assumes that the observations are classfied into each category independently of each other. This is a sampling design issue and is usually avoided by random sampling. In this example, there would be problems is you deliberately chose birds with a combination of bill and face colour if you were missing that combination in the birds already sampled.</p>
+<p><strong>Independence.</strong> The <span class="math inline">\(\chi^2\)</span> test assumes that the observations are classfied into each category independently of each other. This is a sampling design issue and is usually avoided by random sampling. In this example, there would be problems is you deliberately chose birds with a combination of bill and face colour if you were missing that combination in the birds already sampled.</p>
 <p><strong>Sample size.</strong> The <span class="math inline">\(\chi^2\)</span> statistic can only be reliably compared to the <span class="math inline">\(\chi^2\)</span> distribution if sample sizes are sufficiently large. You should check that at least 20% of the expected frequencies are larger than 5. You can see the expected counts for each category by adding <font face="monospace">$expected</font> to the end of your <span class="math inline">\(\chi^2\)</span> test. For example,</p>
 <pre class="r"><code>chisq.test(Gfinch)$expected</code></pre>
-<p>If this assumption has not been met, you could combine categories (if you have more than two and makes sense to do so), run a randomisation test or consider log-linear modelling.
-<br><br></p>
+<p>If this assumption has not been met, you could combine categories (if you have more than two and makes sense to do so), run a randomisation test or consider log-linear modelling.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><br>
-<strong>Written.</strong> The results of analysing a contingency table can be easily presented in the text of a results section. For example, “There was a significant association between the bill colour and the face colour of Gouldian finches (<span class="math inline">\(\chi^2\)</span> = 12.88, df = 2, P = 0.01).”</p>
+<p><strong>Written.</strong> The results of analysing a contingency table can be easily presented in the text of a results section. For example, “There was a significant association between the bill colour and the face colour of Gouldian finches (<span class="math inline">\(\chi^2\)</span> = 12.88, df = 2, P = 0.01).”</p>
 <p><strong>Visual.</strong> Count data are best presented as a bar plot with the counts on the Y axis and the categories on the X axis.</p>
 <pre class="r"><code>barplot(Gfinch,beside=T,ylab=&quot;Count&quot;,xlab=&quot;Face colour&quot;,col=c(&quot;black&quot;,&quot;red&quot;,&quot;yellow&quot;))
 legend(&quot;topright&quot;,inset=0.15,c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;),pch=15,col=c(&quot;black&quot;,&quot;red&quot;,&quot;yellow&quot;))</code></pre>
 <p><img src="/statistics/catagorical/contingency-tabs/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>See the graphing modules for making better versions of these figures that are suitable for reports or publications.
-<br><br></p>
+<p>See the graphing modules for making better versions of these figures that are suitable for reports or publications.</p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>chisq.test</code> to get the R help for this function.</p>
+<p>Type <code>chisq.test</code> to get the R help for this function.</p>
 <p>Quinn and Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Chapter 14. Analyzing frequencies.</p>
-<p>McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 20.3 Comparing proportions among two or more independent samples.
-<br><br></p>
-<p><strong>Author</strong>: Alistair Poore
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 24 12:26:31 2022&quot;</code></pre>
+<p>McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 20.3 Comparing proportions among two or more independent samples.</p>
+<p><strong>Author</strong>: Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:08 2022&quot;</code></pre>
 </div>
 
 
@@ -3179,78 +3225,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -3270,52 +3244,6 @@ Last updated:</p>
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -3323,6 +3251,25 @@ Last updated:</p>
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -3395,25 +3342,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3429,27 +3357,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3552,6 +3463,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3688,6 +3750,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3749,19 +3827,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3777,5 +3855,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

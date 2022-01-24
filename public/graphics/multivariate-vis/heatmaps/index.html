@@ -11,22 +11,22 @@
     <title>Heatmaps :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2425,11 +2483,9 @@
 <p>We will use the package <a href="https://cran.r-project.org/web/packages/pheatmap/index.html">pheatmap</a> (pretty heatmaps) to draw our heatmaps. The base package of R can draw heatmaps as well, but is somewhat limited. First, install the package and load into R. We will also need the package dplyr for selecting rows and columns.</p>
 <pre class="r"><code>library(pheatmap)
 library(dplyr)</code></pre>
-<p><br><br></p>
 <div id="reading-in-the-data" class="section level3">
 <h3>Reading in the data</h3>
-<p><br>
-With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.counts.csv">Bac.counts.csv</a> and <a href="http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.factors.csv">Bac.factors.csv</a>, and import into R.</p>
+<p>With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.counts.csv">Bac.counts.csv</a> and <a href="http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.factors.csv">Bac.factors.csv</a>, and import into R.</p>
 <pre class="r"><code>Bac.counts &lt;- read.csv(file = &quot;Bac.counts.csv&quot;, header = TRUE, row.names=1)
 Bac.factors &lt;- read.csv(file = &quot;Bac.factors.csv&quot;, header = TRUE, row.names=1)</code></pre>
 <p>The <code>row.names=1</code> argument assigns the first column of the spreadsheet as row names in the data frame. We should check the data structure of the counts using the <code>head</code> command. Given there are many columns, we’ll only check the first 10 using indexing (use of <code>[,]</code> after the object, with row numbers before the comma and column numbers after).</p>
@@ -2454,12 +2510,10 @@ Otu00007 1112 1042 1211 1060 1155 1103 1283 1198 1175 1485</code></pre>
  $ pch1        : int  16 16 16 15 15 15 21 21 21 22 ...
  $ pch2        : int  4 22 21 15 16 NA NA NA NA NA ...
  $ legend      : chr  &quot;U - Unvegetated&quot; &quot;SZ - Sparse Zostera &quot; &quot;SC - Sparse Caulerpa&quot; &quot;DS - Dense Zostera&quot; ...</code></pre>
-<p><br><br></p>
 </div>
 <div id="drawing-a-heatmap" class="section level3">
 <h3>Drawing a heatmap</h3>
-<p><br>
-The basic function is <code>pheatmap</code>. Let’s try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function <code>slice</code> in dplyr can take any subset of numbered rows (see <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a>).</p>
+<p>The basic function is <code>pheatmap</code>. Let’s try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function <code>slice</code> in dplyr can take any subset of numbered rows (see <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a>).</p>
 <pre class="r"><code>Bac.counts500 &lt;- slice(Bac.counts, 1:500)
 
 pheatmap(Bac.counts500)</code></pre>
@@ -2472,13 +2526,11 @@ pheatmap(Bac.Log10.counts500)</code></pre>
 <p>The view of the data has really changed with transformation, so has the row and column clustering. There appears to be some very abundant OTUs (red/yellow), some mid abundant (white/low) and low in low abundance (blue).</p>
 <p>This would not have been seen so clearly if we did not cluster the rows and columns, and if we had just plotted them “as is” from the data table (although some row ordering had already been done here). You can see this if we draw the heatmap again without clustering the rows and columns.</p>
 <pre class="r"><code>pheatmap(Bac.Log10.counts500, cluster_rows = FALSE, cluster_cols = FALSE)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" />
-<br><br></p>
+<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="colouring-sample-groups" class="section level3">
 <h3>Colouring sample groups</h3>
-<p><br>
-Before looking further at how clustering effects the patterns observed, we should add some colours associated with the treatment groups next. The simplest method is to use the Bac.factors dataframe as input, taking care that you 1) specify categorical covariates (factor groups) and numerical covariates (e.g. concentration) properly, 2) that row names in Bac.factors match those in Bac.counts, and 3) then remove the factors you do not want to show.</p>
+<p>Before looking further at how clustering effects the patterns observed, we should add some colours associated with the treatment groups next. The simplest method is to use the Bac.factors dataframe as input, taking care that you 1) specify categorical covariates (factor groups) and numerical covariates (e.g. concentration) properly, 2) that row names in Bac.factors match those in Bac.counts, and 3) then remove the factors you do not want to show.</p>
 <p>To extract just the density and species columns from our factors data frame, we can use <code>select</code> from the package dplyr and then use these to colour code our samples.</p>
 <pre class="r"><code>Bac.factorsDS &lt;- select(Bac.factors, Density, Species)
 
@@ -2512,48 +2564,40 @@ $Species
 <p>We can now redraw the heatmap with our chosen colours.</p>
 <pre class="r"><code>pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS, annotation_colors = AnnColour)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>In this case, letting the data speak for itself (with default row and column clustering) shows that the unvegetated samples (Other) are dissimilar to the macrophyte samples (regardless of density) and that the seagrass samples generally cluster together. Note that other methods (e.g., ordination) can show sample to sample comparisons much better than heatmaps, but heatmaps reveal the patterns of the variables unlike those methods. Understanding what the data is doing is often overlooked in multivariate analysis.
-<br><br></p>
+<p>In this case, letting the data speak for itself (with default row and column clustering) shows that the unvegetated samples (Other) are dissimilar to the macrophyte samples (regardless of density) and that the seagrass samples generally cluster together. Note that other methods (e.g., ordination) can show sample to sample comparisons much better than heatmaps, but heatmaps reveal the patterns of the variables unlike those methods. Understanding what the data is doing is often overlooked in multivariate analysis.</p>
 </div>
 <div id="row-and-column-clustering-methods" class="section level3">
 <h3>Row and column clustering methods</h3>
-<p><br>
-By default, <code>pheatmap</code> is using Euclidean distance as the similarity measure and clustering samples based on the ‘complete’ method. There are various other distance and clustering methods available by using additional arguments: <code>clustering_distance_rows</code>, <code>clustering_distance_cols</code> and <code>clustering_method</code>.</p>
+<p>By default, <code>pheatmap</code> is using Euclidean distance as the similarity measure and clustering samples based on the ‘complete’ method. There are various other distance and clustering methods available by using additional arguments: <code>clustering_distance_rows</code>, <code>clustering_distance_cols</code> and <code>clustering_method</code>.</p>
 <p>Some are better than others, but you’ll have to consult the literature further on this. For clustering, however, ‘average’ clustering seems superior in many computer science applications. Again, the benefit of heatmaps is that you see what the data are doing relative to the options you have chosen.</p>
 <p>Let’s see what is produced by using the Manhattan distance as the measure of similarity between rows and columns, and the average clustering method.</p>
 <pre class="r"><code>pheatmap(Bac.Log10.counts500, clustering_distance_rows = &quot;manhattan&quot;,
          clustering_distance_cols = &quot;manhattan&quot;, clustering_method = &#39;average&#39;,
          annotation_colors = AnnColour, annotation_col = Bac.factorsDS)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>You can see that changing the clustering has significantly changed the heatmap produced.
-<br><br></p>
+<p>You can see that changing the clustering has significantly changed the heatmap produced.</p>
 </div>
 <div id="scaling-variables" class="section level3">
 <h3>Scaling variables</h3>
-<p><br>
-We may want to compare the abundance of each bacterial OTU only among samples rather than contrasting their abundance with other OTUs of varying abundance. To do this, we can scale the abundances within each OTU such that the colour scale shows only the relative range of abundance for each individual OTU. In this example, that involves scaling abundance for each row with <code>scale="row"</code>.</p>
+<p>We may want to compare the abundance of each bacterial OTU only among samples rather than contrasting their abundance with other OTUs of varying abundance. To do this, we can scale the abundances within each OTU such that the colour scale shows only the relative range of abundance for each individual OTU. In this example, that involves scaling abundance for each row with <code>scale="row"</code>.</p>
 <pre class="r"><code>pheatmap(Bac.Log10.counts500, scale = &quot;row&quot;, clustering_distance_rows = &quot;manhattan&quot;,
          clustering_method = &#39;average&#39;,
          annotation_colors = AnnColour, annotation_col = Bac.factorsDS)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-13-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).
-<br><br></p>
+<p>We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).</p>
 </div>
 <div id="sorting-by-group" class="section level3">
 <h3>Sorting by group</h3>
-<p><br>
-We can also sort the samples by their groups or treatments rather than sorting by similarity among rows or columns. This is done by ordering the input data and turning off the clustering of the columns with <code>cluster_cols=FALSE</code>.</p>
+<p>We can also sort the samples by their groups or treatments rather than sorting by similarity among rows or columns. This is done by ordering the input data and turning off the clustering of the columns with <code>cluster_cols=FALSE</code>.</p>
 <pre class="r"><code>SampleOrder = order(Bac.factorsDS$Species, Bac.factorsDS$Density)
 
 pheatmap(Bac.Log10.counts500[ , SampleOrder], cluster_cols = FALSE,
          clustering_method = &#39;average&#39;, annotation_colors = AnnColour, annotation_col = Bac.factorsDS)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" />
-<br><br></p>
+<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="using-heatmaps-after-statistical-analyses" class="section level3">
 <h3>Using heatmaps after statistical analyses</h3>
-<p><br>
-If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.</p>
+<p>If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.</p>
 <p>We will analyse the abundances of all OTUs with multivariate generalised linear models using the function <code>manyglm</code> in the package mvabund. The specifics of that analysis are not described further here (see the <a href="http://environmentalcomputing.net/introduction-to-mvabund/">Introduction to mvabund</a> for help with that package). Note that running <code>anova.manyglm</code> is quite slow.</p>
 <pre class="r"><code># Create factor and data file without the U1, U2 and U3 samples
 Bac.factorsDS_noU &lt;- filter(Bac.factors, Treatment_ID != &quot;U&quot;)
@@ -2576,18 +2620,14 @@ pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS], scale = &quot;row&quot;,
          cutree_rows = 2, cutree_cols = 2)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>And the results are as expected. The top half of the heatmap shows those variables over-represented in the Species level Caulerpa. The bottom half are those over-represented in seagrass.</p>
-<p>Happy heatmapping!<br />
-<br><br></p>
+<p>Happy heatmapping!</p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?pheatmap</code> for the R help on this function.
-<br><br></p>
-<p><strong>Author:</strong> Shaun Nielsen
-<br>
-Last updated:</p>
-<pre><code>[1] &quot;Thu Jan 20 14:38:08 2022&quot;</code></pre>
+<p>Type <code>?pheatmap</code> for the R help on this function.</p>
+<p><strong>Author:</strong> Shaun Nielsen</p>
+<p>Last updated:</p>
+<pre><code>[1] &quot;Tue Jan 25 09:45:50 2022&quot;</code></pre>
 </div>
 
 
@@ -3273,42 +3313,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3324,35 +3328,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3374,40 +3349,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3485,25 +3426,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3519,27 +3441,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3642,6 +3547,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3770,6 +3826,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3831,19 +3903,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3859,5 +3931,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

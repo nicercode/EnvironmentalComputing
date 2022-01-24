@@ -11,22 +11,22 @@
     <title>Data Entry :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2413,12 +2471,10 @@
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Data is the life-blood of science. As part of the scientific process, we invest an enormous amount of time collecting, analysing and presenting data. Before we can analyse data, however, we typically need to get it into a format that can be interpreted by others, and more importantly by the software used for analysis. Do this well and you can save yourself a lot of time; do this badly and you may end up wasting considerable time ‘cleaning’ and structuring the data to make it usable.
-<br><br></p>
+<p>Data is the life-blood of science. As part of the scientific process, we invest an enormous amount of time collecting, analysing and presenting data. Before we can analyse data, however, we typically need to get it into a format that can be interpreted by others, and more importantly by the software used for analysis. Do this well and you can save yourself a lot of time; do this badly and you may end up wasting considerable time ‘cleaning’ and structuring the data to make it usable.</p>
 <div id="what-should-a-data-set-look-like" class="section level3">
 <h3>What should a data set look like?</h3>
-<p><br>
-Most data sets consist of rectangular tables of <strong>values</strong> (usually numbers or text). Each value belongs to a <strong>variable</strong> and an <strong>observation</strong>. A variable consists of values of the same type (e.g., temperature, duration or abundance). An observation consists of all values measured on the same unit (e.g., plot or individual). The convention is to store variables in columns and observations in rows.</p>
+<p>Most data sets consist of rectangular tables of <strong>values</strong> (usually numbers or text). Each value belongs to a <strong>variable</strong> and an <strong>observation</strong>. A variable consists of values of the same type (e.g., temperature, duration or abundance). An observation consists of all values measured on the same unit (e.g., plot or individual). The convention is to store variables in columns and observations in rows.</p>
 <p><img src="Data_entry_image.jpg" /></p>
 <p>Here is an abridged data set from some insect sampling that shows you the desired format. It consists of five variables and data from the first nine replicate observations. Note the first row consists of a <strong>header</strong> listing the names of each variable in each column. The variables are:</p>
 <ol style="list-style-type: decimal">
@@ -2426,8 +2482,7 @@ Most data sets consist of rectangular tables of <strong>values</strong> (usually
 <li><strong>Method</strong>, with two possible values reflecting the sampling technique (leaflitter or lighttrap)</li>
 <li><strong>Insect</strong>, with the possible values reflecting the type of insect (ant, beetle, springtail, wasp, moth or termite).</li>
 <li><strong>Number</strong>, with values reflecting the abundance of each insect in each observation.</li>
-<li><strong>Group</strong>, with one possible value reflecting the identity of the collector (A, B, C etc.)
-<br></li>
+<li><strong>Group</strong>, with one possible value reflecting the identity of the collector (A, B, C etc.)</li>
 </ol>
 <pre><code>##         Site     Method     Insect Number Group
 ## 1   woodland leaflitter        ant     26     A
@@ -2439,36 +2494,29 @@ Most data sets consist of rectangular tables of <strong>values</strong> (usually
 ## 7 rainforest leaflitter        ant     16     A
 ## 8 rainforest leaflitter    termite      2     A
 ## 9 rainforest leaflitter springtail     63     A</code></pre>
-<p><br></p>
-<p>This table is structured so that new data can be added with ease. For instance, we may wish to combine the data for multiple ‘collecting groups’, in which case it is straight-forward to add news rows to the existing dataset. If an additional set of samples has new insect species, we do not need to add new columns for each new species, just new values for the Insect variable. This is known as a long format. Some analyses (e.g., contrasts of species composition) will require each species as a separate column. See our <a href="http://environmentalcomputing.net/Reshaping-data/">Reshaping data</a> for help on swapping between long and wide formats.
-<br><br></p>
+<p>This table is structured so that new data can be added with ease. For instance, we may wish to combine the data for multiple ‘collecting groups’, in which case it is straight-forward to add news rows to the existing dataset. If an additional set of samples has new insect species, we do not need to add new columns for each new species, just new values for the Insect variable. This is known as a long format. Some analyses (e.g., contrasts of species composition) will require each species as a separate column. See our <a href="http://environmentalcomputing.net/Reshaping-data/">Reshaping data</a> for help on swapping between long and wide formats.</p>
 </div>
 <div id="golden-rules-of-data-entry" class="section level3">
 <h3>6 Golden rules of data entry</h3>
-<p><br>
-<strong>1.</strong> Each column should contain only one type of information (i.e., text, numbers, dates, boolean). For instance, if text is inserted within or below the dataset, R or other analysis software will try to interpret the text as a <strong>value</strong> in the corresponding column. Similarly, if summary text is provided above the data (a common mistake), this will be interpreted as the first line or header of the actual data.</p>
+<p><strong>1.</strong> Each column should contain only one type of information (i.e., text, numbers, dates, boolean). For instance, if text is inserted within or below the dataset, R or other analysis software will try to interpret the text as a <strong>value</strong> in the corresponding column. Similarly, if summary text is provided above the data (a common mistake), this will be interpreted as the first line or header of the actual data.</p>
 <p><strong>2.</strong> Extensive metadata (e.g., site descriptions) should usually be documented in a separate file, but if sufficiently brief it can useful to include this information in its own column in the data table.</p>
 <p><strong>3.</strong> Only use ASCII characters (upper and lower case English letters, numbers and common punctuation marks) for file names, variable names, and data values.</p>
 <p><strong>4.</strong> Although it won’t affect analyses, to aid with visualisation of the raw data, it is good practise to order fixed variables first, followed by measured variables. In Table 1, <strong>Site</strong> and <strong>Method</strong> are fixed in that we know them in advance of data collection, whereas <strong>Insect</strong> and <strong>Number</strong> are measured. This, however, is not a hard and fast rule. For instance, we may want to order <strong>Group</strong> last as this information will typically be treated as metadata rather than data of actual interest for the analysis.</p>
 <p><strong>5.</strong> Do not manipulate the raw data once digitized. Ideally the raw data should be treated as ‘read-only’ and any further transformations or manipulations should be done using saved R scripts (or an alternative programming language). This avoids accidentally inserting errors into the raw data each time you want to tweak something.</p>
-<p><strong>6.</strong> Finally, always store data as <font face="monospace">.csv</font> or <font face="monospace">.txt</font> <strong>NOT</strong> <font face="monospace">.xls</font>, <font face="monospace">.xlsx</font> or other proprietary formats as those cannot be easily read into R or shared with collaborators. Text files do not require specific software to be read.
-<br><br></p>
+<p><strong>6.</strong> Finally, always store data as <font face="monospace">.csv</font> or <font face="monospace">.txt</font> <strong>NOT</strong> <font face="monospace">.xls</font>, <font face="monospace">.xlsx</font> or other proprietary formats as those cannot be easily read into R or shared with collaborators. Text files do not require specific software to be read.</p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Once your data is entered in .csv or .txt format, see <a href="http://environmentalcomputing.net/Importing-data/">Importing data</a> for help on importing into R.</p>
+<p>Once your data is entered in .csv or .txt format, see <a href="http://environmentalcomputing.net/Importing-data/">Importing data</a> for help on importing into R.</p>
 <p style="margin-left:.5in;text-indent:-.5in">
 Borer, ET, EW Seabloom, MB Jones &amp; M Schildhauer. 2009. Some simple guidelines for effective data management. <em>Bulletin of the Ecological Society of America</em>, 90: 205-214. <a href="http://dx.doi.org/10.1890/0012-9623-90.2.205">link</a>
 </p>
 <p style="margin-left:.5in;text-indent:-.5in">
 Wickham, H. 2014. Tidy data. <em>Journal of Statistical Software</em>, 59:(10). <a href="http://www.jstatsoft.org/v59/i10/paper">link</a>
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Andrew Letten
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 18 18:27:06 2022&quot;</code></pre>
+<p><strong>Author</strong>: Andrew Letten</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:44:02 2022&quot;</code></pre>
 </div>
 
 
@@ -3150,42 +3198,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3201,35 +3213,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3251,40 +3234,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3362,25 +3311,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3396,27 +3326,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3519,6 +3432,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3647,6 +3711,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3708,19 +3788,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3736,5 +3816,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

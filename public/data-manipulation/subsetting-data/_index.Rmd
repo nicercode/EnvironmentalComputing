@@ -210,7 +210,7 @@ Finally, if you have numbered columns, we can use the `numrange` helper function
 ```{r, eval=FALSE}
 select(data, num_range("var", 1:3))
 ```
-<br><br>
+  
 
 ### Further help
 

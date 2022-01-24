@@ -19,10 +19,10 @@ As with the help page on [Subsetting data](http://environmentalcomputing.net/sub
 ```{r}
 Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)
 ```
-<br><br>
+  
 
 ### Summarising data with dplyr
-<br>
+ 
 **Obtaining summary measures from a single variable**  
 
 We can use the function `summarise` with a range of built-in summary functions from R to obtain summary statistics from our data. 
@@ -113,7 +113,7 @@ Treatment.summary <- Bats %>%
             se.Activity=sd.Activity/sqrt(n.Activity), # standard error
             IQR.Activity=IQR(Activity))               # interquartile range
 ```
-<br><br>
+  
 
 **Issues with missing data**
 
@@ -146,10 +146,10 @@ length(Bats$Activity2[!is.na(Bats$Activity2)])
 ```
 
 This calculates the number of values, `length`, of the vector of bat activity values, Bats$Activity2, where they are not NA, `!is.na`. Revising the [Subsetting data](http://environmentalcomputing.net/subsetting-data/) may help you understand this statement. 
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written** If we were writing a paper about bat activity across different forest thinning treatments, we could use our summarised data to make some broad observations at the beginning of our results section, prior to further analysis. For example: "Bats were twice as active in in mature open (reference) forest (365 ? 27) compared to unthinned regrowth (166 ? 21) (mean ? SE). However bat activity was similar across medium-term (385 ? 36) and short-term (350 ? 27) thinned and reference forests".
 
 **Visual**  Presenting means and standard errors of categorical data gives us a way to visually communicate a treatment effect (as long as it is supported by appropriate statistical analysis). Here we've used the ggplot2 package to make a simple bar graph with means ? standard error (error bars).
@@ -174,10 +174,10 @@ plot1 <- ggplot(data=Treatment.summary, aes(x=Treatment.thinned, y=mean.Activity
 
 print(plot1)
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 This tutorial was based on the excellent [Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio.Images were sourced from the same document.
 
 You can type `?dplyr` to get help with this package.
@@ -187,7 +187,7 @@ You can type `?dplyr` to get help with this package.
 If you'd like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with [Plotting with gglpot: the basics](http://environmentalcomputing.net/).
 
 **Author**: Rachel V. Blakey
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

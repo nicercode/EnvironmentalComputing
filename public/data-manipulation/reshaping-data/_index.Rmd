@@ -29,10 +29,10 @@ This format is efficient for data entry as you only need to have rows for the sp
 If, however, you would like to contrast the abundance of one of the species, or create a species by sample matrix that is required by the various multivariate analyses that contrast species composition, the data will need to be manipulated in some way.
 
 Fortunately, there are some very handy packages in R that make this possible. If you have ever used pivot tables in Excel, they are doing similar things.
-<br><br>
+  
 
 ### Reshaping from long to wide format
-<br>
+ 
 In this example, we will use the package [tidyr](https://cran.r-project.org/web/packages/tidyr/index.html) to convert this data frame to a **wide format** that will allow further data exploration. First, install and load the package.
 
 ```{r,warning=F}
@@ -61,10 +61,10 @@ Note that the wide format of this data now has a column for each species with al
 You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the `select` function of dplyr (see [Subsetting data](http://environmentalcomputing.net/subsetting-data/)).
 
 *Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of "none". If you didn't, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.
-<br><br>
+  
 
 ### Reshaping from wide to long format
-<br>
+ 
 The function `gather` will convert data from the wide format to a long format.
 
 Here, we can use this code to get our original data set back from the wide format data set we just made.
@@ -92,10 +92,10 @@ ReefFish.long <- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 ```
 
 We have now recreated our original data set. The only difference is that the rows have been sorted and that species that were absent from a given transect have their own row with an abundance value of zero.
-<br><br>
+  
 
 ### Reshaping with reshape2
-<br>
+ 
 The package [reshape2](https://cran.r-project.org/web/packages/reshape2/) also allows us to reshape data, and has a few extra capabilities that are not present in tidyr. 
 
 ```{r,warning=F,message=F}
@@ -170,10 +170,10 @@ ReefFish.wide_combined <- dcast(ReefFish,
 ```{r,echo =F}
 head(ReefFish.wide_combined[,1-4])
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?gather` and `?spread` to get the R help for these tidyr functions.
 
 Type `?dcast` and `?melt` to get the R help for these reshape2 functions.
@@ -183,10 +183,10 @@ Type `?dcast` and `?melt` to get the R help for these reshape2 functions.
 [Data wrangling with dplyr and tidyr](https://rpubs.com/bradleyboehmke/data_wrangling)
 
 [An introduction to reshape2](http://seananderson.ca/2013/10/19/reshape.html)
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

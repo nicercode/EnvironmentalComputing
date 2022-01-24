@@ -11,22 +11,22 @@
     <title>One Continuous Variable :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2424,8 +2482,7 @@
 <p><img src="Single_continuous_variable_image.jpg" /></p>
 <div id="frequency-histograms" class="section level3">
 <h3>Frequency histograms</h3>
-<p><br>
-Frequency histograms plot how often the values of a continuous variable fall into certain ranges. They are an effective way to visualise the range of values obtained and the distribution of your data (i.e. is it symmetrical or skewed?).</p>
+<p>Frequency histograms plot how often the values of a continuous variable fall into certain ranges. They are an effective way to visualise the range of values obtained and the distribution of your data (i.e. is it symmetrical or skewed?).</p>
 <p>Firstly, download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Estuary_fish.csv">Estuary_fish.csv</a>, and import into R.</p>
 <pre class="r"><code>Fish &lt;- read.csv(file = &quot;Estuary_fish.csv&quot;)</code></pre>
 <p>A frequency histogram of the variable Length from the data frame Fish is easily produced with the <code>hist</code> function.</p>
@@ -2435,61 +2492,47 @@ Frequency histograms plot how often the values of a continuous variable fall int
 <p>You can alter the number of bins or the range of each bin with <code>breaks</code> argument. This will change the width and shape of the histogram. For example, if you wanted 15 bins, you would use:</p>
 <pre class="r"><code>hist(Fish$Length,breaks=15)</code></pre>
 <p><img src="/graphics/basic-plotting/one-continuous/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>If you wanted each bin to be have a range of 2 cm, you would use <code>breaks=seq(0,30,by=2)</code> where the numbers in the brackets are the minimum, maximum and range for each bin.
-<br><br></p>
+<p>If you wanted each bin to be have a range of 2 cm, you would use <code>breaks=seq(0,30,by=2)</code> where the numbers in the brackets are the minimum, maximum and range for each bin.</p>
 </div>
 <div id="box-and-whisker-plots" class="section level3">
 <h3>Box and whisker plots</h3>
-<p><br>
-A box and whisker plot, or boxplot, is another useful way to visualise the distribution of a single, continuous variable. They are easily made with the <code>boxplot</code> function. The <code>horizontal=TRUE</code> argument makes the single axis horizontal.</p>
+<p>A box and whisker plot, or boxplot, is another useful way to visualise the distribution of a single, continuous variable. They are easily made with the <code>boxplot</code> function. The <code>horizontal=TRUE</code> argument makes the single axis horizontal.</p>
 <pre class="r"><code>boxplot(Fish$Length, horizontal=TRUE)</code></pre>
 <p><img src="/graphics/basic-plotting/one-continuous/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>The plot shows the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.</p>
 <p>Remember that the median is the value that has 50% of values larger and 50% of values smaller. Similarly, the quartiles represent the values with 25% of the values lower (the lower quartile) or 25% of values higher (the upper quartile).</p>
-<p>The boxplot will indicate skewness in your data if the median is not equally distant from the quartiles or maximum and minimum values. In this example, you can see that the median is closer to the minimum value that the maximum (indicating that low values are more common).
-<br><br></p>
+<p>The boxplot will indicate skewness in your data if the median is not equally distant from the quartiles or maximum and minimum values. In this example, you can see that the median is closer to the minimum value that the maximum (indicating that low values are more common).</p>
 </div>
 <div id="formatting-plots" class="section level3">
 <h3>Formatting plots</h3>
-<p><br>
-These simple plots can be formatted using the basic R formatting in the graphics package. The code below gives you some of the more commonly used formatting commands to give you higher control over your plots.</p>
-<p><strong>Add axis labels or titles</strong>
-<br>
-Axis labels are produced with the <code>xlab</code> and <code>ylab</code> arguments. Titles are provided with the <code>main</code> argument.</p>
+<p>These simple plots can be formatted using the basic R formatting in the graphics package. The code below gives you some of the more commonly used formatting commands to give you higher control over your plots.</p>
+<p><strong>Add axis labels or titles</strong></p>
+<p>Axis labels are produced with the <code>xlab</code> and <code>ylab</code> arguments. Titles are provided with the <code>main</code> argument.</p>
 <pre class="r"><code>hist(Fish$Length, xlab = &#39;Fish length (cm)&#39;,main=&#39;Frequency histogram of fish length&#39;)</code></pre>
 <p><img src="/graphics/basic-plotting/one-continuous/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>boxplot(Fish$Length, xlab=&#39;Fish length (cm)&#39;, main=&#39;Box plot of fish length&#39;, horizontal = TRUE)</code></pre>
 <p><img src="/graphics/basic-plotting/one-continuous/_index_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>Using the <code>main=NULL</code> argument removes the title, which is often unecessary as details of what a plot illustrates are usually written in a figure legend below the plot.</p>
-<p><strong>Edit axis limits</strong>
-<br>
-Axis limits are set by the <code>xlim</code> and <code>ylim</code> arguments, where a vector of the minimum and maximum limits is required. For example, to have each of these plot the data between 0 and 40, you would use:</p>
+<p><strong>Edit axis limits</strong></p>
+<p>Axis limits are set by the <code>xlim</code> and <code>ylim</code> arguments, where a vector of the minimum and maximum limits is required. For example, to have each of these plot the data between 0 and 40, you would use:</p>
 <pre class="r"><code>hist(Fish$Length, xlab = &#39;Fish length (cm)&#39;,main=&#39;Frequency histogram of fish length&#39;, xlim=c(0,40))
 
 boxplot(Fish$Length, xlab=&#39;Fish length (cm)&#39;, main=&#39;Box plot of fish length&#39;, ylim=c(0,40), horizontal = TRUE)</code></pre>
-<p>Note that <code>ylim' is needed there to set the range for the single response variable (Fish length) even though it ends up on the horizontal axis after we use the</code>horizontal=TRUE` argument.
-<br></p>
-<p><strong>Plot alignment</strong>
-<br>
-Use the <code>horizontal=TRUE</code> argument to align the box plot horizontally - leave this out if you want a vertical alignment.
-<br></p>
-<p><strong>Adding colour</strong>
-<br>
-Colour can be added to any part of the plots (axis, fonts etc.) using the <code>col</code> argument. There are over 600 colours that can be plotted, type <code>colors()</code> for the names of the whole range.</p>
+<p>Note that <code>ylim' is needed there to set the range for the single response variable (Fish length) even though it ends up on the horizontal axis after we use the</code>horizontal=TRUE` argument.</p>
+<p><strong>Plot alignment</strong></p>
+<p>Use the <code>horizontal=TRUE</code> argument to align the box plot horizontally - leave this out if you want a vertical alignment.</p>
+<p><strong>Adding colour</strong></p>
+<p>Colour can be added to any part of the plots (axis, fonts etc.) using the <code>col</code> argument. There are over 600 colours that can be plotted, type <code>colors()</code> for the names of the whole range.</p>
 <p>Here we will simply change the colour of the histogram.</p>
 <pre class="r"><code>hist(Fish$Length, xlab = &#39;Fish length (cm)&#39;,main=&#39;Frequency histogram of fish length&#39;, col=&quot;red&quot;)</code></pre>
-<p><img src="/graphics/basic-plotting/one-continuous/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/basic-plotting/one-continuous/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?hist</code> and <code>?boxplot</code> to get the R help for these functions.
-<br><br></p>
-<p><strong>Author</strong>: Stephanie Brodie
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 13:13:26 2022&quot;</code></pre>
+<p>Type <code>?hist</code> and <code>?boxplot</code> to get the R help for these functions.</p>
+<p><strong>Author</strong>: Stephanie Brodie</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:45:01 2022&quot;</code></pre>
 </div>
 
 
@@ -3169,42 +3212,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3220,35 +3227,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3270,40 +3248,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3381,25 +3325,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3415,27 +3340,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3538,6 +3446,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3666,6 +3725,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3727,19 +3802,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3755,5 +3830,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

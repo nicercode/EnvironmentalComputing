@@ -11,22 +11,22 @@
     <title>Reshaping data :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2430,12 +2488,10 @@
 <p>This data frame is arranged in a <strong>long format</strong> with one variable that identifies the fish species, and one variable that holds the abundance data. The other three variables identify each transect (Site, Month and Transect),</p>
 <p>This format is efficient for data entry as you only need to have rows for the species that were present in that particular transect, and don’t have to keep adding columns every time a new species is recorded. You would need the data in this format if you wanted to use a plot to contrast the abundance of fish among the three species.</p>
 <p>If, however, you would like to contrast the abundance of one of the species, or create a species by sample matrix that is required by the various multivariate analyses that contrast species composition, the data will need to be manipulated in some way.</p>
-<p>Fortunately, there are some very handy packages in R that make this possible. If you have ever used pivot tables in Excel, they are doing similar things.
-<br><br></p>
+<p>Fortunately, there are some very handy packages in R that make this possible. If you have ever used pivot tables in Excel, they are doing similar things.</p>
 <div id="reshaping-from-long-to-wide-format" class="section level3">
 <h3>Reshaping from long to wide format</h3>
-<p><br>
-In this example, we will use the package <a href="https://cran.r-project.org/web/packages/tidyr/index.html">tidyr</a> to convert this data frame to a <strong>wide format</strong> that will allow further data exploration. First, install and load the package.</p>
+<p>In this example, we will use the package <a href="https://cran.r-project.org/web/packages/tidyr/index.html">tidyr</a> to convert this data frame to a <strong>wide format</strong> that will allow further data exploration. First, install and load the package.</p>
 <pre class="r"><code>library(tidyr)</code></pre>
 <p>To convert this data set into a wide format with a separate column for each fish species, we use the function <code>spread</code>.</p>
 <pre class="r"><code>ReefFish.wide &lt;- spread(ReefFish, Species, Abundance, fill = 0)</code></pre>
@@ -2453,13 +2509,11 @@ In this example, we will use the package <a href="https://cran.r-project.org/web
 ## 6 Reef1  January        3         8        0       3</code></pre>
 <p>Note that the wide format of this data now has a column for each species with all the abundance values. You would get as many columns as you had unique levels in the Species column. You get as many rows as you have unique combinations of the variables that are not being split up (Site, Month and Transect in this example).</p>
 <p>You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the <code>select</code> function of dplyr (see <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a>).</p>
-<p>*Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of “none”. If you didn’t, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.
-<br><br></p>
+<p>*Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of “none”. If you didn’t, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.</p>
 </div>
 <div id="reshaping-from-wide-to-long-format" class="section level3">
 <h3>Reshaping from wide to long format</h3>
-<p><br>
-The function <code>gather</code> will convert data from the wide format to a long format.</p>
+<p>The function <code>gather</code> will convert data from the wide format to a long format.</p>
 <p>Here, we can use this code to get our original data set back from the wide format data set we just made.</p>
 <pre class="r"><code>ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, 4:6)</code></pre>
 <pre><code>##    Site    Month Transect   Species Abundance
@@ -2478,13 +2532,11 @@ The function <code>gather</code> will convert data from the wide format to a lon
 <pre class="r"><code>ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish, BlueFish, RedFish)
 
 ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)</code></pre>
-<p>We have now recreated our original data set. The only difference is that the rows have been sorted and that species that were absent from a given transect have their own row with an abundance value of zero.
-<br><br></p>
+<p>We have now recreated our original data set. The only difference is that the rows have been sorted and that species that were absent from a given transect have their own row with an abundance value of zero.</p>
 </div>
 <div id="reshaping-with-reshape2" class="section level3">
 <h3>Reshaping with reshape2</h3>
-<p><br>
-The package <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> also allows us to reshape data, and has a few extra capabilities that are not present in tidyr.</p>
+<p>The package <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> also allows us to reshape data, and has a few extra capabilities that are not present in tidyr.</p>
 <pre class="r"><code>library(reshape2)</code></pre>
 <p>Instead of <code>spread</code>, <code>dcast</code> is used to go from a long to wide format. This code will do the same as we saw above.</p>
 <pre class="r"><code>ReefFish.wide &lt;- dcast(ReefFish,
@@ -2540,21 +2592,17 @@ The package <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2
 ## 4                0               5
 ## 5                3               0
 ## 6               15              24</code></pre>
-<p><br><br></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?gather</code> and <code>?spread</code> to get the R help for these tidyr functions.</p>
+<p>Type <code>?gather</code> and <code>?spread</code> to get the R help for these tidyr functions.</p>
 <p>Type <code>?dcast</code> and <code>?melt</code> to get the R help for these reshape2 functions.</p>
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio.</p>
 <p><a href="https://rpubs.com/bradleyboehmke/data_wrangling">Data wrangling with dplyr and tidyr</a></p>
-<p><a href="http://seananderson.ca/2013/10/19/reshape.html">An introduction to reshape2</a>
-<br><br></p>
-<p><strong>Author</strong>: Alistair Poore
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 21 15:53:45 2022&quot;</code></pre>
+<p><a href="http://seananderson.ca/2013/10/19/reshape.html">An introduction to reshape2</a></p>
+<p><strong>Author</strong>: Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:42:47 2022&quot;</code></pre>
 </div>
 
 
@@ -3236,42 +3284,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3287,35 +3299,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3337,40 +3320,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3448,25 +3397,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3482,27 +3412,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3605,6 +3518,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3733,6 +3797,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3794,19 +3874,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3822,5 +3902,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

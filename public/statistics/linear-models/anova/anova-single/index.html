@@ -11,22 +11,22 @@
     <title>Single Factor ANOVA :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2436,12 +2494,10 @@
 <p><span class="math display">\[HatchingTime = \mu + \beta_1.Temp_{15} + \beta_2.Temp_{20} + \beta_3.Temp_{25} + \beta_4.Temp_{30} + \varepsilon\]</span></p>
 <p>ANOVA partitions the total variance into a component that can be explained by the predictor variable (among levels of the treatment), and a component that cannot be explained (within levels, the residual variance). The test statistic, <em>F</em>, is the ratio of these two sources of variation.</p>
 <p><span class="math display">\[F = \frac{MS_{among}}{MS_{within}}\]</span></p>
-<p>where <em>MS</em> are the mean squares, a measure of variation. The probability of obtaining the observed value of <em>F</em> is calculated from the known probability distribution of <em>F</em>, with two degrees of freedom (one for the numerator = the number of levels -1) and one for the denominator (number of replicates per level - 1 x number of levels).
-<br><br></p>
+<p>where <em>MS</em> are the mean squares, a measure of variation. The probability of obtaining the observed value of <em>F</em> is calculated from the known probability distribution of <em>F</em>, with two degrees of freedom (one for the numerator = the number of levels -1) and one for the denominator (number of replicates per level - 1 x number of levels).</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p><br>
-The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, <em>y</em>, and a corresponding column for the categorical variable, <em>x</em>. Download the sample data set for the turtle hatching example, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Turtles.csv">Turtles.csv</a>, import into R and check that temperature variable is a factor with the <code>str</code> function.</p>
+<p>The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, <em>y</em>, and a corresponding column for the categorical variable, <em>x</em>. Download the sample data set for the turtle hatching example, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Turtles.csv">Turtles.csv</a>, import into R and check that temperature variable is a factor with the <code>str</code> function.</p>
 <pre class="r"><code>Turtles = read.csv(file = &quot;Turtles.csv&quot;,header=TRUE)
 str(Turtles)</code></pre>
 <p>In this case, because we have numbers for the four levels of the Temperature treatment, we need to change that variable to become a factor rather than an integer.</p>
@@ -2453,11 +2509,9 @@ str(Turtles)</code></pre>
 <p>Exactly the same analysis can be reproduced using the linear model function <code>lm</code>.</p>
 <pre class="r"><code>Turtles.lm = lm(Days ~ Temperature,data=Turtles)
 summary(Turtles.lm)</code></pre>
-<p><br><br></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
-<p><br></p>
 <pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Temperature  3   8025  2675.2   15.98 9.08e-07 ***
 ## Residuals   36   6027   167.4                     
@@ -2467,7 +2521,7 @@ summary(Turtles.lm)</code></pre>
 <p>First check the degrees of freedom. The factor Df = the number of levels of your factor - 1. The residual Df = <em>a(n-1)</em>, where <em>a</em> = the number of levels of your factor and <em>n</em> = sample size (replicates per level).</p>
 <p>The sums of squares and mean squares are measures of variation. The <em>F</em> statistic is the ratio of <em>MS<sub>among</sub></em> and <em>MS<sub>within</sub></em> and the <em>p</em>-value is the probability of the observed <em>F</em> value from the <em>F</em> distribution (with the given degrees of freedom).</p>
 <p>The main thing to look at in the ANOVA table is whether your predictor variable had a significant effect on your response variable. In this example, the probability that all four incubation temperatures are equal is &lt;0.001. This is very unlikely and much less than 0.05. We would conclude that there is a difference in hatching times between the temperatures. We are also interested in the R^2 value which tells us how much variation was explained by the model.</p>
-<p>If you use the <code>lm</code> function, you get a bit more information from the summary of the linear model output.<Br></p>
+<p>If you use the <code>lm</code> function, you get a bit more information from the summary of the linear model output.</p>
 <pre><code>## 
 ## Call:
 ## lm(formula = Days ~ Temperature, data = Turtles)
@@ -2504,12 +2558,10 @@ summary(Turtles.lm)</code></pre>
 ## 25-20   4.6 -10.98469  20.184689 0.8562615
 ## 30-20 -24.5 -40.08469  -8.915311 0.0008384
 ## 30-25 -29.1 -44.68469 -13.515311 0.0000785</code></pre>
-<p><br><br></p>
 </div>
 <div id="assumptions-to-check" class="section level3">
 <h3>Assumptions to check</h3>
-<p><br>
-The important assumptions of ANOVA are independence, homegeneity of variance and normality. We advocate a qualitative evalutation of the normality and homogeneity of variance assumptions, by examining the patterns of variation in the residuals, rather than a formal test such has Cochran’s test. Linear models in general are quite ‘robust’ for violating these assumptions (heterogeneity and normality), within reason.</p>
+<p>The important assumptions of ANOVA are independence, homegeneity of variance and normality. We advocate a qualitative evalutation of the normality and homogeneity of variance assumptions, by examining the patterns of variation in the residuals, rather than a formal test such has Cochran’s test. Linear models in general are quite ‘robust’ for violating these assumptions (heterogeneity and normality), within reason.</p>
 <p><strong>Normality.</strong> The assumption of normality can be checked by a frequency histogram of the residuals or by using a quantile plot where the residuals are plotted against the values expected from a normal distribution. The histogram of residuals should follow a normal distribution. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Both of these plots can be obtained from the model object created by the <code>aov</code> function.</p>
 <pre class="r"><code>par(mfrow = c(1,2)) # This code put two plots in the same window
 hist(Turtles.aov$residuals)
@@ -2521,22 +2573,18 @@ plot(Turtles.aov,which=2)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the <em>y</em> axis for each of the levels on the <em>x</em> axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="http://environmentalcomputing.net/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
 <p><strong>Independence.</strong> ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the turtle eggs measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with both temperature and time as factors).</p>
-<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="http://environmentalcomputing.net/mixed-models-1/">mixed-model</a>.
-<br><br></p>
+<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="http://environmentalcomputing.net/mixed-models-1/">mixed-model</a>.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><br>
-<strong>Written.</strong> The results of a one-way ANOVA are usually expressed in text as a short sentence, e.g., “Turtle hatching time differed among the four incubation temperatures (<em>F</em> = 15.98, <em>df</em> = 3,36, <em>p</em> &lt; 0.001)”. A significant effect would be followed by a written description of the post-hoc test results (i.e., exactly which temperatures differed from which). The results from post-hoc tests can also be added to the figure (e.g, by labelling which levels differed).</p>
+<p><strong>Written.</strong> The results of a one-way ANOVA are usually expressed in text as a short sentence, e.g., “Turtle hatching time differed among the four incubation temperatures (<em>F</em> = 15.98, <em>df</em> = 3,36, <em>p</em> &lt; 0.001)”. A significant effect would be followed by a written description of the post-hoc test results (i.e., exactly which temperatures differed from which). The results from post-hoc tests can also be added to the figure (e.g, by labelling which levels differed).</p>
 <p><strong>Visual.</strong> A boxplot or column graph with error bars are suitable for contrasting a continuous variable across levels of categorical variable. See the graphics help for making publication ready versions of these figures.</p>
 <pre class="r"><code>boxplot(Days~Temperature, data=Turtles, ylab = &quot;Hatching time (days)&quot;, xlab = &quot;Temperature (°C)&quot;)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-<br><br></p>
+<p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?aov</code> or <code>?lm</code> to get the R help for these functions.</p>
+<p>Type <code>?aov</code> or <code>?lm</code> to get the R help for these functions.</p>
 <p style="margin-left:.5in;text-indent:-.5in">
 Quinn and Keough (2002) <em>Experimental design and data analysis for biologists.</em> Cambridge University Press. Ch. 8 Comparing groups or treatments - analysis of variance.
 </p>
@@ -2546,11 +2594,9 @@ McKillup (2012) <em>Statistics explained. An introductory guide for life scienti
 <p style="margin-left:.5in;text-indent:-.5in">
 Underood, AJ (1997) <em>Experiments in ecology: Their logical design and interpretation using analysis of variance.</em> Cambridge University Press.
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: James Lavender
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 21 16:12:04 2022&quot;</code></pre>
+<p><strong>Author</strong>: James Lavender</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:40 2022&quot;</code></pre>
 </div>
 
 
@@ -3224,46 +3270,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3279,35 +3285,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3365,49 +3342,10 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
                         
             
             
                 
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -3444,6 +3382,40 @@ Last updated:</p>
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
                 
                 
 
@@ -3463,6 +3435,7 @@ Last updated:</p>
             
                 
                     
+                    
                 
                 
 
@@ -3477,6 +3450,26 @@ Last updated:</p>
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -3501,6 +3494,9 @@ Last updated:</p>
                     
                     
 
+                    
+            
+        
                     
             
         
@@ -3600,22 +3596,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3698,6 +3678,88 @@ Last updated:</p>
 
                     
                     
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
                     
 
                     
@@ -3734,6 +3796,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3795,19 +3873,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3823,5 +3901,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

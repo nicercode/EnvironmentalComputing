@@ -11,22 +11,22 @@
     <title>Count Data :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2420,11 +2478,9 @@
 
 
 <p><strong>Count data</strong></p>
-<p>This is a continuation of <a href="http://environmentalcomputing.net/generalised-linear-models-1/">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.
-<br><br></p>
+<p>This is a continuation of <a href="http://environmentalcomputing.net/generalised-linear-models-1/">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p><br></p>
 <p><img src="GLM2_counts_image.jpg" /></p>
 <p>For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.</p>
 <p>Download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Revegetation.csv">Revegetation.csv</a>, and import into R to see how the data are arranged:</p>
@@ -2437,13 +2493,11 @@
 <p>To fit the GLM, load the mvabund package then fit the following model:</p>
 <pre class="r"><code>library(mvabund)
 ft.sol.pois = manyglm(Soleolifera~Treatment, family=&quot;poisson&quot;, data=Reveg)</code></pre>
-<p>where Soleolifera is the response variable, and Treatment is the predictor variable (with two levels, control and revegetated).
-<br><br></p>
+<p>where Soleolifera is the response variable, and Treatment is the predictor variable (with two levels, control and revegetated).</p>
 </div>
 <div id="assumptions-to-check" class="section level3">
 <h3>Assumptions to check</h3>
-<p><br>
-Before we look at the results, we need to look at the residual plot to check the assumptions.</p>
+<p>Before we look at the results, we need to look at the residual plot to check the assumptions.</p>
 <pre class="r"><code>plot(ft.sol.pois)</code></pre>
 <pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
 ## caption, : Only the first 1 colors will be used for plotting.</code></pre>
@@ -2456,13 +2510,11 @@ Before we look at the results, we need to look at the residual plot to check the
 <pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
 ## caption, : Only the first 1 colors will be used for plotting.</code></pre>
 <p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
-<p>This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.
-<br><br></p>
+<p>This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.</p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
-<p><br>
-If all the assumption checks are okay, we can have a look at the results the model gave us with the same two functions for inference as used for linear models: <code>summary</code> and <code>anova</code>.</p>
+<p>If all the assumption checks are okay, we can have a look at the results the model gave us with the same two functions for inference as used for linear models: <code>summary</code> and <code>anova</code>.</p>
 <pre class="r"><code>anova(ft.sol.nb)</code></pre>
 <pre><code>## Time elapsed: 0 hr 0 min 0 sec</code></pre>
 <pre><code>## Analysis of Deviance Table
@@ -2479,13 +2531,13 @@ If all the assumption checks are okay, we can have a look at the results the mod
 <pre class="r"><code>summary(ft.sol.nb)</code></pre>
 <pre><code>## 
 ## Test statistics:
-##                      wald value Pr(&gt;wald)    
-## (Intercept)               1.502     0.023 *  
-## TreatmentRevegetated      3.307     0.001 ***
+##                      wald value Pr(&gt;wald)   
+## (Intercept)               1.502     0.031 * 
+## TreatmentRevegetated      3.307     0.002 **
 ## --- 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 ## 
-## Test statistic:  3.307, p-value: 0.001 
+## Test statistic:  3.307, p-value: 0.002 
 ## Arguments: P-value calculated using 999 resampling iterations via pit.trap resampling.</code></pre>
 <p>Both tests indicate strong evidence of a treatment effect (p&lt;0.01). To extract the model equation we can look at the coefficients from the fit.</p>
 <pre class="r"><code>ft.sol.nb$coefficients</code></pre>
@@ -2493,41 +2545,33 @@ If all the assumption checks are okay, we can have a look at the results the mod
 ## (Intercept)           -0.9162907
 ## TreatmentRevegetated   2.1202635</code></pre>
 <p>The default link function for Poisson and negative binomial models is <span class="math inline">\(log()\)</span>. If we write the mean count as <span class="math inline">\(\lambda\)</span></p>
-<p><span class="math display">\[ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}\]</span>
-<br><br></p>
+<p><span class="math display">\[ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}\]</span></p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><br>
-<strong>Written.</strong> Results of GLM’s are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g. “There is strong evidence of positive effect of bush regeneration on the abundance of slugs from the order Soleolifera (p &lt; 0.001)”. For multiple predictors it’s best to display the results in a table. You should also indicate which distribution was used (e.g. negative-binomial) and if resampling was used for inference. ” We used a negative-binomial generalised linear model due to overdispersion evident in the data. Inference was carried out using bootstrap resampling with 1000 resamples (default when using manyglm).”</p>
+<p><strong>Written.</strong> Results of GLM’s are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g. “There is strong evidence of positive effect of bush regeneration on the abundance of slugs from the order Soleolifera (p &lt; 0.001)”. For multiple predictors it’s best to display the results in a table. You should also indicate which distribution was used (e.g. negative-binomial) and if resampling was used for inference. ” We used a negative-binomial generalised linear model due to overdispersion evident in the data. Inference was carried out using bootstrap resampling with 1000 resamples (default when using manyglm).”</p>
 <p><strong>Visual.</strong> In this example, a boxplot would be an effective way to visualse the differences in slug counts between control and revegetated sites.</p>
 <pre class="r"><code>boxplot(Soleolifera~Treatment,ylab = &quot;Count&quot;, xlab = &quot;Treatment&quot;, data=Reveg)</code></pre>
-<p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-9-1.png" width="500px" />
-<br><br></p>
+<p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-9-1.png" width="500px" /></p>
 </div>
 <div id="other-types-of-data" class="section level3">
 <h3>Other types of data</h3>
-<p><br>
-If you have continuous positive data with zeros, like biomass data, the <code>tweedie</code> distribution might be able to model this, although it does have some quite restrictive assumptions. You can use <code>family="tweedie"</code> with the <code>manyglm</code> function. Be sure to look at residual plots for violations of assumptions.</p>
-<p>For strictly positive continuous data a <code>gamma</code> distribution can be used. This is available in the <code>glm</code> function using <code>family=gamma</code>.
-<br><br></p>
+<p>If you have continuous positive data with zeros, like biomass data, the <code>tweedie</code> distribution might be able to model this, although it does have some quite restrictive assumptions. You can use <code>family="tweedie"</code> with the <code>manyglm</code> function. Be sure to look at residual plots for violations of assumptions.</p>
+<p>For strictly positive continuous data a <code>gamma</code> distribution can be used. This is available in the <code>glm</code> function using <code>family=gamma</code>.</p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-You can type <code>?glm</code> and <code>?manyglm</code> into R for help with these functions.</p>
+<p>You can type <code>?glm</code> and <code>?manyglm</code> into R for help with these functions.</p>
 <p style="margin-left: .5in; text-indent: -.5in;">
 Faraway, JJ. 2005. <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC press.
 </p>
 <p style="margin-left: .5in; text-indent: -.5in;">
 Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Springer Science &amp; Business Media, 2007.
 </p>
-<p>More advice on <a href="http://environmentalcomputing.net/interpreting-coefficients-in-glms/">interpreting coefficients in glms</a>
-<br><br></p>
-<p><strong>Author</strong>: Gordana Popovic
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 21 17:06:48 2022&quot;</code></pre>
+<p>More advice on <a href="http://environmentalcomputing.net/interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:27 2022&quot;</code></pre>
 </div>
 
 
@@ -3201,78 +3245,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -3292,52 +3264,6 @@ Last updated:</p>
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -3345,6 +3271,25 @@ Last updated:</p>
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -3417,20 +3362,15 @@ Last updated:</p>
 
                     
                     
+                        
+                    
                     
 
-                    
-            
-        
-                    
-            
-        
                     
                         
             
             
                 
-                    
                     
                 
                 
@@ -3446,45 +3386,6 @@ Last updated:</p>
             
             
                 
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -3582,6 +3483,165 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3710,6 +3770,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3771,19 +3847,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3799,5 +3875,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

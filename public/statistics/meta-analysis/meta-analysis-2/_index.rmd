@@ -1,10 +1,11 @@
 ---
-weight: 2
-title: "Fixed-effect and Random-effect Models"
-output: html_document
-editor_options: 
-  chunk_output_type: console
+ weight: 2
+ title: "Fixed-effect and Random-effect Models"
+ output: html_document
+ editor_options:
+   chunk_output_type: console
 ---
+
 First read our [introduction to meta analysis](http://environmentalcomputing.net/meta-analysis) with instructions for calculating effect sizes. Now, we consider the statistical models to estimate mean effect sizes and the influence of moderator variables.
 
 ### Fixed-effect and random-effects models
@@ -53,7 +54,7 @@ lnRR <- escalc(measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
 dat <- bind_cols(dat,lnRR)
 ```
 
-```{r common, tidy=TRUE, cache=TRUE}
+```{r common, tidy=TRUE}
 common_m <- rma(yi = yi, vi = vi, method = "FE", data = dat)
 ```
 
@@ -67,7 +68,7 @@ summary(common_m)
 
 OK, it was easy! The overall mean is statistically significant and it's around 0.2. What does 0.2 mean? Let's convert this back into the original scale - a response ratio of the control and experimental means. 
 
-```{r back, tidy=TRUE, cache=TRUE}
+```{r back, tidy=TRUE}
 exp(0.2)
 ```
 
@@ -77,7 +78,7 @@ This means a plant trait (e.g. mass) was 22% larger in the experimental group (R
 
 Now, we move onto the random-effects model - a more realistic model. Again, we use the `rma` function, but this time change the method to REML which is the default and the best method for the random-effect meta-analysis.
 
-```{r random, tidy=TRUE, cache=TRUE}
+```{r random, tidy=TRUE}
 random_m <- rma(yi = yi, vi = vi, method = "REML", data = dat)
 summary(random_m)
 ```
@@ -110,7 +111,7 @@ Fitting meta-regression is pretty straightforward too. In this example, let's fi
 
 We use `rma` again, but now have a model statement.
 
-```{r regression, tidy=TRUE, cache=TRUE}
+```{r regression, tidy=TRUE}
 metareg <- rma(yi = yi, vi = vi, mod = ~time +  method + fungrp, method = "REML", data = dat)
 summary(metareg)
 ```
@@ -129,11 +130,11 @@ What am I talking about by 'funnel asymmetry'? If you plot effect sizes and its 
 
 To create a funnel plot and run Egger's test:
 
-```{r funnel, tidy=TRUE, cache=TRUE}
+```{r funnel, tidy=TRUE}
 funnel(random_m)
 ```
 
-```{r egger, tidy=TRUE, cache=TRUE}
+```{r egger, tidy=TRUE}
 # Note that the orignal Egger's test is regtest(random_m, model="lm")
 regtest(random_m)
 ```
@@ -142,7 +143,7 @@ The funnel plot and Egger's test both suggest funnel asymmetry. But we need to b
 
 There is an alternative method, which has a cool name, the trim-and-fill method. You will see the reason why. We can use this method by using the function `trimfill`.  
 
-```{r trimfill, tidy=TRUE, cache=TRUE}
+```{r trimfill, tidy=TRUE}
 # Note that we are using the defult estimator ("L0"), but there are two others availablere
 tf_m<-trimfill(random_m)
 tf_m
@@ -164,7 +165,7 @@ I recently learned that there is another meta-analytic model (neither common nor
 
 This is problematic because under publication bias like we saw it just above, effect sizes with small sample sizes (very high $v_i$) should get small weights compared to effect sizes with large sample sizes (low $v_i$). When there exists publication bias, the random-effect model could provide us with a biased estimate... What could we do? Can we use the weight of $1/v_i$ like the common-effect model, but use the structure of the random-effects model? It turns out you can!
 
-```{r weight, tidy=TRUE, cache=TRUE}
+```{r weight, tidy=TRUE}
 # We make weights, which is 1/vi and stick that into the argument, weights
 dat[,"wi"]<-1/dat$vi
 weight_m<-rma(yi = yi, vi = vi, weights = wi, method = "REML", data = dat)
@@ -192,7 +193,7 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 <p style="margin-left:.5in;text-indent:-.5in">Senior, A. M., C. E. Grueber, T. Kamiya, M. Lagisz, K. O'Dwyer, E. S. A. Santos, and S. Nakagawa. 2016. Heterogeneity in ecological and evolutionary meta-analyses: its magnitude and implications. *Ecology* 97:3293-3299.</p>
 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

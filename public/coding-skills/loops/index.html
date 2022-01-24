@@ -11,22 +11,22 @@
     <title>Using Loops :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2415,11 +2473,9 @@
 
 <p>Do you find yourself cutting and pasting R code a lot?</p>
 <p>This usually will create problems for yourself later. One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use <a href="http://environmentalcomputing.net/writing-simple-functions/">functions</a> and the second one, covered here, is to use loops.</p>
-<p>We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> and <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> covered <a href="http://environmentalcomputing.net/data-manipulation/">here</a>. The dplyr approach works well if your data is “tidy” and in a data frame. If your data are in many different files, then a loop may be a quicker solution.<br />
-<br><br></p>
-<p>###Basic syntax of loops
-<br>
-The syntax of loops is relatively simple - the essential components are <code>for(){}</code> with the the <code>for()</code> part dicating how often operations within the <code>{}</code> part are done.</p>
+<p>We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> and <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> covered <a href="http://environmentalcomputing.net/data-manipulation/">here</a>. The dplyr approach works well if your data is “tidy” and in a data frame. If your data are in many different files, then a loop may be a quicker solution.</p>
+<p>###Basic syntax of loops</p>
+<p>The syntax of loops is relatively simple - the essential components are <code>for(){}</code> with the the <code>for()</code> part dicating how often operations within the <code>{}</code> part are done.</p>
 <p>Consider the loop below. The first time we run through the loop, the value <em>i</em> will be equal to 1, and this value will be displayed with the <code>print</code> function. It will then repeat with <em>i</em> = 2, all the way up to <em>i = 10</em>, doing whatever task is within the <code>{}</code> each time.</p>
 <pre class="r"><code>for (i in 1:10) {
   print(i)
@@ -2490,9 +2546,7 @@ for (i in 1:10) {
   x2[i,1] &lt;- col1               # places the first result into row i, column 1
   x2[i,2] &lt;- col2               # places the second result into row i, column 2
 }</code></pre>
-<p><br><br></p>
-<p>###An ecological example
-<br></p>
+<p>###An ecological example</p>
 <p><img src="Subsetting_data_image.jpg" /></p>
 <p>Now we can use your new loop skills in an ecological context. As with the <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a> tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
 <pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)
@@ -2534,16 +2588,13 @@ Correlations &lt;- data.frame(variable=character(length=rows),
 ## 3     Exclusion.thinned  0.17562438
 ## 4 Distance.murray.water -0.18071570
 ## 5  Distance.creek.water -0.09130258</code></pre>
-<p>Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.<br />
-<br><br></p>
-<p>###Further help
-<br></p>
+<p>Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.</p>
+<p>###Further help</p>
 <p><a href="https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r#gs.8KE0Nx4">DataCamp’s tutorial on loops</a></p>
-<p>You can find some more good examples of loops, lists and if/else statements on the BEES R User group GitHub site <a href="https://github.com/mitchest/BEES-ecocomp/blob/master/introToLoops.R">loops and lists by Mitch</a>.
-<br><br></p>
+<p>You can find some more good examples of loops, lists and if/else statements on the BEES R User group GitHub site <a href="https://github.com/mitchest/BEES-ecocomp/blob/master/introToLoops.R">loops and lists by Mitch</a>.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Wed Jan 19 16:45:35 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Tue Jan 25 09:37:31 2022&quot;</code></pre>
 
 
 
@@ -3224,42 +3275,6 @@ Correlations &lt;- data.frame(variable=character(length=rows),
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3275,35 +3290,6 @@ Correlations &lt;- data.frame(variable=character(length=rows),
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3325,40 +3311,6 @@ Correlations &lt;- data.frame(variable=character(length=rows),
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3436,25 +3388,6 @@ Correlations &lt;- data.frame(variable=character(length=rows),
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3470,27 +3403,10 @@ Correlations &lt;- data.frame(variable=character(length=rows),
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3593,6 +3509,157 @@ Correlations &lt;- data.frame(variable=character(length=rows),
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3721,6 +3788,22 @@ Correlations &lt;- data.frame(variable=character(length=rows),
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3782,19 +3865,19 @@ Correlations &lt;- data.frame(variable=character(length=rows),
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3810,5 +3893,13 @@ Correlations &lt;- data.frame(variable=character(length=rows),
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

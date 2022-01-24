@@ -10,10 +10,10 @@ library(ggplot2)
 g1 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() +theme_classic()
 print(g1 + labs(y="Petal length (cm)", x = "Sepal length (cm)"))
 ```
-<br>
+ 
 
 ### Creating a ggplot
-<br>
+ 
 First, you will need to install the package ggplot2 on your machine, then load the package with the usual `library` function.
 
 ```{r}
@@ -45,10 +45,10 @@ Ensure there is a open and closed bracket after the `geom` code. This tells R to
 The type of graph you want to make has to match the classes of the inputs. For example, a scatterplot would require both variables to be numeric. Or a boxplot would require the *x* variable to be a factor and the *y* variable to be numeric. You can check the class of any variable with the `class` function, or all variables in a data frame with the `str` function.
 
 A helpful practise when making ggplots is to assign the plot you've made to an object (e.g., plot1 in the code above) and then 'print' it separately. As your ggplot becomes more complicated this will make it much easier. 
-<br><br>
+  
 
 ### Example plots
-<br>
+ 
 ![](ggplot1_basics_image.jpg)
 
 In these examples, let's use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:
@@ -86,10 +86,10 @@ These points could then be coloured according to the levels of a categorical var
 plot4 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point()
 print(plot4)
 ```
-<br><br>
+  
 
 ### Adding a basic theme
-<br>
+ 
 The overall look of the ggplot can be altered with different set themes. This can be done by adding `+ theme_bw()` or `+ theme_classic()` to the end of your line of code. Like `geom()`, ensure there is open and closed brackets after the theme name.
 
 ```{r}
@@ -99,10 +99,10 @@ print(plot5)
 plot6<-ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() + theme_classic()
 print(plot6)
 ```
-<br><br>
+  
 
 ###Further help
-<br>
+ 
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 * [altering the overall appearance](http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/)  
@@ -114,10 +114,10 @@ Help on all the ggplot functions can be found at the [The master ggplot help sit
 A useful cheat sheet on commonly used functions can be downloaded [here](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
 
 <p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with quite a bit of help online [here](http://www.cookbook-r.com/Graphs/)</p>
-<br><br>
+  
 
 **Author**: Fiona Robinson
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

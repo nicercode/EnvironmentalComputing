@@ -1,6 +1,6 @@
 ---
 title: 'Simple Maps with ggmap'
-weight: 1
+weight: 2
 output: html_document
 ---
 
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 library(ggmap)
 ```
   
-## Settign up ggmap 
+## Setting up ggmap 
 
 The ggmap package "makes it easy to retrieve raster map tiles from popular online mapping services like Google Maps and Stamen Maps and plot them using the ggplot2 framework". 
 
@@ -173,7 +173,7 @@ Read the [ggmap](https://cran.r-project.org/web/packages/ggmap/index.html) docum
 [ggmap cheat sheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf) from the National Centre for Ecological Analysis and Synthesis.
 
 
-**Author**: Kingsley Griffin
+**Author**: Kingsley Griffin and edits by Daniel Falster
 
 Last updated:
 ```{r,echo=F}

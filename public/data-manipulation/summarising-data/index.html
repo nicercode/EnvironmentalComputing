@@ -11,22 +11,22 @@
     <title>Summarising data :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2419,11 +2477,9 @@
 <pre class="r"><code>library(dplyr)</code></pre>
 <p>As with the help page on <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a>, we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Bats_data.csv">Bats_data.csv</a>, and import into R.</p>
 <pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)</code></pre>
-<p><br><br></p>
 <div id="summarising-data-with-dplyr" class="section level3">
 <h3>Summarising data with dplyr</h3>
-<p><br>
-<strong>Obtaining summary measures from a single variable</strong></p>
+<p><strong>Obtaining summary measures from a single variable</strong></p>
 <p>We can use the function <code>summarise</code> with a range of built-in summary functions from R to obtain summary statistics from our data.</p>
 <p>For example, to the mean activity of bats across all nightly measurements in the study, I would use the <code>&gt;mean</code> summary function within the <code>summarise</code> function as follows, specifying the data frame (Bats), the variable I want to get the mean of (Activity) and a name for the new variable (Mean.Activity):</p>
 <pre class="r"><code>summarise(Bats, Mean.Activity=mean(Activity))</code></pre>
@@ -2483,7 +2539,6 @@ For example, in this dataset, we may want to compare bat activity across forests
             n.Activity=n(),                           # sample size
             se.Activity=sd.Activity/sqrt(n.Activity), # standard error
             IQR.Activity=IQR(Activity))               # interquartile range</code></pre>
-<p><br><br></p>
 <p><strong>Issues with missing data</strong></p>
 <p>Things can go wrong in the field and we don’t always collect all the data we need at each site.</p>
 <p>To show you how this affects the <code>summarise</code> function, we can make a new variable (Activity2), which is a copy of Activity but with some of the activity data (the first four rows) now missing.</p>
@@ -2500,28 +2555,23 @@ Bats$Activity2[1:4] &lt;- rep(NA, 4)</code></pre>
 <p>Just remember that this will decrease your sample size. This will work for the summary functions apart from the <code>n</code> function that counts the number of values in a vector. To count the non-missing data, you can use this (slightly more complicated) piece of code to get your new sample size.</p>
 <pre class="r"><code>length(Bats$Activity2[!is.na(Bats$Activity2)])</code></pre>
 <pre><code>## [1] 169</code></pre>
-<p>This calculates the number of values, <code>length</code>, of the vector of bat activity values, Bats$Activity2, where they are not NA, <code>!is.na</code>. Revising the <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a> may help you understand this statement.
-<br><br></p>
+<p>This calculates the number of values, <code>length</code>, of the vector of bat activity values, Bats$Activity2, where they are not NA, <code>!is.na</code>. Revising the <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a> may help you understand this statement.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><br>
-<strong>Written</strong> If we were writing a paper about bat activity across different forest thinning treatments, we could use our summarised data to make some broad observations at the beginning of our results section, prior to further analysis. For example: “Bats were twice as active in in mature open (reference) forest (365 ? 27) compared to unthinned regrowth (166 ? 21) (mean ? SE). However bat activity was similar across medium-term (385 ? 36) and short-term (350 ? 27) thinned and reference forests”.</p>
+<p><strong>Written</strong> If we were writing a paper about bat activity across different forest thinning treatments, we could use our summarised data to make some broad observations at the beginning of our results section, prior to further analysis. For example: “Bats were twice as active in in mature open (reference) forest (365 ? 27) compared to unthinned regrowth (166 ? 21) (mean ? SE). However bat activity was similar across medium-term (385 ? 36) and short-term (350 ? 27) thinned and reference forests”.</p>
 <p><strong>Visual</strong> Presenting means and standard errors of categorical data gives us a way to visually communicate a treatment effect (as long as it is supported by appropriate statistical analysis). Here we’ve used the ggplot2 package to make a simple bar graph with means ? standard error (error bars).</p>
-<p><img src="/data-manipulation/summarising-data/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" />
-<br><br></p>
+<p><img src="/data-manipulation/summarising-data/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio.Images were sourced from the same document.</p>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio.Images were sourced from the same document.</p>
 <p>You can type <code>?dplyr</code> to get help with this package.</p>
 <p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></p>
 <p>If you’d like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with <a href="http://environmentalcomputing.net/">Plotting with gglpot: the basics</a>.</p>
-<p><strong>Author</strong>: Rachel V. Blakey
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Wed Jan 19 12:13:38 2022&quot;</code></pre>
+<p><strong>Author</strong>: Rachel V. Blakey</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:42:55 2022&quot;</code></pre>
 </div>
 
 
@@ -3203,42 +3253,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3254,35 +3268,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3304,40 +3289,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3415,25 +3366,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3449,27 +3381,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3572,6 +3487,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3700,6 +3766,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3761,19 +3843,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3789,5 +3871,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

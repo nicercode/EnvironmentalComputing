@@ -11,22 +11,22 @@
     <title>Combining datasets :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2423,12 +2481,10 @@
 <pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)
 Geo &lt;- read.csv(file=&quot;Geo_data.csv&quot;, header=T, stringsAsFactors=F)
 Weather &lt;- read.csv(file=&quot;Weather_vars.csv&quot;, header=T, stringsAsFactors=F)</code></pre>
-<p>You’ll notice that we used the argument <code>stringsAsFactors=F</code>. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as “character” vectors.
-<br><br></p>
+<p>You’ll notice that we used the argument <code>stringsAsFactors=F</code>. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as “character” vectors.</p>
 <div id="joining-data" class="section level3">
 <h3>Joining data</h3>
-<p><br>
-dplyr has a function for simply adding all columns from one data set (z) to another (y):</p>
+<p>dplyr has a function for simply adding all columns from one data set (z) to another (y):</p>
 <pre class="r"><code>bind_cols(y,z)</code></pre>
 <p>This is only useful if the two data sets have the same number of rows and the rows are arranged in the same order (it just matches up rows by their position).</p>
 <p>In this case, we have two quite different datasets that we want to join to our main dataset on bat abundance. The data set of geographic locations has been measured at the site-scale, so each separate site has a separate measurement of latitude and longitude.</p>
@@ -2443,13 +2499,11 @@ dplyr has a function for simply adding all columns from one data set (z) to anot
 dim(Bats_withGeoWeather)
 colnames(Bats_withGeo)
 colnames(geo.weather.join)</code></pre>
-<p>You will see that the new dataset, Bats_withGeoWeather has the same number of rows as the original, Bats, but an additional four columns: “Latitude”, “Longitude”, “Mean_temperature” and “Mean_humidity”.
-<br><br></p>
+<p>You will see that the new dataset, Bats_withGeoWeather has the same number of rows as the original, Bats, but an additional four columns: “Latitude”, “Longitude”, “Mean_temperature” and “Mean_humidity”.</p>
 </div>
 <div id="dealing-with-messy-datasets" class="section level3">
 <h3>Dealing with messy datasets</h3>
-<p><br>
-That was a nice neat example, where we have all of the codes in our main dataset (Bats) matching up to codes in the data sets we wanted to join on. There are also a series of functions that help with messier data situations.</p>
+<p>That was a nice neat example, where we have all of the codes in our main dataset (Bats) matching up to codes in the data sets we wanted to join on. There are also a series of functions that help with messier data situations.</p>
 <p>Let’s simulate a couple of messy datasets. Imagine you have bat activity data for five sites and tree density data for five sites, but only two of those sites (D and E) contain measurements for both variables. This may happen when you are using datasets collected by different people or for different purposes in the same study.</p>
 <pre class="r"><code>Bat_sim &lt;- as.data.frame(cbind(Site = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;),
                                Activity =c(62,29,30,23,24)),stringsAsFactors = F)
@@ -2511,15 +2565,13 @@ print(Bat_withTree_inn.join)</code></pre>
 ## 1    A       62
 ## 2    B       29
 ## 3    C       30</code></pre>
-<p><br><br></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document. You can use <code>?dplyr</code> to get help with this package.</p>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document. You can use <code>?dplyr</code> to get help with this package.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Wed Jan 19 12:13:50 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Tue Jan 25 09:42:40 2022&quot;</code></pre>
 </div>
 
 
@@ -3201,42 +3253,6 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3252,35 +3268,6 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3302,40 +3289,6 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3413,25 +3366,6 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3447,27 +3381,10 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3570,6 +3487,157 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3698,6 +3766,22 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3759,19 +3843,19 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3787,5 +3871,13 @@ This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-con
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

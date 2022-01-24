@@ -11,22 +11,22 @@
     <title>Introduction :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2464,29 +2522,10 @@
 <p>First, install and load the <code>metafor</code> package.</p>
 <pre class="r"><code>library(metafor)</code></pre>
 <p>Have a look at the data set named <code>dat.curtis1998</code> included in the package. If you have to see the other data sets included in this package, try <code>help(package="metafor")</code>.</p>
-<pre class="r"><code>dat &lt;- get(data(dat.curtis1998))
-str(dat)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    102 obs. of  20 variables:
-##  $ id      : int  21 22 27 32 35 38 44 63 86 87 ...
-##  $ paper   : int  44 44 121 121 121 121 159 183 209 209 ...
-##  $ genus   : chr  &quot;ALNUS&quot; &quot;ALNUS&quot; &quot;ACER&quot; &quot;QUERCUS&quot; ...
-##  $ species : chr  &quot;RUBRA&quot; &quot;RUBRA&quot; &quot;RUBRUM&quot; &quot;PRINUS&quot; ...
-##  $ fungrp  : chr  &quot;N2FIX&quot; &quot;N2FIX&quot; &quot;ANGIO&quot; &quot;ANGIO&quot; ...
-##  $ co2.ambi: num  350 350 350 350 350 350 350 395 350 350 ...
-##  $ co2.elev: num  650 650 700 700 700 700 700 795 700 700 ...
-##  $ units   : chr  &quot;ul/l&quot; &quot;ul/l&quot; &quot;ppm&quot; &quot;ppm&quot; ...
-##  $ time    : int  47 47 59 70 64 50 730 365 365 365 ...
-##  $ pot     : chr  &quot;0.5&quot; &quot;0.5&quot; &quot;2.6&quot; &quot;2.6&quot; ...
-##  $ method  : chr  &quot;GC&quot; &quot;GC&quot; &quot;GH&quot; &quot;GH&quot; ...
-##  $ stock   : chr  &quot;SEED&quot; &quot;SEED&quot; &quot;SEED&quot; &quot;SEED&quot; ...
-##  $ xtrt    : chr  &quot;FERT&quot; &quot;FERT&quot; &quot;NONE&quot; &quot;NONE&quot; ...
-##  $ level   : chr  &quot;HIGH&quot; &quot;CONTROL&quot; &quot;.&quot; &quot;.&quot; ...
-##  $ m1i     : num  6.82 2.6 2.99 5.91 4.61 ...
-##  $ sd1i    : num  1.77 0.667 0.856 1.742 1.407 ...
-##  $ n1i     : int  3 5 5 5 4 5 3 3 20 16 ...
-##  $ m2i     : num  3.94 2.25 1.93 6.62 4.1 ...
-##  $ sd2i    : num  1.116 0.328 0.552 1.631 1.257 ...
-##  $ n2i     : int  5 5 5 5 4 3 3 3 20 16 ...</code></pre>
+<pre class="r"><code>dat &lt;- data(dat.curtis1998)</code></pre>
+<pre><code>## Warning in data(dat.curtis1998): data set &#39;dat.curtis1998&#39; not found</code></pre>
+<pre class="r"><code>str(dat)</code></pre>
+<pre><code>##  chr &quot;dat.curtis1998&quot;</code></pre>
 <p>This data set is from the paper by Curtis and Wang (1998). They looked at the effect of increased CO<span class="math inline">\(_2\)</span> on plant traits (mainly changes in biomass). So we have information on control group (1) and experimental group (2) (m = mean, sd = standard deviation) along with species information and experimental details. In meta-analysis, these variables are often referred to as ‘moderators’ (we will get to this a bit later).</p>
 <p><img src="Linear_regression_image.jpg" /></p>
 </div>
@@ -2517,13 +2556,13 @@ SMD &lt;- escalc(measure = &quot;SMD&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = 
     sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
 <p>where <code>n1i</code> and <code>n2i</code> are the sample sizes, <code>m1i</code> and <code>m2i</code> are the means, and <code>sd1i</code> and <code>sd2i</code> the standard deviations from each study.</p>
 <p>The oject created now has an effect size (yi) and its variance (vi) for each study</p>
-<pre><code>##        yi     vi 
-## 1  1.8222 0.7408 
-## 2  0.5922 0.4175 
-## 3  1.3286 0.4883 
-## 4 -0.3798 0.4072 
-## 5  0.3321 0.5069 
-## 6  2.5137 0.9282</code></pre>
+<pre><code>##           yi        vi
+## 1  1.8221544 0.7408487
+## 2  0.5921892 0.4175344
+## 3  1.3285699 0.4882549
+## 4 -0.3798237 0.4072133
+## 5  0.3320563 0.5068913
+## 6  2.5136955 0.9282499</code></pre>
 <p>To obtain the response ratio (log transformed ratio of menas), we would use:</p>
 <pre class="r"><code>lnRR &lt;- escalc(measure = &quot;ROM&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2 = dat$m2i,
     sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
@@ -2578,10 +2617,9 @@ Nakagawa, S., R. Poulin, K. Mengersen, K. Reinhold, L. Engqvist, M. Lagisz, and 
 <p style="margin-left:.5in;text-indent:-.5in">
 Viechtbauer, W. 2010. Conducting meta-analyses in R with the metafor package. <em>Journal of Statistical Software</em> 36:1-48.
 </p>
-<p><strong>Authors</strong>: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 24 12:56:42 2022&quot;</code></pre>
+<p><strong>Authors</strong>: Shinichi Nakagawa and Malgorzata (Losia) Lagisz</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:51:19 2022&quot;</code></pre>
 </div>
 
 
@@ -3255,78 +3293,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
             
             
@@ -3346,52 +3312,6 @@ Last updated:</p>
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
             
         
                     
@@ -3399,6 +3319,25 @@ Last updated:</p>
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -3471,25 +3410,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3505,27 +3425,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3628,6 +3531,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3782,6 +3836,22 @@ Last updated:</p>
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -3812,7 +3882,7 @@ Last updated:</p>
 			<a class="nav nav-prev" href="/statistics/meta-analysis/" title="Meta-Analyses"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -3822,19 +3892,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3850,5 +3920,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

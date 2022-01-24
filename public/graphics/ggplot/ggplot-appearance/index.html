@@ -11,22 +11,22 @@
     <title>Customising your ggplot :: Environmental Computing</title>
 
     
-    <link href="/css/nucleus.css?1642999923" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1642999923" rel="stylesheet">
-    <link href="/css/hybrid.css?1642999923" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1642999923" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1642999923" rel="stylesheet">
-    <link href="/css/auto-complete.css?1642999923" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1642999923" rel="stylesheet">
-    <link href="/css/theme.css?1642999923" rel="stylesheet">
-    <link href="/css/tabs.css?1642999923" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1642999923" rel="stylesheet">
+    <link href="/css/nucleus.css?1643064960" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1643064960" rel="stylesheet">
+    <link href="/css/hybrid.css?1643064960" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1643064960" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1643064960" rel="stylesheet">
+    <link href="/css/auto-complete.css?1643064960" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1643064960" rel="stylesheet">
+    <link href="/css/theme.css?1643064960" rel="stylesheet">
+    <link href="/css/tabs.css?1643064960" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1643064960" rel="stylesheet">
     
-    <link href="/css/theme-green.css?1642999923" rel="stylesheet">
+    <link href="/css/theme-green.css?1643064960" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1642999923"></script>
+    <script src="/js/jquery-3.3.1.min.js?1643064960"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -83,6 +83,8 @@
 
 </a>
 
+<img src="/images/E_C_Logo.png" alt="mylogo.jpg">
+
     </div>
     
         <div class="searchbox">
@@ -91,14 +93,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1642999923"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1642999923"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1643064960"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1643064960"></script>
 <script type="text/javascript">
     
         var baseurl = "\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1642999923"></script>
+<script type="text/javascript" src="/js/search.js?1643064960"></script>
 
     
   </div>
@@ -1223,13 +1225,13 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/interactive/">
-          Interactive maps in R
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
           
             <i class="fas fa-check read-icon"></i>
           
@@ -1251,13 +1253,41 @@
  
   
     
-    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+    <li data-nav-id="/graphics/spatial-vis/simple-maps/" title="Simple Maps with ggmap" class="dd-item
         
         
         
         ">
-      <a href="/graphics/spatial-vis/basic-raster/">
-          The Basics of Rasters
+      <a href="/graphics/spatial-vis/simple-maps/">
+          Simple Maps with ggmap
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive Maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive Maps in R
           
             <i class="fas fa-check read-icon"></i>
           
@@ -2253,6 +2283,34 @@
  
   
     
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-2/" title="Fixed-effect and Random-effect Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-2/">
+          Fixed-effect and Random-effect Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
     <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
         
         
@@ -2424,11 +2482,9 @@
 <p>The overall appearance can be edited by changing the style or prescence of grid lines, axis notches, panel colour, legend colour or outlines.</p>
 <p>Before you get started, read the page on the <a href="http://environmentalcomputing.net/plotting-with-ggplot-the-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
-<p><br><br></p>
 <div id="creating-a-customised-theme" class="section level3">
 <h3>Creating a customised theme</h3>
-<p><br>
-One of the most effective ways to customise your plot is to create a customised theme and separate this from your basic ggplot code. By separating and saving your theme, it will be much easier to edit, alter and reuse for other projects.</p>
+<p>One of the most effective ways to customise your plot is to create a customised theme and separate this from your basic ggplot code. By separating and saving your theme, it will be much easier to edit, alter and reuse for other projects.</p>
 <p><img src="ggplot1_basics_image.jpg" /></p>
 <p>In these examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
 <pre class="r"><code>data(iris)</code></pre>
@@ -2440,13 +2496,11 @@ One of the most effective ways to customise your plot is to create a customised 
 <p>We would then reprint the base plot with this theme added:</p>
 <pre class="r"><code>print(IrisPlot + mytheme)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Themes can have many different elements, that relate to legends, axes, titles etc. Separate each within the <code>theme</code> code with a comma.
-<br><br></p>
+<p>Themes can have many different elements, that relate to legends, axes, titles etc. Separate each within the <code>theme</code> code with a comma.</p>
 </div>
 <div id="formatting-the-plot-and-legend-background" class="section level3">
 <h3>Formatting the plot and legend background</h3>
-<p><br>
-The plot and legend background can be changed to any colour listed <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a> using the following code:</p>
+<p>The plot and legend background can be changed to any colour listed <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a> using the following code:</p>
 <ul>
 <li><code>panel.background = element_rect(your format)</code> will alter the panel behind the graph.<br />
 </li>
@@ -2468,13 +2522,11 @@ The plot and legend background can be changed to any colour listed <a href="http
                  legend.background = (element_rect(colour= &quot;yellow&quot;, fill = &quot;blue&quot;)))
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="altering-the-size-colour-or-presence-of-grid-lines" class="section level3">
 <h3>Altering the size, colour or presence of grid lines</h3>
-<p><br>
-The grid lines are divided into two sets of grid lines; major and minor. This allows you to accentuate or remove half the grid lines.<br />
+<p>The grid lines are divided into two sets of grid lines; major and minor. This allows you to accentuate or remove half the grid lines.<br />
 * <code>panel.grid.major = element_line(your format)</code> - alters the format of major grid lines.<br />
 * <code>panel.grid.minor = element_line(your format)</code> - alters the format of minor grid lines.</p>
 <p>where <code>(your format)</code> specifies the colour and thickness of the lines.</p>
@@ -2491,44 +2543,36 @@ print(IrisPlot + mytheme)</code></pre>
 <pre class="r"><code>mytheme &lt;- theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="altering-the-x-and-y-axis-lines" class="section level3">
 <h3>Altering the x and y axis lines</h3>
-<p><br>
-The size and colour of axis lines themselves can be customised in the same way as the grid lines (above), using <code>axis.line=element_line(your format)</code>. For example:</p>
+<p>The size and colour of axis lines themselves can be customised in the same way as the grid lines (above), using <code>axis.line=element_line(your format)</code>. For example:</p>
 <pre class="r"><code>mytheme &lt;- theme(axis.line = element_line(size = 1.5, colour = &quot;red&quot;),
                  panel.background = element_rect(fill = &quot;white&quot;))
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="altering-the-axis-ticksnotches" class="section level3">
 <h3>Altering the axis ticks/notches</h3>
-<p><br>
-The size and colour of the ticks can be altered using <code>axis.ticks = element_line(your format)</code>. For example:</p>
+<p>The size and colour of the ticks can be altered using <code>axis.ticks = element_line(your format)</code>. For example:</p>
 <pre class="r"><code>mytheme &lt;- theme(axis.ticks = element_line(colour = &quot;red&quot;, size=(2)))
 
 print(IrisPlot +mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="removing-any-element-of-a-theme" class="section level3">
 <h3>Removing any element of a theme</h3>
-<p><br>
-<code>= element_blank()</code> is used if you wish to entirely remove an element of the formatting. For example, to get rid of ticks, grid lines and the background, you would use:</p>
+<p><code>= element_blank()</code> is used if you wish to entirely remove an element of the formatting. For example, to get rid of ticks, grid lines and the background, you would use:</p>
 <pre class="r"><code>mytheme &lt;- theme(axis.ticks = element_blank(), panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.background= element_blank())
 
 print(IrisPlot +mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="example-of-a-fully-customised-ggplot" class="section level3">
 <h3>Example of a fully customised ggplot</h3>
-<p><br>
-Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on <a href="http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/">adding titles and axis names</a> for help with those parts of the <code>print()</code> code.</p>
+<p>Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on <a href="http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/">adding titles and axis names</a> for help with those parts of the <code>print()</code> code.</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length,Petal.Length,colour=Species,shape=Species))+geom_point() 
 
 mytheme3 &lt;- theme(legend.text = element_text(face = &quot;italic&quot;,colour=&quot;steelblue4&quot;,
@@ -2551,11 +2595,9 @@ mytheme3 &lt;- theme(legend.text = element_text(face = &quot;italic&quot;,colour
 print(IrisPlot + mytheme3+ ggtitle(&quot;Iris species petal and sepal length&quot;)
               + labs(y=&quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;, colour = &quot;Species&quot;)
               + scale_colour_manual(values = c(&quot;slateblue&quot;, &quot;slateblue2&quot;, &quot;slateblue4&quot;)))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" />
-<br><br></p>
-<p>###Further help
-<br>
-To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>###Further help</p>
+<p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
 * <a href="http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/">adding titles and axis names</a><br />
 * <a href="http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/">colours and symbols</a>.</p>
 <p>Help on all the ggplot functions can be found at the <a href="http://docs.ggplot2.org/current/">The master ggplot help site</a>.</p>
@@ -2563,11 +2605,9 @@ To further customise the aesthetics of the graph, including colour and formattin
 <p style="margin-left: .5in; text-indent: -.5in;">
 Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with quite a bit of help online <a href="http://www.cookbook-r.com/Graphs/">here</a>
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Fiona Robinson
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 13:34:15 2022&quot;</code></pre>
+<p><strong>Author</strong>: Fiona Robinson</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:45:14 2022&quot;</code></pre>
 </div>
 
 
@@ -3253,42 +3293,6 @@ Last updated:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -3304,35 +3308,6 @@ Last updated:</p>
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -3354,40 +3329,6 @@ Last updated:</p>
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -3465,25 +3406,6 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                         
                     
                     
@@ -3499,27 +3421,10 @@ Last updated:</p>
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -3622,6 +3527,157 @@ Last updated:</p>
             
         
                     
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
             
             
@@ -3750,6 +3806,22 @@ Last updated:</p>
                     
                     
 
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
                     
                         
             
@@ -3811,19 +3883,19 @@ Last updated:</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.min.js?1642999923"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1642999923"></script>
-    <script src="/js/jquery.sticky.js?1642999923"></script>
-    <script src="/js/featherlight.min.js?1642999923"></script>
-    <script src="/js/highlight.pack.js?1642999923"></script>
+    <script src="/js/clipboard.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.min.js?1643064960"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1643064960"></script>
+    <script src="/js/jquery.sticky.js?1643064960"></script>
+    <script src="/js/featherlight.min.js?1643064960"></script>
+    <script src="/js/highlight.pack.js?1643064960"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1642999923"></script>
-    <script src="/js/learn.js?1642999923"></script>
-    <script src="/js/hugo-learn.js?1642999923"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1643064960"></script>
+    <script src="/js/learn.js?1643064960"></script>
+    <script src="/js/hugo-learn.js?1643064960"></script>
     
         
-            <script src="/mermaid/mermaid.js?1642999923"></script>
+            <script src="/mermaid/mermaid.js?1643064960"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
@@ -3839,5 +3911,13 @@ Last updated:</p>
   ga('send', 'pageview');
 
 </script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({ tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]} })
+</script>
+
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"> </script>
+
+
   </body>
 </html>

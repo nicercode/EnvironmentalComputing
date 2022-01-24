@@ -137,7 +137,7 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 <p style="margin-left:.5in;text-indent:-.5in">Noble, D. W. A., M. Lagisz, R. E. O'Dea, and S. Nakagawa. 2017. Nonindependence and sensitivity analyses in ecological and evolutionary meta-analyses. *Molecular Ecology* 26:2410-2425.</p>
 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

@@ -27,10 +27,10 @@ Before you get started, read the page on the [basics](http://environmentalcomput
 ```{r}
 library(ggplot2)
 ```
-<br><br>
+  
 
 ### Creating a customised theme
-<br>
+ 
 One of the most effective ways to customise your plot is to create a customised theme and separate this from your basic ggplot code. By separating and saving your theme, it will be much easier to edit, alter and reuse for other projects.  
 
 ![](ggplot1_basics_image.jpg)
@@ -64,10 +64,10 @@ print(IrisPlot + mytheme)
 ```
 
 Themes can have many different elements, that relate to legends, axes, titles etc. Separate each within the `theme` code with a comma. 
-<br><br>
+  
 
 ### Formatting the plot and legend background
-<br>
+ 
 The plot and legend background can be changed to any colour listed [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) using the following code:
 
 * `panel.background = element_rect(your format)` will alter the panel behind the graph.  
@@ -90,10 +90,10 @@ mytheme <- theme(panel.background = element_rect(fill = "black", colour = "yello
 
 print(IrisPlot + mytheme)
 ```
-<br><br>
+  
 
 ### Altering the size, colour or presence of grid lines
-<br>
+ 
 The grid lines are divided into two sets of grid lines; major and minor. This allows you to accentuate or remove half the grid lines.  
 * `panel.grid.major = element_line(your format)` - alters the format of major grid lines.  
 * `panel.grid.minor = element_line(your format)` - alters the format of minor grid lines.  
@@ -120,10 +120,10 @@ mytheme <- theme(panel.grid.minor = element_blank(), panel.grid.major = element_
 
 print(IrisPlot + mytheme)
 ```
-<br><br>
+  
 
 ### Altering the x and y axis lines 
-<br>
+ 
 The size and colour of axis lines themselves can be customised in the same way as the grid lines (above), using `axis.line=element_line(your format)`. For example:
 
 ```{r}
@@ -132,10 +132,10 @@ mytheme <- theme(axis.line = element_line(size = 1.5, colour = "red"),
 
 print(IrisPlot + mytheme)
 ```
-<br><br>
+  
 
 ### Altering the axis ticks/notches
-<br>
+ 
 The size and colour of the ticks can be altered using `axis.ticks = element_line(your format)`. For example:
 
 ```{r}
@@ -143,10 +143,10 @@ mytheme <- theme(axis.ticks = element_line(colour = "red", size=(2)))
 
 print(IrisPlot +mytheme)
 ```
-<br><br>
+  
 
 ### Removing any element of a theme
-<br>
+ 
 `= element_blank()` is used if you wish to entirely remove an element of the formatting. For example, to get rid of ticks, grid lines and the background, you would use:
 
 ```{r}
@@ -154,10 +154,10 @@ mytheme <- theme(axis.ticks = element_blank(), panel.grid.minor = element_blank(
 
 print(IrisPlot +mytheme)
 ```
-<br><br>
+  
 
 ### Example of a fully customised ggplot
-<br>
+ 
 Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/) for help with those parts of the `print()` code.
 
 ```{r, warning =F}
@@ -184,11 +184,11 @@ print(IrisPlot + mytheme3+ ggtitle("Iris species petal and sepal length")
               + labs(y="Petal length (cm)", x = "Sepal length (cm)", colour = "Species")
               + scale_colour_manual(values = c("slateblue", "slateblue2", "slateblue4")))
 ```
-<br><br>
+  
 
 
 ###Further help
-<br>
+ 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 * [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/)  
 * [colours and symbols](http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/).   
@@ -198,10 +198,10 @@ Help on all the ggplot functions can be found at the [The master ggplot help sit
 A useful cheat sheet on commonly used functions can be downloaded [here](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
 
 <p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with quite a bit of help online [here](http://www.cookbook-r.com/Graphs/)</p>
-<br><br>
+  
 
 **Author**: Fiona Robinson
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

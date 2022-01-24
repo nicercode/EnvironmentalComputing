@@ -155,7 +155,7 @@ This also provides evidence for an effect of Modification as this parameter (i.e
 You can use the `anova` function to test for random effects, but the p-values are very approximate and we do not recommend this procedure. Instead we will use a parametric bootstrap. This is a simulation based method which involves a fair chunk of code, but there's not much about the code you have to change for different models, it's mostly just a matter of copy-paste. 
 
 Parametric bootstrap
-```{r, warning=FALSE}
+```{r, error=FALSE, message=FALSE, warning=FALSE}
 nBoot=1000
 lrStat=rep(NA,nBoot)
 ft.null = lm(Total~Modification,data=Estuaries)#null model

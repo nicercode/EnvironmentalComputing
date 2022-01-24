@@ -9,6 +9,8 @@
   </url><url>
     <loc>/coding-skills/good-practice/</loc>
   </url><url>
+    <loc>/statistics/catagorical/goodness-of-fit/</loc>
+  </url><url>
     <loc>/getting-started-with-r/installing-r-rstudio/</loc>
   </url><url>
     <loc>/graphics/spatial-vis/interactive/</loc>
@@ -36,6 +38,8 @@
     <loc>/statistics/t-tests/</loc>
   </url><url>
     <loc>/graphics/ggplot/ggplot-basics/</loc>
+  </url><url>
+    <loc>/statistics/catagorical/contingency-tabs/</loc>
   </url><url>
     <loc>/statistics/glms/glm-2/</loc>
   </url><url>
@@ -69,7 +73,11 @@
   </url><url>
     <loc>/data-manipulation/</loc>
   </url><url>
+    <loc>/statistics/catagorical/fishers-exact/</loc>
+  </url><url>
     <loc>/statistics/glms/</loc>
+  </url><url>
+    <loc>/statistics/mixed-models/mixed-model-3/</loc>
   </url><url>
     <loc>/statistics/glms/interpret-glm-coeffs/</loc>
   </url><url>
@@ -109,6 +117,8 @@
   </url><url>
     <loc>/graphics/ggplot/ggplot-barplot/</loc>
   </url><url>
+    <loc>/statistics/gams/</loc>
+  </url><url>
     <loc>/graphics/</loc>
   </url><url>
     <loc>/getting-started-with-r/importing-data/</loc>
@@ -117,9 +127,13 @@
   </url><url>
     <loc>/graphics/spatial-vis/</loc>
   </url><url>
+    <loc>/statistics/catagorical/</loc>
+  </url><url>
     <loc>/getting-started-with-r/data-types-structure/</loc>
   </url><url>
     <loc>/statistics/</loc>
+  </url><url>
+    <loc>/statistics/mvabund/</loc>
   </url><url>
     <loc>/</loc>
     <lastmod>2016-04-09T16:50:16+02:00</lastmod>

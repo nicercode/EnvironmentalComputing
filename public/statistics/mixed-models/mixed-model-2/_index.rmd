@@ -141,7 +141,7 @@ We find weak evidence of an effect of Modification (p=0.05047).
 
 As in  [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/) we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I've taken the code from [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/) and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.
 
-```{r}
+```{r, error=FALSE, message=FALSE, warning=FALSE}
 nBoot=1000
 lrStat <- rep(NA,nBoot)
 ft.null <- lmer(log(Total) ~ Modification + (1|Estuary) , Estuaries, REML=F)#null model

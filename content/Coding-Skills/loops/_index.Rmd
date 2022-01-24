@@ -10,10 +10,10 @@ Do you find yourself cutting and pasting R code a lot?
 This usually will create problems for yourself later.  One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use   [functions](http://environmentalcomputing.net/writing-simple-functions/) and the second one, covered here, is to use loops.  
 
 We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/) and [reshape2](https://cran.r-project.org/web/packages/reshape2/) covered [here](http://environmentalcomputing.net/data-manipulation/). The dplyr approach works well if your data is "tidy" and in a data frame. If your data are in many different files, then a loop may be a quicker solution.  
-<br><br>
+  
 
 ###Basic syntax of loops
-<br>
+ 
 The syntax of loops is relatively simple - the essential components are `for(){}` with the the `for()` part dicating how often operations within the `{}` part are done.
 
 Consider the loop below. The first time we run through the loop, the value *i* will be equal to 1, and this value will be displayed with the `print` function. It will then repeat with *i* = 2, all the way up to *i = 10*, doing whatever task is within the `{}` each time.
@@ -100,10 +100,10 @@ for (i in 1:10) {
   x2[i,2] <- col2               # places the second result into row i, column 2
 }
 ```
-<br><br>
+  
 
 ###An ecological example
-<br>
+ 
 
 ![](Subsetting_data_image.jpg)
 
@@ -153,15 +153,15 @@ Correlations
 ```
 
 Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.  
-<br><br>
+  
 
 ###Further help
-<br>
+ 
 
 [DataCamp's tutorial on loops](https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r#gs.8KE0Nx4)
 
 You can find some more good examples of loops, lists and if/else statements on the BEES R User group GitHub site [loops and lists by Mitch](https://github.com/mitchest/BEES-ecocomp/blob/master/introToLoops.R).
-<br><br>
+  
 
 **Author**: Rachel V. Blakey
 

@@ -15,10 +15,10 @@ Consider an example where researchers wanted to contrast the feeding specificity
 Multidimensional scaling can create an ordination plot from any measure of similarity or dissimilarity among samples and there are many different measures for calculating the dissimilarity among samples. The most basic of these is the Euclidean distance (i.e., simply the straight-line distance between two points in multivariate space). For contrasts of species composition, however, the most commonly used distance measure is the Bray-Curtis dissimilarity metric. The reason for its popularity is that, compared to other measures, Bray-Curtis is better at handling the large proportion of zeroes (e.g., species absences) commonly found in ecological data sets. This measure won't consider shared absences as being similar, which makes sense biologically.
 
 In addition to the choice of distance measure there are a number of different classes of MDS. Here we focus on what is referred to as non-metric MDS (nMDS), a non-parametric rank-based method that is comparatively robust to non-linear relationships between the calculated dissimilarity measure and the projected distance between objects. 
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](http://environmentalcomputing.net/wp-content/uploads/2016/05/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
 
 ```{r}
@@ -79,10 +79,10 @@ To plot those points, color coded by Habitat, we can use:
 library(ggplot2)
 ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) + geom_point() + theme_bw()
 ```
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 Interpreting an MDS plot is reasonably straightforward and the same as for any other ordination plot; objects that are closer together on the plot are more alike than those further apart. MDS arranges the points on the plot so that the distances among each pair of points correlates as best as possible to the dissimilarity between those two samples. The values on the two axes tell you nothing about the variables for a given sample - the plot is just a two dimensional space to arrange the points.
 
 If there is any grouping of samples according to categories of samples, then you have interesting patterns in your multivariate data set. In the plot above, samples from each habitat are more likely to be similar to samples from the same habitat, than samples from ther other habitats (visualised as clusters of different colours). This means that the species composition of herbivores differs across their food plants. Remember, that this is not a statistical test, just a visualisation that helps you seek patterns.
@@ -92,10 +92,10 @@ In contrast, if we colour our samples by time of day, you will see that these tw
 ```{r}
 ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) + geom_point() + theme_bw()
 ```
-<br><br>
+  
 
 ## Assumptions to check
-<br>
+ 
 As a rank-based approach NMDS, is comparatively robust to non-linearity between inter-object distance in space and their multivariate dissimilarity.
 
 **Stress.** Not an assumption of the process, but the most important factor to consider after generating an MDS plot is the 'stress'. The stress provides a measure of the degree to which the distance between samples in reduced dimensional space (usually 2-dimensions) corresponds with the actual multivariate distance between the samples. Lower stress values indicate greater conformity and therefore are desirable. High stress values indicate that there was no 2-dimensional arrangement of your points that reflect their similarities. A rule of thumb is that stress values should ideally be less than 0.2 or even 0.1.
@@ -120,26 +120,26 @@ Standardising samples or variables (by their mean or totals) may also be done, t
 Remember that any of these modifications do actually change your question. If the example above was done with samples standardised by total abundance, then the plot would represent a contrast of species composition with no influence of the different abundances found on the different habitats.
 
 Please also note that ordination based on distances has been criticised for failing to account for the mean-variance relationships that are commonplace in abundance data sets like the one used here, and for lacking an underlying statistical model - see Hui *et al.* (2014) Model-based approaches to unconstrained ordination. *Methods in Ecology and Evolution* 6:399-411. [link](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12236/abstract). 
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Visual.** The results from a MDS are best presented visually as a 2-dimensional ordination plot (as above). Rarely, a 3-dimensional plot may be used.
 
 **Written.** The written description of the MDS analyses (often in the figure legend) should mention what dissimilarity metric was used, whether data were transformed or standardised, and present the stress value. In a formal analysis, MDS plots are usually accompanied by some multivariate statistical test of dissimilarity between treatment/observational groups, e.g., via the `adonis` function in vegan. 
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?metaMDS` for the R help for this function.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Quinn, GP and MJ Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Ch. 18. Multidimensional scaling and cluster analysis.</p>
 
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup, S (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.</p>
-<br><br>
+  
 
 **Author:** Andrew Letten
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

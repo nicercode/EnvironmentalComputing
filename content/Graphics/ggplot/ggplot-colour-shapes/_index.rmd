@@ -9,7 +9,7 @@ Before you get started, read the page on the [basics](http://environmentalcomput
 ```{r,warning=F}
 library(ggplot2)
 ```
-<br><br>
+  
 
 ![](ggplot1_basics_image.jpg)
 
@@ -36,10 +36,10 @@ IrisHist <- ggplot(iris, aes(Sepal.Length)) + geom_histogram()
 library(gridExtra)
 grid.arrange(IrisPlot, IrisBox, IrisHist, ncol=2)
 ```
-<br><br>
+  
 
 ### Changing the colour of the whole plot or its outline
-<br>
+ 
 To colour your entire plot one colour, add `fill = "colour"` or `colour = "colour"` into the brackets following the `geom_...` code where you specified what type of graph you want. 
 
 Note that for most plots, `fill = "colour"` will colour the whole shape, whereas `colour = "colour"` will fill in the outline.
@@ -67,10 +67,10 @@ print(IrisPlot)
 ```
 
 The plots and outlines can be changed to any colour listed [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf). Remember to include "" before and after the colour name. 
-<br><br>
+  
 
 ### Using colour to visualise additional variables
-<br>
+ 
 **Additional categorical variables**
 
 If you wish to colour point on a **scatter plot** by a third categorical variable, then add `colour = variable.name` within your `aes` brackets. This tells ggplot that this third variable will colour the points. To colour the points by the variable Species:
@@ -92,7 +92,7 @@ IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxpl
 ```{r,echo=F,message=F, warning=F}
 print(IrisBox)
 ```
-<br><br>
+  
 
 **Additional continuous variables**
 
@@ -111,10 +111,10 @@ print(IrisPlot.continuous + scale_colour_gradient(low = "black", high = "white")
 
 print(IrisPlot.continuous + scale_colour_gradient(low = "darkolivegreen1", high = "darkolivegreen"))
 ```
-<br><br>
+  
 
 ### Choosing your own colours for these variables
-<br>
+ 
 This can be done in numerous ways. The basic format is to add `+ scale_colour_yourchoice()` for scatter plots or `+ scale_fill_yourchoice()` for box plots to the code where you 'print' your graph, where `yourchoice()` is one of several options. The syntax is:
 
 `print(your.basic.graph + your.theme + scale_colour_yourchoice())`
@@ -153,10 +153,10 @@ print(IrisPlot + scale_colour_brewer(palette = "Dark2"))
 
 print(IrisBox+ scale_fill_brewer(palette = "Oranges"))
 ```
-<br><br>
+  
 
 ### Changing symbols in a scatterplot
-<br>
+ 
 In a simple scatterplot with no grouping variables, you can change the shape of the symbol by adding `shape = ?` to the `geom_point()` code, where ? is one of the following numbers for different shapes.
 
 ![](pch.png)
@@ -196,10 +196,10 @@ IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species, 
 
 print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)) + scale_colour_manual(values = c("chartreuse4", "chocolate", "slateblue4")))
 ```
-<br><br>
+  
 
 ###Further help
-<br>
+ 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 *[altering overall appearance](http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/).  
 *[adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/)  
@@ -209,10 +209,10 @@ Help on all the ggplot functions can be found at the [The master ggplot help sit
 A useful cheat sheet on commonly used functions can be downloaded [here](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
 
 <p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with quite a bit of help online [here](http://www.cookbook-r.com/Graphs/)</p>
-<br><br>
+  
 
 **Author**: Fiona Robinson
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

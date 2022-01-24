@@ -7,12 +7,10 @@ output: html_document
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" />
-<br></p>
+<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <div id="creating-a-ggplot" class="section level3">
 <h3>Creating a ggplot</h3>
-<p><br>
-First, you will need to install the package ggplot2 on your machine, then load the package with the usual <code>library</code> function.</p>
+<p>First, you will need to install the package ggplot2 on your machine, then load the package with the usual <code>library</code> function.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
 <p>The starting point for creating a plot is to use the <code>ggplot</code> function with the following basic structure:</p>
 <pre class="r"><code>plot1 &lt;- ggplot(data, aes(x variable, y variable)) + geom_graph.type()
@@ -28,13 +26,11 @@ print(plot1)</code></pre>
 * bar plot - <code>+ geom_bar()</code></p>
 <p>Ensure there is a open and closed bracket after the <code>geom</code> code. This tells R to make the graph with the basic standard formatting for this graph type.</p>
 <p>The type of graph you want to make has to match the classes of the inputs. For example, a scatterplot would require both variables to be numeric. Or a boxplot would require the <em>x</em> variable to be a factor and the <em>y</em> variable to be numeric. You can check the class of any variable with the <code>class</code> function, or all variables in a data frame with the <code>str</code> function.</p>
-<p>A helpful practise when making ggplots is to assign the plot you’ve made to an object (e.g., plot1 in the code above) and then ‘print’ it separately. As your ggplot becomes more complicated this will make it much easier.
-<br><br></p>
+<p>A helpful practise when making ggplots is to assign the plot you’ve made to an object (e.g., plot1 in the code above) and then ‘print’ it separately. As your ggplot becomes more complicated this will make it much easier.</p>
 </div>
 <div id="example-plots" class="section level3">
 <h3>Example plots</h3>
-<p><br>
-<img src="ggplot1_basics_image.JPG" /></p>
+<p><img src="ggplot1_basics_image.JPG" /></p>
 <p>In these examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
 <pre class="r"><code>data(iris)</code></pre>
 <p>To contrast petal length across the three species of iris with a <strong>box plot</strong>, we would use:</p>
@@ -53,22 +49,18 @@ print(plot3)</code></pre>
 <p>These points could then be coloured according to the levels of a categorical variable. To do this, add <code>colour="categorical.variable"</code> in the <code>aes</code> brackets. To colour by species, we would use:</p>
 <pre class="r"><code>plot4 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point()
 print(plot4)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="adding-a-basic-theme" class="section level3">
 <h3>Adding a basic theme</h3>
-<p><br>
-The overall look of the ggplot can be altered with different set themes. This can be done by adding <code>+ theme_bw()</code> or <code>+ theme_classic()</code> to the end of your line of code. Like <code>geom()</code>, ensure there is open and closed brackets after the theme name.</p>
+<p>The overall look of the ggplot can be altered with different set themes. This can be done by adding <code>+ theme_bw()</code> or <code>+ theme_classic()</code> to the end of your line of code. Like <code>geom()</code>, ensure there is open and closed brackets after the theme name.</p>
 <pre class="r"><code>plot5 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() + theme_bw()
 print(plot5)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>plot6&lt;-ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() + theme_classic()
 print(plot6)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-2.png" width="672" />
-<br><br></p>
-<p>###Further help
-<br></p>
+<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>###Further help</p>
 <p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
 * <a href="http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/">altering the overall appearance</a><br />
 * <a href="http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/">adding titles and axis names</a><br />
@@ -78,9 +70,7 @@ print(plot6)</code></pre>
 <p style="margin-left: .5in; text-indent: -.5in;">
 Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with quite a bit of help online <a href="http://www.cookbook-r.com/Graphs/">here</a>
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Fiona Robinson
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 14:34:18 2022&quot;</code></pre>
+<p><strong>Author</strong>: Fiona Robinson</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:45:22 2022&quot;</code></pre>
 </div>

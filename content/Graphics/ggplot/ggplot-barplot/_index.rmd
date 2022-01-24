@@ -11,7 +11,7 @@ Before you get started, read the page on the [basics](http://environmentalcomput
 ```{r,warning=F}
 library(ggplot2)
 ```
-<br><br>
+  
 
 ![](ggplot1_basics_image.jpg)
 
@@ -53,7 +53,7 @@ IrisPlot + labs(y="Petal length (cm) +/- s.d.", x = "Species") + theme_classic()
 In the `geom_errorbar` code, `ymin` and `ymax` are the top and bottom of the error bars (defined here as mean +/- sd), and `width` defines how wide the error bars are.
 
 ###Further help
-<br>
+ 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 * [altering the overall appearance](http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/)  
 * [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/)  
@@ -64,10 +64,10 @@ Help on all the ggplot functions can be found at the [The master ggplot help sit
 A useful cheat sheet on commonly used functions can be downloaded [here](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
 
 <p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with online help on making bar and line graphs with error bars [here](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/)</p>
-<br><br>
+  
 
 **Author**: Alistair Poore (small edits by Will Cornwell)
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

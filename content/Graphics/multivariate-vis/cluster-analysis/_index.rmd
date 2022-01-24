@@ -15,10 +15,10 @@ There are many methods available for clustering (agglomerative, divisive, non hi
 * join together the pair of objects that are most similar  
 * recalculate the similarity matrix for that cluster vs all remaining objects  
 * repeat last two steps until all objects are joined  
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 
 ![](Cluster_analysis_image2.jpg)
 
@@ -67,18 +67,18 @@ We can make this a bit neater with all the samples lined up along the bottom by 
 ```{r}
 plot(as.dendrogram(H_metals.cluster),ylab = "Euclidean distance")
 ```
-<br><br>
+  
 
 
 ### Interpreting the results
-<br>
+ 
 A dendrogram has a branch for each sample joined at nodes that relate to the value of the similarity coefficient that joined the two objects. Interpretation of all the relationships comes from examination of the branching structure (which objects join most closely with each other) and from the similarities at which they join. Objects that join together close the tips of the branches are more similar to each other than those that join further toward the base of the tree (note that the default dendogram in R is like an upside down tree with the branches at the bottom and trunk at the top).
 
 Strong evidence for distinct groups would be evident if there were clusters where the samples within a cluster are much more similar to each other than samples in other clusters.
-<br><br>
+  
 
 ### Assumptions to check
-<br>
+ 
 Before running a cluster analysis to create a dendrogram, you need to consider:
 
 **What measure of similarity to use.** Dendograms can be created from any similarity matrix. There are many distance measures that can be used to describe the similarity between samples. The `dist` fuction in R has `"euclidean"`, `"maximum"`, `"manhattan"`, `"canberra"`, `"binary"` or `"minkowski"` (specified in the method argument of `dist`). Other measures are available in other packages (e.g., the Bray-Curtis measure which is recommended for analyses of species composition data is available in the package vegan).
@@ -86,10 +86,10 @@ Before running a cluster analysis to create a dendrogram, you need to consider:
 **Whether the data need transforming or standardising.** If the variables are measured on very different scales, or if there are outliers, then the structure of the dendrogram will be strongly influenced by the values of the largest values in the data set. Variables can be transformed or standardised to lessen the influence of large values (i.e., treat all variables on a more equal footing).
 
 **What method will be used to create the dendrogram.** The structure of dendrograms can also be sensitive to algorithm used to construct the tree (the linkage method). In the previous example, you used the single linkage method. The `hclust` function in R has several available: `"ward"`, `"single"`, `"complete"`, `"average"`, `"mcquitty"`, `"median"` and `"centroid"`.
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written.**  The interpretation of the dendrogram would be described in the text of a Results section (i.e, were there any obvious clusters of samples? were there any samples that were very different from the rest?). There are no numerical results to report.
 
 **Visual.**  Results from cluster analyses are communicated visually with the dendrogram. It is important to label the axis to show what measure of similarity was used in the analysis.
@@ -106,10 +106,10 @@ sample_colours <- sample_colours[order.dendrogram(dend)]
 labels_colors(dend) <- sample_colours
 plot(dend,ylab = "Euclidean distance")
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 You can access R help for the main functions used here by typing `?hclust`, `?dist` or `?as.dendrogram`. There are many R packages associated with the many different types of cluster analysis. See a long list of possibly useful packages [here](http://cran.cnr.berkeley.edu/web/views/Cluster.html).
 
 <p style="margin-left: .5in; text-indent: -.5in;">Quinn, GP and MJ Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Ch. 18. Multidimensional scaling and cluster analysis.</p>
@@ -117,10 +117,10 @@ You can access R help for the main functions used here by typing `?hclust`, `?di
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup, S (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.</p>
 
 [Visualizing dendrograms in R](http://rpubs.com/gaston/dendrograms)
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

@@ -16,12 +16,10 @@ editor_options:
 <p>Visualising this in two dimensions helps to understand the approach. The data points will be plotted on the new blue axes (the principal components) rather than the original black axes. Now imagine fitting those lines in more than three dimensions!</p>
 <p>Consider a plant physiologist attempting to quantify differences in leaf shape between two species of tree. She recorded total length (leaf + petiole), leaf length, width at the widest point, width half way along the leaf and petiole length from ten leaves of each species. These data are five dimensional (i.e., five measured variables) and we can use PCA to extract two new variables that will allow us to visualise the data in fewer dimensions.</p>
 <p><img src="PCA_image.png" /></p>
-<p>It is highly likely that there are strong relationships between variables in our example data set (e.g., leaf length vs total length). This means that the principal components are likely to explain a fair bit of the variation (imagine fitting a straight line along a sausage-shaped collection of points in multivariate space). If all variables were completely uncorrelated with each other, then PCA is not going to work very well (imagine trying to fit a line of best best fit a ball-shaped collection of points in multivariate space).
-<br><br></p>
+<p>It is highly likely that there are strong relationships between variables in our example data set (e.g., leaf length vs total length). This means that the principal components are likely to explain a fair bit of the variation (imagine fitting a straight line along a sausage-shaped collection of points in multivariate space). If all variables were completely uncorrelated with each other, then PCA is not going to work very well (imagine trying to fit a line of best best fit a ball-shaped collection of points in multivariate space).</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p><br>
-Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Leafshape.csv">Leafshape.csv.</a>, and import into R to see the required format.</p>
+<p>Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Leafshape.csv">Leafshape.csv.</a>, and import into R to see the required format.</p>
 <pre class="r"><code>Leaf_shape &lt;- read.csv(file = &quot;Leafshape.csv&quot;, header = TRUE)</code></pre>
 <p>The first column is a categorical variable that labels the leaves by species (A or B). We need to extract that to a new object (Species) that we can use later for plotting, and make a new data frame (Leaf_data) with just the variables to be analysed by PCA (columns 2-6).</p>
 <pre class="r"><code>Species &lt;- Leaf_shape$Species
@@ -31,12 +29,10 @@ Leaf_data &lt;- Leaf_shape[,2:6]</code></pre>
 <p>Calling the <code>plot</code> function on the scores of the <code>princomp</code> output produces a score plot. This is the ordination of all 20 leaf samples in the new two-dimensional space defined by PC1 and PC2. Here, we can also label the samples by species with the colour argument, and add a legend.</p>
 <pre class="r"><code>plot(Leaf_PCA$scores, pch = 16, col = as.factor(Species))
 legend(0,0.4,c(&quot;Species A&quot;,&quot;Species B&quot;),pch=16,col=c(&quot;black&quot;,&quot;red&quot;))</code></pre>
-<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
-<p><br></p>
 <p>The interpretation of the score plot is the same as for any ordination plot: points that are close together have similar values of the original variables (in this case, would have been close together in five dimensional space if you can imagine that).</p>
 <p>Principal components analysis produces a lot of graphical and numerical output. To fully interpret the results you need to understand several things:</p>
 <p><strong>1)</strong> How much variance is explained by each component? This can be found by using the <code>summary</code> object produced by the PCA.</p>
@@ -70,32 +66,26 @@ legend(0,0.4,c(&quot;Species A&quot;,&quot;Species B&quot;),pch=16,col=c(&quot;b
 <p>In this example, you can see that PC1 is positively correlated with the two width variables. R doesn’t bother printing very low correlations, so you can also see that PC1 is uncorrelated with the three length variables. Given the the two species are split along the x-axis in the score plot (PC1), we now know that species A with high values of PC1 has wider leaves than species B with low values of PC1. We also know that leaves toward the top of the plot are the longest due to the positive correlations between PC2 and the three length variables (but this does not separate the two species on the plot).</p>
 <p>You can also produce a biplot with the relationships between the original variables and the principal components overlaid on the score plot. The original variables (in red) will have a strong relationship with one of the principal components if they are parallel to that component (eg Width 1 and PC1) and longer arrows represent stronger correlations.</p>
 <pre class="r"><code>biplot(Leaf_PCA)</code></pre>
-<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
-<br><br></p>
+<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="assumptions-to-check" class="section level3">
 <h3>Assumptions to check</h3>
-<p><br>
-<strong>Linearity.</strong> PCA works best when the relationship between variables are approximately linear. In the absence of linearity it is best to transform variables (e.g., log transform) prior to the analysis.</p>
+<p><strong>Linearity.</strong> PCA works best when the relationship between variables are approximately linear. In the absence of linearity it is best to transform variables (e.g., log transform) prior to the analysis.</p>
 <p><strong>Correlation vs covariance matrices.</strong> You can run PCA using a covariance matrix, which is appropriate when all variables are measured on the same scale, or a correlation matrix, which is appropriate if variables are measured on very different scales. These will produce different output because using a covariance matrix is affected by differences in the size of variances among the variables. Researchers also commonly standardise variables prior to the analysis if they would like variables that were measured on different scales to have an equal influence on the output.</p>
 <p>Change between these two options with the <code>cor</code> argument in the <code>princomp</code> function.</p>
 <pre class="r"><code>Leaf_PCA = princomp(Leaf_data, cor = FALSE) # uses a covariance matrix
 Leaf_PCA2 = princomp(Leaf_data, cor = TRUE) # uses a correlation matrix</code></pre>
 <p><strong>Outliers.</strong> Outliers can have big influence on the results of PCA, especially when using a covariance matrix.</p>
-<p><strong>Rotating axes.</strong> The <code>princomp</code> function produces an unrotated principal components analysis. There are options in other R packages for rotating the principal components after they have been derived with the aim of an output that is easier to interpret (e.g., where the loadings within a component are close to one or zero). There are several methods for doing this, and you would need to read more than this help module before attempting such methods.<br />
-<br><br></p>
+<p><strong>Rotating axes.</strong> The <code>princomp</code> function produces an unrotated principal components analysis. There are options in other R packages for rotating the principal components after they have been derived with the aim of an output that is easier to interpret (e.g., where the loadings within a component are close to one or zero). There are several methods for doing this, and you would need to read more than this help module before attempting such methods.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><br>
-<strong>Written.</strong> In the results section, it would be typical to state the amount of variation explained by the first two (or three) PCs and the contribution of different variables to those PCs. In this example, you would state that the first principal component explained 90% of the variation in leaf morphology and was most strongly related to leaf width at the widest point.</p>
-<p><strong>Visual.</strong> PCA results are best presented visually as a 2-dimensional or, rarely, a 3-dimensional ordination plot (see above) where the position of each observation represents is position in relation to the first two (or three) principal components. It is common to label the points in some way to seek patterns on the plot (like how we labelled leaves by species above).
-<br><br></p>
+<p><strong>Written.</strong> In the results section, it would be typical to state the amount of variation explained by the first two (or three) PCs and the contribution of different variables to those PCs. In this example, you would state that the first principal component explained 90% of the variation in leaf morphology and was most strongly related to leaf width at the widest point.</p>
+<p><strong>Visual.</strong> PCA results are best presented visually as a 2-dimensional or, rarely, a 3-dimensional ordination plot (see above) where the position of each observation represents is position in relation to the first two (or three) principal components. It is common to label the points in some way to seek patterns on the plot (like how we labelled leaves by species above).</p>
 </div>
 <div id="further-help" class="section level2">
 <h2>Further help</h2>
-<p><br>
-Type <code>?princomp</code> to get the R help for this function.</p>
+<p>Type <code>?princomp</code> to get the R help for this function.</p>
 <p>An nice interactive page to help you understand what PCA is doing can be found <a href="http://setosa.io/ev/principal-component-analysis/">here</a>.</p>
 <p style="margin-left:.5in;text-indent:-.5in">
 Quinn, GP and MJ Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Ch. 17. Principal Components and Correspondence Analysis.
@@ -103,9 +93,7 @@ Quinn, GP and MJ Keough (2002) <em>Experimental design and data analysis for bio
 <p style="margin-left:.5in;text-indent:-.5in">
 McKillup, S (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Andrew Letten
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 20 14:38:50 2022&quot;</code></pre>
+<p><strong>Author</strong>: Andrew Letten</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:46:01 2022&quot;</code></pre>
 </div>

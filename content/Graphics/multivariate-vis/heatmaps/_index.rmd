@@ -24,10 +24,10 @@ We will use the package [pheatmap](https://cran.r-project.org/web/packages/pheat
 library(pheatmap)
 library(dplyr)
 ```
-<br><br>
+  
 
 ### Reading in the data
-<br>
+ 
 With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, [Bac.counts.csv](http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.counts.csv) and [Bac.factors.csv](http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.factors.csv), and import into R.
 
 ```{r}
@@ -54,10 +54,10 @@ Next we can check the structure of the factor information using `str`. In this e
 ```{r}
 str(Bac.factors)
 ```
-<br><br>
+  
 
 ### Drawing a heatmap
-<br>
+ 
 The basic function is `pheatmap`. Let's try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function `slice` in dplyr can take any subset of numbered rows (see [Subsetting data](http://environmentalcomputing.net/subsetting-data/)). 
 
 ```{r}
@@ -82,10 +82,10 @@ This would not have been seen so clearly if we did not cluster the rows and colu
 ```{r}
 pheatmap(Bac.Log10.counts500, cluster_rows = FALSE, cluster_cols = FALSE)
 ```
-<br><br>
+  
 
 ### Colouring sample groups
-<br>
+ 
 Before looking further at how clustering effects the patterns observed, we should add some colours associated with the treatment groups next. The simplest method is to use the Bac.factors dataframe as input, taking care that you 1) specify categorical covariates (factor groups) and numerical covariates (e.g. concentration) properly, 2) that row names in Bac.factors match those in Bac.counts, and 3) then remove the factors you do not want to show.
 
 To extract just the density and species columns from our factors data frame, we can use `select` from the package dplyr and then use these to colour code our samples.
@@ -125,10 +125,10 @@ pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS, annotation_colors 
 ```
 
 In this case, letting the data speak for itself (with default row and column clustering) shows that the unvegetated samples (Other) are dissimilar to the macrophyte samples (regardless of density) and that the seagrass samples generally cluster together. Note that other methods (e.g., ordination) can show sample to sample comparisons much better than heatmaps, but heatmaps reveal the patterns of the variables unlike those methods. Understanding what the data is doing is often overlooked in multivariate analysis.
-<br><br>
+  
 
 ### Row and column clustering methods
-<br>
+ 
 By default, `pheatmap` is using Euclidean distance as the similarity measure and clustering samples based on the 'complete' method. There are various other distance and clustering methods available by using additional arguments: `clustering_distance_rows`, `clustering_distance_cols` and `clustering_method`.
 
 Some are better than others, but you'll have to consult the literature further on this. For clustering, however, 'average' clustering seems superior in many computer science applications. Again, the benefit of heatmaps is that you see what the data are doing relative to the options you have chosen.
@@ -142,10 +142,10 @@ pheatmap(Bac.Log10.counts500, clustering_distance_rows = "manhattan",
 ```
 
 You can see that changing the clustering has significantly changed the heatmap produced.
-<br><br>
+  
 
 ### Scaling variables
-<br>
+ 
 We may want to compare the abundance of each bacterial OTU only among samples rather than contrasting their abundance with other OTUs of varying abundance. To do this, we can scale the abundances within each OTU such that the colour scale shows only the relative range of abundance for each individual OTU. In this example, that involves scaling abundance for each row with `scale="row"`.
 
 ```{r}
@@ -155,10 +155,10 @@ pheatmap(Bac.Log10.counts500, scale = "row", clustering_distance_rows = "manhatt
 ```
 
 We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).
-<br><br>
+  
 
 ### Sorting by group
-<br>
+ 
 We can also sort the samples by their groups or treatments rather than sorting by similarity among rows or columns. This is done by ordering the input data and turning off the clustering of the columns with `cluster_cols=FALSE`.
 
 ```{r}
@@ -167,10 +167,10 @@ SampleOrder = order(Bac.factorsDS$Species, Bac.factorsDS$Density)
 pheatmap(Bac.Log10.counts500[ , SampleOrder], cluster_cols = FALSE,
          clustering_method = 'average', annotation_colors = AnnColour, annotation_col = Bac.factorsDS)
 ```
-<br><br>
+  
 
 ### Using heatmaps after statistical analyses
-<br>
+ 
 If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.
 
 We will analyse the abundances of all OTUs with multivariate generalised linear models using the function `manyglm` in the package mvabund. The specifics of that analysis are not described further here (see the [Introduction to mvabund](http://environmentalcomputing.net/introduction-to-mvabund/) for help with that package). Note that running `anova.manyglm` is quite slow.
@@ -208,15 +208,15 @@ pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS], scale = "row",
 And the results are as expected. The top half of the heatmap shows those variables over-represented in the Species level Caulerpa. The bottom half are those over-represented in seagrass.  
 
 Happy heatmapping!  
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?pheatmap` for the R help on this function.
-<br><br>
+  
 
 **Author:** Shaun Nielsen
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

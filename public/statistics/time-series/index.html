@@ -1,0 +1,3815 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.91.2" />
+    <meta name="description" content="Documentation for Hugo Learn Theme">
+<meta name="author" content="Mathieu Cornic">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <title>Time Series Forecast :: Environmental Computing</title>
+
+    
+    <link href="/css/nucleus.css?1642990851" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1642990851" rel="stylesheet">
+    <link href="/css/hybrid.css?1642990851" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1642990851" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1642990851" rel="stylesheet">
+    <link href="/css/auto-complete.css?1642990851" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1642990851" rel="stylesheet">
+    <link href="/css/theme.css?1642990851" rel="stylesheet">
+    <link href="/css/tabs.css?1642990851" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1642990851" rel="stylesheet">
+    
+    <link href="/css/theme-green.css?1642990851" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1642990851"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/statistics/time-series/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href='/'>
+
+<svg id="grav-logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%"  viewBox="0 0 285.1 69.9" xml:space="preserve">
+<g>
+	<path d="M35,0c9.6,0,17.9,3.4,24.7,10.3c6.8,6.8,10.3,15,10.3,24.7c0,9.7-3.4,17.9-10.3,24.7c-6.8,6.8-15,10.3-24.7,10.3
+		c-9.7,0-17.9-3.4-24.7-10.3C3.4,52.8,0,44.6,0,34.9c0-9.6,3.4-17.9,10.3-24.7C17.1,3.4,25.3,0,35,0z M22.3,63.7
+		c0.3-7.4,0.3-14.7,0-22.1c-2.1-0.4-4-0.4-5.9,0c-0.2,0.8-0.2,2.5-0.1,4.9c0.1,2.3,0,3.9-0.3,4.8c-1.7-0.6-2.7-2.1-3.1-4.6
+		c-0.1-0.7-0.1-3.3-0.1-8c0-14.5-0.1-23-0.3-25.6c-3.6,4.1-5.6,7-5.9,8.5v10.9c0,4.5,0.1,8.1,0.2,10.9c0,0.4,0,1.3-0.1,2.8
+		c-0.1,1.2,0,2.1,0.1,2.6c0.1,0.6,1.1,2.1,2.8,4.7C13.2,58.7,17.5,62.2,22.3,63.7z M44.6,65.4c0.3-5,0.2-12.9-0.1-23.6
+		c-2.1-0.3-4.1-0.3-5.9,0c-0.2,2-0.2,5.1-0.1,9.5c0.1,4.3,0,7.5-0.1,9.5c-2.9,0.4-5,0.3-6.2-0.1c-0.2-5.6-0.2-15.2-0.1-28.7
+		c0.1-12.4,0-21.8-0.3-28.3c-2.4,0.1-4.3,0.6-5.7,1.3c-0.1,7.7-0.2,17.7-0.1,30.1c0,16.5,0,26.6,0,30.3c2.3,1.1,5.4,1.7,9.4,1.7
+		C38.9,66.9,42.1,66.4,44.6,65.4z M48.1,64.1c9.7-4.6,15.7-12,18-22.2c-1.8-0.2-3.8-0.3-6.1-0.3c-1.6,3.9-2.6,6.3-3.2,7.2
+		c-1.1,1.7-2,2.5-2.7,2.5C54,46,54,39.1,54,30.5c0-11.5,0-18.4,0-20.9c-1.4-1.4-3.3-2.5-5.7-3.4C48.1,6.3,48,6.4,48,6.7
+		c0,3.5,0,13.1,0,28.8C47.9,47.2,48,56.8,48.1,64.1z"/>
+</g>
+<g>
+	<path d="M116.6,51.3h-29c-0.5,0-0.9-0.1-1.3-0.2c-0.4-0.2-0.7-0.4-1-0.7c-0.3-0.3-0.5-0.6-0.7-1c-0.2-0.4-0.2-0.8-0.2-1.3V16.3h6.3
+		V45h25.8V51.3z"/>
+	<path d="M154.8,51.3h-22.9c-0.9,0-1.8-0.2-2.9-0.5c-1-0.3-2-0.8-2.9-1.5c-0.9-0.7-1.6-1.6-2.2-2.8c-0.6-1.1-0.9-2.5-0.9-4.2V19.5
+		c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2h28.6v6.3h-25.4v19.8
+		c0,0.8,0.2,1.5,0.7,1.9s1.1,0.7,1.9,0.7h22.9V51.3z M151.9,37h-20v-6.4h20V37z"/>
+	<path d="M197.3,51.3H191v-8.6h-22.3v8.6h-6.3V33.8c0-2.6,0.4-4.9,1.3-7.1s2.1-4,3.7-5.5c1.6-1.5,3.4-2.8,5.5-3.6
+		c2.1-0.9,4.5-1.3,7-1.3h14.3c0.4,0,0.9,0.1,1.2,0.2c0.4,0.2,0.7,0.4,1,0.7s0.5,0.6,0.7,1c0.2,0.4,0.2,0.8,0.2,1.2V51.3z
+		 M168.7,36.4H191V22.6h-11.2c-0.2,0-0.6,0-1.2,0.1c-0.6,0.1-1.4,0.2-2.2,0.4c-0.8,0.2-1.7,0.6-2.6,1c-0.9,0.5-1.8,1.1-2.5,2
+		c-0.8,0.8-1.4,1.9-1.9,3.1c-0.5,1.2-0.7,2.8-0.7,4.5V36.4z"/>
+	<path d="M241.7,28.1c0,1.4-0.2,2.7-0.5,3.9c-0.4,1.1-0.8,2.1-1.5,3c-0.6,0.9-1.3,1.6-2.1,2.2c-0.8,0.6-1.6,1.1-2.5,1.5
+		c-0.9,0.4-1.8,0.7-2.6,0.9c-0.9,0.2-1.7,0.3-2.5,0.3l13.3,11.5h-9.8l-13.2-11.5h-4.6v-6.3H230c0.8-0.1,1.5-0.2,2.2-0.5
+		c0.7-0.3,1.2-0.6,1.7-1.1c0.5-0.5,0.9-1,1.1-1.6c0.3-0.6,0.4-1.4,0.4-2.2v-4c0-0.4,0-0.6-0.1-0.8c-0.1-0.2-0.2-0.3-0.3-0.4
+		c-0.1-0.1-0.3-0.1-0.4-0.2c-0.2,0-0.3,0-0.4,0h-20.9v28.7h-6.3V19.5c0-0.4,0.1-0.9,0.2-1.2c0.2-0.4,0.4-0.7,0.7-1
+		c0.3-0.3,0.6-0.5,1-0.7c0.4-0.2,0.8-0.2,1.3-0.2H234c1.4,0,2.6,0.3,3.6,0.8s1.8,1.2,2.4,1.9c0.6,0.8,1,1.6,1.3,2.5
+		c0.3,0.9,0.4,1.7,0.4,2.5V28.1z"/>
+	<path d="M285.1,48.6c0,0.5-0.1,0.9-0.3,1.3c-0.2,0.4-0.4,0.7-0.7,1c-0.3,0.3-0.6,0.5-1,0.7c-0.4,0.2-0.8,0.2-1.2,0.2
+		c-0.4,0-0.8-0.1-1.2-0.2c-0.4-0.1-0.8-0.4-1.1-0.7l-23.2-24.2v24.7h-6.3V19c0-0.7,0.2-1.2,0.5-1.8c0.4-0.5,0.8-0.9,1.4-1.2
+		c0.6-0.2,1.2-0.3,1.9-0.2s1.2,0.4,1.6,0.9l23.2,24.2V16.3h6.3V48.6z"/>
+</g>
+</svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1642990851"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1642990851"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1642990851"></script>
+
+    
+  </div>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/about-this-site/" title="About This Site" class="dd-item
+        
+        
+        
+        ">
+      <a href="/about-this-site/">
+          About This Site
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/" title="Getting Started with R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/">
+          Getting Started with R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/installing-r-rstudio/" title="Installing R and R Studio" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/installing-r-rstudio/">
+          Installing R and R Studio
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/rstudio-notebooks/" title="Using R Notebooks" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/rstudio-notebooks/">
+          Using R Notebooks
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/project-managment/" title="Basic Project Management" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/project-managment/">
+          Basic Project Management
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/data-entry/" title="Data Entry" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/data-entry/">
+          Data Entry
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/importing-data/" title="Importing Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/importing-data/">
+          Importing Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/getting-started-with-r/data-types-structure/" title="Data Types &#43; Structure" class="dd-item
+        
+        
+        
+        ">
+      <a href="/getting-started-with-r/data-types-structure/">
+          Data Types &#43; Structure
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/" title="Data Manipulation" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/">
+          Data Manipulation
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/making-new-variables/" title="Making New Variables" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/making-new-variables/">
+          Making New Variables
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/subsetting-data/" title="Subsetting data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/subsetting-data/">
+          Subsetting data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/summarising-data/" title="Summarising data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/summarising-data/">
+          Summarising data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/combining-datasets/" title="Combining datasets" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/combining-datasets/">
+          Combining datasets
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/data-manipulation/reshaping-data/" title="Reshaping data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/data-manipulation/reshaping-data/">
+          Reshaping data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/" title="Coding Skills" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/">
+          Coding Skills
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/good-practice/" title="Good Practices for Code" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/good-practice/">
+          Good Practices for Code
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/writing-functions/" title="Writing Functions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/writing-functions/">
+          Writing Functions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/loops/" title="Using Loops" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/loops/">
+          Using Loops
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/version-control/" title="Version Control" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/version-control/">
+          Version Control
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/coding-skills/asking-code-questions/" title="Asking code questions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/coding-skills/asking-code-questions/">
+          Asking code questions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/" title="Graphics" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/">
+          Graphics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/" title="Basic Plotting in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/">
+          Basic Plotting in R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/one-continuous/" title="One Continuous Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/one-continuous/">
+          One Continuous Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/two-continuous/" title="Two Continuous Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/two-continuous/">
+          Two Continuous Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/basic-plotting/one-continuous-one-factor/" title="One Continuous and One Categorical Variable" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/basic-plotting/one-continuous-one-factor/">
+          One Continuous and One Categorical Variable
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/" title="Plotting in R with ggplot2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/">
+          Plotting in R with ggplot2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-basics/" title="The Basics of ggplot2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-basics/">
+          The Basics of ggplot2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-appearance/" title="Customising your ggplot" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-appearance/">
+          Customising your ggplot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-labels/" title="Titles and Axes Labels" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-labels/">
+          Titles and Axes Labels
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-colour-shapes/" title="Colours and Shapes" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-colour-shapes/">
+          Colours and Shapes
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/ggplot/ggplot-barplot/" title="Barplot with Errorbars" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/ggplot/ggplot-barplot/">
+          Barplot with Errorbars
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/" title="Multivariate Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/">
+          Multivariate Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/mds/" title="Multidimensional Scaling" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/mds/">
+          Multidimensional Scaling
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/pca/" title="Principal Component Analysis" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/pca/">
+          Principal Component Analysis
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/cluster-analysis/" title="Cluster Analysis" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/cluster-analysis/">
+          Cluster Analysis
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/multivariate-vis/heatmaps/" title="Heatmaps" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/multivariate-vis/heatmaps/">
+          Heatmaps
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/" title="Spatial Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/">
+          Spatial Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/interactive/" title="Interactive maps in R" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/interactive/">
+          Interactive maps in R
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/graphics/spatial-vis/basic-raster/" title="The Basics of Rasters" class="dd-item
+        
+        
+        
+        ">
+      <a href="/graphics/spatial-vis/basic-raster/">
+          The Basics of Rasters
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/" title="Statistics" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/statistics/">
+          Statistics
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/" title="T-tests" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/">
+          T-tests
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/one-sample/" title="One Sample T-test" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/one-sample/">
+          One Sample T-test
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/two-sample/" title="Two Sample T-test" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/two-sample/">
+          Two Sample T-test
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/t-tests/paired-t-test/" title="Paired T-test" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/t-tests/paired-t-test/">
+          Paired T-test
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/" title="Linear Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/">
+          Linear Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/linear-regression/" title="Linear Regression" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/linear-regression/">
+          Linear Regression
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/linear-regression/interpret-lm-coeffs/" title="Interpreting Linear Regressions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/linear-regression/interpret-lm-coeffs/">
+          Interpreting Linear Regressions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/anova/" title="ANOVA" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/anova/">
+          ANOVA
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/anova/anova-single/" title="Single Factor ANOVA" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/anova/anova-single/">
+          Single Factor ANOVA
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/anova/anova-factorial/" title="Factorial ANOVA" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/anova/anova-factorial/">
+          Factorial ANOVA
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/anova/anova-nested/" title="Nested ANOVA" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/anova/anova-nested/">
+          Nested ANOVA
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/linear-models/interactions/" title="Understanding Interactions" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/linear-models/interactions/">
+          Understanding Interactions
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/glms/" title="Generalised Linear Models (GLMs)" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/glms/">
+          Generalised Linear Models (GLMs)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/glms/glm-1/" title="Introduction and Binary Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/glms/glm-1/">
+          Introduction and Binary Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/glms/glm-2/" title="Count Data" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/glms/glm-2/">
+          Count Data
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/glms/interpret-glm-coeffs/" title="Interpreting GLMs" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/glms/interpret-glm-coeffs/">
+          Interpreting GLMs
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/mixed-models/" title="Mixed Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/mixed-models/">
+          Mixed Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/mixed-models/mixed-model-1/" title="Introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/mixed-models/mixed-model-1/">
+          Introduction
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/mixed-models/mixed-model-2/" title="Crossed and Nested Factors" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/mixed-models/mixed-model-2/">
+          Crossed and Nested Factors
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/mixed-models/mixed-model-3/" title="Generalised Mixed Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/mixed-models/mixed-model-3/">
+          Generalised Mixed Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/gams/" title="Generalised Additive Models (GAMs)" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/gams/">
+          Generalised Additive Models (GAMs)
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/catagorical/" title="Catagorial Data Analyses" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/catagorical/">
+          Catagorial Data Analyses
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/catagorical/goodness-of-fit/" title="Goodness of Fit" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/catagorical/goodness-of-fit/">
+          Goodness of Fit
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/catagorical/contingency-tabs/" title="Contingency Tables" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/catagorical/contingency-tabs/">
+          Contingency Tables
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/catagorical/fishers-exact/" title="Fisher&#39;s Exact Test" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/catagorical/fishers-exact/">
+          Fisher&#39;s Exact Test
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/power-analysis/" title="Power Analyses" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/power-analysis/">
+          Power Analyses
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/mvabund/" title="Multivariate Analysis with mvabund" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/mvabund/">
+          Multivariate Analysis with mvabund
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/time-series/" title="Time Series Forecast" class="dd-item
+        parent
+        active
+        
+        ">
+      <a href="/statistics/time-series/">
+          Time Series Forecast
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/meta-analysis/" title="Meta-Analyses" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/">
+          Meta-Analyses
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-1/" title="Introduction" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-1/">
+          Introduction
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/statistics/meta-analysis/meta-analysis-3/" title="Multilevel Models" class="dd-item
+        
+        
+        
+        ">
+      <a href="/statistics/meta-analysis/meta-analysis-3/">
+          Multilevel Models
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <center>
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download matcornic/hugo-theme-learn on GitHub">Download</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn" data-icon="octicon-star" data-show-count="true" aria-label="Star matcornic/hugo-theme-learn on GitHub">Star</a>
+
+    
+    <a class="github-button" href="https://github.com/matcornic/hugo-theme-learn/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork matcornic/hugo-theme-learn on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                  
+                  
+                  
+                  <div id="top-github-link">
+                    <a class="github-link" title='Edit this page' href="https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/statistics/time-series/_index.html" target="blank">
+                      <i class="fas fa-code-branch"></i>
+                      <span id="top-github-link-text">Edit this page</span>
+                    </a>
+                  </div>
+                  
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/statistics/'>Statistics</a> > Time Series Forecast
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Time Series Forecast
+            </h1>
+          
+
+        
+
+
+
+	
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In the environmental sciences, we don’t always want to understand current and past processes, sometimes we want to look into the future. For example, we may want to project how long it will take an endangered species to become extinct if threats continue. We may also want to project how populations or distributions will respond to continuing anthropogenic climate change. Predicting the future, or <em>forecasting</em> has the been the focus of a great deal of statistical research in the field of economics and we can apply the same techniques to ecological questions. Here we will focus on <em>time-series forecasting</em>, where we will use historical data collected over time to predict conditions in the future. We will use Rob Hyndman’s <a href="https://cran.r-project.org/web/packages/forecast/index.html">forecast</a> R-package.</p>
+<pre class="r"><code>library(forecast)</code></pre>
+<p>###Simple exponential smoothing models</p>
+<p><img src="Forecasting_image.jpg" /></p>
+<p>Our first example will use annual rainforest loss (ha) in the in the Tocantins region of the Brazilian Amazon collected by satellite imagery over 25 years (data from <a href="http://data.globalforestwatch.org/">Global Forest Watch</a> and analysed in further detail in <a href="http://www.sciencedirect.com/science/article/pii/S2351989415000992">Virah-Sawmy <em>et al.</em> 2015</a>).</p>
+<p>We will enter the data manually.</p>
+<pre class="r"><code>Area &lt;- c(1650,730,580,440,409,333,333,797,320,273,576,216,244,189,212,
+        156,158,271,124,63,107,61,49,40,52)
+Year &lt;- c(1988:2012)</code></pre>
+<p>First, we use the <code>ts</code> function to create a time series object in R, specifying the data, the start and end times, and the frequency (in this case, one year).</p>
+<pre class="r"><code>Area_loss &lt;- ts(Area, start = 1988, end = 2012, frequency = 1)
+Area_loss</code></pre>
+<pre><code>## Time Series:
+## Start = 1988 
+## End = 2012 
+## Frequency = 1 
+##  [1] 1650  730  580  440  409  333  333  797  320  273  576  216  244  189  212
+## [16]  156  158  271  124   63  107   61   49   40   52</code></pre>
+<p>We can then split the data into training and test data using the <code>window</code> function. In this example, we will try to forecast rainforest loss for the last three years in the time series (2010-2012). These three years will be the test data, and the previous years the training data. In this way, we will be able to check our forecasted values against real observations.</p>
+<pre class="r"><code>Area_loss_train &lt;- window(Area_loss, start = 1988, end = 2009, frequency = 1)
+Area_loss_test &lt;- window(Area_loss, start = 2010, end = 2012, frequency = 1)</code></pre>
+<p>Now that we have formatted our data appropriately, we will fit a simple exponential smoothing model using the <code>ets</code> function. This model uses a weighted average of past observations, with the weights decreasing exponentially into the past. This means that the most recent observations get the highest weight and therefore influence the predictions the most.</p>
+<p>In the <code>ets</code> function, the model type is expressed as a three-character code representing the error type (first character), the trend type (second character) and the season type (third character). We will use the <code>model type = ANN</code> which is a simple exponential smoothing model with additive errors (A), no assumed trend (N) and no seasonality (N).</p>
+<pre class="r"><code>fit1 &lt;- ets(Area_loss_train, model = &quot;ANN&quot;)  </code></pre>
+<p>Now that we have fit the model using our training data (1988-2009), we can use the model to predict rainforest loss in the most recent 3 years (2010-2012), specifying <code>h</code> as the number of time points that we want to forecast (in this case 3 years).</p>
+<pre class="r"><code>fit1_forecast &lt;- forecast(fit1, h = 3) 
+fit1_forecast</code></pre>
+<pre><code>##      Point Forecast     Lo 80    Hi 80     Lo 95    Hi 95
+## 2010       70.79069 -287.8400 429.4214 -477.6876 619.2690
+## 2011       70.79069 -379.4406 521.0220 -617.7786 759.3600
+## 2012       70.79069 -455.3275 596.9089 -733.8377 875.4191</code></pre>
+<p>The output of our forecast gives us the forecasted values (Forecast) for each year (Point) and then the 80% and 95% confidence intervals. How did we do? By using the <code>plot</code> function on a <em>forecast</em> object, we can see a plot of the historical trend (line), with our forecast observations (blue points) and our confidence intervales (95% - grey shading, 80% - blue shading).</p>
+<pre class="r"><code>plot(fit1_forecast) </code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>In this case, we already have historical data for our predicted points, so we will plot them on top using the <code>points</code> function (black squares), selecting the last three values in the Year and Area vectors (23:25).</p>
+<pre class="r"><code>plot(fit1_forecast) 
+points(Year[23:25], Area[23:25], lty = 1, col = &quot;black&quot;, lwd = 3, pch = 0)
+legend(&quot;topright&quot;, legend = c(&quot;observed&quot;, &quot;forecasted&quot;), lwd = 3, 
+       col = c(&quot;black&quot;,&quot;blue&quot;), lty = c(0,0), merge = TRUE, 
+       bty = &quot;n&quot;, pch = c(0,19), cex = 1.3)</code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>The value for alpha (the smoothing parameter) was estimated to be 0.7587, which means a relatively fast decay of observation weights into the past. In other words, the past observations have a relatively small influence on future predictions.</p>
+<p>From our figure we see a strong downward trend, so we could add an additive trend in the model. This is simply done by changing the second character in our model code to “A” (additive) and repeating the process.</p>
+<pre class="r"><code>fit2 &lt;- ets(Area_loss_train, model = &quot;AAN&quot;) 
+fit2_forecast &lt;- forecast(fit2, h = 3)</code></pre>
+<p>We can compare the simple exponential model with the model incorporating the additive trend by plotting them side by side.</p>
+<pre class="r"><code>par(mfrow = c(1,2))
+
+plot(fit1_forecast,main=&quot;Simple exponential model&quot;) 
+points(Year[23:25], Area[23:25], lty = 1, col = &quot;black&quot;, lwd = 4, pch = 0)
+
+plot(fit2_forecast, main=&quot;Additive trend model&quot;)
+points(Year[23:25], Area[23:25], lty = 1, col = &quot;black&quot;, lwd = 4, pch = 0)
+
+legend(&quot;topright&quot;, legend = c(&quot;observed&quot;, &quot;forecasted&quot;), lwd = 4, 
+       col = c(&quot;black&quot;,&quot;blue&quot;), lty = c(0,0), merge = TRUE, 
+       bty = &quot;n&quot;, pch=c(0,19), cex = 1.3)</code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Which model do you think performs better? Another option is to fit all possible models and select the best model using AIC. This is done simply by not specifying any model structure in the <code>ets</code> command.</p>
+<pre class="r"><code>fit3 &lt;- ets(Area_loss_train)
+fit3_forecast &lt;- forecast(fit3, h = 3)
+fit3$method</code></pre>
+<pre><code>## [1] &quot;ETS(M,N,N)&quot;</code></pre>
+<p>If you are interested in which model structure was selected you can extract it from the model object <code>fit_3$method</code>. In this case, the model structure was MNN: a model with multiplicative errors (M), but no overall trend (N) or seasonality (N) assumed. Now we can plot all three models to see which is giving us the best approximation of our observed measurements of rainforest loss.</p>
+<pre class="r"><code>par(mfrow = c(1,3))
+
+plot(fit1_forecast, main=&quot;Simple exponential model&quot;) 
+plot(fit2_forecast, main=&quot;Additive trend model&quot;)   
+plot(fit3_forecast, main=&quot;Best model (lowest AIC)&quot;)  
+points(Year[23:25], Area[23:25], lty = 1, col = &quot;black&quot;, lwd = 4, pch = 0)
+
+legend(&quot;topright&quot;, legend = c(&quot;observed&quot;, &quot;forecasted&quot;), lwd = 4, 
+       col = c(&quot;black&quot;,&quot;blue&quot;), lty = c(0,0), merge = TRUE, 
+       bty = &quot;n&quot;, pch = c(0,19), cex = 1.3)</code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>We can also predict future rainforest loss (so no test data). Let’s keep the prediction at three years but include all of our historical observations in the training data. We will again use the AIC model selection method.</p>
+<pre class="r"><code>Area_loss_train_2 &lt;- window(Area_loss, start = 1988, end = 2012, frequency = 1)
+
+fit4 &lt;- ets(Area_loss_train_2)
+
+fit4_forecast &lt;- forecast(fit4, h = 3)
+
+par(mfrow = c(1,1))
+
+plot(fit4_forecast)</code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Bad news! The forecast is for decreasing rainforest area in the Amazon.
+<br><br></p>
+<p>###Models incorporating seasonal variability
+<br>
+Let’s try another example that incorporates not only long-term trends but also seasonal variability. We will use an example used in Rob Hyndman and George Athanasopoulos’ <a href="https://www.otexts.org/fpp">online textbook</a> and included in the <em>forecast</em> package: Australian monthly gas production. We will start by plotting the historical data from 1956 to 1995. If we plot the data, we can see two patterns: an overall positive trend and a zig-zagging seasonal pattern.</p>
+<pre class="r"><code>data(gas)
+
+plot(gas)</code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>If we use our first model, the simple exponential model that doesn’t assume a trend or seasonality (<em>ANN</em>), we get the following when we are predicting the next 3 years. Note that <code>h</code> is now 36 time points (= 3 years x 12 months).</p>
+<pre class="r"><code>fit_gas1 &lt;- ets(gas, model = &quot;ANN&quot;)
+
+fit_gas1_forecast &lt;- forecast(fit_gas1, h = 36)
+
+plot(fit_gas1_forecast, main=&quot;Simple exponential model&quot;) </code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>As expected, we can see that the model does a pretty poor job of predicting the overall trend or the seasonal variability. In fact the model predicts constant gas production over the 3 years (or 36 monthly time steps).</p>
+<p>Now let’s fit the model assuming additive seasonal varibility (<em>ANA</em>).</p>
+<pre class="r"><code>fit_gas2 &lt;- ets(gas, model = &quot;ANA&quot;)
+
+fit_gas2_forecast &lt;- forecast(fit_gas2, h = 36)
+
+par(mfrow = c(1,2))
+
+plot(fit_gas1_forecast, main=&quot;Simple exponential model&quot;) 
+plot(fit_gas2_forecast, main=&quot;Seasonal trend model&quot;) </code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>This model looks a lot more convincing that the simple exponential fit. Finally, let’s let the <code>ets</code> function choose the best model using AIC.</p>
+<pre class="r"><code>fit_gas3 &lt;- ets(gas)
+
+fit_gas3_forecast &lt;- forecast(fit_gas3, h = 36)
+
+par(mfrow = c(1,3))
+plot(fit_gas1_forecast, main=&quot;Simple exponential model&quot;) 
+plot(fit_gas2_forecast, main=&quot;Seasonal trend model&quot;) 
+plot(fit_gas3_forecast, main=&quot;Best model (lowest AIC)&quot;)</code></pre>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<br><br></p>
+<p>###Further help
+<br>
+Type <code>?forecast</code> for the R help with the package forecast.</p>
+<p>For more details on the package and time-series forecasting in general,
+see Rob Hyndman and George Athanasopoulos’ <a href="https://www.otexts.org/fpp">online textbook</a>. This script is based on the <a href="http://eco-stats.blogspot.com.au/2015/07/forecasting-with-time-series-data.html">Ecostats Research Blog post</a> and BEES R User group meeting workshop by Jakub Stoklosa.</p>
+<p><strong>Author</strong>: Jakub Stoklosa &amp; Rachel V. Blakey</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Mon Jan 24 13:20:48 2022&quot;</code></pre>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/statistics/mvabund/" title="Multivariate Analysis with mvabund"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/statistics/meta-analysis/" title="Meta-Analyses" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1642990851"></script>
+    <script src="/js/perfect-scrollbar.min.js?1642990851"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1642990851"></script>
+    <script src="/js/jquery.sticky.js?1642990851"></script>
+    <script src="/js/featherlight.min.js?1642990851"></script>
+    <script src="/js/highlight.pack.js?1642990851"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1642990851"></script>
+    <script src="/js/learn.js?1642990851"></script>
+    <script src="/js/hugo-learn.js?1642990851"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1642990851"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105947713-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>

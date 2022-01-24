@@ -19,8 +19,6 @@
   </url><url>
     <loc>/statistics/meta-analysis/meta-analysis-1/</loc>
   </url><url>
-    <loc>/statistics/meta-analysis/meta-analysis-2/</loc>
-  </url><url>
     <loc>/statistics/mixed-models/mixed-model-1/</loc>
   </url><url>
     <loc>/statistics/glms/glm-1/</loc>
@@ -139,7 +137,11 @@
   </url><url>
     <loc>/statistics/</loc>
   </url><url>
+    <loc>/statistics/power-analysis/</loc>
+  </url><url>
     <loc>/statistics/mvabund/</loc>
+  </url><url>
+    <loc>/statistics/time-series/</loc>
   </url><url>
     <loc>/statistics/meta-analysis/</loc>
   </url><url>

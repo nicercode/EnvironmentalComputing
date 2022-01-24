@@ -1,10 +1,11 @@
----
-weight: 2
-title: "Fixed-effect and Random-effect Models"
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+# ---
+# weight: 2
+# title: "Fixed-effect and Random-effect Models"
+# output: html_document
+# editor_options: 
+#   chunk_output_type: console
+# ---
+
 First read our [introduction to meta analysis](http://environmentalcomputing.net/meta-analysis) with instructions for calculating effect sizes. Now, we consider the statistical models to estimate mean effect sizes and the influence of moderator variables.
 
 ### Fixed-effect and random-effects models

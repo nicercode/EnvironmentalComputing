@@ -30,10 +30,10 @@ In this example, we use a data set where researchers wanted to contrast the spec
 We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](http://environmentalcomputing.net/multidimensional-scaling/) example) or test hypotheses about groups of samples by resampling these differences. 
 
 Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models. 
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 First, install and load the mvabund package.
 
 ```{r results='hide', message=FALSE, warning=FALSE}
@@ -90,10 +90,10 @@ The model syntax below fits our response variable (the mvabund object Herb_spp w
 ```{r}
 mod1 <- manyglm(Herb_spp ~ Herbivores$Habitat, family="poisson")
 ```
-<br><br>
+  
 
 ### Assumptions to check
-<br>
+ 
 Before we examine the output, we need to check our model assumptions. We can use the `plot` function to generate a plot of residuals.
 
 ```{r message=FALSE, warning=FALSE}
@@ -110,10 +110,10 @@ plot(mod2)
 ```
 
 This residual plot is much better, there is now no discernible fan shape and we will use this model for all further analysis.
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 We can test the multivariate hypothesis of whether species composition varied across the habitats by using the `anova` function. This gives an analysis of deviance table where we use likelihood ratio tests and resampled p values to look for a significant effect of Habitat on the community data. 
 
 ```{r}
@@ -140,24 +140,24 @@ anova(mod3)
 ```
 
 You can see that the species composition of herbivores varies with habitat, but not between day and night.
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written.** If we were writing a paper about the differences in habitat use by marine herbivores, we may write the following: There were different marine herbivores communities on different algal substrates (LRT = 625, P < 0.001). We can be more descriptive about the community differences by using a graphical representation of our results.   
 
 **Visual.** Multivariate data are best visualised by ordination plots. See the [boral](https://cran.r-project.org/web/packages/boral/index.html) package for model based ordination. To get started, watch [this](https://www.youtube.com/watch?v=XmrVVMG1HXI) video. 
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 This method was created by UNSW's Ecostats research group, you can keep up with their latest research on their [blog](http://eco-stats.blogspot.com/). They have been updating the mvabund package with many new exciting features, including block resampling and fourth corner analyses.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Wang, Y, U Naumann, ST Wright & DI Warton (2012) mvabund - an R package for model-based analysis of multivariate abundance data. *Methods in Ecology and Evolution* 3: 471-474.</p>
-<br><br>
+  
 
 **Authors**: Rachel V. Blakey & Andrew Letten
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

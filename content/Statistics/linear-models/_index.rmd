@@ -20,10 +20,10 @@ abline(model, col = "red")
 * [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
 * [Interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
 
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

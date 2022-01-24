@@ -18,10 +18,10 @@ where $\alpha$ is the intercept (value of $y$ when $x$ = 0), $\beta$ is the slop
 Note that the *linear* in linear model does not imply a straight-line relationship but rather that the response is a linear (additive) combination of the effects of the explanatory variables. However, because we tend to start by fitting the simplest relationship, many linear models are represented by straight lines.
 
 Note that a linear regression is just a special case of a linear model, where both the response and predictor variables are continuous.
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 The goal in linear regression is obtain the best estimates for the model coefficients ($\alpha$ and $\beta$). In R you can fit linear models using the function `lm`.
 
 For this worked example, download a data set on plant heights around the world, [Plant_height.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Plant_height.csv), and import into R.
@@ -37,10 +37,10 @@ To test whether plant height is associated with temperature, we would model heig
 ```{r, eval = FALSE}
 lm(loght ~ temp, data = Plant_height)
 ```
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 To obtain detailed output (e.g., coefficient values, R^2^, test statistics, *p*-values, confidence intervals etc.), assign the output of the `lm` function to a new object in R and use the `summary` function to extract information from that model object.
 
 ```{r}
@@ -51,7 +51,7 @@ summary(model)
 The estimates for the coefficients give you the slope and intercept. In this example, the regression equation for (log) plant height as a function of temperature is:
 
 $$log(plant height) = -0.22566 +0.0421.temperature + \varepsilon $$ 
-<br><br>
+  
 
 Calling `summary` on a model object produces a lot of useful information but one of the main things to look out for are the *t*-statistics and *p*-values for each coefficient. These test the null hypothesis that the true value for the coefficient is 0. 
 
@@ -66,10 +66,10 @@ We can also obtain 95% confidence intervals for the two parameters. Showing that
 ```{r}
 confint(model)
 ```
-<br><br>
+  
 
 ### Assumptions to check
-<br>
+ 
 **Linearity**. There is no point trying to fit a staight line to data that are curved! Curvilinear relationships produce U-shaped patterns in plots of the residuals vs the fitted values. Using the `plot` function on a model object provides a series of four graphical model diagnostics, the first of which is a plot of residuals versus fitted values.
 
 ```{r, fig.width = 5, fig.height = 4}
@@ -93,10 +93,10 @@ plot(model, which = 2) # Quantile plot
 **Independence**. The observations of the response should be independent of each other. Non-independent observations are those that are in some way associated with each other beyond that which is explained by the predictor variable(s). For instance, samples collected from the same site, or repeatedly from the same object, may be more alike due to some additional factor other than the measured explanatory variable. Ensuring independence is an issue of experimental and sampling design and we usually know if the data are independent or not in advance of our analysis.
 
 There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a mixed-model (see [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/)). 
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written**  The results of linear regression may be presented in the text in a number of different ways, but a short sentence is often adequate, e.g., "plant height exhibited a significant (*F* = 57.5, *p* < 0.01) negative relationship with temperature". However, if you have run several analyses (or if  there is more than one predictor), it may be useful to present the results as a table with coefficient values, standard errors and *p*-values for each explanatory variable.  
 
 **Visual** For a linear regression with a single explanatory variable, it is useful to present the results as a scatter plot. The line of best fit derived from the model can be added with the `abline` function.
@@ -105,10 +105,10 @@ There are a variety of measures for dealing with non-independence. These include
 plot(loght ~ temp, data = Plant_height, xlab = "Temperature (C)", ylab = "log(Plant height)",pch=16)
 abline(model, col = "red")
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?lm` to get the R help for this function. 
 
 <p style="margin-left: .5in; text-indent: -.5in;">Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Ch. 5 Correlation and regression.</p>
@@ -116,10 +116,10 @@ Type `?lm` to get the R help for this function.
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 17 Regression.</p>
 
 More advice on [interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
-<br><br>
+  
 
 **Author**: Andrew Letten
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

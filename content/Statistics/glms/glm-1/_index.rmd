@@ -4,7 +4,7 @@ title: "Introduction and Binary Data"
 output: html_document
 ---
 **Introduction and binomial data**
-<br>
+ 
 [Linear models](http://environmentalcomputing.net/linear-models/
 ) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
 
@@ -16,7 +16,7 @@ For example, if had surveyed a beach and wanted to analyse how the presence of a
 CrabDat = read.csv("Crabs.csv", header = T)
 head(CrabDat)
 ```
-<br><br>
+  
 
 **Properties of GLM's.** Discrete response data, like counts and presence/absence data, generally exhibit a mean-variance relationship. For example; for counts that are on average 5, we would expect most samples to be between about 1 and 9, but for counts that are on average 500, most of the observations will tend to be between 450 and 550, giving us a much larger variance when the mean is large. 
 
@@ -31,13 +31,13 @@ A GLM makes some important assumptions (we'll check these later for our examples
 $$ g(\mu_y) = \alpha + \beta_1 x_1 + \beta_2 x_2 + \cdots $$
 
 Note: link functions `g()` are an important part of fitting GLM's, but beyond the scope of this introductory tutorial. All you need to know is that the default link for binomial data is the `logit()` and for count data it's `log()`. For more information see `?family`.
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 
 **Binomial data**  
-<br>
+ 
 First, we will show you how to fit a model to binomial data, i.e., presence/absence data or data as 0/1. Fitting GLM's uses very similar syntax to fitting linear models. We use the `glm` function instead of `lm`. We also need to add a `?family` argument to specify whether your data are counts, binomial etc.
 
 For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Crabs.csv) and import into R.
@@ -51,10 +51,10 @@ To test whether the probability of crab presence changes with time (a factor) an
 ```{r}
 ft.crab = glm(CrabPres ~ Time*Dist, family=binomial, data=Crab_PA)
 ```
-<br><br>
+  
 
 ### Assumptions to check
-<br>
+ 
 Before we look at the results of our analysis it's important to check that our data met the assumptions of the model we used. Let's look at all the assumptions in order.
 
 **Assumption 1 : The observed $y$ are independent, conditional on some predictors $x$**
@@ -88,10 +88,10 @@ Now we can look for a fan shape in the residual plot. For these data, there does
 **Assumption 3 : There is a straight line relationship between a known function $g$ of the mean of $y$ and the predictors $x$**
 
 To check this assumption, we check the residual plot above for non-linearity, or a U-shape.  In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the `poly` function.
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 If all the assumption checks are okay, we can have a look at the results the model gave us. The two main functions for inference are the same as for linear models: `summary` and `anova`. 
 
 The p-values these give you if you use `glm` for fitting the model work well in large samples, although they are still approximate. For binomial models in particular the p-values from the `summary` function can be funny, and we prefer to use the `anova` function to see if predictors are significant. The `summary()` function is still useful to look at the model equation.
@@ -117,15 +117,15 @@ summary(ft.crab)
 If $p$ is the probability of crab presence, this output tells us
 
 $$ logit(p) = -3.01 + 0.26 \times \text{Time} -0.03 \times \text{Dist} +0.01 \times \text{Time} \times \text{Dist}$$
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 Results of GLM's are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g., "There is strong evidence that the presence of crabs varies with time (p = 0.01). For multiple predictors it's best to display the results in a table. You should also indicate which distribution was used (e.g. Binomial for presence/absence, Poisson or negative-binomial for counts) and if resampling was used for inference. 
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 You can type `?glm` and `?manyglm` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Faraway, JJ. 2005. *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC press.</p>
@@ -133,10 +133,10 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 20074. *Analysing ecological data*. Springer Science & Business Media, 2007.</p>
 
 More advice on [interpreting coefficients in glms](http://environmentalcomputing.net/interpreting-coefficients-in-glms/)
-<br><br>
+  
 
 **Author**: Gordana Popovic
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

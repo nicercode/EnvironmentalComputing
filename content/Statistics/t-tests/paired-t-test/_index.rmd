@@ -23,10 +23,10 @@ Where the $\bar{d}$ is the mean of the differences between values for each pair,
 Note that this equation is identical to a [One sample *t*-test](http://environmentalcomputing.net/one-sample-t-test/), used to contrast any sample mean ($\bar{x}$) to a known population mean ($\mu$) or hypothesised value. What you are doing here is testing whether your sample of differences is likely to have come from a population of differences that have a mean of zero (another way of saying that your groups are the same).
 
 $$t = \frac{\bar{x}-\mu}{SE}$$
-<br><br>
+  
 
 ### Running the analysis
-<br>
+ 
 The test statistic *t* is relatively straightforward to calculate manually. The test statistic can then checked against a *t* distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true. In R, to calculate the probability associated with a given value of *t* use:
 
 ```{r,eval=FALSE}
@@ -56,10 +56,10 @@ The paired *t*-test is run with the `t.test` function, with the arguments specif
 ```{r,eval=F}
 t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
 ```
-<br><br>
+  
 
 ### Interpreting the results
-<br>
+ 
 
 ```{r,echo=FALSE}
 Greenhouse <- read.csv(file = "Greenhouse.csv", header = TRUE)
@@ -69,19 +69,19 @@ t.test(Performance~Treatment, data = Greenhouse, paired = TRUE)
 The important output of a paired *t*-test includes the test statistic *t*, in this case 18.8, the degrees of freedom (in this case 9) and the probability associated with that value of *t*. In this case, we have a very low *p* value (*p* < 0.001) and can reject the null hypothesis that the plants can photosynthesise with the same performance in the two light environments.
 
 You also get the mean and 95% confidence intervals for the differences between measurements in each pair (this will not overlap zero when the test is significant).
-<br><br>
+  
 
 ### Assumptions to check       
-<br>
+ 
 *t*-tests are parametric tests, which implies we can specify a probability distribution for the population of the variable from which samples were taken. Parametric (and non-parametric) tests have a number of assumptions. If these assumptions are violated we can no longer be sure that the test statistic follows a *t* distribution, in which case *p*-values may be inaccurate.   
 
 **Normality.** For a paired *t*-test, it is assumed the the sample of differences is normally distributed. If these are highly skewed, transformations may be used to achieve a distribution closer to normal. 
 
 **Independence.** The paired design takes into account that the two measures from each pair are not independent. It is still important, however, that each pair of objects measured are independent from other pairs. If they are linked in any way (e.g., groups of plants sharing a water tray) then more complex analytical design that account for additional factors may be required.
-<br><br>
+  
 
 ### Communicating the results
-<br>
+ 
 **Written.** As a minimum, the observed *t* statistic, the P-value and the number of degrees of freedom should be reported. For example, you could write "The photosynthetic performance of plants was significantly greater in sunny environments in contrast to shady environments (paired *t*-test: *t* = 18.81, df = 9, P < 0.001)". 
 
 **Visual.** Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.
@@ -89,19 +89,19 @@ You also get the mean and 95% confidence intervals for the differences between m
 ```{r}
 boxplot(Performance~Treatment, data = Greenhouse, xlab = "Light environment", ylab = "Photosynthetic performance (FvFm)")
 ```
-<br><br>
+  
 
 ### Further help
-<br>
+ 
 Type `?t.test` to get the R help for this function. 
 
 <p style="margin-left:.5in;text-indent:-.5in">Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Chapter 9: Hypothesis testing.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.</p>
-<br><br>
+  
 
 **Author**: Alistair Poore
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

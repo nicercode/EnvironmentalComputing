@@ -50,7 +50,7 @@ Some simple [hypothesis tests](http://environmentalcomputing.net/t-tests/) with 
 * [Meta-analyses 2](http://environmentalcomputing.net/meta-analyses-2/): Fixed effect and random effect models  
 * [Meta-analyses 3](http://environmentalcomputing.net/meta-analyses-3/): More complex models 
 
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

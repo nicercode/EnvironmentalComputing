@@ -28,12 +28,10 @@ output: html_document
 <p><span class="math display">\[F = \frac{MS_{A}}{MS_{within}}\]</span>
 <span class="math display">\[F = \frac{MS_{B}}{MS_{within}}\]</span>
 <span class="math display">\[F = \frac{MS_{AB}}{MS_{within}}\]</span></p>
-<p>where <em>MS</em> are the mean squares, a measure of variation. The probability of obtaining the observed value of <em>F</em> is calculated from the known probability distribution of <em>F</em>, with two degrees of freedom (one for the numerator = the number of levels -1) and one for the denominator. Note that these <em>F</em> ratios will change if any factors are random (see below for the distinction between fixed and random factors),
-<br><br></p>
+<p>where <em>MS</em> are the mean squares, a measure of variation. The probability of obtaining the observed value of <em>F</em> is calculated from the known probability distribution of <em>F</em>, with two degrees of freedom (one for the numerator = the number of levels -1) and one for the denominator. Note that these <em>F</em> ratios will change if any factors are random (see below for the distinction between fixed and random factors),</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p><br>
-Your data should be formatted with the measurements from each replicate as a row and each of the variables as columns, corresponding to the dependent variable <em>y</em>, Factor A and Factor B.</p>
+<p>Your data should be formatted with the measurements from each replicate as a row and each of the variables as columns, corresponding to the dependent variable <em>y</em>, Factor A and Factor B.</p>
 <p>Download the sample data set for the sessile invertebrates, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Sessile.csv">Sessile.csv</a>, and import into R to to see the desired format. Check that your predictor variables are factors with the function <code>str</code></p>
 <pre class="r"><code>Sessile = read.csv(file = &quot;Sessile.csv&quot;, header = TRUE)
 str(Sessile)</code></pre>
@@ -46,11 +44,9 @@ str(Sessile)</code></pre>
 <p>Exactly the same model can also be run using the linear model function, <code>lm</code>.</p>
 <pre class="r"><code>Sessile.lm = lm(Richness ~ Copper * Orientation, data = Sessile)
 anova(Sessile.lm)</code></pre>
-<p><br><br></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
-<p><br></p>
 <pre><code>##                    Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Copper              2   3330  1665.0  192.53  &lt; 2e-16 ***
 ## Orientation         1    240   240.0   27.75 2.46e-06 ***
@@ -72,15 +68,12 @@ anova(Sessile.lm)</code></pre>
 <p>A significant interaction means that the effect of one factor depends upon the other. In this example, it would mean that the effect of copper was not consistent between the vertical and horizontal habitats. Consequently, the interpretation of the main effects becomes more complex. See <a href="http://environmentalcomputing.net/?page_id=238&amp;preview=true">Understanding interactions</a> for more help on interpreting interactions in linear models. A quick way to help you understand an interaction if you get one is to examine an interactions plot.</p>
 <pre class="r"><code>interaction.plot(Sessile$Copper, Sessile$Orientation, Sessile$Richness)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Here you can see that the effect of copper (a decline in species richness) is more pronounced in the habitats with a vertical orientation, and that the difference between the two habitats changes with exposure to copper.
-<br></p>
-<p><strong>Multiple comparisons.</strong> If you detect any significant differences in the ANOVA, we are then interested in knowing exactly which levels differ from one another, and which do not. Remember that a significant <em>p</em> value in the test you just ran would reject the null hypothesis the means were the same across all groups, but not identify which were different from each other. If there is no interaction, you can run a <em>post-hoc</em> test on each of the main effects (only needed if there are more than two levels for an effect). If there is an interaction, you will need to consider <em>post-hoc</em> tests that contrast the means from all combinations of both factors.
-<br><br></p>
+<p>Here you can see that the effect of copper (a decline in species richness) is more pronounced in the habitats with a vertical orientation, and that the difference between the two habitats changes with exposure to copper.</p>
+<p><strong>Multiple comparisons.</strong> If you detect any significant differences in the ANOVA, we are then interested in knowing exactly which levels differ from one another, and which do not. Remember that a significant <em>p</em> value in the test you just ran would reject the null hypothesis the means were the same across all groups, but not identify which were different from each other. If there is no interaction, you can run a <em>post-hoc</em> test on each of the main effects (only needed if there are more than two levels for an effect). If there is an interaction, you will need to consider <em>post-hoc</em> tests that contrast the means from all combinations of both factors.</p>
 </div>
 <div id="assumptions-to-check" class="section level3">
 <h3>Assumptions to check</h3>
-<p><br>
-The assumptions of factorial ANOVA’s are the same as for all linear models including the simpler one-way ANOVA’s (see <a href="http://environmentalcomputing.net/analysis-variance-single-factor/">ANOVA: single factor</a>), being independence, normality and homogeneity of variances. We also need to consider two new issues: 1) whether your factors are fixed or random, and 2) whether your sampling or experimental design is balanced (i.e., has the same number of replicates in each combination of treatments).</p>
+<p>The assumptions of factorial ANOVA’s are the same as for all linear models including the simpler one-way ANOVA’s (see <a href="http://environmentalcomputing.net/analysis-variance-single-factor/">ANOVA: single factor</a>), being independence, normality and homogeneity of variances. We also need to consider two new issues: 1) whether your factors are fixed or random, and 2) whether your sampling or experimental design is balanced (i.e., has the same number of replicates in each combination of treatments).</p>
 <p><strong>Fixed and random factors.</strong> There is an important distinction between factors whose levels are the only ones of interest (termed fixed), and factors whose levels are a sampled from a larger collection of possible levels (termed random). For example, if we repeated the experiment above at three different sites in Sydney Harbour, chosen from many possible sites, we would consider site a random factor. We are not interested in those sites in particular, but would like to know if our experimental treatments were consistent across sites. On the other hand, if you were only interested in Darling Harbour and Circular Quay, then these two could be considered two levels of a fixed factor. Treating sites as a fixed factor in that case means that you conclusions should not be extrapolated to other possible sites, but restricted to those particular sites.</p>
 <p>Statistically, there is a big difference between a fixed factors were you have measured all possible levels of interest (e.g, control vs a single treatment) and random factors where the levels are sampled from all possible levels. In analysis of variance, all this matters because the <em>F</em> tests that are being used to test your hypotheses are constructed differently depending on which factors are fixed and random. In the example above, all factors were fixed and the denominator of all <em>F</em> tests was <span class="math inline">\(MS_{within}\)</span>. In models with all factors random, and models with a mix of fixed and random factors (termed mixed effects models), other components of the variation are used as the denominators in the <em>F</em> tests.</p>
 <p>If you have random factors, you will need to read more than this help page to establish the correct <em>F</em> ratios for your design, and you may need to calculate them manually. Note that the code presented will give correct <em>F</em> tests only for designs with all factors fixed. You should also strongly consider analysing your data as a <a href="http://environmentalcomputing.net/mixed-models/">mixed model</a></p>
@@ -98,23 +91,19 @@ plot(Sessile.aov,which=2)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Heterogeneous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the y axis for each of the levels on the x axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="http://environmentalcomputing.net/generalised-linear-models/">generalised linear model (GLM)</a>.</p>
 <p><strong>Independence.</strong> ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the invertebrate samples measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with an additional factor of sampling time).</p>
-<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="http://environmentalcomputing.net/mixed-models/">mixed model</a>
-<br><br></p>
+<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="http://environmentalcomputing.net/mixed-models/">mixed model</a></p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><br>
-<strong>Written.</strong> The results of the main effects and any interaction should be described in the text of a results section. Each <em>F</em> test can be described in the text, e.g., “The copper treatment and substrate orientation interacted to affect the species of sessile invertebrates (<em>F</em> = 19.33, df = 2,54, <em>p</em> &lt; 0.001)”. Alternatively, all tests could be put into a Table like the one given in the output following <code>summary(Sessile.aov)</code> above. Description of the main tests would be followed by a description of the <em>post-hoc</em> results if used.</p>
+<p><strong>Written.</strong> The results of the main effects and any interaction should be described in the text of a results section. Each <em>F</em> test can be described in the text, e.g., “The copper treatment and substrate orientation interacted to affect the species of sessile invertebrates (<em>F</em> = 19.33, df = 2,54, <em>p</em> &lt; 0.001)”. Alternatively, all tests could be put into a Table like the one given in the output following <code>summary(Sessile.aov)</code> above. Description of the main tests would be followed by a description of the <em>post-hoc</em> results if used.</p>
 <p>Remember that the interpretation of the main effects is complicated when there is a significant interaction (see above). In this example, while copper reduced species richness, that effect was not consistent between the two habitats. In other scenarios with an interaction, you might have copper affecting richness in one habitat but not another, preventing you making a simple statement like “copper reduced species richness” because it wouldn’t always be true.</p>
 <p><strong>Visual.</strong> A boxplot or column graph with error bars are suitable for contrasting a continuous variable across levels of categorical variable. See the graphing modules for making publication ready versions of these figures.</p>
 <pre class="r"><code>boxplot(Richness ~ Copper*Orientation,data = Sessile, names = c(&quot;High.H&quot;,&quot;Low.H&quot;,&quot;None.H&quot;,&quot;High.V&quot;,&quot;Low.V&quot;,&quot;None.V&quot;),ylab=&quot;Species richness&quot;,xlab=&quot;Copper/Orientation&quot;,ylim=c(0,80))</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" />
-<br><br></p>
+<p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-Type <code>?aov</code> or <code>?lm</code> to get the R help for these functions.</p>
+<p>Type <code>?aov</code> or <code>?lm</code> to get the R help for these functions.</p>
 <p style="margin-left: .5in; text-indent: -.5in;">
 Quinn and Keough (2002) <em>Experimental design and data analysis for biologist.</em> Cambridge University Press. Ch. 9 Multifactor analysis of variance.
 </p>
@@ -124,9 +113,7 @@ McKillup (2012) <em>Statistics explained. An introductory guide for life scienti
 <p style="margin-left: .5in; text-indent: -.5in;">
 Underwood (1997) <em>Experiments in ecology: Their logical design and interpretation using analysis of variance.</em>&gt; Cambridge University Press.
 </p>
-<p><br><br></p>
-<p><strong>Authors:</strong> James Lavender &amp; Alistair Poore
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 21 16:14:58 2022&quot;</code></pre>
+<p><strong>Authors:</strong> James Lavender &amp; Alistair Poore</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Tue Jan 25 09:47:36 2022&quot;</code></pre>
 </div>

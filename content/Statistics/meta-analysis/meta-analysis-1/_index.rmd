@@ -60,7 +60,7 @@ library(metafor)
 Have a look at the data set named `dat.curtis1998` included in the package. If you have to see the other data sets included in this package, try `help(package="metafor")`.
 
 ```{r}
-dat <- get(data(dat.curtis1998))
+dat <- data(dat.curtis1998)
 str(dat)
 ```
 
@@ -166,7 +166,7 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 <p style="margin-left:.5in;text-indent:-.5in">Viechtbauer, W. 2010. Conducting meta-analyses in R with the metafor package. *Journal of Statistical Software* 36:1-48.</p>
 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
-<br>
+ 
 Last updated:
 ```{r,echo=F}
 date()

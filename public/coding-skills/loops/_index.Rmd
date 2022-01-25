@@ -12,7 +12,7 @@ This usually will create problems for yourself later.  One principle of good cod
 We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/) and [reshape2](https://cran.r-project.org/web/packages/reshape2/) covered [here](http://environmentalcomputing.net/data-manipulation/). The dplyr approach works well if your data is "tidy" and in a data frame. If your data are in many different files, then a loop may be a quicker solution.  
   
 
-###Basic syntax of loops
+### Basic syntax of loops
  
 The syntax of loops is relatively simple - the essential components are `for(){}` with the the `for()` part dicating how often operations within the `{}` part are done.
 
@@ -102,7 +102,7 @@ for (i in 1:10) {
 ```
   
 
-###An ecological example
+### An ecological example
  
 
 ![](Subsetting_data_image.jpg)
@@ -155,7 +155,7 @@ Correlations
 Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.  
   
 
-###Further help
+### Further help
  
 
 [DataCamp's tutorial on loops](https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r#gs.8KE0Nx4)

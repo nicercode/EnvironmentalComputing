@@ -114,7 +114,7 @@ output.sorted <- output[order(output$correlation),] #sorts the output table in o
 
 Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.  
 
-##END HERE
+## END HERE
 
 
 

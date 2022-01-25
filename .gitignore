@@ -5,7 +5,7 @@ Environmental Computing-Page list.xlsx
 .DS_Store
 .Rproj.user
 .RData
-/public
-/resources
+/public/
+/resources/
 Thumbs.db
 .hugo_build.lock

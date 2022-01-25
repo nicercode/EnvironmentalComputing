@@ -8,13 +8,46 @@ output: html_document
 ```{r, echo=FALSE, warning =F}
 library(ggplot2)
 
-g1<-ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() 
+g1 <-
+  ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) + geom_point()
 
-IrisBox<-ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot()
+IrisBox <-
+  ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot()
 
-mytheme1 <- theme(legend.text = element_text(family = "Palatino", size = rel(1)), axis.title.y = element_text(colour="black", family = "Palatino"), axis.title.x = element_blank(), axis.text = element_text(family = "Palatino", colour = "black", size = rel(1.1)), axis.line = element_line(size = 0.5, colour = "grey"), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.background = element_rect(fill = "white"), legend.key = element_rect(fill = "white"), legend.title = element_text(colour = "black", size = rel(1.1),  face = "bold", family = "Palatino"), plot.title = element_text(face = "bold", size = rel(1.7),  family = "Palatino"))
+mytheme1 <-
+  theme(
+    legend.text = element_text(family = "Palatino", size = rel(1)),
+    axis.title.y = element_text(colour = "black", family = "Palatino"),
+    axis.title.x = element_blank(),
+    axis.text = element_text(
+      family = "Palatino",
+      colour = "black",
+      size = rel(1.1)
+    ),
+    axis.line = element_line(size = 0.5, colour = "grey"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "white"),
+    legend.key = element_rect(fill = "white"),
+    legend.title = element_text(
+      colour = "black",
+      size = rel(1.1),
+      face = "bold",
+      family = "Palatino"
+    ),
+    plot.title = element_text(
+      face = "bold",
+      size = rel(1.7),
+      family = "Palatino"
+    )
+  )
 
-print(IrisBox + mytheme1 + labs(y="Sepal length (cm)") + scale_fill_manual (name= "Species", values = c("maroon3", "sienna1", "chartreuse4")))
+print(
+  IrisBox + mytheme1 + labs(y = "Sepal length (cm)") + scale_fill_manual (
+    name = "Species",
+    values = c("maroon3", "sienna1", "chartreuse4")
+  )
+)
 ```
 
 
@@ -54,7 +87,8 @@ print(IrisPlot)
 To change the design of an element of your plot, you create a theme then print the plot with the theme applied. For example, some code to change the colour and size of the legend in the above plot would look like this.
 
 ```{r}
-mytheme <- theme(legend.title = element_text(colour = "steelblue", size = rel(2)))
+mytheme <-
+  theme(legend.title = element_text(colour = "steelblue", size = rel(2)))
 ```
 
 We would then reprint the base plot with this theme added:
@@ -84,9 +118,17 @@ To demonstrate how this works, here is a ugly theme with obvious colours chosen 
 
 ```{r}
 
-mytheme <- theme(panel.background = element_rect(fill = "black", colour = "yellow", size = 4),
-                 legend.key = element_rect(fill = "darkgrey", colour = "yellow"),
-                 legend.background = (element_rect(colour= "yellow", fill = "blue")))
+
+mytheme <-
+  theme(
+    panel.background = element_rect(
+      fill = "black",
+      colour = "yellow",
+      size = 4
+    ),
+    legend.key = element_rect(fill = "darkgrey", colour = "yellow"),
+    legend.background = (element_rect(colour = "yellow", fill = "blue"))
+  )
 
 print(IrisPlot + mytheme)
 ```
@@ -107,8 +149,12 @@ Formats include:
 Putting these together in a theme would look like this:
 
 ```{r}
-mytheme <- theme(panel.grid.major = element_line(colour="black", size = (1.5)),
-                 panel.grid.minor = element_line(size = (0.2), colour="grey"))
+mytheme <-
+  theme(
+    panel.grid.major = element_line(colour = "black", size = (1.5)),
+    panel.grid.minor = element_line(size = (0.2), colour =
+                                      "grey")
+  )
 
 print(IrisPlot + mytheme)
 ```
@@ -127,8 +173,11 @@ print(IrisPlot + mytheme)
 The size and colour of axis lines themselves can be customised in the same way as the grid lines (above), using `axis.line=element_line(your format)`. For example:
 
 ```{r}
-mytheme <- theme(axis.line = element_line(size = 1.5, colour = "red"),
-                 panel.background = element_rect(fill = "white"))
+mytheme <-
+  theme(
+    axis.line = element_line(size = 1.5, colour = "red"),
+    panel.background = element_rect(fill = "white")
+  )
 
 print(IrisPlot + mytheme)
 ```
@@ -139,9 +188,9 @@ print(IrisPlot + mytheme)
 The size and colour of the ticks can be altered using `axis.ticks = element_line(your format)`. For example:
 
 ```{r}
-mytheme <- theme(axis.ticks = element_line(colour = "red", size=(2)))
+mytheme <- theme(axis.ticks = element_line(colour = "red", size = (2)))
 
-print(IrisPlot +mytheme)
+print(IrisPlot + mytheme)
 ```
   
 
@@ -150,9 +199,15 @@ print(IrisPlot +mytheme)
 `= element_blank()` is used if you wish to entirely remove an element of the formatting. For example, to get rid of ticks, grid lines and the background, you would use:
 
 ```{r}
-mytheme <- theme(axis.ticks = element_blank(), panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.background= element_blank())
+mytheme <-
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.background = element_blank()
+  )
 
-print(IrisPlot +mytheme)
+print(IrisPlot + mytheme)
 ```
   
 
@@ -161,28 +216,57 @@ print(IrisPlot +mytheme)
 Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/) for help with those parts of the `print()` code.
 
 ```{r, warning =F}
-IrisPlot <- ggplot(iris, aes(Sepal.Length,Petal.Length,colour=Species,shape=Species))+geom_point() 
+IrisPlot <-
+  ggplot(iris,
+         aes(
+           Sepal.Length,
+           Petal.Length,
+           colour = Species,
+           shape = Species
+         )) + geom_point()
 
-mytheme3 <- theme(legend.text = element_text(face = "italic",colour="steelblue4",
-                            family = "Helvetica", size = rel(1)), 
-                  axis.title = element_text(colour="steelblue4",family = "Helvetica",
-                            size = rel(1.5)), 
-                  axis.text = element_text(family = "Helvetica",colour = "steelblue1",
-                            size = rel(1.5)), 
-                  axis.line = element_line(size = 1,colour = "black"), 
-                  axis.ticks = element_line(colour="grey",size = rel(1.4)),
-                  panel.grid.major = element_line(colour="grey",size = rel(0.5)), 
-                  panel.grid.minor = element_blank(), 
-                  panel.background = element_rect(fill = "whitesmoke"), 
-                  legend.key = element_rect(fill = "whitesmoke"), 
-                  legend.title = element_text(colour = "steelblue",size = rel(1.5),
-                            family = "Helvetica"), 
-                  plot.title = element_text(colour = "steelblue4", face = "bold",
-                            size = rel(1.7),family = "Helvetica"))
+mytheme3 <-
+  theme(
+    legend.text = element_text(
+      face = "italic",
+      colour = "steelblue4",
+      family = "Helvetica",
+      size = rel(1)
+    ),
+    axis.title = element_text(
+      colour = "steelblue4",
+      family = "Helvetica",
+      size = rel(1.5)
+    ),
+    axis.text = element_text(
+      family = "Helvetica",
+      colour = "steelblue1",
+      size = rel(1.5)
+    ),
+    axis.line = element_line(size = 1, colour = "black"),
+    axis.ticks = element_line(colour = "grey", size = rel(1.4)),
+    panel.grid.major = element_line(colour = "grey", size = rel(0.5)),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "whitesmoke"),
+    legend.key = element_rect(fill = "whitesmoke"),
+    legend.title = element_text(
+      colour = "steelblue",
+      size = rel(1.5),
+      family = "Helvetica"
+    ),
+    plot.title = element_text(
+      colour = "steelblue4",
+      face = "bold",
+      size = rel(1.7),
+      family = "Helvetica"
+    )
+  )
 
-print(IrisPlot + mytheme3+ ggtitle("Iris species petal and sepal length")
-              + labs(y="Petal length (cm)", x = "Sepal length (cm)", colour = "Species")
-              + scale_colour_manual(values = c("slateblue", "slateblue2", "slateblue4")))
+print(
+  IrisPlot + mytheme3 + ggtitle("Iris species petal and sepal length")
+  + labs(y = "Petal length (cm)", x = "Sepal length (cm)", colour = "Species")
+  + scale_colour_manual(values = c("slateblue", "slateblue2", "slateblue4"))
+)
 ```
   
 

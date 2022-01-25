@@ -17,14 +17,18 @@ This site is a brief introduction to techniques for data organisation, graphics,
 
 This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
 
-Some resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](http://www.bees.unsw.edu.au/) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to Associate Professor Alistair Poore, Dr Will Cornwell, Professor Iain Suthers and Professor Richard Kingsford.
+Some resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](http://www.bees.unsw.edu.au/) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to  Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford.
 
 
-**Site administrators:**
+**Site editors:**
 
-[Associate Professor Alistair Poore](https://alistairpoore.org) 
+[Professor Alistair Poore](https://alistairpoore.org) 
 
 [Associate Professor Will Cornwell](http://willcornwell.org/)
+
+[Associate Professor Danial Falster](https://danielfalster.com/)
+
+[Dr. Fonti Kar](https://fontikar.wordpress.com/)
 
 **Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Corey Callaghan, Will Cornwell, Kingsley Griffin, Matt Holland, James Lavender, Andrew Letten, Shinichi Nakagawa, Shaun Nielsen, Alistair Poore, Gordana Popovic, Fiona Robinson and Jakub Stoklosa.
 

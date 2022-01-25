@@ -58,7 +58,7 @@ library(ggmap)
 
 ## Data Preparation
 
-###Read in data 
+### Read in data 
 ```{r Preparing Data, message=FALSE, warning=FALSE}
 my_ebird <- read_csv("C:/Users/CTC/Desktop/eBird_Animation/ebird_1486623144023/MyEBirdData.csv")
 colnames(my_ebird) <- gsub(" ", "_", colnames(my_ebird))
@@ -68,7 +68,7 @@ colnames(my_ebird) <- gsub("\\)", "", colnames(my_ebird))
 my_ebird$Date <- as.Date(my_ebird$Date, format="%m-%d-%Y")
 ```
 
-###I only want to select data from my road trip.
+### I only want to select data from my road trip.
 ```{r}
 Aussie_road_trip <- my_ebird %>%
   filter(grepl("^AU", State_Province)) %>%
@@ -79,14 +79,14 @@ Aussie_road_trip <- my_ebird %>%
 Before we get started, let's just make a quick map. See [this post here on Environmental Computing](http://environmentalcomputing.net/making-simple-maps/) for an overview of using ggmap. Here, I produce a map based on 'ozdata.rda', found [on this site](http://www.elaliberte.info/code).
 
 
-####Once downloaded, load the data.
+#### Once downloaded, load the data.
 ```{r}
 load("ozdata.rda")
 
 ```
 
 
-###Quick Map
+### Quick Map
 ```{r}
 ggplot()+
   geom_polygon(data=ozdata, aes(x=long, y=lat, group=group), color="lightgray")+
@@ -97,7 +97,7 @@ ggplot()+
 
 ## Plot the points on the map.
 
-####First, make a dataframe that contains all unique checklists (or places I made an observation from).
+#### First, make a dataframe that contains all unique checklists (or places I made an observation from).
 
 ```{r}
 checklists <- Aussie_road_trip %>%
@@ -108,7 +108,7 @@ checklists <- Aussie_road_trip %>%
 
 
 
-###Put the points on the map
+### Put the points on the map
 
 ```{r}
 ggplot()+
@@ -159,7 +159,7 @@ We can also make the same map on a different background, by doing the following.
 
 
 
-####First, get the map
+#### First, get the map
 ```{r warning=FALSE}
 mybox <- make_bbox(lon=Aussie_road_trip$Longitude, lat=Aussie_road_trip$Latitude, f=.1)
 

@@ -14,7 +14,7 @@ A few quick definitions before we start
 **Censored data.** This tutorial will only cover right-censored data. Censoring data keeps information from being lost during the analysis period as subjects that do not show a response do not have to be removed from the data set. For example, if at the end of a one hour observation period, 90% of the subjects died and 10% were still alive, the event time for the 10% would be included in the analysis and noted as still alive at 1 hour (the end of the experiment), rather than dead at 1 hour. This is right censored data and the analysis takes this factor in consideration.
 <br><br>
 
-###Running the analysis
+### Running the analysis
 <br>
 Your data set should have the following information: the measured response time (time to death or time to event) and the censor (0 for alive or 1 for dead) and other categorical or continuous factors that you would like to analyse (such as sex, age, exposed temperature, etc.)
 
@@ -71,7 +71,7 @@ Species_diff <- survdiff(SurvObj ~ Exp_survival$Species)
 ```
 <br><br>
 
-###Interpreting the results
+### Interpreting the results
 <br>
 You can see the output from this test by simply entering the name of the new object.
 
@@ -82,7 +82,7 @@ Species_diff
 `survdiff` has run a hypothesis test giving evidence for or against species being associated with a difference in survival. The chi-square statistic is used to test whether the actual response is significantly different to the expected response if the two groups had equal survival. In this case, there is a significant difference between the expected and observed (tiny P value), indicating that survival differed between the species under thermal stress.
 <br><br>
 
-###Assumptions to check
+### Assumptions to check
 <br>
 The Kaplan-Meier survival curve is defined as the probability of surviving in a given length of time while considering time in many small intervals. There are three assumptions that needs to be considered when using Kaplan-Meier curves for survival analysis.
 
@@ -91,7 +91,7 @@ The Kaplan-Meier survival curve is defined as the probability of surviving in a 
 3. The event happens at the time specified. This creates problem in some conditions when the event would be detected at a regular examination. All we know is that the event happened between two examinations.  
 <br><br>
 
-###Communicating the results
+### Communicating the results
 <br>
 **Visual. ** The survival curves can be used to visualise patterns in the survival data, such as differences between species or sex survival capabilities. The `survival` R package does not create the most visually appealing graphs, but there are other graphing functions utilizing the  `ggplot2` package that can be taken advantage of to make publishable quality figures. Visit this [link](https://www.r-statistics.com/2013/07/creating-good-looking-survival-curves-the-ggsurv-function/) to find the function `ggsurv` that can be used to make pretty Kaplan-Meier survival curves using the `survival` package.
 
@@ -100,7 +100,7 @@ The Kaplan-Meier survival curve is defined as the probability of surviving in a 
 **What next?** Once you have started creating survival curves the next step in the analysis is to use [Hazard models](). Hazard models allow for measured factors to be used in predicting the survival potential of specific observations and communities. 
 
 
-###Further help
+### Further help
 
 Survival analysis and theory:
 

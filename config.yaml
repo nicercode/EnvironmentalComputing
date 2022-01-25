@@ -6,7 +6,7 @@ theme: hugo-theme-learn
 metaDataFormat: yaml
 defaultContentLanguageInSubdir: yes
 params:
-  author: Will Cornwell
+  author: Fonti Kar, Dan Falster, and Will Cornwell
   customMermaidURL: NA
   description: Environmental Computing
   disableBreadcrumb: no

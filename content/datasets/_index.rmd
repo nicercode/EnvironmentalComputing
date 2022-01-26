@@ -1,0 +1,12 @@
+---
+title: 'Datasets'
+weight: 7
+output: html_document
+---
+
+This page contains the datasets that are used throughout the tutorials found on this website. Most datasets are in .csv format, unless stated otherwise. The datasets are organised alphabetically. 
+ 
+Last updated:
+```{r,echo=F}
+date()
+```

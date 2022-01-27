@@ -47,7 +47,7 @@ We will also demonstrate how the command line relates to the GUI. We will not co
 
 **Setting up a repository.**
 
-To begin tracking files for a project, we need to set up a project repository that keeps all the relevant files (i.e., data, meta-data, code, functions, manuscript etc) in one place. The project directory will form the basis of a reproducible project (see [project management](http://environmentalcomputing.net/basic-project-management/) for more details).
+To begin tracking files for a project, we need to set up a project repository that keeps all the relevant files (i.e., data, meta-data, code, functions, manuscript etc) in one place. The project directory will form the basis of a reproducible project (see [project management](/../getting-started-with-r/project-management) for more details).
 
 To take full advantage of version control, we want to have both a local (on your computer) and remote (cloud) copy of our repository. There are a number of hosting sites that will allow you to create an cloud repository including [GitHub](https://github.com) and [BitBucket](https://bitbucket.org). Bitbucket allows you to create private repositories for free, whereas anything on GitHub is open (although you can pay for private repositories).
 

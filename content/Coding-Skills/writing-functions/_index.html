@@ -25,7 +25,7 @@ output: html_document
 <p>To illustrate our examples, we will use a sample data set containing a series of different measurements from replicated algal samples. You can read the data into R directly from the web:</p>
 <pre class="r"><code>library(tidyverse)
 algae &lt;-  read_csv(&quot;Algal_traits.csv&quot;)</code></pre>
-<p>(or if you like download the data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Algal_traits.csv">Algal_traits.csv</a>).
+<p>(or if you like download the data set, <a href="/datasets/Algal_traits.csv">Algal_traits.csv</a>).
 Taking a look we see a bunch of variables like height, weight etc</p>
 <pre><code>## # A tibble: 60 × 8
 ##    Location Type      Species height length dryweight wetwet strength   
@@ -203,7 +203,7 @@ mean(na.rm=TRUE, algae$height)</code></pre>
 <pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical:
 ## returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
-<p>Notice we get <code>NA</code>, this is because by default the function doesn’t know how to deal with missing values (<code>NA</code> is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on <a href="http://environmentalcomputing.net/Importing-data/">importing data</a>), but in this case, we’re happy remove <code>NA</code>s before calculating the mean. This can be achieved by setting the argument for <code>na.rm</code> to <code>TRUE</code>:</p>
+<p>Notice we get <code>NA</code>, this is because by default the function doesn’t know how to deal with missing values (<code>NA</code> is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on <a href="/../getting-started-with-r/importing-data/">importing data</a>), but in this case, we’re happy remove <code>NA</code>s before calculating the mean. This can be achieved by setting the argument for <code>na.rm</code> to <code>TRUE</code>:</p>
 <pre class="r"><code>mean(algae$strength, na.rm=TRUE)</code></pre>
 <pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric
 ## or logical: returning NA</code></pre>
@@ -288,7 +288,7 @@ standard_error(algae$strength, na.rm = TRUE)
 <div id="storing-and-using-functions" class="section level3">
 <h3>Storing and using functions</h3>
 <p>Once you get into the habit of writing functions it’s a good idea to keep them in a separate file containing your functions together. Why? Because otherwise you have these big clunky files clogging up your script. If you’ve solved the problem of how to do something, why not stuff it away somewhere you can go, but only if needed.</p>
-<p>To get get your functions out of the way, we recommend keeping all the functions for each project together in a folder called <code>R</code> within your project directory. (For more on project set up see our <a href="http://environmentalcomputing.net/basic-project-management/">post on project management</a>.)</p>
+<p>To get get your functions out of the way, we recommend keeping all the functions for each project together in a folder called <code>R</code> within your project directory. (For more on project set up see our <a href="/../getting-started-with-r/project-management/">post on project management</a>.)</p>
 <p>To make these functions accessible within your workflow, you then use the function <code>source</code> to read the function files into memory, e.g.</p>
 <pre class="r"><code>source(&quot;R/stats.R&quot;)</code></pre>
 <p>Often, you may have a series of files</p>
@@ -299,7 +299,7 @@ source(&quot;R/plots.R&quot;)</code></pre>
 </div>
 <div id="writing-functions-to-work-with-pipes" class="section level3">
 <h3>Writing functions to work with pipes <code>%&gt;%</code></h3>
-<p>For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under <a href="http://environmentalcomputing.net/data-manipulation/">data manipulation</a>).</p>
+<p>For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under <a href="/../data-manipulation/">data manipulation</a>).</p>
 <p>Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our <code>standard_error</code> already works with pipes, assuming you are passing in <code>x</code>:</p>
 <pre class="r"><code>algae$height %&gt;% standard_error()</code></pre>
 <pre><code>## [1] 0.04067788</code></pre>
@@ -370,5 +370,5 @@ is.list(fit)</code></pre>
 </ul>
 <p><strong>Author</strong>: Original by Keryn F Bain; revised and substantially expanded by <a href="https://twitter.com/adaptive_plant">Daniel S Falster</a></p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:37:39 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Jan 27 11:46:51 2022&quot;</code></pre>
 </div>

@@ -8,12 +8,12 @@ You might think having skills in computer coding is just for web site and game d
 
 On these pages, we give some advice for writing effective code and some of the very useful coding skills that will save you lots of time.
 
-* [Good practice for writing scripts](http:environmentalcomputing.net/Good-practice-for-writing-scripts/)
-* [Writing simple functions](http://environmentalcomputing.net/Writing-simple-functions/)  
-* [Using loops](http://environmentalcomputing.net/Using-oops/)
+* [Good practice for writing scripts](/../coding-skills/good-practice/)
+* [Writing simple functions](/../coding-skills/writing-functions/)  
+* [Using loops](/../coding-skills/loops/)
 * Using Lists...coming soon
 * Logical control...coming soon
-* [Version control](http://environmentalcomputing.net/version-control/)
+* [Version control](/../coding-skills/version-control/)
 
 ![](Coding_image.jpg)
 

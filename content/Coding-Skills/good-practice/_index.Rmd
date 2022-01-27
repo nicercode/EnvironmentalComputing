@@ -17,7 +17,7 @@ R scripts are very useful when collaborating with others as you can share your m
 ![](Good_script_practice_image.jpg)
   
 
-If you have never made an R script, first read [Getting started with R](http://environmentalcomputing.net/getting-started-with-r/).
+If you have never made an R script, first read [Getting started with R](/../getting-started-with-r/).
   
 
 ### Creating a project directory
@@ -26,7 +26,7 @@ If you have never made an R script, first read [Getting started with R](http://e
 Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as "Data", "R_scripts" or "Outputs", how you manage your project directory is up to you.
   
 
-**Data integrity.** Once data entry is completed and saved in your project directory (see [Data entry](http://environmentalcomputing.net/Data-entry/), this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset. 
+**Data integrity.** Once data entry is completed and saved in your project directory (see [Data entry](/../getting-started-with-r/data-entry/), this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset. 
   
 
 ### General script format
@@ -64,7 +64,7 @@ library(ggplot2)
 source("R_scripts/myfunctions.R")
 ```
 
-Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See [Data structure](http://environmentalcomputing.net/Data-structure/) and [Importing data](http://environmentalcomputing.net/Importing-data/) for help with these issues.
+Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See [Data structure](/../getting-started-with-r/data-types-structure/) and [Importing data](/../getting-started-with-r/importing-data/) for help with these issues.
 
 Putting all this together, the beginning of a script will look something like the following. 
 
@@ -195,7 +195,7 @@ hist(bird_movement$counts,
  
 Function comments should contain, a brief description of the function (one sentence), a list of function arguments with a description of each (including data type) and a description of the return value. Function comments should be written immediately below the function definition line.
 
-See [Writing simple functions](http://environmentalcomputing.net/Writing-simple-functions/) for help on creating functions in R.
+See [Writing functions](/../coding-skills/writing-functions/) for help on creating functions in R.
 
 <span style="color:green"> Good example
 ```{r, eval = FALSE, echo = T}

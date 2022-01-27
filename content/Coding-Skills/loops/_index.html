@@ -9,9 +9,10 @@ output: html_document
 
 
 <p>Do you find yourself cutting and pasting R code a lot?</p>
-<p>This usually will create problems for yourself later. One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use <a href="http://environmentalcomputing.net/writing-simple-functions/">functions</a> and the second one, covered here, is to use loops.</p>
-<p>We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> and <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> covered <a href="http://environmentalcomputing.net/data-manipulation/">here</a>. The dplyr approach works well if your data is “tidy” and in a data frame. If your data are in many different files, then a loop may be a quicker solution.</p>
-<p>###Basic syntax of loops</p>
+<p>This usually will create problems for yourself later. One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use <a href="/../coding-skills/writing-functions/">functions</a> and the second one, covered here, is to use loops.</p>
+<p>We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> and <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> covered <a href="/../data-manipulation/">here</a>. The dplyr approach works well if your data is “tidy” and in a data frame. If your data are in many different files, then a loop may be a quicker solution.</p>
+<div id="basic-syntax-of-loops" class="section level3">
+<h3>Basic syntax of loops</h3>
 <p>The syntax of loops is relatively simple - the essential components are <code>for(){}</code> with the the <code>for()</code> part dicating how often operations within the <code>{}</code> part are done.</p>
 <p>Consider the loop below. The first time we run through the loop, the value <em>i</em> will be equal to 1, and this value will be displayed with the <code>print</code> function. It will then repeat with <em>i</em> = 2, all the way up to <em>i = 10</em>, doing whatever task is within the <code>{}</code> each time.</p>
 <pre class="r"><code>for (i in 1:10) {
@@ -83,9 +84,11 @@ for (i in 1:10) {
   x2[i,1] &lt;- col1               # places the first result into row i, column 1
   x2[i,2] &lt;- col2               # places the second result into row i, column 2
 }</code></pre>
-<p>###An ecological example</p>
+</div>
+<div id="an-ecological-example" class="section level3">
+<h3>An ecological example</h3>
 <p><img src="Subsetting_data_image.jpg" /></p>
-<p>Now we can use your new loop skills in an ecological context. As with the <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a> tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
+<p>Now we can use your new loop skills in an ecological context. As with the <a href="/../data-manipulation/subsetting-data">Subsetting data</a> tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
 <pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)
 str(Bats)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    173 obs. of  10 variables:
@@ -126,9 +129,12 @@ Correlations &lt;- data.frame(variable=character(length=rows),
 ## 4 Distance.murray.water -0.18071570
 ## 5  Distance.creek.water -0.09130258</code></pre>
 <p>Now we can see at a glance that activity is most strongly (negatively) correlated to area thinned and that it is not at all correlated to time since thinned or mean temperature. We might then like to further investigate some of these relationships with appropriate statistical models and tests.</p>
-<p>###Further help</p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
 <p><a href="https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r#gs.8KE0Nx4">DataCamp’s tutorial on loops</a></p>
 <p>You can find some more good examples of loops, lists and if/else statements on the BEES R User group GitHub site <a href="https://github.com/mitchest/BEES-ecocomp/blob/master/introToLoops.R">loops and lists by Mitch</a>.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:37:31 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Jan 27 11:42:09 2022&quot;</code></pre>
+</div>

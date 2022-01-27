@@ -30,7 +30,7 @@ library(tidyverse)
 algae <-  read_csv("Algal_traits.csv")
 ```
 
-(or if you like download the data set, [Algal_traits.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Algal_traits.csv)). 
+(or if you like download the data set, [Algal_traits.csv](/datasets/Algal_traits.csv)). 
 Taking a look we see a bunch of variables like height, weight etc
 
 ```{r, echo=FALSE}
@@ -314,7 +314,7 @@ Try running the `mean()` function on the *strength* variable.
 mean(algae$strength)
 ```
 
-Notice we get `NA`, this is because by default the function doesn't know how to deal with missing values (`NA` is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on [importing data](http://environmentalcomputing.net/Importing-data/)), but in this case, we're happy remove `NA`s before calculating the mean. This can be achieved by setting the argument for `na.rm` to `TRUE`:
+Notice we get `NA`, this is because by default the function doesn't know how to deal with missing values (`NA` is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on [importing data](/../getting-started-with-r/importing-data/)), but in this case, we're happy remove `NA`s before calculating the mean. This can be achieved by setting the argument for `na.rm` to `TRUE`:
 
 ```{r,}
 mean(algae$strength, na.rm=TRUE)
@@ -430,7 +430,7 @@ Another common way to annotate functions is using the [roxygen2 syntax](http://k
 
 Once you get into the habit of writing functions it's a good idea to keep them in a separate file containing your functions together. Why? Because otherwise you have these big clunky files clogging up your script. If you've solved the problem of how to do something, why not stuff it away somewhere you can go, but only if needed.
 
-To get get your functions out of the way, we recommend keeping all the functions for each project together in a folder called `R` within your project directory. (For more on project set up see our [post on project management](http://environmentalcomputing.net/basic-project-management/).)
+To get get your functions out of the way, we recommend keeping all the functions for each project together in a folder called `R` within your project directory. (For more on project set up see our [post on project management](/../getting-started-with-r/project-management/).)
 
 To make these functions accessible within your workflow, you then use the function `source` to read the function files into memory, e.g.
 
@@ -450,7 +450,7 @@ It's a matter of preference whether you use a single or multiple files.
 
 ### Writing functions to work with pipes `%>%` 
 
-For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](http://environmentalcomputing.net/data-manipulation/)).
+For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](/../data-manipulation/)).
 
 Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our `standard_error` already works with pipes, assuming you are passing in `x`:
 

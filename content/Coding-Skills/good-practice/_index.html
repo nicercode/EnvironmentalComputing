@@ -12,11 +12,11 @@ output: html_document
 <p>When undertaking any project that involves data analyses in R, it is a very good idea to save all the code needed to run any analyses or make any figures in an R script.</p>
 <p>R scripts are very useful when collaborating with others as you can share your methods. We also tend to reuse and adapt scripts for future projects, so you may need to read a script you wrote months or even years ago. It is important to format your script for easy transfer across computers and for easy interpretation by others (and yourself). It is the digital equivalent of being organised and avoiding the problem of never knowing where anything is.</p>
 <p><img src="Good_script_practice_image.jpg" /></p>
-<p>If you have never made an R script, first read <a href="http://environmentalcomputing.net/getting-started-with-r/">Getting started with R</a>.</p>
+<p>If you have never made an R script, first read <a href="/../getting-started-with-r/">Getting started with R</a>.</p>
 <div id="creating-a-project-directory" class="section level3">
 <h3>Creating a project directory</h3>
 <p>Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as “Data”, “R_scripts” or “Outputs”, how you manage your project directory is up to you.</p>
-<p><strong>Data integrity.</strong> Once data entry is completed and saved in your project directory (see <a href="http://environmentalcomputing.net/Data-entry/">Data entry</a>, this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset.</p>
+<p><strong>Data integrity.</strong> Once data entry is completed and saved in your project directory (see <a href="/../getting-started-with-r/data-entry/">Data entry</a>, this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset.</p>
 </div>
 <div id="general-script-format" class="section level3">
 <h3>General script format</h3>
@@ -38,7 +38,7 @@ library(lme4)
 library(Reshape2)
 library(ggplot2)
 source(&quot;R_scripts/myfunctions.R&quot;)</code></pre>
-<p>Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See <a href="http://environmentalcomputing.net/Data-structure/">Data structure</a> and <a href="http://environmentalcomputing.net/Importing-data/">Importing data</a> for help with these issues.</p>
+<p>Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See <a href="/../getting-started-with-r/data-types-structure/">Data structure</a> and <a href="/../getting-started-with-r/importing-data/">Importing data</a> for help with these issues.</p>
 <p>Putting all this together, the beginning of a script will look something like the following.</p>
 <pre class="r"><code># Title: Time series analyses
 # Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
@@ -129,7 +129,7 @@ hist(bird_movement$counts,
 # Creates histogram of frequency of bird counts. - place comment before code. </code></pre>
 <p><strong>Adding comments to functions</strong></p>
 <p>Function comments should contain, a brief description of the function (one sentence), a list of function arguments with a description of each (including data type) and a description of the return value. Function comments should be written immediately below the function definition line.</p>
-<p>See <a href="http://environmentalcomputing.net/Writing-simple-functions/">Writing simple functions</a> for help on creating functions in R.</p>
+<p>See <a href="/../coding-skills/writing-functions/">Writing functions</a> for help on creating functions in R.</p>
 <p><span style="color:green"> Good example</p>
 <pre class="r"><code>CalculateStandardError &lt;- function (x){
   # Computes the sample standard error
@@ -234,5 +234,5 @@ bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)),
 <p>You may now be thinking about all the scripts that you have made that need to be be reformatted. As is commonplace in R, someone has created a package to help with this. The <a href="https://cran.r-project.org/web/packages/formatR/index.html">formatR</a> package by Yihui Xie has a neat little function called <code>tidy_source()</code>. This isn’t a fix all, but can go a long way in making horrible scripts look legible. See <a href="http://yihui.name/formatR/">An introduction to format R</a> or type <code>?tidy_source()</code> for details on how to use this package.</p>
 <p><strong>Author</strong>: Keryn F Bain</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:37:27 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Jan 27 11:40:11 2022&quot;</code></pre>
 </div>

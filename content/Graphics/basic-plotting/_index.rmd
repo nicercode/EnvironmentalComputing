@@ -20,7 +20,7 @@ boxplot(loght~hemisphere, data = Plant_height, ylab = "log(Plant height)",xlab =
 
 R has a very wide range of functions and packages for visualising data. Here is some help for some very simple plots using the base functions in R for data with:  
 
-* [one continuous variable](/../one-continuous-variable/) - histograms and box plots  
-* [two continuous variables](/../two-continuous-variables/) - scatter plots  
-* [one continuous vs categorical variables](/../single-continuous-vs-categorical-variables/) - box plots and bar plots  
+* [one continuous variable](/../graphics/basic-plotting/one-continuous/) - histograms and box plots  
+* [two continuous variables](/../graphics/basic-plotting/two-continuous/) - scatter plots  
+* [one continuous vs categorical variables](/../graphics/basic-plotting/one-continuous-one-factor/) - box plots and bar plots  
 

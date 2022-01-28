@@ -7,7 +7,7 @@ output: html_document
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on <a href="/../data-entry/">Data entry</a>). For some types of variables, however, there are choices to be made about how you input the data.</p>
+<p>Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on <a href="/../getting-started-with-r/data-entry/">Data entry</a>). For some types of variables, however, there are choices to be made about how you input the data.</p>
 <p>For example, it is very common in the biological sciences that we record the abundance of many species of organisms from each of our replicate observations (transects, quadrats, surveys etc). We then have two choices for how to input that data:<br />
 1. a separate column for every species that records its abundance, or,<br />
 2. two columns - one that identifies the species and one that records the abundance.</p>
@@ -44,7 +44,7 @@ output: html_document
 ## 5 Reef1  January        2         0       13      42
 ## 6 Reef1  January        3         8        0       3</code></pre>
 <p>Note that the wide format of this data now has a column for each species with all the abundance values. You would get as many columns as you had unique levels in the Species column. You get as many rows as you have unique combinations of the variables that are not being split up (Site, Month and Transect in this example).</p>
-<p>You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the <code>select</code> function of dplyr (see <a href="/../subsetting-data/">Subsetting data</a>).</p>
+<p>You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the <code>select</code> function of dplyr (see <a href="/../data-manipulation/subsetting-data/">Subsetting data</a>).</p>
 <p>*Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of “none”. If you didn’t, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.</p>
 </div>
 <div id="reshaping-from-wide-to-long-format" class="section level3">
@@ -138,5 +138,5 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 <p><a href="http://seananderson.ca/2013/10/19/reshape.html">An introduction to reshape2</a></p>
 <p><strong>Author</strong>: Alistair Poore</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 11:43:47 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:30:17 2022&quot;</code></pre>
 </div>

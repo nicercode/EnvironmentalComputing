@@ -135,7 +135,7 @@ We have conducted a pilot study, and now want to decide how we should allocate s
 
 We have a pilot dataset 'pilot' which has a continuous fixed effect of temperature, a fixed effect of modification and a random effect for site (nested within modification). The response variable is the abundance of a species of interest.
 
-Download this pilot data, [Pilot.csv](/../wp-content/uploads/2016/09/Pilot.csv), import into R and change the modification variable into a factor (labelled as 1,2 and 3, but not an integer).
+Download this pilot data, [Pilot.csv](/datasets/Pilot.csv), import into R and change the modification variable into a factor (labelled as 1,2 and 3, but not an integer).
 
 ```{r}
 Pilot <- read.csv(file = "Pilot.csv", header = TRUE)

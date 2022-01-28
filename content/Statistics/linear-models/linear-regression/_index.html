@@ -17,7 +17,7 @@ output: html_document
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p>The goal in linear regression is obtain the best estimates for the model coefficients (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>). In R you can fit linear models using the function <code>lm</code>.</p>
-<p>For this worked example, download a data set on plant heights around the world, <a href="/../wp-content/uploads/2016/05/Plant_height.csv">Plant_height.csv</a>, and import into R.</p>
+<p>For this worked example, download a data set on plant heights around the world, <a href="/datasets/Plant_height.csv">Plant_height.csv</a>, and import into R.</p>
 <pre class="r"><code>Plant_height &lt;- read.csv(file = &quot;Plant_height.csv&quot;, header = TRUE)</code></pre>
 <p>The main argument to <code>lm</code> is the model formula <code>y ~ x</code>, where the response variable is on the left of the tilde (~) and the explanatory variable is on the right. <code>lm</code> also has an optional data argument that lets you specify a data frame from which the variables will be taken.</p>
 <p>To test whether plant height is associated with temperature, we would model height as the dependent variable (in this case we are using the log of plant height) and temperature as the predictor variable.</p>
@@ -94,5 +94,5 @@ McKillup (2012) <em>Statistics explained. An introductory guide for life scienti
 <p>More advice on <a href="/../how-to-interpret-linear-models/">interpreting coefficients in linear models</a></p>
 <p><strong>Author</strong>: Andrew Letten</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:16:37 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:45:22 2022&quot;</code></pre>
 </div>

@@ -45,7 +45,7 @@ where *my_sample1* and *my_sample2* are vectors containing the measurements from
 
 Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, `y ~ x`, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).
 
-Download a sample data set in this format, [Greenhouse.csv](/../wp-content/uploads/2016/05/Greenhouse.csv/), and import into R
+Download a sample data set in this format, [Greenhouse.csv](/datasets/Greenhouse.csv/), and import into R
 
 ```{r,eval=FALSE}
 Greenhouse = read.csv(file = "Greenhouse.csv", header = TRUE)

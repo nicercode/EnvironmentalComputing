@@ -19,7 +19,7 @@ In addition to the choice of distance measure there are a number of different cl
 
 ### Running the analysis
  
-Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](/../wp-content/uploads/2016/05/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
+Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](/datasets/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
 
 ```{r}
 Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)

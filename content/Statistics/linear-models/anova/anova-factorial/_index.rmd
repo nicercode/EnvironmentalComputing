@@ -46,7 +46,7 @@ where *MS* are the mean squares, a measure of variation. The probability of obta
  
 Your data should be formatted with the measurements from each replicate as a row and each of the variables as columns, corresponding to the dependent variable *y*, Factor A and Factor B.
 
-Download the sample data set for the sessile invertebrates, [Sessile.csv](/../wp-content/uploads/2016/05/Sessile.csv), and import into R to to see the desired format. Check that your predictor variables are factors with the function `str`
+Download the sample data set for the sessile invertebrates, [Sessile.csv](/datasets/Sessile.csv), and import into R to to see the desired format. Check that your predictor variables are factors with the function `str`
 
 ```{r, eval=FALSE}
 Sessile = read.csv(file = "Sessile.csv", header = TRUE)

@@ -181,7 +181,7 @@ simrOptions(progress=FALSE)</code></pre>
 We have conducted a pilot study, and now want to decide how we should allocate sampling for the full study. The study is looking for an effect of estuary modification on the abundance of a marine species. Let’s assume we have the resources to do a maximum of 72 samples, and we want to maximize power for a test of the categorical variable ‘modification’.</p>
 <p><img src="Mixed_models_1_image.jpg" /></p>
 <p>We have a pilot dataset ‘pilot’ which has a continuous fixed effect of temperature, a fixed effect of modification and a random effect for site (nested within modification). The response variable is the abundance of a species of interest.</p>
-<p>Download this pilot data, <a href="/../wp-content/uploads/2016/09/Pilot.csv">Pilot.csv</a>, import into R and change the modification variable into a factor (labelled as 1,2 and 3, but not an integer).</p>
+<p>Download this pilot data, <a href="/datasets/Pilot.csv">Pilot.csv</a>, import into R and change the modification variable into a factor (labelled as 1,2 and 3, but not an integer).</p>
 <pre class="r"><code>Pilot &lt;- read.csv(file = &quot;Pilot.csv&quot;, header = TRUE)
 Pilot$modification &lt;- factor(Pilot$modification)</code></pre>
 <p>Plotting abundance against site and the levels of the modification factor tells us that we have data where sites are quite variable within modification.</p>
@@ -378,5 +378,5 @@ xtabs(~site,data=attributes(full3)$newData)</code></pre>
 <p>More on <a href="http://www.statmethods.net/stats/power.html">specifying effect size</a></p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:50:22 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:44:52 2022&quot;</code></pre>
 </div>

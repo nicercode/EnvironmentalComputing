@@ -32,7 +32,7 @@ output: html_document
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p>Your data should be formatted with the measurements from each replicate as a row and each of the variables as columns, corresponding to the dependent variable <em>y</em>, Factor A and Factor B.</p>
-<p>Download the sample data set for the sessile invertebrates, <a href="/../wp-content/uploads/2016/05/Sessile.csv">Sessile.csv</a>, and import into R to to see the desired format. Check that your predictor variables are factors with the function <code>str</code></p>
+<p>Download the sample data set for the sessile invertebrates, <a href="/datasets/Sessile.csv">Sessile.csv</a>, and import into R to to see the desired format. Check that your predictor variables are factors with the function <code>str</code></p>
 <pre class="r"><code>Sessile = read.csv(file = &quot;Sessile.csv&quot;, header = TRUE)
 str(Sessile)</code></pre>
 <p>With our predictor variable correctly assigned as factors, we can now run the analysis. As with other forms of linear models we have a model formula with the dependent variable, <em>y</em>, to the left of the ~ and the predictor variables to the right. For this two factor design, we use:</p>
@@ -115,5 +115,5 @@ Underwood (1997) <em>Experiments in ecology: Their logical design and interpreta
 </p>
 <p><strong>Authors:</strong> James Lavender &amp; Alistair Poore</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:16:31 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:45:08 2022&quot;</code></pre>
 </div>

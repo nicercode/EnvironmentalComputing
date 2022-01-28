@@ -22,7 +22,7 @@ There are many methods available for clustering (agglomerative, divisive, non hi
 
 ![](Cluster_analysis_image2.jpg)
 
-In this example, we will use cluster analysis to visualise differences in the composition of metal contaminants in the seaweeds of Sydney Harbour (data from [(Roberts *et al.* 2008)](http://www.sciencedirect.com/science/article/pii/S026974910800033X).). Download the data set, [Harbour_metals.csv](/../wp-content/uploads/2016/05/Harbour_metals.csv), and load into R.
+In this example, we will use cluster analysis to visualise differences in the composition of metal contaminants in the seaweeds of Sydney Harbour (data from [(Roberts *et al.* 2008)](http://www.sciencedirect.com/science/article/pii/S026974910800033X).). Download the data set, [Harbour_metals.csv](/datasets/Harbour_metals.csv), and load into R.
 
 ```{r}
 Harbour_metals <- read.csv(file="Harbour_metals.csv", header=TRUE)

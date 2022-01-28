@@ -15,7 +15,7 @@ This is a continuation of [Generalised linear models 1](/../generalised-linear-m
 
 For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs. 
 
-Download the sample data set, [Revegetation.csv](/../wp-content/uploads/2016/05/Revegetation.csv), and import into R to see how the data are arranged:
+Download the sample data set, [Revegetation.csv](/datasets/Revegetation.csv), and import into R to see how the data are arranged:
 
 ```{r}
 Reveg = read.csv("Revegetation.csv", header = T)

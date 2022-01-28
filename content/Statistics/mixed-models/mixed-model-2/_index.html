@@ -20,7 +20,7 @@ editor_options:
 <pre class="r"><code>library(lme4)</code></pre>
 <p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in <a href="/../mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
 <p><img src="Mixed_models_2_image.jpg" /></p>
-<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<p>Download the sample data set, <a href="/datasets/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
 <pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
 <p><strong>Fitting a model with a fixed effect and several random effects</strong></p>
 <p>In this data set, we have a fixed effect (Modification; modified vs pristine) and two random effects (Estuary and Site). Site is nested within Estuary as each site can only belong in one estuary. When entering the data, however, we’ve been careless and numbered sites within each estuary as 1, 2, 3 etc.</p>
@@ -227,6 +227,6 @@ Zuur, A, EN Ieno and GM Smith (2007) <em>Analysing ecological data</em>. Springe
 </p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:24:41 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:47:13 2022&quot;</code></pre>
 </div>
 </div>

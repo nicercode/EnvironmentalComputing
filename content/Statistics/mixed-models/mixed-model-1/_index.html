@@ -49,7 +49,7 @@ editor_options:
 <p>We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, install and load this package:</p>
 <pre class="r"><code>library(lme4)</code></pre>
 <p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data is continuous. Later on in <a href="/../mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
-<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<p>Download the sample data set, <a href="/datasets/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
 <pre class="r"><code>Estuaries = read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
 <p><strong>Fitting a model with a fixed and random effect</strong></p>
 <p>In this data set, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). We can use the <code>lmer</code> function to fit a model for any dependent variables with a continuous distribution. To fit a model for total abundance, we would use:</p>
@@ -174,5 +174,5 @@ Zuur, A, EN Ieno and GM Smith. <em>Analysing ecological data</em>. Springer Scie
 </p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:24:12 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:46:38 2022&quot;</code></pre>
 </div>

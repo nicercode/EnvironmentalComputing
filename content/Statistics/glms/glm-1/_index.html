@@ -34,7 +34,7 @@ output: html_document
 <h3>Running the analysis</h3>
 <p><strong>Binomial data</strong></p>
 <p>First, we will show you how to fit a model to binomial data, i.e., presence/absence data or data as 0/1. Fitting GLM’s uses very similar syntax to fitting linear models. We use the <code>glm</code> function instead of <code>lm</code>. We also need to add a <code>?family</code> argument to specify whether your data are counts, binomial etc.</p>
-<p>For this worked example, download the sample data set on the presence and absence of crabs on the beach, <a href="/../wp-content/uploads/2016/05/Crabs.csv">Crabs.csv</a> and import into R.</p>
+<p>For this worked example, download the sample data set on the presence and absence of crabs on the beach, <a href="/datasets/Crabs.csv">Crabs.csv</a> and import into R.</p>
 <pre class="r"><code>Crab_PA = read.csv(&quot;Crabs.csv&quot;, header = T)</code></pre>
 <p>To test whether the probability of crab presence changes with time (a factor) and distance (a continuous variable), we fit the following model. The response variable (presence/absence of crabs) is binomial, so we use <code>family=binomial</code>.</p>
 <pre class="r"><code>ft.crab = glm(CrabPres ~ Time*Dist, family=binomial, data=Crab_PA)</code></pre>
@@ -141,5 +141,5 @@ Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Spring
 <p>More advice on <a href="/../interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:16:15 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:44:57 2022&quot;</code></pre>
 </div>

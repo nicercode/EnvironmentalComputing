@@ -28,7 +28,7 @@ library(dplyr)
 
 ### Reading in the data
  
-With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, [Bac.counts.csv](/../wp-content/uploads/2016/06/Bac.counts.csv) and [Bac.factors.csv](/../wp-content/uploads/2016/06/Bac.factors.csv), and import into R.
+With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, [Bac.counts.csv](/datasets/Bac.counts.csv) and [Bac.factors.csv](/datasets/Bac.factors.csv), and import into R.
 
 ```{r}
 Bac.counts <- read.csv(file = "Bac.counts.csv", header = TRUE, row.names=1)

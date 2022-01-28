@@ -14,7 +14,7 @@ We will use the package [dplyr](https://cran.r-project.org/web/packages/dplyr/in
 library(dplyr)
 ```
 
-As with the help page on [Subsetting data](http://environmentalcomputing.net/subsetting-data/), we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set,  [Bats_data.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Bats_data.csv), and import into R.
+As with the help page on [Subsetting data](/../subsetting-data/), we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set,  [Bats_data.csv](/datasets/Bats_data.csv), and import into R.
 
 ```{r}
 Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)
@@ -145,7 +145,7 @@ Just remember that this will decrease your sample size. This will work for the s
 length(Bats$Activity2[!is.na(Bats$Activity2)])
 ```
 
-This calculates the number of values, `length`, of the vector of bat activity values, Bats$Activity2, where they are not NA, `!is.na`. Revising the [Subsetting data](http://environmentalcomputing.net/subsetting-data/) may help you understand this statement. 
+This calculates the number of values, `length`, of the vector of bat activity values, Bats$Activity2, where they are not NA, `!is.na`. Revising the [Subsetting data](/../subsetting-data/) may help you understand this statement. 
   
 
 ### Communicating the results
@@ -184,7 +184,7 @@ You can type `?dplyr` to get help with this package.
 
 [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html)
 
-If you'd like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with [Plotting with gglpot: the basics](http://environmentalcomputing.net/).
+If you'd like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with [Plotting with gglpot: the basics](/../).
 
 **Author**: Rachel V. Blakey
  

@@ -19,7 +19,7 @@ We recommend entering data into a spreadsheet program (e.g., Excel), and saving 
 
 In this module, we are going to use a sample data set on feeding behaviour of a marine snail to demonstrate how to import the data, and the most common issues that arise with data import and cleaning in R.
 
-First, save the data file, [Snail_feeding.csv](/../wp-content/uploads/2016/05/Snail_feeding.csv) to your working directory. See [Getting started with R](/../getting-started-with-r/) for help on for setting the working directory.
+First, save the data file, [Snail_feeding.csv](/datasets/Snail_feeding.csv) to your working directory. See [Getting started with R](/../getting-started-with-r/) for help on for setting the working directory.
 
 Second, import the data file to a data frame called Snail_feeding with the `read.csv` function.
 

@@ -67,7 +67,7 @@ library(maptools)
 ### Further help
  
 
-Our help modules on [Good practice for writing scripts](http:environmentalcomputing.net/Good-practice-for-writing-scripts/) and [Importing data and data cleaning](http://environmentalcomputing.net/importing-data/)
+Our help modules on [Good practice for writing scripts](/../coding-skills/good-practice) and [Importing data and data cleaning](/../getting-started-with-r/importing-data/)
 
 [Online help with R Studio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 

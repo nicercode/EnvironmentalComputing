@@ -60,7 +60,7 @@ Running all the code in your chunk is done by clicking the little green arrow at
 
 Use the chunks to organise your workflow, grouping code that does a particular task within a chunk and preceding these by plain text comments that explain what each chunk will do. Avoid putting every single line of code in a separate chunk and avoid having very many lines of code that do different things within the same chunk.
 
-Output from your code will appear directly below the code chunk rather than in the console below or the plots pane to the right. For example, a plot of plant height vs temperature from the data set used in our [linear regression tutorial](http://environmentalcomputing.net/linear-regression/).
+Output from your code will appear directly below the code chunk rather than in the console below or the plots pane to the right. For example, a plot of plant height vs temperature from the data set used in our [linear regression tutorial](/../statistics/linear-models/linear-regression).
 
 
 ```{r, eval=F,echo=F}
@@ -112,7 +112,7 @@ These are nicely detailed on RStudio's [R Markdown cheatsheet](https://www.rstud
 | *italics*  | *italics* |
 | **bold** |  **bold** |
 |Inserting an image:  | ![](E_C_logo_black_square.png)  |
-| Inserting a link: More help at Environmental Computing-http://environmentalcomputing.net | More help at [Environmental Computing](http://environmentalcomputing.net)  |
+| Inserting a link: More help at Environmental Computing-/.. | More help at [Environmental Computing](/..)  |
 
 
 ## Controlling chunk behaviour

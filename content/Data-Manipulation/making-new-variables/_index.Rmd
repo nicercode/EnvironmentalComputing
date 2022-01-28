@@ -66,7 +66,7 @@ The arguments of `mutate` are simply the name of the data frame followed by any 
 
 In the above examples, note that the new variables have been added to the existing data frame, and all old variables have been kept. You can use `transmute` if you want to drop the original variables.
 
-These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](/../subsetting-data/) and [summarising](/../summarising-data/) data. 
+These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](/../data-manipulation/subsetting-data/) and [summarising](/../data-manipulation/summarising-data/) data. 
   
 
 ### Renaming a variable

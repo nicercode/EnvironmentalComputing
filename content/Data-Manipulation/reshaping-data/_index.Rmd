@@ -4,7 +4,7 @@ weight: 5
 output: html_document
 ---
 
-Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](/../data-entry/)). For some types of variables, however, there are choices to be made about how you input the data.
+Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](/../getting-started-with-r/data-entry/)). For some types of variables, however, there are choices to be made about how you input the data.
 
 For example, it is very common in the biological sciences that we record the abundance of many species of organisms from each of our replicate observations (transects, quadrats, surveys etc). We then have two choices for how to input that data:  
 1. a separate column for every species that records its abundance, or,  
@@ -58,7 +58,7 @@ head(ReefFish.wide)
 
 Note that the wide format of this data now has a column for each species with all the abundance values. You would get as many columns as you had unique levels in the Species column. You get as many rows as you have unique combinations of the variables that are not being split up (Site, Month and Transect in this example).
 
-You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the `select` function of dplyr (see [Subsetting data](/../subsetting-data/)).
+You can now plot or analyse any single species against possible predictor variables of Site or Month. Multivariate analyses of species composition against possible predictor variables also need each of the species to be in separate columns. You can select them from this data frame with the `select` function of dplyr (see [Subsetting data](/../data-manipulation/subsetting-data/)).
 
 *Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of "none". If you didn't, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.
   

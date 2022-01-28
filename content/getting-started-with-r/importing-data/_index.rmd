@@ -7,7 +7,7 @@ output: html_document
 
 Before we can run any data analyses or create figures in R, we need to import that data into R. Preparing and cleaning the data for analyses is essential and often more time consuming than the statistical analyses themselves. It is unusual for raw data to be in the correct format and without errors. Data cleaning is the process of identifying and fixing any problems so data can be analysed easily. 
 
-Importing data is a major challenge for beginners. This module will give instructions for one of most common ways we import data, and some of challenges you may face and how to overcome them. Some of these issues can be avoided by following good data entry and management practices (first read [Data entry](http://environmentalcomputing.net/Data-entry/) to get help with this.
+Importing data is a major challenge for beginners. This module will give instructions for one of most common ways we import data, and some of challenges you may face and how to overcome them. Some of these issues can be avoided by following good data entry and management practices (first read [Data entry](/../getting-started-with-r/data-entry/) to get help with this.
   
 
 ### Importing data as a data frame
@@ -19,7 +19,7 @@ We recommend entering data into a spreadsheet program (e.g., Excel), and saving 
 
 In this module, we are going to use a sample data set on feeding behaviour of a marine snail to demonstrate how to import the data, and the most common issues that arise with data import and cleaning in R.
 
-First, save the data file, [Snail_feeding.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Snail_feeding.csv) to your working directory. See [Getting started with R](http://environmentalcomputing.net/getting-started-with-r/) for help on for setting the working directory.
+First, save the data file, [Snail_feeding.csv](/../wp-content/uploads/2016/05/Snail_feeding.csv) to your working directory. See [Getting started with R](/../getting-started-with-r/) for help on for setting the working directory.
 
 Second, import the data file to a data frame called Snail_feeding with the `read.csv` function.
 
@@ -51,7 +51,7 @@ Snail_feeding <- read.csv("Snail_feeding.csv", header = T, strip.white = T, na.s
  
 If something is a character when it should be numeric you might see messages such as <font face="monospace">"'x' must be numeric "</font> or <font face="monospace">"non-numeric argument to binary operator"</font>. Likewise, if something is a factor when it should be character, some character operations might fail. To avoid some of these issues, check your data using `str` and `summary` before analyses.  
 
-`str`  enables you to check the structure of your data and that your variables are the correct type (i.e., numeric, characters, integers, or factors). See [Data types and structure](http://environmentalcomputing.net/Data-types-and-structure/) for explanations of these different types.
+`str`  enables you to check the structure of your data and that your variables are the correct type (i.e., numeric, characters, integers, or factors). See [Data types and structure](/../Data-types-and-structure/) for explanations of these different types.
 
 ```{r, collapse= T}
 str(Snail_feeding)
@@ -79,7 +79,7 @@ If the problem is still there we can tackle it in R, by indexing within square b
 Snail_feeding <- Snail_feeding[,1:7]
 ```
 
-The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has several very neat functions for subsetting rows and columns - see [Subsetting data](http://environmentalcomputing.net/Subsetting-data/) for help with these.
+The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has several very neat functions for subsetting rows and columns - see [Subsetting data](/../Subsetting-data/) for help with these.
 
 If you had very many columns and didn't want to count them, you could use logic (&, or, ==, >, < , !=) to remove the unwanted rows and columns. We don't want to remove all NAs, only additional rows and columns that are entirely filled with NAs. These have the property of the number of NAs being equal to the number of rows in a given column (or number of columns in a given row). 
 
@@ -113,7 +113,7 @@ class(Snail_feeding$Snail)
 
 With a small data set, it is quickest to go back to the original data and find the error. Once fixed, import again and the variable should now be numeric.
 
-With a larger data set, we have the problem of needing to find the typos. Unfortunately, we can't just convert our data straight into numeric from a vector of type Factor. This is because of the levels attribute (see [Data types and structure](http://environmentalcomputing.net/Data-types_and-structure/)). If you try and convert a factor directly to a numerical variable, the values become a number that corresponds to the number of levels (1:n, ordered alphabetically or ascending) rather than the actual value.
+With a larger data set, we have the problem of needing to find the typos. Unfortunately, we can't just convert our data straight into numeric from a vector of type Factor. This is because of the levels attribute (see [Data types and structure](/../Data-types_and-structure/)). If you try and convert a factor directly to a numerical variable, the values become a number that corresponds to the number of levels (1:n, ordered alphabetically or ascending) rather than the actual value.
 
 Thus, we must first convert to a character and then to a numeric. When converting to a numeric, you will get a warning message, NAs introduced by coercion. This is because the non numeric values (i.e., our typos) cannot be coerced to a numeric and get replaced by NA.
 

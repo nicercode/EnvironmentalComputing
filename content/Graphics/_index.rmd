@@ -8,9 +8,9 @@ R has a very wide range of functions and packages for visualising data.
 
 These pages have a brief introduction to:
 
-* [Basic plotting in R](http://environmentalcomputing.net/basic-plotting-in-r/)
-* [More advanced plotting with ggplot](http://environmentalcomputing.net/plotting-with-ggplot/)
-* [Visualising multivariate data](http://environmentalcomputing.net/visualising-multivariate-data/)
-* [Visualising spatial data (incl. mapping)](http://environmentalcomputing.net/visualising-spatial-data/)
+* [Basic plotting in R](/../basic-plotting-in-r/)
+* [More advanced plotting with ggplot](/../plotting-with-ggplot/)
+* [Visualising multivariate data](/../visualising-multivariate-data/)
+* [Visualising spatial data (incl. mapping)](/../visualising-spatial-data/)
 
 

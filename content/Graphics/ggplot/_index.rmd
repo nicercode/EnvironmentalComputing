@@ -17,12 +17,12 @@ The package is named after a book called [The Grammar of Graphics](https://books
   
 
 
-Start with the [basics](http://environmentalcomputing.net/plotting-with-ggplot-the-basics/) to learn the basic syntax of making a graph
+Start with the [basics](/../plotting-with-ggplot-the-basics/) to learn the basic syntax of making a graph
 
 Then, visit our other pages to further customise the aesthetics of the graph, including colour and formatting:  
-* [altering the overall appearance](http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/)  
-* [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/)  
-* [colours and symbols](http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/).   
+* [altering the overall appearance](/../plotting-with-ggplot-altering-the-overall-appearance/)  
+* [adding titles and axis names](/../plotting-with-ggplot-adding-titles-and-axis-names/)  
+* [colours and symbols](/../plotting-with-ggplot-colours-and-symbols/).   
 
 Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
 

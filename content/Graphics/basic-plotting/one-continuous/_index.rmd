@@ -14,7 +14,7 @@ The sample data used below are the lengths (cm) of 80 fish caught in an estuary 
  
 Frequency histograms plot how often the values of a continuous variable fall into certain ranges. They are an effective way to visualise the range of values obtained and the distribution of your data (i.e. is it symmetrical or skewed?).
 
-Firstly, download the sample data set,  [Estuary_fish.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Estuary_fish.csv), and import into R.
+Firstly, download the sample data set,  [Estuary_fish.csv](/../wp-content/uploads/2016/05/Estuary_fish.csv), and import into R.
 
 ```{r}
 Fish <- read.csv(file = "Estuary_fish.csv")

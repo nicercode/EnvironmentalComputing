@@ -8,12 +8,12 @@ output: html_document
 
 
 <p>Bar plots with error bars are very frequently used in the environmental sciences to represent the variation in a continuous variable within one or more categorical variables. These are not always straightforward to make with the base functions in R. This page introduces you to making these plots with the package ggplot2.</p>
-<p>Before you get started, read the page on the <a href="http://environmentalcomputing.net/plotting-with-ggplot-the-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
+<p>Before you get started, read the page on the <a href="/../plotting-with-ggplot-the-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
 <p><img src="ggplot1_basics_image.JPG" /></p>
 <p>In this examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
 <pre class="r"><code>data(iris)</code></pre>
-<p>To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the <code>summarise</code> and <code>group_by</code> functions in the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>. See <a href="http://environmentalcomputing.net/summarising-data/">here</a> for more details on using dplyr for summarising data.</p>
+<p>To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the <code>summarise</code> and <code>group_by</code> functions in the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>. See <a href="/../summarising-data/">here</a> for more details on using dplyr for summarising data.</p>
 <p>The following code will make a new data frame with the summary data per species.</p>
 <pre class="r"><code>library(dplyr)
 
@@ -34,9 +34,9 @@ IrisPlot + labs(y=&quot;Petal length (cm) +/- s.d.&quot;, x = &quot;Species&quot
 <p>In the <code>geom_errorbar</code> code, <code>ymin</code> and <code>ymax</code> are the top and bottom of the error bars (defined here as mean +/- sd), and <code>width</code> defines how wide the error bars are.</p>
 <p>###Further help</p>
 <p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
-* <a href="http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/">altering the overall appearance</a><br />
-* <a href="http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/">adding titles and axis names</a><br />
-* <a href="http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/">colours and symbols</a></p>
+* <a href="/../plotting-with-ggplot-altering-the-overall-appearance/">altering the overall appearance</a><br />
+* <a href="/../plotting-with-ggplot-adding-titles-and-axis-names/">adding titles and axis names</a><br />
+* <a href="/../plotting-with-ggplot-colours-and-symbols/">colours and symbols</a></p>
 <p>Help on all the ggplot functions can be found at the <a href="http://docs.ggplot2.org/current/">The master ggplot help site</a>.</p>
 <p>A useful cheat sheet on commonly used functions can be downloaded <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">here</a>.</p>
 <p style="margin-left: .5in; text-indent: -.5in;">
@@ -44,4 +44,4 @@ Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggp
 </p>
 <p><strong>Author</strong>: Alistair Poore (small edits by Will Cornwell)</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:45:17 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 13:14:54 2022&quot;</code></pre>

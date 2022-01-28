@@ -8,12 +8,12 @@ output: html_document
 
 
 <p><strong>Count data</strong></p>
-<p>This is a continuation of <a href="http://environmentalcomputing.net/generalised-linear-models-1/">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.</p>
+<p>This is a continuation of <a href="/../generalised-linear-models-1/">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p><img src="GLM2_counts_image.jpg" /></p>
 <p>For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.</p>
-<p>Download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Revegetation.csv">Revegetation.csv</a>, and import into R to see how the data are arranged:</p>
+<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Revegetation.csv">Revegetation.csv</a>, and import into R to see how the data are arranged:</p>
 <pre class="r"><code>Reveg = read.csv(&quot;Revegetation.csv&quot;, header = T)</code></pre>
 <p>If you view the frequency histogram of the slug counts, you will see that it is very skewed, with many small values and few large counts (the variable name, Soleolifera, is the order name of terrestrial slugs).</p>
 <pre class="r"><code>hist(Reveg$Soleolifera)</code></pre>
@@ -54,20 +54,20 @@ ft.sol.pois = manyglm(Soleolifera~Treatment, family=&quot;poisson&quot;, data=Re
 ## Multivariate test:
 ##             Res.Df Df.diff   Dev Pr(&gt;Dev)   
 ## (Intercept)     48                          
-## Treatment       47       1 10.52    0.002 **
+## Treatment       47       1 10.52    0.004 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Arguments: P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
 <pre class="r"><code>summary(ft.sol.nb)</code></pre>
 <pre><code>## 
 ## Test statistics:
-##                      wald value Pr(&gt;wald)   
-## (Intercept)               1.502     0.031 * 
-## TreatmentRevegetated      3.307     0.002 **
+##                      wald value Pr(&gt;wald)    
+## (Intercept)               1.502     0.026 *  
+## TreatmentRevegetated      3.307     0.001 ***
 ## --- 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 ## 
-## Test statistic:  3.307, p-value: 0.002 
+## Test statistic:  3.307, p-value: 0.001 
 ## Arguments: P-value calculated using 999 resampling iterations via pit.trap resampling.</code></pre>
 <p>Both tests indicate strong evidence of a treatment effect (p&lt;0.01). To extract the model equation we can look at the coefficients from the fit.</p>
 <pre class="r"><code>ft.sol.nb$coefficients</code></pre>
@@ -98,8 +98,8 @@ Faraway, JJ. 2005. <em>Extending the linear model with R: generalized linear, mi
 <p style="margin-left: .5in; text-indent: -.5in;">
 Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Springer Science &amp; Business Media, 2007.
 </p>
-<p>More advice on <a href="http://environmentalcomputing.net/interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
+<p>More advice on <a href="/../interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:47:27 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 13:16:19 2022&quot;</code></pre>
 </div>

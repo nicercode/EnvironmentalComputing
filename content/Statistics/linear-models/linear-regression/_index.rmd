@@ -24,7 +24,7 @@ Note that a linear regression is just a special case of a linear model, where bo
  
 The goal in linear regression is obtain the best estimates for the model coefficients ($\alpha$ and $\beta$). In R you can fit linear models using the function `lm`.
 
-For this worked example, download a data set on plant heights around the world, [Plant_height.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Plant_height.csv), and import into R.
+For this worked example, download a data set on plant heights around the world, [Plant_height.csv](/../wp-content/uploads/2016/05/Plant_height.csv), and import into R.
 
 ```{r}
 Plant_height <- read.csv(file = "Plant_height.csv", header = TRUE)
@@ -80,7 +80,7 @@ The absence of strong patterning in the above plot indicates the assumption of l
 
 Click [here](https://gallery.shinyapps.io/slr_diag/) to see a nice interactive app that shows you what patterns of residuals you would expect with curved relationships 
 
-**Constant variance**. An even spread of data around the regression line is desirable. If the plot of residuals versus fitted values is fan-shaped the assumption of constant variance (aka homogeneity of variance) is violated. A log-transformation of the response variable may fix this problem, but if it doesn't the best solution is to use a different error distribution in a generalised linear model framework (GLM). See the [Generalised linear models 1](http://environmentalcomputing.net/generalised-linear-models-1/) for more information.        
+**Constant variance**. An even spread of data around the regression line is desirable. If the plot of residuals versus fitted values is fan-shaped the assumption of constant variance (aka homogeneity of variance) is violated. A log-transformation of the response variable may fix this problem, but if it doesn't the best solution is to use a different error distribution in a generalised linear model framework (GLM). See the [Generalised linear models 1](/../generalised-linear-models-1/) for more information.        
 
 **Normality**. Checks of whether the data are normally distributed are usually performed by either plotting a histogram of the residuals or via a quantile plot where the residuals are plotted against the values expected from a normal distribution (the second of the figures obtained by `plot(model)`. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Violations of normality can be fixed via transformations or by using a different error-distribution in a GLM. Note, however, that linear regression is reasonably robust against violations of normality.
 
@@ -92,7 +92,7 @@ plot(model, which = 2) # Quantile plot
 
 **Independence**. The observations of the response should be independent of each other. Non-independent observations are those that are in some way associated with each other beyond that which is explained by the predictor variable(s). For instance, samples collected from the same site, or repeatedly from the same object, may be more alike due to some additional factor other than the measured explanatory variable. Ensuring independence is an issue of experimental and sampling design and we usually know if the data are independent or not in advance of our analysis.
 
-There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a mixed-model (see [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/)). 
+There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a mixed-model (see [Mixed models 1](/../mixed-models-1/)). 
   
 
 ### Communicating the results
@@ -115,7 +115,7 @@ Type `?lm` to get the R help for this function.
 
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 17 Regression.</p>
 
-More advice on [interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
+More advice on [interpreting coefficients in linear models](/../how-to-interpret-linear-models/)
   
 
 **Author**: Andrew Letten

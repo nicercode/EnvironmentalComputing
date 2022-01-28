@@ -10,12 +10,10 @@ editor_options:
 
 
 <p><strong>Generalised linear mixed models</strong></p>
-<p>You will need to read <a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a> and <a href="http://environmentalcomputing.net/mixed-models-2/">Mixed models 2</a> as an introduction to mixed models for continuous data, as well as the help pages on <a href="http://environmentalcomputing.net/generalised-linear-models/">Generalised linear models</a> as an introduction to modelling discrete data.</p>
-<p>This page will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).
-<br><br></p>
-<p><strong>Properties of mixed models</strong>
-<br>
-<strong>Assumptions</strong>. The assumptions of generalised linear mixed models are a combination of the assumptions of GLMs and mixed models.</p>
+<p>You will need to read <a href="/../mixed-models-1/">Mixed models 1</a> and <a href="/../mixed-models-2/">Mixed models 2</a> as an introduction to mixed models for continuous data, as well as the help pages on <a href="/../generalised-linear-models/">Generalised linear models</a> as an introduction to modelling discrete data.</p>
+<p>This page will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).</p>
+<p><strong>Properties of mixed models</strong></p>
+<p><strong>Assumptions</strong>. The assumptions of generalised linear mixed models are a combination of the assumptions of GLMs and mixed models.</p>
 <ol style="list-style-type: decimal">
 <li>The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span><br />
 </li>
@@ -25,12 +23,10 @@ editor_options:
 </li>
 <li>Random effects <span class="math inline">\(z\)</span> are independent of <span class="math inline">\(y\)</span>.<br />
 </li>
-<li>Random effects <span class="math inline">\(z\)</span> are normally distributed<br />
-<br><br></li>
+<li>Random effects <span class="math inline">\(z\)</span> are normally distributed</li>
 </ol>
-<p>###Running the analysis
-<br>
-We will analyse the same data set as the first two mixed model tutorials. This data set aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. In the first two tutorials, we analysed the total count of invertebrates, which we assumed to be continuous as the total counts were large. Here, we will analyse the counts and presence/absences of individual species, which require generalised linear mixed models.</p>
+<p>###Running the analysis</p>
+<p>We will analyse the same data set as the first two mixed model tutorials. This data set aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. In the first two tutorials, we analysed the total count of invertebrates, which we assumed to be continuous as the total counts were large. Here, we will analyse the counts and presence/absences of individual species, which require generalised linear mixed models.</p>
 <p>We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It allows us to model both continuous and discrete data with one or more random effects. There are however some limitations for discrete data.</p>
 <p><strong>What lme4 can do</strong>
 * model binary data (e.g., presence/absence)<br />
@@ -40,7 +36,7 @@ We will analyse the same data set as the first two mixed model tutorials. This d
 * provide good residual plots (we need these for assumption checking)</p>
 <p>First, load the package:</p>
 <pre class="r"><code>library(lme4)</code></pre>
-<p>Download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
 <pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
 <p>In this example, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). To test whether there is an effect of modification on individual species counts and presence/absences, we need to use generalised linear mixed models with the with the <code>glmer</code> function.</p>
 <p><img src="Mixed_models_3_image.jpg" /></p>
@@ -203,11 +199,9 @@ qqnorm(residuals(fit.pois))</code></pre>
 <p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunately lme4 can’t handle this situation (overdispersion), and there is no easy way to model these data. If this happens in your data try the <a href="http://glmmadmb.r-forge.r-project.org/">glmmADMB</a> package.</p>
 <p><strong>Hypothesis test for random effects</strong></p>
-<p>As before you could run hypothesis tests on the random effects using a parametric bootstrap. See <a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a> and <a href="http://environmentalcomputing.net/mixed-models-2/">Mixed models 2</a> for code that you could modify for this situation.
-<br><br></p>
-<p>###Communicating results
-<br>
-<strong>Written.</strong> Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code>) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
+<p>As before you could run hypothesis tests on the random effects using a parametric bootstrap. See <a href="/../mixed-models-1/">Mixed models 1</a> and <a href="/../mixed-models-2/">Mixed models 2</a> for code that you could modify for this situation.</p>
+<p>###Communicating results</p>
+<p><strong>Written.</strong> Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code>) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
 <p><strong>Visual.</strong> The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility.</p>
 <pre class="r"><code>library(Hmisc)
 fit.pois &lt;- glmer(Hydroid ~ Modification + (1|Estuary) ,family=poisson, data=Estuaries)
@@ -221,12 +215,10 @@ legend(&quot;topleft&quot;, inset=.02,
 
 Est.means &lt;- summarize(means,Estuaries$Estuary, mean)$means #extract means by Estuary
 stripchart(Est.means~ sort(unique(Estuary)),data=Estuaries,pch=18,col=&quot;red&quot;,vertical = TRUE,add=TRUE) #plot means by estuary</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-<br><br></p>
+<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-You can type <code>?glmer</code> into R for help with this function.</p>
+<p>You can type <code>?glmer</code> into R for help with this function.</p>
 <p><a href="http://lme4.r-forge.r-project.org/book/Ch2.pdf">Draft book chapter</a> from the authors of lme4.</p>
 <p style="margin-left:.5in;text-indent:-.5in">
 Faraway, JJ (2005) <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC Press.
@@ -234,9 +226,7 @@ Faraway, JJ (2005) <em>Extending the linear model with R: generalized linear, mi
 <p style="margin-left:.5in;text-indent:-.5in">
 Zuur, A, EN Ieno and GM Smith (2007) <em>Analysing ecological data</em>. Springer Science &amp; Business Media.
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Gordana Popovic
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 24 12:19:07 2022&quot;</code></pre>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Fri Jan 28 13:46:30 2022&quot;</code></pre>
 </div>

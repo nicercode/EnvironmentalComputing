@@ -4,7 +4,7 @@ weight: 4
 output: html_document
 ---
 
-Before you get started, read the page on the [basics](http://environmentalcomputing.net/plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
+Before you get started, read the page on the [basics](/../plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
 
 ```{r,warning=F}
 library(ggplot2)
@@ -201,8 +201,8 @@ print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)) + scale_colour_m
 ###Further help
  
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
-*[altering overall appearance](http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/).  
-*[adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/)  
+*[altering overall appearance](/../plotting-with-ggplot-altering-the-overall-appearance/).  
+*[adding titles and axis names](/../plotting-with-ggplot-adding-titles-and-axis-names/)  
    
 Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
 

@@ -8,7 +8,7 @@ output: html_document
 
 This page provides help for adding titles, legends and axis labels.
 
-Before you get started, read the page on the [basics](http://environmentalcomputing.net/plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
+Before you get started, read the page on the [basics](/../plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
 
 ```{r,warning=F}
 library(ggplot2)
@@ -142,8 +142,8 @@ print(IrisPlot +myblanktheme + labs( title= "Petal and sepal \nlength of iris", 
 ###Further help
  
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
-* [altering overall appearance](http://environmentalcomputing.net/plotting-with-ggplot-altering-the-overall-appearance/).  
-* [colours and symbols](http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/).
+* [altering overall appearance](/../plotting-with-ggplot-altering-the-overall-appearance/).  
+* [colours and symbols](/../plotting-with-ggplot-colours-and-symbols/).
    
 Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
 

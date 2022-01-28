@@ -95,11 +95,9 @@ par(mfrow = c(1,1))
 
 plot(fit4_forecast)</code></pre>
 <p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Bad news! The forecast is for decreasing rainforest area in the Amazon.
-<br><br></p>
-<p>###Models incorporating seasonal variability
-<br>
-Let’s try another example that incorporates not only long-term trends but also seasonal variability. We will use an example used in Rob Hyndman and George Athanasopoulos’ <a href="https://www.otexts.org/fpp">online textbook</a> and included in the <em>forecast</em> package: Australian monthly gas production. We will start by plotting the historical data from 1956 to 1995. If we plot the data, we can see two patterns: an overall positive trend and a zig-zagging seasonal pattern.</p>
+<p>Bad news! The forecast is for decreasing rainforest area in the Amazon.</p>
+<p>###Models incorporating seasonal variability</p>
+<p>Let’s try another example that incorporates not only long-term trends but also seasonal variability. We will use an example used in Rob Hyndman and George Athanasopoulos’ <a href="https://www.otexts.org/fpp">online textbook</a> and included in the <em>forecast</em> package: Australian monthly gas production. We will start by plotting the historical data from 1956 to 1995. If we plot the data, we can see two patterns: an overall positive trend and a zig-zagging seasonal pattern.</p>
 <pre class="r"><code>data(gas)
 
 plot(gas)</code></pre>
@@ -131,13 +129,11 @@ par(mfrow = c(1,3))
 plot(fit_gas1_forecast, main=&quot;Simple exponential model&quot;) 
 plot(fit_gas2_forecast, main=&quot;Seasonal trend model&quot;) 
 plot(fit_gas3_forecast, main=&quot;Best model (lowest AIC)&quot;)</code></pre>
-<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" />
-<br><br></p>
-<p>###Further help
-<br>
-Type <code>?forecast</code> for the R help with the package forecast.</p>
+<p><img src="/statistics/time-series/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>###Further help</p>
+<p>Type <code>?forecast</code> for the R help with the package forecast.</p>
 <p>For more details on the package and time-series forecasting in general,
 see Rob Hyndman and George Athanasopoulos’ <a href="https://www.otexts.org/fpp">online textbook</a>. This script is based on the <a href="http://eco-stats.blogspot.com.au/2015/07/forecasting-with-time-series-data.html">Ecostats Research Blog post</a> and BEES R User group meeting workshop by Jakub Stoklosa.</p>
 <p><strong>Author</strong>: Jakub Stoklosa &amp; Rachel V. Blakey</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 24 13:20:48 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 13:50:27 2022&quot;</code></pre>

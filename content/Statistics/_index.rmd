@@ -6,49 +6,49 @@ output: html_document
 
 These pages have some introductions to a wide range of commonly used statistical analyses in the environmental sciences.
 
-Some simple [hypothesis tests](http://environmentalcomputing.net/t-tests/) with the *t* statistic:
+Some simple [hypothesis tests](/../t-tests/) with the *t* statistic:
 
-* [One sample t tests](http://environmentalcomputing.net/one-sample-t-test/) - contrasting a single sample parameter to a population parameter  
-* [Independent samples](http://environmentalcomputing.net/independent-samples-t-test/) - contrasting the means of two samples
-* [Paired t-tests](http://environmentalcomputing.net/paired-t-tests/) - contrasting two groups when data are paired  
+* [One sample t tests](/../one-sample-t-test/) - contrasting a single sample parameter to a population parameter  
+* [Independent samples](/../independent-samples-t-test/) - contrasting the means of two samples
+* [Paired t-tests](/../paired-t-tests/) - contrasting two groups when data are paired  
 
-[Linear models](http://environmentalcomputing.net/linear-models/):
+[Linear models](/../linear-models/):
 
-* [Linear regression](http://environmentalcomputing.net/linear-regression/)
-* [Analysis of variance: single factor](http://environmentalcomputing.net/analysis-variance-single-factor/)
-* [Analysis of variance: factorial](http://environmentalcomputing.net/analysis-variance-factorial/)  
-* [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
+* [Linear regression](/../linear-regression/)
+* [Analysis of variance: single factor](/../analysis-variance-single-factor/)
+* [Analysis of variance: factorial](/../analysis-variance-factorial/)  
+* [Understanding interactions](/../understanding-interactions/)
 
-[Generalised linear models](http://environmentalcomputing.net/generalised-linear-models/):
+[Generalised linear models](/../generalised-linear-models/):
 
-* [Generalised linear models 1](http://environmentalcomputing.net/generalised-linear-models-1/): Introduction and binomial data  
-* [Generalised linear models 2](http://environmentalcomputing.net/generalised-linear-models-2/): Count data  
+* [Generalised linear models 1](/../generalised-linear-models-1/): Introduction and binomial data  
+* [Generalised linear models 2](/../generalised-linear-models-2/): Count data  
 
-[Mixed models](http://environmentalcomputing.net/mixed-models/):
+[Mixed models](/../mixed-models/):
 
-* [Mixed models 1](http://environmentalcomputing.net/mixed-models-1/): Linear mixed models with one random effect  
-* [Mixed models 2](http://environmentalcomputing.net/mixed-models-2/): Linear mixed models with several random effects  
-* [Mixed models 3](http://environmentalcomputing.net/mixed-models-3/): Generalised linear mixed models  
+* [Mixed models 1](/../mixed-models-1/): Linear mixed models with one random effect  
+* [Mixed models 2](/../mixed-models-2/): Linear mixed models with several random effects  
+* [Mixed models 3](/../mixed-models-3/): Generalised linear mixed models  
 
-[Generalised additive models](http://environmentalcomputing.net/gams/)
+[Generalised additive models](/../gams/)
 
-[Categorical data analyses](http://environmentalcomputing.net/categorical-data-analyses/):
+[Categorical data analyses](/../categorical-data-analyses/):
 
-* [Goodness of fit tests](http://environmentalcomputing.net/goodness-of-fit-tests/)  
-* [Contingency tables](http://environmentalcomputing.net/contingency-tables/)
+* [Goodness of fit tests](/../goodness-of-fit-tests/)  
+* [Contingency tables](/../contingency-tables/)
 
-[Power analyses](http://environmentalcomputing.net/power-analysis/): calculating power and deciding on sample sizes
+[Power analyses](/../power-analysis/): calculating power and deciding on sample sizes
 
-[Introduction to mvabund](http://environmentalcomputing.net/introduction-to-mvabund/): model-based analysis of multivariate abundance data
+[Introduction to mvabund](/../introduction-to-mvabund/): model-based analysis of multivariate abundance data
 
-[Forecasting with time series](http://environmentalcomputing.net/forecasting-time-series/)
+[Forecasting with time series](/../forecasting-time-series/)
 
 
-[Meta-analyses](http://environmentalcomputing.net/meta-analyses/) 
+[Meta-analyses](/../meta-analyses/) 
 
-* [Meta-analyses 1](http://environmentalcomputing.net/meta-analyses-1/): Introduction and calculating effect sizes  
-* [Meta-analyses 2](http://environmentalcomputing.net/meta-analyses-2/): Fixed effect and random effect models  
-* [Meta-analyses 3](http://environmentalcomputing.net/meta-analyses-3/): More complex models 
+* [Meta-analyses 1](/../meta-analyses-1/): Introduction and calculating effect sizes  
+* [Meta-analyses 2](/../meta-analyses-2/): Fixed effect and random effect models  
+* [Meta-analyses 3](/../meta-analyses-3/): More complex models 
 
  
 Last updated:

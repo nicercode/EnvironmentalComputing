@@ -5,7 +5,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-First read our [introduction to meta analysis](http://environmentalcomputing.net/meta-analysis-1) and become familiar with [commonly used statistical models for meta-analysis](http://environmentalcomputing.net/meta-analysis-2). Now, we consider more complex models.
+First read our [introduction to meta analysis](/../meta-analysis-1) and become familiar with [commonly used statistical models for meta-analysis](/../meta-analysis-2). Now, we consider more complex models.
 
 ### More complex models
 
@@ -41,7 +41,7 @@ dat <- bind_cols(dat,lnRR)
 
 We can fit an equivalent model using the function `rma.mv`. We need to add `paper` (the between-study effect) and `id` (different effect sizes; the within-study effect) in our data set to the multilevel model as random factors.
 
-```{r multilevel, tidy=TRUE, cache=TRUE}
+```{r multilevel, tidy=TRUE}
 multilevel_m <- rma.mv(yi = yi, V = vi, random = list(~1|paper, ~1|id), method = "REML", data = dat)
 summary(multilevel_m)
 ```
@@ -66,7 +66,7 @@ This means that we need a phylogenetic tree for our data set. For this data set,
 
 First install and load the package [ape](http://ape-package.ird.fr/) that we will use to import the tree file and visualise the phylogeny.
 
-```{r prep1, tidy=TRUE, cache=TRUE, warning=FALSE}
+```{r prep1, tidy=TRUE, warning=FALSE}
 library(ape)
 tree<-read.tree(file="tree_curtis1998.tre")
 plot(tree, cex = 0.7) 
@@ -74,7 +74,7 @@ plot(tree, cex = 0.7)
 
 We can then make a correlation matrix (a relatedness matrix among species). I've skipped explantions of these operations - other than saying we have a correlation matrix to fit to the model
 
-```{r prep2, tidy=TRUE, cache=TRUE}
+```{r prep2, tidy=TRUE}
 tree <- compute.brlen(tree)
 cor <- vcv(tree, cor=T)
 ```
@@ -94,7 +94,7 @@ dat[,"phylo"]<-phylo
 
 We now have our phylogenetic correlation `cor` and a column with species names `phylo`, and can run our meta-analysis again with a phylogenetic effect. 
 
-```{r phylo, tidy=TRUE, cache=TRUE}
+```{r phylo, tidy=TRUE}
 phylo_m<-rma.mv(yi = yi, V = vi, random = list(~1|phylo, ~1|paper, ~1|id), R = list(phylo = cor), method = "REML", data = dat)
 summary(phylo_m)
 ```
@@ -109,12 +109,12 @@ Unfortunately, there are other types of non-independence from what covered here.
 
 We have a multilevel version of the robust model too. It is easy to fit using the function `rma.mv` (we do not include `phylo` as it did not explain any variance).
 
-```{r weight, tidy=TRUE, cache=TRUE, echo=FALSE}
+```{r weight, tidy=TRUE, echo=FALSE}
 # We make weights, which is 1/vi and stick that into the argument, weights
 dat[,"wi"]<-1/dat$vi
 ```
 
-```{r robustml, tidy=TRUE, cache=TRUE}
+```{r robustml, tidy=TRUE}
 # you can put a marix or vector to W which is equivalent to 'weights' in rma
 robustml_m <- rma.mv(yi = yi, V = vi, W = wi, random = list(~1|paper, ~1|id), method = "REML", data = dat)
 summary(robustml_m)

@@ -53,14 +53,14 @@ I think the R package [metafor](http://www.metafor-project.org/doku.php) (Viecht
 
 First, install and load the `metafor` package.
 
-```{r setup, tidy=TRUE, cache=TRUE, message=FALSE, warning=FALSE}
+```{r setup, tidy=TRUE, message=FALSE, warning=FALSE}
 library(metafor)
 ```
 
 Have a look at the data set named `dat.curtis1998` included in the package. If you have to see the other data sets included in this package, try `help(package="metafor")`.
 
 ```{r}
-dat <- data(dat.curtis1998)
+dat <- metafor::dat.curtis1998
 str(dat)
 ```
 
@@ -101,7 +101,7 @@ se^2_\mathrm{lnRR}=\frac{sd^2_{C}}{n_{C}\bar{x}^2_{C}}+\frac{sd^2_{E}}{n_{E}\bar
 
 Let's get these using the function `escalc` in `metafor`. To obtain the standardised mean difference, we use:
 
-```{r effect-size, tidy=TRUE, cache=TRUE}
+```{r effect-size, tidy=TRUE}
 #SMD
 SMD <- escalc(measure = "SMD",n1i = dat$n1i, n2i = dat$n2i,
                m1i = dat$m1i, m2i = dat$m2i,
@@ -117,7 +117,7 @@ head(SMD)
 ```
 
 To obtain the response ratio (log transformed ratio of menas), we would use:
-```{r effect-size-2, tidy=TRUE, cache=TRUE}
+```{r effect-size-2, tidy=TRUE}
 lnRR <- escalc(measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
                m1i = dat$m1i, m2 = dat$m2i,
                sd1i = dat$sd1i, sd2i = dat$sd2i)
@@ -127,7 +127,7 @@ The original paper used lnRR so we will use it, but you may want to repeat analy
 
 Add the effect sizes to the original data set with `cbind` or `bind_cols` from the package `dplyr`
 
-```{r, tidy=TRUE, cache=TRUE, message=FALSE, warning=FALSE}
+```{r, tidy=TRUE, message=FALSE, warning=FALSE}
 library(dplyr)
 dat <- bind_cols(dat,lnRR)
 ```
@@ -140,20 +140,20 @@ str(dat)
 
 **Visualising effect size.** We can visualize point estimates (effect size) and their 95% confidence intervals, CIs (based on sampling error variance) by using the `forest` function, which draws a forest plot for us.  
 
-```{r forest, tidy=TRUE, cache=TRUE}
+```{r forest, tidy=TRUE}
 forest(dat$yi, dat$vi)
 ```
 
 The problem you see is that when there are many studies, a forest plot does not really work (unless you have very large screen!). Let's look at just the first 12 studies. 
 
-```{r forest2, tidy=TRUE, cache=TRUE}
+```{r forest2, tidy=TRUE}
 forest(dat$yi[1:12], dat$vi[1:12])
 ```
 
 We can calculate many different kinds of effect sizes with `escalc`; other common effect size statistics include $Zr$ (Fisher's z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio -- mouthful!), which compares the variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of `metafor`, let you do this with `escalc`-- [github page](https://github.com/cran/metafor). lnCVR is called "CVR" in `escalc`. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight! 
 
 
-Once you have calculated effect sizes, move on to the next page: [Meta-analysis 2: fixed-effect and random-effect models](http://environmentalcomputing.net/meta-analysis-2)
+Once you have calculated effect sizes, move on to the next page: [Meta-analysis 2: fixed-effect and random-effect models](/../meta-analysis-2)
 
 ### Further help (references)
 
@@ -169,6 +169,6 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
  
 Last updated:
 ```{r,echo=F}
-date()
+date() 
 ```
 

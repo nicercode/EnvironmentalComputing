@@ -6,7 +6,7 @@ output: html_document
 
 Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. In this module, we will start with the simplest design - those with a single factor.
 
-Where an independent samples *t*-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of >2 group means, or when there are more than two or more predictor variables (see [ANOVA: factorial](http://environmentalcomputing.net/analysis-of-variance-factorial/)). The logic of this test is essentially the same as the *t*-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.
+Where an independent samples *t*-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of >2 group means, or when there are more than two or more predictor variables (see [ANOVA: factorial](/../analysis-of-variance-factorial/)). The logic of this test is essentially the same as the *t*-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.
 
 ![](ANOVA_single_factor_image.png)
 
@@ -32,7 +32,7 @@ where *MS* are the mean squares, a measure of variation. The probability of obta
 
 ### Running the analysis
  
-The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, *y*, and a corresponding column for the categorical variable, *x*. Download the sample data set for the turtle hatching example, [Turtles.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Turtles.csv), import into R and check that temperature variable is a factor with the `str` function.
+The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, *y*, and a corresponding column for the categorical variable, *x*. Download the sample data set for the turtle hatching example, [Turtles.csv](/../wp-content/uploads/2016/05/Turtles.csv), import into R and check that temperature variable is a factor with the `str` function.
 
 ```{r,eval=FALSE}
 Turtles = read.csv(file = "Turtles.csv",header=TRUE)
@@ -109,7 +109,7 @@ hist(Turtles.aov$residuals)
 plot(Turtles.aov,which=2)
 ```
 
-Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](http://environmentalcomputing.net/generalised-linear-models-1/).
+Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](/../generalised-linear-models-1/).
 
 **Homogeneity of variance.** The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the `aov` model object.
 
@@ -117,11 +117,11 @@ Violations of normality can be fixed via transformations or by using a different
 plot(Turtles.aov,which=1)
 ```
 
-Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the *y* axis for each of the levels on the *x* axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a [generalised linear model (GLM)](http://environmentalcomputing.net/generalised-linear-models-1/).
+Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the *y* axis for each of the levels on the *x* axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a [generalised linear model (GLM)](/../generalised-linear-models-1/).
 
 **Independence.** ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the turtle eggs measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with both temperature and time as factors).
 
-There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed-model](http://environmentalcomputing.net/mixed-models-1/).
+There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed-model](/../mixed-models-1/).
   
 
 ### Communicating the results

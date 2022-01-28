@@ -14,11 +14,11 @@ plot(loght ~ temp, data = Plant_height, col="darkgreen",xlab = "Temperature (C)"
 abline(model, col = "red")
 ```
 
-* [Linear regression](http://environmentalcomputing.net/linear-regression/)
-* [Analysis of variance: single factor](http://environmentalcomputing.net/analysis-variance-single-factor/)
-* [Analysis of variance: factorial](http://environmentalcomputing.net/analysis-variance-factorial/)  
-* [Understanding interactions](http://environmentalcomputing.net/understanding-interactions/)
-* [Interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/)
+* [Linear regression](/../linear-regression/)
+* [Analysis of variance: single factor](/../analysis-variance-single-factor/)
+* [Analysis of variance: factorial](/../analysis-variance-factorial/)  
+* [Understanding interactions](/../understanding-interactions/)
+* [Interpreting coefficients in linear models](/../how-to-interpret-linear-models/)
 
   
 

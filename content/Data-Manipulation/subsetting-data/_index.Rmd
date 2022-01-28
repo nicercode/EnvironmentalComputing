@@ -13,7 +13,7 @@ In this exercise, we will load a dataset where bats were sampled across regrowth
 
 The dataset includes measurements of total number of bat calls ("Activity") and number of bat calls that indicate foraging behaviour ("Foraging") recorded over one night for 47 sites and 173 sampling nights in total. Variables relating to forest thinning have been collected and are listed as columns ending in "thinned". As the forest studied was in a floodplain, covariates relating to water availability were also collected and are listed in columns ending "water".
 
-First, download the data set, [Bats_data.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Bats_data.csv), and load into R.
+First, download the data set, [Bats_data.csv](/datasets/Bats_data.csv), and load into R.
 
 ```{r}
 Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)

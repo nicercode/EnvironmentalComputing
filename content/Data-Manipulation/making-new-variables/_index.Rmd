@@ -11,7 +11,7 @@ To demonstrate a few of the commonly used functions in R for doing this, let's c
 
 ![](MDS_image.jpg)
 
-Download the data set, [Herbivore_specialisation.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Herbivore_specialisation.csv), and load into R.
+Download the data set, [Herbivore_specialisation.csv](/datasets/Herbivore_specialisation.csv), and load into R.
 
 ```{r}
 Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
@@ -66,7 +66,7 @@ The arguments of `mutate` are simply the name of the data frame followed by any 
 
 In the above examples, note that the new variables have been added to the existing data frame, and all old variables have been kept. You can use `transmute` if you want to drop the original variables.
 
-These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](http://environmentalcomputing.net/subsetting-data/) and [summarising](http://environmentalcomputing.net/summarising-data/) data. 
+These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](/../subsetting-data/) and [summarising](/../summarising-data/) data. 
   
 
 ### Renaming a variable

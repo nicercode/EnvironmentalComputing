@@ -11,7 +11,7 @@ output: html_document
 <p>Being able to make new variables from those already in your data set is an essential skill for data manipulation prior to making graphs or doing analyses. These new variables could be a transformed variable that you would like to analyse, a new variable that is a function of existing ones, or a new set of labels for your samples.</p>
 <p>To demonstrate a few of the commonly used functions in R for doing this, let’s consider a data set on the feeding specificity of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of seven species of macroalgae were collected from Sydney Harbour, and the abundance of seven species of herbivorous crustacean recorded from each replicate sample (data from <a href="http://www.int-res.com/abstracts/meps/v208/p183-196/">Poore <em>et al</em>. 2000)</a>.</p>
 <p><img src="MDS_image.jpg" /></p>
-<p>Download the data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Herbivore_specialisation.csv">Herbivore_specialisation.csv</a>, and load into R.</p>
+<p>Download the data set, <a href="/datasets/Herbivore_specialisation.csv">Herbivore_specialisation.csv</a>, and load into R.</p>
 <pre class="r"><code>Herbivores &lt;- read.csv(file = &quot;Herbivore_specialisation.csv&quot;, header = TRUE)</code></pre>
 <p>The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.</p>
 <div id="adding-a-new-variable" class="section level3">
@@ -38,7 +38,7 @@ Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + 
                      )</code></pre>
 <p>The arguments of <code>mutate</code> are simply the name of the data frame followed by any number of expressions that create new variables.</p>
 <p>In the above examples, note that the new variables have been added to the existing data frame, and all old variables have been kept. You can use <code>transmute</code> if you want to drop the original variables.</p>
-<p>These functions become especially powerful when combined with some of the others in dplyr. See our pages on <a href="http://environmentalcomputing.net/subsetting-data/">subsetting</a> and <a href="http://environmentalcomputing.net/summarising-data/">summarising</a> data.</p>
+<p>These functions become especially powerful when combined with some of the others in dplyr. See our pages on <a href="/../subsetting-data/">subsetting</a> and <a href="/../summarising-data/">summarising</a> data.</p>
 </div>
 <div id="renaming-a-variable" class="section level3">
 <h3>Renaming a variable</h3>
@@ -73,5 +73,5 @@ Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + 
 <p><a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">Introducing tidyr</a></p>
 <p><strong>Author:</strong> Alistair Poore</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:42:43 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 11:44:39 2022&quot;</code></pre>
 </div>

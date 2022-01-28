@@ -50,7 +50,7 @@ It is highly likely that there are strong relationships between variables in our
 
 ### Running the analysis
  
-Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, [Leafshape.csv.](http://environmentalcomputing.net/wp-content/uploads/2016/05/Leafshape.csv), and import into R to see the required format.
+Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, [Leafshape.csv.](/../wp-content/uploads/2016/05/Leafshape.csv), and import into R to see the required format.
 
 ```{r}
 Leaf_shape <- read.csv(file = "Leafshape.csv", header = TRUE)

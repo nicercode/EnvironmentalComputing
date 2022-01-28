@@ -55,7 +55,7 @@ print(
 
 The overall appearance can be edited by changing the style or prescence of grid lines, axis notches, panel colour, legend colour or outlines.
 
-Before you get started, read the page on the [basics](http://environmentalcomputing.net/plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
+Before you get started, read the page on the [basics](/../plotting-with-ggplot-the-basics/) of plotting with ggplot and install the package ggplot2.
 
 ```{r}
 library(ggplot2)
@@ -213,7 +213,7 @@ print(IrisPlot + mytheme)
 
 ### Example of a fully customised ggplot
  
-Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/) for help with those parts of the `print()` code.
+Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on [adding titles and axis names](/../plotting-with-ggplot-adding-titles-and-axis-names/) for help with those parts of the `print()` code.
 
 ```{r, warning =F}
 IrisPlot <-
@@ -274,8 +274,8 @@ print(
 ###Further help
  
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
-* [adding titles and axis names](http://environmentalcomputing.net/plotting-with-ggplot-adding-titles-and-axis-names/)  
-* [colours and symbols](http://environmentalcomputing.net/plotting-with-ggplot-colours-and-symbols/).   
+* [adding titles and axis names](/../plotting-with-ggplot-adding-titles-and-axis-names/)  
+* [colours and symbols](/../plotting-with-ggplot-colours-and-symbols/).   
 
 Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
 

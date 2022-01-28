@@ -15,10 +15,10 @@ output: html_document
 3. use <code>+ s(x)</code> not <code>x</code> in your syntax<br />
 4. use <code>method = "REML"</code><br />
 5. always look at <code>gam.check()</code></p>
-<p>This is basically all there is too it - an extension of <a href="http://environmentalcomputing.net/generalised-linear-models/">generalised linear models (GLMs)</a> with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say <code>lmer</code> or <code>glmer</code>, but we use them all the time without reservation!</p>
+<p>This is basically all there is too it - an extension of <a href="/../generalised-linear-models/">generalised linear models (GLMs)</a> with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say <code>lmer</code> or <code>glmer</code>, but we use them all the time without reservation!</p>
 <div id="gams-in-a-nutshell" class="section level3">
 <h3>GAMs in a nutshell</h3>
-<p>Let’s start with an equation for a Gaussian <a href="http://environmentalcomputing.net/linear-regression/">linear model</a>:
+<p>Let’s start with an equation for a Gaussian <a href="/../linear-regression/">linear model</a>:
 <span class="math display">\[y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
 What changes in a GAM is the presence of a smoothing term:
 <span class="math display">\[y = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
@@ -71,16 +71,16 @@ gam.check(gam_y)</code></pre>
 <pre><code>## 
 ## Method: REML   Optimizer: outer newton
 ## full convergence after 6 iterations.
-## Gradient range [-4.949037e-10,3.945209e-10]
-## (score 31.82689 &amp; scale 0.1156574).
-## Hessian positive definite, eigenvalue range [2.264662,30.7132].
+## Gradient range [-7.058887e-10,5.476166e-10]
+## (score 33.89815 &amp; scale 0.1256474).
+## Hessian positive definite, eigenvalue range [2.020067,30.69287].
 ## Model rank =  10 / 10 
 ## 
 ## Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
 ## indicate that k is too low, especially if edf is close to k&#39;.
 ## 
 ##        k&#39;  edf k-index p-value
-## s(x) 9.00 5.91    1.15    0.83</code></pre>
+## s(x) 9.00 5.69    1.17    0.87</code></pre>
 <p>Using <code>summary</code> with the model object will give you the significance of the smooth term (along with any parametric terms, if you’ve included them), along with the variance explained. In this example, a pretty decent fit. The ‘edf’ is the estimated degrees of freedom - essentially, the larger the number, the more wiggly the fitted model. Values of around 1 tend to be close to a linear term. You can read about penalisation and shrinkage for more on what the edf reflects.</p>
 <pre class="r"><code>summary(gam_y)</code></pre>
 <pre><code>## 
@@ -91,17 +91,17 @@ gam.check(gam_y)</code></pre>
 ## y ~ s(x)
 ## 
 ## Parametric coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  0.06261    0.04285   1.461     0.15
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -0.006011   0.044659  -0.135    0.893
 ## 
 ## Approximate significance of smooth terms:
 ##        edf Ref.df     F p-value    
-## s(x) 5.907  7.066 39.11  &lt;2e-16 ***
+## s(x) 5.687   6.84 32.11  &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## R-sq.(adj) =  0.816   Deviance explained = 83.4%
-## -REML = 31.827  Scale est. = 0.11566   n = 63</code></pre>
+## R-sq.(adj) =  0.779   Deviance explained =   80%
+## -REML = 33.898  Scale est. = 0.12565   n = 63</code></pre>
 </div>
 <div id="smooth-terms" class="section level3">
 <h3>Smooth terms</h3>
@@ -159,7 +159,7 @@ plot(y ~ rowSums(X))</code></pre>
 <h2>A quick real example</h2>
 <p><img src="Mauna_Loa.jpg" /></p>
 <p>We’ll now look at a quick real example - we’ll just scratch the surface, and in a future We’ll now look at a quick real example - we’ll just scratch the surface, and in a future tutorial we will look at it in more detail. We’re going to look at some CO<span class="math inline">\(_2\)</span> data from Manua Loa. We will fit a couple GAMs to the data to try and pick apart the intra- and inter-annual trends.</p>
-<p>First load the data - you can download it <a href="http://environmentalcomputing.net/wp-content/uploads/2017/10/manua_loa_co2.csv">here</a>.</p>
+<p>First load the data - you can download it <a href="/../wp-content/uploads/2017/10/manua_loa_co2.csv">here</a>.</p>
 <pre class="r"><code>CO2 &lt;- read.csv(&quot;mauna_loa_co2.csv&quot;)</code></pre>
 <p>We want to look at inter-annual trend first, so let’s convert the date into a continuous time variable (take a subset for visualisation).</p>
 <pre class="r"><code>CO2$time &lt;- as.integer(as.Date(CO2$Date, format = &quot;%d/%m/%Y&quot;))
@@ -216,6 +216,6 @@ Use <code>citation("mgcv")</code> for a range of papers with more technical expl
 A great blog with lots of stuff on GAMs: <a href="https://www.fromthebottomoftheheap.net/" class="uri">https://www.fromthebottomoftheheap.net/</a></p>
 <p><strong>Author</strong>: Mitchell Lyons</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 2022&quot;</code></pre>
 </div>
 </div>

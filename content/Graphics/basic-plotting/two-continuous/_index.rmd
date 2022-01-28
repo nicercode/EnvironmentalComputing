@@ -9,7 +9,7 @@ Visualising the relationship between two continuous variables is one of the most
 ![](Two_continuous_variables_image.jpg)
   
 
-For this worked example, download a data set on plant heights around the world, [Plant_height.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Plant_height.csv), and import into R.
+For this worked example, download a data set on plant heights around the world, [Plant_height.csv](/../wp-content/uploads/2016/05/Plant_height.csv), and import into R.
 
 ```{r}
 Plant_height <- read.csv(file = "Plant_height.csv", header = TRUE)
@@ -75,7 +75,7 @@ plot(height~temp,data=Plant_height, xlab='Temperature (°C)', ylab = 'Plant heig
  
 To further explore the relationship between two variables you can add a line of best fit. For example, to add the line of best fit from a simple linear regression, we would use the linear modelling function, `lm`, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter `abline`.
 
-See the page on [linear regression](http://environmentalcomputing.net/linear-regression/) for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:
+See the page on [linear regression](/../linear-regression/) for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:
 
 ```{r}
 plot(loght ~ temp, data = Plant_height, xlab='Temperature (°C)', ylab = 'log(Plant height)',pch=16)

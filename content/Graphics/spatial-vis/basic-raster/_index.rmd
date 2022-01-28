@@ -4,7 +4,7 @@ weight: 1
 output: html_document
 ---
 
-This tutorial is focused on introducing the bascis of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with [this tutorial](http://environmentalcomputing.net/making-simple-maps/). 
+This tutorial is focused on introducing the bascis of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with [this tutorial](/../making-simple-maps/). 
 
 ### Let's get set up first
 

@@ -6,6 +6,6 @@ output: html_document
 
 Some simple hypothesis tests with the t statistic:
 
-* [One sample t tests](http://environmentalcomputing.net/one-sample-t-test/) to contrasting a single sample parameter to a population parameter  
-* [Independent samples](http://environmentalcomputing.net/independent-samples-t-test/) t tests to contrast the means of two samples
-* [Paired t-tests](http://environmentalcomputing.net/paired-t-tests/) to contrast two groups of values where each pair is measured from the same object.
+* [One sample t tests](/../one-sample-t-test/) to contrasting a single sample parameter to a population parameter  
+* [Independent samples](/../independent-samples-t-test/) t tests to contrast the means of two samples
+* [Paired t-tests](/../paired-t-tests/) to contrast two groups of values where each pair is measured from the same object.

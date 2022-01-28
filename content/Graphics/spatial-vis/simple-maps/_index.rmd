@@ -70,7 +70,7 @@ ggmap(basemap) + geom_point(data=ptdata, aes(x=Long, y=Lat))
 ```
 
 
-Well done -you made your first map with R! Easy! You may have noticed that `ggmap` uses familiar graphics code from the package ggplot (see [plotting with ggplot](http://environmentalcomputing.net/plotting-with-ggplot/)).  
+Well done -you made your first map with R! Easy! You may have noticed that `ggmap` uses familiar graphics code from the package ggplot (see [plotting with ggplot](/../plotting-with-ggplot/)).  
 
 
 ### Making a presentation-ready map

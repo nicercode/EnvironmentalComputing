@@ -12,7 +12,7 @@ These sorts of plots are very commonly used in the biological, earth and environ
 
 We will use sample data from an experiment that contrasted the metabolic rate of two species of prawns and introduce two commonly used types of plots for this purpose: boxplots and bar plots.
 
-Firstly, download the sample data file, [Prawns_MR.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Prawns_MR.csv), and import into R.
+Firstly, download the sample data file, [Prawns_MR.csv](/../wp-content/uploads/2016/05/Prawns_MR.csv), and import into R.
 
 ```{r}
 Prawns <- read.csv(file = "Prawns_MR.csv")
@@ -36,9 +36,9 @@ The continuous variable is on the left of the tilde (~) and the categorical vari
  
 These sorts of data are also commonly visualised with a bar plot that displays the means of the continuous variable for each level of the categorical variable, with error bars displaying some measures of variation within each category. The error bars could be the standard deviation, standard error or 95% confidence intervals.
 
-While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the `summarise` and `group_by` functions from the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) to calculate the means and measures of variation for each level of your categorical variable (see [Summarising data](http://environmentalcomputing.net/summarising-data/)).
+While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the `summarise` and `group_by` functions from the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) to calculate the means and measures of variation for each level of your categorical variable (see [Summarising data](/../summarising-data/)).
 
-Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see [bar plots with error bars](http://environmentalcomputing.net/plotting-with-ggplot-bar-plots-with-error-bars/)).
+Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see [bar plots with error bars](/../plotting-with-ggplot-bar-plots-with-error-bars/)).
 
 ```{r,warning=F,message=F}
 library(dplyr)

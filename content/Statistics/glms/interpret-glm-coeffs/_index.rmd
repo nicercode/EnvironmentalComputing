@@ -5,7 +5,7 @@ output: html_document
 ---
 In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.
 
-For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for [binary](http://environmentalcomputing.net/generalised-linear-models-1/) and [count](http://environmentalcomputing.net/generalised-linear-models-1/) data page on [interpreting coefficients in linear models](http://environmentalcomputing.net/how-to-interpret-linear-models/).
+For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for [binary](/../generalised-linear-models-1/) and [count](/../generalised-linear-models-1/) data page on [interpreting coefficients in linear models](/../how-to-interpret-linear-models/).
   
 
 ### Poisson and negative binomial GLMs
@@ -110,7 +110,7 @@ off_mod <- glm(Y~depth+offset(log(soil)), family = poisson)
 summary(off_mod)
 ```
 
-If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations [here](http://environmentalcomputing.net/how-to-interpret-linear-models/). The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you're not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response. 
+If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations [here](/../how-to-interpret-linear-models/). The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you're not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response. 
 
 ```{r}
 coef_mod <- glm(Y~depth+log(soil), family = poisson)

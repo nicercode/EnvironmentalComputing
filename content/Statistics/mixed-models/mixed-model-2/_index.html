@@ -9,20 +9,18 @@ editor_options:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p><a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a> is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.</p>
+<p><a href="/../mixed-models-1/">Mixed models 1</a> is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.</p>
 <p>Many experimental designs in ecology and environmental sciences require mixed models with several random effects (factors). You might have heard of nested and crossed factors. We often define these as quite distinct designs (e.g., from <a href="http://www.theanalysisfactor.com">www.theanalysisfactor.com</a>)</p>
 <p>Two factors are <strong>crossed</strong> when every category (level) of one factor co-occurs in the design with every category of the other factor. In other words, there is at least one observation in every combination of categories for the two factors.</p>
 <p>A factor is <strong>nested</strong> within another factor when each category of the first factor co-occurs with only one category of the other. In other words, an observation has to be within one category of Factor 2 in order to have a specific category of Factor 1. All combinations of categories are not represented.</p>
-<p>There are also intermediate designs that are partially crossed, where some levels of one factor occur in several (but not all) levels of the second factor. These designs have often been taught as separate problems with different ways to carry out analyses of variance (ANOVAs) depending on if you have crossed or nested factors. Using mixed models with the package lme4, we can think if all of these in one framework, where nested and crossed designs are modelled in the same way. Thinking about factors as crossed or nested is simplified to careful labelling of factor levels - more on this later.
-<br><br></p>
+<p>There are also intermediate designs that are partially crossed, where some levels of one factor occur in several (but not all) levels of the second factor. These designs have often been taught as separate problems with different ways to carry out analyses of variance (ANOVAs) depending on if you have crossed or nested factors. Using mixed models with the package lme4, we can think if all of these in one framework, where nested and crossed designs are modelled in the same way. Thinking about factors as crossed or nested is simplified to careful labelling of factor levels - more on this later.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p><br>
-We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, load the package:</p>
+<p>We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, load the package:</p>
 <pre class="r"><code>library(lme4)</code></pre>
-<p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in <a href="http://environmentalcomputing.net/mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
+<p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in <a href="/../mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
 <p><img src="Mixed_models_2_image.jpg" /></p>
-<p>Download the sample data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
 <pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
 <p><strong>Fitting a model with a fixed effect and several random effects</strong></p>
 <p>In this data set, we have a fixed effect (Modification; modified vs pristine) and two random effects (Estuary and Site). Site is nested within Estuary as each site can only belong in one estuary. When entering the data, however, we’ve been careless and numbered sites within each estuary as 1, 2, 3 etc.</p>
@@ -126,13 +124,11 @@ summary(fit.wrong )</code></pre>
 ##             (Intr)
 ## MdfctnPrstn -0.727</code></pre>
 <p>The only place we can see an obvious difference is under the Random effects table. For the correct model we have <font face="monospace">Number of obs: 52, groups: SiteWithin, 26; Estuary, 7</font> while the wrong model tells us we have only 4 sites, which we know is incorrect.</p>
-<p>Note: fit.wrong would be correct if we had crossed factors
-<br><br></p>
+<p>Note: fit.wrong would be correct if we had crossed factors</p>
 </div>
 <div id="checking-assumptions" class="section level3">
 <h3>Checking assumptions</h3>
-<p><br>
-The assumptions are the same as for one random factor, but it doesn’t hurt to list them again</p>
+<p>The assumptions are the same as for one random factor, but it doesn’t hurt to list them again</p>
 <ol style="list-style-type: decimal">
 <li>The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span><br />
 </li>
@@ -144,10 +140,9 @@ The assumptions are the same as for one random factor, but it doesn’t hurt to 
 </li>
 <li>Random effects <span class="math inline">\(z\)</span> are independent of <span class="math inline">\(y\)</span>.<br />
 </li>
-<li>Random effects <span class="math inline">\(z\)</span> are normally distributed<br />
-<br><br></li>
+<li>Random effects <span class="math inline">\(z\)</span> are normally distributed</li>
 </ol>
-<p>See <a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a> for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.</p>
+<p>See <a href="/../mixed-models-1/">Mixed models 1</a> for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.</p>
 <pre class="r"><code>par(mfrow=c(1,2))
 qqnorm(residuals(fit.mod))
 scatter.smooth(residuals(fit.mod)~fitted(fit.mod)) #residual plot</code></pre>
@@ -158,13 +153,11 @@ par(mfrow=c(1,2))
 qqnorm(residuals(fit.mod))
 scatter.smooth(residuals(fit.mod)~fitted(fit.mod)) #residual plot</code></pre>
 <p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it’s not of great concern.
-<br><br></p>
+<p>This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it’s not of great concern.</p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
-<p><br>
-<strong>Hypothesis test for the fixed effect</strong></p>
+<p><strong>Hypothesis test for the fixed effect</strong></p>
 <p>We can use the <code>anova</code> as before to obtain approximate p-values for fixed effects.</p>
 <pre class="r"><code>ft.mod &lt;- lmer(log(Total)~Modification + (1|Estuary) + (1|SiteWithin), data=Estuaries, REML=F)
 ft.mod.0 &lt;- lmer(log(Total)~(1|Estuary) + (1|SiteWithin), data=Estuaries, REML=F)
@@ -180,7 +173,7 @@ anova(ft.mod.0,ft.mod)</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>We find weak evidence of an effect of Modification (p=0.05047).</p>
 <p><strong>Hypothesis test for random effects</strong></p>
-<p>As in <a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a> we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I’ve taken the code from <a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a> and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.</p>
+<p>As in <a href="/../mixed-models-1/">Mixed models 1</a> we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I’ve taken the code from <a href="/../mixed-models-1/">Mixed models 1</a> and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.</p>
 <pre class="r"><code>nBoot=1000
 lrStat &lt;- rep(NA,nBoot)
 ft.null &lt;- lmer(log(Total) ~ Modification + (1|Estuary) , Estuaries, REML=F)#null model
@@ -195,13 +188,11 @@ for(iBoot in 1:nBoot)
 }
 mean(lrStat&gt;lrObs) #P-value for test of Estuary effect</code></pre>
 <pre><code>## [1] 0</code></pre>
-<p>The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.
-<br><br></p>
+<p>The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.</p>
 </div>
 <div id="communicating-results" class="section level2">
 <h2>Communicating results</h2>
-<p><br>
-<strong>Written.</strong> Results of linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code> function) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g., “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
+<p><strong>Written.</strong> Results of linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code> function) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g., “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
 <p><strong>Visual.</strong> The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility. There is a little bit of code that is required for such a plot, and it will be a little different for your data and model.</p>
 <p>You can plot within each site, but this is a bit odd for a boxplot as there are only two observations per site, you might want to do this for your data if you have more observations within each Site.</p>
 <pre class="r"><code>library(Hmisc)</code></pre>
@@ -223,12 +214,10 @@ means=fitted(fit.mod) #this will give the estimate at each data point
 Est.means=summarize(means, Estuaries$SiteWithin, mean)$means #extract means by site
 stripchart(Est.means~ sort(unique(SiteWithin)),data=Estuaries,pch=18,col=&quot;red&quot;,vertical = TRUE,add=TRUE)#plot means by site</code></pre>
 <p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Alternatively, you can plot by Estuary as before (see <a href="http://environmentalcomputing.net/mixed-models-1/">Mixed models 1</a>).
-<br><br></p>
+<p>Alternatively, you can plot by Estuary as before (see <a href="/../mixed-models-1/">Mixed models 1</a>).</p>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
-<p><br>
-You can type <code>?lmer</code> into R for help with these functions.</p>
+<p>You can type <code>?lmer</code> into R for help with these functions.</p>
 <p><a href="http://lme4.r-forge.r-project.org/book/Ch2.pdf">Draft book chapter</a> from the authors of lme4.</p>
 <p style="margin-left:.5in;text-indent:-.5in">
 Faraway, JJ (2005) <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC Press.
@@ -236,10 +225,8 @@ Faraway, JJ (2005) <em>Extending the linear model with R: generalized linear, mi
 <p style="margin-left:.5in;text-indent:-.5in">
 Zuur, A, EN Ieno and GM Smith (2007) <em>Analysing ecological data</em>. Springer Science &amp; Business Media.
 </p>
-<p><br><br></p>
-<p><strong>Author</strong>: Gordana Popovic
-<br>
-Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 24 12:21:35 2022&quot;</code></pre>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p>Last updated:</p>
+<pre><code>## [1] &quot;Fri Jan 28 13:24:41 2022&quot;</code></pre>
 </div>
 </div>

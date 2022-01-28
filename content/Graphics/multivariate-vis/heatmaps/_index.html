@@ -15,7 +15,7 @@ output: html_document
 library(dplyr)</code></pre>
 <div id="reading-in-the-data" class="section level3">
 <h3>Reading in the data</h3>
-<p>With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.counts.csv">Bac.counts.csv</a> and <a href="http://environmentalcomputing.net/wp-content/uploads/2016/06/Bac.factors.csv">Bac.factors.csv</a>, and import into R.</p>
+<p>With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, <a href="/../wp-content/uploads/2016/06/Bac.counts.csv">Bac.counts.csv</a> and <a href="/../wp-content/uploads/2016/06/Bac.factors.csv">Bac.factors.csv</a>, and import into R.</p>
 <pre class="r"><code>Bac.counts &lt;- read.csv(file = &quot;Bac.counts.csv&quot;, header = TRUE, row.names=1)
 Bac.factors &lt;- read.csv(file = &quot;Bac.factors.csv&quot;, header = TRUE, row.names=1)</code></pre>
 <p>The <code>row.names=1</code> argument assigns the first column of the spreadsheet as row names in the data frame. We should check the data structure of the counts using the <code>head</code> command. Given there are many columns, we’ll only check the first 10 using indexing (use of <code>[,]</code> after the object, with row numbers before the comma and column numbers after).</p>
@@ -43,12 +43,12 @@ Otu00007 1112 1042 1211 1060 1155 1103 1283 1198 1175 1485</code></pre>
 </div>
 <div id="drawing-a-heatmap" class="section level3">
 <h3>Drawing a heatmap</h3>
-<p>The basic function is <code>pheatmap</code>. Let’s try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function <code>slice</code> in dplyr can take any subset of numbered rows (see <a href="http://environmentalcomputing.net/subsetting-data/">Subsetting data</a>).</p>
+<p>The basic function is <code>pheatmap</code>. Let’s try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function <code>slice</code> in dplyr can take any subset of numbered rows (see <a href="/../subsetting-data/">Subsetting data</a>).</p>
 <pre class="r"><code>Bac.counts500 &lt;- slice(Bac.counts, 1:500)
 
 pheatmap(Bac.counts500)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see <a href="http://environmentalcomputing.net/cluster-analysis/">Cluster analysis</a>).</p>
+<p>In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see <a href="/../cluster-analysis/">Cluster analysis</a>).</p>
 <p><strong>Data transformation</strong>. Now you might notice that we have a scale issue. The data are full of rare-ish bacteria (blue) and that is all we can see on the heatmap. To visualise this more effectively, we can try a log10 transformation with + 1 constant to deal with zeros.</p>
 <pre class="r"><code>Bac.Log10.counts500 &lt;- log10(Bac.counts500 + 1)
 pheatmap(Bac.Log10.counts500)</code></pre>
@@ -128,7 +128,7 @@ pheatmap(Bac.Log10.counts500[ , SampleOrder], cluster_cols = FALSE,
 <div id="using-heatmaps-after-statistical-analyses" class="section level3">
 <h3>Using heatmaps after statistical analyses</h3>
 <p>If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.</p>
-<p>We will analyse the abundances of all OTUs with multivariate generalised linear models using the function <code>manyglm</code> in the package mvabund. The specifics of that analysis are not described further here (see the <a href="http://environmentalcomputing.net/introduction-to-mvabund/">Introduction to mvabund</a> for help with that package). Note that running <code>anova.manyglm</code> is quite slow.</p>
+<p>We will analyse the abundances of all OTUs with multivariate generalised linear models using the function <code>manyglm</code> in the package mvabund. The specifics of that analysis are not described further here (see the <a href="/../introduction-to-mvabund/">Introduction to mvabund</a> for help with that package). Note that running <code>anova.manyglm</code> is quite slow.</p>
 <pre class="r"><code># Create factor and data file without the U1, U2 and U3 samples
 Bac.factorsDS_noU &lt;- filter(Bac.factors, Treatment_ID != &quot;U&quot;)
 Bac.counts500DS_noU &lt;- select(Bac.counts500, -contains(&quot;U&quot;))
@@ -157,5 +157,5 @@ pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS], scale = &quot;row&quot;,
 <p>Type <code>?pheatmap</code> for the R help on this function.</p>
 <p><strong>Author:</strong> Shaun Nielsen</p>
 <p>Last updated:</p>
-<pre><code>[1] &quot;Tue Jan 25 09:45:50 2022&quot;</code></pre>
+<pre><code>[1] &quot;Fri Jan 28 13:15:32 2022&quot;</code></pre>
 </div>

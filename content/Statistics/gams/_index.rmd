@@ -18,12 +18,12 @@ Let's start with a famous [tweet](https://twitter.com/ucfagls/status/84244468651
 4. use ```method = "REML"```  
 5. always look at ```gam.check()```  
 
-This is basically all there is too it - an extension of [generalised linear models (GLMs)](http://environmentalcomputing.net/generalised-linear-models/) with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say ```lmer``` or ```glmer```, but we use them all the time without reservation! 
+This is basically all there is too it - an extension of [generalised linear models (GLMs)](/../generalised-linear-models/) with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say ```lmer``` or ```glmer```, but we use them all the time without reservation! 
   
 
 ### GAMs in a nutshell
  
-Let's start with an equation for a Gaussian [linear model](http://environmentalcomputing.net/linear-regression/):
+Let's start with an equation for a Gaussian [linear model](/../linear-regression/):
 $$y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
 What changes in a GAM is the presence of a smoothing term:
 $$y = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
@@ -190,7 +190,7 @@ Not so scary huh? Of course this is not quite the whole story - see ```gam.model
 
 We'll now look at a quick real example - we'll just scratch the surface, and in a future We'll now look at a quick real example - we'll just scratch the surface, and in a future tutorial we will look at it in more detail. We're going to look at some CO$_2$ data from Manua Loa. We will fit a couple GAMs to the data to try and pick apart the intra- and inter-annual trends.
 
-First load the data - you can download it [here](http://environmentalcomputing.net/wp-content/uploads/2017/10/manua_loa_co2.csv).
+First load the data - you can download it [here](/../wp-content/uploads/2017/10/manua_loa_co2.csv).
 ```{r}
 CO2 <- read.csv("mauna_loa_co2.csv")
 ```

@@ -10,7 +10,7 @@ Paired *t*-tests are used to compare the means of two groups of measurements whe
 
 For example, to contrast the photosynthetic performance of ten plants in two environments in a greenhouse (shady and sunny), we could measure performance in each individual plant twice, once in the shade and once in the sun. The measures are paired by belonging to the same individual plant.
 
-For this experimental design, we would use a paired *t*-test to compare the measurements taken in the two environments. The 20 individual measurements are not independent of each other because we would expect the pair of measurements taken from the same individual to be more similar to each other than if randomly sampled from all available plants. We are thus unable to use an [independent samples *t* test](http://environmentalcomputing.net/two-sample-t-test/) - that test would be appropriate if each plant was used only once, with some plants measured in the shady treatment and different set of plants measured in the sunny treatment.
+For this experimental design, we would use a paired *t*-test to compare the measurements taken in the two environments. The 20 individual measurements are not independent of each other because we would expect the pair of measurements taken from the same individual to be more similar to each other than if randomly sampled from all available plants. We are thus unable to use an [independent samples *t* test](/../two-sample-t-test/) - that test would be appropriate if each plant was used only once, with some plants measured in the shady treatment and different set of plants measured in the sunny treatment.
 
 Pairing data like this is usually done to reduce the likely variation among measurements with the aim of better detecting differences between groups. In this example, the difference between the two measures of photosynthetic performance on a given plant should reflect mostly the effect of sunlight, while in an independent samples design, the difference between a plant in the shade and another plant in the sun will reflect both differences in the effects of sunlight and differences between the individual plants.
 
@@ -20,7 +20,7 @@ $$t = \frac{\bar{d}}{SE_{d}}$$
 
 Where the $\bar{d}$ is the mean of the differences between values for each pair, and *SE<sub>d</sub>* is the standard error of that set of differences.
 
-Note that this equation is identical to a [One sample *t*-test](http://environmentalcomputing.net/one-sample-t-test/), used to contrast any sample mean ($\bar{x}$) to a known population mean ($\mu$) or hypothesised value. What you are doing here is testing whether your sample of differences is likely to have come from a population of differences that have a mean of zero (another way of saying that your groups are the same).
+Note that this equation is identical to a [One sample *t*-test](/../one-sample-t-test/), used to contrast any sample mean ($\bar{x}$) to a known population mean ($\mu$) or hypothesised value. What you are doing here is testing whether your sample of differences is likely to have come from a population of differences that have a mean of zero (another way of saying that your groups are the same).
 
 $$t = \frac{\bar{x}-\mu}{SE}$$
   
@@ -45,7 +45,7 @@ where *my_sample1* and *my_sample2* are vectors containing the measurements from
 
 Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, `y ~ x`, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).
 
-Download a sample data set in this format, [Greenhouse.csv](http://environmentalcomputing.net/wp-content/uploads/2016/05/Greenhouse.csv/), and import into R
+Download a sample data set in this format, [Greenhouse.csv](/../wp-content/uploads/2016/05/Greenhouse.csv/), and import into R
 
 ```{r,eval=FALSE}
 Greenhouse = read.csv(file = "Greenhouse.csv", header = TRUE)

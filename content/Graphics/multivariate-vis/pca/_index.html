@@ -19,7 +19,7 @@ editor_options:
 <p>It is highly likely that there are strong relationships between variables in our example data set (e.g., leaf length vs total length). This means that the principal components are likely to explain a fair bit of the variation (imagine fitting a straight line along a sausage-shaped collection of points in multivariate space). If all variables were completely uncorrelated with each other, then PCA is not going to work very well (imagine trying to fit a line of best best fit a ball-shaped collection of points in multivariate space).</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p>Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, <a href="http://environmentalcomputing.net/wp-content/uploads/2016/05/Leafshape.csv">Leafshape.csv.</a>, and import into R to see the required format.</p>
+<p>Your data should be formatted with variables as columns and observations as rows. Download the sample leaf shape data set, <a href="/../wp-content/uploads/2016/05/Leafshape.csv">Leafshape.csv.</a>, and import into R to see the required format.</p>
 <pre class="r"><code>Leaf_shape &lt;- read.csv(file = &quot;Leafshape.csv&quot;, header = TRUE)</code></pre>
 <p>The first column is a categorical variable that labels the leaves by species (A or B). We need to extract that to a new object (Species) that we can use later for plotting, and make a new data frame (Leaf_data) with just the variables to be analysed by PCA (columns 2-6).</p>
 <pre class="r"><code>Species &lt;- Leaf_shape$Species
@@ -95,5 +95,5 @@ McKillup, S (2012) <em>Statistics explained. An introductory guide for life scie
 </p>
 <p><strong>Author</strong>: Andrew Letten</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:46:01 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 13:15:40 2022&quot;</code></pre>
 </div>

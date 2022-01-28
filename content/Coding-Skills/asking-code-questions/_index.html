@@ -58,19 +58,19 @@ df</code></pre>
 <pre class="r"><code>data &lt;- sample(10)
 
 data</code></pre>
-<pre><code>##  [1]  5  9  4  2  6  1  3  8 10  7</code></pre>
+<pre><code>##  [1]  1  9  7  4  5 10  6  8  3  2</code></pre>
 <p>Or, 10 random numbers with replacement:</p>
 <pre class="r"><code>data &lt;- sample(10, replace=TRUE)
 
 data</code></pre>
-<pre><code>##  [1]  2 10  2  2  6  3  6  1  9  4</code></pre>
+<pre><code>##  [1] 10 10  6  2  5  2  1  4  1  8</code></pre>
 <p>You can create a vector and then sample from it:</p>
 <pre class="r"><code>factor &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
 
 data &lt;- sample(factor, replace=TRUE)
 
 data</code></pre>
-<pre><code>## [1] &quot;c&quot; &quot;a&quot; &quot;b&quot; &quot;e&quot; &quot;b&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;e&quot; &quot;b&quot; &quot;e&quot;</code></pre>
 <p>You can also sample n number of times, making it a very convenient function. For example, draw from the four suits of cards, 100 times:</p>
 <pre class="r"><code>suits &lt;- c(&quot;Hearts&quot;, &quot;Spades&quot;, &quot;Clubs&quot;, &quot;Hearts&quot;)
 
@@ -86,7 +86,7 @@ cards &lt;- sample(suits, size=100, replace=TRUE)</code></pre>
 <pre class="r"><code>data &lt;- runif(100)
 
 head(data)</code></pre>
-<pre><code>## [1] 0.9001339 0.8128242 0.4656912 0.1629917 0.8708902 0.2274553</code></pre>
+<pre><code>## [1] 0.5244245 0.2363948 0.4942155 0.7017063 0.5051335 0.8739121</code></pre>
 <p>Similarly to above, <code>runif</code> draws from a distribution with min=0 and max=1. We can change this to whatever we want. For example, to get 100 random numbers between -10 and 5:</p>
 <pre class="r"><code>data &lt;- runif(100, min=-10, max=-5)</code></pre>
 <p>Luckily, R has just about every distribution built in to draw from. This is really helpful if you are theorizing data before you start collection of data! A comprehensive list is <a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html">here</a>.</p>
@@ -205,5 +205,5 @@ dput(tmp)</code></pre>
 <p>There is more help on the web for making reproducible examples. For instance, see <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">here</a>, <a href="http://clayford.github.io/dwir/dwr_12_generating_data.html">here</a>, <a href="http://adv-r.had.co.nz/Reproducibility.html">here</a>, or <a href="https://www.r-bloggers.com/minimal-reproducible-examples/">here</a>.</p>
 <p><strong>Author</strong>: Corey T. Callaghan</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Tue Jan 25 09:37:24 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 13:21:56 2022&quot;</code></pre>
 </div>

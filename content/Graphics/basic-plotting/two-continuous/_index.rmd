@@ -9,7 +9,7 @@ Visualising the relationship between two continuous variables is one of the most
 ![](Two_continuous_variables_image.jpg)
   
 
-For this worked example, download a data set on plant heights around the world, [Plant_height.csv](/../wp-content/uploads/2016/05/Plant_height.csv), and import into R.
+For this worked example, download a data set on plant heights around the world, [Plant_height.csv](/datasets/Plant_height.csv), and import into R.
 
 ```{r}
 Plant_height <- read.csv(file = "Plant_height.csv", header = TRUE)

@@ -32,7 +32,7 @@ where *MS* are the mean squares, a measure of variation. The probability of obta
 
 ### Running the analysis
  
-The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, *y*, and a corresponding column for the categorical variable, *x*. Download the sample data set for the turtle hatching example, [Turtles.csv](/../wp-content/uploads/2016/05/Turtles.csv), import into R and check that temperature variable is a factor with the `str` function.
+The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, *y*, and a corresponding column for the categorical variable, *x*. Download the sample data set for the turtle hatching example, [Turtles.csv](/datasets/Turtles.csv), import into R and check that temperature variable is a factor with the `str` function.
 
 ```{r,eval=FALSE}
 Turtles = read.csv(file = "Turtles.csv",header=TRUE)

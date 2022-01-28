@@ -52,7 +52,7 @@ library(lme4)
 
 We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data is continuous. Later on in [Mixed models 3](/../mixed-models-3/), we'll model counts as discrete using Generalised linear mixed models (GLMMs). 
 
-Download the sample data set, [Estuaries.csv](/../wp-content/uploads/2016/05/Estuaries.csv), and load into R.
+Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
 
 ```{r}
 Estuaries = read.csv("Estuaries.csv", header = T)

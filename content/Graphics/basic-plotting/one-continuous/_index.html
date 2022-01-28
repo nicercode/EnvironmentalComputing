@@ -13,7 +13,7 @@ output: html_document
 <div id="frequency-histograms" class="section level3">
 <h3>Frequency histograms</h3>
 <p>Frequency histograms plot how often the values of a continuous variable fall into certain ranges. They are an effective way to visualise the range of values obtained and the distribution of your data (i.e. is it symmetrical or skewed?).</p>
-<p>Firstly, download the sample data set, <a href="/../wp-content/uploads/2016/05/Estuary_fish.csv">Estuary_fish.csv</a>, and import into R.</p>
+<p>Firstly, download the sample data set, <a href="/datasets/Estuary_fish.csv">Estuary_fish.csv</a>, and import into R.</p>
 <pre class="r"><code>Fish &lt;- read.csv(file = &quot;Estuary_fish.csv&quot;)</code></pre>
 <p>A frequency histogram of the variable Length from the data frame Fish is easily produced with the <code>hist</code> function.</p>
 <pre class="r"><code>hist(Fish$Length)</code></pre>
@@ -62,5 +62,5 @@ boxplot(Fish$Length, xlab=&#39;Fish length (cm)&#39;, main=&#39;Box plot of fish
 <p>Type <code>?hist</code> and <code>?boxplot</code> to get the R help for these functions.</p>
 <p><strong>Author</strong>: Stephanie Brodie</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:14:38 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:49:55 2022&quot;</code></pre>
 </div>

@@ -40,7 +40,7 @@ Note: link functions `g()` are an important part of fitting GLM's, but beyond th
  
 First, we will show you how to fit a model to binomial data, i.e., presence/absence data or data as 0/1. Fitting GLM's uses very similar syntax to fitting linear models. We use the `glm` function instead of `lm`. We also need to add a `?family` argument to specify whether your data are counts, binomial etc.
 
-For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](/../wp-content/uploads/2016/05/Crabs.csv) and import into R.
+For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](/datasets/Crabs.csv) and import into R.
 
 ```{r}
 Crab_PA = read.csv("Crabs.csv", header = T)

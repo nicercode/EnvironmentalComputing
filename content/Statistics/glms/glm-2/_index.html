@@ -13,7 +13,7 @@ output: html_document
 <h3>Running the analysis</h3>
 <p><img src="GLM2_counts_image.jpg" /></p>
 <p>For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.</p>
-<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Revegetation.csv">Revegetation.csv</a>, and import into R to see how the data are arranged:</p>
+<p>Download the sample data set, <a href="/datasets/Revegetation.csv">Revegetation.csv</a>, and import into R to see how the data are arranged:</p>
 <pre class="r"><code>Reveg = read.csv(&quot;Revegetation.csv&quot;, header = T)</code></pre>
 <p>If you view the frequency histogram of the slug counts, you will see that it is very skewed, with many small values and few large counts (the variable name, Soleolifera, is the order name of terrestrial slugs).</p>
 <pre class="r"><code>hist(Reveg$Soleolifera)</code></pre>
@@ -54,7 +54,7 @@ ft.sol.pois = manyglm(Soleolifera~Treatment, family=&quot;poisson&quot;, data=Re
 ## Multivariate test:
 ##             Res.Df Df.diff   Dev Pr(&gt;Dev)   
 ## (Intercept)     48                          
-## Treatment       47       1 10.52    0.004 **
+## Treatment       47       1 10.52    0.002 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Arguments: P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
@@ -62,7 +62,7 @@ ft.sol.pois = manyglm(Soleolifera~Treatment, family=&quot;poisson&quot;, data=Re
 <pre><code>## 
 ## Test statistics:
 ##                      wald value Pr(&gt;wald)    
-## (Intercept)               1.502     0.026 *  
+## (Intercept)               1.502     0.015 *  
 ## TreatmentRevegetated      3.307     0.001 ***
 ## --- 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
@@ -101,5 +101,5 @@ Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Spring
 <p>More advice on <a href="/../interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:16:19 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:45:02 2022&quot;</code></pre>
 </div>

@@ -43,7 +43,7 @@ First, load the package:
 library(lme4)
 ```
 
-Download the sample data set, [Estuaries.csv](/../wp-content/uploads/2016/05/Estuaries.csv), and load into R.
+Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
 
 ```{r,warning=FALSE,message=FALSE}
 Estuaries <- read.csv("Estuaries.csv", header = T)

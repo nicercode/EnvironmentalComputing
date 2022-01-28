@@ -21,7 +21,7 @@ output: html_document
 <p>where <em>MS</em> are the mean squares, a measure of variation. The probability of obtaining the observed value of <em>F</em> is calculated from the known probability distribution of <em>F</em>, with two degrees of freedom (one for the numerator = the number of levels -1) and one for the denominator (number of replicates per level - 1 x number of levels).</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p>The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, <em>y</em>, and a corresponding column for the categorical variable, <em>x</em>. Download the sample data set for the turtle hatching example, <a href="/../wp-content/uploads/2016/05/Turtles.csv">Turtles.csv</a>, import into R and check that temperature variable is a factor with the <code>str</code> function.</p>
+<p>The data should be formatted such that the individual replicates are rows and the variables are separate columns. Include a column for the dependent variable, <em>y</em>, and a corresponding column for the categorical variable, <em>x</em>. Download the sample data set for the turtle hatching example, <a href="/datasets/Turtles.csv">Turtles.csv</a>, import into R and check that temperature variable is a factor with the <code>str</code> function.</p>
 <pre class="r"><code>Turtles = read.csv(file = &quot;Turtles.csv&quot;,header=TRUE)
 str(Turtles)</code></pre>
 <p>In this case, because we have numbers for the four levels of the Temperature treatment, we need to change that variable to become a factor rather than an integer.</p>
@@ -120,5 +120,5 @@ Underood, AJ (1997) <em>Experiments in ecology: Their logical design and interpr
 </p>
 <p><strong>Author</strong>: James Lavender</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:16:34 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:45:12 2022&quot;</code></pre>
 </div>

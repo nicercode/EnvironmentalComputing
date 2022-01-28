@@ -9,7 +9,7 @@ output: html_document
 
 <p>Visualising the relationship between two continuous variables is one of the most commonly used graphical techniques in the sciences. This page details how to produce simple scatterplots to display how one continuous variable is related to another.</p>
 <p><img src="Two_continuous_variables_image.jpg" /></p>
-<p>For this worked example, download a data set on plant heights around the world, <a href="/../wp-content/uploads/2016/05/Plant_height.csv">Plant_height.csv</a>, and import into R.</p>
+<p>For this worked example, download a data set on plant heights around the world, <a href="/datasets/Plant_height.csv">Plant_height.csv</a>, and import into R.</p>
 <pre class="r"><code>Plant_height &lt;- read.csv(file = &quot;Plant_height.csv&quot;, header = TRUE)</code></pre>
 <p>###Scatterplots###</p>
 <p>To visualise how plant height varies with temperature, we can use a simple scatterplot, using the <code>plot</code> function. Place the Y variable on the left of the tilde (~) and the X variable on the right. The <code>data=Plant_height</code> argument tells R to look in the data frame Plant_height for those two variables.</p>
@@ -51,5 +51,5 @@ abline(lm(loght ~ temp, data = Plant_height))</code></pre>
 <p>Type <code>?plot</code> and <code>?abline</code> to get the R help for these functions.</p>
 <p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:14:41 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Fri Jan 28 14:43:45 2022&quot;</code></pre>
 </div>

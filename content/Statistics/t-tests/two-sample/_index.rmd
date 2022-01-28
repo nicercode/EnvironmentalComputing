@@ -41,7 +41,7 @@ where *my_sample1* and *my_sample2* are vectors containing the measurements from
 
 More commonly, we would use a data frame with the response and predictor variables as separate columns. You can then use a formula statement, `y ~ x`, to specify the response and predictor variables rather than the code above. Consider the simple example where you wanted to compare the pH of two rivers. Ten replicate pH measures were taken from each river.
 
-Download the sample data set, [River_pH.csv](/../wp-content/uploads/2016/05/River_pH.csv), and import into R.
+Download the sample data set, [River_pH.csv](/datasets/River_pH.csv), and import into R.
 
 ```{r,eval=FALSE}
 River_pH = read.csv(file = "River_pH.csv", header = TRUE)

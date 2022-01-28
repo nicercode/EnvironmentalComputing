@@ -12,7 +12,7 @@ These sorts of plots are very commonly used in the biological, earth and environ
 
 We will use sample data from an experiment that contrasted the metabolic rate of two species of prawns and introduce two commonly used types of plots for this purpose: boxplots and bar plots.
 
-Firstly, download the sample data file, [Prawns_MR.csv](/../wp-content/uploads/2016/05/Prawns_MR.csv), and import into R.
+Firstly, download the sample data file, [Prawns_MR.csv](/datasets/Prawns_MR.csv), and import into R.
 
 ```{r}
 Prawns <- read.csv(file = "Prawns_MR.csv")

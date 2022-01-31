@@ -149,7 +149,6 @@ Type `?aov` or `?lm` to get the R help for these functions.
 
 **Author**: James Lavender
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

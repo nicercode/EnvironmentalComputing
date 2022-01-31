@@ -70,8 +70,7 @@ A useful cheat sheet on commonly used functions can be downloaded [here](https:/
 
 **Author**: Alistair Poore (small edits by Will Cornwell)
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 

@@ -104,7 +104,6 @@ Type `?t.test` to get the R help for this function.
 
 **Author**: Alistair Poore
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

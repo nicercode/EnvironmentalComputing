@@ -195,7 +195,6 @@ You can type `?lmer` into R for help with these functions.
 
 **Author**: Gordana Popovic
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

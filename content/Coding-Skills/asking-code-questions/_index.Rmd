@@ -265,8 +265,7 @@ There is more help on the web for making reproducible examples. For instance, se
 
 **Author**: Corey T. Callaghan
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2017
+
+**Last updated:** `r date()`
 

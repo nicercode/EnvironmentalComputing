@@ -158,8 +158,7 @@ Note: In a model with multiple covariates, the same rules still apply in terms o
 
 **Author**: Gordana Popovic
  
-Last updated:
-```{r, echo = F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 

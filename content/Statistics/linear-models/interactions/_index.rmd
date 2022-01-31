@@ -150,8 +150,7 @@ In designs with categorical factors, post-hoc tests are commonly used to test wh
 
 **Author**: Alistair Poore
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 

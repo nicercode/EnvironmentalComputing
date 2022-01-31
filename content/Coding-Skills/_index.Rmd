@@ -19,7 +19,6 @@ On these pages, we give some advice for writing effective code and some of the v
 
 **Author**: Alistair Poore & Will Cornwell
 
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

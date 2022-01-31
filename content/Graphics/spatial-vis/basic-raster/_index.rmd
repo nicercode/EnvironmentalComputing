@@ -507,7 +507,6 @@ map(database = "world", col = "grey")
 
 **Author**: Mitchell Lyons
  
-Last updated:
-```{r, eval=TRUE, echo=F}
-format(Sys.time(), "%a %b %d %Y")
-```
+**Year:** 2017
+
+**Last updated:** `r date()`

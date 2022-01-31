@@ -121,7 +121,6 @@ You can access R help for the main functions used here by typing `?hclust`, `?di
 
 **Author**: Alistair Poore
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

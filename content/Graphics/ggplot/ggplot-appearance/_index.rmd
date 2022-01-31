@@ -294,7 +294,6 @@ A useful cheat sheet on commonly used functions can be downloaded [here](https:/
 
 **Author**: Fiona Robinson
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

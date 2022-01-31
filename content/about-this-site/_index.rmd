@@ -31,10 +31,9 @@ Resources were developed initially to assist with teaching quantitative skills t
 
 **Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Corey Callaghan, Will Cornwell, Kingsley Griffin, Matt Holland, James Lavender, Andrew Letten, Shinichi Nakagawa, Shaun Nielsen, Alistair Poore, Gordana Popovic, Fiona Robinson and Jakub Stoklosa.
 
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 
 
 ## Contributors

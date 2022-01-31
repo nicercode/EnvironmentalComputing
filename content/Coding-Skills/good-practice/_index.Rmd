@@ -24,7 +24,6 @@ If you have never made an R script, first read [Getting started with R](/../gett
  
 
 Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as `Data`, `R_scripts` or `Outputs`, how you manage your project directory is up to you.
-  
 
 **Data integrity.** Once data entry is completed and saved in your project directory (see [Data entry](/../getting-started-with-r/data-entry/), this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset. 
   
@@ -45,7 +44,7 @@ Firstly, all scripts should start with  a title,  author details, a brief descri
 # Copyright statement: This script is the product of UNSW etc.
 ```
 
-All comments need to start with # to distinguish them from executable code.
+All comments need to start with `#` to distinguish them from executable code.
 
 You should then include some code that will set your working directory and import your data. Ideally, setting your working directory as your project directory. 
 
@@ -356,7 +355,6 @@ You may now be thinking about all the scripts that you have made that need to be
 
 **Author**: Keryn F Bain
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2017
+
+**Last updated:** `r date()`

@@ -137,8 +137,7 @@ More advice on [interpreting coefficients in glms](/statistics/glms/interpret-gl
 
 **Author**: Gordana Popovic
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 

@@ -69,7 +69,6 @@ Our introduction to [version control](/coding-skills/version-control/) for keepi
 
 **Author**: Alistair Poore & Will Cornwell
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

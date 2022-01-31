@@ -120,7 +120,6 @@ More advice on [interpreting coefficients in linear models](/statistics/glms/int
 
 **Author**: Andrew Letten
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

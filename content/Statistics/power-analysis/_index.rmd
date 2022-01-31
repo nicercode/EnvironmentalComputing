@@ -237,9 +237,8 @@ More on [specifying effect size](http://www.statmethods.net/stats/power.html)
 
 **Author**: Gordana Popovic
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 
 

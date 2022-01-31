@@ -156,7 +156,6 @@ This tutorial was based on the excellent [Data wrangling with dplyr and tidyr ch
 
 **Author**: Rachel V. Blakey
 
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

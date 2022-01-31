@@ -103,8 +103,7 @@ Type `?hist` and `?boxplot` to get the R help for these functions.
 
 **Author**: Stephanie Brodie
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 

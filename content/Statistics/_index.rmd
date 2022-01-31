@@ -51,7 +51,6 @@ Some simple [hypothesis tests](t-tests) with the *t* statistic:
 * [Meta-analyses 3](meta-analyses/meta-analyses-3): More complex models 
 
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

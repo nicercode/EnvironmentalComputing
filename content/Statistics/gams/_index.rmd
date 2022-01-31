@@ -293,7 +293,6 @@ A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/
  
 **Author**: Mitchell Lyons
  
-Last updated:
-```{r, eval=TRUE, echo=F}
-format(Sys.time(), "%a %b %d %Y")
-```
+**Year:** 2017
+
+**Last updated:** `r date()`

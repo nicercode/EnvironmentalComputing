@@ -8,7 +8,7 @@ output: html_document
 
 
 <p>In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.</p>
-<p>For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for <a href="/../generalised-linear-models-1/">binary</a> and <a href="/../generalised-linear-models-1/">count</a> data page on <a href="/../how-to-interpret-linear-models/">interpreting coefficients in linear models</a>.</p>
+<p>For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for <a href="/../statistics/glm-1/">binary</a> and <a href="/../statistics/glm-2/">count</a> data page on <a href="/../statistics/interpret-glm-coeffs/">interpreting coefficients in linear models</a>.</p>
 <div id="poisson-and-negative-binomial-glms" class="section level3">
 <h3>Poisson and negative binomial GLMs</h3>
 <p>In Poisson and negative binomial glms, we use a log link. The actual model we fit with one covariate <span class="math inline">\(x\)</span> looks like this</p>
@@ -28,10 +28,10 @@ Y &lt;- rpois(N, lambda = mu)
 glm1 &lt;- glm(Y~x, family = poisson)
 glm1$coefficients</code></pre>
 <pre><code>## (Intercept)           x 
-##   0.9567377   0.2682353</code></pre>
+##   0.9735358   0.2085838</code></pre>
 <pre class="r"><code>exp(glm1$coefficients[2])</code></pre>
 <pre><code>##        x 
-## 1.307655</code></pre>
+## 1.231932</code></pre>
 <p>So here increasing <span class="math inline">\(x\)</span> by 1 unit multiplies the mean value of Y by <span class="math inline">\(exp( \beta_1 ) = 1.25\)</span>. The same thing is true for negative binomial glms as they have the same link function.</p>
 </div>
 <div id="binomial-glms" class="section level3">
@@ -52,23 +52,23 @@ summary(bin1)</code></pre>
 ## glm(formula = bY ~ x, family = binomial)
 ## 
 ## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -3.07020   0.09264   0.18597   0.35531   1.32812  
+##     Min       1Q   Median       3Q      Max  
+## -2.5775   0.3422   0.3631   0.3868   0.4631  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)   3.6421     0.7115   5.119 3.08e-07 ***
-## x             1.7026     0.5241   3.249  0.00116 ** 
+## (Intercept)   2.6720     0.3777   7.075 1.49e-12 ***
+## x             0.2145     0.3784   0.567    0.571    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 63.932  on 119  degrees of freedom
-## Residual deviance: 47.147  on 118  degrees of freedom
-## AIC: 51.147
+##     Null deviance: 58.783  on 119  degrees of freedom
+## Residual deviance: 58.459  on 118  degrees of freedom
+## AIC: 62.459
 ## 
-## Number of Fisher Scoring iterations: 7</code></pre>
+## Number of Fisher Scoring iterations: 5</code></pre>
 <p>So when we increase <span class="math inline">\(x\)</span> by one unit, the odds of Y are multiplied by <span class="math inline">\(exp( \beta_1 ) = 2.11\)</span></p>
 </div>
 <div id="complementary-log-log" class="section level4">
@@ -80,9 +80,9 @@ summary(bin1)</code></pre>
 <pre class="r"><code>library(mvabund)
 bin2 &lt;- manyglm(bY~x, family = binomial(link = &quot;cloglog&quot;))
 coef(bin2)</code></pre>
-<pre><code>##                   bY
-## (Intercept) 1.215546
-## x           0.561317</code></pre>
+<pre><code>##                     bY
+## (Intercept) 1.00248876
+## x           0.05500261</code></pre>
 <p>The interpretation is now the same as in the Poisson case, when we increase <span class="math inline">\(x\)</span> by 1, the mean of the underlying count is multiplied by <span class="math inline">\(exp( \beta_1 )\)</span>.</p>
 </div>
 <div id="log-binomial-model" class="section level4">
@@ -108,23 +108,21 @@ summary(off_mod)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.4191  -1.1170  -0.2555   0.6552   2.8786  
+## -2.3752  -0.9479  -0.3916   0.5782   3.1473  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)  
-## (Intercept)  0.11093    0.05516   2.011   0.0443 *
-## depth       -0.01407    0.05092  -0.276   0.7822  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)  0.07432    0.05628   1.321    0.187
+## depth        0.04629    0.05708   0.811    0.417
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 158.20  on 119  degrees of freedom
-## Residual deviance: 158.13  on 118  degrees of freedom
-## AIC: 476.05
+##     Null deviance: 168.10  on 119  degrees of freedom
+## Residual deviance: 167.44  on 118  degrees of freedom
+## AIC: 482.97
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<p>If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations <a href="/../how-to-interpret-linear-models/">here</a>. The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you’re not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response.</p>
+<p>If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations <a href="/../statistics/how-to-interpret-linear-models/">here</a>. The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you’re not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response.</p>
 <pre class="r"><code>coef_mod &lt;- glm(Y~depth+log(soil), family = poisson)
 summary(coef_mod)</code></pre>
 <pre><code>## 
@@ -133,23 +131,25 @@ summary(coef_mod)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.3795  -1.1643  -0.3734   0.6819   2.9173  
+## -2.4449  -1.0564  -0.3057   0.6710   2.7099  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)
-## (Intercept)  0.58542    0.57495   1.018    0.309
-## depth       -0.01132    0.05080  -0.223    0.824
-## log(soil)    0.47228    0.63786   0.740    0.459
+##             Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept)  1.54499    0.47628   3.244  0.00118 **
+## depth        0.04621    0.05754   0.803  0.42195   
+## log(soil)   -0.63572    0.53101  -1.197  0.23123   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 158.04  on 119  degrees of freedom
-## Residual deviance: 157.46  on 117  degrees of freedom
-## AIC: 477.38
+##     Null deviance: 160.68  on 119  degrees of freedom
+## Residual deviance: 158.65  on 117  degrees of freedom
+## AIC: 476.17
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>The coefficient the model estimated is close to 1, which would be equivalent to an offset.</p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:16:22 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Jan 31 13:30:53 2022&quot;</code></pre>
 </div>

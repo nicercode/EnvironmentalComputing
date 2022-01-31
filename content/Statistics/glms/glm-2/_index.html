@@ -8,7 +8,7 @@ output: html_document
 
 
 <p><strong>Count data</strong></p>
-<p>This is a continuation of <a href="/../generalised-linear-models-1/">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.</p>
+<p>This is a continuation of <a href="/../statistics/glms/glm-1">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p><img src="GLM2_counts_image.jpg" /></p>
@@ -62,7 +62,7 @@ ft.sol.pois = manyglm(Soleolifera~Treatment, family=&quot;poisson&quot;, data=Re
 <pre><code>## 
 ## Test statistics:
 ##                      wald value Pr(&gt;wald)    
-## (Intercept)               1.502     0.015 *  
+## (Intercept)               1.502     0.025 *  
 ## TreatmentRevegetated      3.307     0.001 ***
 ## --- 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
@@ -101,5 +101,5 @@ Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Spring
 <p>More advice on <a href="/../interpreting-coefficients-in-glms/">interpreting coefficients in glms</a></p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 14:45:02 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Jan 31 13:34:45 2022&quot;</code></pre>
 </div>

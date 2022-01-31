@@ -5,7 +5,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-First read our [introduction to meta analysis](/../meta-analysis-1) and become familiar with [commonly used statistical models for meta-analysis](/../meta-analysis-2). Now, we consider more complex models.
+First read our [introduction to meta analysis](/../statistics/meta-analysis/meta-analysis-1) and become familiar with [commonly used statistical models for meta-analysis](/../statistics/meta-analysis/meta-analysis-2). Now, we consider more complex models.
 
 ### More complex models
 

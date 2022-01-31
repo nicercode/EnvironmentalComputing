@@ -153,7 +153,7 @@ confint(cont)
 Note: In a model with multiple covariates, the same rules still apply in terms of conditional and marginal interpretations of coefficients.
   
 
-**Interpreting coefficients in generalised linear models** In linear models, the interpretation of model parameters is linear, as discussed above. For generalised linear models, now read the tutorial page on [interpreting coefficients in those models](/../interpreting-coefficients-in-glms/).
+**Interpreting coefficients in generalised linear models** In linear models, the interpretation of model parameters is linear, as discussed above. For generalised linear models, now read the tutorial page on [interpreting coefficients in those models](/../statistics/glms/interpret-glm-coeffs/).
   
 
 **Author**: Gordana Popovic

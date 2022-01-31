@@ -15,7 +15,7 @@ Many commonly used analyses for multivariate data sets (e.g. PERMANOVA, ANOSIM, 
 
 There are a couple of problems with these kinds of analysis. First, their statistical power is very low, except for variables with high variance. This means that for variables which are less variable, the analyses are less likely to detect a treatment effect. Second, they do not account for a very important property of multivariate data, which is the mean-variance relationship. Typically, in multivariate datasets like species-abundance data sets, counts for rare species will have many zeros with little variance, and the higher counts for more abundant species will be more variable.
 
-The mvabund approach improves power across a range of species with different variances and includes an assumption of a mean-variance relationship. It does this by fitting a single [generalised linear model](/../generalised-linear-models/) (GLM) to each  response variable with a common set of predictor variables. We can then use resampling to test for significant community level or species level responses to our predictors.
+The mvabund approach improves power across a range of species with different variances and includes an assumption of a mean-variance relationship. It does this by fitting a single [generalised linear model](/../statistics/glms/) (GLM) to each  response variable with a common set of predictor variables. We can then use resampling to test for significant community level or species level responses to our predictors.
 
 Also, the model-based framework makes it easier to check our assumptions and interpret uncertainty around our findings.    
 
@@ -27,7 +27,7 @@ In this example, we use a data set where researchers wanted to contrast the spec
 
 ![](MDS_image.jpg)
 
-We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](/../multidimensional-scaling/) example) or test hypotheses about groups of samples by resampling these differences. 
+We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](/../statistics/mvabundmultidimensional-scaling/) example) or test hypotheses about groups of samples by resampling these differences. 
 
 Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models. 
   

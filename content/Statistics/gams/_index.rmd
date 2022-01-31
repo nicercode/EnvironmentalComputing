@@ -18,12 +18,12 @@ Let's start with a famous [tweet](https://twitter.com/ucfagls/status/84244468651
 4. use ```method = "REML"```  
 5. always look at ```gam.check()```  
 
-This is basically all there is too it - an extension of [generalised linear models (GLMs)](/../generalised-linear-models/) with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say ```lmer``` or ```glmer```, but we use them all the time without reservation! 
+This is basically all there is too it - an extension of [generalised linear models (GLMs)](/../statistics/glms/) with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say ```lmer``` or ```glmer```, but we use them all the time without reservation! 
   
 
 ### GAMs in a nutshell
  
-Let's start with an equation for a Gaussian [linear model](/../linear-regression/):
+Let's start with an equation for a Gaussian [linear model](/../statistics/linear-models/linear-regression/):
 $$y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
 What changes in a GAM is the presence of a smoothing term:
 $$y = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$

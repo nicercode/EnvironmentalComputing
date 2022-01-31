@@ -6,7 +6,7 @@
    chunk_output_type: console
 ---
 
-First read our [introduction to meta analysis](/../meta-analysis) with instructions for calculating effect sizes. Now, we consider the statistical models to estimate mean effect sizes and the influence of moderator variables.
+First read our [introduction to meta analysis](/../statistics/meta-analysis/meta-analysis-1) with instructions for calculating effect sizes. Now, we consider the statistical models to estimate mean effect sizes and the influence of moderator variables.
 
 ### Fixed-effect and random-effects models
 
@@ -176,7 +176,7 @@ Actually, this point estimate is the exactly the same as that of the common-effe
 
 This model is based on the paper by Henmi and Copas (2010). Although it is more robust to publication bias, I do not know any meta-analyses in the field of ecology and evolution, which uses this model. Probably we should be using this model rather than a random-effect model? I think so - let's call this model the 'robust' model. I think we should use this robust model for meta-regression too. I acknowledge Wolfgang telling me about this model to me.  
 
-If you are happy with all this, move on the [more complex models](/../meta-analysis-3)
+If you are happy with all this, move on the [more complex models](/../statistics/meta-analysis/meta-analysis-3)
 
 ### Further help (references)
 

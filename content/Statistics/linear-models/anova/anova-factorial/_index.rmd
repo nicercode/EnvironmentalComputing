@@ -4,7 +4,7 @@ title: "Factorial ANOVA"
 output: html_document
 ---
 
-Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. Here, we will consider designs with two or more factors that are both applied to the experimental units (read the [single factor ANOVA](/../analysis-variance-single-factor/) page first if you are unfamiliar with ANOVA).
+Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. Here, we will consider designs with two or more factors that are both applied to the experimental units (read the [single factor ANOVA](/../statistics/anova/anova-single/) page first if you are unfamiliar with ANOVA).
 
 Frequently, we want to test for differences in a response variable due to two or more factors. These experimental or sampling designs allow us to test for the effects of each of these factors separately (termed *main effects*), and to test whether the two factors interact. For these designs, we use more complex versions of ANOVA than the most simple design that tests the effects of only one factor. 
 
@@ -102,7 +102,7 @@ In this example, there is strong evidence to reject all three null hypotheses:
 * that the vertical and horizontal orientations are equal (P < 0.001)  
 * that there is no interaction between copper and orientation (P < 0.001)
 
-A significant interaction means that the effect of one factor depends upon the other. In this example, it would mean that the effect of copper was not consistent between the vertical and horizontal habitats. Consequently, the interpretation of the main effects becomes more complex. See [Understanding interactions](/../?page_id=238&preview=true) for more help on interpreting interactions in linear models. A quick way to help you understand an interaction if you get one is to examine an interactions plot.
+A significant interaction means that the effect of one factor depends upon the other. In this example, it would mean that the effect of copper was not consistent between the vertical and horizontal habitats. Consequently, the interpretation of the main effects becomes more complex. See [Understanding interactions](/../statistics/interactions) for more help on interpreting interactions in linear models. A quick way to help you understand an interaction if you get one is to examine an interactions plot.
 
 ```{r}
 interaction.plot(Sessile$Copper, Sessile$Orientation, Sessile$Richness)
@@ -116,13 +116,13 @@ Here you can see that the effect of copper (a decline in species richness) is mo
 
 ### Assumptions to check
  
-The assumptions of factorial ANOVA's are the same as for all linear models including the simpler one-way ANOVA's (see [ANOVA: single factor](/../analysis-variance-single-factor/)), being independence, normality and homogeneity of variances. We also need to consider two new issues: 1) whether your factors are fixed or random, and 2) whether your sampling or experimental design is balanced (i.e., has the same number of replicates in each combination of treatments).
+The assumptions of factorial ANOVA's are the same as for all linear models including the simpler one-way ANOVA's (see [ANOVA: single factor](/../statistics/anova/anova-single/)), being independence, normality and homogeneity of variances. We also need to consider two new issues: 1) whether your factors are fixed or random, and 2) whether your sampling or experimental design is balanced (i.e., has the same number of replicates in each combination of treatments).
 
 **Fixed and random factors.** There is an important distinction between factors whose levels are the only ones of interest (termed fixed), and factors whose levels are a sampled from a larger collection of possible levels (termed random). For example, if we repeated the experiment above at three different sites in Sydney Harbour, chosen from many possible sites, we would consider site a random factor. We are not interested in those sites in particular, but would like to know if our experimental treatments were consistent across sites. On the other hand, if you were only interested in Darling Harbour and Circular Quay, then these two could be considered two levels of a fixed factor. Treating sites as a fixed factor in that case means that you conclusions should not be extrapolated to other possible sites, but restricted to those particular sites.
 
 Statistically, there is a big difference between a fixed factors were you have measured all possible levels of interest (e.g, control vs a single treatment) and random factors where the levels are sampled from all possible levels. In analysis of variance, all this matters because the *F* tests that are being used to test your hypotheses are constructed differently depending on which factors are fixed and random. In the example above, all factors were fixed and the denominator of all *F* tests was $MS_{within}$. In models with all factors random, and models with a mix of fixed and random factors (termed mixed effects models), other components of the variation are used as the denominators in the *F* tests.
 
-If you have random factors, you will need to read more than this help page to establish the correct *F* ratios for your design, and you may need to calculate them manually. Note that the code presented will give correct *F* tests only for designs with all factors fixed. You should also strongly consider analysing your data as a [mixed model](/../mixed-models/)
+If you have random factors, you will need to read more than this help page to establish the correct *F* ratios for your design, and you may need to calculate them manually. Note that the code presented will give correct *F* tests only for designs with all factors fixed. You should also strongly consider analysing your data as a [mixed model](/../statistics/mixed-models/)
 
 **Balanced and unbalanced designs.** Ideally, factorial ANOVA should be conducted with a balanced design - one with  the same number of replicates in each combination of factors. Balanced designs are less likely to be affected by minor deviations from the assumptions of normality and homogeneity of variance. Unfortunately, unbalanced designs where you have unequal numbers of replicates for each level are common in practice (e.g. bad weather prevented sampling the second site as intensively, volunteer lost the data sheet etc!).
 
@@ -138,7 +138,7 @@ hist(Sessile.aov$residuals)
 plot(Sessile.aov,which=2)
 ```
 
-Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](/../generalised-linear-models/).
+Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](/../statistics/glms/).
 
 **Homogeneity of variance.** The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the `aov` model object.
 
@@ -146,11 +146,11 @@ Violations of normality can be fixed via transformations or by using a different
 plot(Sessile.aov,which=1)
 ```
 
-Heterogeneous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the y axis for each of the levels on the x axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a  [generalised linear model (GLM)](/../generalised-linear-models/).
+Heterogeneous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the y axis for each of the levels on the x axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a  [generalised linear model (GLM)](/../statistics/glms/).
 
 **Independence.** ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the invertebrate samples measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with an additional factor of sampling time).
 
-There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed model](/../mixed-models/)
+There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed model](/../statistics/mixed-models/)
   
 
 ### Communicating the results

@@ -14,11 +14,11 @@ plot(loght ~ temp, data = Plant_height, col="darkgreen",xlab = "Temperature (C)"
 abline(model, col = "red")
 ```
 
-* [Linear regression](/../linear-regression/)
-* [Analysis of variance: single factor](/../analysis-variance-single-factor/)
-* [Analysis of variance: factorial](/../analysis-variance-factorial/)  
-* [Understanding interactions](/../understanding-interactions/)
-* [Interpreting coefficients in linear models](/../how-to-interpret-linear-models/)
+* [Linear regression](/../statistics/linear-models/linear-regression/)
+* [Analysis of variance: single factor](/../statistics/linear-models/anova/anova-single/)
+* [Analysis of variance: factorial](/../statistics/linear-models/anova/anova-factorial/)  
+* [Understanding interactions](/../statistics/interactions/)
+* [Interpreting coefficients in linear models](/../statistics/glms/interpret-glm-coeffs/)
 
   
 

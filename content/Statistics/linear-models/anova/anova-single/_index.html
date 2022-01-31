@@ -2,13 +2,14 @@
 weight: 1
 title: "Single Factor ANOVA"
 output: html_document
+aliases: /analysis-variance-single-factor/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable <em>y</em> across levels of one or more categorical independent variables <em>x</em>. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. In this module, we will start with the simplest design - those with a single factor.</p>
-<p>Where an independent samples <em>t</em>-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of &gt;2 group means, or when there are more than two or more predictor variables (see <a href="/../statistics/anova/anova-factorial/">ANOVA: factorial</a>). The logic of this test is essentially the same as the <em>t</em>-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.</p>
+<p>Where an independent samples <em>t</em>-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of &gt;2 group means, or when there are more than two or more predictor variables (see <a href="/statistics/anova/anova-factorial/">ANOVA: factorial</a>). The logic of this test is essentially the same as the <em>t</em>-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.</p>
 <p><img src="ANOVA_single_factor_image.png" /></p>
 <p>For example, to contrast the the hatching times of turtle eggs incubated at four different temperatures (15°C, 20°C, 25°C and 30°C), hatching time is the continuous response variable and temperature is the categorical predictor variable with with four levels. The null hypothesis would be that mean hatching time is equal for all temperatures (H<sub>o</sub>: <span class="math inline">\(\mu_{15} = \mu_{20} = \mu_{25} = \mu_{30}\)</span>).</p>
 <p>Note that an ANOVA is a linear model, just like linear regression except that the predictor variables are categorical rather than continuous.</p>
@@ -91,13 +92,13 @@ summary(Turtles.lm)</code></pre>
 hist(Turtles.aov$residuals)
 plot(Turtles.aov,which=2)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>Violations of normality can be fixed via transformations or by using a different error-distribution in a <a href="/../statistics/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
+<p>Violations of normality can be fixed via transformations or by using a different error-distribution in a <a href="/statistics/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
 <p><strong>Homogeneity of variance.</strong> The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the <code>aov</code> model object.</p>
 <pre class="r"><code>plot(Turtles.aov,which=1)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the <em>y</em> axis for each of the levels on the <em>x</em> axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="/../statistics/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
+<p>Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the <em>y</em> axis for each of the levels on the <em>x</em> axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="/statistics/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
 <p><strong>Independence.</strong> ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the turtle eggs measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with both temperature and time as factors).</p>
-<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="/../statistics/mixed-models-1/">mixed-model</a>.</p>
+<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="/statistics/mixed-models-1/">mixed-model</a>.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
@@ -120,5 +121,5 @@ Underood, AJ (1997) <em>Experiments in ecology: Their logical design and interpr
 </p>
 <p><strong>Author</strong>: James Lavender</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 13:38:28 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Jan 31 16:07:37 2022&quot;</code></pre>
 </div>

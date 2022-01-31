@@ -166,9 +166,9 @@ RStudio's [introduction to notebooks](http://rmarkdown.rstudio.com/r_notebooks.h
 
 RStudio's [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
-Nathan Stephen's [Why I love R notebooks](https://rviews.rstudio.com/2017/03/15/why-i-love-r-)
+Nathan Stephen's [Why I love R notebooks](https://rviews.rstudio.com/2017/03/15/why-i-love-r-notebooks/)
 
-Jonathan McPherson's [R Notebooks](https://blog.rstudio.com/2016/10/05/r-)
+Jonathan McPherson's [R Notebooks](https://www.rstudio.com/resources/webinars/introducing-notebooks/)
   
 
 **Author**: Alistair Poore

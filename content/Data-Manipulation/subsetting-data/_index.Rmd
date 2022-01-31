@@ -61,7 +61,7 @@ Bats$Site
 
 ![](Subsetting_data_image1.jpg)
 
-The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has many convenient functions for subsetting that can be more intuitive and quick for you. First, install then load the package:
+The package [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) has many convenient functions for subsetting that can be more intuitive and quick for you. First, install then load the package:
 
 ```{r, message=FALSE,warning =F}
 library(dplyr)

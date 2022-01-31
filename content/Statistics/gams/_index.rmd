@@ -190,7 +190,7 @@ Not so scary huh? Of course this is not quite the whole story - see ```gam.model
 
 We'll now look at a quick real example - we'll just scratch the surface, and in a future We'll now look at a quick real example - we'll just scratch the surface, and in a future tutorial we will look at it in more detail. We're going to look at some CO$_2$ data from Manua Loa. We will fit a couple GAMs to the data to try and pick apart the intra- and inter-annual trends.
 
-First load the data - you can download it [here](/datasets/manua_loa_co2.csv).
+First load the data - you can download it [here](/datasets/mauna_loa_co2.csv).
 ```{r}
 CO2 <- read.csv("mauna_loa_co2.csv")
 ```

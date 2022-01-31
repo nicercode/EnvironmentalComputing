@@ -2,6 +2,7 @@
 weight: 3
 title: "Nested ANOVA"
 output: html_document
+aliases: /analysis-variance-factorial/
 ---
 
 ### Usage

@@ -2,6 +2,7 @@
  weight: 2
  title: "Fixed-effect and Random-effect Models"
  output: html_document
+ aliases: /meta-analysis-2/
  editor_options:
    chunk_output_type: console
 ---

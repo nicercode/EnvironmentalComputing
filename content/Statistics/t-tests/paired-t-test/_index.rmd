@@ -2,6 +2,7 @@
 weight: 3
 title: "Paired T-test"
 output: html_document
+aliases: /paired-t-tests/
 ---
 
 Paired *t*-tests are used to compare the means of two groups of measurements when individual objects are measured twice, once for each type of measurement. Data could be paired in various ways: if the same measure is taken from a single object in two different treatments or at two different times, or if different types of measures are being contrasted from the same object.

@@ -37,7 +37,7 @@ plot(dend,ylab = "")
 
 R has a very wide range of functions and packages for visualising multivariate data. Here is some help for some of the more commonly used techniques:  
 
-* [multidimensional scaling](/../statistics/multidimensional-scaling/)  
-* [principal componenents analysis](/../statistics/principal-components-analysis/)  
-* [cluster analysis](/../statistics/cluster-analysis/)  
+* [multidimensional scaling](/statistics/multidimensional-scaling/)  
+* [principal componenents analysis](/statistics/principal-components-analysis/)  
+* [cluster analysis](/statistics/cluster-analysis/)  
 

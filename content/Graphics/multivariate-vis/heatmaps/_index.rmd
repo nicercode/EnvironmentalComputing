@@ -58,7 +58,7 @@ str(Bac.factors)
 
 ### Drawing a heatmap
  
-The basic function is `pheatmap`. Let's try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function `slice` in dplyr can take any subset of numbered rows (see [Subsetting data](/../data-manipulation/subsetting-data/)). 
+The basic function is `pheatmap`. Let's try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function `slice` in dplyr can take any subset of numbered rows (see [Subsetting data](/data-manipulation/subsetting-data/)). 
 
 ```{r}
 Bac.counts500 <- slice(Bac.counts, 1:500)
@@ -66,7 +66,7 @@ Bac.counts500 <- slice(Bac.counts, 1:500)
 pheatmap(Bac.counts500)
 ```
 
-In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see [Cluster analysis](/../statistics/cluster-analysis/)).
+In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see [Cluster analysis](/statistics/cluster-analysis/)).
 
 **Data transformation**. Now you might notice that we have a scale issue. The data are full of rare-ish bacteria (blue) and that is all we can see on the heatmap. To visualise this more effectively, we can try a log10 transformation with + 1 constant to deal with zeros.
 
@@ -173,7 +173,7 @@ pheatmap(Bac.Log10.counts500[ , SampleOrder], cluster_cols = FALSE,
  
 If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.
 
-We will analyse the abundances of all OTUs with multivariate generalised linear models using the function `manyglm` in the package mvabund. The specifics of that analysis are not described further here (see the [Introduction to mvabund](/../statistics/mvabund/) for help with that package). Note that running `anova.manyglm` is quite slow.
+We will analyse the abundances of all OTUs with multivariate generalised linear models using the function `manyglm` in the package mvabund. The specifics of that analysis are not described further here (see the [Introduction to mvabund](/statistics/mvabund/) for help with that package). Note that running `anova.manyglm` is quite slow.
 
 ```{r,eval=F}
 # Create factor and data file without the U1, U2 and U3 samples

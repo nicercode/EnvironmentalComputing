@@ -7,7 +7,7 @@ output: html_document
 ### What is power analysis and why is it important?
 You collect data to answer a question, usually with the aim of detecting a particular effect (e.g., treatment effect). The power of your test is *the probability of detecting an effect (i.e., getting a p-value less than 0.05) with the experimental design you have and the effect size that you expect or consider meaningful*. 
 
-I'll start by simulating a dataset which has an effect (a difference between the control and treatment), and we'll see if we can detect the effect. We'll do a simple [two sample t-test](/../statistics/t-tests/two-sample-t-test/) for illustration.
+I'll start by simulating a dataset which has an effect (a difference between the control and treatment), and we'll see if we can detect the effect. We'll do a simple [two sample t-test](../t-tests/two-sample-t-test) for illustration.
 
 ```{r}
 set.seed(1)
@@ -57,7 +57,7 @@ This time we did detect an effect. This always happens, no matter what your expe
 
 ### Simple power analysis with 'pwr'
  
-There are various packages which do power analysis in R. [pwr](https://cran.r-project.org/web/packages/pwr/index.html) does simple stuff up to `lm` and [simR](https://cran.r-project.org/web/packages/simr/index.html) does more complex [mixed models](/../statistics/mixed-models/) and [glms](/../statistics/glms/).
+There are various packages which do power analysis in R. [pwr](https://cran.r-project.org/web/packages/pwr/index.html) does simple stuff up to `lm` and [simR](https://cran.r-project.org/web/packages/simr/index.html) does more complex [mixed models](../mixed-models) and [glms](../glms).
 
 First, download and install the package.
 
@@ -119,7 +119,7 @@ Note that specifying effect size is not a statistical question, it's an ecologic
 
 ### Analysis with linear and mixed models with 'simr'
  
-If you are conducting an experiment with random factors, and you need to do a [mixed model](/../statistics/mixed-models/) and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package [simR](https://cran.r-project.org/web/packages/simr/index.html) is designed to do this.
+If you are conducting an experiment with random factors, and you need to do a [mixed model](../mixed-models/) and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package [simR](https://cran.r-project.org/web/packages/simr/index.html) is designed to do this.
 
 Download and install the package.
 
@@ -151,7 +151,7 @@ boxplot(abundance~modification,data=Pilot,main="modification")
 boxplot(abundance~site,data=Pilot,main="site")
 ```
 
-These count data with a random effect of site are best modelled with a [generalised linear mixed model](/../statistics/mixed-models-3/) using `glmer` from the package lme4.
+These count data with a random effect of site are best modelled with a [generalised linear mixed model](../mixed-models-3) using `glmer` from the package lme4.
 
 ```{r}
 library(lme4)

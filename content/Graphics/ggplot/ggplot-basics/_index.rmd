@@ -105,9 +105,9 @@ print(plot6)
  
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
-* [altering the overall appearance](/../graphics/ggplot/ggplot-appearance/)  
-* [adding titles and axis names](/../graphics/ggplot/ggplot-labels/)  
-* [colours and symbols](/../graphics/ggplot/ggplot-colour-shapes/).   
+* [altering the overall appearance](/graphics/ggplot/ggplot-appearance/)  
+* [adding titles and axis names](/graphics/ggplot/ggplot-labels/)  
+* [colours and symbols](/graphics/ggplot/ggplot-colour-shapes/).   
 
 Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
 

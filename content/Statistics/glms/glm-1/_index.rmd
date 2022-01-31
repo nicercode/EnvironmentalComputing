@@ -5,7 +5,7 @@ output: html_document
 ---
 **Introduction and binomial data**
  
-[Linear models](/../statistics/linear-models/
+[Linear models](/statistics/linear-models/
 ) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
 
 ![](GLM1_binary_image.jpg)
@@ -132,7 +132,7 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 20074. *Analysing ecological data*. Springer Science & Business Media, 2007.</p>
 
-More advice on [interpreting coefficients in glms](/../statistics/glms/interpret-glm-coeffs/)
+More advice on [interpreting coefficients in glms](/statistics/glms/interpret-glm-coeffs/)
   
 
 **Author**: Gordana Popovic

@@ -6,7 +6,7 @@ output: html_document
 
 Bar plots with error bars are very frequently used in the environmental sciences to represent the variation in a continuous variable within one or more categorical variables. These are not always straightforward to make with the base functions in R. This page introduces you to making these plots with the package ggplot2.
 
-Before you get started, read the page on the [basics](/../graphics/ggplot/ggplot-basics/) of plotting with ggplot and install the package ggplot2.
+Before you get started, read the page on the [basics](../ggplot-basics/) of plotting with ggplot and install the package ggplot2.
 
 ```{r,warning=F}
 library(ggplot2)
@@ -21,7 +21,7 @@ In this examples, let's use a data set that is already in R with the length and 
 data(iris)
 ```
 
-To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the `summarise` and `group_by` functions in the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html). See [here](/../data-manipulation/summarising-data/
+To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the `summarise` and `group_by` functions in the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html). See [here](/data-manipulation/summarising-data/
 ) for more details on using dplyr for summarising data.
 
 The following code will make a new data frame with the summary data per species.
@@ -55,9 +55,9 @@ In the `geom_errorbar` code, `ymin` and `ymax` are the top and bottom of the err
 ###Further help
  
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
-* [altering the overall appearance](/../graphics/ggplot/ggplot-appearance/)  
-* [adding titles and axis names](/../graphics/ggplot/ggplot-labels/)  
-* [colours and symbols](/../graphics/ggplot/ggplot-colour-shapes/)   
+* [altering the overall appearance](../ggplot-appearance/)  
+* [adding titles and axis names](../ggplot-labels/)  
+* [colours and symbols](../ggplot-colour-shapes/)   
 
 Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
 

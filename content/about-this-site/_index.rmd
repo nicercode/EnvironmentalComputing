@@ -6,12 +6,12 @@ weight: 1
 
 This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
 
-* how to organise your data during [data entry](/../getting-started-with-r/dta-entry/) 
-* how to [manipulate and manage your data](/../data-manipulation/) so there is transparency and version control 
-* instructions for running [statistical analyses](../statistics/) with sample code in R or other relevant software (first see [Getting started with R](/../getting-started-with-r/)) 
+* how to organise your data during [data entry](/getting-started-with-r/data-entry/) 
+* how to [manipulate and manage your data](/data-manipulation/) so there is transparency and version control 
+* instructions for running [statistical analyses](/statistics/) with sample code in R or other relevant software (first see [Getting started with R](/getting-started-with-r/)) 
 * the rationale for the technique in plain language (why is it used) 
 * how to interpret the results and assumptions that you need to check 
-* [visualisation](/../graphics/) of your results and ways to effectively communicate the results in scientific reports or publications
+* [visualisation](/graphics/) of your results and ways to effectively communicate the results in scientific reports or publications
 * where to go for further help 
 
 

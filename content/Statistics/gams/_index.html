@@ -15,10 +15,10 @@ output: html_document
 3. use <code>+ s(x)</code> not <code>x</code> in your syntax<br />
 4. use <code>method = "REML"</code><br />
 5. always look at <code>gam.check()</code></p>
-<p>This is basically all there is too it - an extension of <a href="/../statistics/glms/">generalised linear models (GLMs)</a> with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say <code>lmer</code> or <code>glmer</code>, but we use them all the time without reservation!</p>
+<p>This is basically all there is too it - an extension of <a href="../glms">generalised linear models (GLMs)</a> with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say <code>lmer</code> or <code>glmer</code>, but we use them all the time without reservation!</p>
 <div id="gams-in-a-nutshell" class="section level3">
 <h3>GAMs in a nutshell</h3>
-<p>Let’s start with an equation for a Gaussian <a href="/../statistics/linear-models/linear-regression/">linear model</a>:
+<p>Let’s start with an equation for a Gaussian <a href="../linear-models/linear-regression/">linear model</a>:
 <span class="math display">\[y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
 What changes in a GAM is the presence of a smoothing term:
 <span class="math display">\[y = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
@@ -71,16 +71,16 @@ gam.check(gam_y)</code></pre>
 <pre><code>## 
 ## Method: REML   Optimizer: outer newton
 ## full convergence after 6 iterations.
-## Gradient range [-1.443361e-10,1.09039e-10]
-## (score 38.39218 &amp; scale 0.1458512).
-## Hessian positive definite, eigenvalue range [2.281947,30.69247].
+## Gradient range [-2.092406e-10,1.651652e-10]
+## (score 33.54327 &amp; scale 0.1255361).
+## Hessian positive definite, eigenvalue range [2.105661,30.68019].
 ## Model rank =  10 / 10 
 ## 
 ## Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
 ## indicate that k is too low, especially if edf is close to k&#39;.
 ## 
 ##        k&#39;  edf k-index p-value
-## s(x) 9.00 5.66    1.35    0.99</code></pre>
+## s(x) 9.00 5.52    1.05    0.63</code></pre>
 <p>Using <code>summary</code> with the model object will give you the significance of the smooth term (along with any parametric terms, if you’ve included them), along with the variance explained. In this example, a pretty decent fit. The ‘edf’ is the estimated degrees of freedom - essentially, the larger the number, the more wiggly the fitted model. Values of around 1 tend to be close to a linear term. You can read about penalisation and shrinkage for more on what the edf reflects.</p>
 <pre class="r"><code>summary(gam_y)</code></pre>
 <pre><code>## 
@@ -92,16 +92,16 @@ gam.check(gam_y)</code></pre>
 ## 
 ## Parametric coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  0.00119    0.04811   0.025     0.98
+## (Intercept)  0.05310    0.04464    1.19    0.239
 ## 
 ## Approximate significance of smooth terms:
 ##        edf Ref.df     F p-value    
-## s(x) 5.661  6.812 35.72  &lt;2e-16 ***
+## s(x) 5.524  6.668 31.57  &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## R-sq.(adj) =  0.796   Deviance explained = 81.5%
-## -REML = 38.392  Scale est. = 0.14585   n = 63</code></pre>
+## R-sq.(adj) =  0.772   Deviance explained = 79.2%
+## -REML = 33.543  Scale est. = 0.12554   n = 63</code></pre>
 </div>
 <div id="smooth-terms" class="section level3">
 <h3>Smooth terms</h3>

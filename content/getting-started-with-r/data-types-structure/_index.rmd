@@ -129,7 +129,7 @@ eg_data_frame
 ```
 
 
-More commonly, we import data entered into a spreadsheet straight into a data frame using `read.csv` (see help [Importing data](/../getting-started-with-r/importing-data/)). 
+More commonly, we import data entered into a spreadsheet straight into a data frame using `read.csv` (see help [Importing data](../importing-data/)). 
 
 To check the data types within a data frame, use the `str` function. This gives an output listing for each column (i.e., variables) and the respective data type. 
 

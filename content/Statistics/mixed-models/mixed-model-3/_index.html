@@ -10,7 +10,7 @@ editor_options:
 
 
 <p><strong>Generalised linear mixed models</strong></p>
-<p>You will need to read <a href="/../mixed-models-1/">Mixed models 1</a> and <a href="/../mixed-models-2/">Mixed models 2</a> as an introduction to mixed models for continuous data, as well as the help pages on <a href="/../generalised-linear-models/">Generalised linear models</a> as an introduction to modelling discrete data.</p>
+<p>You will need to read <a href="/../statistics/mixed-models/mixed-model-1/">Mixed models 1</a> and <a href="/../statistics/mixed-models/mixed-model-2/">Mixed models 2</a> as an introduction to mixed models for continuous data, as well as the help pages on <a href="/../statistics/glms/generalised-linear-models/">Generalised linear models</a> as an introduction to modelling discrete data.</p>
 <p>This page will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).</p>
 <p><strong>Properties of mixed models</strong></p>
 <p><strong>Assumptions</strong>. The assumptions of generalised linear mixed models are a combination of the assumptions of GLMs and mixed models.</p>
@@ -36,7 +36,7 @@ editor_options:
 * provide good residual plots (we need these for assumption checking)</p>
 <p>First, load the package:</p>
 <pre class="r"><code>library(lme4)</code></pre>
-<p>Download the sample data set, <a href="/../wp-content/uploads/2016/05/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<p>Download the sample data set, <a href="/datasets/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
 <pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
 <p>In this example, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). To test whether there is an effect of modification on individual species counts and presence/absences, we need to use generalised linear mixed models with the with the <code>glmer</code> function.</p>
 <p><img src="Mixed_models_3_image.jpg" /></p>
@@ -199,7 +199,7 @@ qqnorm(residuals(fit.pois))</code></pre>
 <p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunately lme4 can’t handle this situation (overdispersion), and there is no easy way to model these data. If this happens in your data try the <a href="http://glmmadmb.r-forge.r-project.org/">glmmADMB</a> package.</p>
 <p><strong>Hypothesis test for random effects</strong></p>
-<p>As before you could run hypothesis tests on the random effects using a parametric bootstrap. See <a href="/../mixed-models-1/">Mixed models 1</a> and <a href="/../mixed-models-2/">Mixed models 2</a> for code that you could modify for this situation.</p>
+<p>As before you could run hypothesis tests on the random effects using a parametric bootstrap. See <a href="/../statistics/mixed-models/mixed-model-1/">Mixed models 1</a> and <a href="/../statistics/mixed-models/mixed-model-2/">Mixed models 2</a> for code that you could modify for this situation.</p>
 <p>###Communicating results</p>
 <p><strong>Written.</strong> Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code>) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
 <p><strong>Visual.</strong> The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility.</p>
@@ -228,5 +228,5 @@ Zuur, A, EN Ieno and GM Smith (2007) <em>Analysing ecological data</em>. Springe
 </p>
 <p><strong>Author</strong>: Gordana Popovic</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:46:30 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Jan 31 13:55:01 2022&quot;</code></pre>
 </div>

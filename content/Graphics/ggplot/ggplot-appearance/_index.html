@@ -19,7 +19,8 @@ output: html_document
 <p>In these examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
 <pre class="r"><code>data(iris)</code></pre>
 <p>The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial.</p>
-<pre class="r"><code>IrisPlot&lt;-ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() </code></pre>
+<pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()</code></pre>
 <p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>To change the design of an element of your plot, you create a theme then print the plot with the theme applied. For example, some code to change the colour and size of the legend in the above plot would look like this.</p>
 <pre class="r"><code>mytheme &lt;-
@@ -75,8 +76,10 @@ print(IrisPlot + mytheme)</code></pre>
 <pre class="r"><code>mytheme &lt;-
   theme(
     panel.grid.major = element_line(colour = &quot;black&quot;, size = (1.5)),
-    panel.grid.minor = element_line(size = (0.2), colour =
-                                      &quot;grey&quot;)
+    panel.grid.minor = element_line(
+      size = (0.2), colour =
+        &quot;grey&quot;
+    )
   )
 
 print(IrisPlot + mytheme)</code></pre>
@@ -125,13 +128,16 @@ print(IrisPlot + mytheme)</code></pre>
 <h3>Example of a fully customised ggplot</h3>
 <p>Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on <a href="/graphics/ggplot/ggplot-labels/">adding titles and axis names</a> for help with those parts of the <code>print()</code> code.</p>
 <pre class="r"><code>IrisPlot &lt;-
-  ggplot(iris,
-         aes(
-           Sepal.Length,
-           Petal.Length,
-           colour = Species,
-           shape = Species
-         )) + geom_point()
+  ggplot(
+    iris,
+    aes(
+      Sepal.Length,
+      Petal.Length,
+      colour = Species,
+      shape = Species
+    )
+  ) +
+  geom_point()
 
 mytheme3 &lt;-
   theme(
@@ -172,8 +178,8 @@ mytheme3 &lt;-
 
 print(
   IrisPlot + mytheme3 + ggtitle(&quot;Iris species petal and sepal length&quot;)
-  + labs(y = &quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;, colour = &quot;Species&quot;)
-  + scale_colour_manual(values = c(&quot;slateblue&quot;, &quot;slateblue2&quot;, &quot;slateblue4&quot;))
+    + labs(y = &quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;, colour = &quot;Species&quot;)
+    + scale_colour_manual(values = c(&quot;slateblue&quot;, &quot;slateblue2&quot;, &quot;slateblue4&quot;))
 )</code></pre>
 <p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>###Further help</p>
@@ -186,6 +192,5 @@ print(
 Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with quite a bit of help online <a href="http://www.cookbook-r.com/Graphs/">here</a>
 </p>
 <p><strong>Author</strong>: Fiona Robinson</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:47:36 2022&quot;</code></pre>
+<p><strong>Last updated:</strong> Tue Feb 1 10:27:05 2022</p>
 </div>

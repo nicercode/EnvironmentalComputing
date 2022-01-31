@@ -25,11 +25,11 @@ editor_options:
 <h3>Running the analysis</h3>
 <p><img src="Cluster_analysis_image2.jpg" /></p>
 <p>In this example, we will use cluster analysis to visualise differences in the composition of metal contaminants in the seaweeds of Sydney Harbour (data from <a href="http://www.sciencedirect.com/science/article/pii/S026974910800033X">(Roberts <em>et al.</em> 2008)</a>.). Download the data set, <a href="/datasets/Harbour_metals.csv">Harbour_metals.csv</a>, and load into R.</p>
-<pre class="r"><code>Harbour_metals &lt;- read.csv(file=&quot;Harbour_metals.csv&quot;, header=TRUE)</code></pre>
+<pre class="r"><code>Harbour_metals &lt;- read.csv(file = &quot;Harbour_metals.csv&quot;, header = TRUE)</code></pre>
 <p>These data have the concentrations of seven metals measured from 60 samples, half from the seaweed <em>Padina crassa</em> and half from the <em>Sargassum linearifolium</em></p>
 <p>The first two columns are categorical variables that group samples by site and seaweed species. The third column has unique labels for each replicate sample and the remaining columns are the metal concentrations.</p>
 <p>The cluster analysis runs on the response variables only so we need to make a data frame with just the metal concentrations (columns 4-8).</p>
-<pre class="r"><code>Harbour_metals2 &lt;- Harbour_metals[,4:8]</code></pre>
+<pre class="r"><code>Harbour_metals2 &lt;- Harbour_metals[, 4:8]</code></pre>
 <p>To help interpret the graph, we can add the sample labels as row names in this data frame</p>
 <pre class="r"><code>rownames(Harbour_metals2) &lt;- Harbour_metals$Rep</code></pre>
 <p>To perform the cluster analysis, we need to make a matrix that quantifies the similarity between each pair of samples. Here we will use the Euclidean distance as our similarity coefficient, but there are others to choose from (see below).</p>
@@ -40,7 +40,7 @@ editor_options:
 <pre class="r"><code>plot(H_metals.cluster)</code></pre>
 <p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>We can make this a bit neater with all the samples lined up along the bottom by converting it to a dendrogram object (the <code>as.dendrogram</code> function) and plotting that (although this default plot is still a bit ugly and would need work with labels and axes before being ready for publication).</p>
-<pre class="r"><code>plot(as.dendrogram(H_metals.cluster),ylab = &quot;Euclidean distance&quot;)</code></pre>
+<pre class="r"><code>plot(as.dendrogram(H_metals.cluster), ylab = &quot;Euclidean distance&quot;)</code></pre>
 <p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
@@ -66,7 +66,7 @@ dend &lt;- as.dendrogram(H_metals.cluster)
 sample_colours &lt;- as.numeric(Harbour_metals$Location)
 sample_colours &lt;- sample_colours[order.dendrogram(dend)]
 labels_colors(dend) &lt;- sample_colours
-plot(dend,ylab = &quot;Euclidean distance&quot;)</code></pre>
+plot(dend, ylab = &quot;Euclidean distance&quot;)</code></pre>
 <p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
 </div>
 <div id="further-help" class="section level3">
@@ -80,6 +80,5 @@ McKillup, S (2012) <em>Statistics explained. An introductory guide for life scie
 </p>
 <p><a href="http://rpubs.com/gaston/dendrograms">Visualizing dendrograms in R</a></p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 14:49:58 2022&quot;</code></pre>
+<p><strong>Last updated:</strong> Tue Feb 1 10:27:58 2022</p>
 </div>

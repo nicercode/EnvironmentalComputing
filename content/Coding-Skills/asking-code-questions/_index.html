@@ -58,37 +58,37 @@ df</code></pre>
 <pre class="r"><code>data &lt;- sample(10)
 
 data</code></pre>
-<pre><code>##  [1]  1  9  7  4  5 10  6  8  3  2</code></pre>
+<pre><code>##  [1]  2  4  8  1  5  3  7  9 10  6</code></pre>
 <p>Or, 10 random numbers with replacement:</p>
-<pre class="r"><code>data &lt;- sample(10, replace=TRUE)
+<pre class="r"><code>data &lt;- sample(10, replace = TRUE)
 
 data</code></pre>
-<pre><code>##  [1] 10 10  6  2  5  2  1  4  1  8</code></pre>
+<pre><code>##  [1]  8  7  6  7  8  1  3  5 10  3</code></pre>
 <p>You can create a vector and then sample from it:</p>
 <pre class="r"><code>factor &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
 
-data &lt;- sample(factor, replace=TRUE)
+data &lt;- sample(factor, replace = TRUE)
 
 data</code></pre>
-<pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;e&quot; &quot;b&quot; &quot;e&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;d&quot; &quot;b&quot; &quot;a&quot;</code></pre>
 <p>You can also sample n number of times, making it a very convenient function. For example, draw from the four suits of cards, 100 times:</p>
 <pre class="r"><code>suits &lt;- c(&quot;Hearts&quot;, &quot;Spades&quot;, &quot;Clubs&quot;, &quot;Hearts&quot;)
 
-cards &lt;- sample(suits, size=100, replace=TRUE)</code></pre>
+cards &lt;- sample(suits, size = 100, replace = TRUE)</code></pre>
 <p>Note that in the above examples, it doesn’t return data frames, which may or may not matter. Use <code>as.data.frame</code> for this, if necessary.</p>
 <pre class="r"><code>data &lt;- as.data.frame(sample(10))</code></pre>
 <p><strong>Creating data from a known distribution</strong></p>
 <p><code>rnorm</code> creates data from a normal distribution</p>
 <pre class="r"><code>data &lt;- rnorm(100)</code></pre>
 <p>By default, <code>rnorm</code> draws from a population with mean = 0, and sd = 1. We can change either of these to get a sample from a normal distribution with specified mean and standard deviaition. For example, to get 100 numbers from a normal distribution with a mean of 25 and s.d. of 1.5:</p>
-<pre class="r"><code>data &lt;- rnorm(100, mean=25, sd=1.5)</code></pre>
+<pre class="r"><code>data &lt;- rnorm(100, mean = 25, sd = 1.5)</code></pre>
 <p><code>runif</code> creates data from a uniform distribution</p>
 <pre class="r"><code>data &lt;- runif(100)
 
 head(data)</code></pre>
-<pre><code>## [1] 0.5244245 0.2363948 0.4942155 0.7017063 0.5051335 0.8739121</code></pre>
+<pre><code>## [1] 0.7720220 0.7267045 0.2682775 0.2355372 0.6309985 0.4122872</code></pre>
 <p>Similarly to above, <code>runif</code> draws from a distribution with min=0 and max=1. We can change this to whatever we want. For example, to get 100 random numbers between -10 and 5:</p>
-<pre class="r"><code>data &lt;- runif(100, min=-10, max=-5)</code></pre>
+<pre class="r"><code>data &lt;- runif(100, min = -10, max = -5)</code></pre>
 <p>Luckily, R has just about every distribution built in to draw from. This is really helpful if you are theorizing data before you start collection of data! A comprehensive list is <a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html">here</a>.</p>
 </div>
 <div id="what-if-your-problem-is-a-little-more-complicated" class="section level3">
@@ -99,25 +99,27 @@ head(data)</code></pre>
 <p>Much better, is to take advantage of the <code>rep</code> function. It replicates values in a vector or list. The same outcome as above is achieved with this.</p>
 <pre class="r"><code>site &lt;- c(rep(&quot;a&quot;, 4), rep(&quot;b&quot;, 4), rep(&quot;c&quot;, 4), rep(&quot;e&quot;, 4))</code></pre>
 <p>Alternatively:</p>
-<pre class="r"><code>site &lt;- rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), each=4)</code></pre>
+<pre class="r"><code>site &lt;- rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), each = 4)</code></pre>
 <p>Or, you can replicate until a certain length of the vector is reached. To get 50 replicates from each of the four sites, we would use:</p>
-<pre class="r"><code>site &lt;- rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), length=50)</code></pre>
+<pre class="r"><code>site &lt;- rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), length = 50)</code></pre>
 <p>This becomes increasingly valuable as you increase the number of repetitions and/or factors to include!</p>
 </div>
 <div id="creating-all-combinations-of-multiple-categorical-factors" class="section level3">
 <h3>Creating all combinations of multiple categorical factors</h3>
 <p><code>expand.grid</code> is very useful for creating a data frame that has every combination of all levels from multiple factors. For example, if we had sampled four sites from each of four regions in each of three states, we could use this to create</p>
-<pre class="r"><code>study &lt;- expand.grid(state=c(&quot;NSW&quot;, &quot;VIC&quot;, &quot;QLD&quot;),
-                       region=c(&quot;N&quot;, &quot;E&quot;, &quot;S&quot;, &quot;W&quot;),
-                       site=c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;))</code></pre>
+<pre class="r"><code>study &lt;- expand.grid(
+  state = c(&quot;NSW&quot;, &quot;VIC&quot;, &quot;QLD&quot;),
+  region = c(&quot;N&quot;, &quot;E&quot;, &quot;S&quot;, &quot;W&quot;),
+  site = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
+)</code></pre>
 <p>We could then add some data to simluate species richness at each site:</p>
-<pre class="r"><code>study$richness &lt;- rnorm(nrow(study), mean=15, sd=3)</code></pre>
+<pre class="r"><code>study$richness &lt;- rnorm(nrow(study), mean = 15, sd = 3)</code></pre>
 <p>The <code>nrow</code> argument is used in order to replace the correct amount of data into the dataframe (in this case, 48, the number of rows in your study design).</p>
 </div>
 <div id="what-are-some-other-options-to-make-a-reproducible-example" class="section level3">
 <h3>What are some other options to make a reproducible example?</h3>
 <p>You could use a built in dataset that is loaded in base R, in order to reproduce your problem. You can quickly see the list of built-in datasets.</p>
-<pre class="r"><code>library(help=&quot;datasets&quot;)</code></pre>
+<pre class="r"><code>library(help = &quot;datasets&quot;)</code></pre>
 <p>Then load a dataset using:</p>
 <pre class="r"><code>data(iris)</code></pre>
 </div>
@@ -143,13 +145,18 @@ head(quakes)</code></pre>
 ## 4), stations = c(41L, 15L, 43L, 19L, 11L, 12L)), row.names = c(NA, 
 ## 6L), class = &quot;data.frame&quot;)</code></pre>
 <p>We can then copy and paste this output into an email, etc. However, be sure to name the df first in order to create an object for whoever will be using it!</p>
-<pre class="r"><code>reproduced_df &lt;- structure(list(lat = c(-20.42, -20.62, -26, -17.97, -20.42, -19.68
-), long = c(181.62, 181.03, 184.1, 181.66, 181.96, 184.31), depth = c(562L, 
-650L, 42L, 626L, 649L, 195L), mag = c(4.8, 4.2, 5.4, 4.1, 4, 
-4), stations = c(41L, 15L, 43L, 19L, 11L, 12L)), .Names = c(&quot;lat&quot;, 
-&quot;long&quot;, &quot;depth&quot;, &quot;mag&quot;, &quot;stations&quot;), row.names = c(NA, 6L), class = &quot;data.frame&quot;)</code></pre>
+<pre class="r"><code>reproduced_df &lt;- structure(list(lat = c(-20.42, -20.62, -26, -17.97, -20.42, -19.68), long = c(181.62, 181.03, 184.1, 181.66, 181.96, 184.31), depth = c(
+  562L,
+  650L, 42L, 626L, 649L, 195L
+), mag = c(
+  4.8, 4.2, 5.4, 4.1, 4,
+  4
+), stations = c(41L, 15L, 43L, 19L, 11L, 12L)), .Names = c(
+  &quot;lat&quot;,
+  &quot;long&quot;, &quot;depth&quot;, &quot;mag&quot;, &quot;stations&quot;
+), row.names = c(NA, 6L), class = &quot;data.frame&quot;)</code></pre>
 <p>What if its only certain rows we are having trouble with?</p>
-<pre class="r"><code>tmp &lt;- quakes[30:40,]
+<pre class="r"><code>tmp &lt;- quakes[30:40, ]
 dput(tmp)</code></pre>
 <pre><code>## structure(list(lat = c(-19.84, -22.58, -16.32, -15.55, -23.55, 
 ## -16.3, -25.82, -18.73, -17.64, -17.66, -18.82), long = c(182.37, 
@@ -164,12 +171,12 @@ dput(tmp)</code></pre>
 <h3>What about really complex problems?</h3>
 <p>This tutorial is mainly intended for new R users, and it is likely the tips and tricks above will help other people to help you a large majority of the time. However, in the case it doesn’t, it might be necessary to give some extra information.<code>sessionInfo()</code> gives a summary of the R version currently running, the operating system and which packages are loaded</p>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>## R version 4.1.2 (2021-11-01)
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
 ## Running under: macOS Big Sur 10.16
 ## 
 ## Matrix products: default
-## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib
 ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
@@ -179,12 +186,8 @@ dput(tmp)</code></pre>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] bookdown_0.24   digest_0.6.29   R6_2.5.1        jsonlite_1.7.2 
-##  [5] magrittr_2.0.1  evaluate_0.14   blogdown_1.7    stringi_1.7.6  
-##  [9] rlang_0.4.12    jquerylib_0.1.4 bslib_0.3.1     rmarkdown_2.11 
-## [13] tools_4.1.2     stringr_1.4.0   xfun_0.29       yaml_2.2.1     
-## [17] fastmap_1.1.0   compiler_4.1.2  htmltools_0.5.2 knitr_1.37     
-## [21] sass_0.4.0</code></pre>
+##  [1] bookdown_0.22   digest_0.6.28   R6_2.5.1        jsonlite_1.7.2  magrittr_2.0.1  evaluate_0.14   blogdown_1.4    stringi_1.7.5   rlang_0.4.12    jquerylib_0.1.4 bslib_0.2.5.1   rmarkdown_2.11 
+## [13] tools_4.1.0     stringr_1.4.0   xfun_0.27       yaml_2.2.1      fastmap_1.1.0   compiler_4.1.0  htmltools_0.5.2 knitr_1.36      sass_0.4.0</code></pre>
 <p><strong>Other important notes</strong>
 1. Be sure to clearly define what you are after. Do you have a purely statistics question, or do you have a coding question?
 2. It is a good idea to include any neccessary packages that you are using in which the problem occurs.
@@ -204,6 +207,6 @@ dput(tmp)</code></pre>
 </center>
 <p>There is more help on the web for making reproducible examples. For instance, see <a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">here</a>, <a href="http://clayford.github.io/dwir/dwr_12_generating_data.html">here</a>, <a href="http://adv-r.had.co.nz/Reproducibility.html">here</a>, or <a href="https://www.r-bloggers.com/minimal-reproducible-examples/">here</a>.</p>
 <p><strong>Author</strong>: Corey T. Callaghan</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 13:21:56 2022&quot;</code></pre>
+<p><strong>Last updated:</strong></p>
+<pre><code>## [1] &quot;Tue Feb  1 10:25:00 2022&quot;</code></pre>
 </div>

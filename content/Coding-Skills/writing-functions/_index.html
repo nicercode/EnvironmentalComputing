@@ -24,7 +24,7 @@ output: html_document
 <p>Below we spend some time outlining the two main <a href="#types"><em>types</em> of function</a>, <a href="#why"><em>why</em> use functions</a>, and then <a href="#how"><em>how</em> they are constructed</a>.</p>
 <p>To illustrate our examples, we will use a sample data set containing a series of different measurements from replicated algal samples. You can read the data into R directly from the web:</p>
 <pre class="r"><code>library(tidyverse)
-algae &lt;-  read_csv(&quot;Algal_traits.csv&quot;)</code></pre>
+algae &lt;- read_csv(&quot;Algal_traits.csv&quot;)</code></pre>
 <p>(or if you like download the data set, <a href="/datasets/Algal_traits.csv">Algal_traits.csv</a>).
 Taking a look we see a bunch of variables like height, weight etc</p>
 <pre><code>## # A tibble: 60 × 8
@@ -65,9 +65,9 @@ Taking a look we see a bunch of variables like height, weight etc</p>
 <p>Writing functions is a good way of organising your analytical methods into self contained chunks. Generally, code written in this way is much easier to read.</p>
 <p>Consider some of the functions that you have already used within R. For example, <code>mean()</code>.</p>
 <p>This function is already predefined within the R base package, meaning that you didn’t have to tell the computer how to compute the mean, and because that programming job has already been done, you can simply use the function in your own script. Imagine if every time you needed a mean you had to write the following:</p>
-<pre class="r"><code> sum(x) / length(x)</code></pre>
+<pre class="r"><code>sum(x) / length(x)</code></pre>
 <p>Even this line of script uses two functions: the <code>sum</code> function and <code>length</code> function. If these weren’t available, you would need to write out the full method every time you needed a mean.</p>
-<pre class="r"><code> (x[1] + x[2] + x[3] + x[4] + x[5]) / 5 </code></pre>
+<pre class="r"><code>(x[1] + x[2] + x[3] + x[4] + x[5]) / 5</code></pre>
 <p>Instead, we simply use <code>mean</code> without giving it two thoughts.</p>
 <p>Importantly, it is much easier to tell what <code>mean(x)</code> is doing than the line above. <strong>Reading the code you know exactly what is happening</strong>. Using the full formula, it would be less obvious what was happening every time you wanted to calculate the mean of a different variable.</p>
 <p>Which raises an important point: <strong>functions should have a clear and informative name</strong>, that tells you what the function does.</p>
@@ -103,7 +103,7 @@ save_output(stats_species)</code></pre>
 <pre><code>## [1] 0.04067788</code></pre>
 <p>Imagine now that you wanted to calculate these same statistics on a different variable (e.g., dry weight). When faced with wanting to use this piece of code twice, we may be tempted to just copy-and-paste it to a new place, thus having two copies of the above snippet in our code. However, a much more elegant (and benifitial in the long-term) approach is to make it into a function and call that function twice.</p>
 <p>If we first define a function for standard error:</p>
-<pre class="r"><code>standard_error &lt;- function (x){
+<pre class="r"><code>standard_error &lt;- function(x) {
   sqrt(var(x) / length(x))
 }</code></pre>
 <p>we simply use <code>standard_error</code> like we would any other function.</p>
@@ -133,7 +133,7 @@ save_output(stats_species)</code></pre>
 <p><strong>Second, functions limit the scope of variables and enforce cleanup</strong>. When calculating something, it’s common to create new variables. As an example, Let’s say we calculated standard error as follows</p>
 <pre class="r"><code>var_x &lt;- var(algae$height)
 n &lt;- length(algae$height)
-sqrt( var_x / n )</code></pre>
+sqrt(var_x / n)</code></pre>
 <pre><code>## [1] 0.04067788</code></pre>
 <p>Note you now have two new objects in your environment: <code>var_x</code> and <code>n</code>:</p>
 <pre class="r"><code>var_x</code></pre>
@@ -145,10 +145,10 @@ sqrt( var_x / n )</code></pre>
 <p>(the function <code>rm()</code> “removes”, i.e. deletes, objects from the environment).</p>
 <p>But what if you forget? There’s a real danger that later you accidentally reuse the variable <code>n</code> or <code>var_x</code>, thinking they’re something that they’re not. And if they have non-specific names like <code>n</code> the risk of this happening is high.</p>
 <p>If instead you put the code above into a function, as follows, this danger disappears.</p>
-<pre class="r"><code>standard_error &lt;- function (x){
+<pre class="r"><code>standard_error &lt;- function(x) {
   var_x &lt;- var(algae$height)
   n &lt;- length(algae$height)
-  sqrt( var_x / n )
+  sqrt(var_x / n)
 }</code></pre>
 <p>When you run:</p>
 <pre class="r"><code>standard_error(algae$height)</code></pre>
@@ -170,16 +170,16 @@ sqrt( var_x / n )</code></pre>
 <div id="the-syntax-of-a-function" class="section level3">
 <h3>The syntax of a function</h3>
 <p>A function definition has the following form:</p>
-<pre class="r"><code>function_name &lt;- function (arg1, arg2, ...){
-  statements  # do useful stuff 
-  object      # return something
+<pre class="r"><code>function_name &lt;- function(arg1, arg2, ...) {
+  statements # do useful stuff
+  object # return something
 }</code></pre>
 <p><strong>function_name</strong>: The function’s name. Can be any valid text <em>without a space</em>, but you should avoid using names that are used elsewhere in R. Check to see if your name is already used as a keyword by asking for the help page <code>?function_name</code> (no 100% guarantee, but a good check). Also, aim for names that describe what the function does. A long name like <code>calculate_standard_error</code> is much better than something short and unintuitive like <code>f</code>.</p>
 <p><strong>arg1, arg2, …</strong>: The arguments of the function. You can write a function with any number of arguments, with those being any R objects (numeric, strings, characters, data.frames, matrices, other functions).</p>
 <p><strong>function body</strong>: The code between the <code>{}</code> is the function body and run every time the function is called. This is the code that is doing all the useful stuff and is called the function body.</p>
 <p><strong>return value</strong>: The last line of code is the object to be returned. Some times you’ll see people write <code>return(object)</code>, though it’s enough to write <code>object</code>.</p>
 <p>Using this format, a function to calculate the standard error of the values in the object <code>x</code> would be:</p>
-<pre class="r"><code>standard_error &lt;- function (x) {
+<pre class="r"><code>standard_error &lt;- function(x) {
   sqrt(var(x) / length(x))
 }</code></pre>
 <p>To be able to use the function, you need to run that code into your console. Once defined we can call the function like we would any other function.</p>
@@ -191,40 +191,35 @@ sqrt( var_x / n )</code></pre>
 <p>Let’s take a closer look at the function <code>mean</code>. Typing <code>?mean</code> into the console brings up the relevant “help” details. Note the structure</p>
 <pre class="r"><code>mean(x, trim = 0, na.rm = FALSE, ...)</code></pre>
 <p>The first argument <code>x</code> is our vector of numbers. To use the function we need to specify something for <code>x</code>, e.g.</p>
-<pre class="r"><code>mean(x=algae$height)</code></pre>
+<pre class="r"><code>mean(x = algae$height)</code></pre>
 <p>or just</p>
 <pre class="r"><code>mean(algae$height)</code></pre>
 <p>The first version makes it explicit that the values in <code>algae$height</code> outside of the function are <em>passed</em> to the variable <code>x</code> within the function. The second version does the same thing, but less explictly. It works because R takes the values of <code>height</code> and maps it onto the first unnamed argument in our function call onto the first unnamed argument in the function definition. So the following will also work:</p>
-<pre class="r"><code>mean(na.rm=TRUE, x=algae$height)
-mean(na.rm=TRUE, algae$height)</code></pre>
+<pre class="r"><code>mean(na.rm = TRUE, x = algae$height)
+mean(na.rm = TRUE, algae$height)</code></pre>
 <p>But what are those are other arguments in the function definition: <code>trim</code> and <code>na.rm</code>? These are optional arguments, with default values set as specified. The function needs a value to run but unless you specify it, it will use the default.</p>
 <p>Try running the <code>mean()</code> function on the <em>strength</em> variable.</p>
 <pre class="r"><code>mean(algae$strength)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical:
-## returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Notice we get <code>NA</code>, this is because by default the function doesn’t know how to deal with missing values (<code>NA</code> is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on <a href="/../getting-started-with-r/importing-data/">importing data</a>), but in this case, we’re happy remove <code>NA</code>s before calculating the mean. This can be achieved by setting the argument for <code>na.rm</code> to <code>TRUE</code>:</p>
-<pre class="r"><code>mean(algae$strength, na.rm=TRUE)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric
-## or logical: returning NA</code></pre>
+<pre class="r"><code>mean(algae$strength, na.rm = TRUE)</code></pre>
+<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>The functions <code>mean</code>, <code>var</code>, <code>sd</code>, <code>sum</code> all behave similarly. <strong>Without specifying the argument, the functions all use their default value</strong>, which in this case is <code>na.rm=FALSE</code>. So these give the same result</p>
 <pre class="r"><code>mean(algae$strength)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical:
-## returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
-<pre class="r"><code>mean(algae$strength, na.rm=FALSE)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength, na.rm = FALSE): argument is not numeric
-## or logical: returning NA</code></pre>
+<pre class="r"><code>mean(algae$strength, na.rm = FALSE)</code></pre>
+<pre><code>## Warning in mean.default(algae$strength, na.rm = FALSE): argument is not numeric or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>But, we can override this if that’s what we want:</p>
-<pre class="r"><code>mean(algae$strength, na.rm=TRUE)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric
-## or logical: returning NA</code></pre>
+<pre class="r"><code>mean(algae$strength, na.rm = TRUE)</code></pre>
+<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p><strong>You’ll notice that many functions have arguments with default values set</strong>.</p>
 <p>Going back to our new function <code>standard_error</code>, let’s add a new argument <code>na.rm</code> so that it behaves like <code>mean</code> and the other function listed above:</p>
-<pre class="r"><code>standard_error &lt;- function (x, na.rm=FALSE){
+<pre class="r"><code>standard_error &lt;- function(x, na.rm = FALSE) {
   sqrt(var(x, na.rm = na.rm) / sum(!is.na(x)))
 }</code></pre>
 <p>Like the other functions, we’ve set the default behaviour of <code>na.rm</code> to <code>FALSE</code>.</p>
@@ -248,8 +243,8 @@ standard_error(algae$strength, na.rm = TRUE)
 ...</code></pre>
 <p>(Besides, we’re also repeating ourselves a lot and so increasing the risk of errors – what if we forget?)</p>
 <p>One approach here is to define a new function that builds of our previous function but with the desired behaviour. E.g.</p>
-<pre class="r"><code>standard_error_narm &lt;- function (x){
-  standard_error(x, na.rm=TRUE) 
+<pre class="r"><code>standard_error_narm &lt;- function(x) {
+  standard_error(x, na.rm = TRUE)
 }</code></pre>
 <p>We can now call the new function and the the same result as the above specifying <code>na.rm=TRUE</code></p>
 <pre class="r"><code>standard_error_narm(algae$strength)</code></pre>
@@ -260,24 +255,24 @@ standard_error(algae$strength, na.rm = TRUE)
 <div id="whats-the-...-argument-for" class="section level3">
 <h3>What’s the <code>...</code> argument for?</h3>
 <p>Notice the argument <code>...</code> in the definition of the mean function above? What’s that about? The <code>...</code>, or ellipsis, element in the function definition allows for other arguments to be passed into the function, and passed onto to another function within the function being called, without having to write them all out by name. For example, in the definition of the function <code>standard_error_narm</code> we could instead write</p>
-<pre class="r"><code>standard_error_narm &lt;- function (...){
-  standard_error(..., na.rm=TRUE) 
+<pre class="r"><code>standard_error_narm &lt;- function(...) {
+  standard_error(..., na.rm = TRUE)
 }</code></pre>
 <p>When you call <code>standard_error_narm</code> defined like this, anything other than <code>na.rm</code> will be passed directly into the next function. This avoids repeating the arguments of one function when defining another.</p>
 <p>A less trivial example is using <code>plot</code>. I could write a function setting changing some of defaults for <code>plot</code>, so that I don’t have to keep repeating these.</p>
-<pre class="r"><code>my_plot &lt;- function (...){
-  plot(..., pch=16, las=1, log=&quot;xy&quot;) 
+<pre class="r"><code>my_plot &lt;- function(...) {
+  plot(..., pch = 16, las = 1, log = &quot;xy&quot;)
 }</code></pre>
 </div>
 <div id="adding-comments-to-your-function" class="section level3">
 <h3>Adding comments to your function</h3>
 <p>Before you are finished, there is one last thing to do. It is a good idea to add comments your function, as this will save you from a world of pain when you go back to fix something later on. Function comments should contain, a brief description of the function (one sentence), a list of function arguments with a description of each (including data type) and a description of the return value. Function comments should be written immediately above or below the function definition line.</p>
-<pre class="r"><code>standard_error &lt;- function (x, na.rm){
+<pre class="r"><code>standard_error &lt;- function(x, na.rm) {
   # Computes the sample standard error
   #
   # Args:
   #  x: Vector whose standard error is to be calculated. x must have length greater than one.
-  #  y: na.rm can either be T or F. T removes missing values before calculating standard error. 
+  #  y: na.rm can either be T or F. T removes missing values before calculating standard error.
   #
   # Return:
   #  The standard error of x
@@ -290,17 +285,22 @@ standard_error(algae$strength, na.rm = TRUE)
 <p>Once you get into the habit of writing functions it’s a good idea to keep them in a separate file containing your functions together. Why? Because otherwise you have these big clunky files clogging up your script. If you’ve solved the problem of how to do something, why not stuff it away somewhere you can go, but only if needed.</p>
 <p>To get get your functions out of the way, we recommend keeping all the functions for each project together in a folder called <code>R</code> within your project directory. (For more on project set up see our <a href="/../getting-started-with-r/project-management/">post on project management</a>.)</p>
 <p>To make these functions accessible within your workflow, you then use the function <code>source</code> to read the function files into memory, e.g.</p>
-<pre class="r"><code>source(&quot;R/stats.R&quot;)</code></pre>
-<p>Often, you may have a series of files</p>
+<pre class="r"><code>source(&quot;R/stats.R&quot;)
+````
+
+Often, you may have a series of files</code></pre>
 <pre class="r"><code>source(&quot;R/data_cleaning.R&quot;)
 source(&quot;R/stats.R&quot;)
-source(&quot;R/plots.R&quot;)</code></pre>
-<p>It’s a matter of preference whether you use a single or multiple files.</p>
-</div>
-<div id="writing-functions-to-work-with-pipes" class="section level3">
-<h3>Writing functions to work with pipes <code>%&gt;%</code></h3>
-<p>For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under <a href="/../data-manipulation/">data manipulation</a>).</p>
-<p>Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our <code>standard_error</code> already works with pipes, assuming you are passing in <code>x</code>:</p>
+source(&quot;R/plots.R&quot;)
+````
+
+It&#39;s a matter of preference whether you use a single or multiple files.
+
+### Writing functions to work with pipes `%&gt;%` 
+
+For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](/../data-manipulation/)).
+
+Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our `standard_error` already works with pipes, assuming you are passing in `x`:</code></pre>
 <pre class="r"><code>algae$height %&gt;% standard_error()</code></pre>
 <pre><code>## [1] 0.04067788</code></pre>
 </div>
@@ -309,11 +309,11 @@ source(&quot;R/plots.R&quot;)</code></pre>
 <p>The examples above all return a single item. What if I want to return multiple items from a function? The answer is to return a <code>list</code> object. Lists are helpful because you can bundle together many different items.</p>
 <p>For example, we could write a function that returns several statistics of a variable:</p>
 <pre class="r"><code>summary_stats &lt;- function(x, na.rm = TRUE) {
-
-  list(mean = mean(x, na.rm=na.rm),
-       var = var(x, na.rm=na.rm),
-       n = sum(!is.na(x))
-      )
+  list(
+    mean = mean(x, na.rm = na.rm),
+    var = var(x, na.rm = na.rm),
+    n = sum(!is.na(x))
+  )
 }</code></pre>
 <p>If we run this function, we receive an object that has named elements:</p>
 <pre class="r"><code>height_stats &lt;- summary_stats(algae$height)
@@ -332,9 +332,7 @@ names(height_stats)</code></pre>
 is.list(fit)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>names(fit)</code></pre>
-<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
-##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
-##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;          &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;   &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
 <pre class="r"><code>fit$coefficients</code></pre>
 <pre><code>##     (Intercept) algae$dryweight 
 ##       0.4054402       0.1276447</code></pre>
@@ -368,7 +366,7 @@ is.list(fit)</code></pre>
 <li><a href="https://twitter.com/hadleywickham">Hadley Wickam’s</a> information on <a href="http://adv-r.had.co.nz/Functions.html">functions for intermediate and advanced users</a>.</li>
 <li>The <a href="http://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-R-intro.html#Writing-your-own-functions">official R intro material on writing your own functions</a></li>
 </ul>
-<p><strong>Author</strong>: Original by Keryn F Bain; revised and substantially expanded by <a href="https://twitter.com/adaptive_plant">Daniel S Falster</a></p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 27 11:46:51 2022&quot;</code></pre>
+<p><strong>Author</strong>: Original by Keryn F Bain; revised and expanded by Daniel S Falster</p>
+<p><strong>Year:</strong> 2018</p>
+<p><strong>Last updated:</strong> Tue Feb 1 10:44:10 2022</p>
 </div>

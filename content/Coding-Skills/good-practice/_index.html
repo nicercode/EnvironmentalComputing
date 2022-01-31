@@ -15,7 +15,7 @@ output: html_document
 <p>If you have never made an R script, first read <a href="/../getting-started-with-r/">Getting started with R</a>.</p>
 <div id="creating-a-project-directory" class="section level3">
 <h3>Creating a project directory</h3>
-<p>Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as “Data”, “R_scripts” or “Outputs”, how you manage your project directory is up to you.</p>
+<p>Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as <code>Data</code>, <code>R_scripts</code> or <code>Outputs</code>, how you manage your project directory is up to you.</p>
 <p><strong>Data integrity.</strong> Once data entry is completed and saved in your project directory (see <a href="/../getting-started-with-r/data-entry/">Data entry</a>, this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset.</p>
 </div>
 <div id="general-script-format" class="section level3">
@@ -28,7 +28,7 @@ output: html_document
 # Data consists of counts of bird species.
 # Data was collected in the hunter valley region between 1990 and 1991. 
 # Copyright statement: This script is the product of UNSW etc.</code></pre>
-<p>All comments need to start with # to distinguish them from executable code.</p>
+<p>All comments need to start with <code>#</code> to distinguish them from executable code.</p>
 <p>You should then include some code that will set your working directory and import your data. Ideally, setting your working directory as your project directory.</p>
 <pre class="r"><code>setwd(&quot;C:/Users/JohnSmith/My_project_directory&quot;)
 my.data &lt;- read.csv(&quot;my_data.csv&quot;, sep = &quot;,&quot;, header = T, check.names = FALSE)</code></pre>
@@ -233,6 +233,6 @@ bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)),
 <p>For more info see <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s style guide</a> which is based of the <a href="https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml#generallayout">Google style guide</a>.</p>
 <p>You may now be thinking about all the scripts that you have made that need to be be reformatted. As is commonplace in R, someone has created a package to help with this. The <a href="https://cran.r-project.org/web/packages/formatR/index.html">formatR</a> package by Yihui Xie has a neat little function called <code>tidy_source()</code>. This isn’t a fix all, but can go a long way in making horrible scripts look legible. See <a href="http://yihui.name/formatR/">An introduction to format R</a> or type <code>?tidy_source()</code> for details on how to use this package.</p>
 <p><strong>Author</strong>: Keryn F Bain</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:24:05 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2017</p>
+<p><strong>Last updated:</strong> Tue Feb 1 10:44:04 2022</p>
 </div>

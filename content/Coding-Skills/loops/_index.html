@@ -9,7 +9,7 @@ output: html_document
 
 
 <p>Do you find yourself cutting and pasting R code a lot?</p>
-<p>This usually will create problems for yourself later. One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use <a href="/../coding-skills/writing-functions/">functions</a> and the second one, covered here, is to use loops.</p>
+<p>This usually will create problems for yourself later. One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use <a href="../writing-functions/">functions</a> and the second one, covered here, is to use loops.</p>
 <p>We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> and <a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a> covered <a href="/../data-manipulation/">here</a>. The dplyr approach works well if your data is “tidy” and in a data frame. If your data are in many different files, then a loop may be a quicker solution.</p>
 <div id="basic-syntax-of-loops" class="section level3">
 <h3>Basic syntax of loops</h3>
@@ -54,42 +54,42 @@ for (bat in chars) {
 }</code></pre>
 <p>Often we will want to keep the results that we get back from our loop. The first option is to make a blank vector or data frame and append the results to it. This takes longer to run, but doesn’t really matter with simple loops, but can increase your wait times for longer and more complicated loop structures.</p>
 <p>Here is code that will store the square of the numbers 1 to 10 in a new vector called x</p>
-<pre class="r"><code>x &lt;- vector()         # makes a blank vector
+<pre class="r"><code>x &lt;- vector() # makes a blank vector
 
 for (i in 1:10) {
-  y &lt;- i^2            # performs an operation 
-  x &lt;- append(x,y)    # overwrites &#39;x&#39; with y appended to it
+  y &lt;- i^2 # performs an operation
+  x &lt;- append(x, y) # overwrites &#39;x&#39; with y appended to it
 }</code></pre>
 <p>Here is code that will store both the square and the square root of the numbers 1 to 10 in two columns of a new data frame called x2</p>
-<pre class="r"><code>x2 &lt;- data.frame(col1=vector(), col2=vector())   # makes a blank data frame with two columns
+<pre class="r"><code>x2 &lt;- data.frame(col1 = vector(), col2 = vector()) # makes a blank data frame with two columns
 
 for (i in 1:10) {
-  col1 &lt;- i^2                # performs first operation
-  col2 &lt;- sqrt(i)            # performs second operation 
-  x2 &lt;- rbind(x2, cbind(col1, col2))  # overwrites &#39;x2&#39; values including the new row
+  col1 &lt;- i^2 # performs first operation
+  col2 &lt;- sqrt(i) # performs second operation
+  x2 &lt;- rbind(x2, cbind(col1, col2)) # overwrites &#39;x2&#39; values including the new row
 }</code></pre>
 <p>The second option is to make a blank vector or dataframe of known dimensions and then place the results into it directly. For example, if we had a loop with 10 elements, we could store the results of each operation in a vector with a length of 10</p>
-<pre class="r"><code>x &lt;- vector(length=10)  # makes a blank vector with a length of 10
+<pre class="r"><code>x &lt;- vector(length = 10) # makes a blank vector with a length of 10
 
 for (i in 1:10) {
-  y &lt;- i^2             
-  x[i] &lt;- y             # places the output in position i in the vector x
+  y &lt;- i^2
+  x[i] &lt;- y # places the output in position i in the vector x
 }</code></pre>
 <p>Alternatively, store the results of multiple operations in a new data frame.</p>
-<pre class="r"><code>x2 &lt;- data.frame(col1=vector(length=10),col2=vector(length=10)) # makes a blank data frame with two columns and 10 rows
+<pre class="r"><code>x2 &lt;- data.frame(col1 = vector(length = 10), col2 = vector(length = 10)) # makes a blank data frame with two columns and 10 rows
 
 for (i in 1:10) {
-  col1 &lt;- i^2                   # performs first operation
-  col2 &lt;- sqrt(i)               # performs second operation 
-  x2[i,1] &lt;- col1               # places the first result into row i, column 1
-  x2[i,2] &lt;- col2               # places the second result into row i, column 2
+  col1 &lt;- i^2 # performs first operation
+  col2 &lt;- sqrt(i) # performs second operation
+  x2[i, 1] &lt;- col1 # places the first result into row i, column 1
+  x2[i, 2] &lt;- col2 # places the second result into row i, column 2
 }</code></pre>
 </div>
 <div id="an-ecological-example" class="section level3">
 <h3>An ecological example</h3>
 <p><img src="Subsetting_data_image.jpg" /></p>
 <p>Now we can use your new loop skills in an ecological context. As with the <a href="/../data-manipulation/subsetting-data">Subsetting data</a> tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
-<pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)
+<pre class="r"><code>Bats &lt;- read.csv(file = &quot;Bats_data.csv&quot;, header = T, stringsAsFactors = F)
 str(Bats)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    173 obs. of  10 variables:
 ##  $ Site                 : chr  &quot;CC02A1&quot; &quot;CC02A1&quot; &quot;CC02A1&quot; &quot;CC02A2&quot; ...
@@ -109,18 +109,20 @@ str(Bats)</code></pre>
 
 Bats_subset &lt;- select(Bats, Activity, Area.thinned:Distance.creek.water)</code></pre>
 <p>Next, make an empty data frame with two columns (the name of the variable and the correlation) and the number of rows needed to store all the correlations.</p>
-<pre class="r"><code>rows &lt;- ncol(Bats_subset)-1                    # the number of rows needed in our output dataframe
+<pre class="r"><code>rows &lt;- ncol(Bats_subset) - 1 # the number of rows needed in our output dataframe
 
-Correlations &lt;- data.frame(variable=character(length=rows), 
-                 correlation=numeric(length=rows), 
-                 stringsAsFactors=F)       </code></pre>
+Correlations &lt;- data.frame(
+  variable = character(length = rows),
+  correlation = numeric(length = rows),
+  stringsAsFactors = F
+)</code></pre>
 <p>Finally, we can use a loop to calculate each of the correlations and store the output in our new dataframe.</p>
 <pre class="r"><code>for (i in 1:rows) {
-  temp1 &lt;- colnames(Bats_subset[i+1])       # retrieves the name of predictor variable
-  temp2 &lt;- cor(Bats_subset[,1], Bats_subset[,i+1], method=&quot;pearson&quot;)
-                                           # calculates the correlation between activity and predictor variable
-  Correlations[i,1] &lt;- temp1               # places the variable name into row i, column 1
-  Correlations[i,2] &lt;- temp2               # places the correlation into row i, column 2
+  temp1 &lt;- colnames(Bats_subset[i + 1]) # retrieves the name of predictor variable
+  temp2 &lt;- cor(Bats_subset[, 1], Bats_subset[, i + 1], method = &quot;pearson&quot;)
+  # calculates the correlation between activity and predictor variable
+  Correlations[i, 1] &lt;- temp1 # places the variable name into row i, column 1
+  Correlations[i, 2] &lt;- temp2 # places the correlation into row i, column 2
 }</code></pre>
 <pre><code>##                variable correlation
 ## 1          Area.thinned -0.40890389
@@ -135,6 +137,6 @@ Correlations &lt;- data.frame(variable=character(length=rows),
 <p><a href="https://www.datacamp.com/community/tutorials/tutorial-on-loops-in-r#gs.8KE0Nx4">DataCamp’s tutorial on loops</a></p>
 <p>You can find some more good examples of loops, lists and if/else statements on the BEES R User group GitHub site <a href="https://github.com/mitchest/BEES-ecocomp/blob/master/introToLoops.R">loops and lists by Mitch</a>.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Thu Jan 27 11:42:09 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Tue Feb 1 10:55:17 2022</p>
 </div>

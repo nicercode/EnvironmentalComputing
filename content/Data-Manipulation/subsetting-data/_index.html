@@ -13,19 +13,19 @@ of our dataset, or to pull out observations with particular properties. We may c
 <p>In this exercise, we will load a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
 <p>The dataset includes measurements of total number of bat calls (“Activity”) and number of bat calls that indicate foraging behaviour (“Foraging”) recorded over one night for 47 sites and 173 sampling nights in total. Variables relating to forest thinning have been collected and are listed as columns ending in “thinned”. As the forest studied was in a floodplain, covariates relating to water availability were also collected and are listed in columns ending “water”.</p>
 <p>First, download the data set, <a href="/datasets/Bats_data.csv">Bats_data.csv</a>, and load into R.</p>
-<pre class="r"><code>Bats &lt;- read.csv(file=&quot;Bats_data.csv&quot;, header=T, stringsAsFactors=F)</code></pre>
+<pre class="r"><code>Bats &lt;- read.csv(file = &quot;Bats_data.csv&quot;, header = T, stringsAsFactors = F)</code></pre>
 <div id="basics-of-subsetting-in-r" class="section level3">
 <h3>Basics of subsetting in R</h3>
 <p>Check the structure after you have loaded the data with the <code>str</code> function.</p>
 <p>Now that we have some idea of the dataset we are working with, we can use the <code>[]</code> and <code>$</code> operators to select rows and columns in a dataframe. It’s quite simple: we place the name of the dataframe we want to select from before the square brackets and inside the square brackets we place a comma. Numbers to the left of the comma represent rows we’d like to select and numbers to the left of the comma represent columns we’d like to select.</p>
 <p>For example, if we wanted to select only data from the first three rows and all columns, we would use:</p>
-<pre class="r"><code>Bats[1:3,]</code></pre>
+<pre class="r"><code>Bats[1:3, ]</code></pre>
 <p>If we wanted only the last four columns and all rows, we would use:</p>
-<pre class="r"><code>Bats[,7:10]</code></pre>
+<pre class="r"><code>Bats[, 7:10]</code></pre>
 <p>In combination, this would select data from only the first three rows from the last four columns:</p>
 <pre class="r"><code>Bats[1:3, 7:10]</code></pre>
 <p>If the row and column numbers that you want do not form a sequence, we can use the <code>&gt;c()</code> function to concatenate row or column indices. For example, let’s add the sixth row and the 2<sup>nd</sup> column to our selection from above:</p>
-<pre class="r"><code>Bats[c(6,1:3), c(2,7:10)]</code></pre>
+<pre class="r"><code>Bats[c(6, 1:3), c(2, 7:10)]</code></pre>
 <p>Rather than working out which variable is in which numbered column, it is often easier to use the variable names in a data frame and select the variable using <code>$</code> operator. For example, to choose only the Site variable:</p>
 <pre class="r"><code>Bats$Site</code></pre>
 </div>
@@ -55,9 +55,9 @@ and more.</p>
 <p>You will notice that while using the above functions, we have mostly assigned them to new objects, e.g., <code>Bats.foraging &lt;-...</code> . This gives us the option to use the newly subsetted data for further computations.</p>
 <p><strong>Taking a random selection of rows</strong></p>
 <p>We may want to randomly select a number or fraction of rows in our dataset to validate our models. For example, we could take 50% of the data to build the model and then 50% of the model to test it against observed data. Random selection of rows is important if we are going to split the data up this way, because we don’t want to bias our data to any particular properties or categories. Here we make a new dataframe “Bats.50p” which has half the number of rows of the initial dataset:</p>
-<pre class="r"><code>Bats.50p &lt;- sample_frac(Bats, size = 0.5, replace=FALSE)</code></pre>
+<pre class="r"><code>Bats.50p &lt;- sample_frac(Bats, size = 0.5, replace = FALSE)</code></pre>
 <p>Similarly, we could ask for a certain number of rows to be randomly sampled from the data set. For example, to randomly sample 100 rows, we would use:</p>
-<pre class="r"><code>Bats.100r &lt;- sample_n(Bats, 100, replace=FALSE)</code></pre>
+<pre class="r"><code>Bats.100r &lt;- sample_n(Bats, 100, replace = FALSE)</code></pre>
 <p><strong>Selecting rows with the highest values</strong></p>
 <p>dplyr has a neat function for selecting <em>n</em> rows with the highest values of any given column: <code>top_n</code>. Below, we identify the three rows of data which contain the greatest total bat activity per night:</p>
 <pre class="r"><code>Bats.top &lt;- top_n(Bats, 3, Activity)
@@ -112,6 +112,5 @@ Bats_subset4 &lt;- select(bats, matches(&quot;water$&quot;))</code></pre>
 <p>You can type <code>?dplyr</code> to get help with this package.</p>
 <p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:24:13 2022&quot;</code></pre>
+<p><strong>Last updated:</strong>Tue Feb 1 10:26:03 2022</p>
 </div>

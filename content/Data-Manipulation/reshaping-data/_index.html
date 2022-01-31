@@ -13,7 +13,7 @@ output: html_document
 2. two columns - one that identifies the species and one that records the abundance.</p>
 <p><img src="Reshaping_data_image.jpg" /></p>
 <p>Consider a data set that recorded the abundance of fish from each of three transects that were set up on two reefs in two separate months. First, import this sample data set, <a href="/datasets/ReefFish.csv">ReefFish.csv</a>, to see the way it is formatted.</p>
-<pre class="r"><code>ReefFish &lt;- read.csv(file=&quot;ReefFish.csv&quot;, header =T)</code></pre>
+<pre class="r"><code>ReefFish &lt;- read.csv(file = &quot;ReefFish.csv&quot;, header = T)</code></pre>
 <pre><code>##    Site   Month Transect   Species Abundance
 ## 1 Reef1 January        1   RedFish         4
 ## 2 Reef1 January        1  BlueFish         5
@@ -76,8 +76,9 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 <pre class="r"><code>library(reshape2)</code></pre>
 <p>Instead of <code>spread</code>, <code>dcast</code> is used to go from a long to wide format. This code will do the same as we saw above.</p>
 <pre class="r"><code>ReefFish.wide &lt;- dcast(ReefFish,
-                      Site + Month + Transect ~ Species,
-                      value.var = &quot;Abundance&quot;, fill = 0)</code></pre>
+  Site + Month + Transect ~ Species,
+  value.var = &quot;Abundance&quot;, fill = 0
+)</code></pre>
 <p>The arguments of <code>dcast</code> are:<br />
 * The data frame you would like to convert (in this case, ReefFish)<br />
 * The variable(s) you would like to include unchanged as columns in the new data frame are to the left of the ~ (Site, Month and Transect)<br />
@@ -86,9 +87,10 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 * <code>fill=0</code> tells <code>dcast</code> to fill in zeroes for when a species was missing from a given transect.</p>
 <p>Instead of <code>gather</code>, <code>melt</code> is used to go from a wide to long format.</p>
 <pre class="r"><code>ReefFish.long &lt;- melt(ReefFish.wide,
-                    id.vars = c(&quot;Site&quot;,&quot;Month&quot;,&quot;Transect&quot;),
-                    measure.vars = c(&quot;RedFish&quot;,&quot;BlueFish&quot;,&quot;BlackFish&quot;),
-                    variable.name = &quot;Species&quot;, value.name = &quot;Abundance&quot;)</code></pre>
+  id.vars = c(&quot;Site&quot;, &quot;Month&quot;, &quot;Transect&quot;),
+  measure.vars = c(&quot;RedFish&quot;, &quot;BlueFish&quot;, &quot;BlackFish&quot;),
+  variable.name = &quot;Species&quot;, value.name = &quot;Abundance&quot;
+)</code></pre>
 <p>The arguments of <code>melt</code> are:<br />
 * The data frame that we would like to convert<br />
 * <code>id.vars</code> specifies the columns that remain unchanged (here the predictor variables that label each replicate observation)<br />
@@ -98,9 +100,10 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 <p>In the above example, there was only one row that belonged to each combination of Site, Month and Transect. If there are duplicate rows for each combination of the variables that you want to keep in the new data frame (the ones to the left of the ~) you need to tell <code>dcast</code> how you would like to deal with the duplicates (e.g., add them up or calculate their mean)</p>
 <p>For example, if we wanted to pool the transects from each survey, we could remove Transect from the list of variables to include in the new data frame and add an argument (<code>fun.aggregate = sum</code>) to tell <code>dcast</code> that we would like to add up the values from the three transects in each Site/Month combination.</p>
 <pre class="r"><code>ReefFish.wide_sum &lt;- dcast(ReefFish,
-                       Site + Month ~ Species,
-                       value.var = &quot;Abundance&quot;,
-                       fun.aggregate = sum, fill = 0)</code></pre>
+  Site + Month ~ Species,
+  value.var = &quot;Abundance&quot;,
+  fun.aggregate = sum, fill = 0
+)</code></pre>
 <pre><code>##    Site    Month BlackFish BlueFish RedFish
 ## 1 Reef1 February       116       15      60
 ## 2 Reef1  January        18       18      49
@@ -108,26 +111,21 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 ## 4 Reef2  January       137      110      29</code></pre>
 <p>If we wanted the mean of the three transects, we can use <code>fun.aggregate = mean</code>.</p>
 <pre class="r"><code>ReefFish.wide_mean &lt;- dcast(ReefFish,
-                       Site + Month ~ Species,
-                       value.var = &quot;Abundance&quot;, fun.aggregate = mean, fill = 0)</code></pre>
+  Site + Month ~ Species,
+  value.var = &quot;Abundance&quot;, fun.aggregate = mean, fill = 0
+)</code></pre>
 <p>You can also put more complex expressions in the reshape formula to create new variables that are combinations of old ones. For example, you could create a new column for each of the combinations of Species and Month by adding both variables to the right of the ~</p>
 <pre class="r"><code>ReefFish.wide_combined &lt;- dcast(ReefFish,
-                       Site + Transect ~ Species + Month,
-                       value.var = &quot;Abundance&quot;, fill = 0)</code></pre>
-<pre><code>##    Site Transect BlackFish_January BlueFish_February BlueFish_January
-## 1 Reef1        1                10                12                5
-## 2 Reef1        2                 0                 3               13
-## 3 Reef1        3                 8                 0                0
-## 4 Reef2        1                72                 0                0
-## 5 Reef2        2                 0                22                9
-## 6 Reef2        3                65                84              101
-##   RedFish_February RedFish_January
-## 1               52               4
-## 2                0              42
-## 3                8               3
-## 4                0               5
-## 5                3               0
-## 6               15              24</code></pre>
+  Site + Transect ~ Species + Month,
+  value.var = &quot;Abundance&quot;, fill = 0
+)</code></pre>
+<pre><code>##    Site Transect BlackFish_January BlueFish_February BlueFish_January RedFish_February RedFish_January
+## 1 Reef1        1                10                12                5               52               4
+## 2 Reef1        2                 0                 3               13                0              42
+## 3 Reef1        3                 8                 0                0                8               3
+## 4 Reef2        1                72                 0                0                0               5
+## 5 Reef2        2                 0                22                9                3               0
+## 6 Reef2        3                65                84              101               15              24</code></pre>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
@@ -137,6 +135,5 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 <p><a href="https://rpubs.com/bradleyboehmke/data_wrangling">Data wrangling with dplyr and tidyr</a></p>
 <p><a href="http://seananderson.ca/2013/10/19/reshape.html">An introduction to reshape2</a></p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 14:30:17 2022&quot;</code></pre>
+<p><strong>Last updated:</strong>Tue Feb 1 10:25:56 2022</p>
 </div>

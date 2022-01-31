@@ -49,7 +49,7 @@ You can change the size of these by dragging the edges of the windows.
 
 ### Saving your code in a script
  
-You should save all the code you use for a given analysis or graphic. Use the menus in R Studio to create a new R script (*File >> New >> R script*) and save that with the disk icon or menu (*File >> Save*). See [Good practice for writing scripts](http:environmentalcomputing.net/Good-practice-for-writing-scripts/) for advice on how to structure these files.
+You should save all the code you use for a given analysis or graphic. Use the menus in R Studio to create a new R script (*File >> New >> R script*) and save that with the disk icon or menu (*File >> Save*). See [Project management](../project-management/) for advice on how to structure these files.
   
 
 ### Installing R packages
@@ -67,11 +67,11 @@ library(maptools)
 ### Further help
  
 
-Our help modules on [Good practice for writing scripts](/../coding-skills/good-practice) and [Importing data and data cleaning](/../getting-started-with-r/importing-data/)
+Our help modules on [Good practice for writing scripts](../../coding-skills/good-practice) and [Importing data and data cleaning](../importing-data)
 
 [Online help with R Studio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 
-[Online training in R](http://www.rstudio.com/training/online-learning/)
+[Online training in R](http://www.rstudio.com/training/online-learning)
   
 
 **Author**: Alistair Poore

@@ -160,8 +160,7 @@ If you are unsure of which file you want/need from online then you can use a vie
 **Author**: Stephanie Brodie
 <br>
 
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2018
+
+**Last updated:** `r date()`
 

@@ -151,7 +151,6 @@ ggplot(data=Sites,aes(x=lon, y=lat))+
 
 **Author**: Matt Holland
 <br>
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

@@ -157,10 +157,9 @@ ggplot() +
 the `geom_polygon` plots the map, the `geom_points` adds a point at the latitude and longitude of each sampling site, and if desired, you can use `geom_text` to add labels next to each site. Note that I added a tiny amount (0.01) to the longitude to stop the labels appearing on top of the points.
 
 **Author**: Matt Holland
-<br>
-Last updated:
-```{r,echo=F}
-date()
-```
+
+**Year:** 2018
+
+**Last updated:** `r date()`
 
 

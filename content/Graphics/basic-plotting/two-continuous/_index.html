@@ -41,7 +41,7 @@ The choice of symbols to use in plotting is extensive and choices are accessed u
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p><strong>Adding a line of best fit</strong></p>
 <p>To further explore the relationship between two variables you can add a line of best fit. For example, to add the line of best fit from a simple linear regression, we would use the linear modelling function, <code>lm</code>, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter <code>abline</code>.</p>
-<p>See the page on <a href="/../statistics/linear-model/linear-regression/">linear regression</a> for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:</p>
+<p>See the page on <a href="/statistics/linear-model/linear-regression/">linear regression</a> for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:</p>
 <pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;log(Plant height)&#39;,pch=16)
 abline(lm(loght ~ temp, data = Plant_height))</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
@@ -51,5 +51,5 @@ abline(lm(loght ~ temp, data = Plant_height))</code></pre>
 <p>Type <code>?plot</code> and <code>?abline</code> to get the R help for these functions.</p>
 <p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 15:02:35 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Jan 31 15:45:43 2022&quot;</code></pre>
 </div>

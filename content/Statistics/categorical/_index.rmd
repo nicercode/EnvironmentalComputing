@@ -7,5 +7,5 @@ aliases: /categorical-data-analyses/
 
 Some commonly used tests for contrasting the counts of observations across categorical variables.
 
-* [Goodness of fit tests](/../statistics/goodness-of-fit-tests/)  
-* [Contingency tables](/../statistics/contingency-tabs/)  
+* [Goodness of fit tests](goodness-of-fit-tests)  
+* [Contingency tables](contingency-tables)  

@@ -8,8 +8,8 @@ Throughout this site, instructions for statistical analyses, data management and
 
 Before you get started with making graphics and doing analyses, you will need to:
 
-* [Install R and learn the basics of using R](/../getting-started-with-r/installing-r-rstudio)  
-* Think about [project management](/../getting-started-with-r/project-management) to plan how you are going to organise your files 
+* [Install R and learn the basics of using R](installing-r-rstudio)  
+* Think about [project management](project-management) to plan how you are going to organise your files 
  
 
 ### Data entry
@@ -21,9 +21,9 @@ After collecting data, being able to enter those data and import into various so
 
 On these pages, we give some guidance for data entry that will save a lot of time when it comes to analysing data and making effective figures. We also describe the types and structure of data objects in R that you will see once you have imported your data. 
 
-* [Data entry](/../getting-started-with-r/data-entry) - organising data when first entering it into a spreadsheet.  
-* [Importing data](/../getting-started-with-r/importing-data) into R  
-* [Data types and structure](/../getting-started-with-r/data-types-structure/) - better understanding data objects in R  
+* [Data entry](data-entry) - organising data when first entering it into a spreadsheet.  
+* [Importing data](importing-data) into R  
+* [Data types and structure](data-types-structure/) - better understanding data objects in R  
 
 ![](data-entry/Data_entry_image.jpg)
 

@@ -1,10 +1,57 @@
 ---
+title: 'Statistics'
 weight: 6
-title: "Categorial Data Analyses"
 output: html_document
 ---
 
-Some commonly used tests for contrasting the counts of observations across categorical variables.
+These pages have some introductions to a wide range of commonly used statistical analyses in the environmental sciences.
 
-* [Goodness of fit tests](/../statistics/categorical/goodness-of-fit/)  
-* [Contingency tables](/../statistics/categorical/contingency-tabs/)  
+Some simple [hypothesis tests](t-tests) with the *t* statistic:
+
+* [One sample t tests](t-tests/one-sample-t-test) - contrasting a single sample parameter to a population parameter  
+* [Independent samples](t-tests/two-sample-t-test) - contrasting the means of two samples
+* [Paired t-tests](t-tests/paired-t-test) - contrasting two groups when data are paired  
+
+[Linear models](linear-models):
+
+* [Linear regression](linear-models/linear-regression)
+* [Analysis of variance: single factor](linear-models/analysis-variance-single-factor)
+* [Analysis of variance: factorial](linear-models/analysis-variance-factorial)  
+* [Understanding interactions](linear-models/understanding-interactions)
+
+[Generalised linear models](linear-models/generalised-linear-models):
+
+* [Generalised linear models 1](generalised-linear-models-1): Introduction and binomial data  
+* [Generalised linear models 2](generalised-linear-models-2): Count data  
+
+[Mixed models](mixed-models):
+
+* [Mixed models 1](mixed-models/mixed-models-1): Linear mixed models with one random effect  
+* [Mixed models 2](mixed-models/mixed-models-2): Linear mixed models with several random effects  
+* [Mixed models 3](mixed-models/mixed-models-3): Generalised linear mixed models  
+
+[Generalised additive models](gams)
+
+[Categorical data analyses](categorical-data-analyses):
+
+* [Goodness of fit tests](categorical-data-analyses/goodness-of-fit-tests)  
+* [Contingency tables](categorical-data-analyses/contingency-tables)
+
+[Power analyses](power-analysis): calculating power and deciding on sample sizes
+
+[Introduction to mvabund](introduction-to-mvabund): model-based analysis of multivariate abundance data
+
+[Forecasting with time series](forecasting-time-series)
+
+
+[Meta-analyses](meta-analyses) 
+
+* [Meta-analyses 1](meta-analyses/meta-analyses-1): Introduction and calculating effect sizes  
+* [Meta-analyses 2](meta-analyses/meta-analyses-2): Fixed effect and random effect models  
+* [Meta-analyses 3](meta-analyses/meta-analyses-3): More complex models 
+
+ 
+Last updated:
+```{r,echo=F}
+date()
+```

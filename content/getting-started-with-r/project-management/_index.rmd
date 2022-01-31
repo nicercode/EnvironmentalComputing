@@ -17,7 +17,7 @@ Create a folder on your computer for each project. This could be a course you ar
 * A folder for R functions (if used) usually called "R"
 * A folder for writing and references called "Manuscripts"
 
-The data folder should hold the raw data (usually entered in a spreadsheet program).   After you finish entering your data, you should aim to keep these data untouched; all the things you want to do with the data, such as data cleaning and [subsetting](/../data-manipulation/subsetting-data), [summarising](/../data-manipulation/summarising-data) data into table, running statistical [analyses](/../statistics/) or creating [figures](/../graphics/), can be done via R scripts.  This keeps a record of everything you do.  Think of this script(s) as the lab notebook for a data scientist. Intermediate outputs are good--separate these from the raw data and save them in the outputs folder.
+The data folder should hold the raw data (usually entered in a spreadsheet program).   After you finish entering your data, you should aim to keep these data untouched; all the things you want to do with the data, such as data cleaning and [subsetting](/data-manipulation/subsetting-data), [summarising](/data-manipulation/summarising-data) data into table, running statistical [analyses](/statistics) or creating [figures](/graphics), can be done via R scripts.  This keeps a record of everything you do.  Think of this script(s) as the lab notebook for a data scientist. Intermediate outputs are good--separate these from the raw data and save them in the outputs folder.
 
 One goal of this project organization is that your data processing and analysis is entirely reproducible, and as such both the data and exact methods can be shared with colleagues and supervisors, who can then repeat and hopefully build on your analyses. Also, although you might know all the files and steps at the moment, think of yourself in a year once you've moved on to other jobs or projects; try to be nice to your future self and keep good notes. In contrast, if you used a point--and--click or spreadsheet program to do important steps in your analysis, you'll need to remember all the steps taken to recreate the analyses or figures.  Most analyses at some point get too complicated for this to be tractable.  
   
@@ -64,7 +64,7 @@ If you have mutiple R project files, you can easily swap between them by clickin
 ### Further help
  
 R Studio's help with [using projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
-Our introduction to [version control](/../coding-skills/version-control/) for keeping track of revisions to project files.
+Our introduction to [version control](/coding-skills/version-control/) for keeping track of revisions to project files.
   
 
 **Author**: Alistair Poore & Will Cornwell

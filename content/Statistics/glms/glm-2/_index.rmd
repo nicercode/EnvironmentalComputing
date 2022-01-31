@@ -5,7 +5,7 @@ output: html_document
 ---
 **Count data**
 
-This is a continuation of [Generalised linear models 1](/../statistics/glms/glm-1) which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM's for count data and briefly introduce how they can be used for other data types you may have.
+This is a continuation of [Generalised linear models 1](/statistics/glms/glm-1) which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM's for count data and briefly introduce how they can be used for other data types you may have.
   
 
 ### Running the analysis
@@ -112,7 +112,7 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 20074. *Analysing ecological data*. Springer Science & Business Media, 2007.</p>
 
-More advice on [interpreting coefficients in glms](/../interpreting-coefficients-in-glms/)
+More advice on [interpreting coefficients in glms](/interpreting-coefficients-in-glms/)
   
 
 **Author**: Gordana Popovic

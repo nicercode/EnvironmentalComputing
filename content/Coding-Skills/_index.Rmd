@@ -8,12 +8,12 @@ You might think having skills in computer coding is just for web site and game d
 
 On these pages, we give some advice for writing effective code and some of the very useful coding skills that will save you lots of time.
 
-* [Good practice for writing scripts](/../coding-skills/good-practice/)
-* [Writing simple functions](/../coding-skills/writing-functions/)  
-* [Using loops](/../coding-skills/loops/)
+* [Good practice for writing scripts](good-practice/)
+* [Writing simple functions](writing-functions/)  
+* [Using loops](loops/)
 * Using Lists...coming soon
 * Logical control...coming soon
-* [Version control](/../coding-skills/version-control/)
+* [Version control](version-control/)
 
 ![](Coding_image.jpg)
 

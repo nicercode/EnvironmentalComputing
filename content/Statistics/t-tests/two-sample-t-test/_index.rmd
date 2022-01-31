@@ -30,7 +30,7 @@ Note that a *t* test is a special case of a linear model with a single continuou
 
 ### Running the analysis
  
-An independent samples *t*-test can be run with the same `t.test` function as used for [one sample](/../statistics/t-test/one-sample-t-test/) or [paired *t*-tests](/../statistics/t-test/paired-t-test/). For an independent samples *t*-test assuming equal variances, we would use: 
+An independent samples *t*-test can be run with the same `t.test` function as used for [one sample](/statistics/t-test/one-sample-t-test/) or [paired *t*-tests](/statistics/t-test/paired-t-test/). For an independent samples *t*-test assuming equal variances, we would use: 
 
 
 ```{r,eval = FALSE}

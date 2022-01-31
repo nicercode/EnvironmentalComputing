@@ -24,8 +24,8 @@ output: html_document
 <div id="bar-plots" class="section level3">
 <h3>Bar plots</h3>
 <p>These sorts of data are also commonly visualised with a bar plot that displays the means of the continuous variable for each level of the categorical variable, with error bars displaying some measures of variation within each category. The error bars could be the standard deviation, standard error or 95% confidence intervals.</p>
-<p>While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the <code>summarise</code> and <code>group_by</code> functions from the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> to calculate the means and measures of variation for each level of your categorical variable (see <a href="/../data-manipulation/summarising-data/">Summarising data</a>).</p>
-<p>Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see <a href="/../graphics/ggplot/ggplot-barplot/">bar plots with error bars</a>).</p>
+<p>While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the <code>summarise</code> and <code>group_by</code> functions from the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> to calculate the means and measures of variation for each level of your categorical variable (see <a href="/data-manipulation/summarising-data/">Summarising data</a>).</p>
+<p>Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see <a href="/graphics/ggplot/ggplot-barplot/">bar plots with error bars</a>).</p>
 <pre class="r"><code>library(dplyr)
 
 Species.summary &lt;- Prawns %&gt;% # the names of the new data frame and the data frame to be summarised
@@ -71,5 +71,5 @@ Colour can be added to any part of the plots (axis, fonts etc.) using <code>col<
 <p>Type <code>?boxplot</code> and <code>?barplot</code> to get the R help for these functions.</p>
 <p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
 <p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 15:03:34 2022&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Jan 31 15:47:04 2022&quot;</code></pre>
 </div>

@@ -153,7 +153,7 @@ forest(dat$yi[1:12], dat$vi[1:12])
 We can calculate many different kinds of effect sizes with `escalc`; other common effect size statistics include $Zr$ (Fisher's z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio -- mouthful!), which compares the variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of `metafor`, let you do this with `escalc`-- [github page](https://github.com/cran/metafor). lnCVR is called "CVR" in `escalc`. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight! 
 
 
-Once you have calculated effect sizes, move on to the next page: [Meta-analysis 2: fixed-effect and random-effect models](/../statistics/meta-analysis/meta-analysis-2meta-analysis-2)
+Once you have calculated effect sizes, move on to the next page: [Meta-analysis 2: fixed-effect and random-effect models](/statistics/meta-analysis/meta-analysis-2meta-analysis-2)
 
 ### Further help (references)
 

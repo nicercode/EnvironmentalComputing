@@ -8,9 +8,9 @@ R has a very wide range of functions and packages for visualising data.
 
 These pages have a brief introduction to:
 
-* [Basic plotting in R](/../graphics/basic-plotting/)
-* [More advanced plotting with ggplot](/../graphics/ggplot/)
-* [Visualising multivariate data](/../graphics/multivariate-vis/)
-* [Visualising spatial data (incl. mapping)](/../graphics/spatial-vis/)
+* [Basic plotting in R](basic-plotting/)
+* [More advanced plotting with ggplot](ggplot/)
+* [Visualising multivariate data](multivariate-vis/)
+* [Visualising spatial data (incl. mapping)](spatial-vis/)
 
 

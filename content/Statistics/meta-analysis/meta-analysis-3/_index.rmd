@@ -2,6 +2,7 @@
 weight: 3
 title: "Multilevel Models"
 output: html_document
+aliases: /meta-analysis-3/
 editor_options: 
   chunk_output_type: console
 ---

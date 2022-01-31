@@ -2,6 +2,7 @@
 weight: 2
 title: "Two Sample T-test"
 output: html_document
+aliases: /independent-samples-t-test/
 ---
 
 An independent samples *t*-test aka a two sample *t*-test is one of the most commonly used statistical tests. It is used for comparing whether the means of two samples are statistically different from each other (e.g., control vs. treatment, site A vs site B etc). For example, consider the simple case of whether a sample of pH measurements from one river differs from a sample of pH measurements from a second river.

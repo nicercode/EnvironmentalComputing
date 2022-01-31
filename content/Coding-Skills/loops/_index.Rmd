@@ -7,7 +7,7 @@ output: html_document
 
 Do you find yourself cutting and pasting R code a lot? 
 
-This usually will create problems for yourself later.  One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use   [functions](/../coding-skills/writing-functions/) and the second one, covered here, is to use loops.  
+This usually will create problems for yourself later.  One principle of good coding is to try and reduce repetition to the minimum possible. There are two approaches to both make your code organized and save you work. The first one is to use   [functions](../writing-functions/) and the second one, covered here, is to use loops.  
 
 We often want to do repetitive tasks in the environmental sciences. For example, we may like to loop through a list of files and do the same thing over and over. There are many packages in R with functions that will do all of the hard work for you (e.g. check out [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/) and [reshape2](https://cran.r-project.org/web/packages/reshape2/) covered [here](/../data-manipulation/). The dplyr approach works well if your data is "tidy" and in a data frame. If your data are in many different files, then a loop may be a quicker solution.  
   

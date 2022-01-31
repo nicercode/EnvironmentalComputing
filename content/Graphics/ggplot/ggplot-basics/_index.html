@@ -13,7 +13,8 @@ output: html_document
 <p>First, you will need to install the package ggplot2 on your machine, then load the package with the usual <code>library</code> function.</p>
 <pre class="r"><code>library(ggplot2)</code></pre>
 <p>The starting point for creating a plot is to use the <code>ggplot</code> function with the following basic structure:</p>
-<pre class="r"><code>plot1 &lt;- ggplot(data, aes(x variable, y variable)) + geom_graph.type()
+<pre class="r"><code>plot1 &lt;- ggplot(data, aes(x_variable, y_variable)) +
+  geom_graph.type()
 
 print(plot1)</code></pre>
 <p><code>data</code> is a data frame that holds the variables that you would like to plot.</p>
@@ -34,30 +35,38 @@ print(plot1)</code></pre>
 <p>In these examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
 <pre class="r"><code>data(iris)</code></pre>
 <p>To contrast petal length across the three species of iris with a <strong>box plot</strong>, we would use:</p>
-<pre class="r"><code>plot1 &lt;- ggplot(iris, aes(Species, Petal.Length)) + geom_boxplot()
+<pre class="r"><code>plot1 &lt;- ggplot(iris, aes(Species, Petal.Length)) +
+  geom_boxplot()
 print(plot1)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Note how <code>aes</code> included the <em>x</em> then the <em>y</em> variables which you wanted to plot, and that <code>+ geom_boxplot()</code> specified a boxplot.</p>
 <p>To plot a <strong>frequency histogram</strong> of petal length, we would use:</p>
-<pre class="r"><code>plot2 &lt;- ggplot(iris, aes(Petal.Length)) + geom_histogram()
+<pre class="r"><code>plot2 &lt;- ggplot(iris, aes(Petal.Length)) +
+  geom_histogram()
 print(plot2)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>To use a <strong>scatter plot</strong> the visualise the relationship between petal length and sepal length, we would use:</p>
-<pre class="r"><code>plot3 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length)) + geom_point()
+<pre class="r"><code>plot3 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length)) +
+  geom_point()
 print(plot3)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>These points could then be coloured according to the levels of a categorical variable. To do this, add <code>colour="categorical.variable"</code> in the <code>aes</code> brackets. To colour by species, we would use:</p>
-<pre class="r"><code>plot4 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point()
+<pre class="r"><code>plot4 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
 print(plot4)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="adding-a-basic-theme" class="section level3">
 <h3>Adding a basic theme</h3>
 <p>The overall look of the ggplot can be altered with different set themes. This can be done by adding <code>+ theme_bw()</code> or <code>+ theme_classic()</code> to the end of your line of code. Like <code>geom()</code>, ensure there is open and closed brackets after the theme name.</p>
-<pre class="r"><code>plot5 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() + theme_bw()
+<pre class="r"><code>plot5 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_bw()
 print(plot5)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<pre class="r"><code>plot6&lt;-ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() + theme_classic()
+<pre class="r"><code>plot6 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_classic()
 print(plot6)</code></pre>
 <p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 <p>###Further help</p>
@@ -71,6 +80,5 @@ print(plot6)</code></pre>
 Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with quite a bit of help online <a href="http://www.cookbook-r.com/Graphs/">here</a>
 </p>
 <p><strong>Author</strong>: Fiona Robinson</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:47:53 2022&quot;</code></pre>
+<p><strong>Last updated:</strong> Tue Feb 1 10:27:25 2022</p>
 </div>

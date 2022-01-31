@@ -23,26 +23,26 @@ output: html_document
 <p>Scatterplots can be formatted using the basic R formatting in the graphics package. The code below details some of the more commonly used formatting commands for simple scatterplots. These commands can be used for any plotting function in the graphics package.</p>
 <p><strong>Add axis labels or titles</strong>
 Axis labels are produced with the <code>xlab</code> and <code>ylab</code> arguments. Titles are provided with the <code>main</code> argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.</p>
-<pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;,main=&#39;Plant height vs temperature&#39;)</code></pre>
+<pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab = &quot;Temperature (°C)&quot;, ylab = &quot;Plant height (m)&quot;, main = &quot;Plant height vs temperature&quot;)</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p><strong>Edit axis limits</strong>
 Axis limits are set by the <code>xlim</code> and <code>ylim</code> arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 80 m, and the x axis to range between -20 and 30, use:</p>
-<pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;, ylim = c(0,80),xlim = c(-20,30))</code></pre>
+<pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab = &quot;Temperature (°C)&quot;, ylab = &quot;Plant height (m)&quot;, ylim = c(0, 80), xlim = c(-20, 30))</code></pre>
 <p><strong>Symbol style</strong>
 The choice of symbols to use in plotting is extensive and choices are accessed using the <code>pch</code> argument in the graphical parameters. Type <code>?pch</code> to see all the choices.</p>
 <p><img src="pch.png" /></p>
 <p>A solid circles <code>pch=16</code> or <code>pch=19</code> are often the neatest way to display data on a scatterplot.</p>
-<pre class="r"><code>plot(height~temp,data=Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;, ylim = c(0,80),pch=16)</code></pre>
+<pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab = &quot;Temperature (°C)&quot;, ylab = &quot;Plant height (m)&quot;, ylim = c(0, 80), pch = 16)</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p><strong>Adding colour</strong></p>
 <p>Colour can be added to any part of the plots (axis, fonts etc.) using <code>col</code> argument. There are over 600 colours that can be plotted, type <code>colours()</code> for the whole range.</p>
 <p>Here we will simply change the colour of the symbols to blue.</p>
-<pre class="r"><code>plot(height~temp,data=Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;Plant height (m)&#39;, pch=16, col=&quot;blue&quot;)</code></pre>
+<pre class="r"><code>plot(height ~ temp, data = Plant_height, xlab = &quot;Temperature (°C)&quot;, ylab = &quot;Plant height (m)&quot;, pch = 16, col = &quot;blue&quot;)</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p><strong>Adding a line of best fit</strong></p>
 <p>To further explore the relationship between two variables you can add a line of best fit. For example, to add the line of best fit from a simple linear regression, we would use the linear modelling function, <code>lm</code>, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter <code>abline</code>.</p>
 <p>See the page on <a href="/statistics/linear-model/linear-regression/">linear regression</a> for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:</p>
-<pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab=&#39;Temperature (°C)&#39;, ylab = &#39;log(Plant height)&#39;,pch=16)
+<pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab = &quot;Temperature (°C)&quot;, ylab = &quot;log(Plant height)&quot;, pch = 16)
 abline(lm(loght ~ temp, data = Plant_height))</code></pre>
 <p><img src="/graphics/basic-plotting/two-continuous/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
@@ -50,6 +50,5 @@ abline(lm(loght ~ temp, data = Plant_height))</code></pre>
 <h3>Further help</h3>
 <p>Type <code>?plot</code> and <code>?abline</code> to get the R help for these functions.</p>
 <p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:45:43 2022&quot;</code></pre>
+<p><strong>Last updated:</strong>Tue Feb 1 10:26:30 2022</p>
 </div>

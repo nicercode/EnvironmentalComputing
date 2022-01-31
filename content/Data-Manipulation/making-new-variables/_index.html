@@ -31,11 +31,11 @@ Herbivores$Ampithoe &lt;- Herbivores$Ampithoe_caddi + Herbivores$Ampithoe_kava +
 Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + Ampithoe_ngana)</code></pre>
 <p>Even neater is to run several things at once. We could create both of those new variables and many others with single block of code. For example:</p>
 <pre class="r"><code>Herbivores &lt;- mutate(Herbivores,
-                     log_Mass = log(Mass),  # log of Mass
-                     Ampithoe = Ampithoe_caddi + Ampithoe_kava + Ampithoe_ngana, # sum of three columns
-                     Total_abundance = rowSums(Herbivores[,5:12]), # sum of columns 5-12 with all abundance data
-                     Total_abundance_perGram = Total_abundance/Mass  # abundance as numbers per g of habitat
-                     )</code></pre>
+  log_Mass = log(Mass), # log of Mass
+  Ampithoe = Ampithoe_caddi + Ampithoe_kava + Ampithoe_ngana, # sum of three columns
+  Total_abundance = rowSums(Herbivores[, 5:12]), # sum of columns 5-12 with all abundance data
+  Total_abundance_perGram = Total_abundance / Mass # abundance as numbers per g of habitat
+)</code></pre>
 <p>The arguments of <code>mutate</code> are simply the name of the data frame followed by any number of expressions that create new variables.</p>
 <p>In the above examples, note that the new variables have been added to the existing data frame, and all old variables have been kept. You can use <code>transmute</code> if you want to drop the original variables.</p>
 <p>These functions become especially powerful when combined with some of the others in dplyr. See our pages on <a href="/../data-manipulation/subsetting-data/">subsetting</a> and <a href="/../data-manipulation/summarising-data/">summarising</a> data.</p>
@@ -51,18 +51,18 @@ Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + 
 <p>Combining the content of several columns into a single column can be useful to provide a different set of labels for rows in your data set, or new levels of a categorical variable that you may want to use in graphs. The function <code>unite</code> in the package <a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">tidyr</a> allows us to do this very easily. First, install and load this package into R.</p>
 <pre class="r"><code>library(tidyr)</code></pre>
 <p>If we wanted to make a new categorical variable where each level was the unique combination of habitat and day/night, we would use:</p>
-<pre class="r"><code>Herbivores &lt;- unite(Herbivores, &quot;Habitat_DayNight&quot;, c(Habitat, DayNight), sep=&quot;_&quot;)</code></pre>
+<pre class="r"><code>Herbivores &lt;- unite(Herbivores, &quot;Habitat_DayNight&quot;, c(Habitat, DayNight), sep = &quot;_&quot;)</code></pre>
 <p>The arguments of <code>unite' are:  * the data frame to be used (in this case Herbivores)  * the name of the new variable (in this case "Habitat_DayNight")  * the columns to be united, within</code>c()`
-* the character used to separate the values in each column being united (in this case “_“)</p>
+* the character used to separate the values in each column being united (in this case "_")</p>
 <p>View the data frame again and you will notice the new variable, and the fact that the old ones have been removed. It is a better idea to keep them, by adding <code>remove=FALSE</code></p>
-<pre class="r"><code>Herbivores &lt;- unite(Herbivores, &quot;Habitat_DayNight&quot;, c(Habitat, DayNight), sep=&quot;_&quot;, remove=FALSE)</code></pre>
+<pre class="r"><code>Herbivores &lt;- unite(Herbivores, &quot;Habitat_DayNight&quot;, c(Habitat, DayNight), sep = &quot;_&quot;, remove = FALSE)</code></pre>
 </div>
 <div id="separating-one-column-into-several" class="section level3">
 <h3>Separating one column into several</h3>
 <p><img src="Separate_image.jpg" /></p>
 <p>Separating content from one column into several separate variables is also very useful if the levels of categorical variables in the original data set are actually combinations of more than one variable. The function <code>separate</code> in tidyr does this.</p>
 <p>For example, if we wanted to contrast the abundance of herbivores among the genera of algae being used as habitat (rather than individual species), we would need to make a new variable that held only the genus names. We can use <code>separate</code> to make two new columns, one for genus and one for species, from the values in the Habitat variable.</p>
-<pre class="r"><code>Herbivores &lt;- separate(Herbivores, Habitat, c(&quot;Genus&quot;,&quot;species&quot;), sep=&quot;_&quot;, remove=FALSE)</code></pre>
+<pre class="r"><code>Herbivores &lt;- separate(Herbivores, Habitat, c(&quot;Genus&quot;, &quot;species&quot;), sep = &quot;_&quot;, remove = FALSE)</code></pre>
 <p>The arguments of <code>separate' are:  * the data frame to be used (in this case Herbivores)  * the name of the new variable to be separated (in this case "Habitat")  * the names of the new variables, within</code>c()<code>(in this case "Genus" and "species")  * the character used to separate the values in the column being separated (in this case "_")   * the</code>remove=FALSE` means we keep the variable being separated in the new version of the data frame</p>
 <p>Note that this was only possible because there was a character separating the two variables in the text of the one to be separated (e.g., we couldn’t do this is if the species names in the Habitat variable were originally GenusSpecies, rather than Genus_species).</p>
 </div>
@@ -72,6 +72,5 @@ Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + 
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Some images above were sourced from this document.</p>
 <p><a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">Introducing tidyr</a></p>
 <p><strong>Author:</strong> Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 14:28:21 2022&quot;</code></pre>
+<p><strong>Last updated:</strong>Tue Feb 1 10:25:47 2022</p>
 </div>

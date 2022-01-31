@@ -76,7 +76,6 @@ Our help modules on [Good practice for writing scripts](/coding-skills/good-prac
 
 **Author**: Alistair Poore
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

@@ -144,9 +144,8 @@ Type `?metaMDS` for the R help for this function.
 
 **Author:** Andrew Letten
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 
 

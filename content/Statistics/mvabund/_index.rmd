@@ -158,7 +158,6 @@ This method was created by UNSW's Ecostats research group, you can keep up with 
 
 **Authors**: Rachel V. Blakey & Andrew Letten
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

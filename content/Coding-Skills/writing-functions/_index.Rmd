@@ -533,12 +533,11 @@ You can find more help on functions at
 - The [official R intro material on writing your own functions](http://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-R-intro.html#Writing-your-own-functions)
 
 
-**Author**: Original by Keryn F Bain; revised and substantially expanded by [Daniel S Falster](https://twitter.com/adaptive_plant)
+**Author**: Original by Keryn F Bain; revised and expanded by Daniel S Falster
 
- 
-Last updated:
-```{r,echo=FALSE}
-date()
-```
+**Year:** 2018
+
+**Last updated:** `r date()`
+
 
 

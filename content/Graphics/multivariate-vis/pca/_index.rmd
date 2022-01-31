@@ -155,7 +155,6 @@ An nice interactive page to help you understand what PCA is doing can be found [
 
 **Author**: Andrew Letten
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

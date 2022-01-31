@@ -198,7 +198,6 @@ If you'd like to learn more about the ggplot language for plotting, have a look 
 
 **Author**: Rachel V. Blakey
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

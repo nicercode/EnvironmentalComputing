@@ -122,7 +122,6 @@ Version control systems, and Git in particular, can do quite a lot more then wha
 
 **Author**: Daniel Noble
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

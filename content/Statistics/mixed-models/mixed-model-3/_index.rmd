@@ -234,7 +234,6 @@ You can type `?glmer` into R for help with this function.
 
 **Author**: Gordana Popovic
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

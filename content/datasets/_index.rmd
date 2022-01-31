@@ -93,7 +93,6 @@ This page contains the datasets or files that are used throughout the tutorials 
 
 [Weather_vars.csv](/datasets/Weather_vars.csv)
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

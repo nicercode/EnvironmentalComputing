@@ -166,7 +166,6 @@ You can find some more good examples of loops, lists and if/else statements on t
 
 **Author**: Rachel V. Blakey
 
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

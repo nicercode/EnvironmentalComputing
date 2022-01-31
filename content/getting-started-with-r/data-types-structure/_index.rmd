@@ -156,8 +156,7 @@ and [here](http://www.statmethods.net/input/datatypes.html)
 
 **Author**: Keryn Bain
  
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`
 

@@ -201,7 +201,6 @@ see Rob Hyndman and George Athanasopoulos' [online textbook](https://www.otexts.
 
 **Author**: Jakub Stoklosa & Rachel V. Blakey
 
-Last updated:
-```{r,echo=F}
-date()
-```
+**Year:** 2016
+
+**Last updated:** `r date()`

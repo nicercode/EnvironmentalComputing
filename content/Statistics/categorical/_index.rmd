@@ -2,6 +2,7 @@
 weight: 6
 title: "Catagorial Data Analyses"
 output: html_document
+aliases: /categorical-data-analyses/
 ---
 
 Some commonly used tests for contrasting the counts of observations across categorical variables.

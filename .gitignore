@@ -9,3 +9,4 @@ Environmental Computing-Page list.xlsx
 /resources/
 Thumbs.db
 .hugo_build.lock
+*.lock*

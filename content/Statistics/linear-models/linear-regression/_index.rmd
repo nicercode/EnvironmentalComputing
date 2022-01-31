@@ -85,7 +85,7 @@ Click [here](https://gallery.shinyapps.io/slr_diag/) to see a nice interactive a
 **Normality**. Checks of whether the data are normally distributed are usually performed by either plotting a histogram of the residuals or via a quantile plot where the residuals are plotted against the values expected from a normal distribution (the second of the figures obtained by `plot(model)`. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Violations of normality can be fixed via transformations or by using a different error-distribution in a GLM. Note, however, that linear regression is reasonably robust against violations of normality.
 
 ```{r}
-par(mfrow = c(1,2)) # This code put two plots in the same window
+par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(model$residuals) # Histogram of residuals
 plot(model, which = 2) # Quantile plot
 ```
@@ -102,7 +102,7 @@ There are a variety of measures for dealing with non-independence. These include
 **Visual** For a linear regression with a single explanatory variable, it is useful to present the results as a scatter plot. The line of best fit derived from the model can be added with the `abline` function.
 
 ```{r}
-plot(loght ~ temp, data = Plant_height, xlab = "Temperature (C)", ylab = "log(Plant height)",pch=16)
+plot(loght ~ temp, data = Plant_height, xlab = "Temperature (C)", ylab = "log(Plant height)", pch = 16)
 abline(model, col = "red")
 ```
   

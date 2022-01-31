@@ -54,12 +54,11 @@ Even neater is to run several things at once. We could create both of those new 
 
 ```{r}
 Herbivores <- mutate(Herbivores,
-                     log_Mass = log(Mass),  # log of Mass
-                     Ampithoe = Ampithoe_caddi + Ampithoe_kava + Ampithoe_ngana, # sum of three columns
-                     Total_abundance = rowSums(Herbivores[,5:12]), # sum of columns 5-12 with all abundance data
-                     Total_abundance_perGram = Total_abundance/Mass  # abundance as numbers per g of habitat
-                     )
-
+  log_Mass = log(Mass), # log of Mass
+  Ampithoe = Ampithoe_caddi + Ampithoe_kava + Ampithoe_ngana, # sum of three columns
+  Total_abundance = rowSums(Herbivores[, 5:12]), # sum of columns 5-12 with all abundance data
+  Total_abundance_perGram = Total_abundance / Mass # abundance as numbers per g of habitat
+)
 ```
 
 The arguments of `mutate` are simply the name of the data frame followed by any number of expressions that create new variables.
@@ -91,7 +90,7 @@ library(tidyr)
 If we wanted to make a new categorical variable where each level was the unique combination of habitat and day/night, we would use:
 
 ```{r,eval=FALSE}
-Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep="_")
+Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep = "_")
 ```
 
 The arguments of `unite' are: 
@@ -103,7 +102,7 @@ The arguments of `unite' are:
 View the data frame again and you will notice the new variable, and the fact that the old ones have been removed. It is a better idea to keep them, by adding `remove=FALSE`
 
 ```{r}
-Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep="_", remove=FALSE)
+Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep = "_", remove = FALSE)
 ```
   
 
@@ -116,7 +115,7 @@ Separating content from one column into several separate variables is also very 
 For example, if we wanted to contrast the abundance of herbivores among the genera of algae being used as habitat (rather than individual species), we would need to make a new variable that held only the genus names. We can use `separate` to make two new columns, one for genus and one for species, from the values in the Habitat variable.
 
 ```{r}
-Herbivores <- separate(Herbivores, Habitat, c("Genus","species"), sep="_", remove=FALSE)
+Herbivores <- separate(Herbivores, Habitat, c("Genus", "species"), sep = "_", remove = FALSE)
 ```
 
 The arguments of `separate' are: 

@@ -23,10 +23,10 @@ Common types of atomic vectors are logical, integer, numeric (i.e., double), cha
  
 
 ```{r}
-eg_logical <- c(T, T, T, F, F) 
+eg_logical <- c(T, T, T, F, F)
 eg_integer <- c(1L, 6L, 1L, 5L, 4L)
 eg_numeric <- c(0, 2.3, 2.45, 2.99, -1.1)
-eg_character <- c("things", "in", "apostrophe" ,"are", "characters")
+eg_character <- c("things", "in", "apostrophe", "are", "characters")
 eg_factor <- factor(c("NSW", "NSW", "ACT", "WA", "WA"))
 ```
   
@@ -61,7 +61,7 @@ See [here](http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_lev
 You can check the data type of any vector using the `class` or `is` functions.
 
 ```{r, collapse= T}
-class(eg_logical) 
+class(eg_logical)
 is.integer(eg_integer)
 is.factor(eg_factor)
 ```

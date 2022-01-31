@@ -55,7 +55,7 @@ We will analyse a data set that aimed to test the effect of water pollution on t
 Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
 
 ```{r}
-Estuaries = read.csv("Estuaries.csv", header = T)
+Estuaries <- read.csv("Estuaries.csv", header = T)
 ```
 
 **Fitting a model with a fixed and random effect**
@@ -67,7 +67,7 @@ set.seed(1)
 ```
 
 ```{r}
-ft.estu = lmer(Total ~ Modification + (1|Estuary),data=Estuaries, REML=T)
+ft.estu <- lmer(Total ~ Modification + (1 | Estuary), data = Estuaries, REML = T)
 ```
 
 where Total is the dependent variable (left of the ~), Modification is the fixed effect, and Estuary is the random effect.
@@ -100,7 +100,7 @@ We are looking for a straight line relationship. Here, the assumption of normali
 Like a linear model, a mixed model assumes constant variance. We can check this by looking for a fan shape in the residual plot (residuals vs fitted values).
     
 ```{r,out.width = '500px'}
-scatter.smooth(residuals(ft.estu)~fitted(ft.estu))
+scatter.smooth(residuals(ft.estu) ~ fitted(ft.estu))
 ```
 
 This residual plot seems reasonable, there are differences in variability between estuaries, but variability does not increase with the mean. Note, that the function `scatter.smooth` is just a scatter plot with a fitted, smoothed curve.
@@ -130,14 +130,14 @@ Nevertheless, we will use the `anova` function to test for an effect of modifica
 First, we fit the full model by maximum likelihood, and a second model that lacks the fixed effect of Modification
 
 ```{r}
-ft.estu = lmer(Total ~ Modification + (1|Estuary), data=Estuaries, REML=F)
-ft.estu.0 = lmer(Total ~ (1|Estuary), data=Estuaries, REML=F)
+ft.estu <- lmer(Total ~ Modification + (1 | Estuary), data = Estuaries, REML = F)
+ft.estu.0 <- lmer(Total ~ (1 | Estuary), data = Estuaries, REML = F)
 ```
 
 Then, we compare these two models with a likelihood ratio test, using the `anova` function.
 
 ```{r}
-anova(ft.estu.0,ft.estu)
+anova(ft.estu.0, ft.estu)
 ```
 
 We find that there is evidence of an effect of Modification (p = 0.02385). 
@@ -156,19 +156,19 @@ You can use the `anova` function to test for random effects, but the p-values ar
 
 Parametric bootstrap
 ```{r, error=FALSE, message=FALSE, warning=FALSE}
-nBoot=1000
-lrStat=rep(NA,nBoot)
-ft.null = lm(Total~Modification,data=Estuaries)#null model
-ft.alt = lmer(Total~Modification+(1|Estuary),data=Estuaries,REML=F)#alternate model
-lrObs = 2*logLik(ft.alt) - 2*logLik(ft.null) #observed test stat
-for(iBoot in 1:nBoot)
+nBoot <- 1000
+lrStat <- rep(NA, nBoot)
+ft.null <- lm(Total ~ Modification, data = Estuaries) # null model
+ft.alt <- lmer(Total ~ Modification + (1 | Estuary), data = Estuaries, REML = F) # alternate model
+lrObs <- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
+for (iBoot in 1:nBoot)
 {
-  Estuaries$TotalSim=unlist(simulate(ft.null)) #resampled data
-  bNull = lm(TotalSim~Modification,data=Estuaries)#null model
-  bAlt = lmer(TotalSim~Modification+(1|Estuary),data=Estuaries,REML=F)#alternate model
-  lrStat[iBoot] = 2*logLik(bAlt) - 2*logLik(bNull)#resampled test stat
+  Estuaries$TotalSim <- unlist(simulate(ft.null)) # resampled data
+  bNull <- lm(TotalSim ~ Modification, data = Estuaries) # null model
+  bAlt <- lmer(TotalSim ~ Modification + (1 | Estuary), data = Estuaries, REML = F) # alternate model
+  lrStat[iBoot] <- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
 }
-mean(lrStat>lrObs) #P-value for test of Estuary effect
+mean(lrStat > lrObs) # P-value for test of Estuary effect
 ```
 
 There is strong evidence for including estuary in your model (p = 0.001). You could use similar code to test for the effect of Modification with a parametric bootstrap. 
@@ -200,23 +200,28 @@ This might be a problem as assumption 4 may not hold. You should always sample t
 **Visual.** The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility. There is a little bit of code that is required for such a plot, and it will be a little different for your data and model. 
 
 ```{r}
-ModEst=unique(Estuaries[c("Estuary", "Modification")]) #find which Estuaries are modified
+ModEst <- unique(Estuaries[c("Estuary", "Modification")]) # find which Estuaries are modified
 
 # Prepare a vector of colors with specific color by modification levels
-myColors <- ifelse(unique(ModEst$Modification)=="Modified" , rgb(0.1,0.1,0.7,0.5) , 
-              ifelse(unique(ModEst$Modification)=="Pristine", rgb(0.8,0.1,0.3,0.6),
-              "grey90" ) )
+myColors <- ifelse(unique(ModEst$Modification) == "Modified", rgb(0.1, 0.1, 0.7, 0.5),
+  ifelse(unique(ModEst$Modification) == "Pristine", rgb(0.8, 0.1, 0.3, 0.6),
+    "grey90"
+  )
+)
 
-boxplot(Total~ Estuary,data=Estuaries,col=myColors,xlab="Estuary",ylab="Total invertebrates")
-legend("bottomleft", inset=.02,
-   c(" Modified "," Pristine "), fill=unique(myColors), horiz=TRUE, cex=0.8)
+boxplot(Total ~ Estuary, data = Estuaries, col = myColors, xlab = "Estuary", ylab = "Total invertebrates")
+legend("bottomleft",
+  inset = .02,
+  c(" Modified ", " Pristine "), fill = unique(myColors), horiz = TRUE, cex = 0.8
+)
 
- #0 if Modified, 1 if Pristine
-is.mod = ifelse(unique(ModEst$Modification)=="Modified" , 0 , 
-              ifelse(unique(ModEst$Modification)=="Pristine", 1, NA))
+# 0 if Modified, 1 if Pristine
+is.mod <- ifelse(unique(ModEst$Modification) == "Modified", 0,
+  ifelse(unique(ModEst$Modification) == "Pristine", 1, NA)
+)
 
-Est.means=coef(ft.estu)$Estuary[,1]+coef(ft.estu)$Estuary[,2]*is.mod #Model means
-stripchart(Est.means~ sort(unique(Estuary)),data=Estuaries,pch=18,col="red",vertical = TRUE,add=TRUE)
+Est.means <- coef(ft.estu)$Estuary[, 1] + coef(ft.estu)$Estuary[, 2] * is.mod # Model means
+stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = "red", vertical = TRUE, add = TRUE)
 ```
   
 

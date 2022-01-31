@@ -13,7 +13,7 @@ output: html_document
 For example, if had surveyed a beach and wanted to analyse how the presence of a crab varied with time and distance from the water line, the response variable is discrete: the presence or absence of a crab in a given replicate. The first few rows of the data set would look like this:
 
 ```{r,echo=F}
-CrabDat = read.csv("Crabs.csv", header = T)
+CrabDat <- read.csv("Crabs.csv", header = T)
 head(CrabDat)
 ```
   
@@ -43,13 +43,13 @@ First, we will show you how to fit a model to binomial data, i.e., presence/abse
 For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](/datasets/Crabs.csv) and import into R.
 
 ```{r}
-Crab_PA = read.csv("Crabs.csv", header = T)
+Crab_PA <- read.csv("Crabs.csv", header = T)
 ```
 
 To test whether the probability of crab presence changes with time (a factor) and distance (a continuous variable), we fit the following model. The response variable (presence/absence of crabs) is binomial, so we use `family=binomial`.
 
 ```{r}
-ft.crab = glm(CrabPres ~ Time*Dist, family=binomial, data=Crab_PA)
+ft.crab <- glm(CrabPres ~ Time * Dist, family = binomial, data = Crab_PA)
 ```
   
 
@@ -66,7 +66,7 @@ We can't check this assumption from the results, but you can ensure it's true by
 The mean variance relationship is the main reason we use GLM's instead of linear models. We need to check that the distribution models the mean-variance relationship of our data well. For binomial data this is not a big concern, but later on when we analyse count data it'll be very important. To check this assumption we look at a plot of residuals, and try to see if there is a fan shape. 
     
 ```{r,out.width = '500px'}
-plot(ft.crab,which=1)
+plot(ft.crab, which = 1)
 ```
 
 Unfortunately the `glm` plot function gives us a very odd looking plot due to the discreteness of the data (i.e., many points on top of each other).
@@ -79,7 +79,7 @@ set.seed(1)
 
 ```{r,out.width = '500px',warning=FALSE}
 library(mvabund)
-ft.crab.many = manyglm(CrabPres ~ Time*Dist, family="binomial", data=Crab_PA)
+ft.crab.many <- manyglm(CrabPres ~ Time * Dist, family = "binomial", data = Crab_PA)
 plot(ft.crab.many)
 ```
 
@@ -97,7 +97,7 @@ If all the assumption checks are okay, we can have a look at the results the mod
 The p-values these give you if you use `glm` for fitting the model work well in large samples, although they are still approximate. For binomial models in particular the p-values from the `summary` function can be funny, and we prefer to use the `anova` function to see if predictors are significant. The `summary()` function is still useful to look at the model equation.
 
 ```{r}
-anova(ft.crab,test="Chisq")
+anova(ft.crab, test = "Chisq")
 ```
 
 The p-value for Time is small (P<0.01), so we conclude there is an effect of time on the presence of crabs, but no effect of distance or an interaction between time and distance. This sample is reasonably large, so these p-values should be a good approximation. For a small sample it is often better to use resampling to calculate p-values. When you use `manyglm` the `summary` and `anova` functions use resampling by default.

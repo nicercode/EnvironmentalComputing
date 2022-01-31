@@ -13,30 +13,30 @@ The new set of variables created by PCA can be used in other analyses, but most 
 The first principal component (PC) is fitted such that it explains the maximum amount of variation in the data. Think of this as a line of best fit in multivariate space, as close as possible to all the points with the variation maximised along the line and minimised on the perpindicular away from the line. The second PC is fitted at right angles to the first (i.e., orthogonally, with with no correlation) such that it explains as much of the remaining variation as possible. Additional PCs, which must be orthogonal to existing PCs, can then be fitted by the same iterative process.
 
 ```{r,echo=F,fig.width=5,fig.height=5}
-x <- rnorm(100,mean=30,sd=10)
-y <- x + rnorm(100,mean=4,sd=6)
-plot(y~x,pch=16, col = "red",xlab="",ylab="",xlim=c(0,60),ylim=c(0,60),xaxt="n",yaxt="n",asp=1)
+x <- rnorm(100, mean = 30, sd = 10)
+y <- x + rnorm(100, mean = 4, sd = 6)
+plot(y ~ x, pch = 16, col = "red", xlab = "", ylab = "", xlim = c(0, 60), ylim = c(0, 60), xaxt = "n", yaxt = "n", asp = 1)
 
 
-fit = lm(y~x)
+fit <- lm(y ~ x)
 
 b1 <- fit$coefficients[1]
 a1 <- fit$coefficients[2]
 
-abline(fit,col="blue")
+abline(fit, col = "blue")
 
 x0 <- median(x)
 y0 <- predict(fit, list(x = x0))
 
-x1 <- x0-5
+x1 <- x0 - 5
 
-b2 <- 2*a1*x0 + b1
-y1 <- -a1*x1 + b2
+b2 <- 2 * a1 * x0 + b1
+y1 <- -a1 * x1 + b2
 
-abline(b2,-1,col="blue")
+abline(b2, -1, col = "blue")
 
-text(55,50,"PC1",col="blue")
-text(10,45,"PC2",col="blue")
+text(55, 50, "PC1", col = "blue")
+text(10, 45, "PC2", col = "blue")
 ```
 
 Visualising this in two dimensions helps to understand the approach. The data points will be plotted on the new blue axes (the principal components) rather than the original black axes. Now imagine fitting those lines in more than three dimensions!
@@ -60,7 +60,7 @@ The first column is a categorical variable that labels the leaves by species (A 
 
 ```{r}
 Species <- Leaf_shape$Species
-Leaf_data <- Leaf_shape[,2:6]
+Leaf_data <- Leaf_shape[, 2:6]
 ```
 
 There are a number of function and packages in R available for conducting PCA, one of the simplest of which is the `princomp` function in base stats. To run a PCA, we simply use:
@@ -73,7 +73,7 @@ Calling the `plot` function on the scores of the `princomp` output produces a sc
 
 ```{r}
 plot(Leaf_PCA$scores, pch = 16, col = as.factor(Species))
-legend(0,0.4,c("Species A","Species B"),pch=16,col=c("black","red"))
+legend(0, 0.4, c("Species A", "Species B"), pch = 16, col = c("black", "red"))
 ```
   
 
@@ -95,7 +95,7 @@ The proportion explained independently by each component is provided in the seco
 The relative contribution of each component can also also visualised by a scree plot. Note that the Y-axis presented is not the % of variation explained. The contributions always decline with the number of the component, and ideally we would want as much variation as possible explained by the first two, as these are the ones we are using to visualise the data.
 
 ```{r}
-screeplot(Leaf_PCA, type = 'lines')
+screeplot(Leaf_PCA, type = "lines")
 ```
 
 **2** How are the original variables related to the principal components?
@@ -126,8 +126,8 @@ biplot(Leaf_PCA)
 Change between these two options with the `cor` argument in the `princomp` function. 
 
 ```{r, eval=FALSE}
-Leaf_PCA = princomp(Leaf_data, cor = FALSE) # uses a covariance matrix
-Leaf_PCA2 = princomp(Leaf_data, cor = TRUE) # uses a correlation matrix
+Leaf_PCA <- princomp(Leaf_data, cor = FALSE) # uses a covariance matrix
+Leaf_PCA2 <- princomp(Leaf_data, cor = TRUE) # uses a correlation matrix
 ```
 
 **Outliers.** Outliers can have big influence on the results of PCA, especially when using a covariance matrix.

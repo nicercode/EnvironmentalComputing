@@ -6,8 +6,10 @@ output: html_document
 
 ```{r, echo=FALSE, warning=F}
 library(ggplot2)
-g1 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() +theme_classic()
-print(g1 + labs(y="Petal length (cm)", x = "Sepal length (cm)"))
+g1 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_classic()
+print(g1 + labs(y = "Petal length (cm)", x = "Sepal length (cm)"))
 ```
  
 

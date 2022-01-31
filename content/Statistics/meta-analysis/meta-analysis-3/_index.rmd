@@ -27,23 +27,25 @@ where $u_{ij}$ is a deviation from $s_i$ (the within-study effect; the $j$th eff
 We can visualize this (again Figure 4 from Nakagawa *et al.* 2017). And we can see why this model is called, a 'multilevel' meta-analytic model, an extension of the random-effects model. 
 
 ```{r fig2, echo = FALSE }
-knitr::include_graphics(c("Legend.png","Multi.png"))
+knitr::include_graphics(c("Legend.png", "Multi.png"))
 ```
 
 ```{r re-library, echo = FALSE, message = FALSE, warning=FALSE}
 library(metafor)
 library(dplyr)
 dat <- get(data(dat.curtis1998))
-lnRR <- escalc(measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
-               m1i = dat$m1i, m2 = dat$m2i,
-               sd1i = dat$sd1i, sd2i = dat$sd2i)
-dat <- bind_cols(dat,lnRR)
+lnRR <- escalc(
+  measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
+  m1i = dat$m1i, m2 = dat$m2i,
+  sd1i = dat$sd1i, sd2i = dat$sd2i
+)
+dat <- bind_cols(dat, lnRR)
 ```
 
 We can fit an equivalent model using the function `rma.mv`. We need to add `paper` (the between-study effect) and `id` (different effect sizes; the within-study effect) in our data set to the multilevel model as random factors.
 
 ```{r multilevel, tidy=TRUE}
-multilevel_m <- rma.mv(yi = yi, V = vi, random = list(~1|paper, ~1|id), method = "REML", data = dat)
+multilevel_m <- rma.mv(yi = yi, V = vi, random = list(~ 1 | paper, ~ 1 | id), method = "REML", data = dat)
 summary(multilevel_m)
 ```
 
@@ -69,34 +71,34 @@ First install and load the package [ape](http://ape-package.ird.fr/) that we wil
 
 ```{r prep1, tidy=TRUE, warning=FALSE}
 library(ape)
-tree<-read.tree(file="tree_curtis1998.tre")
-plot(tree, cex = 0.7) 
+tree <- read.tree(file = "tree_curtis1998.tre")
+plot(tree, cex = 0.7)
 ```
 
 We can then make a correlation matrix (a relatedness matrix among species). I've skipped explantions of these operations - other than saying we have a correlation matrix to fit to the model
 
 ```{r prep2, tidy=TRUE}
 tree <- compute.brlen(tree)
-cor <- vcv(tree, cor=T)
+cor <- vcv(tree, cor = T)
 ```
 
 We need a bit more preparation as we do have not a column which has the whole species names (we call it `phylo`). Also, it turns out that we need to correct some typos in `genus` and `species` columns in our data.
 
 ```{r prep3, tidy=TRUE, message = FALSE, warning=FALSE}
 library(Hmisc)
-phylo <- tolower(paste(dat$genus, dat$species, sep="_"))
-#note: "populusx_euramericana" should be same as "populus_euramericana"
+phylo <- tolower(paste(dat$genus, dat$species, sep = "_"))
+# note: "populusx_euramericana" should be same as "populus_euramericana"
 phylo <- gsub("populusx_euramericana", "populus_euramericana", phylo)
 # these two species are the two different names of the same species
 phylo <- gsub("nothofagus_fusca", "fuscospora_fusca", phylo)
 phylo <- capitalize(phylo)
-dat[,"phylo"]<-phylo
+dat[, "phylo"] <- phylo
 ```
 
 We now have our phylogenetic correlation `cor` and a column with species names `phylo`, and can run our meta-analysis again with a phylogenetic effect. 
 
 ```{r phylo, tidy=TRUE}
-phylo_m<-rma.mv(yi = yi, V = vi, random = list(~1|phylo, ~1|paper, ~1|id), R = list(phylo = cor), method = "REML", data = dat)
+phylo_m <- rma.mv(yi = yi, V = vi, random = list(~ 1 | phylo, ~ 1 | paper, ~ 1 | id), R = list(phylo = cor), method = "REML", data = dat)
 summary(phylo_m)
 ```
 
@@ -112,12 +114,12 @@ We have a multilevel version of the robust model too. It is easy to fit using th
 
 ```{r weight, tidy=TRUE, echo=FALSE}
 # We make weights, which is 1/vi and stick that into the argument, weights
-dat[,"wi"]<-1/dat$vi
+dat[, "wi"] <- 1 / dat$vi
 ```
 
 ```{r robustml, tidy=TRUE}
 # you can put a marix or vector to W which is equivalent to 'weights' in rma
-robustml_m <- rma.mv(yi = yi, V = vi, W = wi, random = list(~1|paper, ~1|id), method = "REML", data = dat)
+robustml_m <- rma.mv(yi = yi, V = vi, W = wi, random = list(~ 1 | paper, ~ 1 | id), method = "REML", data = dat)
 summary(robustml_m)
 ```
 

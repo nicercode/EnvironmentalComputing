@@ -31,7 +31,7 @@ $$t = \frac{\bar{x}-\mu}{SE}$$
 The test statistic *t* is relatively straightforward to calculate manually. The test statistic can then checked against a *t* distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true. In R, to calculate the probability associated with a given value of *t* use:
 
 ```{r,eval=FALSE}
-pt(q, df = your.df, lower.tail = FALSE)*2
+pt(q, df = your.df, lower.tail = FALSE) * 2
 ```
 
 where *q* is your value of t, *your.df* is the degrees of freedom (the number of pairs-1). The `lower.tail = FALSE` ensures that you are calculating the probability of getting a *t* value larger than yours (i.e the upper tail, P[X > x]). Note that the critical value for *t* ($\alpha = 0.05$) varies depending on the number of degrees of freedom - larger degrees of freedom = smaller critical value of *t*.
@@ -49,7 +49,7 @@ Alternatively, if you have a data frame with the response and predictor variable
 Download a sample data set in this format, [Greenhouse.csv](/datasets/Greenhouse.csv/), and import into R
 
 ```{r,eval=FALSE}
-Greenhouse = read.csv(file = "Greenhouse.csv", header = TRUE)
+Greenhouse <- read.csv(file = "Greenhouse.csv", header = TRUE)
 ```
 
 The paired *t*-test is run with the `t.test` function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired *t*-test.
@@ -64,7 +64,7 @@ t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
 
 ```{r,echo=FALSE}
 Greenhouse <- read.csv(file = "Greenhouse.csv", header = TRUE)
-t.test(Performance~Treatment, data = Greenhouse, paired = TRUE)
+t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
 ```
 
 The important output of a paired *t*-test includes the test statistic *t*, in this case 18.8, the degrees of freedom (in this case 9) and the probability associated with that value of *t*. In this case, we have a very low *p* value (*p* < 0.001) and can reject the null hypothesis that the plants can photosynthesise with the same performance in the two light environments.
@@ -88,7 +88,7 @@ You also get the mean and 95% confidence intervals for the differences between m
 **Visual.** Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.
 
 ```{r}
-boxplot(Performance~Treatment, data = Greenhouse, xlab = "Light environment", ylab = "Photosynthetic performance (FvFm)")
+boxplot(Performance ~ Treatment, data = Greenhouse, xlab = "Light environment", ylab = "Photosynthetic performance (FvFm)")
 ```
   
 

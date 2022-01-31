@@ -22,9 +22,9 @@ We will also read in a dataset giving geographic locations for each site (for ex
 Download the three sample data sets ([Bats_data.csv](/datasets/Bats_data.csv), [Geo_data.csv](/datasets/Geo_data.csv), and [Weather_vars.csv](/datasets/Weather_vars.csv)) and import into R.
 
 ```{r}
-Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)
-Geo <- read.csv(file="Geo_data.csv", header=T, stringsAsFactors=F)
-Weather <- read.csv(file="Weather_vars.csv", header=T, stringsAsFactors=F)
+Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
+Geo <- read.csv(file = "Geo_data.csv", header = T, stringsAsFactors = F)
+Weather <- read.csv(file = "Weather_vars.csv", header = T, stringsAsFactors = F)
 ```
 
 You'll notice that we used the argument `stringsAsFactors=F`. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as "character" vectors.
@@ -35,7 +35,7 @@ You'll notice that we used the argument `stringsAsFactors=F`. This is because th
 dplyr has a function for simply adding all columns from one data set (z) to another (y):
 
 ```{r,eval=F}
-bind_cols(y,z)
+bind_cols(y, z)
 ```
 
 This is only useful if the two data sets have the same number of rows and the rows are arranged in the same order (it just matches up rows by their position).  
@@ -49,13 +49,13 @@ The function `left_join` will add matching rows from a second dataset onto a fir
 To add the geographic locations to the Bats data set, using the Site column to match the rows, we would use:
 
 ```{r}
-Bats_withGeo <- left_join(Bats, Geo, by="Site")
+Bats_withGeo <- left_join(Bats, Geo, by = "Site")
 ```
 
 To now add the weather data to that new data set, using the Date variable to match rows, we would use:
 
 ```{r}
-Bats_withGeoWeather <- left_join(Bats_withGeo, Weather, by="Date")
+Bats_withGeoWeather <- left_join(Bats_withGeo, Weather, by = "Date")
 ```
 
 You can check what has happened by viewing the data set, using the function `dim`, to find the dimensions of our datasets, or `colnames` to see a list of column names.
@@ -78,12 +78,15 @@ That was a nice neat example, where we have all of the codes in our main dataset
 Let's simulate a couple of messy datasets. Imagine you have bat activity data for five sites and tree density data for five sites, but only two of those sites (D and E) contain measurements for both variables. This may happen when you are using datasets collected by different people or for different purposes in the same study. 
 
 ```{r}
-Bat_sim <- as.data.frame(cbind(Site = c("A","B","C","D","E"),
-                               Activity =c(62,29,30,23,24)),stringsAsFactors = F)
+Bat_sim <- as.data.frame(cbind(
+  Site = c("A", "B", "C", "D", "E"),
+  Activity = c(62, 29, 30, 23, 24)
+), stringsAsFactors = F)
 
-Tree_sim <- as.data.frame(cbind(Site = c("D","E","F","G","H"),
-                                Tree_density=c(525,390,477,778,817)),stringsAsFactors = F)
-
+Tree_sim <- as.data.frame(cbind(
+  Site = c("D", "E", "F", "G", "H"),
+  Tree_density = c(525, 390, 477, 778, 817)
+), stringsAsFactors = F)
 ```
 
 ```{r,echo=F}
@@ -94,15 +97,14 @@ print(Tree_sim)
 If we want to combine data sets for only rows where we have both bat activity AND tree density measured and don't care about the rest of the data, we can use `inner_join`.
 
 ```{r}
-Bat_withTree_inn.join <- inner_join(Bat_sim, Tree_sim, by="Site")
+Bat_withTree_inn.join <- inner_join(Bat_sim, Tree_sim, by = "Site")
 print(Bat_withTree_inn.join)
 ```
 
 If we are interested primarily in the bat dataset, we can use <font face="monospace">left_join()</font> as above to keep all of the bat measurements and add tree densities where we have them. The missing tree density data will be NA.
 
 ```{r}
-Bat_withTree_left.join <- left_join(Bat_sim, Tree_sim, by="Site")
-
+Bat_withTree_left.join <- left_join(Bat_sim, Tree_sim, by = "Site")
 ```
 
 ```{r, echo=F}
@@ -112,7 +114,7 @@ print(Bat_withTree_left.join)
 Conversely if we are primarily interested in tree densities, we can use `right_join` to keep all the tree density data and include bat activity where we have measured it. The missing bat data will be NA.
 
 ```{r}
-Bat_withTree_right.join <- right_join(Bat_sim, Tree_sim, by="Site")
+Bat_withTree_right.join <- right_join(Bat_sim, Tree_sim, by = "Site")
 ```
 
 ```{r, echo=F}
@@ -122,7 +124,7 @@ print(Bat_withTree_right.join)
 Alternatively, if we want to keep ALL of the data and decide for ourselves what to exclude later, we can use `full_join`.
 
 ```{r}
-Bat_withTree_full.join <- full_join(Bat_sim, Tree_sim, by="Site")
+Bat_withTree_full.join <- full_join(Bat_sim, Tree_sim, by = "Site")
 ```
 
 ```{r,echo=F}
@@ -132,7 +134,7 @@ print(Bat_withTree_full.join)
 Finally, we can interrogate which rows of our data do or don't have matches in another table. For example, we can use `semi_join` to print only the rows of bat measurements that have a matching site where trees were measured, or use`anti_join` to find the opposite, where trees were not measured.
 
 ```{r}
-Bat_inTree <- semi_join(Bat_sim, Tree_sim, by="Site")
+Bat_inTree <- semi_join(Bat_sim, Tree_sim, by = "Site")
 ```
 
 ```{r,echo=F}
@@ -140,7 +142,7 @@ print(Bat_inTree)
 ```
 
 ```{r}
-Bat_notinTree <- anti_join(Bat_sim, Tree_sim, by="Site")
+Bat_notinTree <- anti_join(Bat_sim, Tree_sim, by = "Site")
 ```
 
 ```{r,echo=F}

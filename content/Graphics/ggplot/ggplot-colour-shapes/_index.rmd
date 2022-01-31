@@ -25,16 +25,19 @@ The following plots will be used as the base code throughout of this tutorial
 * a frequency histogram of sepal length  
 
 ```{r, echo=TRUE, message=F, warning=F}
-IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length)) + geom_point() 
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length)) +
+  geom_point()
 
-IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot()
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
 
-IrisHist <- ggplot(iris, aes(Sepal.Length)) + geom_histogram() 
+IrisHist <- ggplot(iris, aes(Sepal.Length)) +
+  geom_histogram()
 ```
 
 ```{r,echo=F,message=F, warning=F}
 library(gridExtra)
-grid.arrange(IrisPlot, IrisBox, IrisHist, ncol=2)
+grid.arrange(IrisPlot, IrisBox, IrisHist, ncol = 2)
 ```
   
 
@@ -47,19 +50,22 @@ Note that for most plots, `fill = "colour"` will colour the whole shape, whereas
 For example, to make a blue box plot with a red outline, or a yellow histogram with an green outline::
 
 ```{r}
-IrisBox <- ggplot(iris, aes(Species, Sepal.Length)) + geom_boxplot(fill = "blue", colour = "red") 
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length)) +
+  geom_boxplot(fill = "blue", colour = "red")
 
-IrisHist <- ggplot(iris, aes(Sepal.Length)) + geom_histogram(fill = "yellow", colour = "green")
+IrisHist <- ggplot(iris, aes(Sepal.Length)) +
+  geom_histogram(fill = "yellow", colour = "green")
 ```
 
 ```{r,echo=F,message=F, warning=F}
-grid.arrange(IrisBox, IrisHist, ncol=2)
+grid.arrange(IrisBox, IrisHist, ncol = 2)
 ```
 
 For scatterplots, `colour = "colour"` will specify the fill colour for the point shape. 
 
 ```{r}
-IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) + geom_point(colour = "red") 
+IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
+  geom_point(colour = "red")
 ```
 
 ```{r,echo=F,message=F, warning=F}
@@ -76,7 +82,8 @@ The plots and outlines can be changed to any colour listed [here](http://www.sta
 If you wish to colour point on a **scatter plot** by a third categorical variable, then add `colour = variable.name` within your `aes` brackets. This tells ggplot that this third variable will colour the points. To colour the points by the variable Species:
 
 ```{r}
-IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Species)) + geom_point() 
+IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Species)) +
+  geom_point()
 ```
 
 ```{r,echo=F,message=F, warning=F}
@@ -86,7 +93,8 @@ print(IrisPlot)
 To colour **box plots** or **bar plots** by a given categorical variable, you use you use `fill = variable.name` instead of `colour`.
 
 ```{r}
-IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot() 
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
 ```
 
 ```{r,echo=F,message=F, warning=F}
@@ -99,7 +107,8 @@ print(IrisBox)
 The basic format for colouring a continuous variable is very similar to a categorical variable. The only real difference is you need to use `+ scale_colour_gradient(low = "colour1", high = "colour2")`. The other colour scales will not work as they are for categorical variables. For example, here is a plot of sepal length vs petal length, with the symbols colored by their value of sepal width.
 
 ```{r}
-IrisPlot.continuous <- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Sepal.Width)) + geom_point()
+IrisPlot.continuous <- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Sepal.Width)) +
+  geom_point()
 
 print(IrisPlot.continuous)
 ```
@@ -151,7 +160,7 @@ This can then be added to the end of your graph code just like the others `+ sca
 ```{r}
 print(IrisPlot + scale_colour_brewer(palette = "Dark2"))
 
-print(IrisBox+ scale_fill_brewer(palette = "Oranges"))
+print(IrisBox + scale_fill_brewer(palette = "Oranges"))
 ```
   
 
@@ -164,7 +173,8 @@ In a simple scatterplot with no grouping variables, you can change the shape of 
 For example, to use a filled triangle,
 
 ```{r}
-IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) + geom_point(shape = 17) 
+IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
+  geom_point(shape = 17)
 ```
 
 ```{r,echo=F}
@@ -176,7 +186,8 @@ Different symbols can be used to group data in a scatterplot. This can be very h
 To do this, you need to add  `shape = variable.name` within your basic plot `aes` brackets, where `variable.name` is the name of your grouping variable. For example, to have different symbols for each species, we would use.
 
 ```{r}
-IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species)) + geom_point() 
+IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species)) +
+  geom_point()
 ```
 
 ```{r,echo=F}
@@ -192,7 +203,8 @@ print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)))
 This can be used with colour to further distinguish and group your variables. 
 
 ```{r}
-IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species, colour = Species)) + geom_point() 
+IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species, colour = Species)) +
+  geom_point()
 
 print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)) + scale_colour_manual(values = c("chartreuse4", "chocolate", "slateblue4")))
 ```

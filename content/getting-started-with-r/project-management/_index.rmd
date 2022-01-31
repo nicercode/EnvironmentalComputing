@@ -47,7 +47,7 @@ The data file is found with a relative file path, rather than the alternatives o
 read.csv("C:/Work/Data/Survey_data.csv")
 
 setwd("C:/Work/Data")
-read.csv(file="Survey_data.csv")
+read.csv(file = "Survey_data.csv")
 ```
 
 Similarly, when you output a file (e.g., figures or tables), you can store than in your outputs folder (away from the raw data)

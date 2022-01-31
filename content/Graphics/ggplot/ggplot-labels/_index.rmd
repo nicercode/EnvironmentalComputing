@@ -26,7 +26,8 @@ data(iris)
 The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial:
 
 ```{r, echo=TRUE}
-IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() 
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
 ```
 
 ```{r,echo=F}
@@ -54,15 +55,17 @@ print(IrisPlot + ggtitle("Petal and sepal length \nof three species of iris"))
 To alter the labels on the axis, add the code `+labs(y= "y axis name", x = "x axis name")` to your line of basic ggplot code.
 
 ```{r echo=TRUE}
-print(IrisPlot + labs(y="Petal length (cm)", x = "Sepal length (cm)"))
+print(IrisPlot + labs(y = "Petal length (cm)", x = "Sepal length (cm)"))
 ```
 
 Note: You can also use `+labs(title = "Title")` which is equivalent to `ggtitle`.
 
 For example:
 ```{r eval=F}
-print(IrisPlot + labs(title= "Petal and Sepal Length \nof Iris",
-                      y="Petal Length (cm)", x = "Sepal Length (cm)"))
+print(IrisPlot + labs(
+  title = "Petal and Sepal Length \nof Iris",
+  y = "Petal Length (cm)", x = "Sepal Length (cm)"
+))
 ```
   
 
@@ -71,7 +74,8 @@ print(IrisPlot + labs(title= "Petal and Sepal Length \nof Iris",
 In the same way you edited the title and axis names, you can alter the legend title by adding `+labs(colour = "Legend Title")` to the end of your basic plot code. Note: This will only work if you have actually added an extra variable to your basic `aes` code (in this case, using `colour=Species` to group the points by Species).
 
 ```{r}
-IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point()
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
 
 print(IrisPlot + labs(colour = "Iris species"))
 ```
@@ -79,8 +83,9 @@ print(IrisPlot + labs(colour = "Iris species"))
 Note: If you are using a histogram, boxplot or bar graph then it is slightly different. You must use `fill` instead of `colour`.
 
 ```{r,eval =F}
-IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot()
-print(IrisBox+ labs(fill = "Iris species"))
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
+print(IrisBox + labs(fill = "Iris species"))
 ```
   
 
@@ -114,13 +119,15 @@ The font, colour, size and emphasis of any of these labels can be altered by arg
 Here is an example of a theme that customises the title, the legend, the axis labels and specifies the font, emphasis, size and colour of each of these. The figure is then plotted with this theme and further code that provides the content of the title and axis labels:
 
 ```{r,warning=F}
-mynamestheme <- theme(plot.title = element_text(family = "Helvetica", face = "bold", size = (15)), 
-                 legend.title = element_text(colour = "steelblue",  face = "bold.italic", family = "Helvetica"), 
-                 legend.text = element_text(face = "italic", colour="steelblue4",family = "Helvetica"), 
-                  axis.title = element_text(family = "Helvetica", size = (10), colour = "steelblue4"),
-                  axis.text = element_text(family = "Courier", colour = "cornflowerblue", size = (10)))
-  
-print(IrisPlot + mynamestheme + labs( title= "Petal and sepal \nlength of iris", y="Petal length (cm)", x = "Sepal length (cm)"))
+mynamestheme <- theme(
+  plot.title = element_text(family = "Helvetica", face = "bold", size = (15)),
+  legend.title = element_text(colour = "steelblue", face = "bold.italic", family = "Helvetica"),
+  legend.text = element_text(face = "italic", colour = "steelblue4", family = "Helvetica"),
+  axis.title = element_text(family = "Helvetica", size = (10), colour = "steelblue4"),
+  axis.text = element_text(family = "Courier", colour = "cornflowerblue", size = (10))
+)
+
+print(IrisPlot + mynamestheme + labs(title = "Petal and sepal \nlength of iris", y = "Petal length (cm)", x = "Sepal length (cm)"))
 ```
   
 
@@ -129,13 +136,15 @@ print(IrisPlot + mynamestheme + labs( title= "Petal and sepal \nlength of iris",
 Another option is to remove the text from the plot entirely. To do this you use the code `= element_blank()`, remembering those open and closed brackets. The following code would remove the legend title and axis text.
 
 ```{r,eval=F}
-myblanktheme <- theme(plot.title = element_text(family = "Helvetica", face = "bold", size = (15)), 
-                 legend.title = element_blank(), 
-                 legend.text = element_text(face = "italic", colour="steelblue4",family = "Helvetica"), 
-                  axis.title = element_text(family = "Helvetica", size = (10), colour = "steelblue4"),
-                  axis.text = element_blank())
-  
-print(IrisPlot +myblanktheme + labs( title= "Petal and sepal \nlength of iris", y="Petal length (cm)", x = "Sepal length (cm)"))
+myblanktheme <- theme(
+  plot.title = element_text(family = "Helvetica", face = "bold", size = (15)),
+  legend.title = element_blank(),
+  legend.text = element_text(face = "italic", colour = "steelblue4", family = "Helvetica"),
+  axis.title = element_text(family = "Helvetica", size = (10), colour = "steelblue4"),
+  axis.text = element_blank()
+)
+
+print(IrisPlot + myblanktheme + labs(title = "Petal and sepal \nlength of iris", y = "Petal length (cm)", x = "Sepal length (cm)"))
 ```
   
 

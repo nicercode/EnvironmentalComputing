@@ -31,7 +31,7 @@ You can see straight away that all the fish were less than 30 cm long and that t
 You can alter the number of bins or the range of each bin with `breaks` argument. This will change the width and shape of the histogram. For example, if you wanted 15 bins, you would use:
 
 ```{r}
-hist(Fish$Length,breaks=15)
+hist(Fish$Length, breaks = 15)
 ```
 
 If you wanted each bin to be have a range of 2 cm, you would use `breaks=seq(0,30,by=2)` where the numbers in the brackets are the minimum, maximum and range for each bin.
@@ -42,7 +42,7 @@ If you wanted each bin to be have a range of 2 cm, you would use `breaks=seq(0,3
 A box and whisker plot, or boxplot, is another useful way to visualise the distribution of a single, continuous variable. They are easily made with the `boxplot` function. The `horizontal=TRUE` argument makes the single axis horizontal.
 
 ```{r}
-boxplot(Fish$Length, horizontal=TRUE)
+boxplot(Fish$Length, horizontal = TRUE)
 ```
 
 The plot shows the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles. 
@@ -61,9 +61,9 @@ These simple plots can be formatted using the basic R formatting in the graphics
 Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument.
 
 ```{r}
-hist(Fish$Length, xlab = 'Fish length (cm)',main='Frequency histogram of fish length')
+hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length")
 
-boxplot(Fish$Length, xlab='Fish length (cm)', main='Box plot of fish length', horizontal = TRUE)
+boxplot(Fish$Length, xlab = "Fish length (cm)", main = "Box plot of fish length", horizontal = TRUE)
 ```
 
 Using the `main=NULL` argument removes the title, which is often unecessary as details of what a plot illustrates are usually written in a figure legend below the plot.
@@ -73,9 +73,9 @@ Using the `main=NULL` argument removes the title, which is often unecessary as d
 Axis limits are set by the `xlim` and `ylim` arguments, where a vector of the minimum and maximum limits is required. For example, to have each of these plot the data between 0 and 40, you would use:
 
 ```{r, eval = FALSE}
-hist(Fish$Length, xlab = 'Fish length (cm)',main='Frequency histogram of fish length', xlim=c(0,40))
+hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length", xlim = c(0, 40))
 
-boxplot(Fish$Length, xlab='Fish length (cm)', main='Box plot of fish length', ylim=c(0,40), horizontal = TRUE)
+boxplot(Fish$Length, xlab = "Fish length (cm)", main = "Box plot of fish length", ylim = c(0, 40), horizontal = TRUE)
 ```
 
 Note that `ylim' is needed there to set the range for the single response variable (Fish length) even though it ends up on the horizontal axis after we use the `horizontal=TRUE` argument.
@@ -92,7 +92,7 @@ Colour can be added to any part of the plots (axis, fonts etc.) using the `col` 
 
 Here we will simply change the colour of the histogram.
 ```{r}
-hist(Fish$Length, xlab = 'Fish length (cm)',main='Frequency histogram of fish length', col="red")
+hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length", col = "red")
 ```
   
 

@@ -8,7 +8,10 @@ Many data in the environmental sciences do not fit simple linear models and are 
 
 ```{r, echo=F, fig.height=5, fig.width=5, warning=FALSE, message=FALSE}
 library(ggplot2)
-ggplot(mpg, aes(displ, hwy)) +   geom_point() + geom_smooth(span = 0.3) + theme_void()
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_smooth(span = 0.3) +
+  theme_void()
 ```
 
 Let's start with a famous [tweet](https://twitter.com/ucfagls/status/842444686513991680) by one Gavin Simpson, which amounts to:  
@@ -46,13 +49,14 @@ Lets try a simple example. First, let's create a data frame and fill it with som
 x <- seq(0, pi * 2, 0.1)
 sin_x <- sin(x)
 y <- sin_x + rnorm(n = length(x), mean = 0, sd = sd(sin_x / 2))
-Sample_data <- data.frame(y,x)
+Sample_data <- data.frame(y, x)
 ```
 
 
 ```{r}
 library(ggplot2)
-ggplot(Sample_data, aes(x, y)) + geom_point()
+ggplot(Sample_data, aes(x, y)) +
+  geom_point()
 ```
 
 Try fitting a normal linear model:
@@ -64,7 +68,9 @@ lm_y <- lm(y ~ x, data = Sample_data)
 and plotting the fitted line with data using ```geom_smooth``` in ```ggplot```
 
 ```{r}
-ggplot(Sample_data, aes(x, y)) + geom_point() + geom_smooth(method = lm)
+ggplot(Sample_data, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = lm)
 ```
 
 Looking at the plot or ```summary(lm_y)```, you might think the model fits nicely, but look at the residual plot - eek!
@@ -97,7 +103,9 @@ y_pred <- predict(gam_y, data.frame(x = x_new))
 But for simple models, we can also utilise the ```method = ``` argument in ```geom_smooth```, specifying the model formula.
 
 ```{r}
-ggplot(Sample_data, aes(x, y)) + geom_point() + geom_smooth(method = "gam", formula = y ~s(x))
+ggplot(Sample_data, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x))
 ```
 
 You can see the model is better fit to the data, but always check the diagnostics.
@@ -105,7 +113,7 @@ You can see the model is better fit to the data, but always check the diagnostic
 ```check.gam``` is quick and easy to view the residual plots.
 
 ```{r}
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 gam.check(gam_y)
 ```
 
@@ -140,9 +148,9 @@ plot(y ~ x)
 abline(h = 0)
 
 x_new <- seq(0, max(x), length.out = 100)
-y_pred <- predict(gam_y, data.frame(x = x_new)) 
+y_pred <- predict(gam_y, data.frame(x = x_new))
 
-matplot(x, model_matrix[,-1], type = "l", lty = 2, add = T)
+matplot(x, model_matrix[, -1], type = "l", lty = 2, add = T)
 lines(y_pred ~ x_new, col = "red", lwd = 2)
 ```
 
@@ -153,12 +161,12 @@ plot(gam_y)
 
 OK, now let's look a little closer at how the basis functions are constructed. You'll see that the construction of the functions is separate to the response data. Just to prove it, we'll use ```smoothCon```.
 ```{r}
-x_sin_smooth <- smoothCon(s(x), data = data.frame(x), absorb.cons = TRUE) 
+x_sin_smooth <- smoothCon(s(x), data = data.frame(x), absorb.cons = TRUE)
 X <- x_sin_smooth[[1]]$X
 
-par(mfrow = c(1,2))
+par(mfrow = c(1, 2))
 matplot(x, X, type = "l", main = "smoothCon()")
-matplot(x, model_matrix[,-1], type = "l", main = "predict(gam_y)")
+matplot(x, model_matrix[, -1], type = "l", main = "predict(gam_y)")
 ```
 
 And now to prove that you can go from the basis functions and the estimated coefficients to the fitted smooth term. Again note that this is simplified here because the model is just one smooth term. If you had more terms, we would need to add up all of the terms in the linear predictor.
@@ -167,7 +175,7 @@ And now to prove that you can go from the basis functions and the estimated coef
 betas <- gam_y$coefficients
 linear_pred <- model_matrix %*% betas
 
-par(mfrow = c(1,2))
+par(mfrow = c(1, 2))
 plot(y ~ x, main = "manual from basis/coefs")
 lines(linear_pred ~ x, col = "red", lwd = 2)
 plot(y ~ x, main = "predict(gam_y)")
@@ -176,7 +184,7 @@ lines(y_pred ~ x_new, col = "red", lwd = 2)
 
 Out of interest, take a look at the following plot, remembering that ```X``` is the matrix of basis functions.
 ```{r}
-par(mfrow = c(1,2))
+par(mfrow = c(1, 2))
 plot(y ~ x)
 plot(y ~ rowSums(X))
 ```
@@ -200,13 +208,14 @@ We want to look at inter-annual trend first, so let's convert the date into a co
 ```{r}
 CO2$time <- as.integer(as.Date(CO2$Date, format = "%d/%m/%Y"))
 CO2_dat <- CO2
-CO2 <- CO2[CO2$year %in% (2000:2010),]
+CO2 <- CO2[CO2$year %in% (2000:2010), ]
 ```
 
 OK, so let's plot it and look at a smooth term for time.
 $$y = \beta_0 + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
 ```{r}
-ggplot(CO2_dat, aes(time, co2)) + geom_line()
+ggplot(CO2_dat, aes(time, co2)) +
+  geom_line()
 ```
 
 We can fit a GAM for these data using:
@@ -222,7 +231,7 @@ plot(CO2_time)
 
 Note how the smooth term actually reduces to a 'normal' linear term here (with an edf of 1) - that's the nice thing about penalised regression splines. But if we check the model, then we see something is amuck. 
 ```{r, results='hide', fig.keep='all'}
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 gam.check(CO2_time)
 ```
 
@@ -232,25 +241,25 @@ The cyclical smooth term, $f_{\mathrm{intrannual}}(month)$, is comprised of basi
 
 We'll now see the ```bs = ``` argument to choose the type of smoother, and the ```k = ``` argument to choose the number of knots, because cubic regression splines have a set number of knots. We use 12 knots, because there are 12 months.
 ```{r}
-CO2_season_time <- gam(co2 ~ s(month, bs = 'cc', k = 12) + s(time), data = CO2, method = "REML")
+CO2_season_time <- gam(co2 ~ s(month, bs = "cc", k = 12) + s(time), data = CO2, method = "REML")
 ```
 
 Let's look at the fitted smooth terms:
 ```{r}
-par(mfrow = c(1,2))
+par(mfrow = c(1, 2))
 plot(CO2_season_time)
 ```
 
 Looking at both smooth terms, we can see that the monthly smoother is picking up that monthly rise and fall of CO$_2$ - looking at the relative magnitudes (i.e. monthly fluctuation vs. long-term trend), we can see how important it is to disintangle the components of the time series. Let's see how the model diagnostics look now:
 ```{r, results='hide', fig.keep='all'}
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 gam.check(CO2_season_time)
 ```
 
 Much better. Let's look at how the seasonal component stacks up against the full long term trend.
 ```{r}
-CO2_season_time <- gam(co2 ~ s(month, bs = 'cc', k = 12) + s(time), data = CO2_dat, method = "REML")
-par(mfrow = c(1,2))
+CO2_season_time <- gam(co2 ~ s(month, bs = "cc", k = 12) + s(time), data = CO2_dat, method = "REML")
+par(mfrow = c(1, 2))
 plot(CO2_season_time)
 ```
 
@@ -263,11 +272,14 @@ You can essentially present model results from a GAM as if it were any other lin
 
 You can plot the partial effects by calling the ```plot``` function on a fitted gam model, and you can look at the parametric terms too, possibly using the ```termplot``` function too. You can use ```ggplot``` for simple models like we did earlier in this tutorial, but for more complex models, it's good to know how to make the data using ```predict```. We just use the existing time-series here, but you would generate your own data for the ```newdata=``` argument.
 ```{r}
-CO2_pred <- data.frame(time = CO2_dat$time,
-                       co2 = CO2_dat$co2,
-                       predicted_values = predict(CO2_season_time, newdata = CO2_dat))
+CO2_pred <- data.frame(
+  time = CO2_dat$time,
+  co2 = CO2_dat$co2,
+  predicted_values = predict(CO2_season_time, newdata = CO2_dat)
+)
 ggplot(CO2_pred, aes(x = time)) +
-  geom_point(aes(y = co2), size = 1, alpha = 0.5) + geom_line(aes(y = predicted_values), colour = "red")
+  geom_point(aes(y = co2), size = 1, alpha = 0.5) +
+  geom_line(aes(y = predicted_values), colour = "red")
 ```
   
 

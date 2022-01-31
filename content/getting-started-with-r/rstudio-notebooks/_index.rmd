@@ -65,7 +65,8 @@ Output from your code will appear directly below the code chunk rather than in t
 
 ```{r, eval=F,echo=F}
 Plant_height <- read.csv(file = "Plant_height.csv")
-ggplot(Plant_height, aes(temp, loght, color=growthform)) + geom_point()
+ggplot(Plant_height, aes(temp, loght, color = growthform)) +
+  geom_point()
 ```
 
 ![](Chunk3.png)
@@ -123,22 +124,22 @@ If you want to show the code but not run it, use `eval=F` within the `{r}` at th
 Choose to run code in the output or not
 
 ```{r, eval=F}
-#```{r, eval=F}
-2+2
+# ```{r, eval=F}
+2 + 2
 ```
 
 To run the code, but hide the code in the output:
 
 ```{r, eval=F}
-#```{r, echo=F}
-2+2
+# ```{r, echo=F}
+2 + 2
 ```
 
 To hide all messages and warnings:
 
 ```{r, warning=F, message=F}
-#```{r, warning=F, message=F}
-2+2
+# ```{r, warning=F, message=F}
+2 + 2
 ```
 
 
@@ -149,8 +150,9 @@ Plant_height <- read.csv(file = "Plant_height.csv")
 To change the size of any plots:
 
 ```{r, fig.height=3, fig.width=10}
-#```{r, fig.height=3, fig.width=10}
-ggplot(Plant_height, aes(temp, loght)) + geom_point()
+# ```{r, fig.height=3, fig.width=10}
+ggplot(Plant_height, aes(temp, loght)) +
+  geom_point()
 ```
 
 These can also be set once at the top of the document rather than individually for each chunk (termed Global options). For example, to set the size of all figures, we would use:

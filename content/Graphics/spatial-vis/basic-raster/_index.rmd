@@ -17,7 +17,7 @@ file.exists("SST_feb_mean.img")
 
 Install the packages we're going to need - the raster package is the key library for raster objects in R, dismo has some nice wrappers for various sampling functions (plus some other neat SDM related stuff), and rgdal has a lot of the drivers for reading and writing various spatial data formats
 ```{r, eval=FALSE}
-install.packages(c('raster', 'dismo','rgdal'))
+install.packages(c("raster", "dismo", "rgdal"))
 ```
 
 Check that you can load them
@@ -40,11 +40,11 @@ Make a raster object, and query it
 dummy_raster <- raster(ncol = 10, nrow = 10) # let's make a small raster
 nrow(dummy_raster) # number of pixels
 ncol(dummy_raster) # number of pixels
-ncell(dummy_raster) # total number of pixels 
+ncell(dummy_raster) # total number of pixels
 plot(dummy_raster) # doesn't plot because the raster is empty
 hasValues(dummy_raster) # can check whether your raster has data
 values(dummy_raster) <- 1 # give the raster a pixel value - in this case 1
-plot(dummy_raster) # entire raster has a pixel value of 1 
+plot(dummy_raster) # entire raster has a pixel value of 1
 ```
 
 Make a random number raster so we can see what's happening a little easier
@@ -53,9 +53,9 @@ values(dummy_raster) <- runif(ncell(dummy_raster)) # each pixel is assigned a ra
 plot(dummy_raster) # raster now has pixels with random numbers
 values(dummy_raster) <- runif(ncell(dummy_raster))
 plot(dummy_raster)
-dummy_raster[1,1] # we can query rasters (and subset the maxtrix values) using standard R indexing
-dummy_raster[1,]
-dummy_raster[,1]
+dummy_raster[1, 1] # we can query rasters (and subset the maxtrix values) using standard R indexing
+dummy_raster[1, ]
+dummy_raster[, 1]
 ```
 
 Use this to interactively query the raster - press esc to exit
@@ -72,7 +72,7 @@ xmin(dummy_raster)
 ymax(dummy_raster)
 ymin(dummy_raster)
 extent(dummy_raster) # easier to use extent
-res(dummy_raster)  # resolution
+res(dummy_raster) # resolution
 xres(dummy_raster) # just pixel width
 yres(dummy_raster) # just pixel height
 ```
@@ -86,7 +86,7 @@ yres(dummy_raster) # just pixel height
 
 Import the Cairns mangrove data and have a look at it
 ```{r, eval=FALSE}
-mangrove <- raster("Cairns_Mangroves_30m.tif") 
+mangrove <- raster("Cairns_Mangroves_30m.tif")
 crs(mangrove) # get projection
 plot(mangrove, col = topo.colors("2")) # note two pixel values, 0 (not mangrove) and 1 (mangrove)
 NAvalue(mangrove) <- 0 # make a single binary dataset with mangroves having a raster value 1
@@ -95,16 +95,16 @@ plot(mangrove, col = "mediumseagreen")
 
 The legend is a little odd - we can change to a categorical legend by doign this - but we'll stick to the default continous bar generally so as to reduce clutter in the code
 ```{r, eval=FALSE}
-cols <- c("white","red")
+cols <- c("white", "red")
 plot(mangrove, col = cols, legend = F)
-legend(x = 'bottomleft', legend = c("no mangrove", "mangrove"), fill = cols)
+legend(x = "bottomleft", legend = c("no mangrove", "mangrove"), fill = cols)
 ```
 
 Simple processing
 ```{r, eval=FALSE}
 agg_mangrove <- aggregate(mangrove, fact = 10) # aggregate/resample cells (10 times bigger)
 
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 plot(mangrove, col = "mediumseagreen")
 plot(agg_mangrove, col = "firebrick")
 plot(agg_mangrove, col = "firebrick")
@@ -125,7 +125,7 @@ Convert raster to point data, and then import point data as raster
 pts_mangrove <- rasterToPoints(mangrove)
 str(pts_mangrove)
 
-par(mfrow = c(2,2))
+par(mfrow = c(2, 2))
 plot(mangrove)
 plot(rasterFromXYZ(pts_mangrove)) # huh?
 
@@ -147,15 +147,20 @@ Now, what about multiband rasters? The raster package handles them in the same w
 ```{r, eval=FALSE}
 multiband <- raster("multiband.tif")
 nbands(multiband)
-nrow(multiband) 
-ncol(multiband) 
-ncell(multiband) 
+nrow(multiband)
+ncol(multiband)
+ncell(multiband)
 ```
 
 What about making our own multiband raster?
 ```{r, eval=FALSE}
-for (i in 1:4) { assign(x = paste0("band",i), value = raster(ncol = 10, nrow = 10)) }
-values(band1) <- runif(100); values(band2) <- runif(100); values(band3) <- runif(100); values(band4) <- runif(100)
+for (i in 1:4) {
+  assign(x = paste0("band", i), value = raster(ncol = 10, nrow = 10))
+}
+values(band1) <- runif(100)
+values(band2) <- runif(100)
+values(band3) <- runif(100)
+values(band4) <- runif(100)
 multiband_stack <- stack(list(band1, band2, band3, band4))
 nlayers(multiband_stack)
 plot(multiband_stack)
@@ -201,7 +206,7 @@ CRS(latlong)
 eastnorth <- "+init=epsg:3857"
 CRS(eastnorth)
 
-latlongs_mangrove <- rasterToPoints(mangrove, spatial=T)
+latlongs_mangrove <- rasterToPoints(mangrove, spatial = T)
 latlongs_mangrove
 projected_pts_mangrove <- spTransform(latlongs_mangrove, CRS(eastnorth))
 projected_pts_mangrove
@@ -215,7 +220,7 @@ tir_orig <- raster("LC80910802013275LGN00_TIR.jpg")
 ext <- extent(tir_orig)
 centx <- mean(c(ext[1], ext[2]))
 centy <- mean(c(ext[3], ext[4]))
-new_ext <- c(centx-10000, centx+10000, centy-10000, centy+10000)
+new_ext <- c(centx - 10000, centx + 10000, centy - 10000, centy + 10000)
 tir <- crop(tir_orig, new_ext)
 writeRaster(x = tir, filename = "Landsat_TIR.tif", format = "GTiff")
 ```
@@ -227,16 +232,20 @@ writeRaster(x = tir, filename = "Landsat_TIR.tif", format = "GTiff")
 
 ```{r, eval=FALSE, echo=FALSE}
 tir <- raster("Landsat_TIR.tif")
-temp <- function(x) {0.1*x + 0.5}
+temp <- function(x) {
+  0.1 * x + 0.5
+}
 tir_temp <- calc(tir, fun = temp)
 plot(tir_temp)
-plot(tir_temp, col = rev(heat.colors(10)), legend.args = list(text='Temperature (degC)', side = 4, line = 2.5),
-     main = "Temperature dirived from Landsat TIR band", xlab = "Easting", ylab = "Northing")
+plot(tir_temp,
+  col = rev(heat.colors(10)), legend.args = list(text = "Temperature (degC)", side = 4, line = 2.5),
+  main = "Temperature dirived from Landsat TIR band", xlab = "Easting", ylab = "Northing"
+)
 
 temp_zones <- tir_temp
 values(temp_zones) <- rep(1:100, length.out = ncell(temp_zones))
-zonal_mean_temps <- zonal(x = tir_temp, z = temp_zones, fun = 'mean')
-zonal_sd_temps <- zonal(x = tir_temp, z = temp_zones, fun = 'sd')
+zonal_mean_temps <- zonal(x = tir_temp, z = temp_zones, fun = "mean")
+zonal_sd_temps <- zonal(x = tir_temp, z = temp_zones, fun = "sd")
 ```
 
 
@@ -269,7 +278,7 @@ plot(sst_mn_crop)
 Now let's make an SST anomoly map
 ```{r, eval=FALSE}
 sst_anomaly <- sst_feb_crop - sst_mn_crop # R + {raster} matrix arithmatic
-plot (sst_anomaly) # plot the anomaly map
+plot(sst_anomaly) # plot the anomaly map
 plot(sst_anomaly, col = rev(heat.colors("100"))) # heat colours
 contour(sst_anomaly, add = T) # add contours
 ```
@@ -293,7 +302,7 @@ plot(sst_anomaly == maxValue(sst_anomaly))
 or plots/stats for the entire image,
 ```{r, eval=FALSE}
 plot(sst_anomaly > 1)
-par(mar = c(3,3,3,3))
+par(mar = c(3, 3, 3, 3))
 hist(sst_anomaly, main = "February SST Anomaly", xlab = "sst anomaly")
 ```
 
@@ -301,9 +310,11 @@ or let's be a litle more tricky!
 ```{r, eval=TRUE}
 max_anom <- which.max(sst_anomaly)
 max_xy <- xyFromCell(sst_anomaly, max_anom)
-plot(sst_anomaly, col = rev(heat.colors("100")),
-     main = "2013 Feb SST anomaly + hottest point")
-points(max_xy, pch=8, cex=2)
+plot(sst_anomaly,
+  col = rev(heat.colors("100")),
+  main = "2013 Feb SST anomaly + hottest point"
+)
+points(max_xy, pch = 8, cex = 2)
 ```
 
 Sampling points conditionally? Sure. We'll see a better wrapper for this further down though.
@@ -318,14 +329,14 @@ Try out ```?getValues``` too. OK, re-capping writing back to disk
 # writing rasters
 writeRaster(sst_anomaly, "sst_anomaly.tif", format = "GTiff")
 KML(sst_anomaly, "sst_anomaly.kml")
-save(sst_anomaly, file="sst_anomaly_feb.RData")
-save(sst_feb_mn, file="sst_feb_mn.RData") # check the file size, huh?
+save(sst_anomaly, file = "sst_anomaly_feb.RData")
+save(sst_feb_mn, file = "sst_feb_mn.RData") # check the file size, huh?
 ```
 
 What's going on with those last two ```save()``` commands? Something else to understand about the way the ```raster``` package handles raster files is that for larger rasters, the whole file is not stored in memory, rather it is just a pointer to the file. You can test whether or not it is
 ```{r, eval=FALSE}
 inMemory(sst_feb_mn) # R will only access file  when needed.
-inMemory(sst_anomaly) # it's in memory. 
+inMemory(sst_anomaly) # it's in memory.
 ```
 
 We saw ```stack()``` earlier, and we can use it for multi-band imagery, but also to stack up different information sources. ```brick()``` works in the same way, except that ```RasterBrick``` objects are designed for smaller data, and a ```RasterBrick``` can only point to one file, opposed to a ```RasterStack``` objects, which can point to multiple files.
@@ -344,33 +355,37 @@ So we can see why that might be useful for various remote sensing and modelling 
 
 Now let's look at quick example of what we can do with rasters in context of species distribution modelling and spatial modelling. First lets extract some random points - make sure you've run ```library(dismo)```
 ```{r, eval=FALSE}
-rpoints_sst <- randomPoints(sst_stack, 500) #?randomPoints for more options
+rpoints_sst <- randomPoints(sst_stack, 500) # ?randomPoints for more options
 plot(sst_stack, 2)
 points(rpoints_sst, pch = 16, cex = 0.7)
-sst_samp <- extract(sst_stack, rpoints_sst)  # extract values through stack this time
+sst_samp <- extract(sst_stack, rpoints_sst) # extract values through stack this time
 str(sst_samp)
 sst_samp <- data.frame(sst_samp,
-                       lat = rpoints_sst[,2], lon = rpoints_sst[,1])
+  lat = rpoints_sst[, 2], lon = rpoints_sst[, 1]
+)
 plot(sst_samp$SST_anomaly ~ sst_samp$SST_feb_2013)
-#abline(lm(sst_samp$SST_anomaly ~ sst_samp$SST_feb_2013))
-#plot(mgcv::gam(sst_samp$SST_anomaly ~ s(sst_samp$SST_feb_2013)), resid = T)
+# abline(lm(sst_samp$SST_anomaly ~ sst_samp$SST_feb_2013))
+# plot(mgcv::gam(sst_samp$SST_anomaly ~ s(sst_samp$SST_feb_2013)), resid = T)
 ```
 
 What if we had some real biological data at those points? Well, let's make some up, and then fit a model to it
 ```{r, eval=FALSE}
 sst_samp$shark_abund <- rpois(n = nrow(sst_samp), lambda = round(sst_samp$SST_feb_2013))
 plot(sst_samp$shark_abund ~ sst_samp$SST_feb_2013)
-shark_glm <- glm(shark_abund ~ SST_feb_2013 + SST_anomaly, 
-                 data = sst_samp, family = "poisson")
+shark_glm <- glm(shark_abund ~ SST_feb_2013 + SST_anomaly,
+  data = sst_samp, family = "poisson"
+)
 summary(shark_glm)
 ```
 
 We would usually use ```predict()``` on a model fit object, and we can use it similarly for predicting out to raster data
 ```{r, eval=FALSE}
 head(predict(shark_glm, type = "response"))
-shark_predict <- predict(sst_stack, shark_glm, type = 'response')
-plot(shark_predict, col = rev(rainbow(n = 10, start = 0, end = 0.3)),
-     main = "Shark abundance as a function of SST")
+shark_predict <- predict(sst_stack, shark_glm, type = "response")
+plot(shark_predict,
+  col = rev(rainbow(n = 10, start = 0, end = 0.3)),
+  main = "Shark abundance as a function of SST"
+)
 ```
 
 ```{r, eval=TRUE, echo=F}
@@ -378,13 +393,16 @@ sst_stack <- stack(sst_mn_crop, sst_feb_crop, sst_anomaly)
 names(sst_stack)[3] <- "SST_anomaly"
 rpoints_sst <- randomPoints(sst_stack, 500)
 sst_samp <- extract(sst_stack, rpoints_sst)
-sst_samp <- data.frame(sst_samp, lat = rpoints_sst[,2], lon = rpoints_sst[,1])
+sst_samp <- data.frame(sst_samp, lat = rpoints_sst[, 2], lon = rpoints_sst[, 1])
 sst_samp$shark_abund <- rpois(n = nrow(sst_samp), lambda = round(sst_samp$SST_feb_2013))
-shark_glm <- glm(shark_abund ~ SST_feb_2013 + SST_anomaly, 
-                 data = sst_samp, family = "poisson")
-shark_predict <- predict(sst_stack, shark_glm, type = 'response')
-plot(shark_predict, col = rev(rainbow(n = 10, start = 0, end = 0.3)),
-     main = "Shark abundance as a function of SST")
+shark_glm <- glm(shark_abund ~ SST_feb_2013 + SST_anomaly,
+  data = sst_samp, family = "poisson"
+)
+shark_predict <- predict(sst_stack, shark_glm, type = "response")
+plot(shark_predict,
+  col = rev(rainbow(n = 10, start = 0, end = 0.3)),
+  main = "Shark abundance as a function of SST"
+)
 ```
 
 
@@ -392,11 +410,14 @@ Let's try somethign else, say attack risk. It's not just about abdundance, somet
 ```{r, eval=TRUE}
 sst_samp$shark_aggression <- sst_samp$lat * -1 # so agression goes up with lattitude
 sst_samp$shark_attack <- scale(sst_samp$shark_abund * sst_samp$shark_aggression)
-attack_lm <- lm(shark_attack ~ SST_feb_2013 + SST_anomaly, 
-                 data = sst_samp)
-shark_attack <- predict(sst_stack, attack_lm, type = 'response')
-plot(shark_attack, col = rev(rainbow(n = 10, start = 0, end = 0.3)),
-     main = "Shark attack index!")
+attack_lm <- lm(shark_attack ~ SST_feb_2013 + SST_anomaly,
+  data = sst_samp
+)
+shark_attack <- predict(sst_stack, attack_lm, type = "response")
+plot(shark_attack,
+  col = rev(rainbow(n = 10, start = 0, end = 0.3)),
+  main = "Shark attack index!"
+)
 ```
 
 This is a quick and silly example. If we were less lazy, we might create a new image stack with the abundance predicitons and the lattitude values, pull the random samples out again, and re-fit the model and predictions. 
@@ -414,28 +435,31 @@ plot(sst.feb)
 rpoints.sst.feb <- randomPoints(sst.feb, 500)
 points(rpoints.sst.feb)
 rpoints.sst.feb <- data.frame(rpoints.sst.feb, extract(sst.feb, rpoints.sst.feb))
-names(rpoints.sst.feb)[3] = "SST"
+names(rpoints.sst.feb)[3] <- "SST"
 # fit the idw model
-sst.idw.fit <- gstat(id="SST", formula=SST~1, locations=~x+y, data=rpoints.sst.feb, nmax=5, set=list(idp=1))
+sst.idw.fit <- gstat(id = "SST", formula = SST ~ 1, locations = ~ x + y, data = rpoints.sst.feb, nmax = 5, set = list(idp = 1))
 sst.idw <- interpolate(sst.feb, sst.idw.fit)
-par(mfrow=c(1,2))
-plot(sst.feb); plot(sst.idw) # ahh!
+par(mfrow = c(1, 2))
+plot(sst.feb)
+plot(sst.idw) # ahh!
 sst.idw <- mask(sst.idw, sst.feb)
-plot(sst.feb); plot(sst.idw)
+plot(sst.feb)
+plot(sst.idw)
 ```
 
 ```{r, eval=FALSE, echo=F}
 # first some package specific projection stuff
-coordinates(rpoints.sst.feb) <- ~x+y
+coordinates(rpoints.sst.feb) <- ~ x + y
 proj4string(rpoints.sst.feb) <- proj4string(sst.feb)
 # now the kriging
-sst.vario <- variogram(object=SST~1, data=rpoints.sst.feb) # could log(y) is SST wasn't negative
-sst.vario.fit <- fit.variogram(sst.vario, vgm(psill=0.3, model="Gau", range=100)) #?vgm
+sst.vario <- variogram(object = SST ~ 1, data = rpoints.sst.feb) # could log(y) is SST wasn't negative
+sst.vario.fit <- fit.variogram(sst.vario, vgm(psill = 0.3, model = "Gau", range = 100)) # ?vgm
 # (Exp)ponential, (Sph)rical, (Gau)ssian, (Mat)ern, (Spl)ine, (Lin)ear etc.
-sst.ordkirg.fit <- gstat(id="SST", formula=SST~1, model=sst.vario.fit, data=rpoints.sst.feb)
+sst.ordkirg.fit <- gstat(id = "SST", formula = SST ~ 1, model = sst.vario.fit, data = rpoints.sst.feb)
 sst.ordkrig <- interpolate(sst.feb, sst.ordkirg.fit)
 sst.ordkrig <- mask(sst.ordkrig, sst.feb)
-plot(sst.feb); plot(sst.ordkrig)
+plot(sst.feb)
+plot(sst.ordkrig)
 ```
 
 
@@ -454,27 +478,29 @@ library(rgeos) # watch proprietory stuff here
 You could also try getting bioclim climate data using the ```getData()``` function from the ```raster``` package, or getting various types of maps using the ```gmap()``` function from the ```dismo``` package or the ```map``` function from the ```maps``` package. If you go to the github page for this tutorial, you'll find some answers to the excercies, plus some extra goodies realting to the above suggestions too.
 
 ```{r, eval=FALSE, echo=F}
-par(mfrow=c(1,1))
-rain <- getData('worldclim', var="prec", res=10, lon=5, lat=45) # this will d/l data to getwd()
+par(mfrow = c(1, 1))
+rain <- getData("worldclim", var = "prec", res = 10, lon = 5, lat = 45) # this will d/l data to getwd()
 plot(rain)
 nlayers(rain)
-rpoints.rain <- randomPoints(rain,500)  # through the stack
+rpoints.rain <- randomPoints(rain, 500) # through the stack
 plot(rain, 1) # plot january rainfall
-points(rpoints.rain, pch=16, cex=0.7)
-samp.rain <- extract(rain, rpoints.rain) 
+points(rpoints.rain, pch = 16, cex = 0.7)
+samp.rain <- extract(rain, rpoints.rain)
 head(samp.rain)
 ```
 
 ```{r, eval=FALSE, echo=F}
-install.packages("XML"); library(XML)
+install.packages("XML")
+library(XML)
 Aus <- gmap("Australia") # get google maps normal
 plot(Aus)
-AusSat <- gmap("Australia", type="satellite") # get google maps satellite image
+AusSat <- gmap("Australia", type = "satellite") # get google maps satellite image
 plot(AusSat)
 ```
 
 ```{r, eval=FALSE, echo=F}
-install.packages("maps"); library(maps)
+install.packages("maps")
+library(maps)
 map(database = "world", col = "grey")
 ```
 

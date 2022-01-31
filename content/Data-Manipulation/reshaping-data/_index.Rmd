@@ -15,7 +15,7 @@ For example, it is very common in the biological sciences that we record the abu
 Consider a data set that recorded the abundance of fish from each of three transects that were set up on two reefs in two separate months. First, import this sample data set, [ReefFish.csv](/datasets/ReefFish.csv), to see the way it is formatted.
 
 ```{r}
-ReefFish <- read.csv(file="ReefFish.csv", header =T)
+ReefFish <- read.csv(file = "ReefFish.csv", header = T)
 ```
 
 ```{r,echo =F}
@@ -106,8 +106,9 @@ Instead of `spread`, `dcast` is used to go from a long to wide format. This code
 
 ```{r}
 ReefFish.wide <- dcast(ReefFish,
-                      Site + Month + Transect ~ Species,
-                      value.var = "Abundance", fill = 0)
+  Site + Month + Transect ~ Species,
+  value.var = "Abundance", fill = 0
+)
 ```
 
 The arguments of `dcast` are:  
@@ -122,9 +123,10 @@ Instead of `gather`, `melt` is used to go from a wide to long format.
 
 ```{r}
 ReefFish.long <- melt(ReefFish.wide,
-                    id.vars = c("Site","Month","Transect"),
-                    measure.vars = c("RedFish","BlueFish","BlackFish"),
-                    variable.name = "Species", value.name = "Abundance")
+  id.vars = c("Site", "Month", "Transect"),
+  measure.vars = c("RedFish", "BlueFish", "BlackFish"),
+  variable.name = "Species", value.name = "Abundance"
+)
 ```
 
 The arguments of `melt` are:  
@@ -142,9 +144,10 @@ For example, if we wanted to pool the transects from each survey, we could remov
 
 ```{r}
 ReefFish.wide_sum <- dcast(ReefFish,
-                       Site + Month ~ Species,
-                       value.var = "Abundance",
-                       fun.aggregate = sum, fill = 0)
+  Site + Month ~ Species,
+  value.var = "Abundance",
+  fun.aggregate = sum, fill = 0
+)
 ```
 
 ```{r,echo =F}
@@ -155,20 +158,22 @@ If we wanted the mean of the three transects, we can use `fun.aggregate = mean`.
 
 ```{r}
 ReefFish.wide_mean <- dcast(ReefFish,
-                       Site + Month ~ Species,
-                       value.var = "Abundance", fun.aggregate = mean, fill = 0)
+  Site + Month ~ Species,
+  value.var = "Abundance", fun.aggregate = mean, fill = 0
+)
 ```
 
 You can also put more complex expressions in the reshape formula to create new variables that are combinations of old ones. For example, you could create a new column for each of the combinations of Species and Month by adding both variables to the right of the ~
 
 ```{r}
 ReefFish.wide_combined <- dcast(ReefFish,
-                       Site + Transect ~ Species + Month,
-                       value.var = "Abundance", fill = 0)
+  Site + Transect ~ Species + Month,
+  value.var = "Abundance", fill = 0
+)
 ```
 
 ```{r,echo =F}
-head(ReefFish.wide_combined[,1-4])
+head(ReefFish.wide_combined[, 1 - 4])
 ```
   
 

@@ -44,12 +44,13 @@ Here is some sample code to plot means +/- standard deviations. For more control
 library(dplyr)
 
 Species.summary <- Prawns %>% # the names of the new data frame and the data frame to be summarised
-  group_by(Species) %>%   # the grouping variable
-  summarise(mean = mean(Metabolic_rate),  # calculates the mean
-            sd = sd(Metabolic_rate), # calculates the standard deviation
-            lower = mean(Metabolic_rate) - sd(Metabolic_rate),
-            upper = mean(Metabolic_rate) + sd(Metabolic_rate))
-
+  group_by(Species) %>% # the grouping variable
+  summarise(
+    mean = mean(Metabolic_rate), # calculates the mean
+    sd = sd(Metabolic_rate), # calculates the standard deviation
+    lower = mean(Metabolic_rate) - sd(Metabolic_rate),
+    upper = mean(Metabolic_rate) + sd(Metabolic_rate)
+  )
 ```
 
 In a new data frame called Species.summary, we now have the means, standard deviations and the lower and upper values that set the size of the error bars for each level of the grouping variable. The  limits for the error bars were calculated by adding (upper) or subtracting (lower) the standard deviation from the mean.
@@ -57,11 +58,12 @@ In a new data frame called Species.summary, we now have the means, standard devi
 We can now use the `barplot` and `arrows` functions to make a plot with error bars.
 
 ```{r}
-Prawn.plot <- barplot(Species.summary$mean, names.arg = Species.summary$Species,
-                      ylab="Metabolic rate", xlab = "Species",ylim=c(0,1))
+Prawn.plot <- barplot(Species.summary$mean,
+  names.arg = Species.summary$Species,
+  ylab = "Metabolic rate", xlab = "Species", ylim = c(0, 1)
+)
 
-arrows(Prawn.plot, Species.summary$lower, Prawn.plot, Species.summary$upper, angle=90, code=3)
-
+arrows(Prawn.plot, Species.summary$lower, Prawn.plot, Species.summary$upper, angle = 90, code = 3)
 ```
 
 Note that plots of means and error bars can be misleading as they hide the true distributions of the data. Means can also be misleading when data are very skewed, and calculations for error bars using *t* statistics (e.g., 95% confidence intervals) assume the data are normally distributed. 
@@ -75,15 +77,17 @@ Box plots and bar plots can be formatted using the basic R formatting in the bas
 Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.
 
 ```{r,eval=FALSE}
-boxplot(Metabolic_rate~Species, data = Prawns, xlab = 'Species', ylab = 'Metabolic rate')
+boxplot(Metabolic_rate ~ Species, data = Prawns, xlab = "Species", ylab = "Metabolic rate")
 ```
 
 **Edit axis limits**  
 Axis limits are set by the <font face="monospace">xlim</font> and <font face="monospace">ylim</font> arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 1, use:
 
 ```{r,eval=FALSE}
-boxplot(Metabolic_rate~Species, data = Prawns, xlab = 'Species', ylab = 'Metabolic rate',
-        ylim = c(0,1))
+boxplot(Metabolic_rate ~ Species,
+  data = Prawns, xlab = "Species", ylab = "Metabolic rate",
+  ylim = c(0, 1)
+)
 ```
 
 **Renaming levels of the categorical factor**  
@@ -91,8 +95,10 @@ If the levels of your categorical factor are not ideal for the plot, you can ren
 `names` argument. For example, to put the actual species names on:
 
 ```{r}
-boxplot(Metabolic_rate~Species, data = Prawns, xlab = 'Species', ylab = 'Metabolic rate',
-        names = c("Penaeus monodon","Fenneropenaeus merguiensis"))
+boxplot(Metabolic_rate ~ Species,
+  data = Prawns, xlab = "Species", ylab = "Metabolic rate",
+  names = c("Penaeus monodon", "Fenneropenaeus merguiensis")
+)
 ```
 
 **Adding colour** 
@@ -100,8 +106,10 @@ Colour can be added to any part of the plots (axis, fonts etc.) using `col` argu
 
 Here we will simply change the colour of the bars in the bar plot to red.
 ```{r}
-barplot(Species.summary$mean, names.arg = Species.summary$Species,
-        ylab="Metabolic rate", xlab = "Species",ylim=c(0,1),col='red')
+barplot(Species.summary$mean,
+  names.arg = Species.summary$Species,
+  ylab = "Metabolic rate", xlab = "Species", ylim = c(0, 1), col = "red"
+)
 ```
   
 

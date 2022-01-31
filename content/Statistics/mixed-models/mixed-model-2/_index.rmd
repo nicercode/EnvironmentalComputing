@@ -46,7 +46,7 @@ In this data set, we have a fixed effect (Modification; modified vs pristine) an
 We can see this by looking at the data, and a cross tabulation.
 
 ```{r}
-Estuaries[1:10,]
+Estuaries[1:10, ]
 xtabs(~ Estuary + Site, Estuaries, sparse = TRUE)
 ```
 
@@ -60,7 +60,6 @@ To create a unique label for each site in this data set, we convert Site to a fa
 Estuaries$Site <- as.factor(Estuaries$Site)
 
 Estuaries$SiteWithin <- paste0(Estuaries$Estuary, "_", Estuaries$Site)
-
 ```
 
 Now, check the structure to see that each site is nested in only one Estuary, consistent with the experimental design.
@@ -72,7 +71,7 @@ xtabs(~ Estuary + SiteWithin, Estuaries, sparse = TRUE)
 To fit a model for total abundance, we would use:
 
 ```{r}
-fit.mod <- lmer(Total ~ Modification + (1|Estuary) + (1|SiteWithin), data = Estuaries)
+fit.mod <- lmer(Total ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries)
 summary(fit.mod)
 ```
 
@@ -81,9 +80,8 @@ where Total is the dependent variable (left of the ~), Modification is the fixed
 We'll also fit the wrong model, to see the difference if we had used the old labels for each site.
 
 ```{r, message=FALSE}
-fit.wrong <- lmer(Total ~ Modification + (1|Estuary) + (1|Site), data = Estuaries)
-summary(fit.wrong )
-
+fit.wrong <- lmer(Total ~ Modification + (1 | Estuary) + (1 | Site), data = Estuaries)
+summary(fit.wrong)
 ```
 
 The only place we can see an obvious difference is under the Random effects table. For the correct model we have <font face="monospace">Number of obs: 52, groups:  SiteWithin, 26; Estuary, 7</font> while the wrong model tells us we have only 4 sites, which we know is incorrect. 
@@ -106,19 +104,18 @@ The assumptions are the same as for one random factor, but it doesn't hurt to li
 See [Mixed models 1](/statistics/mixed-modelsmixed-models-1/) for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.  
 
 ```{r}
-par(mfrow=c(1,2))
+par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
-scatter.smooth(residuals(fit.mod)~fitted(fit.mod)) #residual plot
+scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot
 ```
 
 The normal quantile plot looks reasonable, however we see here a definite fan shape in the residual vs. fit plot. Let's try transforming the response and see if we do better.
 
 ```{r}
-fit.mod <- lmer(log(Total) ~ Modification + (1|Estuary) + (1|SiteWithin), data = Estuaries)
-par(mfrow=c(1,2))
+fit.mod <- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries)
+par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
-scatter.smooth(residuals(fit.mod)~fitted(fit.mod)) #residual plot
-
+scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot
 ```
 
 This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it's not of great concern. 
@@ -131,9 +128,9 @@ This scatterplot is much better, the fan shape is all but gone. The smooth line 
 We can use the `anova` as before to obtain approximate p-values for fixed effects.
 
 ```{r}
-ft.mod <- lmer(log(Total)~Modification + (1|Estuary) + (1|SiteWithin), data=Estuaries, REML=F)
-ft.mod.0 <- lmer(log(Total)~(1|Estuary) + (1|SiteWithin), data=Estuaries, REML=F)
-anova(ft.mod.0,ft.mod)
+ft.mod <- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries, REML = F)
+ft.mod.0 <- lmer(log(Total) ~ (1 | Estuary) + (1 | SiteWithin), data = Estuaries, REML = F)
+anova(ft.mod.0, ft.mod)
 ```
 We find weak evidence of an effect of Modification (p=0.05047). 
 
@@ -142,19 +139,19 @@ We find weak evidence of an effect of Modification (p=0.05047).
 As in  [Mixed models 1](/statistics/mixed-modelsmixed-models-1/) we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I've taken the code from [Mixed models 1](/statistics/mixed-modelsmixed-models-1/) and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.
 
 ```{r, error=FALSE, message=FALSE, warning=FALSE}
-nBoot=1000
-lrStat <- rep(NA,nBoot)
-ft.null <- lmer(log(Total) ~ Modification + (1|Estuary) , Estuaries, REML=F)#null model
-ft.alt <- lmer(log(Total) ~ Modification + (1|Estuary) + (1|SiteWithin), Estuaries, REML=F)#alternate model
-lrObs <- 2*logLik(ft.alt) - 2*logLik(ft.null) #observed test stat
-for(iBoot in 1:nBoot)
+nBoot <- 1000
+lrStat <- rep(NA, nBoot)
+ft.null <- lmer(log(Total) ~ Modification + (1 | Estuary), Estuaries, REML = F) # null model
+ft.alt <- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), Estuaries, REML = F) # alternate model
+lrObs <- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
+for (iBoot in 1:nBoot)
 {
-  Estuaries$logTotalSim <- unlist(simulate(ft.null)) #resampled data
-  bNull <- lmer(logTotalSim~Modification + (1|Estuary) , Estuaries, REML=F)#null model
-  bAlt <- lmer(logTotalSim~Modification+(1|Estuary)+ (1|SiteWithin), Estuaries, REML=F)#alternate model
-  lrStat[iBoot] <- 2*logLik(bAlt) - 2*logLik(bNull)#resampled test stat
+  Estuaries$logTotalSim <- unlist(simulate(ft.null)) # resampled data
+  bNull <- lmer(logTotalSim ~ Modification + (1 | Estuary), Estuaries, REML = F) # null model
+  bAlt <- lmer(logTotalSim ~ Modification + (1 | Estuary) + (1 | SiteWithin), Estuaries, REML = F) # alternate model
+  lrStat[iBoot] <- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
 }
-mean(lrStat>lrObs) #P-value for test of Estuary effect
+mean(lrStat > lrObs) # P-value for test of Estuary effect
 ```
 The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.
   
@@ -170,15 +167,16 @@ You can plot within each site, but this is a bit odd for a boxplot as there are 
 ```{r, fig.height=8,warning=FALSE}
 library(Hmisc)
 
-ModEst <- unique(Estuaries[c("SiteWithin", "Modification")])#find which Estuaries are modified
-cols <- as.numeric(ModEst[order(ModEst[,1]),2])+3 #Assign colour by modification
-boxplot(log(Total)~ SiteWithin,data=Estuaries,col=cols,xlab="Estuary",ylab="Total invertebrates")
-legend("bottomleft", inset=.02,
-   c(" Modified "," Pristine "), fill=unique(cols), horiz=TRUE, cex=0.8)
-means=fitted(fit.mod) #this will give the estimate at each data point
-Est.means=summarize(means, Estuaries$SiteWithin, mean)$means #extract means by site
-stripchart(Est.means~ sort(unique(SiteWithin)),data=Estuaries,pch=18,col="red",vertical = TRUE,add=TRUE)#plot means by site
-
+ModEst <- unique(Estuaries[c("SiteWithin", "Modification")]) # find which Estuaries are modified
+cols <- as.numeric(ModEst[order(ModEst[, 1]), 2]) + 3 # Assign colour by modification
+boxplot(log(Total) ~ SiteWithin, data = Estuaries, col = cols, xlab = "Estuary", ylab = "Total invertebrates")
+legend("bottomleft",
+  inset = .02,
+  c(" Modified ", " Pristine "), fill = unique(cols), horiz = TRUE, cex = 0.8
+)
+means <- fitted(fit.mod) # this will give the estimate at each data point
+Est.means <- summarize(means, Estuaries$SiteWithin, mean)$means # extract means by site
+stripchart(Est.means ~ sort(unique(SiteWithin)), data = Estuaries, pch = 18, col = "red", vertical = TRUE, add = TRUE) # plot means by site
 ```
 
 Alternatively, you can plot by Estuary as before (see [Mixed models 1](/statistics/mixed-modelsmixed-models-1/)).

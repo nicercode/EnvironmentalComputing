@@ -9,10 +9,12 @@ output: html_document
 library(ggplot2)
 
 g1 <-
-  ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) + geom_point()
+  ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
 
 IrisBox <-
-  ggplot(iris, aes(Species, Sepal.Length, fill = Species)) + geom_boxplot()
+  ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
 
 mytheme1 <-
   theme(
@@ -43,7 +45,7 @@ mytheme1 <-
   )
 
 print(
-  IrisBox + mytheme1 + labs(y = "Sepal length (cm)") + scale_fill_manual (
+  IrisBox + mytheme1 + labs(y = "Sepal length (cm)") + scale_fill_manual(
     name = "Species",
     values = c("maroon3", "sienna1", "chartreuse4")
   )
@@ -77,7 +79,8 @@ data(iris)
 The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial.
 
 ```{r, echo=TRUE}
-IrisPlot<-ggplot(iris, aes(Sepal.Length, Petal.Length, colour=Species)) + geom_point() 
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
 ```
 
 ```{r,echo=F}
@@ -152,8 +155,10 @@ Putting these together in a theme would look like this:
 mytheme <-
   theme(
     panel.grid.major = element_line(colour = "black", size = (1.5)),
-    panel.grid.minor = element_line(size = (0.2), colour =
-                                      "grey")
+    panel.grid.minor = element_line(
+      size = (0.2), colour =
+        "grey"
+    )
   )
 
 print(IrisPlot + mytheme)
@@ -217,13 +222,16 @@ Here is an example of a ggplot with many of the elements customised. This is obv
 
 ```{r, warning =F}
 IrisPlot <-
-  ggplot(iris,
-         aes(
-           Sepal.Length,
-           Petal.Length,
-           colour = Species,
-           shape = Species
-         )) + geom_point()
+  ggplot(
+    iris,
+    aes(
+      Sepal.Length,
+      Petal.Length,
+      colour = Species,
+      shape = Species
+    )
+  ) +
+  geom_point()
 
 mytheme3 <-
   theme(
@@ -264,8 +272,8 @@ mytheme3 <-
 
 print(
   IrisPlot + mytheme3 + ggtitle("Iris species petal and sepal length")
-  + labs(y = "Petal length (cm)", x = "Sepal length (cm)", colour = "Species")
-  + scale_colour_manual(values = c("slateblue", "slateblue2", "slateblue4"))
+    + labs(y = "Petal length (cm)", x = "Sepal length (cm)", colour = "Species")
+    + scale_colour_manual(values = c("slateblue", "slateblue2", "slateblue4"))
 )
 ```
   

@@ -32,9 +32,9 @@ So the mean of Y is multiplied by $exp( \beta_1 )$ when we increase $x$ by 1 uni
 ```{r}
 N <- 120
 x <- rnorm(N)
-mu <- exp(1+0.2*x)
+mu <- exp(1 + 0.2 * x)
 Y <- rpois(N, lambda = mu)
-glm1 <- glm(Y~x, family = poisson)
+glm1 <- glm(Y ~ x, family = poisson)
 glm1$coefficients
 exp(glm1$coefficients[2])
 ```
@@ -58,8 +58,8 @@ $$  log\left(\frac{p}{1-p}\right)  =  \beta_0 + \beta_1 x $$
 Skipping some maths that is very similar to the above, we can obtain an interpretation for the coefficient of $x$ in the model in terms of the odds. When we increase $x$ by one unit the odds are multiplied by $exp( \beta_1 )$. Odds are not the most intuitive thing to interpret, but they do increase when p increases, so that if your coefficient $\beta_1$ is positive, increasing $x$ will increase your probability. 
 
 ```{r}
-bY <- Y>0 #turning counts into presence absence
-bin1 <- glm(bY~x,family = binomial)
+bY <- Y > 0 # turning counts into presence absence
+bin1 <- glm(bY ~ x, family = binomial)
 summary(bin1)
 ```
 So when we increase $x$ by one unit, the odds of Y are multiplied by $exp( \beta_1 ) = 2.11$
@@ -76,7 +76,7 @@ In that case you can interpret your coefficients in a similar way as the Poisson
 
 ```{r, warning=F}
 library(mvabund)
-bin2 <- manyglm(bY~x, family = binomial(link = "cloglog"))
+bin2 <- manyglm(bY ~ x, family = binomial(link = "cloglog"))
 coef(bin2)
 ```
 
@@ -99,21 +99,21 @@ If you sample soil and count critters, all other things being equal, you would e
 ```{r}
 soil <- exp(rbeta(N, shape1 = 8, shape2 = 1))
 depth <- rnorm(N)
-mu <- soil*exp(0.5+0.5*depth)
+mu <- soil * exp(0.5 + 0.5 * depth)
 count <- rpois(N, lambda = mu)
 ```
 
 Now, we can model counts with depth as our predictor and soil quantity as an offset.
 
 ```{r}
-off_mod <- glm(Y~depth+offset(log(soil)), family = poisson)
+off_mod <- glm(Y ~ depth + offset(log(soil)), family = poisson)
 summary(off_mod)
 ```
 
 If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations [here](/statistics/how-to-interpret-linear-models/). The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you're not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response. 
 
 ```{r}
-coef_mod <- glm(Y~depth+log(soil), family = poisson)
+coef_mod <- glm(Y ~ depth + log(soil), family = poisson)
 summary(coef_mod)
 ```
 

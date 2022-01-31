@@ -103,10 +103,12 @@ se^2_\mathrm{lnRR}=\frac{sd^2_{C}}{n_{C}\bar{x}^2_{C}}+\frac{sd^2_{E}}{n_{E}\bar
 Let's get these using the function `escalc` in `metafor`. To obtain the standardised mean difference, we use:
 
 ```{r effect-size, tidy=TRUE}
-#SMD
-SMD <- escalc(measure = "SMD",n1i = dat$n1i, n2i = dat$n2i,
-               m1i = dat$m1i, m2i = dat$m2i,
-               sd1i = dat$sd1i, sd2i = dat$sd2i)
+# SMD
+SMD <- escalc(
+  measure = "SMD", n1i = dat$n1i, n2i = dat$n2i,
+  m1i = dat$m1i, m2i = dat$m2i,
+  sd1i = dat$sd1i, sd2i = dat$sd2i
+)
 ```
 
 where `n1i` and `n2i` are the sample sizes, `m1i` and `m2i` are the means, and `sd1i` and `sd2i` the standard deviations from each study.
@@ -119,9 +121,11 @@ head(SMD)
 
 To obtain the response ratio (log transformed ratio of menas), we would use:
 ```{r effect-size-2, tidy=TRUE}
-lnRR <- escalc(measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
-               m1i = dat$m1i, m2 = dat$m2i,
-               sd1i = dat$sd1i, sd2i = dat$sd2i)
+lnRR <- escalc(
+  measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
+  m1i = dat$m1i, m2 = dat$m2i,
+  sd1i = dat$sd1i, sd2i = dat$sd2i
+)
 ```
 
 The original paper used lnRR so we will use it, but you may want to repeat analysis below using SMD to see whether results are consistent.
@@ -130,7 +134,7 @@ Add the effect sizes to the original data set with `cbind` or `bind_cols` from t
 
 ```{r, tidy=TRUE, message=FALSE, warning=FALSE}
 library(dplyr)
-dat <- bind_cols(dat,lnRR)
+dat <- bind_cols(dat, lnRR)
 ```
 
 You should see yi (effec size) and vi (sampling variance) are added.
@@ -170,6 +174,6 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
  
 Last updated:
 ```{r,echo=F}
-date() 
+date()
 ```
 

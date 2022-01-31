@@ -17,7 +17,7 @@ library(dplyr)
 As with the help page on [Subsetting data](/../data-manipulation/subsetting-data/), we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set,  [Bats_data.csv](/datasets/Bats_data.csv), and import into R.
 
 ```{r}
-Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)
+Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
 ```
   
 
@@ -30,30 +30,34 @@ We can use the function `summarise` with a range of built-in summary functions f
 For example, to the mean activity of bats across all nightly measurements in the study, I would use the `>mean` summary function within the `summarise` function as follows, specifying the data frame (Bats), the variable I want to get the mean of (Activity) and a name for the new variable (Mean.Activity):
 
 ```{r}
-summarise(Bats, Mean.Activity=mean(Activity))
+summarise(Bats, Mean.Activity = mean(Activity))
 ```
 
 We can add as many other measurements to this as we like, including a wide range of summary functions (described with #).
 
 ```{r}
-summarise(Bats, mean.activity=mean(Activity),       # mean
-          min.Activity=min(Activity),               # minimum
-          max.Activity=max(Activity),               # maximum
-          med.Activity=median(Activity),            # median
-          sd.Activity=sd(Activity),                 # standard deviation
-          var.Activity=var(Activity),               # variance
-          n.Activity=n(),                           # sample size
-          se.Activity=sd.Activity/sqrt(n.Activity), # standard error
-          IQR.Activity=IQR(Activity))               # interquartile range
+summarise(Bats,
+  mean.activity = mean(Activity), # mean
+  min.Activity = min(Activity), # minimum
+  max.Activity = max(Activity), # maximum
+  med.Activity = median(Activity), # median
+  sd.Activity = sd(Activity), # standard deviation
+  var.Activity = var(Activity), # variance
+  n.Activity = n(), # sample size
+  se.Activity = sd.Activity / sqrt(n.Activity), # standard error
+  IQR.Activity = IQR(Activity)
+) # interquartile range
 ```
 
 If we are looking at factors, especially if they are ordered in some way, we may find some of the other dplyr summary functions useful. For example:
 
 ```{r}
-summarise(Bats, first.site=first(Site),     # first value in Site variable
-          last.Site=last(Site),             # last value in Site variable
-          third.Site=nth(Site, 3),          # nth value of Site
-          n.Sites=n_distinct(Site))         # number of distinct sites
+summarise(Bats,
+  first.site = first(Site), # first value in Site variable
+  last.Site = last(Site), # last value in Site variable
+  third.Site = nth(Site, 3), # nth value of Site
+  n.Sites = n_distinct(Site)
+) # number of distinct sites
 ```
 
 
@@ -71,17 +75,17 @@ Bats_by_Treatment <- group_by(Bats, Treatment.thinned)
 In order to retain our original datset as is, I have used the function to make a new dataset called "Bats_by_Treatment". Now I can use exactly the same code as we used above to summarise the data for each of the groups. 
 
 ```{r}
-Treatment.summary <- summarise(Bats_by_Treatment, 
-                  mean.Activity=mean(Activity),             # mean
-                  min.Activity=min(Activity),               # minimum
-                  max.Activity=max(Activity),               # maximum
-                  med.Activity=median(Activity),            # median
-                  sd.Activity=sd(Activity),                 # standard deviation
-                  var.Activity=var(Activity),               # variance
-                  n.Activity=n(),                           # sample size
-                  se.Activity=sd.Activity/sqrt(n.Activity), # standard error
-                  IQR.Activity=IQR(Activity))               # interquartile range
-
+Treatment.summary <- summarise(Bats_by_Treatment,
+  mean.Activity = mean(Activity), # mean
+  min.Activity = min(Activity), # minimum
+  max.Activity = max(Activity), # maximum
+  med.Activity = median(Activity), # median
+  sd.Activity = sd(Activity), # standard deviation
+  var.Activity = var(Activity), # variance
+  n.Activity = n(), # sample size
+  se.Activity = sd.Activity / sqrt(n.Activity), # standard error
+  IQR.Activity = IQR(Activity)
+) # interquartile range
 ```
 
 Note that the input data frame is now "Bats_by_Treatment", rather than "Bats".
@@ -101,17 +105,19 @@ View(Treatment.summary)
 You can also combine the grouping and summarising into some neater code by "piping" with `%>%`. For example, the code above could be replaced with:
 
 ```{r}
-Treatment.summary <- Bats %>%                          
+Treatment.summary <- Bats %>%
   group_by(Treatment.thinned) %>%
-  summarise(mean.Activity=mean(Activity),             # mean
-            min.Activity=min(Activity),               # minimum
-            max.Activity=max(Activity),               # maximum
-            med.Activity=median(Activity),            # median
-            sd.Activity=sd(Activity),                 # standard deviation
-            var.Activity=var(Activity),               # variance
-            n.Activity=n(),                           # sample size
-            se.Activity=sd.Activity/sqrt(n.Activity), # standard error
-            IQR.Activity=IQR(Activity))               # interquartile range
+  summarise(
+    mean.Activity = mean(Activity), # mean
+    min.Activity = min(Activity), # minimum
+    max.Activity = max(Activity), # maximum
+    med.Activity = median(Activity), # median
+    sd.Activity = sd(Activity), # standard deviation
+    var.Activity = var(Activity), # variance
+    n.Activity = n(), # sample size
+    se.Activity = sd.Activity / sqrt(n.Activity), # standard error
+    IQR.Activity = IQR(Activity)
+  ) # interquartile range
 ```
   
 
@@ -130,13 +136,13 @@ Bats$Activity2[1:4] <- rep(NA, 4)
 Next, let's try summarising the data: 
 
 ```{r}
-summarise(Bats, mean.Activity=mean(Activity2))              
+summarise(Bats, mean.Activity = mean(Activity2))
 ```
 
 You'll see we get an NA for the result. To obtain the mean for all the values that are present, we can add an argument, `na.rm=TRUE`, to remove the rows that are NA.
 
 ```{r}
-summarise(Bats, mean.Activity=mean(Activity2, na.rm=TRUE))              
+summarise(Bats, mean.Activity = mean(Activity2, na.rm = TRUE))
 ```
 
 Just remember that this will decrease your sample size. This will work for the summary functions apart from the `n` function that counts the number of values in a vector. To count the non-missing data, you can use this (slightly more complicated) piece of code to get your new sample size. 
@@ -157,20 +163,24 @@ This calculates the number of values, `length`, of the vector of bat activity va
 ```{r,warning=F,echo=F}
 library(ggplot2)
 
-plot1 <- ggplot(data=Treatment.summary, aes(x=Treatment.thinned, y=mean.Activity)) + 
-  geom_bar(stat="identity", colour="black", fill="white", position=position_identity()) +
+plot1 <- ggplot(data = Treatment.summary, aes(x = Treatment.thinned, y = mean.Activity)) +
+  geom_bar(stat = "identity", colour = "black", fill = "white", position = position_identity()) +
   theme_bw() +
-  theme(legend.position="none", 
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.title.x=element_text(vjust=-0.3, size=12),
-        axis.title.y=element_text(vjust=0.8, size=12),
-        axis.text.x=element_text(size=12),
-        axis.text.y=element_text(size=12)) +
-  scale_y_continuous(name="Total bat activity") +
-  scale_x_discrete(name="Thinning treatment") +
-  geom_errorbar(aes(ymin=mean.Activity-se.Activity, ymax=mean.Activity+se.Activity),width=.2,
-                position=position_dodge(0.9)) 
+  theme(
+    legend.position = "none",
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.title.x = element_text(vjust = -0.3, size = 12),
+    axis.title.y = element_text(vjust = 0.8, size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12)
+  ) +
+  scale_y_continuous(name = "Total bat activity") +
+  scale_x_discrete(name = "Thinning treatment") +
+  geom_errorbar(aes(ymin = mean.Activity - se.Activity, ymax = mean.Activity + se.Activity),
+    width = .2,
+    position = position_dodge(0.9)
+  )
 
 print(plot1)
 ```

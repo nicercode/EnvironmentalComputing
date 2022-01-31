@@ -14,7 +14,7 @@ For example, consider the bill and face colours of the endangered Gouldian Finch
 
 
 ```{r, echo = F}
-Gfinch <- matrix(c(16,19,18,5,20,22,6,6,22), nrow=3, dimnames = list(c("Black bill", "Red bill", "Yellow bill"), c("Black face", "Red face", "Yellow face")))
+Gfinch <- matrix(c(16, 19, 18, 5, 20, 22, 6, 6, 22), nrow = 3, dimnames = list(c("Black bill", "Red bill", "Yellow bill"), c("Black face", "Red face", "Yellow face")))
 Gfinch
 ```
 
@@ -45,7 +45,7 @@ where *O* and *E* are the observed and expected numbers in each of the cells of 
 With a calculator, you could calculate $\chi^2$ and then determine the probability of obtaining that $\chi^2$ value from a table of the known probability distribution of $\chi^2$. In R, we can obtain that probability by:
 
 ```{r, eval = FALSE}
-pchisq(x, df,lower.tail = FALSE)
+pchisq(x, df, lower.tail = FALSE)
 ```
 
 with *x* = your value of $\chi^2$, and degrees of freedom (*df*) = (number of row-1) x (number of columns-1). The `lower.tail = FALSE` bit gives you the probability that $\chi^2$ is greater than your value.
@@ -54,7 +54,7 @@ with *x* = your value of $\chi^2$, and degrees of freedom (*df*) = (number of ro
 Easier, is to run the whole analysis in R. Firstly, you would need to enter the observed counts as a matrix.
 
 ```{r, eval = F}
-Gfinch <- matrix(c(16,19,18,5,20,22,6,6,22), nrow=3, dimnames = list(c("Black bill", "Red bill", "Yellow bill"), c("Black face", "Red face", "Yellow face")))
+Gfinch <- matrix(c(16, 19, 18, 5, 20, 22, 6, 6, 22), nrow = 3, dimnames = list(c("Black bill", "Red bill", "Yellow bill"), c("Black face", "Red face", "Yellow face")))
 ```
 
 `nrow` tells R how many rows you have. `dimnames` labels the rows and columns.
@@ -121,8 +121,8 @@ If this assumption has not been met, you could combine categories (if you have m
 **Visual.** Count data are best presented as a bar plot with the counts on the Y axis and the categories on the X axis.
 
 ```{r}
-barplot(Gfinch,beside=T,ylab="Count",xlab="Face colour",col=c("black","red","yellow"))
-legend("topright",inset=0.15,c("Black bill", "Red bill", "Yellow bill"),pch=15,col=c("black","red","yellow"))
+barplot(Gfinch, beside = T, ylab = "Count", xlab = "Face colour", col = c("black", "red", "yellow"))
+legend("topright", inset = 0.15, c("Black bill", "Red bill", "Yellow bill"), pch = 15, col = c("black", "red", "yellow"))
 ```
 
 See the graphing modules for making better versions of these figures that are suitable for reports or publications.

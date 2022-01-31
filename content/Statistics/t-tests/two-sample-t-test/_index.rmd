@@ -45,8 +45,7 @@ More commonly, we would use a data frame with the response and predictor variabl
 Download the sample data set, [River_pH.csv](/datasets/River_pH.csv), and import into R.
 
 ```{r,eval=FALSE}
-River_pH = read.csv(file = "River_pH.csv", header = TRUE)
-
+River_pH <- read.csv(file = "River_pH.csv", header = TRUE)
 ```
 
 The *t*-test is run with the `t.test` function, with the arguments specifying the response variable (pH) to the left of the ~, the predictor variable (River_name) to the right of the ~, and the data frame to be used.
@@ -61,8 +60,8 @@ The argument `var.equal = TRUE` specifies that we are assuming equal variances. 
 ### Interpreting the results
  
 ```{r,echo=FALSE}
-River_pH = read.csv(file = "River_pH.csv", header = TRUE)
-t.test(River_pH$pH~River_pH$River_name, alternative = "two.sided", var.equal = TRUE)
+River_pH <- read.csv(file = "River_pH.csv", header = TRUE)
+t.test(River_pH$pH ~ River_pH$River_name, alternative = "two.sided", var.equal = TRUE)
 ```
 
 The output of a *t*-test is straight-forward to interpret. In the above output, the test statistic *t* = 6.9788 with 18 degrees of freedom, and a very low *p* value (*p* < 0.001). We can therefore reject the null hypothesis that the two rivers have the same pH.
@@ -90,7 +89,7 @@ In the event of unequal variances, it may be better to perform a Welch's *t* tes
 **Visual.** Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.
 
 ```{r}
-boxplot(pH~River_name, data = River_pH, xlab = "River name", ylab = "pH")
+boxplot(pH ~ River_name, data = River_pH, xlab = "River name", ylab = "pH")
 ```
   
 

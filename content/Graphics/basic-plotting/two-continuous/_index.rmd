@@ -41,14 +41,14 @@ Scatterplots can be formatted using the basic R formatting in the graphics packa
 Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.
 
 ```{r}
-plot(height ~ temp, data = Plant_height, xlab='Temperature (°C)', ylab = 'Plant height (m)',main='Plant height vs temperature')
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", main = "Plant height vs temperature")
 ```
 
 **Edit axis limits**
 Axis limits are set by the `xlim` and `ylim` arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 80 m, and the x axis to range between -20 and 30, use:
 
 ```{r,eval=FALSE}
-plot(height ~ temp, data = Plant_height, xlab='Temperature (°C)', ylab = 'Plant height (m)', ylim = c(0,80),xlim = c(-20,30))
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", ylim = c(0, 80), xlim = c(-20, 30))
 ```
 
 **Symbol style**
@@ -58,7 +58,7 @@ The choice of symbols to use in plotting is extensive and choices are accessed u
 
 A solid circles `pch=16` or `pch=19` are often the neatest way to display data on a scatterplot.
 ```{r}
-plot(height~temp,data=Plant_height, xlab='Temperature (°C)', ylab = 'Plant height (m)', ylim = c(0,80),pch=16)
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", ylim = c(0, 80), pch = 16)
 ```
 
 **Adding colour**
@@ -67,7 +67,7 @@ Colour can be added to any part of the plots (axis, fonts etc.) using `col` argu
 
 Here we will simply change the colour of the symbols to blue.
 ```{r}
-plot(height~temp,data=Plant_height, xlab='Temperature (°C)', ylab = 'Plant height (m)', pch=16, col="blue")
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", pch = 16, col = "blue")
 ```
 
 
@@ -78,7 +78,7 @@ To further explore the relationship between two variables you can add a line of 
 See the page on [linear regression](/statistics/linear-model/linear-regression/) for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:
 
 ```{r}
-plot(loght ~ temp, data = Plant_height, xlab='Temperature (°C)', ylab = 'log(Plant height)',pch=16)
+plot(loght ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "log(Plant height)", pch = 16)
 abline(lm(loght ~ temp, data = Plant_height))
 ```
   

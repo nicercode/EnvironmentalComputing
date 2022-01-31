@@ -50,20 +50,20 @@ Your data should be formatted with the measurements from each replicate as a row
 Download the sample data set for the sessile invertebrates, [Sessile.csv](/datasets/Sessile.csv), and import into R to to see the desired format. Check that your predictor variables are factors with the function `str`
 
 ```{r, eval=FALSE}
-Sessile = read.csv(file = "Sessile.csv", header = TRUE)
+Sessile <- read.csv(file = "Sessile.csv", header = TRUE)
 str(Sessile)
 ```
 
 With our predictor variable correctly assigned as factors, we can now run the analysis. As with other forms of linear models we have a model formula with the dependent variable, *y*, to the left of the ~ and the predictor variables to the right. For this two factor design, we use:
 
 ```{r, eval=FALSE}
-Sessile.aov = aov(Richness ~ Copper * Orientation, data = Sessile)
+Sessile.aov <- aov(Richness ~ Copper * Orientation, data = Sessile)
 ```
 
 Note that when you specify a model with * between the two predictors, R automatically includes both variables and their interaction. This same model could also be written as:
 
 ```{r, eval = FALSE}
-Sessile.aov = aov(Richness ~ Copper + Orientation + Copper:Orientation, data = Sessile)
+Sessile.aov <- aov(Richness ~ Copper + Orientation + Copper:Orientation, data = Sessile)
 ```
 
 The output from this analysis can be seen by using the `summary` function on the object created.
@@ -76,7 +76,7 @@ summary(Sessile.aov)
 Exactly the same model can also be run using the linear model function, `lm`.
 
 ```{r,eval=FALSE}
-Sessile.lm = lm(Richness ~ Copper * Orientation, data = Sessile)
+Sessile.lm <- lm(Richness ~ Copper * Orientation, data = Sessile)
 anova(Sessile.lm)
 ```
   
@@ -84,8 +84,8 @@ anova(Sessile.lm)
 ### Interpreting the results
  
 ```{r,echo=FALSE}
-Sessile = read.csv(file = "Sessile.csv", header = TRUE)
-Sessile.aov = aov(Richness ~ Copper * Orientation, data = Sessile)
+Sessile <- read.csv(file = "Sessile.csv", header = TRUE)
+Sessile.aov <- aov(Richness ~ Copper * Orientation, data = Sessile)
 summary(Sessile.aov)
 ```
 The summary output of an ANOVA object is a table with the degrees of freedom (Df), sums of squares (Sum Sq), mean squares (Mean Sq) for the each of predictor variable (i.e., variation among levels of your treatments), their interaction and for the Residuals (i.e., varation within the levels). The test statistic, *F* value and its associated *p*-value (Pr(>F)) are also presented.
@@ -134,9 +134,9 @@ There is a fair bit of debate on this in the statistical literature, but many ad
 **Normality.** The assumption of normality can be checked by a frequency histogram of the residuals or by using a quantile plot where the residuals are plotted against the values expected from a normal distribution. The histogram of residuals should follow a normal distribution. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Both of these plots can be obtained from the model object created by the `aov` function.
 
 ```{r}
-par(mfrow = c(1,2)) # This code put two plots in the same window
+par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(Sessile.aov$residuals)
-plot(Sessile.aov,which=2)
+plot(Sessile.aov, which = 2)
 ```
 
 Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](/statistics/glms/).
@@ -144,7 +144,7 @@ Violations of normality can be fixed via transformations or by using a different
 **Homogeneity of variance.** The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the `aov` model object.
 
 ```{r}
-plot(Sessile.aov,which=1)
+plot(Sessile.aov, which = 1)
 ```
 
 Heterogeneous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the y axis for each of the levels on the x axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a  [generalised linear model (GLM)](/statistics/glms/).
@@ -163,7 +163,7 @@ Remember that the interpretation of the main effects is complicated when there i
 **Visual.** A boxplot or column graph with error bars are suitable for contrasting a continuous variable across levels of categorical variable. See the graphing modules for making publication ready versions of these figures.
 
 ```{r}
-boxplot(Richness ~ Copper*Orientation,data = Sessile, names = c("High.H","Low.H","None.H","High.V","Low.V","None.V"),ylab="Species richness",xlab="Copper/Orientation",ylim=c(0,80))
+boxplot(Richness ~ Copper * Orientation, data = Sessile, names = c("High.H", "Low.H", "None.H", "High.V", "Low.V", "None.V"), ylab = "Species richness", xlab = "Copper/Orientation", ylim = c(0, 80))
 ```
   
 

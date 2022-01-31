@@ -21,8 +21,10 @@ Our first example will use annual rainforest loss (ha) in the in the Tocantins r
 We will enter the data manually.
 
 ```{r}
-Area <- c(1650,730,580,440,409,333,333,797,320,273,576,216,244,189,212,
-        156,158,271,124,63,107,61,49,40,52)
+Area <- c(
+  1650, 730, 580, 440, 409, 333, 333, 797, 320, 273, 576, 216, 244, 189, 212,
+  156, 158, 271, 124, 63, 107, 61, 49, 40, 52
+)
 Year <- c(1988:2012)
 ```
 
@@ -45,30 +47,32 @@ Now that we have formatted our data appropriately, we will fit a simple exponent
 In the `ets` function, the model type is expressed as a three-character code representing the error type (first character), the trend type (second character) and the season type (third character). We will use the `model type = ANN` which is a simple exponential smoothing model with additive errors (A), no assumed trend (N) and no seasonality (N). 
 
 ```{r}
-fit1 <- ets(Area_loss_train, model = "ANN")  
+fit1 <- ets(Area_loss_train, model = "ANN")
 ```
 
 Now that we have fit the model using our training data (1988-2009), we can use the model to predict rainforest loss in the most recent 3 years (2010-2012), specifying `h` as the number of time points that we want to forecast (in this case 3 years).
 
 ```{r}
-fit1_forecast <- forecast(fit1, h = 3) 
+fit1_forecast <- forecast(fit1, h = 3)
 fit1_forecast
 ```
 
 The output of our forecast gives us the forecasted values (Forecast) for each year (Point) and then the 80% and 95% confidence intervals. How did we do? By using the `plot` function on a *forecast* object, we can see a plot of the historical trend (line), with our forecast observations (blue points) and our confidence intervales (95% - grey shading, 80% - blue shading).
 
 ```{r}
-plot(fit1_forecast) 
+plot(fit1_forecast)
 ```
 
 In this case, we already have historical data for our predicted points, so we will plot them on top using the `points` function (black squares), selecting the last three values in the Year and Area vectors (23:25). 
 
 ```{r}
-plot(fit1_forecast) 
+plot(fit1_forecast)
 points(Year[23:25], Area[23:25], lty = 1, col = "black", lwd = 3, pch = 0)
-legend("topright", legend = c("observed", "forecasted"), lwd = 3, 
-       col = c("black","blue"), lty = c(0,0), merge = TRUE, 
-       bty = "n", pch = c(0,19), cex = 1.3)
+legend("topright",
+  legend = c("observed", "forecasted"), lwd = 3,
+  col = c("black", "blue"), lty = c(0, 0), merge = TRUE,
+  bty = "n", pch = c(0, 19), cex = 1.3
+)
 ```
 
 The value for alpha (the smoothing parameter) was estimated to be 0.7587, which means a relatively fast decay of observation weights into the past. In other words, the past observations have a relatively small influence on future predictions. 
@@ -76,23 +80,25 @@ The value for alpha (the smoothing parameter) was estimated to be 0.7587, which 
 From our figure we see a strong downward trend, so we could add an additive trend in the model. This is simply done by changing the second character in our model code to "A" (additive) and repeating the process. 
 
 ```{r}
-fit2 <- ets(Area_loss_train, model = "AAN") 
+fit2 <- ets(Area_loss_train, model = "AAN")
 fit2_forecast <- forecast(fit2, h = 3)
 ```
 
 We can compare the simple exponential model with the model incorporating the additive trend by plotting them side by side.
 ```{r}
-par(mfrow = c(1,2))
+par(mfrow = c(1, 2))
 
-plot(fit1_forecast,main="Simple exponential model") 
+plot(fit1_forecast, main = "Simple exponential model")
 points(Year[23:25], Area[23:25], lty = 1, col = "black", lwd = 4, pch = 0)
 
-plot(fit2_forecast, main="Additive trend model")
+plot(fit2_forecast, main = "Additive trend model")
 points(Year[23:25], Area[23:25], lty = 1, col = "black", lwd = 4, pch = 0)
 
-legend("topright", legend = c("observed", "forecasted"), lwd = 4, 
-       col = c("black","blue"), lty = c(0,0), merge = TRUE, 
-       bty = "n", pch=c(0,19), cex = 1.3)
+legend("topright",
+  legend = c("observed", "forecasted"), lwd = 4,
+  col = c("black", "blue"), lty = c(0, 0), merge = TRUE,
+  bty = "n", pch = c(0, 19), cex = 1.3
+)
 ```
 
 Which model do you think performs better? Another option is to fit all possible models and select the best model using AIC. This is done simply by not specifying any model structure in the `ets` command. 
@@ -106,16 +112,18 @@ fit3$method
 If you are interested in which model structure was selected you can extract it from the model object `fit_3$method`. In this case, the model structure was MNN: a model with multiplicative errors (M), but no overall trend (N) or seasonality (N) assumed. Now we can plot all three models to see which is giving us the best approximation of our observed measurements of rainforest loss.  
 
 ```{r}
-par(mfrow = c(1,3))
+par(mfrow = c(1, 3))
 
-plot(fit1_forecast, main="Simple exponential model") 
-plot(fit2_forecast, main="Additive trend model")   
-plot(fit3_forecast, main="Best model (lowest AIC)")  
+plot(fit1_forecast, main = "Simple exponential model")
+plot(fit2_forecast, main = "Additive trend model")
+plot(fit3_forecast, main = "Best model (lowest AIC)")
 points(Year[23:25], Area[23:25], lty = 1, col = "black", lwd = 4, pch = 0)
 
-legend("topright", legend = c("observed", "forecasted"), lwd = 4, 
-       col = c("black","blue"), lty = c(0,0), merge = TRUE, 
-       bty = "n", pch = c(0,19), cex = 1.3)
+legend("topright",
+  legend = c("observed", "forecasted"), lwd = 4,
+  col = c("black", "blue"), lty = c(0, 0), merge = TRUE,
+  bty = "n", pch = c(0, 19), cex = 1.3
+)
 ```
 
 We can also predict future rainforest loss (so no test data). Let's keep the prediction at three years but include all of our historical observations in the training data. We will again use the AIC model selection method. 
@@ -127,7 +135,7 @@ fit4 <- ets(Area_loss_train_2)
 
 fit4_forecast <- forecast(fit4, h = 3)
 
-par(mfrow = c(1,1))
+par(mfrow = c(1, 1))
 
 plot(fit4_forecast)
 ```
@@ -152,7 +160,7 @@ fit_gas1 <- ets(gas, model = "ANN")
 
 fit_gas1_forecast <- forecast(fit_gas1, h = 36)
 
-plot(fit_gas1_forecast, main="Simple exponential model") 
+plot(fit_gas1_forecast, main = "Simple exponential model")
 ```
 
 As expected, we can see that the model does a pretty poor job of predicting the overall trend or the seasonal variability. In fact the model predicts constant gas production over the 3 years (or 36 monthly time steps). 
@@ -164,10 +172,10 @@ fit_gas2 <- ets(gas, model = "ANA")
 
 fit_gas2_forecast <- forecast(fit_gas2, h = 36)
 
-par(mfrow = c(1,2))
+par(mfrow = c(1, 2))
 
-plot(fit_gas1_forecast, main="Simple exponential model") 
-plot(fit_gas2_forecast, main="Seasonal trend model") 
+plot(fit_gas1_forecast, main = "Simple exponential model")
+plot(fit_gas2_forecast, main = "Seasonal trend model")
 ```
 
 This model looks a lot more convincing that the simple exponential fit. Finally, let's let the `ets` function choose the best model using AIC.
@@ -177,10 +185,10 @@ fit_gas3 <- ets(gas)
 
 fit_gas3_forecast <- forecast(fit_gas3, h = 36)
 
-par(mfrow = c(1,3))
-plot(fit_gas1_forecast, main="Simple exponential model") 
-plot(fit_gas2_forecast, main="Seasonal trend model") 
-plot(fit_gas3_forecast, main="Best model (lowest AIC)")
+par(mfrow = c(1, 3))
+plot(fit_gas1_forecast, main = "Simple exponential model")
+plot(fit_gas2_forecast, main = "Seasonal trend model")
+plot(fit_gas3_forecast, main = "Best model (lowest AIC)")
 ```
   
 

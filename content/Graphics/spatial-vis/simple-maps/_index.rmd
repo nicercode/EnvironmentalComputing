@@ -9,7 +9,7 @@ Being able to make a simple map is a very useful skill for all sorts of applicat
 There are many packages that are useful for plotting and manipulating spatial data in R. For simplicity, we're going to solely use the package [ggmap](https://cran.r-project.org/web/packages/ggmap/index.html) for this exercise. To get started, install this package and load into R.
 
 ```{r, warning=F,message=F, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 ```{r}
@@ -29,7 +29,7 @@ In this example, let's say we collected data from five sites near Royal National
 Using the function `get_map`, we can download an image from Google maps at any named location:
 
 ````{r, echo=TRUE, eval=FALSE}
-basemap <- get_map('Royal National Park', zoom=12)
+basemap <- get_map("Royal National Park", zoom = 12)
 ```
 
 ```{r, echo=FALSE, eval=FALSE}
@@ -38,8 +38,8 @@ saveRDS(basemap, "basemap.rds")
 ```
 
 ```{r, echo=FALSE}
-#reload data
-basemap <- readRDS('basemap.rds')
+# reload data
+basemap <- readRDS("basemap.rds")
 ```
 
 and then plot it with the function `ggmap`: 
@@ -54,19 +54,27 @@ The argument of `get_map` is simply any place searchable on Google Maps (in this
 To add point data for our five survey sites, we first need to make a new data frame holding the place name, latitude and longitude of each site (or import this data from a spreadsheet).
 
 ```{r}
-ptdata <- data.frame("PlaceName" = c(" Hacking R. ", " Cabbage Tree Ck. ", 
-                                     " Marley Ck. ", " Wattamolla Ck. ", 
-                                     " Waratah R. "), 
-                     "Long" = c(151.054823, 151.124566, 151.139216, 
-                             151.115645, 150.960431), 
-                     "Lat" = c(-34.074918, -34.090796, -34.111972, 
-                             -34.136046, -34.172308))                       
+ptdata <- data.frame(
+  "PlaceName" = c(
+    " Hacking R. ", " Cabbage Tree Ck. ",
+    " Marley Ck. ", " Wattamolla Ck. ",
+    " Waratah R. "
+  ),
+  "Long" = c(
+    151.054823, 151.124566, 151.139216,
+    151.115645, 150.960431
+  ),
+  "Lat" = c(
+    -34.074918, -34.090796, -34.111972,
+    -34.136046, -34.172308
+  )
+)
 ```
 
 We can add these points to our map based on the Latitude (y) and Longitude (x) coordinates. It is important that the points and the other features on the map work on the same scale - or 'projection'. These locations were estimated from Google Maps data for this reason - estimate your own via [LatLong.net](http://latlong.net)).
 
 ```{r}
-ggmap(basemap) + geom_point(data=ptdata, aes(x=Long, y=Lat))
+ggmap(basemap) + geom_point(data = ptdata, aes(x = Long, y = Lat))
 ```
 
 
@@ -84,9 +92,10 @@ First, adjust some of the options in `get_map`:
 * increase the `zoom` level to improve detail   
   
 ```{r}
-bound <- c(left = min(ptdata$Long) - 0.05, bottom = min(ptdata$Lat) - 0.05, 
-           right = max(ptdata$Long) + 0.05 , top = max(ptdata$Lat) + 0.05)
-
+bound <- c(
+  left = min(ptdata$Long) - 0.05, bottom = min(ptdata$Lat) - 0.05,
+  right = max(ptdata$Long) + 0.05, top = max(ptdata$Lat) + 0.05
+)
 ```
 
 ```{r, echo=TRUE, eval=FALSE}
@@ -99,8 +108,8 @@ saveRDS(Pres_basemap, "Pres_basemap.rds")
 ```
 
 ```{r, echo=FALSE}
-#reload data
-Pres_basemap <- readRDS('Pres_basemap.rds')
+# reload data
+Pres_basemap <- readRDS("Pres_basemap.rds")
 ```
 
 Second, adjust some of the options for plotting:
@@ -117,14 +126,18 @@ Second, adjust some of the options for plotting:
 * use `labs` to define the *x* and *y* axis labels  
 
 ```{r}
-ggmap(Pres_basemap) + 
-  geom_point(data = ptdata, aes(x=Long, y=Lat), 
-             colour = "white") +
-  geom_text(data = ptdata, 
-            aes(x=Long, y=Lat, label = PlaceName),
-            size = 4, 
-            colour = "white",
-            hjust = "inward") +
+ggmap(Pres_basemap) +
+  geom_point(
+    data = ptdata, aes(x = Long, y = Lat),
+    colour = "white"
+  ) +
+  geom_text(
+    data = ptdata,
+    aes(x = Long, y = Lat, label = PlaceName),
+    size = 4,
+    colour = "white",
+    hjust = "inward"
+  ) +
   labs(x = "Longitude", y = "Latitude")
 ```
 
@@ -149,18 +162,20 @@ saveRDS(Pub_basemap, "Pub_basemap.rds")
 
 ```{r, echo=FALSE}
 # reload data
-Pub_basemap <- readRDS('Pub_basemap.rds')
+Pub_basemap <- readRDS("Pub_basemap.rds")
 ```
 
 
 ```{r}
-ggmap(Pub_basemap) + 
-  geom_point(data = ptdata, aes(x=Long, y=Lat, label=PlaceName)) +
-  geom_text(data = ptdata, 
-            aes(x=Long, y=Lat, label = PlaceName),
-            size = 4,
-            fontface = "bold",
-            hjust = "right") +
+ggmap(Pub_basemap) +
+  geom_point(data = ptdata, aes(x = Long, y = Lat, label = PlaceName)) +
+  geom_text(
+    data = ptdata,
+    aes(x = Long, y = Lat, label = PlaceName),
+    size = 4,
+    fontface = "bold",
+    hjust = "right"
+  ) +
   theme_bw() +
   theme(axis.title = element_blank())
 ```

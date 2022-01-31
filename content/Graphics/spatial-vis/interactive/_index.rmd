@@ -22,7 +22,7 @@ Creating a basic interactive map is simple!
 
 ```{r basic, fig.width=8}
 library(leaflet)
-leaflet() %>% 
+leaflet() %>%
   addTiles()
 ```
 
@@ -31,10 +31,10 @@ The Leaflet R package has been designed to be used with pipes (`%>%`), which mak
 Most of the time however we will have an area or a study site that we are interested in that we want to view:
 
 ```{r b2,fig.width=8}
-leaflet() %>% 
+leaflet() %>%
   addTiles() %>%
-  addScaleBar() %>% 
-  setView(lng = 151.2, lat = -33.86, zoom = 10) %>% 
+  addScaleBar() %>%
+  setView(lng = 151.2, lat = -33.86, zoom = 10) %>%
   addMiniMap()
 ```
 
@@ -48,18 +48,22 @@ We will be displaying all eucalypt observations within the Macquarie Marshes reg
 ## Getting the data
 # install.packages('gbif')
 library(rgbif)
-gbif_query <- occ_search(genusKey = 7493935,
-                         geometry = rgbif::gbif_bbox2wkt(minx = 147.8,miny = -30.6,maxx = 147.4,maxy = -31))
+gbif_query <- occ_search(
+  genusKey = 7493935,
+  geometry = rgbif::gbif_bbox2wkt(minx = 147.8, miny = -30.6, maxx = 147.4, maxy = -31)
+)
 euc <- gbif_query$data
-euc$label <- paste(euc$name, '|', euc$vernacularName, '|', euc$year, '-', month.abb[euc$month])
+euc$label <- paste(euc$name, "|", euc$vernacularName, "|", euc$year, "-", month.abb[euc$month])
 ## Creating a map
-base <- leaflet() %>% 
+base <- leaflet() %>%
   addTiles() %>%
-  addScaleBar() %>% 
+  addScaleBar() %>%
   setView(lat = mean(euc$decimalLatitude), lng = mean(euc$decimalLongitude), zoom = 10)
 
-base %>% addMarkers(lng = euc$decimalLongitude, lat = euc$decimalLatitude,
-                    label = euc$label)
+base %>% addMarkers(
+  lng = euc$decimalLongitude, lat = euc$decimalLatitude,
+  label = euc$label
+)
 ```
 
 ## Clustering markers
@@ -67,10 +71,12 @@ base %>% addMarkers(lng = euc$decimalLongitude, lat = euc$decimalLatitude,
 Nice! but it is a bit cluttered, we can add clustering by specifying the clusterOptions argument to try and solve this issue:
 
 ```{r b4,fig.width=8}
-base %>% 
-  addMarkers(lng = euc$decimalLongitude, lat = euc$decimalLatitude,
-             clusterOptions = markerClusterOptions(),
-             label = euc$label)
+base %>%
+  addMarkers(
+    lng = euc$decimalLongitude, lat = euc$decimalLatitude,
+    clusterOptions = markerClusterOptions(),
+    label = euc$label
+  )
 ```
 
 ## Colouring markers
@@ -80,10 +86,12 @@ You can also add circle markers which can have custom colours, and add a legend:
 ```{r b5,fig.width=8}
 color_function <- colorFactor("RdYlBu", domain = NULL)
 
-base %>% 
-  addCircleMarkers(lng = euc$decimalLongitude, lat = euc$decimalLatitude,
-                   color = color_function(euc$name),
-                   label = euc$label) %>% 
+base %>%
+  addCircleMarkers(
+    lng = euc$decimalLongitude, lat = euc$decimalLatitude,
+    color = color_function(euc$name),
+    label = euc$label
+  ) %>%
   addLegend(pal = color_function, values = euc$name)
 ```
 

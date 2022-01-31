@@ -51,14 +51,14 @@ The first two columns are categorical variables that label the samples as coming
 We will now use the just the abundance data (in columns 5 to 11) and convert it to an mvabund object format used by the mvabund package. 
 
 ```{r}
-Herb_spp <- mvabund(Herbivores[,5:11])
+Herb_spp <- mvabund(Herbivores[, 5:11])
 ```
 
 We can have a quick look at the spread of our data using the `boxplot` function. 
 
 ```{r message=FALSE, warning=FALSE}
-par(mar=c(2,10,2,2)) # adjusts the margins
-boxplot(Herbivores[,5:11],horizontal = TRUE,las=2, main="Abundance")
+par(mar = c(2, 10, 2, 2)) # adjusts the margins
+boxplot(Herbivores[, 5:11], horizontal = TRUE, las = 2, main = "Abundance")
 ```
 
 It looks like some species of marine herbivores (e.g. *Ampithoe ngana*) are much more abundant and variable than others (e.g. *Cymadusa munnu*). It's probably a good idea to check our mean-variance relationship then! We can do this using the `meanvar.plot` function:
@@ -76,7 +76,7 @@ Now let's get back to our research questions. Are there differences in the speci
 There is a 'quick and dirty' built-in plotting function in the *mvabund* package that allows us to contrast transformed abundances to the predictor variables of our choice. To contrast abundances against habitat, we would use:
 
 ```{r message=FALSE, warning=FALSE}
-plot(Herb_spp~as.factor(Herbivores$Habitat), cex.axis=0.8, cex=0.8)
+plot(Herb_spp ~ as.factor(Herbivores$Habitat), cex.axis = 0.8, cex = 0.8)
 ```
 
 Alternatively, we can include the argument `transformation="no"` to look at the raw abundance data. Because this plot is based on the base plotting language in R, you can add extra arguments to customise the graph. We have made the axis text (`cex.axis=0.8`) and the symbols (`cex=0.8`) smaller so that we can better see what's going on.
@@ -88,7 +88,7 @@ Let's now contrast the species composition across algal species to see if the mo
 The model syntax below fits our response variable (the mvabund object Herb_spp with the 100 counts of 7 species) to the predictor variable Habitat (type of algae).
 
 ```{r}
-mod1 <- manyglm(Herb_spp ~ Herbivores$Habitat, family="poisson")
+mod1 <- manyglm(Herb_spp ~ Herbivores$Habitat, family = "poisson")
 ```
   
 
@@ -105,7 +105,7 @@ If the model is a good fit, we should see a random scatter of points. What we do
 In this example, we see a clear fan shape in the residual plot, this means we have misspecified our mean-variance relationship. We can use the `family` argument to choose a distribution which is better suited to our data. For count data which does not fit the `'poisson` distribution, we can use the `negative_binomial` distribution.
 
 ```{r}
-mod2 <- manyglm(Herb_spp ~ Herbivores$Habitat, family="negative_binomial")
+mod2 <- manyglm(Herb_spp ~ Herbivores$Habitat, family = "negative_binomial")
 plot(mod2)
 ```
 
@@ -127,7 +127,7 @@ To examine this further, and see which herbivore species are more likely to be f
 This is done by using the `p.uni="adjusted"` argument in the `anova` function. The "adjusted" part of the argument refers to the resampling method used to compute the p values, taking into account the correlation between the response variables. This correlation is often found in ecological systems where different species will interact with each other, competing with or facilitating each others' resource use.
 
 ```{r}
-anova(mod2, p.uni="adjusted")
+anova(mod2, p.uni = "adjusted")
 ```
 
 Even after adjusting for multiple testing, there is an effect of habitat on all species.
@@ -135,7 +135,7 @@ Even after adjusting for multiple testing, there is an effect of habitat on all 
 So far, we have considered just one predictor variable of habitat. By altering the formula in mvabund, we can test more complex models. For example, to fit a model with both habitat and day or night, we would use:
 
 ```{r}
-mod3 <- manyglm(Herb_spp ~ Herbivores$Habitat*Herbivores$DayNight, family="negative_binomial")
+mod3 <- manyglm(Herb_spp ~ Herbivores$Habitat * Herbivores$DayNight, family = "negative_binomial")
 anova(mod3)
 ```
 

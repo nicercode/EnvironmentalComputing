@@ -8,9 +8,9 @@ These pages have some introductions to commonly used linear models that test the
 
 
 ```{r,echo=F}
-Plant_height = read.csv(file = "data/Plant_Height.csv", header = TRUE)
+Plant_height <- read.csv(file = "data/Plant_Height.csv", header = TRUE)
 model <- lm(loght ~ temp, data = Plant_height)
-plot(loght ~ temp, data = Plant_height, col="darkgreen",xlab = "Temperature (C)", ylab = "log(Plant height)",pch=16)
+plot(loght ~ temp, data = Plant_height, col = "darkgreen", xlab = "Temperature (C)", ylab = "log(Plant height)", pch = 16)
 abline(model, col = "red")
 ```
 

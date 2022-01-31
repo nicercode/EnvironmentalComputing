@@ -24,12 +24,12 @@ Here is an abridged data set from some insect sampling that shows you the desire
  
 
 ```{r, echo = FALSE, results = 'asis'}
-Insect = c("ant", "beetle", "springtail", "beetle", "wasp", "moth", "ant", "termite", "springtail")
-Number = c(26,8,6,8,1,1,16,2,63)
-Site = c("woodland", "woodland","woodland", "woodland", "woodland","woodland", "rainforest", "rainforest", "rainforest")
-Method = c("leaflitter", "leaflitter", "leaflitter", "lighttrap","lighttrap","lighttrap", "leaflitter", "leaflitter", "leaflitter")
-Group = c("A", "A", "A", "A", "A", "A", "A", "A", "A")
-raw_dat = data.frame(Site, Method, Insect, Number, Group)
+Insect <- c("ant", "beetle", "springtail", "beetle", "wasp", "moth", "ant", "termite", "springtail")
+Number <- c(26, 8, 6, 8, 1, 1, 16, 2, 63)
+Site <- c("woodland", "woodland", "woodland", "woodland", "woodland", "woodland", "rainforest", "rainforest", "rainforest")
+Method <- c("leaflitter", "leaflitter", "leaflitter", "lighttrap", "lighttrap", "lighttrap", "leaflitter", "leaflitter", "leaflitter")
+Group <- c("A", "A", "A", "A", "A", "A", "A", "A", "A")
+raw_dat <- data.frame(Site, Method, Insect, Number, Group)
 ```
 
 ```{r,echo=FALSE}

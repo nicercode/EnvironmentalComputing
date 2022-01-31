@@ -14,7 +14,7 @@ First read our [introduction to meta analysis](/statistics/meta-analysis/meta-an
 There are two main models of meta-analysis: 1) the fixed-effect model and 2) the random-effect model (actually we say 3 types, but the third one is the extension of the second model). Because fixed effects mean something different in another context, this naming is a bit confusing. So people now call the first model 'common-effect' model. You can see a visual representation of these two models (from Figure 4 in Nakagawa *et al.* 2017). 
 
 ```{r fig1, echo = FALSE}
-knitr::include_graphics(c("Fixed.png","Random.png"))
+knitr::include_graphics(c("Fixed.png", "Random.png"))
 ```
 
 A math representation for the common-effect model is:
@@ -49,10 +49,12 @@ Let's use the function `rma` from `metafor` to run a common-effect model.
 library(metafor)
 library(dplyr)
 dat <- get(data(dat.curtis1998))
-lnRR <- escalc(measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
-               m1i = dat$m1i, m2 = dat$m2i,
-               sd1i = dat$sd1i, sd2i = dat$sd2i)
-dat <- bind_cols(dat,lnRR)
+lnRR <- escalc(
+  measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
+  m1i = dat$m1i, m2 = dat$m2i,
+  sd1i = dat$sd1i, sd2i = dat$sd2i
+)
+dat <- bind_cols(dat, lnRR)
 ```
 
 ```{r common, tidy=TRUE}
@@ -113,7 +115,7 @@ Fitting meta-regression is pretty straightforward too. In this example, let's fi
 We use `rma` again, but now have a model statement.
 
 ```{r regression, tidy=TRUE}
-metareg <- rma(yi = yi, vi = vi, mod = ~time +  method + fungrp, method = "REML", data = dat)
+metareg <- rma(yi = yi, vi = vi, mod = ~ time + method + fungrp, method = "REML", data = dat)
 summary(metareg)
 ```
 
@@ -146,7 +148,7 @@ There is an alternative method, which has a cool name, the trim-and-fill method.
 
 ```{r trimfill, tidy=TRUE}
 # Note that we are using the defult estimator ("L0"), but there are two others availablere
-tf_m<-trimfill(random_m)
+tf_m <- trimfill(random_m)
 tf_m
 funnel(tf_m)
 ```
@@ -168,8 +170,8 @@ This is problematic because under publication bias like we saw it just above, ef
 
 ```{r weight, tidy=TRUE}
 # We make weights, which is 1/vi and stick that into the argument, weights
-dat[,"wi"]<-1/dat$vi
-weight_m<-rma(yi = yi, vi = vi, weights = wi, method = "REML", data = dat)
+dat[, "wi"] <- 1 / dat$vi
+weight_m <- rma(yi = yi, vi = vi, weights = wi, method = "REML", data = dat)
 summary(weight_m)
 ```
 

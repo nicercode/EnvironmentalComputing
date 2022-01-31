@@ -76,14 +76,14 @@ Estuaries$HydroidPres <- Estuaries$Hydroid > 0
 To fit a model for the presence or absence of hydroids, we would use `glmer` with `family=binomial`.
 
 ```{r}
-fit.bin <- glmer(HydroidPres ~ Modification + (1|Estuary), family=binomial, data=Estuaries)
+fit.bin <- glmer(HydroidPres ~ Modification + (1 | Estuary), family = binomial, data = Estuaries)
 ```
 
 **Checking assumptions** As usual, we can examine residual plots to check assumptions.
 
 ```{r}
-par(mfrow=c(1,2))
-plot(residuals(fit.bin)~fitted(fit.bin),main="residuals v.s. Fitted")
+par(mfrow = c(1, 2))
+plot(residuals(fit.bin) ~ fitted(fit.bin), main = "residuals v.s. Fitted")
 qqnorm(residuals(fit.bin))
 ```
 
@@ -97,23 +97,31 @@ For generalised linear mixed models (GLMMs), we need to use the parametric boots
 
 ```{r, error=FALSE, message=FALSE, warning=FALSE}
 nBoot <- 1000
-lrStat <- rep(NA,nBoot)
-ft.null <- glmer(HydroidPres ~ 1 + (1|Estuary) ,family=binomial, data=Estuaries) #null model
-ft.alt <- glmer(HydroidPres ~ Modification + (1|Estuary) ,family=binomial, data=Estuaries) #alternate model
+lrStat <- rep(NA, nBoot)
+ft.null <- glmer(HydroidPres ~ 1 + (1 | Estuary), family = binomial, data = Estuaries) # null model
+ft.alt <- glmer(HydroidPres ~ Modification + (1 | Estuary), family = binomial, data = Estuaries) # alternate model
 
-lrObs <- 2*logLik(ft.alt) - 2*logLik(ft.null) #observed test stat
+lrObs <- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
 
-for(iBoot in 1:nBoot)
+for (iBoot in 1:nBoot)
 {
-  Estuaries$HydroidPresSim <- unlist(simulate(ft.null)) #resampled data
-  tryCatch({#sometimes the glmer code doesn't converge
-    
-    bNull <- glmer(HydroidPresSim ~ 1 + (1|Estuary) ,family=binomial, data=Estuaries)#null model
-    bAlt <- glmer(HydroidPresSim ~ Modification + (1|Estuary) ,family=binomial, data=Estuaries)#alternate model
-    lrStat[iBoot] <- 2*logLik(bAlt) - 2*logLik(bNull) #resampled test stat
-    },warning=function(war) {lrStat[iBoot]=NA},error=function(err){lrStat[iBoot]=NA}) #if code doesn't converge skip sim
+  Estuaries$HydroidPresSim <- unlist(simulate(ft.null)) # resampled data
+  tryCatch(
+    { # sometimes the glmer code doesn't converge
+
+      bNull <- glmer(HydroidPresSim ~ 1 + (1 | Estuary), family = binomial, data = Estuaries) # null model
+      bAlt <- glmer(HydroidPresSim ~ Modification + (1 | Estuary), family = binomial, data = Estuaries) # alternate model
+      lrStat[iBoot] <- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
+    },
+    warning = function(war) {
+      lrStat[iBoot] <- NA
+    },
+    error = function(err) {
+      lrStat[iBoot] <- NA
+    }
+  ) # if code doesn't converge skip sim
 }
-mean(lrStat>lrObs,na.rm=T) #P-value for test of Estuary effect
+mean(lrStat > lrObs, na.rm = T) # P-value for test of Estuary effect
 ```
 
 We have evidence of an effect of modification on the presence of hydroids. 
@@ -125,14 +133,14 @@ lme4 can model count data that has a Poisson distribution. If the data do not fi
 To model the counts of hydroids, we would use use `glmer` with `family=poisson`.
 
 ```{r}
-fit.pois <- glmer(Hydroid ~ Modification + (1|Estuary) ,family=poisson, data=Estuaries)
+fit.pois <- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
 ```
 
 To check the assumptions:
 
 ```{r}
-par(mfrow=c(1,2))
-plot(residuals(fit.pois)~fitted(fit.pois),main="Residuals vs. Fitted")
+par(mfrow = c(1, 2))
+plot(residuals(fit.pois) ~ fitted(fit.pois), main = "Residuals vs. Fitted")
 qqnorm(residuals(fit.pois))
 ```
 
@@ -144,21 +152,29 @@ Again, we can use parametric bootstrapping to test for an effect of Modification
 
 ```{r}
 nBoot <- 1000
-lrStat <- rep(NA,nBoot)
-ft.null <- glmer(Hydroid ~ 1 + (1|Estuary) ,family=poisson, data=Estuaries) #null model
-ft.alt <- glmer(Hydroid ~ Modification + (1|Estuary) ,family=poisson, data=Estuaries) #alternate model
+lrStat <- rep(NA, nBoot)
+ft.null <- glmer(Hydroid ~ 1 + (1 | Estuary), family = poisson, data = Estuaries) # null model
+ft.alt <- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries) # alternate model
 
-lrObs <- 2*logLik(ft.alt) - 2*logLik(ft.null) #observed test stat
-for(iBoot in 1:nBoot)
+lrObs <- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
+for (iBoot in 1:nBoot)
 {
-  Estuaries$HydroidSim <- unlist(simulate(ft.null)) #resampled data
-  tryCatch({
-    bNull <- glmer(HydroidSim ~ 1 + (1|Estuary)  ,family=poisson, data=Estuaries)#null model
-    bAlt <- glmer(HydroidSim ~ Modification + (1|Estuary) ,family=poisson, data=Estuaries) #alternate model
-    lrStat[iBoot] <- 2*logLik(bAlt) - 2*logLik(bNull) #resampled test stat
-    },warning=function(war) {lrStat[iBoot]=NA},error=function(err){lrStat[iBoot]=NA})  #if code doesn't converge skip sim#   lrStat[iBoot]
+  Estuaries$HydroidSim <- unlist(simulate(ft.null)) # resampled data
+  tryCatch(
+    {
+      bNull <- glmer(HydroidSim ~ 1 + (1 | Estuary), family = poisson, data = Estuaries) # null model
+      bAlt <- glmer(HydroidSim ~ Modification + (1 | Estuary), family = poisson, data = Estuaries) # alternate model
+      lrStat[iBoot] <- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
+    },
+    warning = function(war) {
+      lrStat[iBoot] <- NA
+    },
+    error = function(err) {
+      lrStat[iBoot] <- NA
+    }
+  ) # if code doesn't converge skip sim#   lrStat[iBoot]
 }
-mean(lrStat>lrObs,na.rm=TRUE) #P-value for test of Estuary effect
+mean(lrStat > lrObs, na.rm = TRUE) # P-value for test of Estuary effect
 ```
 
 We have evidence of an effect of modification on hydroid abundance.
@@ -168,9 +184,9 @@ We have evidence of an effect of modification on hydroid abundance.
 Often, count data will not fit a Poisson distribution. Look at what happens if you try and model the counts of the bryozoan, *Schizoporella errata*, from that same data set.
 
 ```{r}
-fit.pois2 <- glmer(Schizoporella.errata ~ Modification + (1|Estuary), family=poisson,  data=Estuaries)
-par(mfrow=c(1,2))
-plot(residuals(fit.pois)~fitted(fit.pois),main="residuals vs. Fitted")
+fit.pois2 <- glmer(Schizoporella.errata ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
+par(mfrow = c(1, 2))
+plot(residuals(fit.pois) ~ fitted(fit.pois), main = "residuals vs. Fitted")
 qqnorm(residuals(fit.pois))
 ```
 
@@ -190,16 +206,18 @@ As before you could run hypothesis tests on the random effects using a parametri
 
 ```{r,message=FALSE}
 library(Hmisc)
-fit.pois <- glmer(Hydroid ~ Modification + (1|Estuary) ,family=poisson, data=Estuaries)
-means <- fitted(fit.pois) #this will give the estimate at each data point
-ModEst <- unique(Estuaries[c("Estuary", "Modification")])#find which Estuaries are modified
-cols <- as.numeric(ModEst[order(ModEst[,1]),2])+3 #Assign colour by modification
-boxplot(Hydroid~ Estuary,data=Estuaries,col=cols,xlab="Estuary",ylab="Count of hydroids")
-legend("topleft", inset=.02,
-   c("Modified","Pristine"), fill=unique(cols), horiz=TRUE, cex=0.8)
+fit.pois <- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
+means <- fitted(fit.pois) # this will give the estimate at each data point
+ModEst <- unique(Estuaries[c("Estuary", "Modification")]) # find which Estuaries are modified
+cols <- as.numeric(ModEst[order(ModEst[, 1]), 2]) + 3 # Assign colour by modification
+boxplot(Hydroid ~ Estuary, data = Estuaries, col = cols, xlab = "Estuary", ylab = "Count of hydroids")
+legend("topleft",
+  inset = .02,
+  c("Modified", "Pristine"), fill = unique(cols), horiz = TRUE, cex = 0.8
+)
 
-Est.means <- summarize(means,Estuaries$Estuary, mean)$means #extract means by Estuary
-stripchart(Est.means~ sort(unique(Estuary)),data=Estuaries,pch=18,col="red",vertical = TRUE,add=TRUE) #plot means by estuary
+Est.means <- summarize(means, Estuaries$Estuary, mean)$means # extract means by Estuary
+stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = "red", vertical = TRUE, add = TRUE) # plot means by estuary
 ```
   
 

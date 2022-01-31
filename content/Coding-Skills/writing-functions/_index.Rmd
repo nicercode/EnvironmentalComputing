@@ -27,7 +27,7 @@ To illustrate our examples, we will use a sample data set containing a series of
 
 ```{r, message=FALSE, warning=FALSE, results="hide"}
 library(tidyverse)
-algae <-  read_csv("Algal_traits.csv")
+algae <- read_csv("Algal_traits.csv")
 ```
 
 (or if you like download the data set, [Algal_traits.csv](/datasets/Algal_traits.csv)). 
@@ -84,13 +84,13 @@ This function is already predefined within the R base package, meaning that you 
 
 
 ```{r, eval = FALSE}
- sum(x) / length(x)
+sum(x) / length(x)
 ```
 
 Even this line of script uses two functions: the `sum` function and `length` function. If these weren't available, you would need to write out the full method every time you needed a mean. 
 
 ```{r, eval = FALSE}
- (x[1] + x[2] + x[3] + x[4] + x[5]) / 5 
+(x[1] + x[2] + x[3] + x[4] + x[5]) / 5
 ```
 
 Instead, we simply use `mean` without giving it two thoughts. 
@@ -150,7 +150,7 @@ Imagine now that you wanted to calculate these same statistics on a different va
 If we first define a function for standard error: 
 
 ```{r,}
-standard_error <- function (x){
+standard_error <- function(x) {
   sqrt(var(x) / length(x))
 }
 ```
@@ -190,7 +190,7 @@ standard_error(algae$length)
 ```{r, eval=TRUE}
 var_x <- var(algae$height)
 n <- length(algae$height)
-sqrt( var_x / n )
+sqrt(var_x / n)
 ```
 
 Note you now have two new objects in your environment: `var_x` and `n`:
@@ -213,10 +213,10 @@ But what if you forget? There's a real danger that later you accidentally reuse 
 If instead you put the code above into a function, as follows, this danger disappears. 
 
 ```{r, eval=TRUE}
-standard_error <- function (x){
+standard_error <- function(x) {
   var_x <- var(algae$height)
   n <- length(algae$height)
-  sqrt( var_x / n )
+  sqrt(var_x / n)
 }
 ```
 
@@ -251,9 +251,9 @@ Now let's look more closely at the mechanics of writing a function.
 A function definition has the following form:
 
 ```{r, eval = FALSE}
-function_name <- function (arg1, arg2, ...){
-  statements  # do useful stuff 
-  object      # return something
+function_name <- function(arg1, arg2, ...) {
+  statements # do useful stuff
+  object # return something
 }
 ```
 
@@ -268,7 +268,7 @@ function_name <- function (arg1, arg2, ...){
 Using this format, a function to calculate the standard error of the values in the object `x` would be:  
 
 ```{r}
-standard_error <- function (x) {
+standard_error <- function(x) {
   sqrt(var(x) / length(x))
 }
 ```
@@ -290,7 +290,7 @@ mean(x, trim = 0, na.rm = FALSE, ...)
 The first argument `x` is our vector of numbers. To use the function we need to specify something for `x`, e.g.
 
 ```{r, results="hide"}
-mean(x=algae$height)
+mean(x = algae$height)
 ```
 
 or just
@@ -302,8 +302,8 @@ mean(algae$height)
 The first version makes it explicit that the values in `algae$height` outside of the function are *passed* to the variable `x` within the function. The second version does the same thing, but less explictly.  It works because R takes the values of `height` and maps it onto the first unnamed argument in our function call onto the first unnamed argument in the function definition. So the following will also work:
 
 ```{r, results="hide"}
-mean(na.rm=TRUE, x=algae$height)
-mean(na.rm=TRUE, algae$height)
+mean(na.rm = TRUE, x = algae$height)
+mean(na.rm = TRUE, algae$height)
 ```
 
 But what are those are other arguments in the function definition: `trim` and `na.rm`? These are optional arguments, with default values set as specified. The function needs a value to run but unless you specify it, it will use the default. 
@@ -317,20 +317,20 @@ mean(algae$strength)
 Notice we get `NA`, this is because by default the function doesn't know how to deal with missing values (`NA` is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on [importing data](/../getting-started-with-r/importing-data/)), but in this case, we're happy remove `NA`s before calculating the mean. This can be achieved by setting the argument for `na.rm` to `TRUE`:
 
 ```{r,}
-mean(algae$strength, na.rm=TRUE)
+mean(algae$strength, na.rm = TRUE)
 ```
 
 The functions `mean`, `var`, `sd`, `sum` all behave similarly. **Without specifying the argument, the functions all use their default value**, which in this case is `na.rm=FALSE`. So these give the same result
 
 ```{r,}
 mean(algae$strength)
-mean(algae$strength, na.rm=FALSE)
+mean(algae$strength, na.rm = FALSE)
 ```
 
 But, we can override this if that's what we want:
 
 ```{r,}
-mean(algae$strength, na.rm=TRUE)
+mean(algae$strength, na.rm = TRUE)
 ```
 
 **You'll notice that many functions have arguments with default values set**.
@@ -339,7 +339,7 @@ mean(algae$strength, na.rm=TRUE)
 Going back to our new function `standard_error`, let's add a new argument `na.rm` so that it behaves like `mean` and the other function listed above:
 
 ```{r,}
-standard_error <- function (x, na.rm=FALSE){
+standard_error <- function(x, na.rm = FALSE) {
   sqrt(var(x, na.rm = na.rm) / sum(!is.na(x)))
 }
 ```
@@ -372,8 +372,8 @@ standard_error(algae$strength, na.rm = TRUE)
 One approach here is to define a new function that builds of our previous function but with the desired behaviour. E.g. 
 
 ```{r,}
-standard_error_narm <- function (x){
-  standard_error(x, na.rm=TRUE) 
+standard_error_narm <- function(x) {
+  standard_error(x, na.rm = TRUE)
 }
 ```
 
@@ -391,8 +391,8 @@ While the example with `standard_error` is perhaps a bit trivial, you can take t
 Notice the argument `...` in the definition of the mean function above? What's that about? The `...`, or ellipsis, element in the function definition allows for other arguments to be passed into the function, and passed onto to another function within the function being called, without having to write them all out by name. For example, in the definition of the function `standard_error_narm` we could instead write
 
 ```{r,}
-standard_error_narm <- function (...){
-  standard_error(..., na.rm=TRUE) 
+standard_error_narm <- function(...) {
+  standard_error(..., na.rm = TRUE)
 }
 ```
 
@@ -401,8 +401,8 @@ When you call `standard_error_narm` defined like this, anything other than `na.r
 A less trivial example is using `plot`. I could write a function setting changing some of defaults for `plot`, so that I don't have to keep repeating these. 
 
 ```{r,}
-my_plot <- function (...){
-  plot(..., pch=16, las=1, log="xy") 
+my_plot <- function(...) {
+  plot(..., pch = 16, las = 1, log = "xy")
 }
 ```
 
@@ -411,12 +411,12 @@ my_plot <- function (...){
 Before you are finished, there is one last thing to do. It is a good idea to add comments your function, as this will save you from a world of pain when you go back to fix something later on. Function comments should contain, a brief description of the function (one sentence), a list of function arguments with a description of each (including data type) and a description of the return value.  Function comments should be written immediately above or below the function definition line.
 
 ```{r, eval = FALSE, echo = T}
-standard_error <- function (x, na.rm){
+standard_error <- function(x, na.rm) {
   # Computes the sample standard error
   #
   # Args:
   #  x: Vector whose standard error is to be calculated. x must have length greater than one.
-  #  y: na.rm can either be T or F. T removes missing values before calculating standard error. 
+  #  y: na.rm can either be T or F. T removes missing values before calculating standard error.
   #
   # Return:
   #  The standard error of x
@@ -466,11 +466,11 @@ For example, we could write a function that returns several statistics of a vari
 
 ```{r,}
 summary_stats <- function(x, na.rm = TRUE) {
-
-  list(mean = mean(x, na.rm=na.rm),
-       var = var(x, na.rm=na.rm),
-       n = sum(!is.na(x))
-      )
+  list(
+    mean = mean(x, na.rm = na.rm),
+    var = var(x, na.rm = na.rm),
+    n = sum(!is.na(x))
+  )
 }
 ```
 

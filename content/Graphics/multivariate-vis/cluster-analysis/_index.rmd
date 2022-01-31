@@ -25,7 +25,7 @@ There are many methods available for clustering (agglomerative, divisive, non hi
 In this example, we will use cluster analysis to visualise differences in the composition of metal contaminants in the seaweeds of Sydney Harbour (data from [(Roberts *et al.* 2008)](http://www.sciencedirect.com/science/article/pii/S026974910800033X).). Download the data set, [Harbour_metals.csv](/datasets/Harbour_metals.csv), and load into R.
 
 ```{r}
-Harbour_metals <- read.csv(file="Harbour_metals.csv", header=TRUE)
+Harbour_metals <- read.csv(file = "Harbour_metals.csv", header = TRUE)
 ```
 
 These data have the concentrations of seven metals measured from 60 samples, half from the seaweed *Padina crassa* and half from the *Sargassum linearifolium*
@@ -35,7 +35,7 @@ The first two columns are categorical variables that group samples by site and s
 The cluster analysis runs on the response variables only so we need to make a data frame with just the metal concentrations (columns 4-8).
 
 ```{r}
-Harbour_metals2 <- Harbour_metals[,4:8]
+Harbour_metals2 <- Harbour_metals[, 4:8]
 ```
 
 To help interpret the graph, we can add the sample labels as row names in this data frame
@@ -65,7 +65,7 @@ plot(H_metals.cluster)
 We can make this a bit neater with all the samples lined up along the bottom by converting it to a dendrogram object (the `as.dendrogram` function) and plotting that (although this default plot is still a bit ugly and would need work with labels and axes before being ready for publication).
 
 ```{r}
-plot(as.dendrogram(H_metals.cluster),ylab = "Euclidean distance")
+plot(as.dendrogram(H_metals.cluster), ylab = "Euclidean distance")
 ```
   
 
@@ -104,7 +104,7 @@ dend <- as.dendrogram(H_metals.cluster)
 sample_colours <- as.numeric(Harbour_metals$Location)
 sample_colours <- sample_colours[order.dendrogram(dend)]
 labels_colors(dend) <- sample_colours
-plot(dend,ylab = "Euclidean distance")
+plot(dend, ylab = "Euclidean distance")
 ```
   
 

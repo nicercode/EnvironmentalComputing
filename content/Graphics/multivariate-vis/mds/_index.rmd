@@ -55,7 +55,7 @@ where `comm = Herb_community` specifies the data frame holding the community dat
 Calling the `plot` function on the x-y coordinates of the `metaMDS` output creates an MDS ordination plot.
 
 ```{r}
-plot(Herb_community.mds$points) 
+plot(Herb_community.mds$points)
 ```
 
 This is not informative until we plot samples from each habitat type (macroalgal species) as a different colour. 
@@ -77,7 +77,9 @@ To plot those points, color coded by Habitat, we can use:
 
 ```{r}
 library(ggplot2)
-ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) + geom_point() + theme_bw()
+ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
+  geom_point() +
+  theme_bw()
 ```
   
 
@@ -90,7 +92,9 @@ If there is any grouping of samples according to categories of samples, then you
 In contrast, if we colour our samples by time of day, you will see that these two groups of samples are mixed on the plot. This suggests no difference in species composition between the two sampling times.
 
 ```{r}
-ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) + geom_point() + theme_bw()
+ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) +
+  geom_point() +
+  theme_bw()
 ```
   
 

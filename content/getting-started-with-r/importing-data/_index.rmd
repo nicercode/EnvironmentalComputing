@@ -76,7 +76,7 @@ If you see a bunch of extra columns (X, X.1,X.2,X.3 etc) or rows in your data fr
 If the problem is still there we can tackle it in R, by indexing within square brackets `dataframe[row, column]`. For example, the following code will replace the data frame in this example with one that only includes the first 7 columns and removes the 5 unwanted ones (X, X.1,X.2,X.3 etc).
 
 ```{r}
-Snail_feeding <- Snail_feeding[,1:7]
+Snail_feeding <- Snail_feeding[, 1:7]
 ```
 
 The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has several very neat functions for subsetting rows and columns - see [Subsetting data](../subsetting-data) for help with these.
@@ -89,7 +89,7 @@ We do this by selecting columns from our data frame where the column sum, `colSu
 # Selects rows that are not entirely NA
 Snail_feeding <- Snail_feeding[, colSums(is.na(Snail_feeding)) != nrow(Snail_feeding)]
 # Select columns that are not entirely NA
-Snail_feeding <- Snail_feeding[rowSums(is.na(Snail_feeding)) != ncol(Snail_feeding), ]  
+Snail_feeding <- Snail_feeding[rowSums(is.na(Snail_feeding)) != ncol(Snail_feeding), ]
 ```
   
 
@@ -123,16 +123,16 @@ We can use this to our advantage, `is.na` in combination with `which` will ident
 Snail_feeding$Distance <- as.character(Snail_feeding$Distance)
 Snail_feeding$Distance <- as.numeric(Snail_feeding$Distance)
 
-which(is.na(Snail_feeding$Distance)) 
+which(is.na(Snail_feeding$Distance))
 ```
 
 This tells us that something weird happened in rows 682 and 755.  Now we have identified where the problem is, it is simple to replace values within our data frame with correct values (go back to your original datasheet). You could either fix the error in the data set and import again, or replace values in R by indexing within square bracketsand assigning, `<-`, the new value.  Use `which(is.na())` to check if your fix worked. 
 
 ```{r, collapse= T}
-Snail_feeding[682,"Distance"] <- 0.356452
-Snail_feeding[755,"Distance"]<- 0.42336
+Snail_feeding[682, "Distance"] <- 0.356452
+Snail_feeding[755, "Distance"] <- 0.42336
 
-which(is.na(Snail_feeding$Distance)) 
+which(is.na(Snail_feeding$Distance))
 ```
   
 
@@ -144,7 +144,7 @@ You can check the levels of a factor, or unique character values with `levels` (
 
 ```{r, collapse= T}
 levels(Snail_feeding$Sex)
-unique (Snail_feeding$Sex)
+unique(Snail_feeding$Sex)
 ```
 
 There are several typos which we can correct with `unique` and `which` and the logical operators `==` (equals) and `|` (or) to identify and replace typos.  
@@ -191,7 +191,7 @@ Snail_feeding[which(Snail_feeding$Depth > 2), ]
 There is only 1 row. After confirming with our original data that this is in fact a typo we will replace it with the real value. Selecting the row and column we replace the value 162 with 1.62.
 
 ```{r, collapse= T}
-Snail_feeding[which(Snail_feeding$Depth > 2),6] <- 1.62
+Snail_feeding[which(Snail_feeding$Depth > 2), 6] <- 1.62
 ```
   
 

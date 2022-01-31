@@ -54,23 +54,23 @@ Often we will want to keep the results that we get back from our loop. The first
 Here is code that will store the square of the numbers 1 to 10 in a new vector called x
 
 ```{r}
-x <- vector()         # makes a blank vector
+x <- vector() # makes a blank vector
 
 for (i in 1:10) {
-  y <- i^2            # performs an operation 
-  x <- append(x,y)    # overwrites 'x' with y appended to it
+  y <- i^2 # performs an operation
+  x <- append(x, y) # overwrites 'x' with y appended to it
 }
 ```
 
 Here is code that will store both the square and the square root of the numbers 1 to 10 in two columns of a new data frame called x2
 
 ```{r}
-x2 <- data.frame(col1=vector(), col2=vector())   # makes a blank data frame with two columns
+x2 <- data.frame(col1 = vector(), col2 = vector()) # makes a blank data frame with two columns
 
 for (i in 1:10) {
-  col1 <- i^2                # performs first operation
-  col2 <- sqrt(i)            # performs second operation 
-  x2 <- rbind(x2, cbind(col1, col2))  # overwrites 'x2' values including the new row
+  col1 <- i^2 # performs first operation
+  col2 <- sqrt(i) # performs second operation
+  x2 <- rbind(x2, cbind(col1, col2)) # overwrites 'x2' values including the new row
 }
 ```
 
@@ -78,26 +78,25 @@ for (i in 1:10) {
 The second option is to make a blank vector or dataframe of known dimensions and then place the results into it directly. For example, if we had a loop with 10 elements, we could store the results of each operation in a vector with a length of 10
 
 ```{r}
-x <- vector(length=10)  # makes a blank vector with a length of 10
+x <- vector(length = 10) # makes a blank vector with a length of 10
 
 for (i in 1:10) {
-  y <- i^2             
-  x[i] <- y             # places the output in position i in the vector x
+  y <- i^2
+  x[i] <- y # places the output in position i in the vector x
 }
-
 ```
 
 Alternatively, store the results of multiple operations in a new data frame.
 
 ```{r}
 
-x2 <- data.frame(col1=vector(length=10),col2=vector(length=10)) # makes a blank data frame with two columns and 10 rows
+x2 <- data.frame(col1 = vector(length = 10), col2 = vector(length = 10)) # makes a blank data frame with two columns and 10 rows
 
 for (i in 1:10) {
-  col1 <- i^2                   # performs first operation
-  col2 <- sqrt(i)               # performs second operation 
-  x2[i,1] <- col1               # places the first result into row i, column 1
-  x2[i,2] <- col2               # places the second result into row i, column 2
+  col1 <- i^2 # performs first operation
+  col2 <- sqrt(i) # performs second operation
+  x2[i, 1] <- col1 # places the first result into row i, column 1
+  x2[i, 2] <- col2 # places the second result into row i, column 2
 }
 ```
   
@@ -110,7 +109,7 @@ for (i in 1:10) {
 Now we can use your new loop skills in an ecological context. As with the [Subsetting data](/../data-manipulation/subsetting-data) tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees. 
 
 ```{r}
-Bats <- read.csv(file="Bats_data.csv", header=T, stringsAsFactors=F)
+Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
 str(Bats)
 ```
 
@@ -129,22 +128,24 @@ Bats_subset <- select(Bats, Activity, Area.thinned:Distance.creek.water)
 Next, make an empty data frame with two columns (the name of the variable and the correlation) and the number of rows needed to store all the correlations.
 
 ```{r}
-rows <- ncol(Bats_subset)-1                    # the number of rows needed in our output dataframe
+rows <- ncol(Bats_subset) - 1 # the number of rows needed in our output dataframe
 
-Correlations <- data.frame(variable=character(length=rows), 
-                 correlation=numeric(length=rows), 
-                 stringsAsFactors=F)       
+Correlations <- data.frame(
+  variable = character(length = rows),
+  correlation = numeric(length = rows),
+  stringsAsFactors = F
+)
 ```
 
 Finally, we can use a loop to calculate each of the correlations and store the output in our new dataframe.
 
 ```{r}
 for (i in 1:rows) {
-  temp1 <- colnames(Bats_subset[i+1])       # retrieves the name of predictor variable
-  temp2 <- cor(Bats_subset[,1], Bats_subset[,i+1], method="pearson")
-                                           # calculates the correlation between activity and predictor variable
-  Correlations[i,1] <- temp1               # places the variable name into row i, column 1
-  Correlations[i,2] <- temp2               # places the correlation into row i, column 2
+  temp1 <- colnames(Bats_subset[i + 1]) # retrieves the name of predictor variable
+  temp2 <- cor(Bats_subset[, 1], Bats_subset[, i + 1], method = "pearson")
+  # calculates the correlation between activity and predictor variable
+  Correlations[i, 1] <- temp1 # places the variable name into row i, column 1
+  Correlations[i, 2] <- temp2 # places the correlation into row i, column 2
 }
 ```
 

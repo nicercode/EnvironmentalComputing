@@ -26,12 +26,12 @@ The design is nested because an area cannot belong to both a removal treatment a
 Data for a nested design should be in the format of samples as rows and variables as columns. A coloumn should correspond to the dependent variable *y*, in this case, number of voles. Another coloumn should contain the levels of the fixed factor A, Treatment. Finally, a column for the levels of the nested random factor B, Area.
 
 ```{r}
-#Input data file
-Mink = read.csv(file = "Mink.csv", header = TRUE)
-#Check the structure of the data
+# Input data file
+Mink <- read.csv(file = "Mink.csv", header = TRUE)
+# Check the structure of the data
 str(Mink)
-#Run the analysis
-Mink.nested = aov(Voles ~ Treatment + Area%in%Treatment, data = Mink)
+# Run the analysis
+Mink.nested <- aov(Voles ~ Treatment + Area %in% Treatment, data = Mink)
 summary(Mink.nested)
 ```
 
@@ -72,18 +72,18 @@ The assumption of normality can be checked by a frequency histogram of the resid
 
 ```{r}
 hist(Mink.nested$residuals)
-plot(Mink.nested,which=2)
+plot(Mink.nested, which = 2)
 ```
 
 Heterogenous variances is indicated by non-random pattern in the residuals vs. fitted plot. If there is strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error disturbiton in a gnerealised linear model framework (GLM).
 
 ```{r}
-plot(Mink.nested$residuals~Mink.nested$fitted)
+plot(Mink.nested$residuals ~ Mink.nested$fitted)
 ```
 
 ```{r, eval = FALSE}
-#Alternative option
-plot(Turtles.ANOVA,which=1)
+# Alternative option
+plot(Turtles.ANOVA, which = 1)
 ```
 
 ### Communicating the results

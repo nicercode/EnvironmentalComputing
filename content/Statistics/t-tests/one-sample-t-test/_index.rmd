@@ -35,7 +35,7 @@ The test statistic *t* is relatively straightforward to manually calculate. The 
 To calculate the probability associated with a given value of t in R, use
 
 ```{r,eval=FALSE}
-pt(q, df = your.df, lower.tail = FALSE)*2
+pt(q, df = your.df, lower.tail = FALSE) * 2
 ```
 
 where *q* is your value of t, *your.df* is the degrees of freedom (*n*-1). The `lower.tail = FALSE` ensures that you are calculating the probability of getting a *t* value larger than yours (i.e., the upper tail, P[X > x]). Note that the critical value for $t_{\alpha = 0.05}$ varies depending on the number of degrees of freedom - larger degrees of freedom = smaller critical value of *t*.
@@ -44,7 +44,7 @@ Much easier is to use the `t.test` function in R to give you the test statistic 
 
 
 ```{r,eval = FALSE}
-t.test(y,mu=your.mu)
+t.test(y, mu = your.mu)
 ```
 
 where *y* is a vector with your sample data and *your.mu* is the population parameter you are comparing the sample to.
@@ -52,7 +52,7 @@ where *y* is a vector with your sample data and *your.mu* is the population para
 For our crime scene example, we could assign our ten measurements to an object called pollen and run the *t*-test on that object.
 
 ```{r,eval=FALSE}
-pollen <- c(94,135,78,98,137,114,114,101,112,121)
+pollen <- c(94, 135, 78, 98, 137, 114, 114, 101, 112, 121)
 t.test(pollen, mu = 125)
 ```
   
@@ -60,7 +60,7 @@ t.test(pollen, mu = 125)
 ### Interpreting the results
  
 ```{r,echo=FALSE}
-pollen = c(94,135,78,98,123,114,114,101,112,121)
+pollen <- c(94, 135, 78, 98, 123, 114, 114, 101, 112, 121)
 t.test(pollen, mu = 125)
 ```
 
@@ -85,10 +85,10 @@ You also get the mean of your sample (109) and the 95% confidence interval for p
 **Visual.** Box plots or frequency histograms can be used to visualise the variation in a single variable. In this example, you might use a line or arrow to indicate the single value (125) that you were comparing the sample to.
 
 ```{r}
-hist(pollen, xlab = "Pollen count", main=NULL)
-abline(v=125,col="red")
-boxplot(pollen,xlab = "Pollen count",horizontal =TRUE)
-abline(v=125,col="red")
+hist(pollen, xlab = "Pollen count", main = NULL)
+abline(v = 125, col = "red")
+boxplot(pollen, xlab = "Pollen count", horizontal = TRUE)
+abline(v = 125, col = "red")
 ```
   
 

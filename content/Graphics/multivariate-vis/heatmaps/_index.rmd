@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   echo = TRUE,
   fig.height = 10,
   fig.width = 10,
-  fig.align = 'center', comment = NA)
+  fig.align = "center", comment = NA
+)
 ```
 
 Heatmaps are a useful method to explore large multivariate data sets. Response variables (e.g., abundances) are visualised using colour gradients or colour schemes. With the right transformation, and row and column clustering, interesting patterns within the data can be seen. They can also be used to show the results after statistical analysis, for example, to show those variables that differ between treatment groups.
@@ -31,14 +32,14 @@ library(dplyr)
 With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, [Bac.counts.csv](/datasets/Bac.counts.csv) and [Bac.factors.csv](/datasets/Bac.factors.csv), and import into R.
 
 ```{r}
-Bac.counts <- read.csv(file = "Bac.counts.csv", header = TRUE, row.names=1)
-Bac.factors <- read.csv(file = "Bac.factors.csv", header = TRUE, row.names=1)
+Bac.counts <- read.csv(file = "Bac.counts.csv", header = TRUE, row.names = 1)
+Bac.factors <- read.csv(file = "Bac.factors.csv", header = TRUE, row.names = 1)
 ```
 
 The `row.names=1` argument assigns the first column of the spreadsheet as row names in the data frame. We should check the data structure of the counts using the `head` command. Given there are many columns, we'll only check the first 10 using indexing (use of `[,]` after the object, with row numbers before the comma and column numbers after).
 
 ```{r}
-head(Bac.counts[,1:10])
+head(Bac.counts[, 1:10])
 ```
 
 We can see that the row names of the data have the code numbers for each operational taxonomic unit (OTU) of bacteria and there are integer counts of these in each sample. Now, we will check the dimensions of the data (number of rows and columns).   
@@ -100,7 +101,7 @@ The colours are pretty ugly. To make your own is tricky, but involves making nam
 
 ```{r}
 # Reorder Density levels to Sparse, Dense, Other
-Bac.factorsDS$Density = factor(Bac.factorsDS$Density, levels = c("Sparse", "Dense", "Other"))
+Bac.factorsDS$Density <- factor(Bac.factorsDS$Density, levels = c("Sparse", "Dense", "Other"))
 DensityCol <- c("darkorchid", "darkorange", "grey80")
 names(DensityCol) <- levels(Bac.factorsDS$Density)
 
@@ -112,7 +113,8 @@ names(SpeciesCol) <- levels(Bac.factorsDS$Species)
 # Add to a list, where names match those in factors dataframe
 AnnColour <- list(
   Density = DensityCol,
-  Species = SpeciesCol)
+  Species = SpeciesCol
+)
 
 # Check the output
 AnnColour
@@ -136,9 +138,11 @@ Some are better than others, but you'll have to consult the literature further o
 Let's see what is produced by using the Manhattan distance as the measure of similarity between rows and columns, and the average clustering method.
 
 ```{r}
-pheatmap(Bac.Log10.counts500, clustering_distance_rows = "manhattan",
-         clustering_distance_cols = "manhattan", clustering_method = 'average',
-         annotation_colors = AnnColour, annotation_col = Bac.factorsDS)
+pheatmap(Bac.Log10.counts500,
+  clustering_distance_rows = "manhattan",
+  clustering_distance_cols = "manhattan", clustering_method = "average",
+  annotation_colors = AnnColour, annotation_col = Bac.factorsDS
+)
 ```
 
 You can see that changing the clustering has significantly changed the heatmap produced.
@@ -149,9 +153,11 @@ You can see that changing the clustering has significantly changed the heatmap p
 We may want to compare the abundance of each bacterial OTU only among samples rather than contrasting their abundance with other OTUs of varying abundance. To do this, we can scale the abundances within each OTU such that the colour scale shows only the relative range of abundance for each individual OTU. In this example, that involves scaling abundance for each row with `scale="row"`.
 
 ```{r}
-pheatmap(Bac.Log10.counts500, scale = "row", clustering_distance_rows = "manhattan",
-         clustering_method = 'average',
-         annotation_colors = AnnColour, annotation_col = Bac.factorsDS)
+pheatmap(Bac.Log10.counts500,
+  scale = "row", clustering_distance_rows = "manhattan",
+  clustering_method = "average",
+  annotation_colors = AnnColour, annotation_col = Bac.factorsDS
+)
 ```
 
 We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).
@@ -162,10 +168,12 @@ We can now see how many standard deviations the Log10 abundance of a single OTU 
 We can also sort the samples by their groups or treatments rather than sorting by similarity among rows or columns. This is done by ordering the input data and turning off the clustering of the columns with `cluster_cols=FALSE`.
 
 ```{r}
-SampleOrder = order(Bac.factorsDS$Species, Bac.factorsDS$Density)
+SampleOrder <- order(Bac.factorsDS$Species, Bac.factorsDS$Density)
 
-pheatmap(Bac.Log10.counts500[ , SampleOrder], cluster_cols = FALSE,
-         clustering_method = 'average', annotation_colors = AnnColour, annotation_col = Bac.factorsDS)
+pheatmap(Bac.Log10.counts500[, SampleOrder],
+  cluster_cols = FALSE,
+  clustering_method = "average", annotation_colors = AnnColour, annotation_col = Bac.factorsDS
+)
 ```
   
 
@@ -186,8 +194,8 @@ dat.mva <- mvabund(t(Bac.counts500DS_noU))
 plot(dat.mva)
 dat.nb <- manyglm(dat.mva ~ Species * Density, data = Bac.factorsDS_noU)
 dat.aov <- anova.manyglm(dat.nb, p.uni = "unadjusted", nBoot = 500)
-dat.aov$uni.p[ ,1:5]
-SpeciesDiffs <- which(dat.aov$uni.p["Species",] < 0.05 & dat.aov$uni.p["Species:Density",] > 0.05)
+dat.aov$uni.p[, 1:5]
+SpeciesDiffs <- which(dat.aov$uni.p["Species", ] < 0.05 & dat.aov$uni.p["Species:Density", ] > 0.05)
 ```
 
 We can include the argument `cutree` for the rows and columns, to split data into the two expected groups. Fingers crossed it shows that we expect.
@@ -198,11 +206,13 @@ load("SpeciesDiffs.Rdata")
 
 ```{r}
 # Create a vector that will be used to select samples that are not from the sediment
-DS = Bac.factors$Treatment_ID != "U"
+DS <- Bac.factors$Treatment_ID != "U"
 
-pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS], scale = "row",
-         clustering_method = 'average', annotation_col = Bac.factorsDS,
-         cutree_rows = 2, cutree_cols = 2)
+pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS],
+  scale = "row",
+  clustering_method = "average", annotation_col = Bac.factorsDS,
+  cutree_rows = 2, cutree_cols = 2
+)
 ```
 
 And the results are as expected. The top half of the heatmap shows those variables over-represented in the Species level Caulerpa. The bottom half are those over-represented in seagrass.  

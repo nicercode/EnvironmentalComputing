@@ -21,11 +21,11 @@ N <- 1000
 rho <- -0.4
 
 # This line of code creates two correlated variables
-X = rmvnorm(N, mean = c(0, 0), sigma = matrix(c(1, rho, rho, 1), 2, 2))
+X <- rmvnorm(N, mean = c(0, 0), sigma = matrix(c(1, rho, rho, 1), 2, 2))
 
 # Extract the first and second columns to vectors named temp and alt and plot
-temp <- X[,1]
-alt <- X[,2]
+temp <- X[, 1]
+alt <- X[, 2]
 plot(temp, alt)
 ```
 
@@ -33,7 +33,7 @@ Now we can simulate some data for height of plants. Here we say that the mean he
 
 ```{r}
 beta <- c(2, 1, -1)
-mu <- beta[1]+beta[2]*temp+beta[3] * alt
+mu <- beta[1] + beta[2] * temp + beta[3] * alt
 height <- rnorm(N, mu, sd = 2)
 ```
 
@@ -66,7 +66,7 @@ Note: If you use the code above to simulate your own data sets, you will get sli
 This distinction has a lot of consequences for modelling as well as testing hypothesis. Let's generate some data where altitude predicts height, and temperature has no (additional) information, and then test for temperature.
 
 ```{r}
-mu <- 2-1*alt
+mu <- 2 - 1 * alt
 height <- rnorm(N, mu, sd = 2)
 
 mod_temp <- lm(height ~ temp)
@@ -96,11 +96,11 @@ When we have categorical covariates (for example treatment), there are a number 
 ```{r}
 N <- 120
 # The effect of treatment
-trt.n <- rep(c(-1, 0, 1), N/3)
-mu <- 2+1*trt.n
+trt.n <- rep(c(-1, 0, 1), N / 3)
+mu <- 2 + 1 * trt.n
 
 # Labels for the treatment
-treatment <- factor(rep(c("low", "med", "high"), N/3))#group labels
+treatment <- factor(rep(c("low", "med", "high"), N / 3)) # group labels
 
 # Create, Y, a normally distributed response variable and plot against treatment
 Y <- rnorm(N, mu, sd = 2)

@@ -1,0 +1,67 @@
+Package: EnvironmentalComputing
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Daniel", "Falster", , "daniel.falster@unsw.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0002-9814-092X")),
+    person("Fonti", "Kar"),
+    person("William", "Cornwell"),
+    person("Alistair", "Poore")
+  )
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: en
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    blogdown,
+    ape,
+    car,
+    dendextend,
+    devtools,
+    dismo,
+    dplyr,
+    forecast,
+    formatR,
+    gganimate,
+    ggmap,
+    ggplot2,
+    gridExtra,
+    Hmisc,
+    httr,
+    installr,
+    knitr,
+    leaflet,
+    lme4,
+    lubridate,
+    mapdata,
+    mapproj,
+    maps,
+    maptools,
+    metafor,
+    mgcv,
+    multcomp,
+    mvabund,
+    mvtnorm,
+    ncdf4,
+    pheatmap,
+    pwr,
+    raster,
+    rasterVis,
+    RColorBrewer,
+    RCurl,
+    readr,
+    reshape2,
+    Reshape2,
+    rgbif,
+    rgdal,
+    rgeos,
+    simr,
+    sp,
+    survival,
+    tidyr,
+    tidyverse,
+    vegan,
+    XML

@@ -20,7 +20,7 @@ library(ggmap)
 
 The ggmap package "makes it easy to retrieve raster map tiles from popular online mapping services like Google Maps and Stamen Maps and plot them using the ggplot2 framework". 
 
-**To use the package you'll need to setup an API key to google maps.** For information on how to do this see the [package homepage on GitHub](https://github.com/dkahle/ggmap). An aletrantive interface to OpenStreetMap can also be used with slightly different functions.
+**To use the package you'll need to setup an API key to google maps.** For information on how to do this see the [package homepage on GitHub](https://github.com/dkahle/ggmap). An alternative interface to OpenStreetMap can also be used with slightly different functions.
 
 ### Making your first map
 
@@ -28,7 +28,7 @@ In this example, let's say we collected data from five sites near Royal National
 
 Using the function `get_map`, we can download an image from Google maps at any named location:
 
-````{r, echo=TRUE, eval=FALSE}
+```{r, echo=TRUE, eval=FALSE}
 basemap <- get_map("Royal National Park", zoom = 12)
 ```
 

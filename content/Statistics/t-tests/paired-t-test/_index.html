@@ -21,14 +21,14 @@ aliases: /paired-t-tests/
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p>The test statistic <em>t</em> is relatively straightforward to calculate manually. The test statistic can then checked against a <em>t</em> distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true. In R, to calculate the probability associated with a given value of <em>t</em> use:</p>
-<pre class="r"><code>pt(q, df = your.df, lower.tail = FALSE)*2</code></pre>
+<pre class="r"><code>pt(q, df = your.df, lower.tail = FALSE) * 2</code></pre>
 <p>where <em>q</em> is your value of t, <em>your.df</em> is the degrees of freedom (the number of pairs-1). The <code>lower.tail = FALSE</code> ensures that you are calculating the probability of getting a <em>t</em> value larger than yours (i.e the upper tail, P[X &gt; x]). Note that the critical value for <em>t</em> (<span class="math inline">\(\alpha = 0.05\)</span>) varies depending on the number of degrees of freedom - larger degrees of freedom = smaller critical value of <em>t</em>.</p>
 <p>The <code>t.test</code> function gives you the test statistic and its associated probability in one output. For an paired <em>t</em>-test, we would use:</p>
 <pre class="r"><code>t.test(x = my_sample1, y = my_sample2, paired = TRUE)</code></pre>
 <p>where <em>my_sample1</em> and <em>my_sample2</em> are vectors containing the measurements from each sample. You would need to make sure the two vectors have the same number of values and that data from each pair were in the matching rows.</p>
 <p>Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, <code>y ~ x</code>, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).</p>
 <p>Download a sample data set in this format, <a href="/datasets/Greenhouse.csv/">Greenhouse.csv</a>, and import into R</p>
-<pre class="r"><code>Greenhouse = read.csv(file = &quot;Greenhouse.csv&quot;, header = TRUE)</code></pre>
+<pre class="r"><code>Greenhouse &lt;- read.csv(file = &quot;Greenhouse.csv&quot;, header = TRUE)</code></pre>
 <p>The paired <em>t</em>-test is run with the <code>t.test</code> function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired <em>t</em>-test.</p>
 <pre class="r"><code>t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)</code></pre>
 </div>
@@ -58,7 +58,7 @@ aliases: /paired-t-tests/
 <h3>Communicating the results</h3>
 <p><strong>Written.</strong> As a minimum, the observed <em>t</em> statistic, the P-value and the number of degrees of freedom should be reported. For example, you could write “The photosynthetic performance of plants was significantly greater in sunny environments in contrast to shady environments (paired <em>t</em>-test: <em>t</em> = 18.81, df = 9, P &lt; 0.001)”.</p>
 <p><strong>Visual.</strong> Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.</p>
-<pre class="r"><code>boxplot(Performance~Treatment, data = Greenhouse, xlab = &quot;Light environment&quot;, ylab = &quot;Photosynthetic performance (FvFm)&quot;)</code></pre>
+<pre class="r"><code>boxplot(Performance ~ Treatment, data = Greenhouse, xlab = &quot;Light environment&quot;, ylab = &quot;Photosynthetic performance (FvFm)&quot;)</code></pre>
 <p><img src="/statistics/t-tests/paired-t-test/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
@@ -71,6 +71,6 @@ Quinn and Keough (2002) <em>Experimental design and data analysis for biologists
 McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.
 </p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 16:14:20 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:39:21 2022</p>
 </div>

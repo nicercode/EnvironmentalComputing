@@ -21,17 +21,17 @@ For this example,</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p>You can calculate <span class="math inline">\(\chi^2\)</span> pretty easily with a calculator. You would then need to determine the probability of obtaining that <span class="math inline">\(\chi^2\)</span> value from the known probability distribution of <span class="math inline">\(\chi^2\)</span>.</p>
-<pre class="r"><code>pchisq(x, df,lower.tail = FALSE)</code></pre>
+<pre class="r"><code>pchisq(x, df, lower.tail = FALSE)</code></pre>
 <p>with <em>x</em> = your value of <span class="math inline">\(\chi^2\)</span>, and degrees of freedom (<em>df</em>) = number of categories-1. The <code>lower.tail = FALSE</code> bit gives you the probability that <span class="math inline">\(\chi^2\)</span> is greater than your value.</p>
 <p>Alternatively, you can do all of this in one go with the <code>chisq.test</code> function.</p>
-<pre class="r"><code>chisq.test(x, p) </code></pre>
+<pre class="r"><code>chisq.test(x, p)</code></pre>
 <p>where <em>x</em> = the observed data (i.e., counts in each category) and <em>p</em> are the expected probabilities for each category.</p>
 <p>In this example we would use:</p>
-<pre class="r"><code>chisq.test(x = c(60,40), p = c(0.5,0.5))</code></pre>
+<pre class="r"><code>chisq.test(x = c(60, 40), p = c(0.5, 0.5))</code></pre>
 <p>where <em>x</em> is the observed range of numbers and <em>p</em> has the expected probabilities.</p>
 <p>Note that it is very important that you use the actual counts as your observed data, not their proportions (i.e., 60 and 40, not 0.6 and 0.4). This makes sense if you understand that a sex ratio of 6:4 in a sample of 10 people is more likely to occur by chance when sampling from an equal sex ratio than a ratio of 600:400 in a sample of 1000 people.</p>
 <p>You are not constrained to just two categories, or an expectation that the counts in each are equal. For example, to test whether the counts 10, 20 and 70 in three categories came from a population with expected frequencies of 0.25, 0.25 and 0.5, you would use:</p>
-<pre class="r"><code>chisq.test(x = c(10,20,70), p = c(0.25,0.25,0.5))</code></pre>
+<pre class="r"><code>chisq.test(x = c(10, 20, 70), p = c(0.25, 0.25, 0.5))</code></pre>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
@@ -43,7 +43,7 @@ For this example,</p>
 ## X-squared = 4, df = 1, p-value = 0.0455</code></pre>
 <p>In the sex ratio example, you should have obtained a p-value of 0.0455, which tells us that it is unlikely to obtain a sample of 60 women and 40 men from a population with an equal sex ratio. We would then conclude that they were likely to be sampled from a population that did not have an equal sex ratio.</p>
 <p>To explore which of the categories had more observations than expected, or had fewer observations than expected, look at the standardised residuals.</p>
-<pre class="r"><code>chisq.test(x = c(60,40), p = c(0.5,0.5))$residuals</code></pre>
+<pre class="r"><code>chisq.test(x = c(60, 40), p = c(0.5, 0.5))$residuals</code></pre>
 <p>These are the differences between the observed and expected, standardised by the square root of the expected. These are standardised because any contrast of the absolute differences (observed - expected) can be misleading when the size of the expected values vary. For example, a difference of 5 from an expectation of 10 is an increase of 50%, but a difference of 5 from an expectation of 100 is only a 5% change.</p>
 <p>Exploring the residuals becomes important when there are more than two categories in the test, as the <span class="math inline">\(\chi^2\)</span> test will only tell you if the observed frequencies differ from the expected across all categories, not which particular category is over- or under-represented.</p>
 </div>
@@ -51,14 +51,14 @@ For this example,</p>
 <h3>Assumptions to check</h3>
 <p><strong>Independence.</strong> The <span class="math inline">\(\chi^2\)</span> test assumes that the observations are classfied into each category independently of each other. This is a sampling design issue and is usually avoided by random sampling. In the sex ratio example, there would be problems is you deliberately chose women to add to your sample if you thought that you had enough men already.</p>
 <p><strong>Sample size.</strong> The <span class="math inline">\(\chi^2\)</span> statistic can only be reliably compared to the <span class="math inline">\(\chi^2\)</span> distribution if sample sizes are sufficiently large. You should check that at least 20% of the expected frequencies are larger than 5. You can see the expected counts for each category by adding <font face="monospace">$expected</font> to the end of your <span class="math inline">\(\chi^2\)</span> test. For example,</p>
-<pre class="r"><code>chisq.test(x = c(60,40), p = c(0.5,0.5))$expected</code></pre>
+<pre class="r"><code>chisq.test(x = c(60, 40), p = c(0.5, 0.5))$expected</code></pre>
 <p>If this assumption has not been met, you could combine categories (if you have more than two), run a randomisation test or consider log-linear modelling.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
-<p><strong>Written.</strong> The results of a <span class="math inline">\(\chi^2\)</span> goodness of fit test can be easily presented in the text of a results section. For example, “The sex ratio of the class of 100 students differed significantly from a 1:1 ratio (”<span class="math inline">\(\chi^2\)</span> = 4, df = 1, P = 0.0455)."</p>
+<p><strong>Written.</strong> The results of a <span class="math inline">\(\chi^2\)</span> goodness of fit test can be easily presented in the text of a results section. For example, “The sex ratio of the class of 100 students differed significantly from a 1:1 ratio (”<span class="math inline">\(\chi^2\)</span> = 4, df = 1, P = 0.0455).”</p>
 <p><strong>Visual.</strong> Count data are best presented as a bar plot with the counts on the Y axis and the categories on the X axis</p>
-<pre class="r"><code>barplot(c(60,40),xlab = &#39;Sex&#39;, ylab = &#39;Count&#39;, names=c(&#39;Female&#39;,&#39;Male&#39;))</code></pre>
+<pre class="r"><code>barplot(c(60, 40), xlab = &quot;Sex&quot;, ylab = &quot;Count&quot;, names = c(&quot;Female&quot;, &quot;Male&quot;))</code></pre>
 <p><img src="/statistics/categorical/goodness-of-fit/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>See the graphing modules for making better versions of these figures that are suitable for reports or publications.</p>
 </div>
@@ -68,6 +68,6 @@ For this example,</p>
 <p>Quinn and Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Chapter 14. Analyzing frequencies.</p>
 <p>McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 20.2 Comparing observed and expected frequencies: the chi-square test for goodness of fit.</p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:25:16 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:26:50 2022</p>
 </div>

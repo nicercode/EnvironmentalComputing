@@ -65,20 +65,20 @@ summary(model)</code></pre>
 <p><img src="/statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-5-1.png" width="480" /></p>
 <p>The absence of strong patterning in the above plot indicates the assumption of linearity is valid. If there is strong patterning, one potential solution is to log-transform the response. Note in the above example plant height had already been log-transformed. An alternative solution is to fit a linear model of the response as a polynomial function (e.g. quadratic) of the response. The simplest way to do this in R is to use the <code>poly</code> function.</p>
 <p>Click <a href="https://gallery.shinyapps.io/slr_diag/">here</a> to see a nice interactive app that shows you what patterns of residuals you would expect with curved relationships</p>
-<p><strong>Constant variance</strong>. An even spread of data around the regression line is desirable. If the plot of residuals versus fitted values is fan-shaped the assumption of constant variance (aka homogeneity of variance) is violated. A log-transformation of the response variable may fix this problem, but if it doesn’t the best solution is to use a different error distribution in a generalised linear model framework (GLM). See the <a href="/../statistics/glms/glm-1/">Generalised linear models 1</a> for more information.</p>
+<p><strong>Constant variance</strong>. An even spread of data around the regression line is desirable. If the plot of residuals versus fitted values is fan-shaped the assumption of constant variance (aka homogeneity of variance) is violated. A log-transformation of the response variable may fix this problem, but if it doesn’t the best solution is to use a different error distribution in a generalised linear model framework (GLM). See the <a href="/statistics/glms/glm-1/">Generalised linear models 1</a> for more information.</p>
 <p><strong>Normality</strong>. Checks of whether the data are normally distributed are usually performed by either plotting a histogram of the residuals or via a quantile plot where the residuals are plotted against the values expected from a normal distribution (the second of the figures obtained by <code>plot(model)</code>. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Violations of normality can be fixed via transformations or by using a different error-distribution in a GLM. Note, however, that linear regression is reasonably robust against violations of normality.</p>
-<pre class="r"><code>par(mfrow = c(1,2)) # This code put two plots in the same window
+<pre class="r"><code>par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(model$residuals) # Histogram of residuals
 plot(model, which = 2) # Quantile plot</code></pre>
 <p><img src="/statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p><strong>Independence</strong>. The observations of the response should be independent of each other. Non-independent observations are those that are in some way associated with each other beyond that which is explained by the predictor variable(s). For instance, samples collected from the same site, or repeatedly from the same object, may be more alike due to some additional factor other than the measured explanatory variable. Ensuring independence is an issue of experimental and sampling design and we usually know if the data are independent or not in advance of our analysis.</p>
-<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a mixed-model (see <a href="/../statistics/mixed-models/mixed-model-1/">Mixed models 1</a>).</p>
+<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a mixed-model (see <a href="/statistics/mixed-models/mixed-model-1/">Mixed models 1</a>).</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
 <p><strong>Written</strong> The results of linear regression may be presented in the text in a number of different ways, but a short sentence is often adequate, e.g., “plant height exhibited a significant (<em>F</em> = 57.5, <em>p</em> &lt; 0.01) negative relationship with temperature”. However, if you have run several analyses (or if there is more than one predictor), it may be useful to present the results as a table with coefficient values, standard errors and <em>p</em>-values for each explanatory variable.</p>
 <p><strong>Visual</strong> For a linear regression with a single explanatory variable, it is useful to present the results as a scatter plot. The line of best fit derived from the model can be added with the <code>abline</code> function.</p>
-<pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab = &quot;Temperature (C)&quot;, ylab = &quot;log(Plant height)&quot;,pch=16)
+<pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab = &quot;Temperature (C)&quot;, ylab = &quot;log(Plant height)&quot;, pch = 16)
 abline(model, col = &quot;red&quot;)</code></pre>
 <p><img src="/statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
@@ -91,8 +91,8 @@ Quinn and Keough (2002) <em>Experimental design and data analysis for biologists
 <p style="margin-left: .5in; text-indent: -.5in;">
 McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Ch. 17 Regression.
 </p>
-<p>More advice on <a href="/../statistics/glms/interpret-glm-coeffs/">interpreting coefficients in linear models</a></p>
+<p>More advice on <a href="/statistics/glms/interpret-glm-coeffs/">interpreting coefficients in linear models</a></p>
 <p><strong>Author</strong>: Andrew Letten</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 13:49:51 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:32:53 2022</p>
 </div>

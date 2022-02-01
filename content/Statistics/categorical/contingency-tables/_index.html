@@ -31,10 +31,10 @@ editor_options:
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p>With a calculator, you could calculate <span class="math inline">\(\chi^2\)</span> and then determine the probability of obtaining that <span class="math inline">\(\chi^2\)</span> value from a table of the known probability distribution of <span class="math inline">\(\chi^2\)</span>. In R, we can obtain that probability by:</p>
-<pre class="r"><code>pchisq(x, df,lower.tail = FALSE)</code></pre>
+<pre class="r"><code>pchisq(x, df, lower.tail = FALSE)</code></pre>
 <p>with <em>x</em> = your value of <span class="math inline">\(\chi^2\)</span>, and degrees of freedom (<em>df</em>) = (number of row-1) x (number of columns-1). The <code>lower.tail = FALSE</code> bit gives you the probability that <span class="math inline">\(\chi^2\)</span> is greater than your value.</p>
 <p>Easier, is to run the whole analysis in R. Firstly, you would need to enter the observed counts as a matrix.</p>
-<pre class="r"><code>Gfinch &lt;- matrix(c(16,19,18,5,20,22,6,6,22), nrow=3, dimnames = list(c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;), c(&quot;Black face&quot;, &quot;Red face&quot;, &quot;Yellow face&quot;)))</code></pre>
+<pre class="r"><code>Gfinch &lt;- matrix(c(16, 19, 18, 5, 20, 22, 6, 6, 22), nrow = 3, dimnames = list(c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;), c(&quot;Black face&quot;, &quot;Red face&quot;, &quot;Yellow face&quot;)))</code></pre>
 <p><code>nrow</code> tells R how many rows you have. <code>dimnames</code> labels the rows and columns.</p>
 <p>Check that you have entered the data correctly by simply entering the name of the matrix you just made.</p>
 <pre class="r"><code>Gfinch</code></pre>
@@ -71,8 +71,8 @@ editor_options:
 <h3>Communicating the results</h3>
 <p><strong>Written.</strong> The results of analysing a contingency table can be easily presented in the text of a results section. For example, “There was a significant association between the bill colour and the face colour of Gouldian finches (<span class="math inline">\(\chi^2\)</span> = 12.88, df = 2, P = 0.01).”</p>
 <p><strong>Visual.</strong> Count data are best presented as a bar plot with the counts on the Y axis and the categories on the X axis.</p>
-<pre class="r"><code>barplot(Gfinch,beside=T,ylab=&quot;Count&quot;,xlab=&quot;Face colour&quot;,col=c(&quot;black&quot;,&quot;red&quot;,&quot;yellow&quot;))
-legend(&quot;topright&quot;,inset=0.15,c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;),pch=15,col=c(&quot;black&quot;,&quot;red&quot;,&quot;yellow&quot;))</code></pre>
+<pre class="r"><code>barplot(Gfinch, beside = T, ylab = &quot;Count&quot;, xlab = &quot;Face colour&quot;, col = c(&quot;black&quot;, &quot;red&quot;, &quot;yellow&quot;))
+legend(&quot;topright&quot;, inset = 0.15, c(&quot;Black bill&quot;, &quot;Red bill&quot;, &quot;Yellow bill&quot;), pch = 15, col = c(&quot;black&quot;, &quot;red&quot;, &quot;yellow&quot;))</code></pre>
 <p><img src="/statistics/categorical/contingency-tables/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>See the graphing modules for making better versions of these figures that are suitable for reports or publications.</p>
 </div>
@@ -82,6 +82,6 @@ legend(&quot;topright&quot;,inset=0.15,c(&quot;Black bill&quot;, &quot;Red bill&
 <p>Quinn and Keough (2002) <em>Experimental design and data analysis for biologists</em>. Cambridge University Press. Chapter 14. Analyzing frequencies.</p>
 <p>McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 20.3 Comparing proportions among two or more independent samples.</p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:25:29 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:26:44 2022</p>
 </div>

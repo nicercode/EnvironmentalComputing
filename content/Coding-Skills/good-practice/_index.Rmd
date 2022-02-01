@@ -36,7 +36,7 @@ The following notes outline the general layout and ordering you should follow wh
 Firstly, all scripts should start with  a title,  author details, a brief description of the scripts purpose and the data being used and copyright and legal stuff (Probably not while in university, but later in life you'll want to remember this). For example,
 
 ```{r}
-# Title: Time series analyses
+# title: Time series analyses
 # Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
 # Script and data info: This script performs a time series analyses on count data.  
 # Data consists of counts of bird species.
@@ -68,7 +68,7 @@ Finally, before you start running any data analyses you may need to conduct some
 Putting all this together, the beginning of a script will look something like the following. 
 
 ```{r, eval = F, echo = T}
-# Title: Time series analyses
+# title: Time series analyses
 # Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
 # Script and data info: This script performs a time series analyses on count data.  
 # Data consists of counts of bird species.

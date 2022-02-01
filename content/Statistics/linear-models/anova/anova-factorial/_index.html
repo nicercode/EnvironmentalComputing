@@ -34,16 +34,16 @@ aliases: /analysis-variance-single-factor/
 <h3>Running the analysis</h3>
 <p>Your data should be formatted with the measurements from each replicate as a row and each of the variables as columns, corresponding to the dependent variable <em>y</em>, Factor A and Factor B.</p>
 <p>Download the sample data set for the sessile invertebrates, <a href="/datasets/Sessile.csv">Sessile.csv</a>, and import into R to to see the desired format. Check that your predictor variables are factors with the function <code>str</code></p>
-<pre class="r"><code>Sessile = read.csv(file = &quot;Sessile.csv&quot;, header = TRUE)
+<pre class="r"><code>Sessile &lt;- read.csv(file = &quot;Sessile.csv&quot;, header = TRUE)
 str(Sessile)</code></pre>
 <p>With our predictor variable correctly assigned as factors, we can now run the analysis. As with other forms of linear models we have a model formula with the dependent variable, <em>y</em>, to the left of the ~ and the predictor variables to the right. For this two factor design, we use:</p>
-<pre class="r"><code>Sessile.aov = aov(Richness ~ Copper * Orientation, data = Sessile)</code></pre>
+<pre class="r"><code>Sessile.aov &lt;- aov(Richness ~ Copper * Orientation, data = Sessile)</code></pre>
 <p>Note that when you specify a model with * between the two predictors, R automatically includes both variables and their interaction. This same model could also be written as:</p>
-<pre class="r"><code>Sessile.aov = aov(Richness ~ Copper + Orientation + Copper:Orientation, data = Sessile)</code></pre>
+<pre class="r"><code>Sessile.aov &lt;- aov(Richness ~ Copper + Orientation + Copper:Orientation, data = Sessile)</code></pre>
 <p>The output from this analysis can be seen by using the <code>summary</code> function on the object created.</p>
 <pre class="r"><code>summary(Sessile.aov)</code></pre>
 <p>Exactly the same model can also be run using the linear model function, <code>lm</code>.</p>
-<pre class="r"><code>Sessile.lm = lm(Richness ~ Copper * Orientation, data = Sessile)
+<pre class="r"><code>Sessile.lm &lt;- lm(Richness ~ Copper * Orientation, data = Sessile)
 anova(Sessile.lm)</code></pre>
 </div>
 <div id="interpreting-the-results" class="section level3">
@@ -82,13 +82,13 @@ anova(Sessile.lm)</code></pre>
 <p>Unbalanced designs are more susceptible to violating the assumptions of ANOVA and there is no single way to partitioning the <span class="math inline">\(SS_{total}\)</span> into the main effect and interaction components. The <code>aov</code> and <code>lm</code> functions in R use what are called Type I sums of squares where the terms in the model are fitted sequentially (i.e., how much variation is explained by factor A, then how much additional variation is explained by adding factor B). This means that the order of the terms in model matters: the model formulae <code>Y ~ A + B + A:B</code> and <code>Y ~ B + A + B:A</code> will give you different results.</p>
 <p>There is a fair bit of debate on this in the statistical literature, but many advise using what are called Type II or Type III sums of squares for unbalanced designs. Other software packages like SPSS, SYSTAT and Minitab will automatically use Type III sums of squares where the order of terms in the model doesn’t matter. To access these in R, we can use the <code>Anova</code> function in the <a href="https://cran.r-project.org/web/packages/car/index.html">car</a> package.</p>
 <p><strong>Normality.</strong> The assumption of normality can be checked by a frequency histogram of the residuals or by using a quantile plot where the residuals are plotted against the values expected from a normal distribution. The histogram of residuals should follow a normal distribution. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Both of these plots can be obtained from the model object created by the <code>aov</code> function.</p>
-<pre class="r"><code>par(mfrow = c(1,2)) # This code put two plots in the same window
+<pre class="r"><code>par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(Sessile.aov$residuals)
-plot(Sessile.aov,which=2)</code></pre>
+plot(Sessile.aov, which = 2)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Violations of normality can be fixed via transformations or by using a different error-distribution in a <a href="/statistics/glms/">generalised linear model (GLM)</a>.</p>
 <p><strong>Homogeneity of variance.</strong> The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the <code>aov</code> model object.</p>
-<pre class="r"><code>plot(Sessile.aov,which=1)</code></pre>
+<pre class="r"><code>plot(Sessile.aov, which = 1)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Heterogeneous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the y axis for each of the levels on the x axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="/statistics/glms/">generalised linear model (GLM)</a>.</p>
 <p><strong>Independence.</strong> ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the invertebrate samples measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with an additional factor of sampling time).</p>
@@ -99,7 +99,7 @@ plot(Sessile.aov,which=2)</code></pre>
 <p><strong>Written.</strong> The results of the main effects and any interaction should be described in the text of a results section. Each <em>F</em> test can be described in the text, e.g., “The copper treatment and substrate orientation interacted to affect the species of sessile invertebrates (<em>F</em> = 19.33, df = 2,54, <em>p</em> &lt; 0.001)”. Alternatively, all tests could be put into a Table like the one given in the output following <code>summary(Sessile.aov)</code> above. Description of the main tests would be followed by a description of the <em>post-hoc</em> results if used.</p>
 <p>Remember that the interpretation of the main effects is complicated when there is a significant interaction (see above). In this example, while copper reduced species richness, that effect was not consistent between the two habitats. In other scenarios with an interaction, you might have copper affecting richness in one habitat but not another, preventing you making a simple statement like “copper reduced species richness” because it wouldn’t always be true.</p>
 <p><strong>Visual.</strong> A boxplot or column graph with error bars are suitable for contrasting a continuous variable across levels of categorical variable. See the graphing modules for making publication ready versions of these figures.</p>
-<pre class="r"><code>boxplot(Richness ~ Copper*Orientation,data = Sessile, names = c(&quot;High.H&quot;,&quot;Low.H&quot;,&quot;None.H&quot;,&quot;High.V&quot;,&quot;Low.V&quot;,&quot;None.V&quot;),ylab=&quot;Species richness&quot;,xlab=&quot;Copper/Orientation&quot;,ylim=c(0,80))</code></pre>
+<pre class="r"><code>boxplot(Richness ~ Copper * Orientation, data = Sessile, names = c(&quot;High.H&quot;, &quot;Low.H&quot;, &quot;None.H&quot;, &quot;High.V&quot;, &quot;Low.V&quot;, &quot;None.V&quot;), ylab = &quot;Species richness&quot;, xlab = &quot;Copper/Orientation&quot;, ylim = c(0, 80))</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
@@ -115,6 +115,6 @@ McKillup (2012) <em>Statistics explained. An introductory guide for life scienti
 Underwood (1997) <em>Experiments in ecology: Their logical design and interpretation using analysis of variance.</em>&gt; Cambridge University Press.
 </p>
 <p><strong>Authors:</strong> James Lavender &amp; Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 16:07:29 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:32:31 2022</p>
 </div>

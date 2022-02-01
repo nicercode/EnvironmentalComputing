@@ -2,6 +2,7 @@
  weight: 2
  title: "Fixed-effect and Random-effect Models"
  output: html_document
+ aliases: /meta-analysis-2/
  editor_options:
    chunk_output_type: console
 ---
@@ -9,7 +10,7 @@
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>First read our <a href="/../statistics/meta-analysis/meta-analysis-1">introduction to meta analysis</a> with instructions for calculating effect sizes. Now, we consider the statistical models to estimate mean effect sizes and the influence of moderator variables.</p>
+<p>First read our <a href="/statistics/meta-analysis/meta-analysis-1">introduction to meta analysis</a> with instructions for calculating effect sizes. Now, we consider the statistical models to estimate mean effect sizes and the influence of moderator variables.</p>
 <div id="fixed-effect-and-random-effects-models" class="section level3">
 <h3>Fixed-effect and random-effects models</h3>
 <p>There are two main models of meta-analysis: 1) the fixed-effect model and 2) the random-effect model (actually we say 3 types, but the third one is the extension of the second model). Because fixed effects mean something different in another context, this naming is a bit confusing. So people now call the first model ‘common-effect’ model. You can see a visual representation of these two models (from Figure 4 in Nakagawa <em>et al.</em> 2017).</p>
@@ -110,8 +111,7 @@ I^2=\frac{\tau^2}{(\tau^2+\bar{v})},
 <p>The existence of heterogeneity sets a scene for meta-regression. This means that we now put predictors (‘moderators’ in the meta-analytic terminology) into our model to explain heterogeneity (equivalent to normal regression models).</p>
 <p>Fitting meta-regression is pretty straightforward too. In this example, let’s fit three moderators that were collected by the authors: 1) <code>time</code> (how long the experiment was), 2) <code>method</code> (different ways of increasing CO<span class="math inline">\(_2\)</span>), and 3) <code>fungroup</code> (functional group, i.e., angiosperm, gymnosperm or N<span class="math inline">\(_2\)</span> fixer).</p>
 <p>We use <code>rma</code> again, but now have a model statement.</p>
-<pre class="r"><code>metareg &lt;- rma(yi = yi, vi = vi, mod = ~time + method + fungrp, method = &quot;REML&quot;,
-    data = dat)
+<pre class="r"><code>metareg &lt;- rma(yi = yi, vi = vi, mod = ~time + method + fungrp, method = &quot;REML&quot;, data = dat)
 summary(metareg)</code></pre>
 <pre><code>## 
 ## Mixed-Effects Model (k = 102; tau^2 estimator: REML)
@@ -168,8 +168,7 @@ regtest(random_m)</code></pre>
 ## Limit Estimate (as sei -&gt; 0):   b = 0.1584 (CI: 0.0890, 0.2278)</code></pre>
 <p>The funnel plot and Egger’s test both suggest funnel asymmetry. But we need to be careful. Funnel asymmetry cannot be caused not only by publication bias but also by heterogeneity (one or more undetected moderators are distorting a funnel shape). Given we have a lot of unexplained variance (i.e. heterogeneity), we are not sure which is causing this asymmetry. But we have some evidence for publication bias. A relating point is that if meta-regression explains a lot of heterogeneity, you should use that meta-regression model in the function <code>regrest</code> (in our case <code>regrest(metareg)</code>, but I did not do it as our model <code>metareg</code> did not explain anything).</p>
 <p>There is an alternative method, which has a cool name, the trim-and-fill method. You will see the reason why. We can use this method by using the function <code>trimfill</code>.</p>
-<pre class="r"><code># Note that we are using the defult estimator (&#39;L0&#39;), but there are two others
-# availablere
+<pre class="r"><code># Note that we are using the defult estimator (&#39;L0&#39;), but there are two others availablere
 tf_m &lt;- trimfill(random_m)
 tf_m</code></pre>
 <pre><code>## 
@@ -234,7 +233,7 @@ summary(weight_m)</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Actually, this point estimate is the exactly the same as that of the common-effect model (this is not just a coincidence as this model calculates the overall mean like the common-effect model). But it is important to notice this model has a wider 97% CI than the common-effect model and this level of uncertainty is more realistic (just like the random-effects model). Basically, this model has got the best of both worlds!</p>
 <p>This model is based on the paper by Henmi and Copas (2010). Although it is more robust to publication bias, I do not know any meta-analyses in the field of ecology and evolution, which uses this model. Probably we should be using this model rather than a random-effect model? I think so - let’s call this model the ‘robust’ model. I think we should use this robust model for meta-regression too. I acknowledge Wolfgang telling me about this model to me.</p>
-<p>If you are happy with all this, move on the <a href="/../statistics/meta-analysis/meta-analysis-3">more complex models</a></p>
+<p>If you are happy with all this, move on the <a href="/statistics/meta-analysis/meta-analysis-3">more complex models</a></p>
 </div>
 <div id="further-help-references" class="section level3">
 <h3>Further help (references)</h3>
@@ -253,6 +252,6 @@ Nakagawa, S., D. W. A. Noble, A. M. Senior, and M. Lagisz. 2017. Meta-evaluation
 Senior, A. M., C. E. Grueber, T. Kamiya, M. Lagisz, K. O’Dwyer, E. S. A. Santos, and S. Nakagawa. 2016. Heterogeneity in ecological and evolutionary meta-analyses: its magnitude and implications. <em>Ecology</em> 97:3293-3299.
 </p>
 <p><strong>Authors</strong>: Shinichi Nakagawa and Malgorzata (Losia) Lagisz</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 13:42:21 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:33:13 2022</p>
 </div>

@@ -29,7 +29,7 @@ output: html_document
 <pre class="r"><code>Herb_community.mds &lt;- metaMDS(comm = Herb_community, distance = &quot;bray&quot;, trace = FALSE, autotransform = FALSE)</code></pre>
 <p>where <code>comm = Herb_community</code> specifies the data frame holding the community data, <code>distance = "bray"</code> indicates you want to use a Bray-Curtis distance measure and <code>trace = FALSE</code> indicates you wish to ignore in progress output of results. <code>autotransform = FALSE</code> stops vegan from automatically transforming the data (see below for advice on transformation).</p>
 <p>Calling the <code>plot</code> function on the x-y coordinates of the <code>metaMDS</code> output creates an MDS ordination plot.</p>
-<pre class="r"><code>plot(Herb_community.mds$points) </code></pre>
+<pre class="r"><code>plot(Herb_community.mds$points)</code></pre>
 <p><img src="/graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>This is not informative until we plot samples from each habitat type (macroalgal species) as a different colour.</p>
 <p>To do this we can extract the x and y coordinates from the MDS plot into a new data frame.</p>
@@ -39,7 +39,9 @@ output: html_document
 MDS_xy$DayNight &lt;- Herbivores$DayNight</code></pre>
 <p>To plot those points, color coded by Habitat, we can use:</p>
 <pre class="r"><code>library(ggplot2)
-ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) + geom_point() + theme_bw()</code></pre>
+ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
+  geom_point() +
+  theme_bw()</code></pre>
 <p><img src="/graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
@@ -47,7 +49,9 @@ ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) + geom_point() + theme_bw()</co
 <p>Interpreting an MDS plot is reasonably straightforward and the same as for any other ordination plot; objects that are closer together on the plot are more alike than those further apart. MDS arranges the points on the plot so that the distances among each pair of points correlates as best as possible to the dissimilarity between those two samples. The values on the two axes tell you nothing about the variables for a given sample - the plot is just a two dimensional space to arrange the points.</p>
 <p>If there is any grouping of samples according to categories of samples, then you have interesting patterns in your multivariate data set. In the plot above, samples from each habitat are more likely to be similar to samples from the same habitat, than samples from ther other habitats (visualised as clusters of different colours). This means that the species composition of herbivores differs across their food plants. Remember, that this is not a statistical test, just a visualisation that helps you seek patterns.</p>
 <p>In contrast, if we colour our samples by time of day, you will see that these two groups of samples are mixed on the plot. This suggests no difference in species composition between the two sampling times.</p>
-<pre class="r"><code>ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) + geom_point() + theme_bw()</code></pre>
+<pre class="r"><code>ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) +
+  geom_point() +
+  theme_bw()</code></pre>
 <p><img src="/graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="assumptions-to-check" class="section level2">
@@ -56,7 +60,7 @@ ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) + geom_point() + theme_bw()</co
 <p><strong>Stress.</strong> Not an assumption of the process, but the most important factor to consider after generating an MDS plot is the ‘stress’. The stress provides a measure of the degree to which the distance between samples in reduced dimensional space (usually 2-dimensions) corresponds with the actual multivariate distance between the samples. Lower stress values indicate greater conformity and therefore are desirable. High stress values indicate that there was no 2-dimensional arrangement of your points that reflect their similarities. A rule of thumb is that stress values should ideally be less than 0.2 or even 0.1.</p>
 <p>You can obtain the stress value from your plot with:</p>
 <pre class="r"><code>Herb_community.mds$stress</code></pre>
-<pre><code>## [1] 0.1485344</code></pre>
+<pre><code>## [1] 0.1485345</code></pre>
 <p>If the stress value is greater than 0.2, it is advisable to include an additional dimension, but remember that human brains are not very well equipped to visualise objects in more than 2-dimensions.</p>
 <p><strong>Transformation and standardisation.</strong> Transforming data sets prior to creating a MDS plot is often desirable, not to meet assumptions of normality, but to reduce the influence of extreme values. For example,</p>
 <pre class="r"><code>Herb_community.sq &lt;- sqrt(Herb_community)
@@ -79,7 +83,7 @@ Quinn, GP and MJ Keough (2002) <em>Experimental design and data analysis for bio
 McKillup, S (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.
 </p>
 <p><strong>Author:</strong> Andrew Letten</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Fri Jan 28 14:50:08 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Tue Feb 1 13:59:52 2022</p>
 </div>
 </div>

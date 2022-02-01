@@ -7,7 +7,7 @@ editor_options:
 ---
 **Generalised linear mixed models**
 
-You will need to read [Mixed models 1](/statistics/mixed-models/mixed-model-1/) and [Mixed models 2](/statistics/mixed-models/mixed-model-2/) as an introduction to mixed models for continuous data, as well as the help pages on [Generalised linear models](/statistics/glms/generalised-linear-models/) as an introduction to modelling discrete data. 
+You will need to read [Mixed models 1](/statistics/mixed-models/mixed-model-1/) and [Mixed models 2](/statistics/mixed-models/mixed-model-2/) as an introduction to mixed models for continuous data, as well as the help pages on [Generalised linear models](/statistics/glms/) as an introduction to modelling discrete data. 
 
 This page will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).
   

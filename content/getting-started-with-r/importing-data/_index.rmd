@@ -79,7 +79,7 @@ If the problem is still there we can tackle it in R, by indexing within square b
 Snail_feeding <- Snail_feeding[, 1:7]
 ```
 
-The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has several very neat functions for subsetting rows and columns - see [Subsetting data](../subsetting-data) for help with these.
+The package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) has several very neat functions for subsetting rows and columns - see [Subsetting data](/../data-manipulation/subsetting-data) for help with these.
 
 If you had very many columns and didn't want to count them, you could use logic (&, or, ==, >, < , !=) to remove the unwanted rows and columns. We don't want to remove all NAs, only additional rows and columns that are entirely filled with NAs. These have the property of the number of NAs being equal to the number of rows in a given column (or number of columns in a given row). 
 

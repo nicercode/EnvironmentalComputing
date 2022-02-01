@@ -26,7 +26,7 @@ aliases: /independent-samples-t-test/
 <p>where <em>my_sample1</em> and <em>my_sample2</em> are vectors containing the measurements from each sample.</p>
 <p>More commonly, we would use a data frame with the response and predictor variables as separate columns. You can then use a formula statement, <code>y ~ x</code>, to specify the response and predictor variables rather than the code above. Consider the simple example where you wanted to compare the pH of two rivers. Ten replicate pH measures were taken from each river.</p>
 <p>Download the sample data set, <a href="/datasets/River_pH.csv">River_pH.csv</a>, and import into R.</p>
-<pre class="r"><code>River_pH = read.csv(file = &quot;River_pH.csv&quot;, header = TRUE)</code></pre>
+<pre class="r"><code>River_pH &lt;- read.csv(file = &quot;River_pH.csv&quot;, header = TRUE)</code></pre>
 <p>The <em>t</em>-test is run with the <code>t.test</code> function, with the arguments specifying the response variable (pH) to the left of the ~, the predictor variable (River_name) to the right of the ~, and the data frame to be used.</p>
 <pre class="r"><code>t.test(pH ~ River_name, data = River_pH, var.equal = TRUE)</code></pre>
 <p>The argument <code>var.equal = TRUE</code> specifies that we are assuming equal variances. Note the default <code>t-test</code> argument for the alternative hypothesis is a two-tailed test. If you want to conduct a one-tailed test you must add an argument to the function specifying <code>alternative = "greater"</code> or <code>alternative = "less"</code>.</p>
@@ -59,7 +59,7 @@ aliases: /independent-samples-t-test/
 <h3>Communicating the results</h3>
 <p><strong>Written.</strong> As a minimum, the observed <em>t</em> statistic, the P-value and the number of degrees of freedom should be reported. For example, you could write “the pH was significantly higher in River A than River B (independent samples <em>t</em>-test: <em>t</em> = 6.98, df = 18, P &lt; 0.001)”.</p>
 <p><strong>Visual.</strong> Box plots or column graphs with error bars are effective ways of communicating the variation in a single continuous response variable versus a single categorical predictor variable.</p>
-<pre class="r"><code>boxplot(pH~River_name, data = River_pH, xlab = &quot;River name&quot;, ylab = &quot;pH&quot;)</code></pre>
+<pre class="r"><code>boxplot(pH ~ River_name, data = River_pH, xlab = &quot;River name&quot;, ylab = &quot;pH&quot;)</code></pre>
 <p><img src="/statistics/t-tests/two-sample-t-test/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
@@ -72,6 +72,6 @@ Quinn and Keough (2002) <em>Experimental design and data analysis for biologists
 McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.
 </p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 16:16:49 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:39:24 2022</p>
 </div>

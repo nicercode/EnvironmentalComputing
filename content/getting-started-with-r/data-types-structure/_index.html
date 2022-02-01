@@ -17,10 +17,10 @@ output: html_document
 <div id="common-types-of-vectors" class="section level4">
 <h4>Common types of vectors</h4>
 <p>Common types of atomic vectors are logical, integer, numeric (i.e., double), character and factor. You can easily create each of these data types by using <code>c()</code>. In the integer example, the L forces R to consider those numbers as integers rather than numerical.</p>
-<pre class="r"><code>eg_logical &lt;- c(T, T, T, F, F) 
+<pre class="r"><code>eg_logical &lt;- c(T, T, T, F, F)
 eg_integer &lt;- c(1L, 6L, 1L, 5L, 4L)
 eg_numeric &lt;- c(0, 2.3, 2.45, 2.99, -1.1)
-eg_character &lt;- c(&quot;things&quot;, &quot;in&quot;, &quot;apostrophe&quot; ,&quot;are&quot;, &quot;characters&quot;)
+eg_character &lt;- c(&quot;things&quot;, &quot;in&quot;, &quot;apostrophe&quot;, &quot;are&quot;, &quot;characters&quot;)
 eg_factor &lt;- factor(c(&quot;NSW&quot;, &quot;NSW&quot;, &quot;ACT&quot;, &quot;WA&quot;, &quot;WA&quot;))</code></pre>
 </div>
 <div id="factors-a-special-data-type" class="section level4">
@@ -44,7 +44,7 @@ sizes
 <div id="checking-data-types" class="section level4">
 <h4>Checking data types</h4>
 <p>You can check the data type of any vector using the <code>class</code> or <code>is</code> functions.</p>
-<pre class="r"><code>class(eg_logical) 
+<pre class="r"><code>class(eg_logical)
 ## [1] &quot;logical&quot;
 is.integer(eg_integer)
 ## [1] TRUE
@@ -118,6 +118,6 @@ is.numeric(eg_data_frame$numeric)
 <p>Further information on data types in R can be found <a href="https://www.stat.auckland.ac.nz/~paul/ItDT/HTML/node64.html">here</a>
 and <a href="http://www.statmethods.net/input/datatypes.html">here</a></p>
 <p><strong>Author</strong>: Keryn Bain</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:32:54 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Tue Feb 1 13:57:49 2022</p>
 </div>

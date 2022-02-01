@@ -22,7 +22,7 @@ output: html_document
 <h3>General script format</h3>
 <p>The following notes outline the general layout and ordering you should follow when writing your scripts. If everyone is using the same general format, reading and understanding each other’s (and your own) scripts will be much easier.</p>
 <p>Firstly, all scripts should start with a title, author details, a brief description of the scripts purpose and the data being used and copyright and legal stuff (Probably not while in university, but later in life you’ll want to remember this). For example,</p>
-<pre class="r"><code># Title: Time series analyses
+<pre class="r"><code># title: Time series analyses
 # Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
 # Script and data info: This script performs a time series analyses on count data.  
 # Data consists of counts of bird species.
@@ -40,7 +40,7 @@ library(ggplot2)
 source(&quot;R_scripts/myfunctions.R&quot;)</code></pre>
 <p>Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See <a href="/../getting-started-with-r/data-types-structure/">Data structure</a> and <a href="/../getting-started-with-r/importing-data/">Importing data</a> for help with these issues.</p>
 <p>Putting all this together, the beginning of a script will look something like the following.</p>
-<pre class="r"><code># Title: Time series analyses
+<pre class="r"><code># title: Time series analyses
 # Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
 # Script and data info: This script performs a time series analyses on count data.  
 # Data consists of counts of bird species.
@@ -234,5 +234,5 @@ bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)),
 <p>You may now be thinking about all the scripts that you have made that need to be be reformatted. As is commonplace in R, someone has created a package to help with this. The <a href="https://cran.r-project.org/web/packages/formatR/index.html">formatR</a> package by Yihui Xie has a neat little function called <code>tidy_source()</code>. This isn’t a fix all, but can go a long way in making horrible scripts look legible. See <a href="http://yihui.name/formatR/">An introduction to format R</a> or type <code>?tidy_source()</code> for details on how to use this package.</p>
 <p><strong>Author</strong>: Keryn F Bain</p>
 <p><strong>Year:</strong> 2017</p>
-<p><strong>Last updated:</strong> Tue Feb 1 10:44:04 2022</p>
+<p><strong>Last updated:</strong> Tue Feb 1 13:57:00 2022</p>
 </div>

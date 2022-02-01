@@ -16,10 +16,10 @@ library(dplyr)</code></pre>
 <div id="reading-in-the-data" class="section level3">
 <h3>Reading in the data</h3>
 <p>With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, <a href="/datasets/Bac.counts.csv">Bac.counts.csv</a> and <a href="/datasets/Bac.factors.csv">Bac.factors.csv</a>, and import into R.</p>
-<pre class="r"><code>Bac.counts &lt;- read.csv(file = &quot;Bac.counts.csv&quot;, header = TRUE, row.names=1)
-Bac.factors &lt;- read.csv(file = &quot;Bac.factors.csv&quot;, header = TRUE, row.names=1)</code></pre>
+<pre class="r"><code>Bac.counts &lt;- read.csv(file = &quot;Bac.counts.csv&quot;, header = TRUE, row.names = 1)
+Bac.factors &lt;- read.csv(file = &quot;Bac.factors.csv&quot;, header = TRUE, row.names = 1)</code></pre>
 <p>The <code>row.names=1</code> argument assigns the first column of the spreadsheet as row names in the data frame. We should check the data structure of the counts using the <code>head</code> command. Given there are many columns, we’ll only check the first 10 using indexing (use of <code>[,]</code> after the object, with row numbers before the comma and column numbers after).</p>
-<pre class="r"><code>head(Bac.counts[,1:10])</code></pre>
+<pre class="r"><code>head(Bac.counts[, 1:10])</code></pre>
 <pre><code>          DC1  DC2  DC3  DS1  DS2  DS3  SC1  SC2  SC3  SS1
 Otu00002 2906 2619 2200 2959 3205 2455 2815 2761 2275 3519
 Otu00003 1631 1323 1258 1055 1552 1509 1345 1255 1270 1180
@@ -43,12 +43,12 @@ Otu00007 1112 1042 1211 1060 1155 1103 1283 1198 1175 1485</code></pre>
 </div>
 <div id="drawing-a-heatmap" class="section level3">
 <h3>Drawing a heatmap</h3>
-<p>The basic function is <code>pheatmap</code>. Let’s try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function <code>slice</code> in dplyr can take any subset of numbered rows (see <a href="/../data-manipulation/subsetting-data/">Subsetting data</a>).</p>
+<p>The basic function is <code>pheatmap</code>. Let’s try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function <code>slice</code> in dplyr can take any subset of numbered rows (see <a href="/data-manipulation/subsetting-data/">Subsetting data</a>).</p>
 <pre class="r"><code>Bac.counts500 &lt;- slice(Bac.counts, 1:500)
 
 pheatmap(Bac.counts500)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see <a href="/../statistics/cluster-analysis/">Cluster analysis</a>).</p>
+<p>In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see <a href="/statistics/cluster-analysis/">Cluster analysis</a>).</p>
 <p><strong>Data transformation</strong>. Now you might notice that we have a scale issue. The data are full of rare-ish bacteria (blue) and that is all we can see on the heatmap. To visualise this more effectively, we can try a log10 transformation with + 1 constant to deal with zeros.</p>
 <pre class="r"><code>Bac.Log10.counts500 &lt;- log10(Bac.counts500 + 1)
 pheatmap(Bac.Log10.counts500)</code></pre>
@@ -68,7 +68,7 @@ pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The colours are pretty ugly. To make your own is tricky, but involves making named colour vectors and then adding them to a list. This represents the “colour annotation” information. We have to define colours for categorical covariate (factor groups) and colour ranges for numerical covariates (e.g. concentration).</p>
 <pre class="r"><code># Reorder Density levels to Sparse, Dense, Other
-Bac.factorsDS$Density = factor(Bac.factorsDS$Density, levels = c(&quot;Sparse&quot;, &quot;Dense&quot;, &quot;Other&quot;))
+Bac.factorsDS$Density &lt;- factor(Bac.factorsDS$Density, levels = c(&quot;Sparse&quot;, &quot;Dense&quot;, &quot;Other&quot;))
 DensityCol &lt;- c(&quot;darkorchid&quot;, &quot;darkorange&quot;, &quot;grey80&quot;)
 names(DensityCol) &lt;- levels(Bac.factorsDS$Density)
 
@@ -80,7 +80,8 @@ names(SpeciesCol) &lt;- levels(Bac.factorsDS$Species)
 # Add to a list, where names match those in factors dataframe
 AnnColour &lt;- list(
   Density = DensityCol,
-  Species = SpeciesCol)
+  Species = SpeciesCol
+)
 
 # Check the output
 AnnColour</code></pre>
@@ -101,34 +102,40 @@ $Species
 <p>By default, <code>pheatmap</code> is using Euclidean distance as the similarity measure and clustering samples based on the ‘complete’ method. There are various other distance and clustering methods available by using additional arguments: <code>clustering_distance_rows</code>, <code>clustering_distance_cols</code> and <code>clustering_method</code>.</p>
 <p>Some are better than others, but you’ll have to consult the literature further on this. For clustering, however, ‘average’ clustering seems superior in many computer science applications. Again, the benefit of heatmaps is that you see what the data are doing relative to the options you have chosen.</p>
 <p>Let’s see what is produced by using the Manhattan distance as the measure of similarity between rows and columns, and the average clustering method.</p>
-<pre class="r"><code>pheatmap(Bac.Log10.counts500, clustering_distance_rows = &quot;manhattan&quot;,
-         clustering_distance_cols = &quot;manhattan&quot;, clustering_method = &#39;average&#39;,
-         annotation_colors = AnnColour, annotation_col = Bac.factorsDS)</code></pre>
+<pre class="r"><code>pheatmap(Bac.Log10.counts500,
+  clustering_distance_rows = &quot;manhattan&quot;,
+  clustering_distance_cols = &quot;manhattan&quot;, clustering_method = &quot;average&quot;,
+  annotation_colors = AnnColour, annotation_col = Bac.factorsDS
+)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>You can see that changing the clustering has significantly changed the heatmap produced.</p>
 </div>
 <div id="scaling-variables" class="section level3">
 <h3>Scaling variables</h3>
 <p>We may want to compare the abundance of each bacterial OTU only among samples rather than contrasting their abundance with other OTUs of varying abundance. To do this, we can scale the abundances within each OTU such that the colour scale shows only the relative range of abundance for each individual OTU. In this example, that involves scaling abundance for each row with <code>scale="row"</code>.</p>
-<pre class="r"><code>pheatmap(Bac.Log10.counts500, scale = &quot;row&quot;, clustering_distance_rows = &quot;manhattan&quot;,
-         clustering_method = &#39;average&#39;,
-         annotation_colors = AnnColour, annotation_col = Bac.factorsDS)</code></pre>
+<pre class="r"><code>pheatmap(Bac.Log10.counts500,
+  scale = &quot;row&quot;, clustering_distance_rows = &quot;manhattan&quot;,
+  clustering_method = &quot;average&quot;,
+  annotation_colors = AnnColour, annotation_col = Bac.factorsDS
+)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-13-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).</p>
 </div>
 <div id="sorting-by-group" class="section level3">
 <h3>Sorting by group</h3>
 <p>We can also sort the samples by their groups or treatments rather than sorting by similarity among rows or columns. This is done by ordering the input data and turning off the clustering of the columns with <code>cluster_cols=FALSE</code>.</p>
-<pre class="r"><code>SampleOrder = order(Bac.factorsDS$Species, Bac.factorsDS$Density)
+<pre class="r"><code>SampleOrder &lt;- order(Bac.factorsDS$Species, Bac.factorsDS$Density)
 
-pheatmap(Bac.Log10.counts500[ , SampleOrder], cluster_cols = FALSE,
-         clustering_method = &#39;average&#39;, annotation_colors = AnnColour, annotation_col = Bac.factorsDS)</code></pre>
+pheatmap(Bac.Log10.counts500[, SampleOrder],
+  cluster_cols = FALSE,
+  clustering_method = &quot;average&quot;, annotation_colors = AnnColour, annotation_col = Bac.factorsDS
+)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="using-heatmaps-after-statistical-analyses" class="section level3">
 <h3>Using heatmaps after statistical analyses</h3>
 <p>If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.</p>
-<p>We will analyse the abundances of all OTUs with multivariate generalised linear models using the function <code>manyglm</code> in the package mvabund. The specifics of that analysis are not described further here (see the <a href="/../statistics/mvabund/">Introduction to mvabund</a> for help with that package). Note that running <code>anova.manyglm</code> is quite slow.</p>
+<p>We will analyse the abundances of all OTUs with multivariate generalised linear models using the function <code>manyglm</code> in the package mvabund. The specifics of that analysis are not described further here (see the <a href="/statistics/mvabund/">Introduction to mvabund</a> for help with that package). Note that running <code>anova.manyglm</code> is quite slow.</p>
 <pre class="r"><code># Create factor and data file without the U1, U2 and U3 samples
 Bac.factorsDS_noU &lt;- filter(Bac.factors, Treatment_ID != &quot;U&quot;)
 Bac.counts500DS_noU &lt;- select(Bac.counts500, -contains(&quot;U&quot;))
@@ -139,15 +146,17 @@ dat.mva &lt;- mvabund(t(Bac.counts500DS_noU))
 plot(dat.mva)
 dat.nb &lt;- manyglm(dat.mva ~ Species * Density, data = Bac.factorsDS_noU)
 dat.aov &lt;- anova.manyglm(dat.nb, p.uni = &quot;unadjusted&quot;, nBoot = 500)
-dat.aov$uni.p[ ,1:5]
-SpeciesDiffs &lt;- which(dat.aov$uni.p[&quot;Species&quot;,] &lt; 0.05 &amp; dat.aov$uni.p[&quot;Species:Density&quot;,] &gt; 0.05)</code></pre>
+dat.aov$uni.p[, 1:5]
+SpeciesDiffs &lt;- which(dat.aov$uni.p[&quot;Species&quot;, ] &lt; 0.05 &amp; dat.aov$uni.p[&quot;Species:Density&quot;, ] &gt; 0.05)</code></pre>
 <p>We can include the argument <code>cutree</code> for the rows and columns, to split data into the two expected groups. Fingers crossed it shows that we expect.</p>
 <pre class="r"><code># Create a vector that will be used to select samples that are not from the sediment
-DS = Bac.factors$Treatment_ID != &quot;U&quot;
+DS &lt;- Bac.factors$Treatment_ID != &quot;U&quot;
 
-pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS], scale = &quot;row&quot;,
-         clustering_method = &#39;average&#39;, annotation_col = Bac.factorsDS,
-         cutree_rows = 2, cutree_cols = 2)</code></pre>
+pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS],
+  scale = &quot;row&quot;,
+  clustering_method = &quot;average&quot;, annotation_col = Bac.factorsDS,
+  cutree_rows = 2, cutree_cols = 2
+)</code></pre>
 <p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>And the results are as expected. The top half of the heatmap shows those variables over-represented in the Species level Caulerpa. The bottom half are those over-represented in seagrass.</p>
 <p>Happy heatmapping!</p>
@@ -156,6 +165,6 @@ pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS], scale = &quot;row&quot;,
 <h3>Further help</h3>
 <p>Type <code>?pheatmap</code> for the R help on this function.</p>
 <p><strong>Author:</strong> Shaun Nielsen</p>
-<p>Last updated:</p>
-<pre><code>[1] &quot;Fri Jan 28 14:57:05 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Tue Feb 1 13:59:43 2022</p>
 </div>

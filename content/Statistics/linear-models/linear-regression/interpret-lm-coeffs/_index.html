@@ -19,38 +19,38 @@ N &lt;- 1000
 rho &lt;- -0.4
 
 # This line of code creates two correlated variables
-X = rmvnorm(N, mean = c(0, 0), sigma = matrix(c(1, rho, rho, 1), 2, 2))
+X &lt;- rmvnorm(N, mean = c(0, 0), sigma = matrix(c(1, rho, rho, 1), 2, 2))
 
 # Extract the first and second columns to vectors named temp and alt and plot
-temp &lt;- X[,1]
-alt &lt;- X[,2]
+temp &lt;- X[, 1]
+alt &lt;- X[, 2]
 plot(temp, alt)</code></pre>
 <p><img src="/statistics/linear-models/linear-regression/interpret-lm-coeffs/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Now we can simulate some data for height of plants. Here we say that the mean height of plants is 2 (when all the other variables are 0), as temperature increases by one unit (holding altitude constant), the mean of height will increase by 1 unit (<code>beta[2] = 1</code>), and similarly as you increase altitude by 1 unit (holding temperature constant) then mean height decreases by 1 (<code>beta[3] = -1</code>). Height is then normally distributed with this mean and standard deviation of 2.</p>
 <pre class="r"><code>beta &lt;- c(2, 1, -1)
-mu &lt;- beta[1]+beta[2]*temp+beta[3] * alt
+mu &lt;- beta[1] + beta[2] * temp + beta[3] * alt
 height &lt;- rnorm(N, mu, sd = 2)</code></pre>
 <p>If we use a linear model to find the coefficients we get what we expect, estimates very close to the true values.</p>
 <pre class="r"><code>lm_both &lt;- lm(height ~ temp + alt)
 data.frame(estimated = round(lm_both$coefficients, 2), true = beta)</code></pre>
 <pre><code>##             estimated true
-## (Intercept)      2.07    2
+## (Intercept)      2.04    2
 ## temp             1.05    1
-## alt             -1.04   -1</code></pre>
+## alt             -0.95   -1</code></pre>
 <p>The interpretation of these coefficients is that if you hold everything else in the model constant (i.e., temperature) and add 1 to altitude, then the estimated mean height will decrease by 1.09. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter.</p>
 <p>The intercept is the predicted value when all the other variables are set to 0, which sometimes makes sense (here it would be the height of plants at sea level and 0 temperature). Other times 0 is not a meaningful value, and if you would like to interpret the intercept it might make sense to rescale your other variables so that their mean is 0. If you do this, then the intercept is the predicted value when all other variables are at their mean level.</p>
 <p>What if now we had a model with just temperature?</p>
 <pre class="r"><code>lm1 &lt;- lm(height ~ temp)
 lm1$coefficients</code></pre>
 <pre><code>## (Intercept)        temp 
-##    2.089560    1.431987</code></pre>
+##    2.009073    1.445214</code></pre>
 <p>The coefficient of temperature is now 1.38, what’s going on? Altitude is an important predictor of plant height, and some of the information about altitude is contained in temperature (remember they are correlated, so as altitude increases temperature decreases). The model accounts for this by changing the effect of temperature to take account of the information it contains about altitude. Notice the coefficient of temperature is wrong by approximately 0.4, the amount of correlation between the variables.</p>
 <p>Note: When statisticians talk about this, they use the words <strong>conditional</strong> and <strong>marginal</strong>. Conditional is the effect of a variable when others are held constant (as in lm_both), while marginal is the overall effect (as in lm1).
 Note: If you use the code above to simulate your own data sets, you will get slightly different values for the coefficients.</p>
 <div id="testing-hypotheses" class="section level3">
 <h3>Testing hypotheses</h3>
 <p>This distinction has a lot of consequences for modelling as well as testing hypothesis. Let’s generate some data where altitude predicts height, and temperature has no (additional) information, and then test for temperature.</p>
-<pre class="r"><code>mu &lt;- 2-1*alt
+<pre class="r"><code>mu &lt;- 2 - 1 * alt
 height &lt;- rnorm(N, mu, sd = 2)
 
 mod_temp &lt;- lm(height ~ temp)
@@ -61,25 +61,25 @@ summary(mod_temp)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -7.5346 -1.5557  0.0242  1.4807  7.2630 
+## -7.5415 -1.4862 -0.0133  1.3929  7.9466 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  1.95289    0.06963  28.045  &lt; 2e-16 ***
-## temp         0.33696    0.06909   4.877 1.25e-06 ***
+## (Intercept)  2.05557    0.07046  29.173  &lt; 2e-16 ***
+## temp         0.42370    0.06831   6.203 8.11e-10 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 2.202 on 998 degrees of freedom
-## Multiple R-squared:  0.02328,    Adjusted R-squared:  0.0223 
-## F-statistic: 23.78 on 1 and 998 DF,  p-value: 1.254e-06</code></pre>
+## Residual standard error: 2.227 on 998 degrees of freedom
+## Multiple R-squared:  0.03712,    Adjusted R-squared:  0.03616 
+## F-statistic: 38.48 on 1 and 998 DF,  p-value: 8.109e-10</code></pre>
 <pre class="r"><code>anova(mod_temp)</code></pre>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: height
 ##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-## temp        1  115.3 115.298  23.784 1.254e-06 ***
-## Residuals 998 4838.1   4.848                      
+## temp        1  190.8 190.774  38.476 8.109e-10 ***
+## Residuals 998 4948.4   4.958                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The output of this model is telling us there is an effect of temperature, even though technically there isn’t. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by 0.45 (remember the correlation was 0.4). If our hypothesis is ‘Does plant height change with temperature?’, the answer is yes, the higher the temperature, the taller the plants.</p>
@@ -91,28 +91,28 @@ summary(mod_temp_alt)</code></pre>
 ## lm(formula = height ~ alt + temp)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -6.4013 -1.3556 -0.0576  1.3790  6.6573 
+##    Min     1Q Median     3Q    Max 
+## -6.502 -1.387  0.015  1.300  5.809 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  1.939495   0.064027  30.292   &lt;2e-16 ***
-## alt         -0.949684   0.070066 -13.554   &lt;2e-16 ***
-## temp        -0.006936   0.068404  -0.101    0.919    
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.08865    0.06492  32.173   &lt;2e-16 ***
+## alt         -0.95963    0.07146 -13.429   &lt;2e-16 ***
+## temp         0.02326    0.06960   0.334    0.738    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 2.024 on 997 degrees of freedom
-## Multiple R-squared:  0.1752, Adjusted R-squared:  0.1736 
-## F-statistic: 105.9 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 2.05 on 997 degrees of freedom
+## Multiple R-squared:  0.1846, Adjusted R-squared:  0.183 
+## F-statistic: 112.9 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>anova(mod_temp_alt)</code></pre>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: height
 ##            Df Sum Sq Mean Sq  F value Pr(&gt;F)    
-## alt         1  868.0  868.04 211.8401 &lt;2e-16 ***
-## temp        1    0.0    0.04   0.0103 0.9193    
-## Residuals 997 4085.3    4.10                    
+## alt         1  948.3  948.27 225.6154 &lt;2e-16 ***
+## temp        1    0.5    0.47   0.1117 0.7383    
+## Residuals 997 4190.4    4.20                    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.</p>
@@ -123,11 +123,11 @@ summary(mod_temp_alt)</code></pre>
 <p>When we have categorical covariates (for example treatment), there are a number of ways to code the model, which will give different interpretations for the coefficients. Let’s simulate 120 data points with 40 in each of three levels of a categorical treatment.</p>
 <pre class="r"><code>N &lt;- 120
 # The effect of treatment
-trt.n &lt;- rep(c(-1, 0, 1), N/3)
-mu &lt;- 2+1*trt.n
+trt.n &lt;- rep(c(-1, 0, 1), N / 3)
+mu &lt;- 2 + 1 * trt.n
 
 # Labels for the treatment
-treatment &lt;- factor(rep(c(&quot;low&quot;, &quot;med&quot;, &quot;high&quot;), N/3))#group labels
+treatment &lt;- factor(rep(c(&quot;low&quot;, &quot;med&quot;, &quot;high&quot;), N / 3)) # group labels
 
 # Create, Y, a normally distributed response variable and plot against treatment
 Y &lt;- rnorm(N, mu, sd = 2)
@@ -142,19 +142,19 @@ summary(cat_lm)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -3.9725 -1.2764 -0.0605  1.0381  4.7077 
+## -5.5889 -1.1835  0.1173  1.3417  5.0061 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    3.0051     0.2882  10.426  &lt; 2e-16 ***
-## treatmentlow  -1.9645     0.4076  -4.819 4.37e-06 ***
-## treatmentmed  -0.6147     0.4076  -1.508    0.134    
+## (Intercept)    3.3063     0.3390   9.752  &lt; 2e-16 ***
+## treatmentlow  -2.3910     0.4795  -4.987 2.15e-06 ***
+## treatmentmed  -0.9799     0.4795  -2.044   0.0432 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.823 on 117 degrees of freedom
-## Multiple R-squared:  0.172,  Adjusted R-squared:  0.1579 
-## F-statistic: 12.15 on 2 and 117 DF,  p-value: 1.6e-05</code></pre>
+## Residual standard error: 2.144 on 117 degrees of freedom
+## Multiple R-squared:  0.1769, Adjusted R-squared:  0.1628 
+## F-statistic: 12.57 on 2 and 117 DF,  p-value: 1.136e-05</code></pre>
 <p>So here group “high” has a mean of 2.65, and the difference between the means of group “low” and group “high” is -0.66, and the difference between group “med” and group “high” is -1.48. If you would like to have another group as the reference group, you can use <code>relevel</code> to recode your treatment factor.</p>
 <pre class="r"><code>treatment &lt;- relevel(treatment, ref = &quot;low&quot;)
 cat_lm &lt;- lm(Y ~ treatment)
@@ -165,19 +165,19 @@ summary(cat_lm)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -3.9725 -1.2764 -0.0605  1.0381  4.7077 
+## -5.5889 -1.1835  0.1173  1.3417  5.0061 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     1.0407     0.2882   3.610 0.000451 ***
-## treatmenthigh   1.9645     0.4076   4.819 4.37e-06 ***
-## treatmentmed    1.3498     0.4076   3.311 0.001236 ** 
+## (Intercept)     0.9153     0.3390   2.700  0.00797 ** 
+## treatmenthigh   2.3910     0.4795   4.987 2.15e-06 ***
+## treatmentmed    1.4111     0.4795   2.943  0.00392 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.823 on 117 degrees of freedom
-## Multiple R-squared:  0.172,  Adjusted R-squared:  0.1579 
-## F-statistic: 12.15 on 2 and 117 DF,  p-value: 1.6e-05</code></pre>
+## Residual standard error: 2.144 on 117 degrees of freedom
+## Multiple R-squared:  0.1769, Adjusted R-squared:  0.1628 
+## F-statistic: 12.57 on 2 and 117 DF,  p-value: 1.136e-05</code></pre>
 <pre class="r"><code>boxplot(Y ~ treatment)</code></pre>
 <p><img src="/statistics/linear-models/linear-regression/interpret-lm-coeffs/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Now the intercept is the mean of group “low”, and all the other coefficients are the differences between group “low” and the others. Another thing you can do is to put <code>-1</code> in the model to get rid of the intercept, and just have the means of each group as coefficients.</p>
@@ -189,19 +189,19 @@ summary(cat_lm)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -3.9725 -1.2764 -0.0605  1.0381  4.7077 
+## -5.5889 -1.1835  0.1173  1.3417  5.0061 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## treatmentlow    1.0407     0.2882   3.610 0.000451 ***
-## treatmenthigh   3.0051     0.2882  10.426  &lt; 2e-16 ***
-## treatmentmed    2.3904     0.2882   8.293 2.14e-13 ***
+## treatmentlow    0.9153     0.3390   2.700  0.00797 ** 
+## treatmenthigh   3.3063     0.3390   9.752  &lt; 2e-16 ***
+## treatmentmed    2.3264     0.3390   6.862 3.44e-10 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.823 on 117 degrees of freedom
-## Multiple R-squared:  0.6195, Adjusted R-squared:  0.6098 
-## F-statistic:  63.5 on 3 and 117 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 2.144 on 117 degrees of freedom
+## Multiple R-squared:  0.5609, Adjusted R-squared:  0.5497 
+## F-statistic: 49.83 on 3 and 117 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Now, the three coefficients are the mean of the groups.</p>
 <p><strong>Contrasting the coefficients</strong> We can also look at contrasts; these are the difference between all pairs of groups. Load the package <a href="https://cran.r-project.org/web/packages/multcomp/index.html">multcomp</a> and use <code>glht</code> (general linear hypotheses) to examine all pair-wise differences.</p>
 <pre class="r"><code>library(multcomp)
@@ -219,9 +219,9 @@ summary(cont)</code></pre>
 ## 
 ## Linear Hypotheses:
 ##                 Estimate Std. Error t value Pr(&gt;|t|)    
-## high - low == 0   1.9645     0.4076   4.819  &lt; 1e-04 ***
-## med - low == 0    1.3498     0.4076   3.311  0.00351 ** 
-## med - high == 0  -0.6147     0.4076  -1.508  0.29094    
+## high - low == 0   2.3910     0.4795   4.987   &lt;1e-04 ***
+## med - low == 0    1.4111     0.4795   2.943   0.0109 *  
+## med - high == 0  -0.9799     0.4795  -2.044   0.1064    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## (Adjusted p values reported -- single-step method)</code></pre>
@@ -241,12 +241,12 @@ summary(cont)</code></pre>
 ## 
 ## Linear Hypotheses:
 ##                 Estimate lwr     upr    
-## high - low == 0  1.9645   0.9968  2.9322
-## med - low == 0   1.3498   0.3821  2.3175
-## med - high == 0 -0.6147  -1.5824  0.3530</code></pre>
+## high - low == 0  2.3910   1.2527  3.5292
+## med - low == 0   1.4111   0.2728  2.5494
+## med - high == 0 -0.9799  -2.1181  0.1584</code></pre>
 <p>Note: In a model with multiple covariates, the same rules still apply in terms of conditional and marginal interpretations of coefficients.</p>
-<p><strong>Interpreting coefficients in generalised linear models</strong> In linear models, the interpretation of model parameters is linear, as discussed above. For generalised linear models, now read the tutorial page on <a href="/../statistics/glms/interpret-glm-coeffs/">interpreting coefficients in those models</a>.</p>
+<p><strong>Interpreting coefficients in generalised linear models</strong> In linear models, the interpretation of model parameters is linear, as discussed above. For generalised linear models, now read the tutorial page on <a href="/statistics/glms/interpret-glm-coeffs/">interpreting coefficients in those models</a>.</p>
 <p><strong>Author</strong>: Gordana Popovic</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 13:35:49 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:33:00 2022</p>
 </div>

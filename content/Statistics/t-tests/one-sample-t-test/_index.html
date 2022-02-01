@@ -23,13 +23,13 @@ aliases: /one-sample-t-test/
 <h3>Running the analysis</h3>
 <p>The test statistic <em>t</em> is relatively straightforward to manually calculate. The test statistic can then checked against a <em>t</em> distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true.</p>
 <p>To calculate the probability associated with a given value of t in R, use</p>
-<pre class="r"><code>pt(q, df = your.df, lower.tail = FALSE)*2</code></pre>
+<pre class="r"><code>pt(q, df = your.df, lower.tail = FALSE) * 2</code></pre>
 <p>where <em>q</em> is your value of t, <em>your.df</em> is the degrees of freedom (<em>n</em>-1). The <code>lower.tail = FALSE</code> ensures that you are calculating the probability of getting a <em>t</em> value larger than yours (i.e., the upper tail, P[X &gt; x]). Note that the critical value for <span class="math inline">\(t_{\alpha = 0.05}\)</span> varies depending on the number of degrees of freedom - larger degrees of freedom = smaller critical value of <em>t</em>.</p>
 <p>Much easier is to use the <code>t.test</code> function in R to give you the test statistic and its associated probability in one output. For a one sample <em>t</em>-test, we would use:</p>
-<pre class="r"><code>t.test(y,mu=your.mu)</code></pre>
+<pre class="r"><code>t.test(y, mu = your.mu)</code></pre>
 <p>where <em>y</em> is a vector with your sample data and <em>your.mu</em> is the population parameter you are comparing the sample to.</p>
 <p>For our crime scene example, we could assign our ten measurements to an object called pollen and run the <em>t</em>-test on that object.</p>
-<pre class="r"><code>pollen &lt;- c(94,135,78,98,137,114,114,101,112,121)
+<pre class="r"><code>pollen &lt;- c(94, 135, 78, 98, 137, 114, 114, 101, 112, 121)
 t.test(pollen, mu = 125)</code></pre>
 </div>
 <div id="interpreting-the-results" class="section level3">
@@ -58,11 +58,11 @@ t.test(pollen, mu = 125)</code></pre>
 <h3>Communicating the results</h3>
 <p><strong>Written.</strong> As a minimum, the observed <em>t</em> statistic, the <em>p</em> value and the number of degrees of freedom should be reported. For example, you could write “The mean pollen count from the footprints (109 ) was significantly lower than expected if it was derived from the nearby forest with an average count of 125 (<em>t</em> = 3.07, df = 9, P = 0.01)”.</p>
 <p><strong>Visual.</strong> Box plots or frequency histograms can be used to visualise the variation in a single variable. In this example, you might use a line or arrow to indicate the single value (125) that you were comparing the sample to.</p>
-<pre class="r"><code>hist(pollen, xlab = &quot;Pollen count&quot;, main=NULL)
-abline(v=125,col=&quot;red&quot;)</code></pre>
+<pre class="r"><code>hist(pollen, xlab = &quot;Pollen count&quot;, main = NULL)
+abline(v = 125, col = &quot;red&quot;)</code></pre>
 <p><img src="/statistics/t-tests/one-sample-t-test/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<pre class="r"><code>boxplot(pollen,xlab = &quot;Pollen count&quot;,horizontal =TRUE)
-abline(v=125,col=&quot;red&quot;)</code></pre>
+<pre class="r"><code>boxplot(pollen, xlab = &quot;Pollen count&quot;, horizontal = TRUE)
+abline(v = 125, col = &quot;red&quot;)</code></pre>
 <p><img src="/statistics/t-tests/one-sample-t-test/_index_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
@@ -75,6 +75,6 @@ Quinn and Keough (2002) <em>Experimental design and data analysis for biologists
 McKillup (2012) <em>Statistics explained. An introductory guide for life scientists.</em> Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.
 </p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 16:14:38 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:39:17 2022</p>
 </div>

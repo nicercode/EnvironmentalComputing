@@ -106,18 +106,19 @@ output: html_document
 <p>You can control how the code and its output is displayed in the exported document with a series of options for each chunk. There are lots of these (detailed <a href="https://yihui.name/knitr/options/">here</a>), but a few useful ones are:</p>
 <p>If you want to show the code but not run it, use <code>eval=F</code> within the <code>{r}</code> at the top of your chunk
 Choose to run code in the output or not</p>
-<pre class="r"><code>#```{r, eval=F}
-2+2</code></pre>
+<pre class="r"><code># ```{r, eval=F}
+2 + 2</code></pre>
 <p>To run the code, but hide the code in the output:</p>
-<pre class="r"><code>#```{r, echo=F}
-2+2</code></pre>
+<pre class="r"><code># ```{r, echo=F}
+2 + 2</code></pre>
 <p>To hide all messages and warnings:</p>
-<pre class="r"><code>#```{r, warning=F, message=F}
-2+2</code></pre>
+<pre class="r"><code># ```{r, warning=F, message=F}
+2 + 2</code></pre>
 <pre><code>## [1] 4</code></pre>
 <p>To change the size of any plots:</p>
-<pre class="r"><code>#```{r, fig.height=3, fig.width=10}
-ggplot(Plant_height, aes(temp, loght)) + geom_point()</code></pre>
+<pre class="r"><code># ```{r, fig.height=3, fig.width=10}
+ggplot(Plant_height, aes(temp, loght)) +
+  geom_point()</code></pre>
 <p><img src="/getting-started-with-r/rstudio-notebooks/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
 <p>These can also be set once at the top of the document rather than individually for each chunk (termed Global options). For example, to set the size of all figures, we would use:</p>
 <div id="further-help" class="section level3">
@@ -127,7 +128,7 @@ ggplot(Plant_height, aes(temp, loght)) + geom_point()</code></pre>
 <p>Nathan Stephen’s <a href="https://rviews.rstudio.com/2017/03/15/why-i-love-r-notebooks/">Why I love R notebooks</a></p>
 <p>Jonathan McPherson’s <a href="https://www.rstudio.com/resources/webinars/introducing-notebooks/">R Notebooks</a></p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
-<pre><code>## [1] &quot;Mon Jan 31 15:40:36 2022&quot;</code></pre>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Tue Feb 1 13:58:03 2022</p>
 </div>
 </div>

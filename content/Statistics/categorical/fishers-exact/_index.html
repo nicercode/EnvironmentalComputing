@@ -16,7 +16,7 @@ editor_options:
 China (Hoffenberg 1983), 96, 2
 USA (Sugarman and Neelon 1985), 10, 5
 USA (Lison et al. 1980), 11, 10</p>
-<pre class="r"><code>asparagus = matrix(c(328,96,10,11,0,2,5,10), nrow=4, dimnames = list(c(&quot;Israel&quot;, &quot;China&quot;, &quot;USA.1&quot;, &quot;USA.2&quot;), c(&quot;Can detect odour&quot;,&quot;Cannot detect odour&quot;)))
+<pre class="r"><code>asparagus &lt;- matrix(c(328, 96, 10, 11, 0, 2, 5, 10), nrow = 4, dimnames = list(c(&quot;Israel&quot;, &quot;China&quot;, &quot;USA.1&quot;, &quot;USA.2&quot;), c(&quot;Can detect odour&quot;, &quot;Cannot detect odour&quot;)))
 asparagus</code></pre>
 <pre><code>##        Can detect odour Cannot detect odour
 ## Israel              328                   0
@@ -24,7 +24,7 @@ asparagus</code></pre>
 ## USA.1                10                   5
 ## USA.2                11                  10</code></pre>
 <p><strong>Q1</strong> What numbers of people would be expected to smell the odour in each population if all study populations had the same proportion of people able to detect the odour?</p>
-<pre class="r"><code>chisq.test(asparagus, correct=F)$expected</code></pre>
+<pre class="r"><code>chisq.test(asparagus, correct = F)$expected</code></pre>
 <pre><code>## Warning in chisq.test(asparagus, correct = F): Chi-squared approximation may be incorrect</code></pre>
 <pre><code>##        Can detect odour Cannot detect odour
 ## Israel        315.93074          12.0692641
@@ -47,4 +47,5 @@ asparagus</code></pre>
 <p><strong>Q1</strong> What is the exact probability of observing this or a more extreme pattern by chance alone?</p>
 <p><strong>Q2</strong> Is there evidence to suggest that the possums at site A and B differ in their use of food trees?</p>
 <p><strong>Author</strong>: Alistair Poore</p>
-<p>Last updated:</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Wed Feb 2 06:26:47 2022</p>

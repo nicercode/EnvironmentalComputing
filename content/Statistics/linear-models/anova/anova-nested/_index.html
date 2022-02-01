@@ -21,16 +21,16 @@ aliases: /analysis-variance-factorial/
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
 <p>Data for a nested design should be in the format of samples as rows and variables as columns. A coloumn should correspond to the dependent variable <em>y</em>, in this case, number of voles. Another coloumn should contain the levels of the fixed factor A, Treatment. Finally, a column for the levels of the nested random factor B, Area.</p>
-<pre class="r"><code>#Input data file
-Mink = read.csv(file = &quot;Mink.csv&quot;, header = TRUE)
-#Check the structure of the data
+<pre class="r"><code># Input data file
+Mink &lt;- read.csv(file = &quot;Mink.csv&quot;, header = TRUE)
+# Check the structure of the data
 str(Mink)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    40 obs. of  3 variables:
 ##  $ Treatment: chr  &quot;Control&quot; &quot;Control&quot; &quot;Control&quot; &quot;Control&quot; ...
 ##  $ Area     : chr  &quot;area1&quot; &quot;area1&quot; &quot;area1&quot; &quot;area1&quot; ...
 ##  $ Voles    : int  8 16 11 15 9 10 11 9 8 14 ...</code></pre>
-<pre class="r"><code>#Run the analysis
-Mink.nested = aov(Voles ~ Treatment + Area%in%Treatment, data = Mink)
+<pre class="r"><code># Run the analysis
+Mink.nested &lt;- aov(Voles ~ Treatment + Area %in% Treatment, data = Mink)
 summary(Mink.nested)</code></pre>
 <pre><code>##                Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## Treatment       1 1416.1  1416.1   38.39 3.81e-07 ***
@@ -67,13 +67,13 @@ summary(Mink.nested)</code></pre>
 <p>The assumption of normality can be checked by a frequency histogram of the residuals or using a quantile plot where the residuals are plotted against the values expected from a normal distribution. The historgram of residuals should follow a normal distribution. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Violations of normality can be fixed via transformations or by using a different error-distribution in a GLM. See the GLM module for more information. The plot() function on a model object provides a series of four graphical model diagnostics, the second of which is a quantile plot.</p>
 <pre class="r"><code>hist(Mink.nested$residuals)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre class="r"><code>plot(Mink.nested,which=2)</code></pre>
+<pre class="r"><code>plot(Mink.nested, which = 2)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <p>Heterogenous variances is indicated by non-random pattern in the residuals vs. fitted plot. If there is strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error disturbiton in a gnerealised linear model framework (GLM).</p>
-<pre class="r"><code>plot(Mink.nested$residuals~Mink.nested$fitted)</code></pre>
+<pre class="r"><code>plot(Mink.nested$residuals ~ Mink.nested$fitted)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<pre class="r"><code>#Alternative option
-plot(Turtles.ANOVA,which=1)</code></pre>
+<pre class="r"><code># Alternative option
+plot(Turtles.ANOVA, which = 1)</code></pre>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>

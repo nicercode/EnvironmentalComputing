@@ -78,4 +78,4 @@ Our help modules on [Good practice for writing scripts](/coding-skills/good-prac
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

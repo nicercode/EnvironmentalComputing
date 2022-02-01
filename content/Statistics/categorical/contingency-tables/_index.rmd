@@ -141,4 +141,4 @@ McKillup (2012) *Statistics explained. An introductory guide for life scientists
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

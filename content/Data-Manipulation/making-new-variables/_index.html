@@ -53,7 +53,7 @@ Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + 
 <p>If we wanted to make a new categorical variable where each level was the unique combination of habitat and day/night, we would use:</p>
 <pre class="r"><code>Herbivores &lt;- unite(Herbivores, &quot;Habitat_DayNight&quot;, c(Habitat, DayNight), sep = &quot;_&quot;)</code></pre>
 <p>The arguments of <code>unite' are:  * the data frame to be used (in this case Herbivores)  * the name of the new variable (in this case "Habitat_DayNight")  * the columns to be united, within</code>c()`
-* the character used to separate the values in each column being united (in this case "_")</p>
+* the character used to separate the values in each column being united (in this case “_“)</p>
 <p>View the data frame again and you will notice the new variable, and the fact that the old ones have been removed. It is a better idea to keep them, by adding <code>remove=FALSE</code></p>
 <pre class="r"><code>Herbivores &lt;- unite(Herbivores, &quot;Habitat_DayNight&quot;, c(Habitat, DayNight), sep = &quot;_&quot;, remove = FALSE)</code></pre>
 </div>
@@ -73,5 +73,5 @@ Herbivores &lt;- mutate(Herbivores, Ampithoe = Ampithoe_caddi + Ampithoe_kava + 
 <p><a href="https://blog.rstudio.org/2014/07/22/introducing-tidyr/">Introducing tidyr</a></p>
 <p><strong>Author:</strong> Alistair Poore</p>
 <p><strong>Year:</strong> 2016</p>
-<p><strong>Last updated:</strong> Tue Feb 1 13:57:23 2022</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
 </div>

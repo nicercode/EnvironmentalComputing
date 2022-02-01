@@ -285,22 +285,17 @@ standard_error(algae$strength, na.rm = TRUE)
 <p>Once you get into the habit of writing functions it’s a good idea to keep them in a separate file containing your functions together. Why? Because otherwise you have these big clunky files clogging up your script. If you’ve solved the problem of how to do something, why not stuff it away somewhere you can go, but only if needed.</p>
 <p>To get get your functions out of the way, we recommend keeping all the functions for each project together in a folder called <code>R</code> within your project directory. (For more on project set up see our <a href="/../getting-started-with-r/project-management/">post on project management</a>.)</p>
 <p>To make these functions accessible within your workflow, you then use the function <code>source</code> to read the function files into memory, e.g.</p>
-<pre class="r"><code>source(&quot;R/stats.R&quot;)
-````
-
-Often, you may have a series of files</code></pre>
+<pre class="r"><code>source(&quot;R/stats.R&quot;)</code></pre>
+<p>Often, you may have a series of files</p>
 <pre class="r"><code>source(&quot;R/data_cleaning.R&quot;)
 source(&quot;R/stats.R&quot;)
-source(&quot;R/plots.R&quot;)
-````
-
-It&#39;s a matter of preference whether you use a single or multiple files.
-
-### Writing functions to work with pipes `%&gt;%` 
-
-For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](/../data-manipulation/)).
-
-Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our `standard_error` already works with pipes, assuming you are passing in `x`:</code></pre>
+source(&quot;R/plots.R&quot;)</code></pre>
+<p>It’s a matter of preference whether you use a single or multiple files.</p>
+</div>
+<div id="writing-functions-to-work-with-pipes" class="section level3">
+<h3>Writing functions to work with pipes <code>%&gt;%</code></h3>
+<p>For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under <a href="/../data-manipulation/">data manipulation</a>).</p>
+<p>Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our <code>standard_error</code> already works with pipes, assuming you are passing in <code>x</code>:</p>
 <pre class="r"><code>algae$height %&gt;% standard_error()</code></pre>
 <pre><code>## [1] 0.04067788</code></pre>
 </div>
@@ -368,5 +363,5 @@ is.list(fit)</code></pre>
 </ul>
 <p><strong>Author</strong>: Original by Keryn F Bain; revised and expanded by Daniel S Falster</p>
 <p><strong>Year:</strong> 2018</p>
-<p><strong>Last updated:</strong> Tue Feb 1 13:57:12 2022</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
 </div>

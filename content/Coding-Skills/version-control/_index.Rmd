@@ -124,4 +124,4 @@ Version control systems, and Git in particular, can do quite a lot more then wha
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

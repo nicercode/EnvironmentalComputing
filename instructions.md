@@ -37,6 +37,22 @@ To stop the server:
 blogdown::stop_server()
 ```
 
+## Full rebuild
+
+Blogdown only renders pages when the rmd file is either missing or updated. To trigger a full rebuild, you can remove all the html and .lock files from the `content` folder then run `blogdown::serve_site()`. 
+
+```
+list.files("content", pattern=".lock", recursive=TRUE, full.names=TRUE) %>% file.remove()
+list.files("content", pattern=".html", recursive=TRUE, full.names=TRUE) %>% file.remove()
+```
+
+Note, rendering will stop if an error is encountered. Hence, it is important that you have all relevant packages installed. This can be achieved with the following call, which ensures all the dependencies listed in DESCRIPTION are installed:
+
+```
+devtools::install_deps()
+```
+
+
 # Writing content
 
 ## Folder structure

@@ -46,7 +46,7 @@ output: html_document
 ## 1     CC02A1    KC33A2     CC02A1      47</code></pre>
 <p><strong>Obtaining summary measures from groups of rows</strong></p>
 <p>Very often we’re interested in measurements of mean values and variability across categories, so need to calculate summary measures for variables within each category.<br />
-For example, in this dataset, we may want to compare bat activity across forests that vary in their history of thinning. The sites belong to four categories of thinning history: dense regrowth sites that were thinned recently (“short-term”) and in the medium term (“medium-term”, ), sites that were never thinned (“unthinned”“) and mature open forest (”reference").</p>
+For example, in this dataset, we may want to compare bat activity across forests that vary in their history of thinning. The sites belong to four categories of thinning history: dense regrowth sites that were thinned recently (“short-term”) and in the medium term (“medium-term”, ), sites that were never thinned (“unthinned”“) and mature open forest (”reference”).</p>
 <p>To summarise any variables for each of these categories, we use the <code>group_by</code> function in dplyr.</p>
 <pre class="r"><code>Bats_by_Treatment &lt;- group_by(Bats, Treatment.thinned)</code></pre>
 <p>In order to retain our original datset as is, I have used the function to make a new dataset called “Bats_by_Treatment”. Now I can use exactly the same code as we used above to summarise the data for each of the groups.</p>
@@ -112,5 +112,5 @@ Bats$Activity2[1:4] &lt;- rep(NA, 4)</code></pre>
 <p>If you’d like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with <a href="/../graphics">Plotting with gglpot: the basics</a>.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p><strong>Year:</strong> 2016</p>
-<p><strong>Last updated:</strong> Tue Feb 1 13:57:36 2022</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
 </div>

@@ -25,7 +25,7 @@ output: html_document
 <p>The ones that are particularly useful are:</p>
 <p><code>header = T</code> - specifying this at T (i.e., TRUE) will ensure that the values in the first row of your data are treated as variable names.</p>
 <p><code>strip.white = T</code> - this will remove trailing and leading white space from factors. This is a common typing error made during data entry (i.e., “males” vs. “males_”). If we set this as TRUE, they both become “males”, otherwise R will think there are two different levels.</p>
-<p><code>na.strings = ""</code> - this will ensure that empty cells are replaced by NA (the way R records missing data). Annoyingly, R imports missing values within characters/factors types as a value "". Using <code>na.strings = ""</code> will insert NAs instead. In addition, if you have coded missing values as something other then blank space you can define that missing value using this argument (i.e <code>na.strings = c("", "-", "*")</code>).</p>
+<p><code>na.strings = ""</code> - this will ensure that empty cells are replaced by NA (the way R records missing data). Annoyingly, R imports missing values within characters/factors types as a value ““. Using <code>na.strings = ""</code> will insert NAs instead. In addition, if you have coded missing values as something other then blank space you can define that missing value using this argument (i.e <code>na.strings = c("", "-", "*")</code>).</p>
 <p>Putting all these together in the <code>read.csv</code> function will give us a cleaner data frame.</p>
 <pre class="r"><code>Snail_feeding &lt;- read.csv(&quot;Snail_feeding.csv&quot;, header = T, strip.white = T, na.strings = &quot;&quot;)</code></pre>
 </div>
@@ -65,7 +65,7 @@ output: html_document
 <p>If you see a bunch of extra columns (X, X.1,X.2,X.3 etc) or rows in your data frame filled with NAs its likely because a character (most likely white space(i.e. space bar or tab) was entered in cells beyond your actual data in Excel. This problem can be avoided during data entry by removing all the colors/formatting and emptying columns/rows except for those needed.</p>
 <p>If the problem is still there we can tackle it in R, by indexing within square brackets <code>dataframe[row, column]</code>. For example, the following code will replace the data frame in this example with one that only includes the first 7 columns and removes the 5 unwanted ones (X, X.1,X.2,X.3 etc).</p>
 <pre class="r"><code>Snail_feeding &lt;- Snail_feeding[, 1:7]</code></pre>
-<p>The package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> has several very neat functions for subsetting rows and columns - see <a href="../subsetting-data">Subsetting data</a> for help with these.</p>
+<p>The package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> has several very neat functions for subsetting rows and columns - see <a href="/../data-manipulation/subsetting-data">Subsetting data</a> for help with these.</p>
 <p>If you had very many columns and didn’t want to count them, you could use logic (&amp;, or, ==, &gt;, &lt; , !=) to remove the unwanted rows and columns. We don’t want to remove all NAs, only additional rows and columns that are entirely filled with NAs. These have the property of the number of NAs being equal to the number of rows in a given column (or number of columns in a given row).</p>
 <p>We do this by selecting columns from our data frame where the column sum, <code>colSums</code>, of all the NAs, <code>&gt;is.na</code>, in our data frame are not equal, <code>!=</code> to the number of rows, <code>nrow</code>, of our data frame. Using the same logic you can do this for rows as well.</p>
 <pre class="r"><code># Selects rows that are not entirely NA
@@ -162,5 +162,5 @@ summary(Snail_feeding)
 <p><a href="http://www.r-bloggers.com/using-r-common-errors-in-table-import/">R-bloggers- common errors in table import</a></p>
 <p><strong>Author</strong>: Keryn Bain</p>
 <p><strong>Year:</strong> 2016</p>
-<p><strong>Last updated:</strong> Tue Feb 1 13:57:52 2022</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
 </div>

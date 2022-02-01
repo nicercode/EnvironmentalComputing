@@ -141,6 +141,6 @@ Type `?mutate`, `?unite`, and `?separate` for the R help for these functions.
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 

@@ -33,7 +33,7 @@ Resources were developed initially to assist with teaching quantitative skills t
 
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 
 ## Contributors

@@ -192,6 +192,6 @@ Read the [ggmap](https://cran.r-project.org/web/packages/ggmap/index.html) docum
 
 **Year:** 2017
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 

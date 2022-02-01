@@ -160,5 +160,5 @@ Note: In a model with multiple covariates, the same rules still apply in terms o
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

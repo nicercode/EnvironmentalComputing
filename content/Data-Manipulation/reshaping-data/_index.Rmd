@@ -194,4 +194,4 @@ Type `?dcast` and `?melt` to get the R help for these reshape2 functions.
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

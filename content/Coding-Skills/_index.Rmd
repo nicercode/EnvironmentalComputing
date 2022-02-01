@@ -21,4 +21,4 @@ On these pages, we give some advice for writing effective code and some of the v
 
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

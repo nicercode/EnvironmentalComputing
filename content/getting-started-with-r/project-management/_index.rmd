@@ -71,4 +71,4 @@ Our introduction to [version control](/coding-skills/version-control/) for keepi
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

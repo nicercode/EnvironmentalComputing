@@ -229,5 +229,5 @@ Type `?pheatmap` for the R help on this function.
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

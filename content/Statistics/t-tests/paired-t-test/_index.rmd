@@ -105,5 +105,5 @@ Type `?t.test` to get the R help for this function.
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

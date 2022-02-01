@@ -158,4 +158,4 @@ This tutorial was based on the excellent [Data wrangling with dplyr and tidyr ch
 
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -160,6 +160,6 @@ the `geom_polygon` plots the map, the `geom_points` adds a point at the latitude
 
 **Year:** 2018
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")``
 
 

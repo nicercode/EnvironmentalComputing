@@ -14,7 +14,7 @@ Data manipulation using the packages [dplyr](https://cran.r-project.org/web/pack
 * [Making new variables](making-new-variables/)
 * [Subsetting data](subsetting-data/) - selecting rows and columns  
 * [Summarising data](summarising-data/) - extracting summary statistics  
-* [Combining data sets](combining-data-sets/) - joining entire data sets, or parts by matching rows
+* [Combining data sets](combining-datasets/) - joining entire data sets, or parts by matching rows
 * [Reshaping data](reshaping-data/) between wide and long formats  
   
 
@@ -27,4 +27,4 @@ The British Ecological Society's [Guide to Data Management in Ecology and Evolut
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -267,5 +267,5 @@ There is more help on the web for making reproducible examples. For instance, se
  
 **Year:** 2017
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

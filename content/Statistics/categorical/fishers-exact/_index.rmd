@@ -71,4 +71,4 @@ fisher.test(possum)
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

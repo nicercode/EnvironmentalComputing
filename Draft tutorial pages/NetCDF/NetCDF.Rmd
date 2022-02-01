@@ -162,5 +162,5 @@ If you are unsure of which file you want/need from online then you can use a vie
 
 **Year:** 2018
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")``
 

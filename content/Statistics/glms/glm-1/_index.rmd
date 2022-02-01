@@ -139,5 +139,5 @@ More advice on [interpreting coefficients in glms](/statistics/glms/interpret-gl
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

@@ -357,4 +357,4 @@ You may now be thinking about all the scripts that you have made that need to be
  
 **Year:** 2017
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -203,4 +203,4 @@ see Rob Hyndman and George Athanasopoulos' [online textbook](https://www.otexts.
 
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -110,7 +110,7 @@ hist(Turtles.aov$residuals)
 plot(Turtles.aov, which = 2)
 ```
 
-Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](/statistics/generalised-linear-models-1/).
+Violations of normality can be fixed via transformations or by using a different error-distribution in a [generalised linear model (GLM)](/statistics/glms/).
 
 **Homogeneity of variance.** The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the `aov` model object.
 
@@ -118,11 +118,11 @@ Violations of normality can be fixed via transformations or by using a different
 plot(Turtles.aov, which = 1)
 ```
 
-Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the *y* axis for each of the levels on the *x* axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a [generalised linear model (GLM)](/statistics/generalised-linear-models-1/).
+Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the *y* axis for each of the levels on the *x* axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable *y*. If this doesn't fix the problem the best solution is to use a different error distribution in a [generalised linear model (GLM)](/statistics/glms/).
 
 **Independence.** ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the turtle eggs measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with both temperature and time as factors).
 
-There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed-model](/statistics/mixed-models-1/).
+There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a [mixed-model](/statistics/mixed-models/mixed-model-1/).
   
 
 ### Communicating the results
@@ -151,4 +151,4 @@ Type `?aov` or `?lm` to get the R help for these functions.
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

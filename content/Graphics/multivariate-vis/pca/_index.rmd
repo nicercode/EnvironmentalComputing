@@ -157,4 +157,4 @@ An nice interactive page to help you understand what PCA is doing can be found [
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

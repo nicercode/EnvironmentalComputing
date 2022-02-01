@@ -68,4 +68,4 @@ Once your data is entered in .csv or .txt format, see [Importing data](/getting-
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

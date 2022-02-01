@@ -225,4 +225,4 @@ You can type `?dplyr` to get help with this package.
 
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -158,5 +158,5 @@ and [here](http://www.statmethods.net/input/datatypes.html)
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

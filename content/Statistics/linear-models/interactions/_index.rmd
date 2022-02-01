@@ -152,5 +152,5 @@ In designs with categorical factors, post-hoc tests are commonly used to test wh
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 

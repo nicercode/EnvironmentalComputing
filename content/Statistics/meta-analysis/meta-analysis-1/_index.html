@@ -153,7 +153,7 @@ dat &lt;- bind_cols(dat, lnRR)</code></pre>
 <pre class="r"><code>forest(dat$yi[1:12], dat$vi[1:12])</code></pre>
 <p><img src="/statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest2-1.png" width="672" /></p>
 <p>We can calculate many different kinds of effect sizes with <code>escalc</code>; other common effect size statistics include <span class="math inline">\(Zr\)</span> (Fisher’s z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio – mouthful!), which compares the variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of <code>metafor</code>, let you do this with <code>escalc</code>– <a href="https://github.com/cran/metafor">github page</a>. lnCVR is called “CVR” in <code>escalc</code>. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight!</p>
-<p>Once you have calculated effect sizes, move on to the next page: <a href="/statistics/meta-analysis/meta-analysis-2meta-analysis-2">Meta-analysis 2: fixed-effect and random-effect models</a></p>
+<p>Once you have calculated effect sizes, move on to the next page: <a href="/statistics/meta-analysis/meta-analysis-2">Meta-analysis 2: fixed-effect and random-effect models</a></p>
 </div>
 <div id="further-help-references" class="section level3">
 <h3>Further help (references)</h3>
@@ -169,5 +169,5 @@ Viechtbauer, W. 2010. Conducting meta-analyses in R with the metafor package. <e
 </p>
 <p><strong>Authors</strong>: Shinichi Nakagawa and Malgorzata (Losia) Lagisz</p>
 <p><strong>Year:</strong> 2016</p>
-<p><strong>Last updated:</strong> Wed Feb 2 06:33:08 2022</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
 </div>

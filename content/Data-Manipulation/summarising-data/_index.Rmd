@@ -200,4 +200,4 @@ If you'd like to learn more about the ggplot language for plotting, have a look 
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

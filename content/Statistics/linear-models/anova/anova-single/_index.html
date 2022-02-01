@@ -92,13 +92,13 @@ summary(Turtles.lm)</code></pre>
 hist(Turtles.aov$residuals)
 plot(Turtles.aov, which = 2)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>Violations of normality can be fixed via transformations or by using a different error-distribution in a <a href="/statistics/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
+<p>Violations of normality can be fixed via transformations or by using a different error-distribution in a <a href="/statistics/glms/">generalised linear model (GLM)</a>.</p>
 <p><strong>Homogeneity of variance.</strong> The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the <code>aov</code> model object.</p>
 <pre class="r"><code>plot(Turtles.aov, which = 1)</code></pre>
 <p><img src="/statistics/linear-models/anova/anova-single/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the <em>y</em> axis for each of the levels on the <em>x</em> axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="/statistics/generalised-linear-models-1/">generalised linear model (GLM)</a>.</p>
+<p>Heterogenous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the <em>y</em> axis for each of the levels on the <em>x</em> axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="/statistics/glms/">generalised linear model (GLM)</a>.</p>
 <p><strong>Independence.</strong> ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the turtle eggs measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with both temperature and time as factors).</p>
-<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="/statistics/mixed-models-1/">mixed-model</a>.</p>
+<p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="/statistics/mixed-models/mixed-model-1/">mixed-model</a>.</p>
 </div>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
@@ -121,5 +121,5 @@ Underood, AJ (1997) <em>Experiments in ecology: Their logical design and interpr
 </p>
 <p><strong>Author</strong>: James Lavender</p>
 <p><strong>Year:</strong> 2016</p>
-<p><strong>Last updated:</strong> Wed Feb 2 06:32:38 2022</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
 </div>

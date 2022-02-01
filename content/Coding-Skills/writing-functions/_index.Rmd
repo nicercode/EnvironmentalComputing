@@ -436,7 +436,7 @@ To make these functions accessible within your workflow, you then use the functi
 
 ```{r, eval = FALSE}
 source("R/stats.R")
-````
+```
 
 Often, you may have a series of files
 
@@ -444,7 +444,7 @@ Often, you may have a series of files
 source("R/data_cleaning.R")
 source("R/stats.R")
 source("R/plots.R")
-````
+```
 
 It's a matter of preference whether you use a single or multiple files.
 
@@ -537,7 +537,7 @@ You can find more help on functions at
 
 **Year:** 2018
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 
 

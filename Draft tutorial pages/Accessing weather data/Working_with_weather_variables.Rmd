@@ -154,4 +154,4 @@ The skills you've learned here not only help you integrate weather and climate d
 
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")``

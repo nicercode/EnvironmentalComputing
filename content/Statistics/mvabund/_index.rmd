@@ -160,4 +160,4 @@ This method was created by UNSW's Ecostats research group, you can keep up with 
  
 **Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

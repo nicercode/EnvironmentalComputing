@@ -15,42 +15,40 @@ Some simple [hypothesis tests](t-tests) with the *t* statistic:
 [Linear models](linear-models):
 
 * [Linear regression](linear-models/linear-regression)
-* [Analysis of variance: single factor](linear-models/analysis-variance-single-factor)
-* [Analysis of variance: factorial](linear-models/analysis-variance-factorial)  
-* [Understanding interactions](linear-models/understanding-interactions)
+* [Analysis of variance: single factor](linear-models/anova/anova-single/)
+* [Analysis of variance: factorial](linear-models/anova/anova-factorial/)  
+* [Understanding interactions](linear-models/interactions)
 
-[Generalised linear models](linear-models/generalised-linear-models):
+[Generalised linear models](glms):
 
-* [Generalised linear models 1](generalised-linear-models-1): Introduction and binomial data  
-* [Generalised linear models 2](generalised-linear-models-2): Count data  
+* [Generalised linear models 1](glms/glm-1): Introduction and binomial data  
+* [Generalised linear models 2](glms/glm-2): Count data  
 
 [Mixed models](mixed-models):
 
-* [Mixed models 1](mixed-models/mixed-models-1): Linear mixed models with one random effect  
-* [Mixed models 2](mixed-models/mixed-models-2): Linear mixed models with several random effects  
-* [Mixed models 3](mixed-models/mixed-models-3): Generalised linear mixed models  
+* [Mixed models 1](mixed-models/mixed-model-1): Linear mixed models with one random effect  
+* [Mixed models 2](mixed-models/mixed-model-2): Linear mixed models with several random effects  
+* [Mixed models 3](mixed-models/mixed-model-3): Generalised linear mixed models  
 
 [Generalised additive models](gams)
 
-[Categorical data analyses](categorical-data-analyses):
+[Categorical data analyses](categorical):
 
-* [Goodness of fit tests](categorical-data-analyses/goodness-of-fit-tests)  
-* [Contingency tables](categorical-data-analyses/contingency-tables)
+* [Goodness of fit tests](categorical/goodness-of-fit)  
+* [Contingency tables](categorical/contingency-tables)
 
 [Power analyses](power-analysis): calculating power and deciding on sample sizes
 
-[Introduction to mvabund](introduction-to-mvabund): model-based analysis of multivariate abundance data
+[Introduction to mvabund](mvabund): model-based analysis of multivariate abundance data
 
-[Forecasting with time series](forecasting-time-series)
+[Forecasting with time series](time-series)
 
 
-[Meta-analyses](meta-analyses) 
+[Meta-analyses](meta-analysis) 
 
-* [Meta-analyses 1](meta-analyses/meta-analyses-1): Introduction and calculating effect sizes  
-* [Meta-analyses 2](meta-analyses/meta-analyses-2): Fixed effect and random effect models  
-* [Meta-analyses 3](meta-analyses/meta-analyses-3): More complex models 
+* [Meta-analyses 1](meta-analysis/meta-analysis-1): Introduction and calculating effect sizes  
+* [Meta-analyses 2](meta-analysis/meta-analysis-2): Fixed effect and random effect models  
+* [Meta-analyses 3](meta-analysis/meta-analysis-3): More complex models 
 
- 
-**Year:** 2016
 
-**Last updated:** `r date()`
+**Last updated:** `r format(Sys.time(), "%b %Y")`

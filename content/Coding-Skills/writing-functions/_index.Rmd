@@ -1,7 +1,6 @@
 ---
 weight: 2
 title: "Writing Functions"
-author: "Keryn F Bain and Daniel Falster"
 aliases: /writing-simple-functions/
 output: html_document
 ---
@@ -534,7 +533,7 @@ You can find more help on functions at
 - The [official R intro material on writing your own functions](http://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-R-intro.html#Writing-your-own-functions)
 
 
-**Author**: Original by Keryn F Bain; revised and expanded by Daniel S Falster
+**Author**: Original by Keryn F Bain; revised by Daniel S Falster
 
 **Year:** 2018
 

@@ -2,6 +2,7 @@
 weight: 3
 title: "Basic Project Management"
 author: "Alistair Poore & Will Cornwell"
+aliases: /basic-project-management/
 output: html_document
 ---
 

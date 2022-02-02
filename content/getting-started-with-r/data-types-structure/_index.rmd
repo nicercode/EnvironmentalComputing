@@ -1,7 +1,6 @@
 ---
 weight: 6
 title: "Data Types + Structure"
-author: "Keryn Bain"
 aliases: /data-types-and-structure/
 output: html_document
 ---

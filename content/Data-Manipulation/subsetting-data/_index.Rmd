@@ -2,6 +2,7 @@
 title: "Subsetting data"
 weight: 2
 output: html_document
+aliases: /subsetting-data/
 ---
 
 We often want to subset our data, whether it's to examine particular rows or columns

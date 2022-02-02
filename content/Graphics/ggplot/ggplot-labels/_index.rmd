@@ -2,6 +2,7 @@
 title: 'Titles and Axes Labels'
 weight: 3
 output: html_document
+aliases: /plotting-with-ggplot-adding-titles-and-axis-names/
 ---
 
 **ggplots** are almost entirely customisable. This gives you the freedom to create a plot design that perfectly matches your report, essay or paper. 

@@ -2,6 +2,7 @@
 title: 'One Continuous Variable'
 weight: 1
 output: html_document
+aliases: /one-continuous-variable/
 ---
 
 Being able to visualise the properties of data is a critical step in data exploration, and needed for effective communication of results. This page details two common ways that you can display data from a single, continuous variable in R: frequency histograms and box-and-whisker plots.

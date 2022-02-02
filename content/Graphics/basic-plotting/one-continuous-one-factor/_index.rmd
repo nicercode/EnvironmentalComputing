@@ -2,6 +2,7 @@
 title: 'One Continuous and One Categorical Variable'
 weight: 3
 output: html_document
+aliases: /single-continuous-vs-categorical-variables/
 ---
 
 Visualising how a measured variable relates to other variables of interest is essential for data exploration and communicating the results of scientific research. This page details how to plot a single, continuous variable against levels of a categorical predictor variable. 

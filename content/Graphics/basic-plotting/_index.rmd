@@ -2,6 +2,7 @@
 title: 'Basic Plotting in R'
 weight: 1
 output: html_document
+aliases: /basic-plotting-in-r/
 ---
 
 ```{r,echo=F,fig.width=6, fig.height=2.5}

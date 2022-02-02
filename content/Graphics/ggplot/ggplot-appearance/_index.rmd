@@ -2,6 +2,7 @@
 title: 'Customising your ggplot'
 weight: 2
 output: html_document
+aliases: /plotting-with-ggplot-altering-the-overall-appearance/
 ---
 
 

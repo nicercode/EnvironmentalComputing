@@ -2,6 +2,7 @@
 weight: 2
 title: "Writing Functions"
 author: "Keryn F Bain and Daniel Falster"
+aliases: /writing-simple-functions/
 output: html_document
 ---
 

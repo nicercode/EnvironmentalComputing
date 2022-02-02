@@ -4,6 +4,7 @@ title: "Generalised Mixed Models"
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /mixed-models-3/
 ---
 **Generalised linear mixed models**
 

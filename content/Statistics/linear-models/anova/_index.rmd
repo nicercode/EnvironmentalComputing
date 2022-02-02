@@ -2,6 +2,7 @@
 weight: 3
 title: "ANOVA"
 output: html_document
+aliases: /analysis-variance/
 ---
 
 Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. In this module, we will start with the simplest design - those with a single factor.

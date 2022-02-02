@@ -4,6 +4,7 @@ title: "Time Series Forecast"
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /forecasting-time-series/
 ---
 
 In the environmental sciences, we don't always want to understand current and past processes, sometimes we want to look into the future. For example, we may want to project how long it will take an endangered species to become extinct if threats continue. We may also want to project how populations or distributions will respond to continuing anthropogenic climate change. Predicting the future, or *forecasting* has the been the focus of a great deal of statistical research in the field of economics and we can apply the same techniques to ecological questions. Here we will focus on *time-series forecasting*, where we will use historical data collected over time to predict conditions in the future. We will use Rob Hyndman's [forecast](https://cran.r-project.org/web/packages/forecast/index.html) R-package.

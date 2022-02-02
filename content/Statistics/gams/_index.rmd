@@ -2,6 +2,7 @@
 weight: 5
 title: "Generalised Additive Models (GAMs)"
 output: html_document
+aliases: /intro-to-gams/
 ---
 
 Many data in the environmental sciences do not fit simple linear models and are best described by "wiggly models", also known as Generalised Additive Models (GAMs). 

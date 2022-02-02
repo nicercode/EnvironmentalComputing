@@ -2,6 +2,7 @@
 weight: 3
 title: "Interpreting GLMs"
 output: html_document
+aliases: /interpreting-coefficients-in-glms/
 ---
 In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.
 

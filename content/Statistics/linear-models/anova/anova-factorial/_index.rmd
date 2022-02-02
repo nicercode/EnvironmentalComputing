@@ -2,7 +2,7 @@
 weight: 2
 title: "Factorial ANOVA"
 output: html_document
-aliases: /analysis-variance-single-factor/
+aliases: /analysis-variance-factorial/
 ---
 
 Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. Here, we will consider designs with two or more factors that are both applied to the experimental units (read the [single factor ANOVA](/statistics/anova/anova-single/) page first if you are unfamiliar with ANOVA).

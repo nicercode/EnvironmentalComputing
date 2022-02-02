@@ -2,6 +2,7 @@
 weight: 2
 title: "Count Data"
 output: html_document
+aliases: /generalised-linear-models-2/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -29,14 +30,16 @@ ft.sol.pois &lt;- manyglm(Soleolifera ~ Treatment, family = &quot;poisson&quot;,
 <h3>Assumptions to check</h3>
 <p>Before we look at the results, we need to look at the residual plot to check the assumptions.</p>
 <pre class="r"><code>plot(ft.sol.pois)</code></pre>
-<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption = caption, : Only the first 1 colors will be used for plotting.</code></pre>
+<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
+## caption, : Only the first 1 colors will be used for plotting.</code></pre>
 <p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-4-1.png" width="500px" /></p>
 <p>It’s hard to say whether there is any non-linearity in this plot, this is because the predictor is binary (treatment vs revegetated). Looking at the variance assumption, it does appear as though there is a fan shape. The residuals are more spread out on the right than the left - we call this overdispersion.</p>
 <p>This tells us the variance assumption of the Poisson may be too restrictive and we should try a different distribution. We can instead fit a negative-binomial distribution in <code>manyglm</code> by changing the family argument to <code>family="negative binomial"</code>.</p>
 <pre class="r"><code>ft.sol.nb &lt;- manyglm(Soleolifera ~ Treatment, family = &quot;negative binomial&quot;, data = Reveg)</code></pre>
 <p>Look again at the residual plot:</p>
 <pre class="r"><code>plot(ft.sol.nb)</code></pre>
-<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption = caption, : Only the first 1 colors will be used for plotting.</code></pre>
+<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
+## caption, : Only the first 1 colors will be used for plotting.</code></pre>
 <p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
 <p>This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.</p>
 </div>
@@ -52,7 +55,7 @@ ft.sol.pois &lt;- manyglm(Soleolifera ~ Treatment, family = &quot;poisson&quot;,
 ## Multivariate test:
 ##             Res.Df Df.diff   Dev Pr(&gt;Dev)   
 ## (Intercept)     48                          
-## Treatment       47       1 10.52    0.004 **
+## Treatment       47       1 10.52    0.002 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Arguments: P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
@@ -60,7 +63,7 @@ ft.sol.pois &lt;- manyglm(Soleolifera ~ Treatment, family = &quot;poisson&quot;,
 <pre><code>## 
 ## Test statistics:
 ##                      wald value Pr(&gt;wald)    
-## (Intercept)               1.502     0.017 *  
+## (Intercept)               1.502     0.020 *  
 ## TreatmentRevegetated      3.307     0.001 ***
 ## --- 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 

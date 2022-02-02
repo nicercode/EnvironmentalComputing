@@ -2,6 +2,7 @@
 weight: 4
 title: "Understanding Interactions"
 output: html_document
+aliases: /understanding-interactions/
 ---
 Sampling or experimental designs with more than one factor give us the opportunity to test whether the factors interact. An interaction between factors is when the effect of one factor is dependent on the conditions in the other factor. If there is no interaction, then the two factors are acting independently. When learning statistics, interactions make our lives a bit more difficult because we aren't able to make simple statements about the main effects (each factor in isolation)  - the observed results are due to factors acting in combination. It is very important to understand these, however, as we are often interested in whether various environmental variables act together to independently. Consider any of the following questions:   
 Does the effect of removing predators vary between habitats?  

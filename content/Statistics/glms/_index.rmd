@@ -2,6 +2,7 @@
 weight: 3
 title: "Generalised Linear Models (GLMs)"
 output: html_document
+aliases: /generalised-linear-models/
 ---
 Generalised linear models (GLMs) are used when the distribution of data do not conform to the assumptions of linear models, specifically the assumptions of normally distributed residuals and no relationship between the variance and the mean (e.g., presence/absence, count or highly skewed data).
 

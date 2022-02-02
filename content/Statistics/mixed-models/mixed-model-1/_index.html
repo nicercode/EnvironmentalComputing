@@ -4,6 +4,7 @@ title: "Introduction"
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /mixed-models-1/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -162,7 +163,8 @@ is.mod &lt;- ifelse(unique(ModEst$Modification) == &quot;Modified&quot;, 0,
 )
 
 Est.means &lt;- coef(ft.estu)$Estuary[, 1] + coef(ft.estu)$Estuary[, 2] * is.mod # Model means</code></pre>
-<pre><code>## Warning in coef(ft.estu)$Estuary[, 2] * is.mod: longer object length is not a multiple of shorter object length</code></pre>
+<pre><code>## Warning in coef(ft.estu)$Estuary[, 2] * is.mod: longer object length is not a
+## multiple of shorter object length</code></pre>
 <pre class="r"><code>stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE)</code></pre>
 <p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>

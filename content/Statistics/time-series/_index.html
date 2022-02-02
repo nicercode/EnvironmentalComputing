@@ -4,6 +4,7 @@ title: "Time Series Forecast"
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /forecasting-time-series/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -27,7 +28,8 @@ Area_loss</code></pre>
 ## Start = 1988 
 ## End = 2012 
 ## Frequency = 1 
-##  [1] 1650  730  580  440  409  333  333  797  320  273  576  216  244  189  212  156  158  271  124   63  107   61   49   40   52</code></pre>
+##  [1] 1650  730  580  440  409  333  333  797  320  273  576  216  244  189  212
+## [16]  156  158  271  124   63  107   61   49   40   52</code></pre>
 <p>We can then split the data into training and test data using the <code>window</code> function. In this example, we will try to forecast rainforest loss for the last three years in the time series (2010-2012). These three years will be the test data, and the previous years the training data. In this way, we will be able to check our forecasted values against real observations.</p>
 <pre class="r"><code>Area_loss_train &lt;- window(Area_loss, start = 1988, end = 2009, frequency = 1)
 Area_loss_test &lt;- window(Area_loss, start = 2010, end = 2012, frequency = 1)</code></pre>

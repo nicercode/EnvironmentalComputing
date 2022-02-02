@@ -1,7 +1,6 @@
 ---
 weight: 3
 title: "Using Loops"
-author: "Rachel V. Blakey"
 aliases: /using-loops/
 output: html_document
 ---

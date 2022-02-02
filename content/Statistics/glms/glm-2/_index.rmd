@@ -2,6 +2,7 @@
 weight: 2
 title: "Count Data"
 output: html_document
+aliases: /generalised-linear-models-2/
 ---
 **Count data**
 

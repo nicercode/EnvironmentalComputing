@@ -2,6 +2,7 @@
 weight: 8
 title: "Multivariate Analysis with mvabund"
 output: html_document
+aliases: /introduction-to-mvabund/
 editor_options: 
   chunk_output_type: console
 ---

@@ -4,6 +4,7 @@ title: "Generalised Mixed Models"
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /mixed-models-3/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -41,7 +42,8 @@ editor_options:
 <p>In this example, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). To test whether there is an effect of modification on individual species counts and presence/absences, we need to use generalised linear mixed models with the with the <code>glmer</code> function.</p>
 <p><img src="Mixed_models_3_image.jpg" /></p>
 <p>Consider the counts of hydroids (the variable Hydroid).</p>
-<pre><code>##  [1] 0 0 0 0 1 1 0 0 7 5 2 0 0 0 3 3 0 0 0 0 0 0 0 0 0 0 1 1 2 1 2 2 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 3 1 0 1 2 2 2</code></pre>
+<pre><code>##  [1] 0 0 0 0 1 1 0 0 7 5 2 0 0 0 3 3 0 0 0 0 0 0 0 0 0 0 1 1 2 1 2 2 0 0 0 0 0 0
+## [39] 0 0 0 0 1 0 0 0 0 3 1 0 1 2 2 2</code></pre>
 <p>Looking at the data, you can see the counts are small, with many zeros, so we don’t want to treat these as continuous. We will model them as counts with a Poisson distribution, and also as presence/absence data.</p>
 <p>To model presence/absence, we first create a variable HydroidPres which is 1 (TRUE) when Hydroids are present and 0 (FALSE) otherwise.</p>
 <pre class="r"><code>Estuaries$HydroidPres &lt;- Estuaries$Hydroid &gt; 0</code></pre>

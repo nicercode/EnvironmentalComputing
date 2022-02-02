@@ -4,6 +4,7 @@ title: "Crossed and Nested Factors"
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /mixed-models-2/
 ---
 [Mixed models 1](/statistics/mixed-modelsmixed-models-1/) is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.
 

@@ -2,6 +2,7 @@
 weight: 5
 title: "Generalised Additive Models (GAMs)"
 output: html_document
+aliases: /intro-to-gams/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -76,16 +77,16 @@ gam.check(gam_y)</code></pre>
 <pre><code>## 
 ## Method: REML   Optimizer: outer newton
 ## full convergence after 6 iterations.
-## Gradient range [-1.899739e-09,1.449659e-09]
-## (score 41.53829 &amp; scale 0.1583214).
-## Hessian positive definite, eigenvalue range [1.653888,30.7141].
+## Gradient range [-5.835055e-09,5.281155e-09]
+## (score 35.33426 &amp; scale 0.1288606).
+## Hessian positive definite, eigenvalue range [1.995652,30.71975].
 ## Model rank =  10 / 10 
 ## 
 ## Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
 ## indicate that k is too low, especially if edf is close to k&#39;.
 ## 
 ##        k&#39;  edf k-index p-value
-## s(x) 9.00 5.97    1.23    0.95</code></pre>
+## s(x) 9.00 6.01     1.1    0.65</code></pre>
 <p>Using <code>summary</code> with the model object will give you the significance of the smooth term (along with any parametric terms, if you’ve included them), along with the variance explained. In this example, a pretty decent fit. The ‘edf’ is the estimated degrees of freedom - essentially, the larger the number, the more wiggly the fitted model. Values of around 1 tend to be close to a linear term. You can read about penalisation and shrinkage for more on what the edf reflects.</p>
 <pre class="r"><code>summary(gam_y)</code></pre>
 <pre><code>## 
@@ -96,19 +97,17 @@ gam.check(gam_y)</code></pre>
 ## y ~ s(x)
 ## 
 ## Parametric coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)  
-## (Intercept)  0.09932    0.05013   1.981   0.0525 .
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  0.05768    0.04523   1.275    0.207
 ## 
 ## Approximate significance of smooth terms:
-##       edf Ref.df     F p-value    
-## s(x) 5.97   7.13 31.01  &lt;2e-16 ***
+##        edf Ref.df     F p-value    
+## s(x) 6.006  7.166 33.76  &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## R-sq.(adj) =  0.781   Deviance explained = 80.2%
-## -REML = 41.538  Scale est. = 0.15832   n = 63</code></pre>
+## R-sq.(adj) =  0.796   Deviance explained = 81.6%
+## -REML = 35.334  Scale est. = 0.12886   n = 63</code></pre>
 </div>
 <div id="smooth-terms" class="section level3">
 <h3>Smooth terms</h3>

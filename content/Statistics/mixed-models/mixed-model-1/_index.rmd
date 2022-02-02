@@ -22,9 +22,9 @@ We will introduce mixed models in three parts
 
 1. Mixed models 1 (this page) is an introduction to mixed models for a **continuous** response with **one random effect**. You will learn how to check assumptions and do inference, including the parametric bootstrap.
 
-2. [Mixed models 2](/statistics/mixed-models/mixed-models-2/) extends this to **multiple random effects** with a continuous response. We look into how to model nested and crossed random effects.
+2. [Mixed models 2](/statistics/mixed-models/mixed-model-2/) extends this to **multiple random effects** with a continuous response. We look into how to model nested and crossed random effects.
 
-3. [Mixed models 3](/statistics/mixed-models/mixed-models-3/) teaches you how to model **discrete data**, including counts and binary data, with random effects.  
+3. [Mixed models 3](/statistics/mixed-models/mixed-model-3/) teaches you how to model **discrete data**, including counts and binary data, with random effects.  
 
 All three pages will use the same data for illustration. 
 
@@ -50,7 +50,7 @@ We will use the package [lme4](https://cran.r-project.org/web/packages/lme4/inde
 library(lme4)
 ```
 
-We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data is continuous. Later on in [Mixed models 3](/statistics/mixed-models/mixed-models-3/), we'll model counts as discrete using Generalised linear mixed models (GLMMs). 
+We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data is continuous. Later on in [Mixed models 3](/statistics/mixed-models/mixed-model-3/), we'll model counts as discrete using Generalised linear mixed models (GLMMs). 
 
 Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
 

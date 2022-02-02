@@ -192,7 +192,7 @@ This tutorial was based on the excellent [Data wrangling with dplyr and tidyr ch
 
 You can type `?dplyr` to get help with this package.
 
-[Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html)
+[Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
 If you'd like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with [Plotting with gglpot: the basics](/../graphics).
 

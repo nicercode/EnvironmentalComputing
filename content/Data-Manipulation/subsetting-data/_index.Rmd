@@ -218,7 +218,7 @@ This tutorial was based on the excellent [Data wrangling with dplyr and tidyr ch
 
 You can type `?dplyr` to get help with this package.
 
-[Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html)
+[Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
 
 **Author**: Rachel V. Blakey

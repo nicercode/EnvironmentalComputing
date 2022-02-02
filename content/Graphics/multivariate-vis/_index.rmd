@@ -4,6 +4,7 @@ weight: 4
 output: html_document
 editor_options: 
   chunk_output_type: console
+aliases: /visualising-multivariate-data/
 ---
 
 ```{r,echo=F,fig.width=8, fig.height=4,warning=FALSE,message=FALSE}

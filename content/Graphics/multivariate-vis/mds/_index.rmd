@@ -2,6 +2,7 @@
 title: 'Multidimensional Scaling'
 weight: 1
 output: html_document
+aliases: /multidimensional-scaling/
 ---
 
 Multidimensional scaling (MDS) is a popular approach for graphically representing relationships between objects (e.g. plots or samples) in multidimensional space. Dimension reduction via MDS is achieved by taking the original set of samples and calculating a dissimilarity (distance) measure for each pairwise comparison of samples. The samples are then usually represented graphically in two dimensions such that the distance between points on the plot approximates their multivariate dissimilarity as closely as possible. 

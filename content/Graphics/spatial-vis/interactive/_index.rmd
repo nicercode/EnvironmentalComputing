@@ -2,6 +2,7 @@
 title: 'Interactive Maps in R'
 weight: 3
 output: html_document
+aliases: /visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/
 ---
 
 Being able to produce interactive maps on the fly can greatly speed up exploratory analysis and is a useful tool for displaying data that would be less informative on a [static map](/making-simple-maps).

@@ -2,6 +2,7 @@
 title: 'Simple Maps with ggmap'
 weight: 2
 output: html_document
+aliases: /making-simple-maps/
 ---
 
 Being able to make a simple map is a very useful skill for all sorts of applications. Here, we will introduce some of the basics of working with spatial data, and use R to produce simple and easy maps. You could use the same technique to make a map for a presentation, or a figure for a report or publication. 

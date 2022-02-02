@@ -1,8 +1,6 @@
 ---
 weight: 1
 title: "Installing R and R Studio"
-author: "Alistair Poore and Will Cornwell"
-date: "October 2, 2016"
 aliases: /installing-r-r-studio/
 output: html_document
 ---
@@ -75,7 +73,7 @@ Our help modules on [Good practice for writing scripts](/coding-skills/good-prac
 [Online training in R](https://education.rstudio.com/learn/beginner/)
   
 
-**Author**: Alistair Poore
+**Author**: Alistair Poore & Will Cornwel
  
 **Year:** 2016
 

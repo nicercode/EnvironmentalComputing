@@ -1,7 +1,6 @@
 ---
 weight: 4
 title: "Data Entry"
-author: "Andrew Letten"
 output: html_document
 ---
 

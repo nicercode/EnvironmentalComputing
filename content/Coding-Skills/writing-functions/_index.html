@@ -200,22 +200,27 @@ mean(na.rm = TRUE, algae$height)</code></pre>
 <p>But what are those are other arguments in the function definition: <code>trim</code> and <code>na.rm</code>? These are optional arguments, with default values set as specified. The function needs a value to run but unless you specify it, it will use the default.</p>
 <p>Try running the <code>mean()</code> function on the <em>strength</em> variable.</p>
 <pre class="r"><code>mean(algae$strength)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical:
+## returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Notice we get <code>NA</code>, this is because by default the function doesn’t know how to deal with missing values (<code>NA</code> is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on <a href="/../getting-started-with-r/importing-data/">importing data</a>), but in this case, we’re happy remove <code>NA</code>s before calculating the mean. This can be achieved by setting the argument for <code>na.rm</code> to <code>TRUE</code>:</p>
 <pre class="r"><code>mean(algae$strength, na.rm = TRUE)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric
+## or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>The functions <code>mean</code>, <code>var</code>, <code>sd</code>, <code>sum</code> all behave similarly. <strong>Without specifying the argument, the functions all use their default value</strong>, which in this case is <code>na.rm=FALSE</code>. So these give the same result</p>
 <pre class="r"><code>mean(algae$strength)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength): argument is not numeric or logical:
+## returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <pre class="r"><code>mean(algae$strength, na.rm = FALSE)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength, na.rm = FALSE): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength, na.rm = FALSE): argument is not numeric
+## or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>But, we can override this if that’s what we want:</p>
 <pre class="r"><code>mean(algae$strength, na.rm = TRUE)</code></pre>
-<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric or logical: returning NA</code></pre>
+<pre><code>## Warning in mean.default(algae$strength, na.rm = TRUE): argument is not numeric
+## or logical: returning NA</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p><strong>You’ll notice that many functions have arguments with default values set</strong>.</p>
 <p>Going back to our new function <code>standard_error</code>, let’s add a new argument <code>na.rm</code> so that it behaves like <code>mean</code> and the other function listed above:</p>
@@ -327,7 +332,9 @@ names(height_stats)</code></pre>
 is.list(fit)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>names(fit)</code></pre>
-<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;          &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;   &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
 <pre class="r"><code>fit$coefficients</code></pre>
 <pre><code>##     (Intercept) algae$dryweight 
 ##       0.4054402       0.1276447</code></pre>

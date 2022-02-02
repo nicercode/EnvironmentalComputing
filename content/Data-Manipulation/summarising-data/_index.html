@@ -1,0 +1,118 @@
+---
+title: "Summarising data"
+weight: 3
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Summarising our data is often the first step in data exploration and needed to understanding patterns in the magnitude and variability of our measurements.</p>
+<p><img src="Summarising_data_image.jpg" /></p>
+<p>We will use the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> which has many convenient functions for summarising data, so let’s start by loading the package.</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<p>As with the help page on <a href="/../data-manipulation/subsetting-data/">Subsetting data</a>, we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set, <a href="/datasets/Bats_data.csv">Bats_data.csv</a>, and import into R.</p>
+<pre class="r"><code>Bats &lt;- read.csv(file = &quot;Bats_data.csv&quot;, header = T, stringsAsFactors = F)</code></pre>
+<div id="summarising-data-with-dplyr" class="section level3">
+<h3>Summarising data with dplyr</h3>
+<p><strong>Obtaining summary measures from a single variable</strong></p>
+<p>We can use the function <code>summarise</code> with a range of built-in summary functions from R to obtain summary statistics from our data.</p>
+<p>For example, to the mean activity of bats across all nightly measurements in the study, I would use the <code>&gt;mean</code> summary function within the <code>summarise</code> function as follows, specifying the data frame (Bats), the variable I want to get the mean of (Activity) and a name for the new variable (Mean.Activity):</p>
+<pre class="r"><code>summarise(Bats, Mean.Activity = mean(Activity))</code></pre>
+<pre><code>##   Mean.Activity
+## 1      316.0405</code></pre>
+<p>We can add as many other measurements to this as we like, including a wide range of summary functions (described with #).</p>
+<pre class="r"><code>summarise(Bats,
+  mean.activity = mean(Activity), # mean
+  min.Activity = min(Activity), # minimum
+  max.Activity = max(Activity), # maximum
+  med.Activity = median(Activity), # median
+  sd.Activity = sd(Activity), # standard deviation
+  var.Activity = var(Activity), # variance
+  n.Activity = n(), # sample size
+  se.Activity = sd.Activity / sqrt(n.Activity), # standard error
+  IQR.Activity = IQR(Activity)
+) # interquartile range</code></pre>
+<pre><code>##   mean.activity min.Activity max.Activity med.Activity sd.Activity var.Activity
+## 1      316.0405            9         1070          282    203.1081     41252.89
+##   n.Activity se.Activity IQR.Activity
+## 1        173    15.44202          292</code></pre>
+<p>If we are looking at factors, especially if they are ordered in some way, we may find some of the other dplyr summary functions useful. For example:</p>
+<pre class="r"><code>summarise(Bats,
+  first.site = first(Site), # first value in Site variable
+  last.Site = last(Site), # last value in Site variable
+  third.Site = nth(Site, 3), # nth value of Site
+  n.Sites = n_distinct(Site)
+) # number of distinct sites</code></pre>
+<pre><code>##   first.site last.Site third.Site n.Sites
+## 1     CC02A1    KC33A2     CC02A1      47</code></pre>
+<p><strong>Obtaining summary measures from groups of rows</strong></p>
+<p>Very often we’re interested in measurements of mean values and variability across categories, so need to calculate summary measures for variables within each category.<br />
+For example, in this dataset, we may want to compare bat activity across forests that vary in their history of thinning. The sites belong to four categories of thinning history: dense regrowth sites that were thinned recently (“short-term”) and in the medium term (“medium-term”, ), sites that were never thinned (“unthinned”“) and mature open forest (”reference”).</p>
+<p>To summarise any variables for each of these categories, we use the <code>group_by</code> function in dplyr.</p>
+<pre class="r"><code>Bats_by_Treatment &lt;- group_by(Bats, Treatment.thinned)</code></pre>
+<p>In order to retain our original datset as is, I have used the function to make a new dataset called “Bats_by_Treatment”. Now I can use exactly the same code as we used above to summarise the data for each of the groups.</p>
+<pre class="r"><code>Treatment.summary &lt;- summarise(Bats_by_Treatment,
+  mean.Activity = mean(Activity), # mean
+  min.Activity = min(Activity), # minimum
+  max.Activity = max(Activity), # maximum
+  med.Activity = median(Activity), # median
+  sd.Activity = sd(Activity), # standard deviation
+  var.Activity = var(Activity), # variance
+  n.Activity = n(), # sample size
+  se.Activity = sd.Activity / sqrt(n.Activity), # standard error
+  IQR.Activity = IQR(Activity)
+) # interquartile range</code></pre>
+<p>Note that the input data frame is now “Bats_by_Treatment”, rather than “Bats”.</p>
+<p>The new summarised data has been placed in a new object (Treatment.summary), which of tbl class, particular to dplyr. To convert this to the more broadly used data frame class, we can use <code>as.data.frame</code>.</p>
+<pre class="r"><code>Treatment.summary &lt;- as.data.frame(Treatment.summary)</code></pre>
+<p>View this new data frame to see the summary statistics for each of the four forest categories.</p>
+<pre class="r"><code>View(Treatment.summary)</code></pre>
+<p>You can also combine the grouping and summarising into some neater code by “piping” with <code>%&gt;%</code>. For example, the code above could be replaced with:</p>
+<pre class="r"><code>Treatment.summary &lt;- Bats %&gt;%
+  group_by(Treatment.thinned) %&gt;%
+  summarise(
+    mean.Activity = mean(Activity), # mean
+    min.Activity = min(Activity), # minimum
+    max.Activity = max(Activity), # maximum
+    med.Activity = median(Activity), # median
+    sd.Activity = sd(Activity), # standard deviation
+    var.Activity = var(Activity), # variance
+    n.Activity = n(), # sample size
+    se.Activity = sd.Activity / sqrt(n.Activity), # standard error
+    IQR.Activity = IQR(Activity)
+  ) # interquartile range</code></pre>
+<p><strong>Issues with missing data</strong></p>
+<p>Things can go wrong in the field and we don’t always collect all the data we need at each site.</p>
+<p>To show you how this affects the <code>summarise</code> function, we can make a new variable (Activity2), which is a copy of Activity but with some of the activity data (the first four rows) now missing.</p>
+<pre class="r"><code>Bats$Activity2 &lt;- Bats$Activity
+Bats$Activity2[1:4] &lt;- rep(NA, 4)</code></pre>
+<p>Next, let’s try summarising the data:</p>
+<pre class="r"><code>summarise(Bats, mean.Activity = mean(Activity2))</code></pre>
+<pre><code>##   mean.Activity
+## 1            NA</code></pre>
+<p>You’ll see we get an NA for the result. To obtain the mean for all the values that are present, we can add an argument, <code>na.rm=TRUE</code>, to remove the rows that are NA.</p>
+<pre class="r"><code>summarise(Bats, mean.Activity = mean(Activity2, na.rm = TRUE))</code></pre>
+<pre><code>##   mean.Activity
+## 1      314.8757</code></pre>
+<p>Just remember that this will decrease your sample size. This will work for the summary functions apart from the <code>n</code> function that counts the number of values in a vector. To count the non-missing data, you can use this (slightly more complicated) piece of code to get your new sample size.</p>
+<pre class="r"><code>length(Bats$Activity2[!is.na(Bats$Activity2)])</code></pre>
+<pre><code>## [1] 169</code></pre>
+<p>This calculates the number of values, <code>length</code>, of the vector of bat activity values, Bats$Activity2, where they are not NA, <code>!is.na</code>. Revising the <a href="/../data-manipulation/subsetting-data/">Subsetting data</a> may help you understand this statement.</p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><strong>Written</strong> If we were writing a paper about bat activity across different forest thinning treatments, we could use our summarised data to make some broad observations at the beginning of our results section, prior to further analysis. For example: “Bats were twice as active in in mature open (reference) forest (365 ? 27) compared to unthinned regrowth (166 ? 21) (mean ? SE). However bat activity was similar across medium-term (385 ? 36) and short-term (350 ? 27) thinned and reference forests”.</p>
+<p><strong>Visual</strong> Presenting means and standard errors of categorical data gives us a way to visually communicate a treatment effect (as long as it is supported by appropriate statistical analysis). Here we’ve used the ggplot2 package to make a simple bar graph with means ? standard error (error bars).</p>
+<p><img src="/data-manipulation/summarising-data/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio.Images were sourced from the same document.</p>
+<p>You can type <code>?dplyr</code> to get help with this package.</p>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">Introduction to dplyr</a></p>
+<p>If you’d like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with <a href="/../graphics">Plotting with gglpot: the basics</a>.</p>
+<p><strong>Author</strong>: Rachel V. Blakey</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

@@ -1,0 +1,251 @@
+---
+weight: 3
+title: "Generalised Mixed Models"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+aliases: /mixed-models-3/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><strong>Generalised linear mixed models</strong></p>
+<p>You will need to read <a href="/statistics/mixed-models/mixed-model-1/">Mixed models 1</a> and <a href="/statistics/mixed-models/mixed-model-2/">Mixed models 2</a> as an introduction to mixed models for continuous data, as well as the help pages on <a href="/statistics/glms/">Generalised linear models</a> as an introduction to modelling discrete data.</p>
+<p>This page will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).</p>
+<p><strong>Properties of mixed models</strong></p>
+<p><strong>Assumptions</strong>. The assumptions of generalised linear mixed models are a combination of the assumptions of GLMs and mixed models.</p>
+<ol style="list-style-type: decimal">
+<li>The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>The response <span class="math inline">\(y\)</span> come from a known distribution from the exponential family, with a known mean variance relationship<br />
+</li>
+<li>There is a straight line relationship between some known function (link) of the mean of <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span><br />
+</li>
+<li>Random effects <span class="math inline">\(z\)</span> are independent of <span class="math inline">\(y\)</span>.<br />
+</li>
+<li>Random effects <span class="math inline">\(z\)</span> are normally distributed</li>
+</ol>
+<p>###Running the analysis</p>
+<p>We will analyse the same data set as the first two mixed model tutorials. This data set aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. In the first two tutorials, we analysed the total count of invertebrates, which we assumed to be continuous as the total counts were large. Here, we will analyse the counts and presence/absences of individual species, which require generalised linear mixed models.</p>
+<p>We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It allows us to model both continuous and discrete data with one or more random effects. There are however some limitations for discrete data.</p>
+<p><strong>What lme4 can do</strong>
+* model binary data (e.g., presence/absence)<br />
+* model counts with Poisson distribution</p>
+<p><strong>What lme4 can’t do</strong>
+* model overdispersed counts (unfortunately these are really common in ecology)<br />
+* provide good residual plots (we need these for assumption checking)</p>
+<p>First, load the package:</p>
+<pre class="r"><code>library(lme4)</code></pre>
+<p>Download the sample data set, <a href="/datasets/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
+<p>In this example, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). To test whether there is an effect of modification on individual species counts and presence/absences, we need to use generalised linear mixed models with the with the <code>glmer</code> function.</p>
+<p><img src="Mixed_models_3_image.jpg" /></p>
+<p>Consider the counts of hydroids (the variable Hydroid).</p>
+<pre><code>##  [1] 0 0 0 0 1 1 0 0 7 5 2 0 0 0 3 3 0 0 0 0 0 0 0 0 0 0 1 1 2 1 2 2 0 0 0 0 0 0
+## [39] 0 0 0 0 1 0 0 0 0 3 1 0 1 2 2 2</code></pre>
+<p>Looking at the data, you can see the counts are small, with many zeros, so we don’t want to treat these as continuous. We will model them as counts with a Poisson distribution, and also as presence/absence data.</p>
+<p>To model presence/absence, we first create a variable HydroidPres which is 1 (TRUE) when Hydroids are present and 0 (FALSE) otherwise.</p>
+<pre class="r"><code>Estuaries$HydroidPres &lt;- Estuaries$Hydroid &gt; 0</code></pre>
+<p><strong>Binary data</strong></p>
+<p>To fit a model for the presence or absence of hydroids, we would use <code>glmer</code> with <code>family=binomial</code>.</p>
+<pre class="r"><code>fit.bin &lt;- glmer(HydroidPres ~ Modification + (1 | Estuary), family = binomial, data = Estuaries)</code></pre>
+<p><strong>Checking assumptions</strong> As usual, we can examine residual plots to check assumptions.</p>
+<pre class="r"><code>par(mfrow = c(1, 2))
+plot(residuals(fit.bin) ~ fitted(fit.bin), main = &quot;residuals v.s. Fitted&quot;)
+qqnorm(residuals(fit.bin))</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Unfortunately, for binary data residual plots are quite difficult to interpret. In the residual v.s. fitted plot all the 0’s are in a line (lower left) and all the ones are in a line (upper right) due to the discreteness of the data. This stops us from being able to look for patterns. We have the same problem with the normal quantile plot.</p>
+<p>Briefly looking at our assumptions, Assumptions 1 and 4 we can’t check, but will be true if we sample randomly. Assumption 2 and 3 we should check with the residual plots, but given its failings we are unsure. Assumption 5 is hard to check in general and not crucial.</p>
+<p><strong>Hypothesis test for fixed effects</strong></p>
+<p>For generalised linear mixed models (GLMMs), we need to use the parametric bootstrap even for fixed effects inference. This is because the p-values from the <code>anova</code> function are quite approximate for GLMMs even for fixed effects. Sometimes the <code>glmer</code> function will give warnings or errors, so I’ve added a <code>tryCatch</code> to this code to handle that.</p>
+<pre class="r"><code>nBoot &lt;- 1000
+lrStat &lt;- rep(NA, nBoot)
+ft.null &lt;- glmer(HydroidPres ~ 1 + (1 | Estuary), family = binomial, data = Estuaries) # null model
+ft.alt &lt;- glmer(HydroidPres ~ Modification + (1 | Estuary), family = binomial, data = Estuaries) # alternate model
+
+lrObs &lt;- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
+
+for (iBoot in 1:nBoot)
+{
+  Estuaries$HydroidPresSim &lt;- unlist(simulate(ft.null)) # resampled data
+  tryCatch(
+    { # sometimes the glmer code doesn&#39;t converge
+
+      bNull &lt;- glmer(HydroidPresSim ~ 1 + (1 | Estuary), family = binomial, data = Estuaries) # null model
+      bAlt &lt;- glmer(HydroidPresSim ~ Modification + (1 | Estuary), family = binomial, data = Estuaries) # alternate model
+      lrStat[iBoot] &lt;- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
+    },
+    warning = function(war) {
+      lrStat[iBoot] &lt;- NA
+    },
+    error = function(err) {
+      lrStat[iBoot] &lt;- NA
+    }
+  ) # if code doesn&#39;t converge skip sim
+}
+mean(lrStat &gt; lrObs, na.rm = T) # P-value for test of Estuary effect</code></pre>
+<pre><code>## [1] 0.03089245</code></pre>
+<p>We have evidence of an effect of modification on the presence of hydroids.</p>
+<p><strong>Count data</strong></p>
+<p>lme4 can model count data that has a Poisson distribution. If the data do not fit the Poisson mean/variance relationship, then things become much more complicated, and we won’t cover that situation here.</p>
+<p>To model the counts of hydroids, we would use use <code>glmer</code> with <code>family=poisson</code>.</p>
+<pre class="r"><code>fit.pois &lt;- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)</code></pre>
+<p>To check the assumptions:</p>
+<pre class="r"><code>par(mfrow = c(1, 2))
+plot(residuals(fit.pois) ~ fitted(fit.pois), main = &quot;Residuals vs. Fitted&quot;)
+qqnorm(residuals(fit.pois))</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Once again, the residual plots aren’t that useful, but we at least get an idea about whether the variance assumption is reasonable. There is no obvious fan shape, so a Poisson model seems okay.</p>
+<p><strong>Hypothesis test for fixed effects</strong></p>
+<p>Again, we can use parametric bootstrapping to test for an effect of Modification.</p>
+<pre class="r"><code>nBoot &lt;- 1000
+lrStat &lt;- rep(NA, nBoot)
+ft.null &lt;- glmer(Hydroid ~ 1 + (1 | Estuary), family = poisson, data = Estuaries) # null model
+ft.alt &lt;- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries) # alternate model
+
+lrObs &lt;- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
+for (iBoot in 1:nBoot)
+{
+  Estuaries$HydroidSim &lt;- unlist(simulate(ft.null)) # resampled data
+  tryCatch(
+    {
+      bNull &lt;- glmer(HydroidSim ~ 1 + (1 | Estuary), family = poisson, data = Estuaries) # null model
+      bAlt &lt;- glmer(HydroidSim ~ Modification + (1 | Estuary), family = poisson, data = Estuaries) # alternate model
+      lrStat[iBoot] &lt;- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
+    },
+    warning = function(war) {
+      lrStat[iBoot] &lt;- NA
+    },
+    error = function(err) {
+      lrStat[iBoot] &lt;- NA
+    }
+  ) # if code doesn&#39;t converge skip sim#   lrStat[iBoot]
+}</code></pre>
+<pre><code>## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular
+## boundary (singular) fit: see ?isSingular</code></pre>
+<pre class="r"><code>mean(lrStat &gt; lrObs, na.rm = TRUE) # P-value for test of Estuary effect</code></pre>
+<pre><code>## [1] 0.04202719</code></pre>
+<p>We have evidence of an effect of modification on hydroid abundance.</p>
+<p><strong>A non Poisson example</strong></p>
+<p>Often, count data will not fit a Poisson distribution. Look at what happens if you try and model the counts of the bryozoan, <em>Schizoporella errata</em>, from that same data set.</p>
+<pre class="r"><code>fit.pois2 &lt;- glmer(Schizoporella.errata ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
+par(mfrow = c(1, 2))
+plot(residuals(fit.pois) ~ fitted(fit.pois), main = &quot;residuals vs. Fitted&quot;)
+qqnorm(residuals(fit.pois))</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunately lme4 can’t handle this situation (overdispersion), and there is no easy way to model these data. If this happens in your data try the <a href="http://glmmadmb.r-forge.r-project.org/">glmmADMB</a> package.</p>
+<p><strong>Hypothesis test for random effects</strong></p>
+<p>As before you could run hypothesis tests on the random effects using a parametric bootstrap. See <a href="/statistics/mixed-models/mixed-model-1/">Mixed models 1</a> and <a href="/statistics/mixed-models/mixed-model-2/">Mixed models 2</a> for code that you could modify for this situation.</p>
+<p>###Communicating results</p>
+<p><strong>Written.</strong> Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code>) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
+<p><strong>Visual.</strong> The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility.</p>
+<pre class="r"><code>library(Hmisc)
+fit.pois &lt;- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
+means &lt;- fitted(fit.pois) # this will give the estimate at each data point
+ModEst &lt;- unique(Estuaries[c(&quot;Estuary&quot;, &quot;Modification&quot;)]) # find which Estuaries are modified
+cols &lt;- as.numeric(ModEst[order(ModEst[, 1]), 2]) + 3 # Assign colour by modification</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>boxplot(Hydroid ~ Estuary, data = Estuaries, col = cols, xlab = &quot;Estuary&quot;, ylab = &quot;Count of hydroids&quot;)
+legend(&quot;topleft&quot;,
+  inset = .02,
+  c(&quot;Modified&quot;, &quot;Pristine&quot;), fill = unique(cols), horiz = TRUE, cex = 0.8
+)
+
+Est.means &lt;- summarize(means, Estuaries$Estuary, mean)$means # extract means by Estuary
+stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE) # plot means by estuary</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>You can type <code>?glmer</code> into R for help with this function.</p>
+<p><a href="http://lme4.r-forge.r-project.org/book/Ch2.pdf">Draft book chapter</a> from the authors of lme4.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Faraway, JJ (2005) <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC Press.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Zuur, A, EN Ieno and GM Smith (2007) <em>Analysing ecological data</em>. Springer Science &amp; Business Media.
+</p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

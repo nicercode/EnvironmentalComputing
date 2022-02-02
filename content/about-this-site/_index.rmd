@@ -1,0 +1,41 @@
+---
+title: "About This Site"
+weight: 1
+---
+
+This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
+
+* how to organise your data during [data entry](/getting-started-with-r/data-entry/) 
+* how to [manipulate and manage your data](/data-manipulation/) so there is transparency and version control 
+* instructions for running [statistical analyses](/statistics/) with sample code in R or other relevant software (first see [Getting started with R](/getting-started-with-r/)) 
+* the rationale for the technique in plain language (why is it used) 
+* how to interpret the results and assumptions that you need to check 
+* [visualisation](/graphics/) of your results and ways to effectively communicate the results in scientific reports or publications
+* where to go for further help 
+
+
+This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
+
+Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](http://www.bees.unsw.edu.au/) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to  Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford.  Development of the second generation of this site was possible through the support of the [Evolution and Ecology Research Centre](http://www.eerc.unsw.edu.au/).  
+
+**Site editors:**
+
+[Professor Alistair Poore](https://alistairpoore.org) 
+
+[Associate Professor Will Cornwell](http://willcornwell.org/)
+
+[Associate Professor Danial Falster](https://danielfalster.com/)
+
+[Dr. Fonti Kar](https://fontikar.wordpress.com/)
+
+**Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Corey Callaghan, Will Cornwell, Kingsley Griffin, Matt Holland, James Lavender, Andrew Letten, Shinichi Nakagawa, Shaun Nielsen, Alistair Poore, Gordana Popovic, Fiona Robinson and Jakub Stoklosa.
+
+**Year:** 2016
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`
+
+
+## Contributors
+
+Thanks to them <i class="fas fa-heart"></i> for making Open Source Software a better place !
+

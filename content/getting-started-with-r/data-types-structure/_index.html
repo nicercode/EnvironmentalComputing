@@ -1,0 +1,123 @@
+---
+weight: 6
+title: "Data Types + Structure"
+aliases: /data-types-and-structure/
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><img src="Data_types_structure_image.jpg" /></p>
+<p>One of the most common sources of frustration for beginners in R is dealing with different data structures and types. Here is an overview of the most important data structures, types and how to check and manipulate them.</p>
+<p>The terms ‘structure’ and ‘type’ are often used interchangable. To avoid confusion, for this help page, data structure refers whether the data is a vector, matrix or data frame etc. and type refers to whether the data or variable is an integer, character or numeric etc.</p>
+<div id="one-dimensional-data-vectors" class="section level3">
+<h3>One dimensional data (vectors)</h3>
+<p>The most basic data structure in R is a vector, a one-dimensional set of numbers or characters. This is the data structure that you will work with the most, albeit from within a data frame (see below). Vectors can be either atomic or list, atomic vectors differ to lists in that all elements within an atomic vector must be of the <strong>same</strong> type (see below). For the most part we work with atomic vector and the following help file refers to this type of data.</p>
+<div id="common-types-of-vectors" class="section level4">
+<h4>Common types of vectors</h4>
+<p>Common types of atomic vectors are logical, integer, numeric (i.e., double), character and factor. You can easily create each of these data types by using <code>c()</code>. In the integer example, the L forces R to consider those numbers as integers rather than numerical.</p>
+<pre class="r"><code>eg_logical &lt;- c(T, T, T, F, F)
+eg_integer &lt;- c(1L, 6L, 1L, 5L, 4L)
+eg_numeric &lt;- c(0, 2.3, 2.45, 2.99, -1.1)
+eg_character &lt;- c(&quot;things&quot;, &quot;in&quot;, &quot;apostrophe&quot;, &quot;are&quot;, &quot;characters&quot;)
+eg_factor &lt;- factor(c(&quot;NSW&quot;, &quot;NSW&quot;, &quot;ACT&quot;, &quot;WA&quot;, &quot;WA&quot;))</code></pre>
+</div>
+<div id="factors-a-special-data-type" class="section level4">
+<h4>Factors (a special data type)</h4>
+<p>Notice how I couldn’t just use the <code>c()</code> to create a factor. Though factors look (and behave for the most part) like characters, they are actually a special type of integer with predefined categories, known as levels. The factor in this example has three levels: NSW, ACT and WA.</p>
+<p>You can check how many levels any factor has using:</p>
+<pre class="r"><code>levels(eg_factor)</code></pre>
+<pre><code>## [1] &quot;ACT&quot; &quot;NSW&quot; &quot;WA&quot;</code></pre>
+<p>This makes them behave differently to integers. Once created, factors can only contain a pre-defined set levels. For example, if you collecting data from sites across Australia you could have the fixed number of states as a factor, but it would be better to have a variable like site as a character if you were going to add data from more sites later on.</p>
+<p>By default, R will always sort levels in alphabetical order. If you want your factors to be ordered (i.e., small, medium, high), use <code>ordered</code> to define the sequence you would like the levels to be presented. This is particularly useful for graphics to present the categories along an x axis in a more logical order.</p>
+<pre class="r"><code>sizes &lt;- factor(c(&quot;small&quot;, &quot;large&quot;, &quot;large&quot;, &quot;small&quot;, &quot;medium&quot;))
+sizes
+## [1] small  large  large  small  medium
+## Levels: large medium small
+sizes &lt;- ordered(sizes, levels = c(&quot;small&quot;, &quot;medium&quot;, &quot;large&quot;))
+sizes
+## [1] small  large  large  small  medium
+## Levels: small &lt; medium &lt; large</code></pre>
+<p>See <a href="http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_levels_of_a_factor/">here</a> for more info on ordered factors.</p>
+</div>
+<div id="checking-data-types" class="section level4">
+<h4>Checking data types</h4>
+<p>You can check the data type of any vector using the <code>class</code> or <code>is</code> functions.</p>
+<pre class="r"><code>class(eg_logical)
+## [1] &quot;logical&quot;
+is.integer(eg_integer)
+## [1] TRUE
+is.factor(eg_factor)
+## [1] TRUE</code></pre>
+</div>
+<div id="automatic-coercion" class="section level4">
+<h4>Automatic coercion</h4>
+<p>As all elements within an atomic vector must be the same type, combining different types will coerce the data to the most flexible. Types from least to most flexible are: logical, integer, double, and character. For example, combining and integers and character will produce a character vector. This is something to be aware whilst manipulating your own data, especially when merging data frames.</p>
+<pre class="r"><code>eg_coerced &lt;- c(&quot;tricks&quot;, 1, 2, 3, 4)
+class(eg_coerced)
+## [1] &quot;character&quot;</code></pre>
+</div>
+<div id="coercing-data" class="section level4">
+<h4>Coercing data</h4>
+<p>If you find your data is the wrong type, you can use the <code>as</code> functions to coerce data from one type to another. Be aware of what happens to your data after coercion. For example, coercing logical to numeric replaces F with 0s and Ts with 1s and any nonsensical coercion (like trying to make character “NSW” into a numeric) will result in NAs.</p>
+<pre class="r"><code>as.numeric(eg_logical)
+## [1] 1 1 1 0 0
+as.numeric(eg_character)
+## Warning: NAs introduced by coercion
+## [1] NA NA NA NA NA</code></pre>
+</div>
+</div>
+<div id="two-dimensional-data-matrices-and-data-frames" class="section level3">
+<h3>Two dimensional data (matrices and data frames)</h3>
+<p>For the most part, we tend to work with two dimensional data containing both columns and rows. Like the one dimensional vectors, they come in two forms: matrices, where all vectors must be of all the same type of data, and data frames, which can be made up of vectors containing different data types.</p>
+<div id="matrices" class="section level4">
+<h4>Matrices</h4>
+<p>Matrices are easily constructed in R and can you check if its a matrix using the <code>class</code> function. For example, to make a matrix with 3 rows and 2 columns with 6 values:</p>
+<pre class="r"><code>eg_matrix &lt;- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, ncol = 2)</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<p>Think of matrices as atomic vectors with dimensions; the number of rows and columns. Like atomic matrices, you can check the type of data with <code>is</code> and coerce using the <code>as</code> functions.</p>
+<pre class="r"><code>is.logical(eg_matrix)
+## [1] FALSE
+as.numeric(eg_logical)
+## [1] 1 1 1 0 0</code></pre>
+</div>
+<div id="data-frames" class="section level4">
+<h4>Data frames</h4>
+<p>The most common data structure we work with is the data frame. Data frames are just a collection of atomic vectors of equal length stuck together. They are different to matrices as they can contain vectors of different types.</p>
+<p>To make a simple data frame that combines three of the vectors we made above, we could use:</p>
+<pre class="r"><code>eg_data_frame &lt;- data.frame(eg_character, eg_factor, eg_numeric)</code></pre>
+<pre><code>##   eg_character eg_factor eg_numeric
+## 1       things       NSW       0.00
+## 2           in       NSW       2.30
+## 3   apostrophe       ACT       2.45
+## 4          are        WA       2.99
+## 5   characters        WA      -1.10</code></pre>
+<p>More commonly, we import data entered into a spreadsheet straight into a data frame using <code>read.csv</code> (see help <a href="../importing-data/">Importing data</a>).</p>
+<p>To check the data types within a data frame, use the <code>str</code> function. This gives an output listing for each column (i.e., variables) and the respective data type.</p>
+<pre class="r"><code>str(eg_data_frame)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ eg_character: chr  &quot;things&quot; &quot;in&quot; &quot;apostrophe&quot; &quot;are&quot; ...
+##  $ eg_factor   : Factor w/ 3 levels &quot;ACT&quot;,&quot;NSW&quot;,&quot;WA&quot;: 2 2 1 3 3
+##  $ eg_numeric  : num  0 2.3 2.45 2.99 -1.1</code></pre>
+<p>Note that data types can change. In this example, the character vector has been coerced to a factor in the process of making the data frame.</p>
+<p>If you wish to check the data type of just one variable, or change that variable to another type, we use <code>$</code> to access that variable from within the data frame. For example:</p>
+<pre class="r"><code>str(eg_data_frame$eg_character)
+##  chr [1:5] &quot;things&quot; &quot;in&quot; &quot;apostrophe&quot; &quot;are&quot; &quot;characters&quot;
+levels(eg_data_frame$eg_factor)
+## [1] &quot;ACT&quot; &quot;NSW&quot; &quot;WA&quot;
+is.numeric(eg_data_frame$numeric)
+## [1] FALSE</code></pre>
+</div>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>Further information on data types in R can be found <a href="https://www.stat.auckland.ac.nz/~paul/ItDT/HTML/node64.html">here</a>
+and <a href="http://www.statmethods.net/input/datatypes.html">here</a></p>
+<p><strong>Author</strong>: Keryn Bain</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

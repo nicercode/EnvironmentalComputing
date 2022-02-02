@@ -1,0 +1,116 @@
+---
+weight: 4
+title: "Combining datasets"
+aliases: /combining-data-sets/
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Combining data sets is an essential task for many projects. For example, we may have data on the abundance of species, but also a data set from external sources on the environmental conditions during our observations (e.g., temperature, rainfall, elevation, vegetation type).</p>
+<p><img src="Combining_data_image.jpg" /></p>
+<p>We will use the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> which has many convenient functions for combining data sets, First, load the package:</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<p>As with the help page for <a href="/../data-manipulation/subsetting-data/">Subsetting data</a>, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
+<p>We will also read in a dataset giving geographic locations for each site (for example, downloaded from a GPS) and nightly weather data (in this case downloaded and summarised from the Bureau of Meteorology data online).</p>
+<p>Download the three sample data sets (<a href="/datasets/Bats_data.csv">Bats_data.csv</a>, <a href="/datasets/Geo_data.csv">Geo_data.csv</a>, and <a href="/datasets/Weather_vars.csv">Weather_vars.csv</a>) and import into R.</p>
+<pre class="r"><code>Bats &lt;- read.csv(file = &quot;Bats_data.csv&quot;, header = T, stringsAsFactors = F)
+Geo &lt;- read.csv(file = &quot;Geo_data.csv&quot;, header = T, stringsAsFactors = F)
+Weather &lt;- read.csv(file = &quot;Weather_vars.csv&quot;, header = T, stringsAsFactors = F)</code></pre>
+<p>You’ll notice that we used the argument <code>stringsAsFactors=F</code>. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as “character” vectors.</p>
+<div id="joining-data" class="section level3">
+<h3>Joining data</h3>
+<p>dplyr has a function for simply adding all columns from one data set (z) to another (y):</p>
+<pre class="r"><code>bind_cols(y, z)</code></pre>
+<p>This is only useful if the two data sets have the same number of rows and the rows are arranged in the same order (it just matches up rows by their position).</p>
+<p>In this case, we have two quite different datasets that we want to join to our main dataset on bat abundance. The data set of geographic locations has been measured at the site-scale, so each separate site has a separate measurement of latitude and longitude.</p>
+<p>The second dataset with weather information has used the same weather station for all sites, but has been measured for each separate survey night. Therefore we will use the Site column to join the Geo dataset and the Date column to join the Weather dataset.</p>
+<p>The function <code>left_join</code> will add matching rows from a second dataset onto a first, specifying which variable in the first is used to make the match.</p>
+<p>To add the geographic locations to the Bats data set, using the Site column to match the rows, we would use:</p>
+<pre class="r"><code>Bats_withGeo &lt;- left_join(Bats, Geo, by = &quot;Site&quot;)</code></pre>
+<p>To now add the weather data to that new data set, using the Date variable to match rows, we would use:</p>
+<pre class="r"><code>Bats_withGeoWeather &lt;- left_join(Bats_withGeo, Weather, by = &quot;Date&quot;)</code></pre>
+<p>You can check what has happened by viewing the data set, using the function <code>dim</code>, to find the dimensions of our datasets, or <code>colnames</code> to see a list of column names.</p>
+<pre class="r"><code>dim(Bats)
+dim(Bats_withGeoWeather)
+colnames(Bats_withGeo)
+colnames(geo.weather.join)</code></pre>
+<p>You will see that the new dataset, Bats_withGeoWeather has the same number of rows as the original, Bats, but an additional four columns: “Latitude”, “Longitude”, “Mean_temperature” and “Mean_humidity”.</p>
+</div>
+<div id="dealing-with-messy-datasets" class="section level3">
+<h3>Dealing with messy datasets</h3>
+<p>That was a nice neat example, where we have all of the codes in our main dataset (Bats) matching up to codes in the data sets we wanted to join on. There are also a series of functions that help with messier data situations.</p>
+<p>Let’s simulate a couple of messy datasets. Imagine you have bat activity data for five sites and tree density data for five sites, but only two of those sites (D and E) contain measurements for both variables. This may happen when you are using datasets collected by different people or for different purposes in the same study.</p>
+<pre class="r"><code>Bat_sim &lt;- as.data.frame(cbind(
+  Site = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;),
+  Activity = c(62, 29, 30, 23, 24)
+), stringsAsFactors = F)
+
+Tree_sim &lt;- as.data.frame(cbind(
+  Site = c(&quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;),
+  Tree_density = c(525, 390, 477, 778, 817)
+), stringsAsFactors = F)</code></pre>
+<pre><code>##   Site Activity
+## 1    A       62
+## 2    B       29
+## 3    C       30
+## 4    D       23
+## 5    E       24</code></pre>
+<pre><code>##   Site Tree_density
+## 1    D          525
+## 2    E          390
+## 3    F          477
+## 4    G          778
+## 5    H          817</code></pre>
+<p>If we want to combine data sets for only rows where we have both bat activity AND tree density measured and don’t care about the rest of the data, we can use <code>inner_join</code>.</p>
+<pre class="r"><code>Bat_withTree_inn.join &lt;- inner_join(Bat_sim, Tree_sim, by = &quot;Site&quot;)
+print(Bat_withTree_inn.join)</code></pre>
+<pre><code>##   Site Activity Tree_density
+## 1    D       23          525
+## 2    E       24          390</code></pre>
+<p>If we are interested primarily in the bat dataset, we can use <font face="monospace">left_join()</font> as above to keep all of the bat measurements and add tree densities where we have them. The missing tree density data will be NA.</p>
+<pre class="r"><code>Bat_withTree_left.join &lt;- left_join(Bat_sim, Tree_sim, by = &quot;Site&quot;)</code></pre>
+<pre><code>##   Site Activity Tree_density
+## 1    A       62         &lt;NA&gt;
+## 2    B       29         &lt;NA&gt;
+## 3    C       30         &lt;NA&gt;
+## 4    D       23          525
+## 5    E       24          390</code></pre>
+<p>Conversely if we are primarily interested in tree densities, we can use <code>right_join</code> to keep all the tree density data and include bat activity where we have measured it. The missing bat data will be NA.</p>
+<pre class="r"><code>Bat_withTree_right.join &lt;- right_join(Bat_sim, Tree_sim, by = &quot;Site&quot;)</code></pre>
+<pre><code>##   Site Activity Tree_density
+## 1    D       23          525
+## 2    E       24          390
+## 3    F     &lt;NA&gt;          477
+## 4    G     &lt;NA&gt;          778
+## 5    H     &lt;NA&gt;          817</code></pre>
+<p>Alternatively, if we want to keep ALL of the data and decide for ourselves what to exclude later, we can use <code>full_join</code>.</p>
+<pre class="r"><code>Bat_withTree_full.join &lt;- full_join(Bat_sim, Tree_sim, by = &quot;Site&quot;)</code></pre>
+<pre><code>##   Site Activity Tree_density
+## 1    A       62         &lt;NA&gt;
+## 2    B       29         &lt;NA&gt;
+## 3    C       30         &lt;NA&gt;
+## 4    D       23          525
+## 5    E       24          390
+## 6    F     &lt;NA&gt;          477
+## 7    G     &lt;NA&gt;          778
+## 8    H     &lt;NA&gt;          817</code></pre>
+<p>Finally, we can interrogate which rows of our data do or don’t have matches in another table. For example, we can use <code>semi_join</code> to print only the rows of bat measurements that have a matching site where trees were measured, or use<code>anti_join</code> to find the opposite, where trees were not measured.</p>
+<pre class="r"><code>Bat_inTree &lt;- semi_join(Bat_sim, Tree_sim, by = &quot;Site&quot;)</code></pre>
+<pre><code>##   Site Activity
+## 1    D       23
+## 2    E       24</code></pre>
+<pre class="r"><code>Bat_notinTree &lt;- anti_join(Bat_sim, Tree_sim, by = &quot;Site&quot;)</code></pre>
+<pre><code>##   Site Activity
+## 1    A       62
+## 2    B       29
+## 3    C       30</code></pre>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document. You can use <code>?dplyr</code> to get help with this package.</p>
+<p><strong>Author</strong>: Rachel V. Blakey</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

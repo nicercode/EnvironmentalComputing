@@ -1,0 +1,235 @@
+---
+weight: 2
+title: "Crossed and Nested Factors"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+aliases: /mixed-models-2/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.</p>
+<p>Many experimental designs in ecology and environmental sciences require mixed models with several random effects (factors). You might have heard of nested and crossed factors. We often define these as quite distinct designs (e.g., from <a href="http://www.theanalysisfactor.com">www.theanalysisfactor.com</a>)</p>
+<p>Two factors are <strong>crossed</strong> when every category (level) of one factor co-occurs in the design with every category of the other factor. In other words, there is at least one observation in every combination of categories for the two factors.</p>
+<p>A factor is <strong>nested</strong> within another factor when each category of the first factor co-occurs with only one category of the other. In other words, an observation has to be within one category of Factor 2 in order to have a specific category of Factor 1. All combinations of categories are not represented.</p>
+<p>There are also intermediate designs that are partially crossed, where some levels of one factor occur in several (but not all) levels of the second factor. These designs have often been taught as separate problems with different ways to carry out analyses of variance (ANOVAs) depending on if you have crossed or nested factors. Using mixed models with the package lme4, we can think if all of these in one framework, where nested and crossed designs are modelled in the same way. Thinking about factors as crossed or nested is simplified to careful labelling of factor levels - more on this later.</p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p>We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, load the package:</p>
+<pre class="r"><code>library(lme4)</code></pre>
+<p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in <a href="/statistics/mixed-models/mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
+<p><img src="Mixed_models_2_image.jpg" /></p>
+<p>Download the sample data set, <a href="/datasets/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
+<pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
+<p><strong>Fitting a model with a fixed effect and several random effects</strong></p>
+<p>In this data set, we have a fixed effect (Modification; modified vs pristine) and two random effects (Estuary and Site). Site is nested within Estuary as each site can only belong in one estuary. When entering the data, however, we’ve been careless and numbered sites within each estuary as 1, 2, 3 etc.</p>
+<p>We can see this by looking at the data, and a cross tabulation.</p>
+<pre class="r"><code>Estuaries[1:10, ]</code></pre>
+<pre><code>##     X Modification Estuary Site Hydroid Total Schizoporella.errata
+## 1   1     Modified     JAK    1       0    44                   15
+## 2   2     Modified     JAK    1       0    42                    8
+## 3   3     Modified     JAK    2       0    32                    9
+## 4   4     Modified     JAK    2       0    44                   14
+## 5   5     Modified     JAK    3       1    42                    6
+## 6   6     Modified     JAK    3       1    48                   12
+## 7   7     Modified     JAK    4       0    45                   28
+## 8   8     Modified     JAK    4       0    34                    1
+## 9   9     Pristine     JER    1       7    29                    0
+## 10 10     Pristine     JER    1       5    51                    0</code></pre>
+<pre class="r"><code>xtabs(~ Estuary + Site, Estuaries, sparse = TRUE)</code></pre>
+<pre><code>## 7 x 4 sparse Matrix of class &quot;dgCMatrix&quot;
+##        Site
+## Estuary 1 2 3 4
+##     BOT 2 2 2 2
+##     CLY 2 2 2 2
+##     HAK 2 2 2 2
+##     JAK 2 2 2 2
+##     JER 2 2 2 2
+##     KEM 2 2 . 2
+##     WAG 2 2 2 2</code></pre>
+<p>Estuary JAK and estuary JER each have sites numbered 1, even though these sites are not connected in any way. We can also see this in the cross tabulation <code>xtabs</code>. This site labelling looks crossed, where each site occurs in each estuary, rather than nested.</p>
+<p>We can fix this by simply telling R that Site is nested in Estuary. It is best practice, however, to do this at the data entry stage. If things are the same, then they should be labelled the same, and if they are not they should be labelled differently.</p>
+<p>To create a unique label for each site in this data set, we convert Site to a factor (it was an integer), and create a new variable (SiteWithin) that is the combination of Estuary and Site</p>
+<pre class="r"><code>Estuaries$Site &lt;- as.factor(Estuaries$Site)
+
+Estuaries$SiteWithin &lt;- paste0(Estuaries$Estuary, &quot;_&quot;, Estuaries$Site)</code></pre>
+<p>Now, check the structure to see that each site is nested in only one Estuary, consistent with the experimental design.</p>
+<pre class="r"><code>xtabs(~ Estuary + SiteWithin, Estuaries, sparse = TRUE)</code></pre>
+<pre><code>## 7 x 27 sparse Matrix of class &quot;dgCMatrix&quot;</code></pre>
+<pre><code>##    [[ suppressing 27 column names &#39;BOT_1&#39;, &#39;BOT_2&#39;, &#39;BOT_3&#39; ... ]]</code></pre>
+<pre><code>##                                                          
+## BOT 2 2 2 2 . . . . . . . . . . . . . . . . . . . . . . .
+## CLY . . . . 2 2 2 2 . . . . . . . . . . . . . . . . . . .
+## HAK . . . . . . . . 2 2 2 2 . . . . . . . . . . . . . . .
+## JAK . . . . . . . . . . . . 2 2 2 2 . . . . . . . . . . .
+## JER . . . . . . . . . . . . . . . . 2 2 2 2 . . . . . . .
+## KEM . . . . . . . . . . . . . . . . . . . . 2 2 2 . . . .
+## WAG . . . . . . . . . . . . . . . . . . . . . . . 2 2 2 2</code></pre>
+<p>To fit a model for total abundance, we would use:</p>
+<pre class="r"><code>fit.mod &lt;- lmer(Total ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries)
+summary(fit.mod)</code></pre>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Total ~ Modification + (1 | Estuary) + (1 | SiteWithin)
+##    Data: Estuaries
+## 
+## REML criterion at convergence: 386.6
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.8686 -0.6687  0.1504  0.6505  1.9816 
+## 
+## Random effects:
+##  Groups     Name        Variance Std.Dev.
+##  SiteWithin (Intercept) 49.85    7.061   
+##  Estuary    (Intercept) 47.59    6.899   
+##  Residual               43.65    6.607   
+## Number of obs: 54, groups:  SiteWithin, 27; Estuary, 7
+## 
+## Fixed effects:
+##                      Estimate Std. Error t value
+## (Intercept)            41.053      4.739   8.662
+## ModificationPristine  -14.553      6.232  -2.335
+## 
+## Correlation of Fixed Effects:
+##             (Intr)
+## MdfctnPrstn -0.760</code></pre>
+<p>where Total is the dependent variable (left of the ~), Modification is the fixed effect, and Estuary and SiteWithin are the random effects.</p>
+<p>We’ll also fit the wrong model, to see the difference if we had used the old labels for each site.</p>
+<pre class="r"><code>fit.wrong &lt;- lmer(Total ~ Modification + (1 | Estuary) + (1 | Site), data = Estuaries)
+summary(fit.wrong)</code></pre>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: Total ~ Modification + (1 | Estuary) + (1 | Site)
+##    Data: Estuaries
+## 
+## REML criterion at convergence: 393.6
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.3312 -0.7631  0.1040  0.5766  1.8202 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Estuary  (Intercept) 53.613   7.322   
+##  Site     (Intercept)  7.686   2.772   
+##  Residual             80.045   8.947   
+## Number of obs: 54, groups:  Estuary, 7; Site, 4
+## 
+## Fixed effects:
+##                      Estimate Std. Error t value
+## (Intercept)            41.257      4.849   8.508
+## ModificationPristine  -14.757      6.124  -2.410
+## 
+## Correlation of Fixed Effects:
+##             (Intr)
+## MdfctnPrstn -0.727</code></pre>
+<p>The only place we can see an obvious difference is under the Random effects table. For the correct model we have <font face="monospace">Number of obs: 52, groups: SiteWithin, 26; Estuary, 7</font> while the wrong model tells us we have only 4 sites, which we know is incorrect.</p>
+<p>Note: fit.wrong would be correct if we had crossed factors</p>
+</div>
+<div id="checking-assumptions" class="section level3">
+<h3>Checking assumptions</h3>
+<p>The assumptions are the same as for one random factor, but it doesn’t hurt to list them again</p>
+<ol style="list-style-type: decimal">
+<li>The observed <span class="math inline">\(y\)</span> are independent, conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>The response <span class="math inline">\(y\)</span> are normally distributed conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>The response <span class="math inline">\(y\)</span> has constant variance, conditional on some predictors <span class="math inline">\(x\)</span><br />
+</li>
+<li>There is a straight line relationship between <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span><br />
+</li>
+<li>Random effects <span class="math inline">\(z\)</span> are independent of <span class="math inline">\(y\)</span>.<br />
+</li>
+<li>Random effects <span class="math inline">\(z\)</span> are normally distributed</li>
+</ol>
+<p>See <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.</p>
+<pre class="r"><code>par(mfrow = c(1, 2))
+qqnorm(residuals(fit.mod))
+scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The normal quantile plot looks reasonable, however we see here a definite fan shape in the residual vs. fit plot. Let’s try transforming the response and see if we do better.</p>
+<pre class="r"><code>fit.mod &lt;- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries)
+par(mfrow = c(1, 2))
+qqnorm(residuals(fit.mod))
+scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it’s not of great concern.</p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p><strong>Hypothesis test for the fixed effect</strong></p>
+<p>We can use the <code>anova</code> as before to obtain approximate p-values for fixed effects.</p>
+<pre class="r"><code>ft.mod &lt;- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries, REML = F)
+ft.mod.0 &lt;- lmer(log(Total) ~ (1 | Estuary) + (1 | SiteWithin), data = Estuaries, REML = F)
+anova(ft.mod.0, ft.mod)</code></pre>
+<pre><code>## Data: Estuaries
+## Models:
+## ft.mod.0: log(Total) ~ (1 | Estuary) + (1 | SiteWithin)
+## ft.mod: log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin)
+##          npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+## ft.mod.0    4 79.223 87.179 -35.611   71.223                       
+## ft.mod      5 77.397 87.342 -33.698   67.397 3.8258  1    0.05047 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We find weak evidence of an effect of Modification (p=0.05047).</p>
+<p><strong>Hypothesis test for random effects</strong></p>
+<p>As in <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I’ve taken the code from <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.</p>
+<pre class="r"><code>nBoot &lt;- 1000
+lrStat &lt;- rep(NA, nBoot)
+ft.null &lt;- lmer(log(Total) ~ Modification + (1 | Estuary), Estuaries, REML = F) # null model
+ft.alt &lt;- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), Estuaries, REML = F) # alternate model
+lrObs &lt;- 2 * logLik(ft.alt) - 2 * logLik(ft.null) # observed test stat
+for (iBoot in 1:nBoot)
+{
+  Estuaries$logTotalSim &lt;- unlist(simulate(ft.null)) # resampled data
+  bNull &lt;- lmer(logTotalSim ~ Modification + (1 | Estuary), Estuaries, REML = F) # null model
+  bAlt &lt;- lmer(logTotalSim ~ Modification + (1 | Estuary) + (1 | SiteWithin), Estuaries, REML = F) # alternate model
+  lrStat[iBoot] &lt;- 2 * logLik(bAlt) - 2 * logLik(bNull) # resampled test stat
+}
+mean(lrStat &gt; lrObs) # P-value for test of Estuary effect</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.</p>
+</div>
+<div id="communicating-results" class="section level2">
+<h2>Communicating results</h2>
+<p><strong>Written.</strong> Results of linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the <code>anova</code> function) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g., “There is strong evidence (p&lt;0.001) of negative effect of modification on total abundance”. For multiple predictors it’s best to display the results in a table.</p>
+<p><strong>Visual.</strong> The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility. There is a little bit of code that is required for such a plot, and it will be a little different for your data and model.</p>
+<p>You can plot within each site, but this is a bit odd for a boxplot as there are only two observations per site, you might want to do this for your data if you have more observations within each Site.</p>
+<pre class="r"><code>library(Hmisc)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: Formula</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;Hmisc&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     format.pval, units</code></pre>
+<pre class="r"><code>ModEst &lt;- unique(Estuaries[c(&quot;SiteWithin&quot;, &quot;Modification&quot;)]) # find which Estuaries are modified
+cols &lt;- as.numeric(ModEst[order(ModEst[, 1]), 2]) + 3 # Assign colour by modification
+boxplot(log(Total) ~ SiteWithin, data = Estuaries, col = cols, xlab = &quot;Estuary&quot;, ylab = &quot;Total invertebrates&quot;)
+legend(&quot;bottomleft&quot;,
+  inset = .02,
+  c(&quot; Modified &quot;, &quot; Pristine &quot;), fill = unique(cols), horiz = TRUE, cex = 0.8
+)
+means &lt;- fitted(fit.mod) # this will give the estimate at each data point
+Est.means &lt;- summarize(means, Estuaries$SiteWithin, mean)$means # extract means by site
+stripchart(Est.means ~ sort(unique(SiteWithin)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE) # plot means by site</code></pre>
+<p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Alternatively, you can plot by Estuary as before (see <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a>).</p>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>You can type <code>?lmer</code> into R for help with these functions.</p>
+<p><a href="http://lme4.r-forge.r-project.org/book/Ch2.pdf">Draft book chapter</a> from the authors of lme4.</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Faraway, JJ (2005) <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC Press.
+</p>
+<p style="margin-left:.5in;text-indent:-.5in">
+Zuur, A, EN Ieno and GM Smith (2007) <em>Analysing ecological data</em>. Springer Science &amp; Business Media.
+</p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>
+</div>

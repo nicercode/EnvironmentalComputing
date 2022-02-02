@@ -1,0 +1,198 @@
+---
+title: 'Customising your ggplot'
+weight: 2
+output: html_document
+aliases: /plotting-with-ggplot-altering-the-overall-appearance/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><strong>ggplots</strong> are almost entirely customisable. This gives you the freedom to create a plot design that perfectly matches your report, essay or paper.</p>
+<p>The overall appearance can be edited by changing the style or prescence of grid lines, axis notches, panel colour, legend colour or outlines.</p>
+<p>Before you get started, read the page on the <a href="/graphics/ggplot/ggplot-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<div id="creating-a-customised-theme" class="section level3">
+<h3>Creating a customised theme</h3>
+<p>One of the most effective ways to customise your plot is to create a customised theme and separate this from your basic ggplot code. By separating and saving your theme, it will be much easier to edit, alter and reuse for other projects.</p>
+<p><img src="ggplot1_basics_image.JPG" /></p>
+<p>In these examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
+<pre class="r"><code>data(iris)</code></pre>
+<p>The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial.</p>
+<pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>To change the design of an element of your plot, you create a theme then print the plot with the theme applied. For example, some code to change the colour and size of the legend in the above plot would look like this.</p>
+<pre class="r"><code>mytheme &lt;-
+  theme(legend.title = element_text(colour = &quot;steelblue&quot;, size = rel(2)))</code></pre>
+<p>We would then reprint the base plot with this theme added:</p>
+<pre class="r"><code>print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Themes can have many different elements, that relate to legends, axes, titles etc. Separate each within the <code>theme</code> code with a comma.</p>
+</div>
+<div id="formatting-the-plot-and-legend-background" class="section level3">
+<h3>Formatting the plot and legend background</h3>
+<p>The plot and legend background can be changed to any colour listed <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a> using the following code:</p>
+<ul>
+<li><code>panel.background = element_rect(your format)</code> will alter the panel behind the graph.<br />
+</li>
+<li><code>legend.key = element_rect(your format)</code> alters the boxes next to each category name.<br />
+</li>
+<li><code>legend.background = element_rect(your format)</code> will alter the box around the legend names and boxes.</li>
+</ul>
+<p>For each of these, the formats you can alter are:</p>
+<ul>
+<li><code>fill = "colour"</code> to colour the panel behind the plot.<br />
+</li>
+<li><code>colour = "colour"</code> will alter the axis outline of the graph.<br />
+</li>
+<li><code>size = (number)</code> will alter the thickness of this outline.</li>
+</ul>
+<p>To demonstrate how this works, here is a ugly theme with obvious colours chosen to demonstrate the differences:</p>
+<pre class="r"><code>mytheme &lt;-
+  theme(
+    panel.background = element_rect(
+      fill = &quot;black&quot;,
+      colour = &quot;yellow&quot;,
+      size = 4
+    ),
+    legend.key = element_rect(fill = &quot;darkgrey&quot;, colour = &quot;yellow&quot;),
+    legend.background = (element_rect(colour = &quot;yellow&quot;, fill = &quot;blue&quot;))
+  )
+
+print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="altering-the-size-colour-or-presence-of-grid-lines" class="section level3">
+<h3>Altering the size, colour or presence of grid lines</h3>
+<p>The grid lines are divided into two sets of grid lines; major and minor. This allows you to accentuate or remove half the grid lines.<br />
+* <code>panel.grid.major = element_line(your format)</code> - alters the format of major grid lines.<br />
+* <code>panel.grid.minor = element_line(your format)</code> - alters the format of minor grid lines.</p>
+<p>where <code>(your format)</code> specifies the colour and thickness of the lines.</p>
+<p>Formats include:<br />
+* Colour. For example, <code>colour = "steelblue2"</code> - remember to include “” before and after the colour name.<br />
+* Size. Specified by entering a number, for example, <code>size = (3)</code>.</p>
+<p>Putting these together in a theme would look like this:</p>
+<pre class="r"><code>mytheme &lt;-
+  theme(
+    panel.grid.major = element_line(colour = &quot;black&quot;, size = (1.5)),
+    panel.grid.minor = element_line(
+      size = (0.2), colour =
+        &quot;grey&quot;
+    )
+  )
+
+print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>To remove the grid lines, use the <code>element_blank()</code>.</p>
+<pre class="r"><code>mytheme &lt;- theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
+
+print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="altering-the-x-and-y-axis-lines" class="section level3">
+<h3>Altering the x and y axis lines</h3>
+<p>The size and colour of axis lines themselves can be customised in the same way as the grid lines (above), using <code>axis.line=element_line(your format)</code>. For example:</p>
+<pre class="r"><code>mytheme &lt;-
+  theme(
+    axis.line = element_line(size = 1.5, colour = &quot;red&quot;),
+    panel.background = element_rect(fill = &quot;white&quot;)
+  )
+
+print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="altering-the-axis-ticksnotches" class="section level3">
+<h3>Altering the axis ticks/notches</h3>
+<p>The size and colour of the ticks can be altered using <code>axis.ticks = element_line(your format)</code>. For example:</p>
+<pre class="r"><code>mytheme &lt;- theme(axis.ticks = element_line(colour = &quot;red&quot;, size = (2)))
+
+print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="removing-any-element-of-a-theme" class="section level3">
+<h3>Removing any element of a theme</h3>
+<p><code>= element_blank()</code> is used if you wish to entirely remove an element of the formatting. For example, to get rid of ticks, grid lines and the background, you would use:</p>
+<pre class="r"><code>mytheme &lt;-
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.background = element_blank()
+  )
+
+print(IrisPlot + mytheme)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="example-of-a-fully-customised-ggplot" class="section level3">
+<h3>Example of a fully customised ggplot</h3>
+<p>Here is an example of a ggplot with many of the elements customised. This is obviously a lot of code, but remember that you can save and reuse your favorite theme as often as you like. See the page on <a href="/graphics/ggplot/ggplot-labels/">adding titles and axis names</a> for help with those parts of the <code>print()</code> code.</p>
+<pre class="r"><code>IrisPlot &lt;-
+  ggplot(
+    iris,
+    aes(
+      Sepal.Length,
+      Petal.Length,
+      colour = Species,
+      shape = Species
+    )
+  ) +
+  geom_point()
+
+mytheme3 &lt;-
+  theme(
+    legend.text = element_text(
+      face = &quot;italic&quot;,
+      colour = &quot;steelblue4&quot;,
+      family = &quot;Helvetica&quot;,
+      size = rel(1)
+    ),
+    axis.title = element_text(
+      colour = &quot;steelblue4&quot;,
+      family = &quot;Helvetica&quot;,
+      size = rel(1.5)
+    ),
+    axis.text = element_text(
+      family = &quot;Helvetica&quot;,
+      colour = &quot;steelblue1&quot;,
+      size = rel(1.5)
+    ),
+    axis.line = element_line(size = 1, colour = &quot;black&quot;),
+    axis.ticks = element_line(colour = &quot;grey&quot;, size = rel(1.4)),
+    panel.grid.major = element_line(colour = &quot;grey&quot;, size = rel(0.5)),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = &quot;whitesmoke&quot;),
+    legend.key = element_rect(fill = &quot;whitesmoke&quot;),
+    legend.title = element_text(
+      colour = &quot;steelblue&quot;,
+      size = rel(1.5),
+      family = &quot;Helvetica&quot;
+    ),
+    plot.title = element_text(
+      colour = &quot;steelblue4&quot;,
+      face = &quot;bold&quot;,
+      size = rel(1.7),
+      family = &quot;Helvetica&quot;
+    )
+  )
+
+print(
+  IrisPlot + mytheme3 + ggtitle(&quot;Iris species petal and sepal length&quot;)
+    + labs(y = &quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;, colour = &quot;Species&quot;)
+    + scale_colour_manual(values = c(&quot;slateblue&quot;, &quot;slateblue2&quot;, &quot;slateblue4&quot;))
+)</code></pre>
+<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>###Further help</p>
+<p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
+* <a href="/graphics/ggplot/ggplot-labels/">adding titles and axis names</a><br />
+* <a href="/graphics/ggplot/ggplot-colour-shapes/">colours and symbols</a>.</p>
+<p>Help on all the ggplot functions can be found at the <a href="https://ggplot2.tidyverse.org">The master ggplot help site</a>.</p>
+<p>A useful cheat sheet on commonly used functions can be downloaded <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf">here</a>.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with quite a bit of help online <a href="http://www.cookbook-r.com/Graphs/">here</a>
+</p>
+<p><strong>Author</strong>: Fiona Robinson</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

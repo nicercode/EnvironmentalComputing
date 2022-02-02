@@ -1,0 +1,238 @@
+---
+weight: 1
+title: "Good Practices for Code"
+aliases: /good-practice-for-writing-scripts/
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(formatR)</code></pre>
+<p>When undertaking any project that involves data analyses in R, it is a very good idea to save all the code needed to run any analyses or make any figures in an R script.</p>
+<p>R scripts are very useful when collaborating with others as you can share your methods. We also tend to reuse and adapt scripts for future projects, so you may need to read a script you wrote months or even years ago. It is important to format your script for easy transfer across computers and for easy interpretation by others (and yourself). It is the digital equivalent of being organised and avoiding the problem of never knowing where anything is.</p>
+<p><img src="Good_script_practice_image.jpg" /></p>
+<p>If you have never made an R script, first read <a href="/../getting-started-with-r/">Getting started with R</a>.</p>
+<div id="creating-a-project-directory" class="section level3">
+<h3>Creating a project directory</h3>
+<p>Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as <code>Data</code>, <code>R_scripts</code> or <code>Outputs</code>, how you manage your project directory is up to you.</p>
+<p><strong>Data integrity.</strong> Once data entry is completed and saved in your project directory (see <a href="/../getting-started-with-r/data-entry/">Data entry</a>, this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset.</p>
+</div>
+<div id="general-script-format" class="section level3">
+<h3>General script format</h3>
+<p>The following notes outline the general layout and ordering you should follow when writing your scripts. If everyone is using the same general format, reading and understanding each other’s (and your own) scripts will be much easier.</p>
+<p>Firstly, all scripts should start with a title, author details, a brief description of the scripts purpose and the data being used and copyright and legal stuff (Probably not while in university, but later in life you’ll want to remember this). For example,</p>
+<pre class="r"><code># title: Time series analyses
+# Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
+# Script and data info: This script performs a time series analyses on count data.  
+# Data consists of counts of bird species.
+# Data was collected in the hunter valley region between 1990 and 1991. 
+# Copyright statement: This script is the product of UNSW etc.</code></pre>
+<p>All comments need to start with <code>#</code> to distinguish them from executable code.</p>
+<p>You should then include some code that will set your working directory and import your data. Ideally, setting your working directory as your project directory.</p>
+<pre class="r"><code>setwd(&quot;C:/Users/JohnSmith/My_project_directory&quot;)
+my.data &lt;- read.csv(&quot;my_data.csv&quot;, sep = &quot;,&quot;, header = T, check.names = FALSE)</code></pre>
+<p>To save time later and avoid annoying error messages, ensure all the packages and functions needed for you analyses are loaded into R, this includes libraries or any function scripts you have written yourself. Each package is loaded with the <code>library</code>.</p>
+<pre class="r"><code>library(car)
+library(lme4)
+library(Reshape2)
+library(ggplot2)
+source(&quot;R_scripts/myfunctions.R&quot;)</code></pre>
+<p>Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See <a href="/../getting-started-with-r/data-types-structure/">Data structure</a> and <a href="/../getting-started-with-r/importing-data/">Importing data</a> for help with these issues.</p>
+<p>Putting all this together, the beginning of a script will look something like the following.</p>
+<pre class="r"><code># title: Time series analyses
+# Author details: Author: John Smith, Contact details: John.Smith@unsw.edu.au
+# Script and data info: This script performs a time series analyses on count data.  
+# Data consists of counts of bird species.
+# Data was collected in the Hunter Valley region between 1990 and 1991. 
+# Copyright statement: This script is the product of UNSW etc.
+setwd(&quot;C:/Users/JohnSmith/myprojectdirectory&quot;)
+my.data &lt;- read.csv(&quot;mydata.csv&quot;, sep = &quot;,&quot;, header = T, check.names = FALSE)
+
+library(car)
+library(lme4)
+library(Reshape2)
+library(ggplot2)
+source(&quot;R_scripts/myfunctions.R&quot;)
+
+# Checking data structure
+
+summary(my.data)
+str(my.data)
+my.data[which(is.na(my.data)), ]
+levels(my.data$variable1)
+
+# Data cleaning
+my.data$variable1 &lt;- as.numeric(my.data$variable1)  # changed to numeric.
+my.data[is.na(my.data)] &lt;- 0  # replace NAs with zeros. 
+my.data[6, 4] &lt;- 46.01  # replace value 4601 with 46.01.
+
+# begin data analyses.</code></pre>
+</div>
+<div id="style-guide" class="section level3">
+<h3>Style guide</h3>
+<p>“<em>Good coding is like using correct punctuation. You can manage without it, but it sure makes things easier to read</em>.” - Hadley Wickham.</p>
+<p>There are many different styles of coding (none of which are better or worse). The point of style guides is to have a common vocabulary. When working with others, its a good idea to agree on a common style before the project gets too far along.</p>
+<p>The following guide is based on the <a href="https://google.github.io/styleguide/Rguide.html">Google’s R style guide</a> and Hadley Wickham’s <a href="http://adv-r.had.co.nz/Style.html">Style Guide</a>. If you haven’t already adopted a consistent coding style these are good places to start.</p>
+</div>
+<div id="notation-and-naming" class="section level3">
+<h3>Notation and naming</h3>
+<p><strong>File and folder names</strong></p>
+<p>When naming your project folders, data files, script files, or any other files for that matter, there are number of things that need to be considered. Files may be copied or transferred across different operating systems (e.g Windows, Mac, or UNIX ) and we need to name our files for transfer-ability. In addition, file names must be unique and indicative of what the file contains. Consider the following rules when naming your own folders and files.</p>
+<p>Firstly, avoid “special” characters. Special characters include things such as file separators (e.g. colons, forward-slash, and backslash), non-alphabetical and non-numerical symbols ( e.g., ? T $ ?), punctuation marks ( e.g., full stops, commas, parentheses, quotations marks, and operators ) and, the most common mistake, avoid white space characters (spaces, tabs, new lines and embedded returns).</p>
+<p>Give your files meaningful names; avoid filenames such as “project1” and “project2” or “data1.csv” and “data2.csv”, instead use things like “bird_movement.csv”, “snail_feeding.csv” or “diurnal_movement_data.csv” and “yearly_movement_data.csv”. For R scripts, file names should end in .R (i.e., “predict_diurnal_movements.R”).</p>
+<p>Although current file systems allow 255 character limits, it is good practice to shorten files names. Try keep file names between 1 and 3 words long. If you add dates to a filename, remember to avoid using special characters, consider underscore or dashes to separate out days-months-years.</p>
+<p>It is absolutely crucial that file names be unique, especially if you work in a collaborative environment, and especially if you frequently copy files to a server. If you don’t have a system for how you keep file names unique, you risk overwriting them and losing all your data.</p>
+<p><strong>Object names in R</strong></p>
+<p>Variable names should all be in lower case with words separated by dots where as Function names have initial capital letters and no dots. Generally, variables names should be nouns and function names should be verbs. For ease of typing, it is OK to shorten words and use abbreviations so long as they still identify and describe the object they are naming. Strive for names that are concise and meaningful, refrain from calling variable names single letters and, where possible, avoid using existing function and variable names.</p>
+<p><span style="color:green"> Good examples</p>
+<pre class="r"><code># variables 
+bird.mvment &lt;- read.csv(&quot;bird_movement.csv&quot;)
+bird.mvment.mdl &lt;- lm(counts ~ location, data = bird.mvmnt)
+bird.mvment$log.counts &lt;- log(bird.mvmnt$counts)
+
+# functions 
+CalcStandardError &lt;- function (x){
+  sd(x)/sqrt(length(x))
+}</code></pre>
+<p><span style="color:red"> Bad examples</p>
+<pre class="r"><code># variables
+data &lt;- read.csv(&quot;bird_movement.csv&quot;) # uninformative, especially if you had to load two datasets. 
+Bird.Mvment_Mdl &lt;- lm(counts ~ location, data = bird.mvmnt) # inconsistent naming format. 
+bird.mvment$log &lt;- log(bird.mvmnt$counts) # uninformative and used function name to label variable. 
+
+# functions
+S &lt;- function (x){ # S is uninformative. 
+  sd(x)/sqrt(length(x))
+}</code></pre>
+</div>
+<div id="guidelines-for-adding-comments" class="section level3">
+<h3>Guidelines for adding comments</h3>
+<p><strong>Adding comments to your script</strong></p>
+<p>When you go back and edit or work on projects in the future it is surprising how much you’ll forget. It is thus essential to accurately comment your code for both solo and team projects. However, you can have too many comments. Descriptive and informative names and expressive code can abolish the need for many comments and over commenting can scripts that are messy and hard to read. This is a skill that develops over time and with practice. As you get better at coding you will find yourself commenting less and less - “Code doesn’t lie, but comments can”.</p>
+<p>In general, comments should NOT state the obvious, they should be consistent with what they describe, it should be clear what line or block of code they are referring to and they should be readable by any future handler.</p>
+<p>Entire commented lines should begin with # and one space; short comments can be placed after code proceeded by two spaces, # and then one space.</p>
+<p>Tip: Use commented lines of # —— to break up your script into readable chunks.</p>
+<p><span style="color:green"> Good examples</p>
+<pre class="r"><code>bird.count &lt;- 10
+
+# Creates histogram of frequency of bird counts.
+hist(bird_movement$counts,
+     breaks = &quot;scott&quot;,  # method for choosing number of buckets
+     main   = &quot;Histogram: bird counts&quot;)</code></pre>
+<p><span style="color:red"> Bad examples</p>
+<pre class="r"><code>x &lt;- 10  # Bird counts - unneccesary, simply name the variable &#39;bird.count&#39;
+
+hist(bird_movement$counts,
+     breaks = &quot;scott&quot;,### method for choosing number of buckets - looks messy. 
+     main   = &quot;Histogram: bird counts&quot;)
+# Creates histogram of frequency of bird counts. - place comment before code. </code></pre>
+<p><strong>Adding comments to functions</strong></p>
+<p>Function comments should contain, a brief description of the function (one sentence), a list of function arguments with a description of each (including data type) and a description of the return value. Function comments should be written immediately below the function definition line.</p>
+<p>See <a href="/../coding-skills/writing-functions/">Writing functions</a> for help on creating functions in R.</p>
+<p><span style="color:green"> Good example</p>
+<pre class="r"><code>CalculateStandardError &lt;- function (x){
+  # Computes the sample standard error
+  #
+  # Arguments:
+  #  x: Vector whose standard error is to be calculated. x must have length greater than one,
+  #     with no missingn values.
+  #
+  # Return:
+  #  The standard error of x
+  se&lt;-sd(x)/sqrt(length(x))
+  return(se)
+}</code></pre>
+</div>
+<div id="syntax" class="section level3">
+<h3>Syntax</h3>
+<p><strong>Assignment</strong></p>
+<p>Always use <code>&lt;-</code> when assigning names to objects and avoid using <code>=</code> for assignment. Even though this distinction doesn’t matter for the majority of the time, it is a good habit to use <code>&lt;-</code> as this can be used anywhere, whereas the operator <code>=</code> is only allowed at the top level. In addition <code>=</code> closely resembles <code>==</code>, which is the logical operator for equals to.</p>
+<p><span style="color:green"> Good example</p>
+<pre class="r"><code>bird.count &lt;- bird.mvments$counts</code></pre>
+<p><span style="color:red"> Bad example</p>
+<pre class="r"><code>bird.count = bird.mvments$counts</code></pre>
+<p><strong>Line length</strong></p>
+<p>The maximum line length should be 80 characters. This fits comfortable on a printed page with a reasonably sized font. If you find yourself running out of space, you may need to condense some of the work into a separate function.</p>
+<pre class="r"><code>This is how long 80 characters is. Try not to type more than 80 on a single line.</code></pre>
+<p><strong>Spacing</strong></p>
+<p>Place spaces around all binary operators (=, +, -, &lt;-, ==, ! = ), the exception to this is colons (:) and commas(,). Just like regular English, always put a space after a comma and never before.</p>
+<p><span style="color:green"> Good examples</p>
+<pre class="r"><code>bird.mvments[which(bird.mvments == max(bird.mvments)), ]
+
+bird.var &lt;- bird.mvments[, 4:10]</code></pre>
+<p><span style="color:red"> Bad examples</p>
+<pre class="r"><code>bird.mvments[which(bird.mvments==max(bird.mvments)),]  # spaces needed between operators and after comma.
+
+bird.var &lt;- bird.mvments[ ,4 : 10]  # space goes after comma not before, remove space around :.
+
+bird.var&lt;-bird.mvments[, 4:10]  # space needed around &lt;-. </code></pre>
+<p>Place a space before parentheses, except in a function call. Do not place space around code within parentheses or square brackets except after a comma.</p>
+<p><span style="color:green"> Good examples</p>
+<pre class="r"><code>for (i in 1:20) {
+   bird.means[[i]] &lt;- mean(bird.mvments$bird.count[[i]])
+}
+
+mean(bird.mvments$bird.count)
+
+bird.mvments[2, ]</code></pre>
+<p><span style="color:red"> Bad examples</p>
+<pre class="r"><code>for(i in 1:20) {  # space needed betwen for and (i in 1:20).
+   bird.means[[i]] &lt;- mean (bird.mvments$bird.count[[i]])  # remove space after mean. 
+}
+
+mean( bird.mvments$bird.count )  # remove space around code.
+
+bird.mvments[2,]  # needs a space after comma. </code></pre>
+<p><strong>Curley braces {}</strong></p>
+<p>Curly braces are used in loops and to set up logical conditions. An opening curly brace should never go on its own line and should always be followed by a new line. A closing curly brace should always go on its own line, unless followed by <code>else</code>, which should be contained within outward facing curly braces <code>&gt;}else{</code>. Always indent the code within curly braces.</p>
+<p><span style="color:green"> Good examples</p>
+<pre class="r"><code>for (i in 1:20) {
+  bird.means[[i]] &lt;- mean(bird.mvments$bird.count[[i]])
+}
+
+if (y == 0) {
+    log(x)
+  } else {
+    y ^ x
+}</code></pre>
+<p><span style="color:red"> Bad examples</p>
+<pre class="r"><code>for (i in 1:20) { bird.means[[i]] &lt;- mean(bird.mvments$bird.count[[i]])  # opening curly followed by new line
+} 
+
+for (i in 1:20) { 
+  bird.means[[i]] &lt;- mean(bird.mvments$bird.count[[i]])}  # closing curly needs new line. 
+
+if (y == 0) {
+    log(x)
+  } 
+  else {  # inclose else within }{. 
+    y ^ x
+}</code></pre>
+<p><strong>Indentation</strong></p>
+<p>Never use tabs or mix tabs and spaces when indenting your code. When indenting, use two spaces, except when using parentheses where you align a new line with the first character within the parenthesis or square brackets.</p>
+<p><span style="color:green"> Good examples</p>
+<pre class="r"><code>CalcStandardError &lt;- function (x){
+  se&lt;-sd(x)/sqrt(length(x))
+  return(se)
+}
+
+bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)), 
+             10:ncols(bird.mvments)]</code></pre>
+<p><span style="color:red"> Bad examples</p>
+<pre class="r"><code>CalcStandardError &lt;- function (x){
+se&lt;-sd(x)/sqrt(length(x))  # indent two spaces.
+return(se)
+}
+
+bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)), 
+  10:ncols(bird.mvments)]  # align with the square brackets. </code></pre>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>For more info see <a href="http://adv-r.had.co.nz/Style.html">Hadley Wickham’s style guide</a> which is based of the <a href="https://google.github.io/styleguide/Rguide.html">Google style guide</a>.</p>
+<p>You may now be thinking about all the scripts that you have made that need to be be reformatted. As is commonplace in R, someone has created a package to help with this. The <a href="https://cran.r-project.org/web/packages/formatR/index.html">formatR</a> package by Yihui Xie has a neat little function called <code>tidy_source()</code>. This isn’t a fix all, but can go a long way in making horrible scripts look legible. See <a href="http://yihui.name/formatR/">An introduction to format R</a> or type <code>?tidy_source()</code> for details on how to use this package.</p>
+<p><strong>Author</strong>: Keryn F Bain</p>
+<p><strong>Year:</strong> 2017</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

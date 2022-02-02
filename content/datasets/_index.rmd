@@ -1,0 +1,98 @@
+---
+title: 'Datasets'
+weight: 7
+output: html_document
+---
+
+This page contains the datasets or files that are used throughout the tutorials found on this website. Most datasets are in .csv format, unless stated otherwise. The datasets are organised alphabetically. 
+
+## A
+
+[Algal_traits.csv](/datasets/Algal_traits.csv)
+
+## B
+
+[Bac.counts.csv](/datasets/Bac.counts.csv)
+
+[Bac.factors.csv](/datasets/Bac.factors.csv)
+
+[Bats_data.csv](/datasets/Bats_data.csv)
+
+## C
+
+[Cairns_Mangroves_30m.tif](/datasets/Cairns_Mangroves_30m.tif)
+
+[Crabs.csv](/datasets/Crabs.csv)
+
+## E
+
+[Estuaries.csv](/datasets/Estuaries.csv)
+
+[Estuary_fish.csv](/datasets/Estuary_fish.csv)
+
+## G
+
+[Geo_data.csv](/datasets/Geo_data.csv)
+
+[Greenhouse.csv](/datasets/Greenhouse.csv)
+
+## H
+
+[Harbour_metals.csv](/datasets/Harbour_metals.csv)
+
+[Herbivore_specialisation.csv](/datasets/Herbivore_specialisation.csv)
+
+## I
+
+[Interaction_plots.csv](/datasets/Interaction_plots.csv)
+
+## L
+
+[Landsat_TIR.tif](/datasets/Landsat_TIR.tif)
+
+[Leafshape.csv](/datasets/Leafshape.csv)
+
+## M
+
+[mauna_loa_co2.csv](/datasets/mauna_loa_co2.csv)
+
+[Mink.csv](/datasets/Mink.csv)
+
+[multiband.tif](/datasets/multiband.tif)
+
+## P
+
+[Pilot.csv](/datasets/Pilot.csv)
+
+[Plant_height.csv](/datasets/Plant_height.csv)
+
+[Prawns_MR.csv](/datasets/Prawns_MR.csv)
+
+## R
+
+[ReefFish.csv](/datasets/ReefFish.csv)
+
+[Revegetation.csv](/datasets/Revegetation.csv)
+
+[River_pH.csv](/datasets/River_pH.csv)
+
+## S
+
+[Sessile.csv](/datasets/Sessile.csv)
+
+[Snail_feeding.csv](/datasets/Snail_feeding.csv)
+
+## T
+
+[tree_curtis1998.tre](/datasets/tree_curtis1998.tre)
+
+[Turtles.csv](/datasets/Turtles.csv)
+
+
+## W
+
+[Weather_vars.csv](/datasets/Weather_vars.csv)
+ 
+**Year:** 2016
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -1,0 +1,54 @@
+---
+title: 'Statistics'
+weight: 6
+output: html_document
+---
+
+These pages have some introductions to a wide range of commonly used statistical analyses in the environmental sciences.
+
+Some simple [hypothesis tests](t-tests) with the *t* statistic:
+
+* [One sample t tests](t-tests/one-sample-t-test) - contrasting a single sample parameter to a population parameter  
+* [Independent samples](t-tests/two-sample-t-test) - contrasting the means of two samples
+* [Paired t-tests](t-tests/paired-t-test) - contrasting two groups when data are paired  
+
+[Linear models](linear-models):
+
+* [Linear regression](linear-models/linear-regression)
+* [Analysis of variance: single factor](linear-models/anova/anova-single/)
+* [Analysis of variance: factorial](linear-models/anova/anova-factorial/)  
+* [Understanding interactions](linear-models/interactions)
+
+[Generalised linear models](glms):
+
+* [Generalised linear models 1](glms/glm-1): Introduction and binomial data  
+* [Generalised linear models 2](glms/glm-2): Count data  
+
+[Mixed models](mixed-models):
+
+* [Mixed models 1](mixed-models/mixed-model-1): Linear mixed models with one random effect  
+* [Mixed models 2](mixed-models/mixed-model-2): Linear mixed models with several random effects  
+* [Mixed models 3](mixed-models/mixed-model-3): Generalised linear mixed models  
+
+[Generalised additive models](gams)
+
+[Categorical data analyses](categorical):
+
+* [Goodness of fit tests](categorical/goodness-of-fit)  
+* [Contingency tables](categorical/contingency-tables)
+
+[Power analyses](power-analysis): calculating power and deciding on sample sizes
+
+[Introduction to mvabund](mvabund): model-based analysis of multivariate abundance data
+
+[Forecasting with time series](time-series)
+
+
+[Meta-analyses](meta-analysis) 
+
+* [Meta-analyses 1](meta-analysis/meta-analysis-1): Introduction and calculating effect sizes  
+* [Meta-analyses 2](meta-analysis/meta-analysis-2): Fixed effect and random effect models  
+* [Meta-analyses 3](meta-analysis/meta-analysis-3): More complex models 
+
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`

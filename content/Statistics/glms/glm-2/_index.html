@@ -1,0 +1,106 @@
+---
+weight: 2
+title: "Count Data"
+output: html_document
+aliases: /generalised-linear-models-2/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><strong>Count data</strong></p>
+<p>This is a continuation of <a href="/statistics/glms/glm-1">Generalised linear models 1</a> which introduced GLMs and gave instructions for binary data. Read that first to understand when GLMs are used. On this page, we will cover the use of GLM’s for count data and briefly introduce how they can be used for other data types you may have.</p>
+<div id="running-the-analysis" class="section level3">
+<h3>Running the analysis</h3>
+<p><img src="GLM2_counts_image.jpg" /></p>
+<p>For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.</p>
+<p>Download the sample data set, <a href="/datasets/Revegetation.csv">Revegetation.csv</a>, and import into R to see how the data are arranged:</p>
+<pre class="r"><code>Reveg &lt;- read.csv(&quot;Revegetation.csv&quot;, header = T)</code></pre>
+<p>If you view the frequency histogram of the slug counts, you will see that it is very skewed, with many small values and few large counts (the variable name, Soleolifera, is the order name of terrestrial slugs).</p>
+<pre class="r"><code>hist(Reveg$Soleolifera)</code></pre>
+<p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-2-1.png" width="500px" /></p>
+<p>The default distribution for count data is the Poisson. The Poisson distribution assumes the variance equals the mean. This is quite a restrictive assumption which ecological count data often violate. We may need to use the more flexible negative-binomial distribution instead.</p>
+<p>We can use a GLM to test whether the counts of slugs (from the order Soleolifera) differ between control and regenerated sites. To fit the GLM, we will use the <code>manyglm</code> function instead of <code>glm</code> so we have access to more useful residual plots.</p>
+<p>To fit the GLM, load the mvabund package then fit the following model:</p>
+<pre class="r"><code>library(mvabund)
+ft.sol.pois &lt;- manyglm(Soleolifera ~ Treatment, family = &quot;poisson&quot;, data = Reveg)</code></pre>
+<p>where Soleolifera is the response variable, and Treatment is the predictor variable (with two levels, control and revegetated).</p>
+</div>
+<div id="assumptions-to-check" class="section level3">
+<h3>Assumptions to check</h3>
+<p>Before we look at the results, we need to look at the residual plot to check the assumptions.</p>
+<pre class="r"><code>plot(ft.sol.pois)</code></pre>
+<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
+## caption, : Only the first 1 colors will be used for plotting.</code></pre>
+<p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-4-1.png" width="500px" /></p>
+<p>It’s hard to say whether there is any non-linearity in this plot, this is because the predictor is binary (treatment vs revegetated). Looking at the variance assumption, it does appear as though there is a fan shape. The residuals are more spread out on the right than the left - we call this overdispersion.</p>
+<p>This tells us the variance assumption of the Poisson may be too restrictive and we should try a different distribution. We can instead fit a negative-binomial distribution in <code>manyglm</code> by changing the family argument to <code>family="negative binomial"</code>.</p>
+<pre class="r"><code>ft.sol.nb &lt;- manyglm(Soleolifera ~ Treatment, family = &quot;negative binomial&quot;, data = Reveg)</code></pre>
+<p>Look again at the residual plot:</p>
+<pre class="r"><code>plot(ft.sol.nb)</code></pre>
+<pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
+## caption, : Only the first 1 colors will be used for plotting.</code></pre>
+<p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
+<p>This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.</p>
+</div>
+<div id="interpreting-the-results" class="section level3">
+<h3>Interpreting the results</h3>
+<p>If all the assumption checks are okay, we can have a look at the results the model gave us with the same two functions for inference as used for linear models: <code>summary</code> and <code>anova</code>.</p>
+<pre class="r"><code>anova(ft.sol.nb)</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 0 sec</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: Soleolifera ~ Treatment
+## 
+## Multivariate test:
+##             Res.Df Df.diff   Dev Pr(&gt;Dev)   
+## (Intercept)     48                          
+## Treatment       47       1 10.52    0.002 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Arguments: P-value calculated using 999 iterations via PIT-trap resampling.</code></pre>
+<pre class="r"><code>summary(ft.sol.nb)</code></pre>
+<pre><code>## 
+## Test statistics:
+##                      wald value Pr(&gt;wald)    
+## (Intercept)               1.502     0.020 *  
+## TreatmentRevegetated      3.307     0.001 ***
+## --- 
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## Test statistic:  3.307, p-value: 0.001 
+## Arguments: P-value calculated using 999 resampling iterations via pit.trap resampling.</code></pre>
+<p>Both tests indicate strong evidence of a treatment effect (p&lt;0.01). To extract the model equation we can look at the coefficients from the fit.</p>
+<pre class="r"><code>ft.sol.nb$coefficients</code></pre>
+<pre><code>##                      Soleolifera
+## (Intercept)           -0.9162907
+## TreatmentRevegetated   2.1202635</code></pre>
+<p>The default link function for Poisson and negative binomial models is <span class="math inline">\(log()\)</span>. If we write the mean count as <span class="math inline">\(\lambda\)</span></p>
+<p><span class="math display">\[ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}\]</span></p>
+</div>
+<div id="communicating-the-results" class="section level3">
+<h3>Communicating the results</h3>
+<p><strong>Written.</strong> Results of GLM’s are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g. “There is strong evidence of positive effect of bush regeneration on the abundance of slugs from the order Soleolifera (p &lt; 0.001)”. For multiple predictors it’s best to display the results in a table. You should also indicate which distribution was used (e.g. negative-binomial) and if resampling was used for inference. ” We used a negative-binomial generalised linear model due to overdispersion evident in the data. Inference was carried out using bootstrap resampling with 1000 resamples (default when using manyglm).”</p>
+<p><strong>Visual.</strong> In this example, a boxplot would be an effective way to visualse the differences in slug counts between control and revegetated sites.</p>
+<pre class="r"><code>boxplot(Soleolifera ~ Treatment, ylab = &quot;Count&quot;, xlab = &quot;Treatment&quot;, data = Reveg)</code></pre>
+<p><img src="/statistics/glms/glm-2/_index_files/figure-html/unnamed-chunk-9-1.png" width="500px" /></p>
+</div>
+<div id="other-types-of-data" class="section level3">
+<h3>Other types of data</h3>
+<p>If you have continuous positive data with zeros, like biomass data, the <code>tweedie</code> distribution might be able to model this, although it does have some quite restrictive assumptions. You can use <code>family="tweedie"</code> with the <code>manyglm</code> function. Be sure to look at residual plots for violations of assumptions.</p>
+<p>For strictly positive continuous data a <code>gamma</code> distribution can be used. This is available in the <code>glm</code> function using <code>family=gamma</code>.</p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>You can type <code>?glm</code> and <code>?manyglm</code> into R for help with these functions.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Faraway, JJ. 2005. <em>Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models</em>. CRC press.
+</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Zuur, A, EN Ieno and GM Smith. 20074. <em>Analysing ecological data</em>. Springer Science &amp; Business Media, 2007.
+</p>
+<p>More advice on <a href="/../statistics/glms/interpret-glm-coeffs/">interpreting coefficients in glms</a></p>
+<p><strong>Author</strong>: Gordana Popovic</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

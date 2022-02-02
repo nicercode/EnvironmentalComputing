@@ -1,0 +1,39 @@
+---
+title: 'Plotting in R with ggplot2'
+weight: 1
+output: html_document
+aliases: /plotting-with-ggplot/
+---
+
+```{r, echo=FALSE, warning=F}
+library(ggplot2)
+g1 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_classic()
+print(g1 + labs(y = "Petal length (cm)", x = "Sepal length (cm)"))
+```
+ 
+
+[ggplot2](https://ggplot2.tidyverse.org) is a powerful graphing package in R that can be used to create professional looking plot for reports, essays or papers. It can create a variety of plots including boxplots, scatterpots and histograms and they can be highly customised to suit your data. 
+
+The package is named after a book called [The Grammar of Graphics](https://books.google.com.au/books/about/The_Grammar_of_Graphics.html?id=ZiwLCAAAQBAJ&source=kp_cover&hl=en) about how to effectively communicate data graphically. 
+  
+
+
+Start with the [basics](/graphics/ggplot/ggplot-basics) to learn the basic syntax of making a graph
+
+Then, visit our other pages to further customise the aesthetics of the graph, including colour and formatting:  
+* [altering the overall appearance](/graphics/ggplot/ggplot-appearance/)  
+* [adding titles and axis names](/graphics/ggplot/ggplot-labels/)  
+* [colours and symbols](/graphics/ggplot/ggplot-colour-shapes/).   
+
+Help on all the ggplot functions can be found at the [The master ggplot help site](https://ggplot2.tidyverse.org).
+
+A useful cheat sheet on commonly used functions can be downloaded [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
+
+<p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with quite a bit of help online [here](http://www.cookbook-r.com/Graphs/)</p>
+  
+
+**Year:** 2016
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`

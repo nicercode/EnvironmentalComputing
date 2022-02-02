@@ -6,20 +6,31 @@ theme: hugo-theme-learn
 metaDataFormat: yaml
 defaultContentLanguageInSubdir: yes
 params:
-  author: Mathieu Cornic
-  customMermaidURL: https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js
-  description: Documentation for Hugo Learn Theme
+  author: Fonti Kar, Daniel Falster, and Will Cornwell
+  customMermaidURL: NA
+  description: Environmental Computing
   disableBreadcrumb: no
   disableLandingPageButton: yes
   disableMermaid: no
   disableNextPrev: no
-  editURL: https://github.com/matcornic/hugo-theme-learn/edit/master/exampleSite/content/
+  editURL: https://github.com/nicercode/EnvironmentalComputing/edit/develop/content/
   showVisitedLinks: yes
   titleSeparator: '::'
+  themeVariant: 'green'
 outputs:
   home:
     - HTML
     - RSS
     - JSON
 
+ignoreFiles:
+  - \.Rmd$
+  - \.Rmarkdown$
+  - _cache$
+  - \.knit\.md$
+  - \.utf8\.md$
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

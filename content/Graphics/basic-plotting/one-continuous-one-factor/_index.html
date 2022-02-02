@@ -1,0 +1,86 @@
+---
+title: 'One Continuous and One Categorical Variable'
+weight: 3
+output: html_document
+aliases: /single-continuous-vs-categorical-variables/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Visualising how a measured variable relates to other variables of interest is essential for data exploration and communicating the results of scientific research. This page details how to plot a single, continuous variable against levels of a categorical predictor variable.</p>
+<p>These sorts of plots are very commonly used in the biological, earth and environmental sciences. For example, to view how a given variable differs between an experimental treatment and a control, or among sites and sampling times in environmental sampling.</p>
+<p><img src="Single_continuous_vs_categorical_variable_image.jpg" /></p>
+<p>We will use sample data from an experiment that contrasted the metabolic rate of two species of prawns and introduce two commonly used types of plots for this purpose: boxplots and bar plots.</p>
+<p>Firstly, download the sample data file, <a href="/datasets/Prawns_MR.csv">Prawns_MR.csv</a>, and import into R.</p>
+<pre class="r"><code>Prawns &lt;- read.csv(file = &quot;Prawns_MR.csv&quot;)</code></pre>
+<div id="boxplots" class="section level3">
+<h3>Boxplots</h3>
+<p>Boxplots are easily made with the <code>boxplot</code> function. Boxplots show the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.</p>
+<p>To contrast metabolic rate across the two species, we would use:</p>
+<pre class="r"><code>boxplot(Metabolic_rate ~ Species, data = Prawns)</code></pre>
+<p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The continuous variable is on the left of the tilde (~) and the categorical variable is on the right. Straight away you can see that species B has a higher metabolic rate than species A.</p>
+</div>
+<div id="bar-plots" class="section level3">
+<h3>Bar plots</h3>
+<p>These sorts of data are also commonly visualised with a bar plot that displays the means of the continuous variable for each level of the categorical variable, with error bars displaying some measures of variation within each category. The error bars could be the standard deviation, standard error or 95% confidence intervals.</p>
+<p>While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the <code>summarise</code> and <code>group_by</code> functions from the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> to calculate the means and measures of variation for each level of your categorical variable (see <a href="/data-manipulation/summarising-data/">Summarising data</a>).</p>
+<p>Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see <a href="/graphics/ggplot/ggplot-barplot/">bar plots with error bars</a>).</p>
+<pre class="r"><code>library(dplyr)
+
+Species.summary &lt;- Prawns %&gt;% # the names of the new data frame and the data frame to be summarised
+  group_by(Species) %&gt;% # the grouping variable
+  summarise(
+    mean = mean(Metabolic_rate), # calculates the mean
+    sd = sd(Metabolic_rate), # calculates the standard deviation
+    lower = mean(Metabolic_rate) - sd(Metabolic_rate),
+    upper = mean(Metabolic_rate) + sd(Metabolic_rate)
+  )</code></pre>
+<p>In a new data frame called Species.summary, we now have the means, standard deviations and the lower and upper values that set the size of the error bars for each level of the grouping variable. The limits for the error bars were calculated by adding (upper) or subtracting (lower) the standard deviation from the mean.</p>
+<p>We can now use the <code>barplot</code> and <code>arrows</code> functions to make a plot with error bars.</p>
+<pre class="r"><code>Prawn.plot &lt;- barplot(Species.summary$mean,
+  names.arg = Species.summary$Species,
+  ylab = &quot;Metabolic rate&quot;, xlab = &quot;Species&quot;, ylim = c(0, 1)
+)
+
+arrows(Prawn.plot, Species.summary$lower, Prawn.plot, Species.summary$upper, angle = 90, code = 3)</code></pre>
+<p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Note that plots of means and error bars can be misleading as they hide the true distributions of the data. Means can also be misleading when data are very skewed, and calculations for error bars using <em>t</em> statistics (e.g., 95% confidence intervals) assume the data are normally distributed.</p>
+</div>
+<div id="formatting-plots" class="section level3">
+<h3>Formatting plots</h3>
+<p>Box plots and bar plots can be formatted using the basic R formatting in the base graphics package. The code below details some of the more commonly used formatting commands for these plots. These commands can be used for any plotting function in the graphics package.</p>
+<p><strong>Add axis labels or titles</strong><br />
+Axis labels are produced with the <code>xlab</code> and <code>ylab</code> arguments. Titles are provided with the <code>main</code> argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.</p>
+<pre class="r"><code>boxplot(Metabolic_rate ~ Species, data = Prawns, xlab = &quot;Species&quot;, ylab = &quot;Metabolic rate&quot;)</code></pre>
+<p><strong>Edit axis limits</strong><br />
+Axis limits are set by the <font face="monospace">xlim</font> and <font face="monospace">ylim</font> arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 1, use:</p>
+<pre class="r"><code>boxplot(Metabolic_rate ~ Species,
+  data = Prawns, xlab = &quot;Species&quot;, ylab = &quot;Metabolic rate&quot;,
+  ylim = c(0, 1)
+)</code></pre>
+<p><strong>Renaming levels of the categorical factor</strong><br />
+If the levels of your categorical factor are not ideal for the plot, you can rename those with the
+<code>names</code> argument. For example, to put the actual species names on:</p>
+<pre class="r"><code>boxplot(Metabolic_rate ~ Species,
+  data = Prawns, xlab = &quot;Species&quot;, ylab = &quot;Metabolic rate&quot;,
+  names = c(&quot;Penaeus monodon&quot;, &quot;Fenneropenaeus merguiensis&quot;)
+)</code></pre>
+<p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><strong>Adding colour</strong>
+Colour can be added to any part of the plots (axis, fonts etc.) using <code>col</code> argument. There are over 600 colours that can be plotted, type <code>colours()</code> for the whole range.</p>
+<p>Here we will simply change the colour of the bars in the bar plot to red.</p>
+<pre class="r"><code>barplot(Species.summary$mean,
+  names.arg = Species.summary$Species,
+  ylab = &quot;Metabolic rate&quot;, xlab = &quot;Species&quot;, ylim = c(0, 1), col = &quot;red&quot;
+)</code></pre>
+<p><img src="/graphics/basic-plotting/one-continuous-one-factor/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="further-help" class="section level3">
+<h3>Further help</h3>
+<p>Type <code>?boxplot</code> and <code>?barplot</code> to get the R help for these functions.</p>
+<p><strong>Authors</strong>: Stephanie Brodie &amp; Alistair Poore</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

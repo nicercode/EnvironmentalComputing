@@ -1,0 +1,12 @@
+---
+weight: 1
+title: "T-tests"
+output: html_document
+aliases: /t-tests/
+---
+
+Some simple hypothesis tests with the t statistic:
+
+* [One sample t tests](one-sample-t-test) to contrasting a single sample parameter to a population parameter  
+* [Independent samples](two-sample-t-test) t tests to contrast the means of two samples
+* [Paired t-tests](paired-t-test) to contrast two groups of values where each pair is measured from the same object.

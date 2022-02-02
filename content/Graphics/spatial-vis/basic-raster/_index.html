@@ -1,0 +1,299 @@
+---
+title: 'The Basics of Rasters'
+weight: 1
+output: html_document
+aliases: /basic-raster-manipulations/
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>This tutorial is focused on introducing the bascis of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with <a href="/spatial-vis/simple-maps/">this tutorial</a>.</p>
+<div id="lets-get-set-up-first" class="section level3">
+<h3>Let’s get set up first</h3>
+<p>Check if you can see the data we’ll be using (your working directory should be this file’s location)</p>
+<pre class="r"><code>file.exists(&quot;Cairns_Mangroves_30m.tif&quot;)
+file.exists(&quot;SST_feb_2013.img&quot;)
+file.exists(&quot;SST_feb_mean.img&quot;)</code></pre>
+<p>Install the packages we’re going to need - the raster package is the key library for raster objects in R, dismo has some nice wrappers for various sampling functions (plus some other neat SDM related stuff), and rgdal has a lot of the drivers for reading and writing various spatial data formats</p>
+<pre class="r"><code>install.packages(c(&quot;raster&quot;, &quot;dismo&quot;, &quot;rgdal&quot;))</code></pre>
+<p>Check that you can load them</p>
+<pre class="r"><code>library(raster)
+library(dismo)
+library(rgdal)</code></pre>
+</div>
+<div id="what-is-a-raster" class="section level3">
+<h3>What is a raster?</h3>
+<p>Now we’re ready to go, but firstly, what is a raster? Well, simply, it is a grid of coordinates for which we can define certain values across, and we display the corresponding grid elements according to those values. The raster data is essentially a matrix, but a raster is special in that we define what shape and how big each grid element is, and usually where the grid should sit in some known space (i.e. a geographic projected coordinate system).</p>
+<p><img src="teaser_plot.png" /></p>
+</div>
+<div id="understanding-raster-data" class="section level3">
+<h3>Understanding Raster Data</h3>
+<p>Make a raster object, and query it</p>
+<pre class="r"><code>dummy_raster &lt;- raster(ncol = 10, nrow = 10) # let&#39;s make a small raster
+nrow(dummy_raster) # number of pixels
+ncol(dummy_raster) # number of pixels
+ncell(dummy_raster) # total number of pixels
+plot(dummy_raster) # doesn&#39;t plot because the raster is empty
+hasValues(dummy_raster) # can check whether your raster has data
+values(dummy_raster) &lt;- 1 # give the raster a pixel value - in this case 1
+plot(dummy_raster) # entire raster has a pixel value of 1</code></pre>
+<p>Make a random number raster so we can see what’s happening a little easier</p>
+<pre class="r"><code>values(dummy_raster) &lt;- runif(ncell(dummy_raster)) # each pixel is assigned a random number
+plot(dummy_raster) # raster now has pixels with random numbers
+values(dummy_raster) &lt;- runif(ncell(dummy_raster))
+plot(dummy_raster)
+dummy_raster[1, 1] # we can query rasters (and subset the maxtrix values) using standard R indexing
+dummy_raster[1, ]
+dummy_raster[, 1]</code></pre>
+<p>Use this to interactively query the raster - press esc to exit</p>
+<pre class="r"><code>click(dummy_raster)</code></pre>
+<p>What’s special about a raster object?</p>
+<pre class="r"><code>str(dummy_raster) # note the CRS and extent, plus plenty of other slots
+crs(dummy_raster) # check what coordinate system it is in, the default in the PROJ.4 format
+xmax(dummy_raster) # check extent
+xmin(dummy_raster)
+ymax(dummy_raster)
+ymin(dummy_raster)
+extent(dummy_raster) # easier to use extent
+res(dummy_raster) # resolution
+xres(dummy_raster) # just pixel width
+yres(dummy_raster) # just pixel height</code></pre>
+<div id="excercises" class="section level4">
+<h4>Excercises</h4>
+<ul>
+<li>make a raster with a smiley face (tip: make a blank raster, then use indexing to change values sequentially)</li>
+<li>extract some vector and matrix data from the raster (tip: use indexing or things like <code>?as.matrix</code>)</li>
+<li>subset the raster into a smaller chunk (tricker - see <code>?crop</code>)</li>
+</ul>
+</div>
+</div>
+<div id="working-with-real-raster-data" class="section level3">
+<h3>Working with real raster data</h3>
+<p>Import the Cairns mangrove data and have a look at it</p>
+<pre class="r"><code>mangrove &lt;- raster(&quot;Cairns_Mangroves_30m.tif&quot;)
+crs(mangrove) # get projection
+plot(mangrove, col = topo.colors(&quot;2&quot;)) # note two pixel values, 0 (not mangrove) and 1 (mangrove)
+NAvalue(mangrove) &lt;- 0 # make a single binary dataset with mangroves having a raster value 1
+plot(mangrove, col = &quot;mediumseagreen&quot;)</code></pre>
+<p>The legend is a little odd - we can change to a categorical legend by doign this - but we’ll stick to the default continous bar generally so as to reduce clutter in the code</p>
+<pre class="r"><code>cols &lt;- c(&quot;white&quot;, &quot;red&quot;)
+plot(mangrove, col = cols, legend = F)
+legend(x = &quot;bottomleft&quot;, legend = c(&quot;no mangrove&quot;, &quot;mangrove&quot;), fill = cols)</code></pre>
+<p>Simple processing</p>
+<pre class="r"><code>agg_mangrove &lt;- aggregate(mangrove, fact = 10) # aggregate/resample cells (10 times bigger)
+
+par(mfrow = c(2, 2))
+plot(mangrove, col = &quot;mediumseagreen&quot;)
+plot(agg_mangrove, col = &quot;firebrick&quot;)
+plot(agg_mangrove, col = &quot;firebrick&quot;)
+plot(mangrove, col = &quot;mediumseagreen&quot;, add = TRUE) # add information to current plot</code></pre>
+<p>Create a simple buffer</p>
+<pre class="r"><code>buf_mangrove &lt;- buffer(agg_mangrove, width = 1000) # add a buffer
+plot(buf_mangrove, col = &quot;peachpuff&quot;)
+plot(mangrove, col = &quot;mediumseagreen&quot;, add = T) # note add= argument</code></pre>
+<p>Note at this point, we could mess around with the margins if we cared about that, e.g. <code>par(mar = c(2,1,2,1), oma = c(2,1,2,1))</code>.</p>
+<p>Convert raster to point data, and then import point data as raster</p>
+<pre class="r"><code>pts_mangrove &lt;- rasterToPoints(mangrove)
+str(pts_mangrove)
+
+par(mfrow = c(2, 2))
+plot(mangrove)
+plot(rasterFromXYZ(pts_mangrove)) # huh?
+
+NAvalue(mangrove) &lt;- -999
+pts_mangrove &lt;- rasterToPoints(mangrove)
+plot(rasterFromXYZ(pts_mangrove))
+
+NAvalue(mangrove) &lt;- 0 # set it back to 0
+dev.off()</code></pre>
+<p>Export your data - lets try the aggregated raster</p>
+<pre class="r"><code>KML(agg_mangrove, &quot;agg_mangrove.kml&quot;, overwrite = TRUE)
+writeRaster(agg_mangrove, &quot;agg_mangrove.tif&quot;, format = &quot;GTiff&quot;)</code></pre>
+<p>Now, what about multiband rasters? The raster package handles them in the same way, just the <code>nbands()</code> attribute is &gt;1 - think about an array instead of a matrix</p>
+<pre class="r"><code>multiband &lt;- raster(&quot;multiband.tif&quot;)
+nbands(multiband)
+nrow(multiband)
+ncol(multiband)
+ncell(multiband)</code></pre>
+<p>What about making our own multiband raster?</p>
+<pre class="r"><code>for (i in 1:4) {
+  assign(x = paste0(&quot;band&quot;, i), value = raster(ncol = 10, nrow = 10))
+}
+values(band1) &lt;- runif(100)
+values(band2) &lt;- runif(100)
+values(band3) &lt;- runif(100)
+values(band4) &lt;- runif(100)
+multiband_stack &lt;- stack(list(band1, band2, band3, band4))
+nlayers(multiband_stack)
+plot(multiband_stack)</code></pre>
+<p>Plotting an RGB image?</p>
+<pre class="r"><code>plotRGB(multiband_stack, r = 1, g = 2, b = 3)
+range(multiband_stack)
+plotRGB(multiband_stack, r = 1, g = 2, b = 3, scale = 1) # let it know what the max value is for display
+plotRGB(multiband_stack, r = 3, g = 2, b = 1, scale = 1)
+plotRGB(multiband_stack, r = 2, g = 3, b = 4, scale = 1)</code></pre>
+<p>Other handy processing functions</p>
+<pre class="r"><code>?crop
+?merge
+?trim
+?interpolate
+?reclassify
+?rasterToPolygons</code></pre>
+<p>Some handy analysis functions</p>
+<pre class="r"><code>?zonal # zonal statistics
+?focal # moving windows
+?calc # raster calculator
+?distance # distance calculations
+?sampleRandom
+?sampleRegular
+?sampleStratified</code></pre>
+<p>We won’t go into detail on coordinate and projection systems today, but <em>very</em> briefly, <code>CRS()</code> and <code>crs()</code> are they key functions/objects</p>
+<pre class="r"><code>crs(mangrove)
+proj4string(mangrove)
+
+latlong &lt;- &quot;+init=epsg:4326&quot;
+CRS(latlong)
+eastnorth &lt;- &quot;+init=epsg:3857&quot;
+CRS(eastnorth)
+
+latlongs_mangrove &lt;- rasterToPoints(mangrove, spatial = T)
+latlongs_mangrove
+projected_pts_mangrove &lt;- spTransform(latlongs_mangrove, CRS(eastnorth))
+projected_pts_mangrove</code></pre>
+<div id="excercises-1" class="section level4">
+<h4>Excercises</h4>
+<ul>
+<li>import the raster “Landsat_TIR.tif” - it’s a TIR (thermal infrared) image from the Landsat 8 satellite captured over a cropping area</li>
+<li>suppose we modelled the TIR values via linear regression to calculate the real on ground temperature, and beta0 was 0.5 and beta1 was 0.1 (i.e. y = 0.1x + 0.5) - make a map of temperature (hint: <code>?calc</code>, and you’ll need to write a function)</li>
+<li>give the plot a title and axis labels, and colours that make sense for temperature</li>
+<li>make a matching raster (in extent and number of pixels, for the easiest solution) with zone codes (for each pixel), then calulate the mean/sd temperature in those zones (hint: <code>?values</code> and <code>?zonal</code>)</li>
+</ul>
+</div>
+</div>
+<div id="extending-raster-analyses" class="section level3">
+<h3>Extending raster analyses</h3>
+<p>Now let’s take a bit of a whirlwind tour of the types of analyses we can do, and hopefully discover a bit deeper understanding of raster analysis in R.</p>
+<p>Load up some SST data - Feb 2013 for the globe (as an aside, check <a href="http://oceancolor.gsfc.nasa.gov/cms/">this link</a> for more great ocean global data sets:</p>
+<pre class="r"><code>sst_feb &lt;- raster(&quot;SST_feb_2013.img&quot;)
+plot(sst_feb)</code></pre>
+<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Crop it to the pacific so we can compare our mangrove data</p>
+<pre class="r"><code>pacific_extent &lt;- extent(mangrove) + 80 # take advantage of the way R handles vector arithmatic!
+pacific_extent # check it
+sst_feb_crop &lt;- crop(sst_feb, pacific_extent) # crop to the pacific
+plot(sst_feb_crop)</code></pre>
+<p>Load up the long term mean SST data for Feb</p>
+<pre class="r"><code>sst_feb_mn &lt;- raster(&quot;SST_feb_mean.img&quot;)
+plot(sst_feb_mn)
+sst_mn_crop &lt;- crop(sst_feb_mn, pacific_extent)
+plot(sst_mn_crop)</code></pre>
+<p>Now let’s make an SST anomoly map</p>
+<pre class="r"><code>sst_anomaly &lt;- sst_feb_crop - sst_mn_crop # R + {raster} matrix arithmatic
+plot(sst_anomaly) # plot the anomaly map
+plot(sst_anomaly, col = rev(heat.colors(&quot;100&quot;))) # heat colours
+contour(sst_anomaly, add = T) # add contours</code></pre>
+<p>Query single values,</p>
+<pre class="r"><code>minValue(sst_anomaly) # coldest pixel
+maxValue(sst_anomaly) # warmest pixel
+plot(sst_anomaly == maxValue(sst_anomaly))</code></pre>
+<p>or plots/stats for the entire image,</p>
+<pre class="r"><code>plot(sst_anomaly &gt; 1)
+par(mar = c(3, 3, 3, 3))
+hist(sst_anomaly, main = &quot;February SST Anomaly&quot;, xlab = &quot;sst anomaly&quot;)</code></pre>
+<p>or let’s be a litle more tricky!</p>
+<pre class="r"><code>max_anom &lt;- which.max(sst_anomaly)
+max_xy &lt;- xyFromCell(sst_anomaly, max_anom)
+plot(sst_anomaly,
+  col = rev(heat.colors(&quot;100&quot;)),
+  main = &quot;2013 Feb SST anomaly + hottest point&quot;
+)
+points(max_xy, pch = 8, cex = 2)</code></pre>
+<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>Sampling points conditionally? Sure. We’ll see a better wrapper for this further down though.</p>
+<pre class="r"><code>xy &lt;- xyFromCell(sst_anomaly, sample(1:ncell(sst_anomaly), 20)) # 20 random points
+points(xy)
+extract(sst_feb, xy)</code></pre>
+<p>Try out <code>?getValues</code> too. OK, re-capping writing back to disk</p>
+<pre class="r"><code># writing rasters
+writeRaster(sst_anomaly, &quot;sst_anomaly.tif&quot;, format = &quot;GTiff&quot;)
+KML(sst_anomaly, &quot;sst_anomaly.kml&quot;)
+save(sst_anomaly, file = &quot;sst_anomaly_feb.RData&quot;)
+save(sst_feb_mn, file = &quot;sst_feb_mn.RData&quot;) # check the file size, huh?</code></pre>
+<p>What’s going on with those last two <code>save()</code> commands? Something else to understand about the way the <code>raster</code> package handles raster files is that for larger rasters, the whole file is not stored in memory, rather it is just a pointer to the file. You can test whether or not it is</p>
+<pre class="r"><code>inMemory(sst_feb_mn) # R will only access file  when needed.
+inMemory(sst_anomaly) # it&#39;s in memory.</code></pre>
+<p>We saw <code>stack()</code> earlier, and we can use it for multi-band imagery, but also to stack up different information sources. <code>brick()</code> works in the same way, except that <code>RasterBrick</code> objects are designed for smaller data, and a <code>RasterBrick</code> can only point to one file, opposed to a <code>RasterStack</code> objects, which can point to multiple files.</p>
+<pre class="r"><code>sst_stack &lt;- stack(sst_mn_crop, sst_feb_crop, sst_anomaly)
+plot(sst_stack)
+nlayers(sst_stack)
+plot(sst_stack, 2)
+names(sst_stack)[3] &lt;- &quot;SST_anomaly&quot;</code></pre>
+<p>So we can see why that might be useful for various remote sensing and modelling applicaitons.</p>
+</div>
+<div id="modelling-and-interpolation" class="section level3">
+<h3>Modelling and interpolation</h3>
+<p>Now let’s look at quick example of what we can do with rasters in context of species distribution modelling and spatial modelling. First lets extract some random points - make sure you’ve run <code>library(dismo)</code></p>
+<pre class="r"><code>rpoints_sst &lt;- randomPoints(sst_stack, 500) # ?randomPoints for more options
+plot(sst_stack, 2)
+points(rpoints_sst, pch = 16, cex = 0.7)
+sst_samp &lt;- extract(sst_stack, rpoints_sst) # extract values through stack this time
+str(sst_samp)
+sst_samp &lt;- data.frame(sst_samp,
+  lat = rpoints_sst[, 2], lon = rpoints_sst[, 1]
+)
+plot(sst_samp$SST_anomaly ~ sst_samp$SST_feb_2013)
+# abline(lm(sst_samp$SST_anomaly ~ sst_samp$SST_feb_2013))
+# plot(mgcv::gam(sst_samp$SST_anomaly ~ s(sst_samp$SST_feb_2013)), resid = T)</code></pre>
+<p>What if we had some real biological data at those points? Well, let’s make some up, and then fit a model to it</p>
+<pre class="r"><code>sst_samp$shark_abund &lt;- rpois(n = nrow(sst_samp), lambda = round(sst_samp$SST_feb_2013))
+plot(sst_samp$shark_abund ~ sst_samp$SST_feb_2013)
+shark_glm &lt;- glm(shark_abund ~ SST_feb_2013 + SST_anomaly,
+  data = sst_samp, family = &quot;poisson&quot;
+)
+summary(shark_glm)</code></pre>
+<p>We would usually use <code>predict()</code> on a model fit object, and we can use it similarly for predicting out to raster data</p>
+<pre class="r"><code>head(predict(shark_glm, type = &quot;response&quot;))
+shark_predict &lt;- predict(sst_stack, shark_glm, type = &quot;response&quot;)
+plot(shark_predict,
+  col = rev(rainbow(n = 10, start = 0, end = 0.3)),
+  main = &quot;Shark abundance as a function of SST&quot;
+)</code></pre>
+<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>Let’s try somethign else, say attack risk. It’s not just about abdundance, something else like how mean or aggressive they are?</p>
+<pre class="r"><code>sst_samp$shark_aggression &lt;- sst_samp$lat * -1 # so agression goes up with lattitude
+sst_samp$shark_attack &lt;- scale(sst_samp$shark_abund * sst_samp$shark_aggression)
+attack_lm &lt;- lm(shark_attack ~ SST_feb_2013 + SST_anomaly,
+  data = sst_samp
+)
+shark_attack &lt;- predict(sst_stack, attack_lm, type = &quot;response&quot;)
+plot(shark_attack,
+  col = rev(rainbow(n = 10, start = 0, end = 0.3)),
+  main = &quot;Shark attack index!&quot;
+)</code></pre>
+<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>This is a quick and silly example. If we were less lazy, we might create a new image stack with the abundance predicitons and the lattitude values, pull the random samples out again, and re-fit the model and predictions.</p>
+<div id="excercises-2" class="section level4">
+<h4>Excercises</h4>
+<ul>
+<li>try generating some stats (values or plots) for SST anomaly for different regions, either across the globe or across Australia</li>
+<li>try some band math, or some conditional statements using multiple rasters or a RasterStack</li>
+<li>create another SDM scenario - either using downloaded data, or totally simulated data</li>
+<li>if we just had the physical data at some points, and wanted to make those into a geographically weighted or interpolated SST map? You could sample some of the points then use <code>library(gstat)</code> to try an IDW (inverse distance weighted) interpolation. Do some interpolations, varying the number of points used, and see how that effects your interpollated product</li>
+</ul>
+</div>
+</div>
+<div id="some-more-stuff-to-investigate" class="section level3">
+<h3>Some more stuff to investigate</h3>
+<p>Some of the other commonly used packages for spatial data analysis</p>
+<pre class="r"><code>library(sp) # used here, but owrht checking out exdlicitly
+library(maps)
+library(rasterVis)
+library(maptools)
+library(mapproj)
+library(rgeos) # watch proprietory stuff here</code></pre>
+<p>You could also try getting bioclim climate data using the <code>getData()</code> function from the <code>raster</code> package, or getting various types of maps using the <code>gmap()</code> function from the <code>dismo</code> package or the <code>map</code> function from the <code>maps</code> package. If you go to the github page for this tutorial, you’ll find some answers to the excercies, plus some extra goodies realting to the above suggestions too.</p>
+<p><strong>Author</strong>: Mitchell Lyons</p>
+<p><strong>Year:</strong> 2017</p>
+<p><strong>Last updated:</strong> Feb 2022</p>
+</div>

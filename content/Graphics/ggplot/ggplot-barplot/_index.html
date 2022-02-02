@@ -1,0 +1,49 @@
+---
+title: 'Barplot with Errorbars'
+weight: 5
+output: html_document
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Bar plots with error bars are very frequently used in the environmental sciences to represent the variation in a continuous variable within one or more categorical variables. These are not always straightforward to make with the base functions in R. This page introduces you to making these plots with the package ggplot2.</p>
+<p>Before you get started, read the page on the <a href="../ggplot-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<p><img src="ggplot1_basics_image.JPG" /></p>
+<p>In this examples, let’s use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:</p>
+<pre class="r"><code>data(iris)</code></pre>
+<p>To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the <code>summarise</code> and <code>group_by</code> functions in the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>. See <a href="/data-manipulation/summarising-data/">here</a> for more details on using dplyr for summarising data.</p>
+<p>The following code will make a new data frame with the summary data per species.</p>
+<pre class="r"><code>library(dplyr)
+
+Iris_summary &lt;- iris %&gt;% # the names of the new data frame and the data frame to be summarised
+  group_by(Species) %&gt;% # the grouping variable
+  summarise(
+    mean_PL = mean(Petal.Length), # calculates the mean of each group
+    sd_PL = sd(Petal.Length), # calculates the standard deviation of each group
+    n_PL = n(), # calculates the sample size per group
+    SE_PL = sd(Petal.Length) / sqrt(n())
+  ) # calculates the standard error of each group</code></pre>
+<p>We can now make a bar plot of means vs species, with standard deviations or standard errors as the error bar. The following code uses the standard deviations.</p>
+<pre class="r"><code>IrisPlot &lt;- ggplot(Iris_summary, aes(Species, mean_PL)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = mean_PL - sd_PL, ymax = mean_PL + sd_PL), width = 0.2)
+
+IrisPlot + labs(y = &quot;Petal length (cm) +/- s.d.&quot;, x = &quot;Species&quot;) + theme_classic()</code></pre>
+<p><img src="/graphics/ggplot/ggplot-barplot/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><code>geom_col</code> uses the value of the y variable (mean_PL) as the height of the bars.</p>
+<p>In the <code>geom_errorbar</code> code, <code>ymin</code> and <code>ymax</code> are the top and bottom of the error bars (defined here as mean +/- sd), and <code>width</code> defines how wide the error bars are.</p>
+<p>###Further help</p>
+<p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
+* <a href="../ggplot-appearance/">altering the overall appearance</a><br />
+* <a href="../ggplot-labels/">adding titles and axis names</a><br />
+* <a href="../ggplot-colour-shapes/">colours and symbols</a></p>
+<p>Help on all the ggplot functions can be found at the <a href="https://ggplot2.tidyverse.org">The master ggplot help site</a>.</p>
+<p>A useful cheat sheet on commonly used functions can be downloaded <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf">here</a>.</p>
+<p style="margin-left: .5in; text-indent: -.5in;">
+Chang, W (2012) <em>R Graphics cookbook.</em> O’Reilly Media. - a guide to ggplot with online help on making bar and line graphs with error bars <a href="http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/">here</a>
+</p>
+<p><strong>Author</strong>: Alistair Poore (small edits by Will Cornwell)</p>
+<p><strong>Year:</strong> 2016</p>
+<p><strong>Last updated:</strong> Feb 2022</p>

@@ -28,7 +28,7 @@ In this example, we use a data set where researchers wanted to contrast the spec
 
 ![](MDS_image.jpg)
 
-We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](../multidimensional-scaling) example) or test hypotheses about groups of samples by resampling these differences. 
+We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](/graphics/multivariate-vis/mds/) example) or test hypotheses about groups of samples by resampling these differences. 
 
 Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models. 
   

@@ -18,7 +18,7 @@ library(dplyr)
 
 As with the help page for [Subsetting data](/../data-manipulation/subsetting-data/), we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.
 
-We will also read in a dataset giving geographic locations for each site (for example, downloaded from a GPS) and nightly weather data (in this case downloaded and summarised from the Bureau of Meteorology data online). If you would like to know more about downloading weather and climate data, our help on [Accessing weather data](/../accessing-weather-data/) in Australia.
+We will also read in a dataset giving geographic locations for each site (for example, downloaded from a GPS) and nightly weather data (in this case downloaded and summarised from the Bureau of Meteorology data online).
 
 Download the three sample data sets ([Bats_data.csv](/datasets/Bats_data.csv), [Geo_data.csv](/datasets/Geo_data.csv), and [Weather_vars.csv](/datasets/Weather_vars.csv)) and import into R.
 

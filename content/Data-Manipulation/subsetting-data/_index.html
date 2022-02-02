@@ -62,10 +62,18 @@ and more.</p>
 <p>dplyr has a neat function for selecting <em>n</em> rows with the highest values of any given column: <code>top_n</code>. Below, we identify the three rows of data which contain the greatest total bat activity per night:</p>
 <pre class="r"><code>Bats.top &lt;- top_n(Bats, 3, Activity)
 print(Bats.top)</code></pre>
-<pre><code>##     Site Activity Foraging      Date Treatment.thinned Area.thinned Time.since.thinned Exclusion.thinned Distance.murray.water Distance.creek.water
-## 1 CC04A1      802        9 7/01/2013        short-term            0                  0         11.932831              143.9868             102.5009
-## 2 PC32A2     1070       66 7/01/2013       medium-term            0                  8          7.150972              429.2099             694.7085
-## 3 PC32A2      944       52 8/01/2013       medium-term            0                  8          7.150972              429.2099             694.7085</code></pre>
+<pre><code>##     Site Activity Foraging      Date Treatment.thinned Area.thinned
+## 1 CC04A1      802        9 7/01/2013        short-term            0
+## 2 PC32A2     1070       66 7/01/2013       medium-term            0
+## 3 PC32A2      944       52 8/01/2013       medium-term            0
+##   Time.since.thinned Exclusion.thinned Distance.murray.water
+## 1                  0         11.932831              143.9868
+## 2                  8          7.150972              429.2099
+## 3                  8          7.150972              429.2099
+##   Distance.creek.water
+## 1             102.5009
+## 2             694.7085
+## 3             694.7085</code></pre>
 <p>Wow, over 1000 bat calls in one night!</p>
 <p><strong>Removing duplicate rows</strong></p>
 <p>Another useful function is to remove duplicate rows, for example if we have accidentally entered data twice.</p>
@@ -110,7 +118,7 @@ Bats_subset4 &lt;- select(bats, matches(&quot;water$&quot;))</code></pre>
 <h3>Further help</h3>
 <p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio. Images were sourced from the same document.</p>
 <p>You can type <code>?dplyr</code> to get help with this package.</p>
-<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></p>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">Introduction to dplyr</a></p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p><strong>Year:</strong> 2016</p>
 <p><strong>Last updated:</strong> Feb 2022</p>

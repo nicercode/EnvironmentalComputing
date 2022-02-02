@@ -21,7 +21,7 @@ aliases: /independent-samples-t-test/
 <p>Note that a <em>t</em> test is a special case of a linear model with a single continuous response variable and a single categorical predictor variable that has two levels.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
-<p>An independent samples <em>t</em>-test can be run with the same <code>t.test</code> function as used for <a href="/statistics/t-test/one-sample-t-test/">one sample</a> or <a href="/statistics/t-test/paired-t-test/">paired <em>t</em>-tests</a>. For an independent samples <em>t</em>-test assuming equal variances, we would use:</p>
+<p>An independent samples <em>t</em>-test can be run with the same <code>t.test</code> function as used for <a href="/statistics/t-tests/one-sample-t-test/">one sample</a> or <a href="/statistics/t-tests/paired-t-test/">paired <em>t</em>-tests</a>. For an independent samples <em>t</em>-test assuming equal variances, we would use:</p>
 <pre class="r"><code>t.test(x &lt;- my_sample1, y = my_sample2, var.equal = TRUE)</code></pre>
 <p>where <em>my_sample1</em> and <em>my_sample2</em> are vectors containing the measurements from each sample.</p>
 <p>More commonly, we would use a data frame with the response and predictor variables as separate columns. You can then use a formula statement, <code>y ~ x</code>, to specify the response and predictor variables rather than the code above. Consider the simple example where you wanted to compare the pH of two rivers. Ten replicate pH measures were taken from each river.</p>

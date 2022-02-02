@@ -2,6 +2,7 @@
 title: 'Two Continuous Variable'
 weight: 2
 output: html_document
+aliases: /two-continuous-variables/
 ---
 
 Visualising the relationship between two continuous variables is one of the most commonly used graphical techniques in the sciences. This page details how to produce simple scatterplots to display how one continuous variable is related to another.

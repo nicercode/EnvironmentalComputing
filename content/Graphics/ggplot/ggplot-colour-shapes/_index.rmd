@@ -2,6 +2,7 @@
 title: 'Colours and Shapes'
 weight: 4
 output: html_document
+aliases: /plotting-with-ggplot-colours-and-symbols/
 ---
 
 Before you get started, read the page on the [basics](/graphics/ggplot/ggplot-basics/) of plotting with ggplot and install the package ggplot2.

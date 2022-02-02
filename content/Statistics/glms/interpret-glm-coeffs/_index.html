@@ -9,7 +9,7 @@ aliases: /interpreting-coefficients-in-glms/
 
 
 <p>In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.</p>
-<p>For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for <a href="/statistics/glm-1/">binary</a> and <a href="/statistics/glm-2/">count</a> data page on <a href="/statistics/interpret-glm-coeffs/">interpreting coefficients in linear models</a>.</p>
+<p>For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for <a href="/statistics/glms/glm-1/">binary</a> and <a href="/statistics/glms/glm-2/">count</a> data page on <a href="/statistics/glms/interpret-glm-coeffs/">interpreting coefficients in linear models</a>.</p>
 <div id="poisson-and-negative-binomial-glms" class="section level3">
 <h3>Poisson and negative binomial GLMs</h3>
 <p>In Poisson and negative binomial glms, we use a log link. The actual model we fit with one covariate <span class="math inline">\(x\)</span> looks like this</p>
@@ -29,10 +29,10 @@ Y &lt;- rpois(N, lambda = mu)
 glm1 &lt;- glm(Y ~ x, family = poisson)
 glm1$coefficients</code></pre>
 <pre><code>## (Intercept)           x 
-##  1.05352027  0.08798164</code></pre>
+##   0.9349148   0.3231450</code></pre>
 <pre class="r"><code>exp(glm1$coefficients[2])</code></pre>
 <pre><code>##        x 
-## 1.091968</code></pre>
+## 1.381466</code></pre>
 <p>So here increasing <span class="math inline">\(x\)</span> by 1 unit multiplies the mean value of Y by <span class="math inline">\(exp( \beta_1 ) = 1.25\)</span>. The same thing is true for negative binomial glms as they have the same link function.</p>
 </div>
 <div id="binomial-glms" class="section level3">
@@ -54,20 +54,20 @@ summary(bin1)</code></pre>
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.3439   0.3401   0.3825   0.4256   0.5161  
+## -2.4045   0.3184   0.3570   0.4003   0.5170  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)   2.5678     0.3647   7.040 1.93e-12 ***
-## x             0.3357     0.4235   0.793    0.428    
+## (Intercept)   2.7174     0.3939   6.899 5.24e-12 ***
+## x             0.3490     0.4183   0.834    0.404    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 63.932  on 119  degrees of freedom
-## Residual deviance: 63.295  on 118  degrees of freedom
-## AIC: 67.295
+##     Null deviance: 58.783  on 119  degrees of freedom
+## Residual deviance: 58.075  on 118  degrees of freedom
+## AIC: 62.075
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>So when we increase <span class="math inline">\(x\)</span> by one unit, the odds of Y are multiplied by <span class="math inline">\(exp( \beta_1 ) = 2.11\)</span></p>
@@ -82,8 +82,8 @@ summary(bin1)</code></pre>
 bin2 &lt;- manyglm(bY ~ x, family = binomial(link = &quot;cloglog&quot;))
 coef(bin2)</code></pre>
 <pre><code>##                    bY
-## (Intercept) 0.9710940
-## x           0.1375006</code></pre>
+## (Intercept) 1.0279645
+## x           0.1544171</code></pre>
 <p>The interpretation is now the same as in the Poisson case, when we increase <span class="math inline">\(x\)</span> by 1, the mean of the underlying count is multiplied by <span class="math inline">\(exp( \beta_1 )\)</span>.</p>
 </div>
 <div id="log-binomial-model" class="section level4">
@@ -108,21 +108,19 @@ summary(off_mod)</code></pre>
 ## glm(formula = Y ~ depth + offset(log(soil)), family = poisson)
 ## 
 ## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -2.70530  -0.83038  -0.05319   0.51410   2.39616  
+##     Min       1Q   Median       3Q      Max  
+## -2.3511  -1.0522  -0.2750   0.6794   2.4929  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)   
-## (Intercept)  0.15641    0.05529   2.829  0.00467 **
-## depth       -0.07098    0.05539  -1.282  0.20000   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)  0.04983    0.05703   0.874    0.382
+## depth       -0.00689    0.05738  -0.120    0.904
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 164.56  on 119  degrees of freedom
-## Residual deviance: 162.91  on 118  degrees of freedom
-## AIC: 486.49
+##     Null deviance: 146.65  on 119  degrees of freedom
+## Residual deviance: 146.64  on 118  degrees of freedom
+## AIC: 459.5
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>If we ignored the soil amount, we could have misleading conclusions. If the soil amount is correlated with another variable in your model, then leaving out the offset will affect the coefficient of that variable, as in the discussion of conditional/marginal interpretations <a href="/statistics/linear-models/linear-regression/interpret-lm-coeffs/">here</a>. The offset will also often account for a lot of the variation in the response, so including it will give you a better model overall. What if you’re not sure if the relationship is exactly proportional? In that case just include the variable in your model as a coefficient, and the model will decide the best relationship between it and your response.</p>
@@ -133,22 +131,20 @@ summary(coef_mod)</code></pre>
 ## glm(formula = Y ~ depth + log(soil), family = poisson)
 ## 
 ## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -2.60322  -0.84634  -0.00977   0.59449   2.50635  
+##     Min       1Q   Median       3Q      Max  
+## -2.2857  -1.1037  -0.3492   0.7931   2.6578  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  1.47825    0.38066   3.883 0.000103 ***
-## depth       -0.05594    0.05599  -0.999 0.317748    
-## log(soil)   -0.50383    0.43379  -1.161 0.245450    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+##              Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)  0.746165   0.545712   1.367    0.172
+## depth       -0.001209   0.057153  -0.021    0.983
+## log(soil)    0.220848   0.609542   0.362    0.717
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 154.37  on 119  degrees of freedom
-## Residual deviance: 151.86  on 117  degrees of freedom
-## AIC: 477.44
+##     Null deviance: 145.18  on 119  degrees of freedom
+## Residual deviance: 145.05  on 117  degrees of freedom
+## AIC: 459.91
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>The coefficient the model estimated is close to 1, which would be equivalent to an offset.</p>

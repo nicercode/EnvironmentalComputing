@@ -17,7 +17,7 @@ abline(model, col = "red")
 * [Linear regression](linear-regression/)
 * [Analysis of variance: single factor](anova/anova-single/)
 * [Analysis of variance: factorial](anova/anova-factorial/)  
-* [Understanding interactions](../interactions/)
+* [Understanding interactions](interactions)
 * [Interpreting coefficients in linear models](../glms/interpret-glm-coeffs/)
 
   

@@ -21,7 +21,7 @@ Many commonly used analyses for multivariate data sets (e.g. PERMANOVA, ANOSIM,
 <p><img src="Rick-Astley.jpg" /></p>
 <p>In this example, we use a data set where researchers wanted to contrast the species composition of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of seven species of macroalgae were collected from Sydney Harbour, and the abundance of seven species of herbivorous crustacean recorded from each replicate (data from <a href="http://www.int-res.com/abstracts/meps/v208/p183-196/">Poore <em>et al</em>. 2000)</a>. The data are multivariate because seven response variables (the species) were measured from each of the samples.</p>
 <p><img src="MDS_image.jpg" /></p>
-<p>We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our <a href="../multidimensional-scaling">multi-dimensional scaling</a> example) or test hypotheses about groups of samples by resampling these differences.</p>
+<p>We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our <a href="/graphics/multivariate-vis/mds/">multi-dimensional scaling</a> example) or test hypotheses about groups of samples by resampling these differences.</p>
 <p>Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
@@ -134,8 +134,8 @@ anova(mod3)</code></pre>
 ##                                        Res.Df Df.diff   Dev Pr(&gt;Dev)    
 ## (Intercept)                                99                           
 ## Herbivores$Habitat                         95       4 625.2    0.001 ***
-## Herbivores$DayNight                        94       1   6.2    0.570    
-## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.428    
+## Herbivores$DayNight                        94       1   6.2    0.574    
+## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.447    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Arguments:

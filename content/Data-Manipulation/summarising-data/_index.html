@@ -33,8 +33,10 @@ output: html_document
   se.Activity = sd.Activity / sqrt(n.Activity), # standard error
   IQR.Activity = IQR(Activity)
 ) # interquartile range</code></pre>
-<pre><code>##   mean.activity min.Activity max.Activity med.Activity sd.Activity var.Activity n.Activity se.Activity IQR.Activity
-## 1      316.0405            9         1070          282    203.1081     41252.89        173    15.44202          292</code></pre>
+<pre><code>##   mean.activity min.Activity max.Activity med.Activity sd.Activity var.Activity
+## 1      316.0405            9         1070          282    203.1081     41252.89
+##   n.Activity se.Activity IQR.Activity
+## 1        173    15.44202          292</code></pre>
 <p>If we are looking at factors, especially if they are ordered in some way, we may find some of the other dplyr summary functions useful. For example:</p>
 <pre class="r"><code>summarise(Bats,
   first.site = first(Site), # first value in Site variable
@@ -108,7 +110,7 @@ Bats$Activity2[1:4] &lt;- rep(NA, 4)</code></pre>
 <h3>Further help</h3>
 <p>This tutorial was based on the excellent <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling with dplyr and tidyr cheat sheet</a> produced by Rstudio.Images were sourced from the same document.</p>
 <p>You can type <code>?dplyr</code> to get help with this package.</p>
-<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></p>
+<p><a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html">Introduction to dplyr</a></p>
 <p>If you’d like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with <a href="/../graphics">Plotting with gglpot: the basics</a>.</p>
 <p><strong>Author</strong>: Rachel V. Blakey</p>
 <p><strong>Year:</strong> 2016</p>

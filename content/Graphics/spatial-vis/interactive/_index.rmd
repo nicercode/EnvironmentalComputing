@@ -5,7 +5,7 @@ output: html_document
 aliases: /visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/
 ---
 
-Being able to produce interactive maps on the fly can greatly speed up exploratory analysis and is a useful tool for displaying data that would be less informative on a [static map](/making-simple-maps).
+Being able to produce interactive maps on the fly can greatly speed up exploratory analysis and is a useful tool for displaying data that would be less informative on a [static map](../making-simple-maps).
 
 Leaflet is an open source JavaScript library that is used to create interactive maps on websites. In this post we will look at the the [leaflet R package](https://github.com/rstudio/leaflet) and create some cool interactive maps!
 

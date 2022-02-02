@@ -9,7 +9,7 @@ editor_options:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p><a href="/statistics/mixed-modelsmixed-models-1/">Mixed models 1</a> is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.</p>
+<p><a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.</p>
 <p>Many experimental designs in ecology and environmental sciences require mixed models with several random effects (factors). You might have heard of nested and crossed factors. We often define these as quite distinct designs (e.g., from <a href="http://www.theanalysisfactor.com">www.theanalysisfactor.com</a>)</p>
 <p>Two factors are <strong>crossed</strong> when every category (level) of one factor co-occurs in the design with every category of the other factor. In other words, there is at least one observation in every combination of categories for the two factors.</p>
 <p>A factor is <strong>nested</strong> within another factor when each category of the first factor co-occurs with only one category of the other. In other words, an observation has to be within one category of Factor 2 in order to have a specific category of Factor 1. All combinations of categories are not represented.</p>
@@ -18,7 +18,7 @@ editor_options:
 <h3>Running the analysis</h3>
 <p>We will use the package <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> for all our mixed effect modelling. It will allow us to model both continuous and discrete data with one or more random effects. First, load the package:</p>
 <pre class="r"><code>library(lme4)</code></pre>
-<p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in <a href="/statistics/mixed-modelsmixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
+<p>We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in <a href="/statistics/mixed-models/mixed-models-3/">Mixed models 3</a>, we’ll model counts as discrete using Generalised linear mixed models (GLMMs).</p>
 <p><img src="Mixed_models_2_image.jpg" /></p>
 <p>Download the sample data set, <a href="/datasets/Estuaries.csv">Estuaries.csv</a>, and load into R.</p>
 <pre class="r"><code>Estuaries &lt;- read.csv(&quot;Estuaries.csv&quot;, header = T)</code></pre>
@@ -142,7 +142,7 @@ summary(fit.wrong)</code></pre>
 </li>
 <li>Random effects <span class="math inline">\(z\)</span> are normally distributed</li>
 </ol>
-<p>See <a href="/statistics/mixed-modelsmixed-models-1/">Mixed models 1</a> for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.</p>
+<p>See <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.</p>
 <pre class="r"><code>par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
 scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot</code></pre>
@@ -173,7 +173,7 @@ anova(ft.mod.0, ft.mod)</code></pre>
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>We find weak evidence of an effect of Modification (p=0.05047).</p>
 <p><strong>Hypothesis test for random effects</strong></p>
-<p>As in <a href="/statistics/mixed-modelsmixed-models-1/">Mixed models 1</a> we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I’ve taken the code from <a href="/statistics/mixed-modelsmixed-models-1/">Mixed models 1</a> and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.</p>
+<p>As in <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I’ve taken the code from <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a> and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.</p>
 <pre class="r"><code>nBoot &lt;- 1000
 lrStat &lt;- rep(NA, nBoot)
 ft.null &lt;- lmer(log(Total) ~ Modification + (1 | Estuary), Estuaries, REML = F) # null model
@@ -216,7 +216,7 @@ means &lt;- fitted(fit.mod) # this will give the estimate at each data point
 Est.means &lt;- summarize(means, Estuaries$SiteWithin, mean)$means # extract means by site
 stripchart(Est.means ~ sort(unique(SiteWithin)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE) # plot means by site</code></pre>
 <p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>Alternatively, you can plot by Estuary as before (see <a href="/statistics/mixed-modelsmixed-models-1/">Mixed models 1</a>).</p>
+<p>Alternatively, you can plot by Estuary as before (see <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a>).</p>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
 <p>You can type <code>?lmer</code> into R for help with these functions.</p>

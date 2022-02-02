@@ -5,7 +5,7 @@ output: html_document
 aliases: /analysis-variance-single-factor/
 ---
 
-Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. Here, we will consider designs with two or more factors that are both applied to the experimental units (read the [single factor ANOVA](/statistics/anova/anova-single/) page first if you are unfamiliar with ANOVA).
+Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. Here, we will consider designs with two or more factors that are both applied to the experimental units (read the [single factor ANOVA](/statistics/linear-models/anova/anova-single/) page first if you are unfamiliar with ANOVA).
 
 Frequently, we want to test for differences in a response variable due to two or more factors. These experimental or sampling designs allow us to test for the effects of each of these factors separately (termed *main effects*), and to test whether the two factors interact. For these designs, we use more complex versions of ANOVA than the most simple design that tests the effects of only one factor. 
 
@@ -103,7 +103,7 @@ In this example, there is strong evidence to reject all three null hypotheses:
 * that the vertical and horizontal orientations are equal (P < 0.001)  
 * that there is no interaction between copper and orientation (P < 0.001)
 
-A significant interaction means that the effect of one factor depends upon the other. In this example, it would mean that the effect of copper was not consistent between the vertical and horizontal habitats. Consequently, the interpretation of the main effects becomes more complex. See [Understanding interactions](/statistics/interactions) for more help on interpreting interactions in linear models. A quick way to help you understand an interaction if you get one is to examine an interactions plot.
+A significant interaction means that the effect of one factor depends upon the other. In this example, it would mean that the effect of copper was not consistent between the vertical and horizontal habitats. Consequently, the interpretation of the main effects becomes more complex. See [Understanding interactions](/statistics/linear-models/interactions/) for more help on interpreting interactions in linear models. A quick way to help you understand an interaction if you get one is to examine an interactions plot.
 
 ```{r}
 interaction.plot(Sessile$Copper, Sessile$Orientation, Sessile$Richness)
@@ -117,7 +117,7 @@ Here you can see that the effect of copper (a decline in species richness) is mo
 
 ### Assumptions to check
  
-The assumptions of factorial ANOVA's are the same as for all linear models including the simpler one-way ANOVA's (see [ANOVA: single factor](/statistics/anova/anova-single/)), being independence, normality and homogeneity of variances. We also need to consider two new issues: 1) whether your factors are fixed or random, and 2) whether your sampling or experimental design is balanced (i.e., has the same number of replicates in each combination of treatments).
+The assumptions of factorial ANOVA's are the same as for all linear models including the simpler one-way ANOVA's (see [ANOVA: single factor](/statistics/linear-models/anova/anova-single/)), being independence, normality and homogeneity of variances. We also need to consider two new issues: 1) whether your factors are fixed or random, and 2) whether your sampling or experimental design is balanced (i.e., has the same number of replicates in each combination of treatments).
 
 **Fixed and random factors.** There is an important distinction between factors whose levels are the only ones of interest (termed fixed), and factors whose levels are a sampled from a larger collection of possible levels (termed random). For example, if we repeated the experiment above at three different sites in Sydney Harbour, chosen from many possible sites, we would consider site a random factor. We are not interested in those sites in particular, but would like to know if our experimental treatments were consistent across sites. On the other hand, if you were only interested in Darling Harbour and Circular Quay, then these two could be considered two levels of a fixed factor. Treating sites as a fixed factor in that case means that you conclusions should not be extrapolated to other possible sites, but restricted to those particular sites.
 

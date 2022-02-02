@@ -14,7 +14,7 @@ print(g1 + labs(y = "Petal length (cm)", x = "Sepal length (cm)"))
 ```
  
 
-[ggplot2](http://ggplot2.org/) is a powerful graphing package in R that can be used to create professional looking plot for reports, essays or papers. It can create a variety of plots including boxplots, scatterpots and histograms and they can be highly customised to suit your data. 
+[ggplot2](https://ggplot2.tidyverse.org) is a powerful graphing package in R that can be used to create professional looking plot for reports, essays or papers. It can create a variety of plots including boxplots, scatterpots and histograms and they can be highly customised to suit your data. 
 
 The package is named after a book called [The Grammar of Graphics](https://books.google.com.au/books/about/The_Grammar_of_Graphics.html?id=ZiwLCAAAQBAJ&source=kp_cover&hl=en) about how to effectively communicate data graphically. 
   
@@ -27,7 +27,7 @@ Then, visit our other pages to further customise the aesthetics of the graph, in
 * [adding titles and axis names](/graphics/ggplot/ggplot-labels/)  
 * [colours and symbols](/graphics/ggplot/ggplot-colour-shapes/).   
 
-Help on all the ggplot functions can be found at the [The master ggplot help site](http://docs.ggplot2.org/current/).
+Help on all the ggplot functions can be found at the [The master ggplot help site](https://ggplot2.tidyverse.org).
 
 A useful cheat sheet on commonly used functions can be downloaded [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
 

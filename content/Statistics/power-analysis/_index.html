@@ -9,7 +9,7 @@ output: html_document
 
 <div id="what-is-power-analysis-and-why-is-it-important" class="section level3">
 <h3>What is power analysis and why is it important?</h3>
-<p>You collect data to answer a question, usually with the aim of detecting a particular effect (e.g., treatment effect). The power of your test is <em>the probability of detecting an effect (i.e., getting a p-value less than 0.05) with the experimental design you have and the effect size that you expect or consider meaningful</em>.</p>
+<p>You collect data to answer a question, usually with the aim of detecting a particular effect (e.g., treatment effect). The power of your test is <em>the probability of detecting an effect (i.e., getting a p-value &lt; 0.05) with the experimental design you have and the effect size that you expect or consider meaningful</em>.</p>
 <p>I’ll start by simulating a dataset which has an effect (a difference between the control and treatment), and we’ll see if we can detect the effect. We’ll do a simple <a href="../t-tests/two-sample-t-test">two sample t-test</a> for illustration.</p>
 <pre class="r"><code>set.seed(1)
 
@@ -191,7 +191,7 @@ Pilot$modification &lt;- factor(Pilot$modification)</code></pre>
 boxplot(abundance ~ modification, data = Pilot, main = &quot;modification&quot;)
 boxplot(abundance ~ site, data = Pilot, main = &quot;site&quot;)</code></pre>
 <p><img src="/statistics/power-analysis/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>These count data with a random effect of site are best modelled with a <a href="../mixed-models-3">generalised linear mixed model</a> using <code>glmer</code> from the package lme4.</p>
+<p>These count data with a random effect of site are best modelled with a <a href="../mixed-model-3">generalised linear mixed model</a> using <code>glmer</code> from the package lme4.</p>
 <pre class="r"><code>library(lme4)
 
 Pilot.mod &lt;- glmer(abundance ~ temperature + modification + (1 | site), family = &quot;poisson&quot;, data = Pilot)
@@ -282,7 +282,7 @@ fixef(Pilot.mod)[&quot;modification3&quot;] &lt;- 0.2</code></pre>
 ## Based on 50 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 18
 ## 
-## Time elapsed: 0 h 0 m 7 s</code></pre>
+## Time elapsed: 0 h 0 m 6 s</code></pre>
 <pre class="r"><code># this is a small number of sims for demonstration, the default of 1000 is more appropriate</code></pre>
 <p>So we expect power of around 45% for a likelihood ratio test for ‘modification’ with the current number of observations. This is quite low, we would like to see power above 80%, so let’s see how increasing sample size affects that.</p>
 <p><strong>How can we increase power?</strong>
@@ -364,7 +364,7 @@ xtabs(~site, data = attributes(full3)$newData)</code></pre>
 ## Based on 50 simulations, (0 warnings, 0 errors)
 ## alpha = 0.05, nrow = 72
 ## 
-## Time elapsed: 0 h 0 m 7 s</code></pre>
+## Time elapsed: 0 h 0 m 6 s</code></pre>
 <p>This gives 75% power, which is midway between the others. So in this case it is again better to add more sites than more observations per site. This is by no means always true, and depended to a large extent on the variability within and between sites, your experimental design, your question.</p>
 </div>
 <div id="some-notes" class="section level3">

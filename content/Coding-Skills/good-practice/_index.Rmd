@@ -349,7 +349,7 @@ bird.mvments[which(bird.mvments$counts == max(bird.mvments$counts)),
 
 ### Further help
  
-For more info see [Hadley Wickham's style guide](http://adv-r.had.co.nz/Style.html) which is based of the [Google style guide](https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml#generallayout).
+For more info see [Hadley Wickham's style guide](http://adv-r.had.co.nz/Style.html) which is based of the [Google style guide](https://google.github.io/styleguide/Rguide.html).
 
 You may now be thinking about all the scripts that you have made that need to be be reformatted. As is commonplace in R, someone has created a package to help with this. The [formatR](https://cran.r-project.org/web/packages/formatR/index.html) package by Yihui Xie has a neat little function called `tidy_source()`. This isn't a fix all, but can go a long way in making horrible scripts look legible. See [An introduction to format R](http://yihui.name/formatR/) or type `?tidy_source()` for details on how to use this package.
   

@@ -20,7 +20,7 @@ Many commonly used analyses for multivariate data sets (e.g. PERMANOVA, ANOSIM,
 <p><img src="Rick-Astley.jpg" /></p>
 <p>In this example, we use a data set where researchers wanted to contrast the species composition of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of seven species of macroalgae were collected from Sydney Harbour, and the abundance of seven species of herbivorous crustacean recorded from each replicate (data from <a href="http://www.int-res.com/abstracts/meps/v208/p183-196/">Poore <em>et al</em>. 2000)</a>. The data are multivariate because seven response variables (the species) were measured from each of the samples.</p>
 <p><img src="MDS_image.jpg" /></p>
-<p>We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our <a href="../multidimensional-scaling">multi-dimensional scaling</a> example) or test hypotheses about groups of samples by resampling these differences.</p>
+<p>We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our <a href="/graphics/multivariate-vis/mds/">multi-dimensional scaling</a> example) or test hypotheses about groups of samples by resampling these differences.</p>
 <p>Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models.</p>
 <div id="running-the-analysis" class="section level3">
 <h3>Running the analysis</h3>
@@ -69,7 +69,7 @@ plot(mod2)</code></pre>
 <h3>Interpreting the results</h3>
 <p>We can test the multivariate hypothesis of whether species composition varied across the habitats by using the <code>anova</code> function. This gives an analysis of deviance table where we use likelihood ratio tests and resampled p values to look for a significant effect of Habitat on the community data.</p>
 <pre class="r"><code>anova(mod2)</code></pre>
-<pre><code>## Time elapsed: 0 hr 0 min 8 sec</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 7 sec</code></pre>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Herb_spp ~ Herbivores$Habitat
@@ -87,7 +87,7 @@ plot(mod2)</code></pre>
 <p>To examine this further, and see which herbivore species are more likely to be found on which algal species, we can run univariate tests for each species separately.</p>
 <p>This is done by using the <code>p.uni="adjusted"</code> argument in the <code>anova</code> function. The “adjusted” part of the argument refers to the resampling method used to compute the p values, taking into account the correlation between the response variables. This correlation is often found in ecological systems where different species will interact with each other, competing with or facilitating each others’ resource use.</p>
 <pre class="r"><code>anova(mod2, p.uni = &quot;adjusted&quot;)</code></pre>
-<pre><code>## Time elapsed: 0 hr 0 min 8 sec</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 7 sec</code></pre>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Herb_spp ~ Herbivores$Habitat
@@ -115,7 +115,7 @@ plot(mod2)</code></pre>
 <p>So far, we have considered just one predictor variable of habitat. By altering the formula in mvabund, we can test more complex models. For example, to fit a model with both habitat and day or night, we would use:</p>
 <pre class="r"><code>mod3 &lt;- manyglm(Herb_spp ~ Herbivores$Habitat * Herbivores$DayNight, family = &quot;negative_binomial&quot;)
 anova(mod3)</code></pre>
-<pre><code>## Time elapsed: 0 hr 0 min 23 sec</code></pre>
+<pre><code>## Time elapsed: 0 hr 0 min 24 sec</code></pre>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model: Herb_spp ~ Herbivores$Habitat * Herbivores$DayNight
@@ -124,8 +124,8 @@ anova(mod3)</code></pre>
 ##                                        Res.Df Df.diff   Dev Pr(&gt;Dev)    
 ## (Intercept)                                99                           
 ## Herbivores$Habitat                         95       4 625.2    0.001 ***
-## Herbivores$DayNight                        94       1   6.2    0.597    
-## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.431    
+## Herbivores$DayNight                        94       1   6.2    0.606    
+## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.448    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Arguments:

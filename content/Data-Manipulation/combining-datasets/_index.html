@@ -14,7 +14,7 @@ output: html_document
 <p>We will use the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> which has many convenient functions for combining data sets, First, load the package:</p>
 <pre class="r"><code>library(dplyr)</code></pre>
 <p>As with the help page for <a href="/../data-manipulation/subsetting-data/">Subsetting data</a>, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.</p>
-<p>We will also read in a dataset giving geographic locations for each site (for example, downloaded from a GPS) and nightly weather data (in this case downloaded and summarised from the Bureau of Meteorology data online). If you would like to know more about downloading weather and climate data, our help on <a href="/../accessing-weather-data/">Accessing weather data</a> in Australia.</p>
+<p>We will also read in a dataset giving geographic locations for each site (for example, downloaded from a GPS) and nightly weather data (in this case downloaded and summarised from the Bureau of Meteorology data online).</p>
 <p>Download the three sample data sets (<a href="/datasets/Bats_data.csv">Bats_data.csv</a>, <a href="/datasets/Geo_data.csv">Geo_data.csv</a>, and <a href="/datasets/Weather_vars.csv">Weather_vars.csv</a>) and import into R.</p>
 <pre class="r"><code>Bats &lt;- read.csv(file = &quot;Bats_data.csv&quot;, header = T, stringsAsFactors = F)
 Geo &lt;- read.csv(file = &quot;Geo_data.csv&quot;, header = T, stringsAsFactors = F)

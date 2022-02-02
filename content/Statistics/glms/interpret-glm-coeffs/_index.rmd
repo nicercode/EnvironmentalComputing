@@ -5,7 +5,7 @@ output: html_document
 ---
 In linear models, the interpretation of model parameters is linear. For example, if a you were modelling plant height against altitude and your coefficient for altitude was -0.9, then plant height will decrease by 1.09 for every increase in altitude of 1 unit.
 
-For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for [binary](/statistics/glm-1/) and [count](/statistics/glm-2/) data page on [interpreting coefficients in linear models](/statistics/interpret-glm-coeffs/).
+For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for [binary](/statistics/glms/glm-1/) and [count](/statistics/glms/glm-2/) data page on [interpreting coefficients in linear models](/statistics/glms/interpret-glm-coeffs/).
   
 
 ### Poisson and negative binomial GLMs

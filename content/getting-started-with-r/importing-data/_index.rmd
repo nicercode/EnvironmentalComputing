@@ -1,7 +1,6 @@
 ---
 weight: 5
 title: "Importing Data"
-author: "Keryn Bain"
 output: html_document
 ---
 

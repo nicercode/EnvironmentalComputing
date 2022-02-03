@@ -17,7 +17,7 @@ This repository contains the
 Below are important details to quickly orientate you to the
 behind-the-scenes of this website
 
-## Installation of `blogdown` and Hugo
+### Installation of `blogdown` and Hugo
 
 `blogdown` is a R interface to Hugo and is super handy for our purposes
 as most tutorials are written as R Markdown files which is rendered into
@@ -34,27 +34,27 @@ install.packages("blogdown")
 remotes::install_github('rstudio/blogdown')
 ```
 
-Once blogdown is installed, we can use this package to install `hugo`!
+Once blogdown is installed, we can use this package to install Hugo!
 
 ``` r
 blogdown::install_hugo()
 ```
 
-If you have old versions of `hugo` on your computer or having issues
-installing hugo via blogdown you may want to run:
+If you have old versions of Hugo on your computer or having issues
+installing Hugo via blogdown you may want to run:
 
 ``` r
-# Search for where hugo was previously installed, option to remove previous versions
+# Search for where Hugo was previously installed, option to remove previous versions
 blogdown::find_hugo() 
 
-# Having issues with hugo, try using this handy function!
+# Having issues with Hugo, try using this handy function!
 blogdown::check_hugo()
 ```
 
-## Install dependencies
+### Install dependencies
 
-Once you have `blogdown` and `hugo` running happily, you will want to
-make sure you have all the different packages that were used in the
+Once you have `blogdown` and Hugo running happily, you will want to make
+sure you have all the different packages that were used in the
 tutorials. We created a `DESCRIPTION` file which lists out all the
 current dependencies under `Imports`. As the website continues to grow,
 you will need to manually edit the `DESCRIPTION` file to ensure the
@@ -66,7 +66,7 @@ To install the dependencies listed in the `DESCRIPTION` file
 remotes::install_deps()
 ```
 
-## Structure of the major directories
+### Structure of the major directories
 
 The most important folders for this website are `content/`, `static/`
 and `public/`.
@@ -83,4 +83,41 @@ renders the website. You don’t know need to physically edit the items in
 For more info about this directories see
 [here](https://bookdown.org/yihui/blogdown/hugo.html)
 
-### The anatomy of nested menus
+### Name and code style conventions
+
+Please follow these conventions when creating new folders: - lowercase
+names - using `-` hypthens to join separate words and numbers
+e.g. `data-manipulation` - keep folder names to less than 3 concise
+words if possible - use commonly used abbreviations e.g. `glms` instead
+of `generalised-linear-models` - If there are multiple tutorials for a
+given topic, use numbers beginning from 1 e.g `mixed-model-1`
+
+We used the `styler` package to format all the content within chunks.
+
+``` r
+styler::????
+```
+
+### The anatomy of nested menus in `content/`
+
+All of our tutorials are organised into major menus
+
+    content/
+    ├── about-this-site
+    ├── coding-skills
+    │   ├── asking-code-questions
+    │   │   ├── _index.html
+    │   │   ├── _index.rmd
+    │   │   ├── stack.png
+    │   ├── good-practice
+
+I recommend taking a look at this
+[website](https://mingchen0919.github.io/blogdown-website-with-hugo-theme-learn/)
+to better understand the nestedness of the menus and how to set this up
+using subfolders and `_index.Rmd` files.
+
+### R Markdown and yamls
+
+### Building the site
+
+### Internal links

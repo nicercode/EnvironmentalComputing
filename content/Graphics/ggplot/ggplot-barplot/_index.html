@@ -2,6 +2,7 @@
 title: 'Barplot with Errorbars'
 weight: 5
 output: html_document
+aliases: /plotting-with-ggplot-bar-plots-with-error-bars/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -31,7 +32,7 @@ Iris_summary &lt;- iris %&gt;% # the names of the new data frame and the data fr
   geom_errorbar(aes(ymin = mean_PL - sd_PL, ymax = mean_PL + sd_PL), width = 0.2)
 
 IrisPlot + labs(y = &quot;Petal length (cm) +/- s.d.&quot;, x = &quot;Species&quot;) + theme_classic()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-barplot/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-barplot/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p><code>geom_col</code> uses the value of the y variable (mean_PL) as the height of the bars.</p>
 <p>In the <code>geom_errorbar</code> code, <code>ymin</code> and <code>ymax</code> are the top and bottom of the error bars (defined here as mean +/- sd), and <code>width</code> defines how wide the error bars are.</p>
 <p>###Further help</p>

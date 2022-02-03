@@ -25,7 +25,7 @@ IrisBox &lt;- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
 
 IrisHist &lt;- ggplot(iris, aes(Sepal.Length)) +
   geom_histogram()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="changing-the-colour-of-the-whole-plot-or-its-outline" class="section level3">
 <h3>Changing the colour of the whole plot or its outline</h3>
 <p>To colour your entire plot one colour, add <code>fill = "colour"</code> or <code>colour = "colour"</code> into the brackets following the <code>geom_...</code> code where you specified what type of graph you want.</p>
@@ -36,11 +36,11 @@ IrisHist &lt;- ggplot(iris, aes(Sepal.Length)) +
 
 IrisHist &lt;- ggplot(iris, aes(Sepal.Length)) +
   geom_histogram(fill = &quot;yellow&quot;, colour = &quot;green&quot;)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>For scatterplots, <code>colour = "colour"</code> will specify the fill colour for the point shape.</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
   geom_point(colour = &quot;red&quot;)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>The plots and outlines can be changed to any colour listed <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a>. Remember to include “” before and after the colour name.</p>
 </div>
 <div id="using-colour-to-visualise-additional-variables" class="section level3">
@@ -49,23 +49,23 @@ IrisHist &lt;- ggplot(iris, aes(Sepal.Length)) +
 <p>If you wish to colour point on a <strong>scatter plot</strong> by a third categorical variable, then add <code>colour = variable.name</code> within your <code>aes</code> brackets. This tells ggplot that this third variable will colour the points. To colour the points by the variable Species:</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Species)) +
   geom_point()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>To colour <strong>box plots</strong> or <strong>bar plots</strong> by a given categorical variable, you use you use <code>fill = variable.name</code> instead of <code>colour</code>.</p>
 <pre class="r"><code>IrisBox &lt;- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
   geom_boxplot()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><strong>Additional continuous variables</strong></p>
 <p>The basic format for colouring a continuous variable is very similar to a categorical variable. The only real difference is you need to use <code>+ scale_colour_gradient(low = "colour1", high = "colour2")</code>. The other colour scales will not work as they are for categorical variables. For example, here is a plot of sepal length vs petal length, with the symbols colored by their value of sepal width.</p>
 <pre class="r"><code>IrisPlot.continuous &lt;- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Sepal.Width)) +
   geom_point()
 
 print(IrisPlot.continuous)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>To make the gradient more effective, specify two colours within the <code>+ scale_colour_gradient</code> brackets to represent either end of the gradient. For example:</p>
 <pre class="r"><code>print(IrisPlot.continuous + scale_colour_gradient(low = &quot;black&quot;, high = &quot;white&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code>print(IrisPlot.continuous + scale_colour_gradient(low = &quot;darkolivegreen1&quot;, high = &quot;darkolivegreen&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
 </div>
 <div id="choosing-your-own-colours-for-these-variables" class="section level3">
 <h3>Choosing your own colours for these variables</h3>
@@ -74,22 +74,22 @@ print(IrisPlot.continuous)</code></pre>
 <p>There are numerous options for the <code>+ scale_colour_yourchoice()</code> part.</p>
 <p><strong>Individually select colours.</strong> To manually choose colours, you can use <code>+ scale_colour_manual()</code> or <code>+ scale_fill_manual()</code>. For example, to choose three colours for the iris plots:</p>
 <pre class="r"><code>print(IrisPlot + scale_colour_manual(values = c(&quot;Blue&quot;, &quot;Red&quot;, &quot;Green&quot;)))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre class="r"><code>print(IrisBox + scale_fill_manual(values = c(&quot;Black&quot;, &quot;Orange&quot;, &quot;Brown&quot;)))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
 <p><strong>Assign tones on a greyscale.</strong> Use <code>+ scale_colour_grey()</code> or <code>+ scale_fill_grey()</code></p>
 <pre class="r"><code>print(IrisPlot + scale_colour_grey())</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <pre class="r"><code>print(IrisBox + scale_fill_grey())</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
 <p><strong>Assign colours from a pre-made pallette.</strong> Use <code>+ scale_colour_brewer()</code> or <code>+ scale_fill_brewer</code>. To do this you will need to install the package <a href="https://cran.r-project.org/web/packages/RColorBrewer/index.html">RColorBrewer</a> and load in R.</p>
 <pre class="r"><code>library(RColorBrewer)</code></pre>
 <p><img src="RColourBrewer_palette.png" /></p>
 <p>This can then be added to the end of your graph code just like the others <code>+ scale_colour_brewer(palette = "chosen.palette")</code> for scatterplots and <code>+ scale_fill_brewer(palette = "chosen.palette")</code> for boxplots, where <code>"chosen.pallete"</code> is one of the available palletes. For example,</p>
 <pre class="r"><code>print(IrisPlot + scale_colour_brewer(palette = &quot;Dark2&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <pre class="r"><code>print(IrisBox + scale_fill_brewer(palette = &quot;Oranges&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
 </div>
 <div id="changing-symbols-in-a-scatterplot" class="section level3">
 <h3>Changing symbols in a scatterplot</h3>
@@ -98,21 +98,21 @@ print(IrisPlot.continuous)</code></pre>
 <p>For example, to use a filled triangle,</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
   geom_point(shape = 17)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Different symbols can be used to group data in a scatterplot. This can be very helpful when printing in black and white or to further distinguish your categories.</p>
 <p>To do this, you need to add <code>shape = variable.name</code> within your basic plot <code>aes</code> brackets, where <code>variable.name</code> is the name of your grouping variable. For example, to have different symbols for each species, we would use.</p>
 <pre class="r"><code>IrisPlot.shape &lt;- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species)) +
   geom_point()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>To set the symbols manually, we can use the symbol codes in <code>scale_shape_manual()</code> added to your print function.</p>
 <pre class="r"><code>print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>This can be used with colour to further distinguish and group your variables.</p>
 <pre class="r"><code>IrisPlot.shape &lt;- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species, colour = Species)) +
   geom_point()
 
 print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)) + scale_colour_manual(values = c(&quot;chartreuse4&quot;, &quot;chocolate&quot;, &quot;slateblue4&quot;)))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-colour-shapes/_index_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>###Further help</p>
 <p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
 <em><a href="/graphics/ggplot/ggplot-appearance/">altering overall appearance</a>.<br />

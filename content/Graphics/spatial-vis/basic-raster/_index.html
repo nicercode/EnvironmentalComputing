@@ -177,7 +177,7 @@ projected_pts_mangrove</code></pre>
 <p>Load up some SST data - Feb 2013 for the globe (as an aside, check <a href="http://oceancolor.gsfc.nasa.gov/cms/">this link</a> for more great ocean global data sets:</p>
 <pre class="r"><code>sst_feb &lt;- raster(&quot;SST_feb_2013.img&quot;)
 plot(sst_feb)</code></pre>
-<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Crop it to the pacific so we can compare our mangrove data</p>
 <pre class="r"><code>pacific_extent &lt;- extent(mangrove) + 80 # take advantage of the way R handles vector arithmatic!
 pacific_extent # check it
@@ -209,7 +209,7 @@ plot(sst_anomaly,
   main = &quot;2013 Feb SST anomaly + hottest point&quot;
 )
 points(max_xy, pch = 8, cex = 2)</code></pre>
-<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Sampling points conditionally? Sure. We’ll see a better wrapper for this further down though.</p>
 <pre class="r"><code>xy &lt;- xyFromCell(sst_anomaly, sample(1:ncell(sst_anomaly), 20)) # 20 random points
 points(xy)
@@ -259,7 +259,7 @@ plot(shark_predict,
   col = rev(rainbow(n = 10, start = 0, end = 0.3)),
   main = &quot;Shark abundance as a function of SST&quot;
 )</code></pre>
-<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>Let’s try somethign else, say attack risk. It’s not just about abdundance, something else like how mean or aggressive they are?</p>
 <pre class="r"><code>sst_samp$shark_aggression &lt;- sst_samp$lat * -1 # so agression goes up with lattitude
 sst_samp$shark_attack &lt;- scale(sst_samp$shark_abund * sst_samp$shark_aggression)
@@ -271,7 +271,7 @@ plot(shark_attack,
   col = rev(rainbow(n = 10, start = 0, end = 0.3)),
   main = &quot;Shark attack index!&quot;
 )</code></pre>
-<p><img src="/graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/basic-raster/_index_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>This is a quick and silly example. If we were less lazy, we might create a new image stack with the abundance predicitons and the lattitude values, pull the random samples out again, and re-fit the model and predictions.</p>
 <div id="excercises-2" class="section level4">
 <h4>Excercises</h4>

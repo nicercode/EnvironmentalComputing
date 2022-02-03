@@ -8,7 +8,7 @@ aliases: /plotting-with-ggplot-altering-the-overall-appearance/
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p><strong>ggplots</strong> are almost entirely customisable. This gives you the freedom to create a plot design that perfectly matches your report, essay or paper.</p>
 <p>The overall appearance can be edited by changing the style or prescence of grid lines, axis notches, panel colour, legend colour or outlines.</p>
 <p>Before you get started, read the page on the <a href="/graphics/ggplot/ggplot-basics/">basics</a> of plotting with ggplot and install the package ggplot2.</p>
@@ -22,13 +22,13 @@ aliases: /plotting-with-ggplot-altering-the-overall-appearance/
 <p>The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial.</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
   geom_point()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>To change the design of an element of your plot, you create a theme then print the plot with the theme applied. For example, some code to change the colour and size of the legend in the above plot would look like this.</p>
 <pre class="r"><code>mytheme &lt;-
   theme(legend.title = element_text(colour = &quot;steelblue&quot;, size = rel(2)))</code></pre>
 <p>We would then reprint the base plot with this theme added:</p>
 <pre class="r"><code>print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Themes can have many different elements, that relate to legends, axes, titles etc. Separate each within the <code>theme</code> code with a comma.</p>
 </div>
 <div id="formatting-the-plot-and-legend-background" class="section level3">
@@ -62,7 +62,7 @@ aliases: /plotting-with-ggplot-altering-the-overall-appearance/
   )
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="altering-the-size-colour-or-presence-of-grid-lines" class="section level3">
 <h3>Altering the size, colour or presence of grid lines</h3>
@@ -84,12 +84,12 @@ print(IrisPlot + mytheme)</code></pre>
   )
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>To remove the grid lines, use the <code>element_blank()</code>.</p>
 <pre class="r"><code>mytheme &lt;- theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="altering-the-x-and-y-axis-lines" class="section level3">
 <h3>Altering the x and y axis lines</h3>
@@ -101,7 +101,7 @@ print(IrisPlot + mytheme)</code></pre>
   )
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="altering-the-axis-ticksnotches" class="section level3">
 <h3>Altering the axis ticks/notches</h3>
@@ -109,7 +109,7 @@ print(IrisPlot + mytheme)</code></pre>
 <pre class="r"><code>mytheme &lt;- theme(axis.ticks = element_line(colour = &quot;red&quot;, size = (2)))
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="removing-any-element-of-a-theme" class="section level3">
 <h3>Removing any element of a theme</h3>
@@ -123,7 +123,7 @@ print(IrisPlot + mytheme)</code></pre>
   )
 
 print(IrisPlot + mytheme)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="example-of-a-fully-customised-ggplot" class="section level3">
 <h3>Example of a fully customised ggplot</h3>
@@ -182,7 +182,7 @@ print(
     + labs(y = &quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;, colour = &quot;Species&quot;)
     + scale_colour_manual(values = c(&quot;slateblue&quot;, &quot;slateblue2&quot;, &quot;slateblue4&quot;))
 )</code></pre>
-<p><img src="/graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-appearance/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>###Further help</p>
 <p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
 * <a href="/graphics/ggplot/ggplot-labels/">adding titles and axis names</a><br />

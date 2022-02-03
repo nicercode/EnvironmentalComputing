@@ -13,7 +13,7 @@ aliases: /principal-components-analysis/
 <p>Principal Components Analysis (PCA) is the one of the most widely used multivariate statistical techniques. The primary motivation behind PCA is to reduce, or summarize, a large number of variables into a smaller number of derived variables that may be readily visualised in 2- or 3-dimensional space. For example, PCA might be used to compare the chemistry of different watersheds based on multiple variables or to quantify phenotypic variation amongst species based on multiple morphological measurements.</p>
 <p>The new set of variables created by PCA can be used in other analyses, but most commonly as a new set of axes on which to plot your multivariate data.</p>
 <p>The first principal component (PC) is fitted such that it explains the maximum amount of variation in the data. Think of this as a line of best fit in multivariate space, as close as possible to all the points with the variation maximised along the line and minimised on the perpindicular away from the line. The second PC is fitted at right angles to the first (i.e., orthogonally, with with no correlation) such that it explains as much of the remaining variation as possible. Additional PCs, which must be orthogonal to existing PCs, can then be fitted by the same iterative process.</p>
-<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
+<p><img src="/Graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
 <p>Visualising this in two dimensions helps to understand the approach. The data points will be plotted on the new blue axes (the principal components) rather than the original black axes. Now imagine fitting those lines in more than three dimensions!</p>
 <p>Consider a plant physiologist attempting to quantify differences in leaf shape between two species of tree. She recorded total length (leaf + petiole), leaf length, width at the widest point, width half way along the leaf and petiole length from ten leaves of each species. These data are five dimensional (i.e., five measured variables) and we can use PCA to extract two new variables that will allow us to visualise the data in fewer dimensions.</p>
 <p><img src="PCA_image.png" /></p>
@@ -30,7 +30,7 @@ Leaf_data &lt;- Leaf_shape[, 2:6]</code></pre>
 <p>Calling the <code>plot</code> function on the scores of the <code>princomp</code> output produces a score plot. This is the ordination of all 20 leaf samples in the new two-dimensional space defined by PC1 and PC2. Here, we can also label the samples by species with the colour argument, and add a legend.</p>
 <pre class="r"><code>plot(Leaf_PCA$scores, pch = 16, col = as.factor(Species))
 legend(0, 0.4, c(&quot;Species A&quot;, &quot;Species B&quot;), pch = 16, col = c(&quot;black&quot;, &quot;red&quot;))</code></pre>
-<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
@@ -46,7 +46,7 @@ legend(0, 0.4, c(&quot;Species A&quot;, &quot;Species B&quot;), pch = 16, col = 
 <p>The proportion explained independently by each component is provided in the second row of the output from <code>summary</code>. In this example, PC1 explains 90% of the variation between the two species with PC2 2 explaining a further 6.6%. Together, those two axes (the ones you are now plotting on) explain 96.7% of the variance (the cumulative proportion row in the output). This means that those original data in five dimensions can be placed almost perfectly on this new two-dimensional plane.</p>
 <p>The relative contribution of each component can also also visualised by a scree plot. Note that the Y-axis presented is not the % of variation explained. The contributions always decline with the number of the component, and ideally we would want as much variation as possible explained by the first two, as these are the ones we are using to visualise the data.</p>
 <pre class="r"><code>screeplot(Leaf_PCA, type = &quot;lines&quot;)</code></pre>
-<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p><strong>2</strong> How are the original variables related to the principal components?</p>
 <p>These relationships can obtained numerically by extracting the loadings from the object produced by the PCA.</p>
 <pre class="r"><code>loadings(Leaf_PCA)</code></pre>
@@ -67,7 +67,7 @@ legend(0, 0.4, c(&quot;Species A&quot;, &quot;Species B&quot;), pch = 16, col = 
 <p>In this example, you can see that PC1 is positively correlated with the two width variables. R doesn’t bother printing very low correlations, so you can also see that PC1 is uncorrelated with the three length variables. Given the the two species are split along the x-axis in the score plot (PC1), we now know that species A with high values of PC1 has wider leaves than species B with low values of PC1. We also know that leaves toward the top of the plot are the longest due to the positive correlations between PC2 and the three length variables (but this does not separate the two species on the plot).</p>
 <p>You can also produce a biplot with the relationships between the original variables and the principal components overlaid on the score plot. The original variables (in red) will have a strong relationship with one of the principal components if they are parallel to that component (eg Width 1 and PC1) and longer arrows represent stronger correlations.</p>
 <pre class="r"><code>biplot(Leaf_PCA)</code></pre>
-<p><img src="/graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/pca/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="assumptions-to-check" class="section level3">
 <h3>Assumptions to check</h3>

@@ -27,7 +27,8 @@ e_{ij}\sim \mathcal{N}(0,v_{ij})\
 <p>We can visualize this (again Figure 4 from Nakagawa <em>et al.</em> 2017). And we can see why this model is called, a ‘multilevel’ meta-analytic model, an extension of the random-effects model.</p>
 <p><img src="Legend.png" width="228" /><img src="Multi.png" width="255" /></p>
 <p>We can fit an equivalent model using the function <code>rma.mv</code>. We need to add <code>paper</code> (the between-study effect) and <code>id</code> (different effect sizes; the within-study effect) in our data set to the multilevel model as random factors.</p>
-<pre class="r"><code>multilevel_m &lt;- rma.mv(yi = yi, V = vi, random = list(~1 | paper, ~1 | id), method = &quot;REML&quot;, data = dat)
+<pre class="r"><code>multilevel_m &lt;- rma.mv(yi = yi, V = vi, random = list(~1 | paper, ~1 | id), method = &quot;REML&quot;,
+    data = dat)
 summary(multilevel_m)</code></pre>
 <pre><code>## 
 ## Multivariate Meta-Analysis Model (k = 102; method: REML)
@@ -67,7 +68,7 @@ I^2=\frac{\tau^2+\sigma^2}{(\tau^2+\sigma^2+\bar{v})},
 <pre class="r"><code>library(ape)
 tree &lt;- read.tree(file = &quot;tree_curtis1998.tre&quot;)
 plot(tree, cex = 0.7)</code></pre>
-<p><img src="/statistics/meta-analysis/meta-analysis-3/_index_files/figure-html/prep1-1.png" width="672" /></p>
+<p><img src="/Statistics/meta-analysis/meta-analysis-3/_index_files/figure-html/prep1-1.png" width="672" /></p>
 <p>We can then make a correlation matrix (a relatedness matrix among species). I’ve skipped explantions of these operations - other than saying we have a correlation matrix to fit to the model</p>
 <pre class="r"><code>tree &lt;- compute.brlen(tree)
 cor &lt;- vcv(tree, cor = T)</code></pre>
@@ -81,7 +82,8 @@ phylo &lt;- gsub(&quot;nothofagus_fusca&quot;, &quot;fuscospora_fusca&quot;, phy
 phylo &lt;- capitalize(phylo)
 dat[, &quot;phylo&quot;] &lt;- phylo</code></pre>
 <p>We now have our phylogenetic correlation <code>cor</code> and a column with species names <code>phylo</code>, and can run our meta-analysis again with a phylogenetic effect.</p>
-<pre class="r"><code>phylo_m &lt;- rma.mv(yi = yi, V = vi, random = list(~1 | phylo, ~1 | paper, ~1 | id), R = list(phylo = cor), method = &quot;REML&quot;, data = dat)
+<pre class="r"><code>phylo_m &lt;- rma.mv(yi = yi, V = vi, random = list(~1 | phylo, ~1 | paper, ~1 | id),
+    R = list(phylo = cor), method = &quot;REML&quot;, data = dat)
 summary(phylo_m)</code></pre>
 <pre><code>## 
 ## Multivariate Meta-Analysis Model (k = 102; method: REML)
@@ -114,7 +116,8 @@ summary(phylo_m)</code></pre>
 <h3>Complex robust models (the last section!)</h3>
 <p>We have a multilevel version of the robust model too. It is easy to fit using the function <code>rma.mv</code> (we do not include <code>phylo</code> as it did not explain any variance).</p>
 <pre class="r"><code># you can put a marix or vector to W which is equivalent to &#39;weights&#39; in rma
-robustml_m &lt;- rma.mv(yi = yi, V = vi, W = wi, random = list(~1 | paper, ~1 | id), method = &quot;REML&quot;, data = dat)
+robustml_m &lt;- rma.mv(yi = yi, V = vi, W = wi, random = list(~1 | paper, ~1 | id),
+    method = &quot;REML&quot;, data = dat)
 summary(robustml_m)</code></pre>
 <pre><code>## 
 ## Multivariate Meta-Analysis Model (k = 102; method: REML)

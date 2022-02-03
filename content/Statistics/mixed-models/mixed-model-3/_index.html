@@ -54,7 +54,7 @@ aliases: /mixed-models-3/
 <pre class="r"><code>par(mfrow = c(1, 2))
 plot(residuals(fit.bin) ~ fitted(fit.bin), main = &quot;residuals v.s. Fitted&quot;)
 qqnorm(residuals(fit.bin))</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Unfortunately, for binary data residual plots are quite difficult to interpret. In the residual v.s. fitted plot all the 0’s are in a line (lower left) and all the ones are in a line (upper right) due to the discreteness of the data. This stops us from being able to look for patterns. We have the same problem with the normal quantile plot.</p>
 <p>Briefly looking at our assumptions, Assumptions 1 and 4 we can’t check, but will be true if we sample randomly. Assumption 2 and 3 we should check with the residual plots, but given its failings we are unsure. Assumption 5 is hard to check in general and not crucial.</p>
 <p><strong>Hypothesis test for fixed effects</strong></p>
@@ -95,7 +95,7 @@ mean(lrStat &gt; lrObs, na.rm = T) # P-value for test of Estuary effect</code></
 <pre class="r"><code>par(mfrow = c(1, 2))
 plot(residuals(fit.pois) ~ fitted(fit.pois), main = &quot;Residuals vs. Fitted&quot;)
 qqnorm(residuals(fit.pois))</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Once again, the residual plots aren’t that useful, but we at least get an idea about whether the variance assumption is reasonable. There is no obvious fan shape, so a Poisson model seems okay.</p>
 <p><strong>Hypothesis test for fixed effects</strong></p>
 <p>Again, we can use parametric bootstrapping to test for an effect of Modification.</p>
@@ -213,7 +213,7 @@ for (iBoot in 1:nBoot)
 par(mfrow = c(1, 2))
 plot(residuals(fit.pois) ~ fitted(fit.pois), main = &quot;residuals vs. Fitted&quot;)
 qqnorm(residuals(fit.pois))</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunately lme4 can’t handle this situation (overdispersion), and there is no easy way to model these data. If this happens in your data try the <a href="http://glmmadmb.r-forge.r-project.org/">glmmADMB</a> package.</p>
 <p><strong>Hypothesis test for random effects</strong></p>
 <p>As before you could run hypothesis tests on the random effects using a parametric bootstrap. See <a href="/statistics/mixed-models/mixed-model-1/">Mixed models 1</a> and <a href="/statistics/mixed-models/mixed-model-2/">Mixed models 2</a> for code that you could modify for this situation.</p>
@@ -234,7 +234,7 @@ legend(&quot;topleft&quot;,
 
 Est.means &lt;- summarize(means, Estuaries$Estuary, mean)$means # extract means by Estuary
 stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE) # plot means by estuary</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-3/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>
 <p>You can type <code>?glmer</code> into R for help with this function.</p>

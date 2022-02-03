@@ -2,6 +2,7 @@
 title: "Summarising data"
 weight: 3
 output: html_document
+aliases: /summarising-data/
 ---
 
 Summarising our data is often the first step in data exploration and needed to understanding patterns in the magnitude and variability of our measurements.

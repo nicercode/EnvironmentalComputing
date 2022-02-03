@@ -22,7 +22,7 @@ aliases: /making-simple-maps/
 <pre class="r"><code>basemap &lt;- get_map(&quot;Royal National Park&quot;, zoom = 12)</code></pre>
 <p>and then plot it with the function <code>ggmap</code>:</p>
 <pre class="r"><code>ggmap(basemap)</code></pre>
-<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>The argument of <code>get_map</code> is simply any place searchable on Google Maps (in this case ‘Royal National Park’) - easy!</p>
 <p>To add point data for our five survey sites, we first need to make a new data frame holding the place name, latitude and longitude of each site (or import this data from a spreadsheet).</p>
 <pre class="r"><code>ptdata &lt;- data.frame(
@@ -42,7 +42,7 @@ aliases: /making-simple-maps/
 )</code></pre>
 <p>We can add these points to our map based on the Latitude (y) and Longitude (x) coordinates. It is important that the points and the other features on the map work on the same scale - or ‘projection’. These locations were estimated from Google Maps data for this reason - estimate your own via <a href="http://latlong.net">LatLong.net</a>).</p>
 <pre class="r"><code>ggmap(basemap) + geom_point(data = ptdata, aes(x = Long, y = Lat))</code></pre>
-<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Well done -you made your first map with R! Easy! You may have noticed that <code>ggmap</code> uses familiar graphics code from the package ggplot (see <a href="/graphics/ggplot/">plotting with ggplot</a>).</p>
 </div>
 <div id="making-a-presentation-ready-map" class="section level3">
@@ -85,7 +85,7 @@ aliases: /making-simple-maps/
     hjust = &quot;inward&quot;
   ) +
   labs(x = &quot;Longitude&quot;, y = &quot;Latitude&quot;)</code></pre>
-<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="making-a-publication-ready-map" class="section level3">
 <h3>Making a publication-ready map</h3>
@@ -109,7 +109,7 @@ aliases: /making-simple-maps/
   ) +
   theme_bw() +
   theme(axis.title = element_blank())</code></pre>
-<p><img src="/graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/Graphics/spatial-vis/simple-maps/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

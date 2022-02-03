@@ -111,7 +111,8 @@ I^2=\frac{\tau^2}{(\tau^2+\bar{v})},
 <p>The existence of heterogeneity sets a scene for meta-regression. This means that we now put predictors (‘moderators’ in the meta-analytic terminology) into our model to explain heterogeneity (equivalent to normal regression models).</p>
 <p>Fitting meta-regression is pretty straightforward too. In this example, let’s fit three moderators that were collected by the authors: 1) <code>time</code> (how long the experiment was), 2) <code>method</code> (different ways of increasing CO<span class="math inline">\(_2\)</span>), and 3) <code>fungroup</code> (functional group, i.e., angiosperm, gymnosperm or N<span class="math inline">\(_2\)</span> fixer).</p>
 <p>We use <code>rma</code> again, but now have a model statement.</p>
-<pre class="r"><code>metareg &lt;- rma(yi = yi, vi = vi, mod = ~time + method + fungrp, method = &quot;REML&quot;, data = dat)
+<pre class="r"><code>metareg &lt;- rma(yi = yi, vi = vi, mod = ~time + method + fungrp, method = &quot;REML&quot;,
+    data = dat)
 summary(metareg)</code></pre>
 <pre><code>## 
 ## Mixed-Effects Model (k = 102; tau^2 estimator: REML)
@@ -155,7 +156,7 @@ summary(metareg)</code></pre>
 <p>What am I talking about by ‘funnel asymmetry’? If you plot effect sizes and its standard error in a decreasing order (<span class="math inline">\(se\)</span>; see the figure below) , we suppose to see a funnel up-side-down with effect sizes with low <span class="math inline">\(se\)</span> (or high weights) are more tightly aggregated than effect sizes with high <span class="math inline">\(se\)</span> (or low weights). But this funnel shape occurs only when we do not have publication bias. If there is, we should see funnel asymmetry. This is because studies with small sample sizes (i.e. high <span class="math inline">\(se\)</span>, which leads to non-significance) are less likely to be published. We will see an example of this funnel asymmetry in our data set.</p>
 <p>To create a funnel plot and run Egger’s test:</p>
 <pre class="r"><code>funnel(random_m)</code></pre>
-<p><img src="/statistics/meta-analysis/meta-analysis-2/_index_files/figure-html/funnel-1.png" width="672" /></p>
+<p><img src="/Statistics/meta-analysis/meta-analysis-2/_index_files/figure-html/funnel-1.png" width="672" /></p>
 <pre class="r"><code># Note that the orignal Egger&#39;s test is regtest(random_m, model=&#39;lm&#39;)
 regtest(random_m)</code></pre>
 <pre><code>## 
@@ -168,7 +169,8 @@ regtest(random_m)</code></pre>
 ## Limit Estimate (as sei -&gt; 0):   b = 0.1584 (CI: 0.0890, 0.2278)</code></pre>
 <p>The funnel plot and Egger’s test both suggest funnel asymmetry. But we need to be careful. Funnel asymmetry cannot be caused not only by publication bias but also by heterogeneity (one or more undetected moderators are distorting a funnel shape). Given we have a lot of unexplained variance (i.e. heterogeneity), we are not sure which is causing this asymmetry. But we have some evidence for publication bias. A relating point is that if meta-regression explains a lot of heterogeneity, you should use that meta-regression model in the function <code>regrest</code> (in our case <code>regrest(metareg)</code>, but I did not do it as our model <code>metareg</code> did not explain anything).</p>
 <p>There is an alternative method, which has a cool name, the trim-and-fill method. You will see the reason why. We can use this method by using the function <code>trimfill</code>.</p>
-<pre class="r"><code># Note that we are using the defult estimator (&#39;L0&#39;), but there are two others availablere
+<pre class="r"><code># Note that we are using the defult estimator (&#39;L0&#39;), but there are two others
+# availablere
 tf_m &lt;- trimfill(random_m)
 tf_m</code></pre>
 <pre><code>## 
@@ -192,7 +194,7 @@ tf_m</code></pre>
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <pre class="r"><code>funnel(tf_m)</code></pre>
-<p><img src="/statistics/meta-analysis/meta-analysis-2/_index_files/figure-html/trimfill-1.png" width="672" /></p>
+<p><img src="/Statistics/meta-analysis/meta-analysis-2/_index_files/figure-html/trimfill-1.png" width="672" /></p>
 <p>As you can see this method uses the asymmetry to add more points and provide a revised overall mean, which is smaller than that of the original random-effect model. Although this effect is still significant, this method could turn a significant overall mean into a non-significant one. But rather than taking this is a real estimate of the overall mean, we need to see this as a part of sensitivity analysis.</p>
 <p>There are more methods for publication bias tests, none of which are perfect, but we do need to do some of these tests (see more for Nakagawa <em>et al.</em> 2017 and references therein).</p>
 </div>

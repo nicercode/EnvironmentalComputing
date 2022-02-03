@@ -2,6 +2,7 @@
 weight: 7
 title: "Power Analyses"
 output: html_document
+aliases: /power-analysis/
 ---
 
 ### What is power analysis and why is it important?

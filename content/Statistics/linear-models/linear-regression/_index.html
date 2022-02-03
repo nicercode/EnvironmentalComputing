@@ -2,6 +2,7 @@
 weight: 1
 title: "Linear Regression"
 output: html_document
+aliases: /linear-regression/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -62,7 +63,7 @@ summary(model)</code></pre>
 <h3>Assumptions to check</h3>
 <p><strong>Linearity</strong>. There is no point trying to fit a staight line to data that are curved! Curvilinear relationships produce U-shaped patterns in plots of the residuals vs the fitted values. Using the <code>plot</code> function on a model object provides a series of four graphical model diagnostics, the first of which is a plot of residuals versus fitted values.</p>
 <pre class="r"><code>plot(model, which = 1)</code></pre>
-<p><img src="/statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-5-1.png" width="480" /></p>
+<p><img src="/Statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-5-1.png" width="480" /></p>
 <p>The absence of strong patterning in the above plot indicates the assumption of linearity is valid. If there is strong patterning, one potential solution is to log-transform the response. Note in the above example plant height had already been log-transformed. An alternative solution is to fit a linear model of the response as a polynomial function (e.g. quadratic) of the response. The simplest way to do this in R is to use the <code>poly</code> function.</p>
 <p>Click <a href="https://gallery.shinyapps.io/slr_diag/">here</a> to see a nice interactive app that shows you what patterns of residuals you would expect with curved relationships</p>
 <p><strong>Constant variance</strong>. An even spread of data around the regression line is desirable. If the plot of residuals versus fitted values is fan-shaped the assumption of constant variance (aka homogeneity of variance) is violated. A log-transformation of the response variable may fix this problem, but if it doesn’t the best solution is to use a different error distribution in a generalised linear model framework (GLM). See the <a href="/statistics/glms/glm-1/">Generalised linear models 1</a> for more information.</p>
@@ -70,7 +71,7 @@ summary(model)</code></pre>
 <pre class="r"><code>par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(model$residuals) # Histogram of residuals
 plot(model, which = 2) # Quantile plot</code></pre>
-<p><img src="/statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p><strong>Independence</strong>. The observations of the response should be independent of each other. Non-independent observations are those that are in some way associated with each other beyond that which is explained by the predictor variable(s). For instance, samples collected from the same site, or repeatedly from the same object, may be more alike due to some additional factor other than the measured explanatory variable. Ensuring independence is an issue of experimental and sampling design and we usually know if the data are independent or not in advance of our analysis.</p>
 <p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a mixed-model (see <a href="/statistics/mixed-models/mixed-model-1/">Mixed models 1</a>).</p>
 </div>
@@ -80,7 +81,7 @@ plot(model, which = 2) # Quantile plot</code></pre>
 <p><strong>Visual</strong> For a linear regression with a single explanatory variable, it is useful to present the results as a scatter plot. The line of best fit derived from the model can be added with the <code>abline</code> function.</p>
 <pre class="r"><code>plot(loght ~ temp, data = Plant_height, xlab = &quot;Temperature (C)&quot;, ylab = &quot;log(Plant height)&quot;, pch = 16)
 abline(model, col = &quot;red&quot;)</code></pre>
-<p><img src="/statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/linear-regression/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

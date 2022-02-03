@@ -104,7 +104,8 @@ se^2_\mathrm{lnRR}=\frac{sd^2_{C}}{n_{C}\bar{x}^2_{C}}+\frac{sd^2_{E}}{n_{E}\bar
 \end{equation}\]</span></p>
 <p>Let’s get these using the function <code>escalc</code> in <code>metafor</code>. To obtain the standardised mean difference, we use:</p>
 <pre class="r"><code># SMD
-SMD &lt;- escalc(measure = &quot;SMD&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2i = dat$m2i, sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
+SMD &lt;- escalc(measure = &quot;SMD&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2i = dat$m2i,
+    sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
 <p>where <code>n1i</code> and <code>n2i</code> are the sample sizes, <code>m1i</code> and <code>m2i</code> are the means, and <code>sd1i</code> and <code>sd2i</code> the standard deviations from each study.</p>
 <p>The oject created now has an effect size (yi) and its variance (vi) for each study</p>
 <pre><code>##        yi     vi 
@@ -115,7 +116,8 @@ SMD &lt;- escalc(measure = &quot;SMD&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = 
 ## 5  0.3321 0.5069 
 ## 6  2.5137 0.9282</code></pre>
 <p>To obtain the response ratio (log transformed ratio of menas), we would use:</p>
-<pre class="r"><code>lnRR &lt;- escalc(measure = &quot;ROM&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2 = dat$m2i, sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
+<pre class="r"><code>lnRR &lt;- escalc(measure = &quot;ROM&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2 = dat$m2i,
+    sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
 <p>The original paper used lnRR so we will use it, but you may want to repeat analysis below using SMD to see whether results are consistent.</p>
 <p>Add the effect sizes to the original data set with <code>cbind</code> or <code>bind_cols</code> from the package <code>dplyr</code></p>
 <pre class="r"><code>library(dplyr)
@@ -148,10 +150,10 @@ dat &lt;- bind_cols(dat, lnRR)</code></pre>
 ##  $ vi      : num  0.0385 0.0175 0.0328 0.0295 0.0468 ...</code></pre>
 <p><strong>Visualising effect size.</strong> We can visualize point estimates (effect size) and their 95% confidence intervals, CIs (based on sampling error variance) by using the <code>forest</code> function, which draws a forest plot for us.</p>
 <pre class="r"><code>forest(dat$yi, dat$vi)</code></pre>
-<p><img src="/statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest-1.png" width="672" /></p>
+<p><img src="/Statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest-1.png" width="672" /></p>
 <p>The problem you see is that when there are many studies, a forest plot does not really work (unless you have very large screen!). Let’s look at just the first 12 studies.</p>
 <pre class="r"><code>forest(dat$yi[1:12], dat$vi[1:12])</code></pre>
-<p><img src="/statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest2-1.png" width="672" /></p>
+<p><img src="/Statistics/meta-analysis/meta-analysis-1/_index_files/figure-html/forest2-1.png" width="672" /></p>
 <p>We can calculate many different kinds of effect sizes with <code>escalc</code>; other common effect size statistics include <span class="math inline">\(Zr\)</span> (Fisher’s z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio – mouthful!), which compares the variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of <code>metafor</code>, let you do this with <code>escalc</code>– <a href="https://github.com/cran/metafor">github page</a>. lnCVR is called “CVR” in <code>escalc</code>. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight!</p>
 <p>Once you have calculated effect sizes, move on to the next page: <a href="/statistics/meta-analysis/meta-analysis-2">Meta-analysis 2: fixed-effect and random-effect models</a></p>
 </div>

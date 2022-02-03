@@ -48,13 +48,13 @@ aliases: /generalised-linear-models-1/
 <p><strong>Assumption 2 : The response <span class="math inline">\(y\)</span> come from a known distribution with a known mean-variance relationship</strong></p>
 <p>The mean variance relationship is the main reason we use GLM’s instead of linear models. We need to check that the distribution models the mean-variance relationship of our data well. For binomial data this is not a big concern, but later on when we analyse count data it’ll be very important. To check this assumption we look at a plot of residuals, and try to see if there is a fan shape.</p>
 <pre class="r"><code>plot(ft.crab, which = 1)</code></pre>
-<p><img src="/statistics/glms/glm-1/_index_files/figure-html/unnamed-chunk-4-1.png" width="500px" /></p>
+<p><img src="/Statistics/glms/glm-1/_index_files/figure-html/unnamed-chunk-4-1.png" width="500px" /></p>
 <p>Unfortunately the <code>glm</code> plot function gives us a very odd looking plot due to the discreteness of the data (i.e., many points on top of each other).</p>
 <p>For a more useful plot we can instead fit the model using the <code>manyglm</code> function in the <a href="https://cran.r-project.org/web/packages/mvabund/index.html">mvabund</a> package. We need a slight change to the family argument, for <code>manyglm</code> we write <code>family = "binomial"</code>.</p>
 <pre class="r"><code>library(mvabund)
 ft.crab.many &lt;- manyglm(CrabPres ~ Time * Dist, family = &quot;binomial&quot;, data = Crab_PA)
 plot(ft.crab.many)</code></pre>
-<p><img src="/statistics/glms/glm-1/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
+<p><img src="/Statistics/glms/glm-1/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
 <p>Now we can look for a fan shape in the residual plot. For these data, there doesn’t seem to be a fan shape, so we can conclude the mean-variance assumption the model made was reasonable for our data. The residuals in this plot have a random component. If you see a pattern it’s best to repeat the plot a few times to see if the pattern is real.</p>
 <p><strong>Assumption 3 : There is a straight line relationship between a known function <span class="math inline">\(g\)</span> of the mean of <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span></strong></p>
 <p>To check this assumption, we check the residual plot above for non-linearity, or a U-shape. In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the <code>poly</code> function.</p>

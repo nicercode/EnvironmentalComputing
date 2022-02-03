@@ -18,21 +18,21 @@ aliases: /plotting-with-ggplot-adding-titles-and-axis-names/
 <p>The following code for a scatter plot of petal length vs sepal length with the three species colour-coded is the base that we will use throughout this tutorial:</p>
 <pre class="r"><code>IrisPlot &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
   geom_point()</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="adding-a-title" class="section level3">
 <h3>Adding a title</h3>
 <p>To add a title to your plot, add the code <code>+ggtitle("Your Title Here")</code> to your line of basic ggplot code. Ensure you have quotation marks at the start and end of your title.</p>
 <pre class="r"><code>print(IrisPlot + ggtitle(&quot;Petal and sepal length of iris&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>If you have a particulary long title that would work better on two lines, use <code>\n</code> for a new line. Make sure to use the correct slash.</p>
 <pre class="r"><code>print(IrisPlot + ggtitle(&quot;Petal and sepal length \nof three species of iris&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="changing-axis-labels" class="section level3">
 <h3>Changing axis labels</h3>
 <p>To alter the labels on the axis, add the code <code>+labs(y= "y axis name", x = "x axis name")</code> to your line of basic ggplot code.</p>
 <pre class="r"><code>print(IrisPlot + labs(y = &quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Note: You can also use <code>+labs(title = "Title")</code> which is equivalent to <code>ggtitle</code>.</p>
 <p>For example:</p>
 <pre class="r"><code>print(IrisPlot + labs(
@@ -47,7 +47,7 @@ aliases: /plotting-with-ggplot-adding-titles-and-axis-names/
   geom_point()
 
 print(IrisPlot + labs(colour = &quot;Iris species&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Note: If you are using a histogram, boxplot or bar graph then it is slightly different. You must use <code>fill</code> instead of <code>colour</code>.</p>
 <pre class="r"><code>IrisBox &lt;- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
   geom_boxplot()
@@ -94,7 +94,7 @@ The font, colour, size and emphasis of any of these labels can be altered by arg
 )
 
 print(IrisPlot + mynamestheme + labs(title = &quot;Petal and sepal \nlength of iris&quot;, y = &quot;Petal length (cm)&quot;, x = &quot;Sepal length (cm)&quot;))</code></pre>
-<p><img src="/graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-labels/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="removing-a-label" class="section level3">
 <h3>Removing a label</h3>

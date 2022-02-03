@@ -147,13 +147,13 @@ summary(fit.wrong)</code></pre>
 <pre class="r"><code>par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
 scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>The normal quantile plot looks reasonable, however we see here a definite fan shape in the residual vs. fit plot. Let’s try transforming the response and see if we do better.</p>
 <pre class="r"><code>fit.mod &lt;- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries)
 par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
 scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it’s not of great concern.</p>
 </div>
 <div id="interpreting-the-results" class="section level3">
@@ -216,7 +216,7 @@ legend(&quot;bottomleft&quot;,
 means &lt;- fitted(fit.mod) # this will give the estimate at each data point
 Est.means &lt;- summarize(means, Estuaries$SiteWithin, mean)$means # extract means by site
 stripchart(Est.means ~ sort(unique(SiteWithin)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE) # plot means by site</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-2/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Alternatively, you can plot by Estuary as before (see <a href="/statistics/mixed-models/mixed-models-1/">Mixed models 1</a>).</p>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

@@ -2,6 +2,7 @@
 weight: 7
 title: "Power Analyses"
 output: html_document
+aliases: /power-analysis/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -40,7 +41,7 @@ t.test(control, treatment)</code></pre>
 ## 0.09526194 0.19676424</code></pre>
 <p>We can view the differences between the groups with a boxplot and test for those differences with a t-test:</p>
 <pre class="r"><code>boxplot(cbind(control, treatment))</code></pre>
-<p><img src="/statistics/power-analysis/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/Statistics/power-analysis/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre class="r"><code>t.test(control, treatment)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -64,7 +65,7 @@ mean.trt &lt;- mean.con + trt.effect
 control &lt;- rnorm(N, mean.con, sigma)
 treatment &lt;- rnorm(N, mean.trt, sigma)
 boxplot(cbind(control, treatment))</code></pre>
-<p><img src="/statistics/power-analysis/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/Statistics/power-analysis/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>t.test(control, treatment)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -122,7 +123,7 @@ plot(nvals, powvals,
 )
 
 abline(h = 0.8)</code></pre>
-<p><img src="/statistics/power-analysis/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Statistics/power-analysis/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>The <em>pwr</em> package has a bunch of functions, but they all pretty much work the same way.</p>
 <table>
 <thead>
@@ -190,7 +191,7 @@ Pilot$modification &lt;- factor(Pilot$modification)</code></pre>
 <pre class="r"><code>par(mfrow = c(1, 2))
 boxplot(abundance ~ modification, data = Pilot, main = &quot;modification&quot;)
 boxplot(abundance ~ site, data = Pilot, main = &quot;site&quot;)</code></pre>
-<p><img src="/statistics/power-analysis/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Statistics/power-analysis/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>These count data with a random effect of site are best modelled with a <a href="../mixed-model-3">generalised linear mixed model</a> using <code>glmer</code> from the package lme4.</p>
 <pre class="r"><code>library(lme4)
 

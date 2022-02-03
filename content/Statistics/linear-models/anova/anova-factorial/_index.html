@@ -68,7 +68,7 @@ anova(Sessile.lm)</code></pre>
 * that there is no interaction between copper and orientation (P &lt; 0.001)</p>
 <p>A significant interaction means that the effect of one factor depends upon the other. In this example, it would mean that the effect of copper was not consistent between the vertical and horizontal habitats. Consequently, the interpretation of the main effects becomes more complex. See <a href="/statistics/linear-models/interactions/">Understanding interactions</a> for more help on interpreting interactions in linear models. A quick way to help you understand an interaction if you get one is to examine an interactions plot.</p>
 <pre class="r"><code>interaction.plot(Sessile$Copper, Sessile$Orientation, Sessile$Richness)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Here you can see that the effect of copper (a decline in species richness) is more pronounced in the habitats with a vertical orientation, and that the difference between the two habitats changes with exposure to copper.</p>
 <p><strong>Multiple comparisons.</strong> If you detect any significant differences in the ANOVA, we are then interested in knowing exactly which levels differ from one another, and which do not. Remember that a significant <em>p</em> value in the test you just ran would reject the null hypothesis the means were the same across all groups, but not identify which were different from each other. If there is no interaction, you can run a <em>post-hoc</em> test on each of the main effects (only needed if there are more than two levels for an effect). If there is an interaction, you will need to consider <em>post-hoc</em> tests that contrast the means from all combinations of both factors.</p>
 </div>
@@ -85,11 +85,11 @@ anova(Sessile.lm)</code></pre>
 <pre class="r"><code>par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(Sessile.aov$residuals)
 plot(Sessile.aov, which = 2)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Violations of normality can be fixed via transformations or by using a different error-distribution in a <a href="/statistics/glms/">generalised linear model (GLM)</a>.</p>
 <p><strong>Homogeneity of variance.</strong> The assumption of homgeneity of variance, namely that the variation in the residuals is approximately equal across the range of the predictor variable, can be checked by plotting the residuals against the fitted values from the <code>aov</code> model object.</p>
 <pre class="r"><code>plot(Sessile.aov, which = 1)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Heterogeneous variances are indicated by non-random pattern in the residuals vs. fitted plot. Look for an even spread of the residuals on the y axis for each of the levels on the x axis. A fan-shaped distribution with more variance at higher values on the x axis is a common problem when data are skewed. See the testing assumptions of linear models module for more information. If there are strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error distribution in a <a href="/statistics/glms/">generalised linear model (GLM)</a>.</p>
 <p><strong>Independence.</strong> ANOVA assumes that all replicate measures are independent of each other (i.e., equally likely to be sampled from the population of possible values for each level). This issue needs to be considered at the design stage. If data are grouped in any way (e.g., half the invertebrate samples measured at one time, then the other half measured later), then more complex designs are needed to account for additional factors (e.g., a design with an additional factor of sampling time).</p>
 <p>There are a variety of measures for dealing with non-independence. These include ensuring all important predictors are in the model; averaging across nested observations; or using a <a href="/statistics/mixed-models/">mixed model</a></p>
@@ -100,7 +100,7 @@ plot(Sessile.aov, which = 2)</code></pre>
 <p>Remember that the interpretation of the main effects is complicated when there is a significant interaction (see above). In this example, while copper reduced species richness, that effect was not consistent between the two habitats. In other scenarios with an interaction, you might have copper affecting richness in one habitat but not another, preventing you making a simple statement like “copper reduced species richness” because it wouldn’t always be true.</p>
 <p><strong>Visual.</strong> A boxplot or column graph with error bars are suitable for contrasting a continuous variable across levels of categorical variable. See the graphing modules for making publication ready versions of these figures.</p>
 <pre class="r"><code>boxplot(Richness ~ Copper * Orientation, data = Sessile, names = c(&quot;High.H&quot;, &quot;Low.H&quot;, &quot;None.H&quot;, &quot;High.V&quot;, &quot;Low.V&quot;, &quot;None.V&quot;), ylab = &quot;Species richness&quot;, xlab = &quot;Copper/Orientation&quot;, ylim = c(0, 80))</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-factorial/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

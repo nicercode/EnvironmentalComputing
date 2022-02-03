@@ -2,6 +2,7 @@
 title: "Reshaping data"
 weight: 5
 output: html_document
+aliases: /reshaping-data/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -119,13 +120,20 @@ ReefFish.long &lt;- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
   Site + Transect ~ Species + Month,
   value.var = &quot;Abundance&quot;, fill = 0
 )</code></pre>
-<pre><code>##    Site Transect BlackFish_January BlueFish_February BlueFish_January RedFish_February RedFish_January
-## 1 Reef1        1                10                12                5               52               4
-## 2 Reef1        2                 0                 3               13                0              42
-## 3 Reef1        3                 8                 0                0                8               3
-## 4 Reef2        1                72                 0                0                0               5
-## 5 Reef2        2                 0                22                9                3               0
-## 6 Reef2        3                65                84              101               15              24</code></pre>
+<pre><code>##    Site Transect BlackFish_January BlueFish_February BlueFish_January
+## 1 Reef1        1                10                12                5
+## 2 Reef1        2                 0                 3               13
+## 3 Reef1        3                 8                 0                0
+## 4 Reef2        1                72                 0                0
+## 5 Reef2        2                 0                22                9
+## 6 Reef2        3                65                84              101
+##   RedFish_February RedFish_January
+## 1               52               4
+## 2                0              42
+## 3                8               3
+## 4                0               5
+## 5                3               0
+## 6               15              24</code></pre>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

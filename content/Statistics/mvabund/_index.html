@@ -35,10 +35,10 @@ Many commonly used analyses for multivariate data sets (e.g. PERMANOVA, ANOSIM,
 <p>We can have a quick look at the spread of our data using the <code>boxplot</code> function.</p>
 <pre class="r"><code>par(mar = c(2, 10, 2, 2)) # adjusts the margins
 boxplot(Herbivores[, 5:11], horizontal = TRUE, las = 2, main = &quot;Abundance&quot;)</code></pre>
-<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/Statistics/mvabund/_index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>It looks like some species of marine herbivores (e.g. <em>Ampithoe ngana</em>) are much more abundant and variable than others (e.g. <em>Cymadusa munnu</em>). It’s probably a good idea to check our mean-variance relationship then! We can do this using the <code>meanvar.plot</code> function:</p>
 <pre class="r"><code>meanvar.plot(Herb_spp)</code></pre>
-<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Statistics/mvabund/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>You can clearly see that the species with high means (on the <em>x</em> axis) also have high variances (<em>y</em> axis).</p>
 <p>We can deal with this relationship by choosing a family of GLMs with an appropriate mean-variance assumption. The default family used by <em>mvabund</em> when fitting multivariate GLMs is <em>negative binomial</em> which assumes a quadratic mean-variance relationship and a log-linear relationship between the response variables and any continuous variables. In this example, we only have categorical variables so that one’s not too important. If you are unsure of these relationships, don’t worry, we can check our model fit later.</p>
 <p>Now let’s get back to our research questions. Are there differences in the species composition of the seven marine herbivores sampled? Do some of them specialise on particular types of algae while others are more generalised feeders? Which species? Let’s start by eyeballing the data.</p>
@@ -46,7 +46,7 @@ boxplot(Herbivores[, 5:11], horizontal = TRUE, las = 2, main = &quot;Abundance&q
 <pre class="r"><code>plot(Herb_spp ~ as.factor(Herbivores$Habitat), cex.axis = 0.8, cex = 0.8)</code></pre>
 <pre><code>## 
 ##  PIPING TO 2nd MVFACTOR</code></pre>
-<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Statistics/mvabund/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Alternatively, we can include the argument <code>transformation="no"</code> to look at the raw abundance data. Because this plot is based on the base plotting language in R, you can add extra arguments to customise the graph. We have made the axis text (<code>cex.axis=0.8</code>) and the symbols (<code>cex=0.8</code>) smaller so that we can better see what’s going on.</p>
 <p>It is quite a messy graph but a couple of things jump out at us. It looks like the herbivore <em>Ampithoe ngana</em> is very abundant and will eat just about anything. On the other hand, <em>Cymadusa munnu</em> and <em>Plumithoe quadrimana</em> are quite rare. <em>Ampithoe ngana</em>, <em>A. caddi</em>, <em>A. kava</em> and <em>Exampithoe kutti</em> are generalist feeders whereas <em>Perampithoe parmerong</em> is largely specialised to the two species of <em>Sargassum</em>.</p>
 <p>Let’s now contrast the species composition across algal species to see if the models support our observations.</p>
@@ -57,14 +57,14 @@ boxplot(Herbivores[, 5:11], horizontal = TRUE, las = 2, main = &quot;Abundance&q
 <h3>Assumptions to check</h3>
 <p>Before we examine the output, we need to check our model assumptions. We can use the <code>plot</code> function to generate a plot of residuals.</p>
 <pre class="r"><code>plot(mod1)</code></pre>
-<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Statistics/mvabund/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>If the model is a good fit, we should see a random scatter of points. What we don’t want to see is a relationship, either linear or curvilinear, or a fan shape. This could mean that one of our assumptions was wrong: either our mean-variance relationship was wrongly specified, or our assumed relationship between our response and predictors was incorrect. Or, we could have missed a key explaining variable in our model which leaves a lot of unexplained variance.</p>
 <p>In this example, we see a clear fan shape in the residual plot, this means we have misspecified our mean-variance relationship. We can use the <code>family</code> argument to choose a distribution which is better suited to our data. For count data which does not fit the <code>'poisson</code> distribution, we can use the <code>negative_binomial</code> distribution.</p>
 <pre class="r"><code>mod2 &lt;- manyglm(Herb_spp ~ Herbivores$Habitat, family = &quot;negative_binomial&quot;)
 plot(mod2)</code></pre>
 <pre><code>## Warning in default.plot.manyglm(x, res.type = res.type, which = which, caption =
 ## caption, : Only the first 7 colors will be used for plotting.</code></pre>
-<p><img src="/statistics/mvabund/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Statistics/mvabund/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>This residual plot is much better, there is now no discernible fan shape and we will use this model for all further analysis.</p>
 </div>
 <div id="interpreting-the-results" class="section level3">
@@ -134,8 +134,8 @@ anova(mod3)</code></pre>
 ##                                        Res.Df Df.diff   Dev Pr(&gt;Dev)    
 ## (Intercept)                                99                           
 ## Herbivores$Habitat                         95       4 625.2    0.001 ***
-## Herbivores$DayNight                        94       1   6.2    0.574    
-## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.447    
+## Herbivores$DayNight                        94       1   6.2    0.586    
+## Herbivores$Habitat:Herbivores$DayNight     90       4  25.4    0.449    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## Arguments:

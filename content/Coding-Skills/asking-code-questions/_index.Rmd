@@ -2,6 +2,7 @@
 weight: 5
 title: "Asking code questions"
 output: html_document
+aliases: /asking-coding-questions/
 ---
 
 When you started to learn R, one of the first things you probably figured out was how to get your data into R. You had to use some method to read your lovely excel datasets into R so you could achieve what you wanted. Maybe ```read.csv``` or ```read.table```, or maybe you use Hadley Wickham's recent package ```readr```.

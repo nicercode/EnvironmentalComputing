@@ -2,6 +2,7 @@
 weight: 5
 title: "Asking code questions"
 output: html_document
+aliases: /asking-coding-questions/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -57,19 +58,19 @@ df</code></pre>
 <pre class="r"><code>data &lt;- sample(10)
 
 data</code></pre>
-<pre><code>##  [1]  4  5 10  3  7  6  8  1  9  2</code></pre>
+<pre><code>##  [1]  8  6 10  4  2  1  5  7  3  9</code></pre>
 <p>Or, 10 random numbers with replacement:</p>
 <pre class="r"><code>data &lt;- sample(10, replace = TRUE)
 
 data</code></pre>
-<pre><code>##  [1]  4 10  2  5  3  2 10  1  7  9</code></pre>
+<pre><code>##  [1]  7  6  9  1  8  3  4  4 10  4</code></pre>
 <p>You can create a vector and then sample from it:</p>
 <pre class="r"><code>factor &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;)
 
 data &lt;- sample(factor, replace = TRUE)
 
 data</code></pre>
-<pre><code>## [1] &quot;e&quot; &quot;c&quot; &quot;b&quot; &quot;e&quot; &quot;d&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;d&quot; &quot;b&quot; &quot;c&quot; &quot;b&quot;</code></pre>
 <p>You can also sample n number of times, making it a very convenient function. For example, draw from the four suits of cards, 100 times:</p>
 <pre class="r"><code>suits &lt;- c(&quot;Hearts&quot;, &quot;Spades&quot;, &quot;Clubs&quot;, &quot;Hearts&quot;)
 
@@ -85,7 +86,7 @@ cards &lt;- sample(suits, size = 100, replace = TRUE)</code></pre>
 <pre class="r"><code>data &lt;- runif(100)
 
 head(data)</code></pre>
-<pre><code>## [1] 0.8927149 0.4128808 0.6937582 0.4073088 0.8600866 0.7054591</code></pre>
+<pre><code>## [1] 0.8085571 0.1725387 0.4390001 0.7846654 0.5199137 0.1023688</code></pre>
 <p>Similarly to above, <code>runif</code> draws from a distribution with min=0 and max=1. We can change this to whatever we want. For example, to get 100 random numbers between -10 and 5:</p>
 <pre class="r"><code>data &lt;- runif(100, min = -10, max = -5)</code></pre>
 <p>Luckily, R has just about every distribution built in to draw from. This is really helpful if you are theorizing data before you start collection of data! A comprehensive list is <a href="http://www.stat.umn.edu/geyer/old/5101/rlook.html">here</a>.</p>
@@ -170,7 +171,7 @@ dput(tmp)</code></pre>
 <h3>What about really complex problems?</h3>
 <p>This tutorial is mainly intended for new R users, and it is likely the tips and tricks above will help other people to help you a large majority of the time. However, in the case it doesn’t, it might be necessary to give some extra information.<code>sessionInfo()</code> gives a summary of the R version currently running, the operating system and which packages are loaded</p>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>## R version 4.1.1 (2021-08-10)
+<pre><code>## R version 4.1.2 (2021-11-01)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
 ## Running under: macOS Big Sur 10.16
 ## 
@@ -179,14 +180,18 @@ dput(tmp)</code></pre>
 ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_AU.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## [1] en_AU.UTF-8/en_AU.UTF-8/en_AU.UTF-8/C/en_AU.UTF-8/en_AU.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] bookdown_0.24   digest_0.6.29   R6_2.5.1        jsonlite_1.7.2  magrittr_2.0.1  evaluate_0.14   blogdown_1.7    stringi_1.7.6   rlang_0.4.12    jquerylib_0.1.4 bslib_0.3.1     rmarkdown_2.11 
-## [13] tools_4.1.1     stringr_1.4.0   xfun_0.29       yaml_2.2.1      fastmap_1.1.0   compiler_4.1.1  htmltools_0.5.2 knitr_1.37      sass_0.4.0</code></pre>
+##  [1] bookdown_0.24   digest_0.6.29   R6_2.5.1        jsonlite_1.7.2 
+##  [5] magrittr_2.0.1  evaluate_0.14   blogdown_1.7    stringi_1.7.6  
+##  [9] rlang_0.4.12    jquerylib_0.1.4 bslib_0.3.1     rmarkdown_2.11 
+## [13] tools_4.1.2     stringr_1.4.0   xfun_0.29       yaml_2.2.1     
+## [17] fastmap_1.1.0   compiler_4.1.2  htmltools_0.5.2 knitr_1.37     
+## [21] sass_0.4.0</code></pre>
 <p><strong>Other important notes</strong>
 1. Be sure to clearly define what you are after. Do you have a purely statistics question, or do you have a coding question?
 2. It is a good idea to include any neccessary packages that you are using in which the problem occurs.

@@ -2,6 +2,7 @@
 weight: 2
 title: "Linear Models"
 output: html_document
+aliases: /linear-models/
 ---
 
 These pages have some introductions to commonly used linear models that test the response of a continuous dependent variable against one or more predictor variables that may be continuous or categorical. Note that these are only named as different techniques (e.g., regression vs ANOVA) due to common usage in the literature that you will encounter - they all involve the same linear modelling framework.

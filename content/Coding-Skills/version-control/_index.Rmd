@@ -2,6 +2,7 @@
 weight: 4
 title: "Version Control"
 output: html_document
+aliases: /version-control/
 ---
 ### Advantages, disadvantages and solutions
  

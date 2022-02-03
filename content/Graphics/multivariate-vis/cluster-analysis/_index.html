@@ -38,10 +38,10 @@ editor_options:
 <pre class="r"><code>H_metals.cluster &lt;- hclust(H_metals.sim, method = &quot;single&quot;)</code></pre>
 <p>Finally, plot the object that was created by the <font face="monospace">hclust</font> function.</p>
 <pre class="r"><code>plot(H_metals.cluster)</code></pre>
-<p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>We can make this a bit neater with all the samples lined up along the bottom by converting it to a dendrogram object (the <code>as.dendrogram</code> function) and plotting that (although this default plot is still a bit ugly and would need work with labels and axes before being ready for publication).</p>
 <pre class="r"><code>plot(as.dendrogram(H_metals.cluster), ylab = &quot;Euclidean distance&quot;)</code></pre>
-<p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
@@ -67,7 +67,7 @@ sample_colours &lt;- as.numeric(Harbour_metals$Location)
 sample_colours &lt;- sample_colours[order.dendrogram(dend)]
 labels_colors(dend) &lt;- sample_colours
 plot(dend, ylab = &quot;Euclidean distance&quot;)</code></pre>
-<p><img src="/graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
+<p><img src="/Graphics/multivariate-vis/cluster-analysis/_index_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

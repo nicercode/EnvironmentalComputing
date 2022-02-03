@@ -48,16 +48,16 @@ Otu00007 1112 1042 1211 1060 1155 1103 1283 1198 1175 1485</code></pre>
 <pre class="r"><code>Bac.counts500 &lt;- slice(Bac.counts, 1:500)
 
 pheatmap(Bac.counts500)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see <a href="/statistics/cluster-analysis/">Cluster analysis</a>).</p>
 <p><strong>Data transformation</strong>. Now you might notice that we have a scale issue. The data are full of rare-ish bacteria (blue) and that is all we can see on the heatmap. To visualise this more effectively, we can try a log10 transformation with + 1 constant to deal with zeros.</p>
 <pre class="r"><code>Bac.Log10.counts500 &lt;- log10(Bac.counts500 + 1)
 pheatmap(Bac.Log10.counts500)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The view of the data has really changed with transformation, so has the row and column clustering. There appears to be some very abundant OTUs (red/yellow), some mid abundant (white/low) and low in low abundance (blue).</p>
 <p>This would not have been seen so clearly if we did not cluster the rows and columns, and if we had just plotted them “as is” from the data table (although some row ordering had already been done here). You can see this if we draw the heatmap again without clustering the rows and columns.</p>
 <pre class="r"><code>pheatmap(Bac.Log10.counts500, cluster_rows = FALSE, cluster_cols = FALSE)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="colouring-sample-groups" class="section level3">
 <h3>Colouring sample groups</h3>
@@ -66,7 +66,7 @@ pheatmap(Bac.Log10.counts500)</code></pre>
 <pre class="r"><code>Bac.factorsDS &lt;- select(Bac.factors, Density, Species)
 
 pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The colours are pretty ugly. To make your own is tricky, but involves making named colour vectors and then adding them to a list. This represents the “colour annotation” information. We have to define colours for categorical covariate (factor groups) and colour ranges for numerical covariates (e.g. concentration).</p>
 <pre class="r"><code># Reorder Density levels to Sparse, Dense, Other
 Bac.factorsDS$Density &lt;- factor(Bac.factorsDS$Density, levels = c(&quot;Sparse&quot;, &quot;Dense&quot;, &quot;Other&quot;))
@@ -95,7 +95,7 @@ $Species
 &quot;forestgreen&quot;       &quot;blue3&quot;      &quot;grey80&quot; </code></pre>
 <p>We can now redraw the heatmap with our chosen colours.</p>
 <pre class="r"><code>pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS, annotation_colors = AnnColour)</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>In this case, letting the data speak for itself (with default row and column clustering) shows that the unvegetated samples (Other) are dissimilar to the macrophyte samples (regardless of density) and that the seagrass samples generally cluster together. Note that other methods (e.g., ordination) can show sample to sample comparisons much better than heatmaps, but heatmaps reveal the patterns of the variables unlike those methods. Understanding what the data is doing is often overlooked in multivariate analysis.</p>
 </div>
 <div id="row-and-column-clustering-methods" class="section level3">
@@ -108,7 +108,7 @@ $Species
   clustering_distance_cols = &quot;manhattan&quot;, clustering_method = &quot;average&quot;,
   annotation_colors = AnnColour, annotation_col = Bac.factorsDS
 )</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>You can see that changing the clustering has significantly changed the heatmap produced.</p>
 </div>
 <div id="scaling-variables" class="section level3">
@@ -119,7 +119,7 @@ $Species
   clustering_method = &quot;average&quot;,
   annotation_colors = AnnColour, annotation_col = Bac.factorsDS
 )</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-13-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-13-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).</p>
 </div>
 <div id="sorting-by-group" class="section level3">
@@ -131,7 +131,7 @@ pheatmap(Bac.Log10.counts500[, SampleOrder],
   cluster_cols = FALSE,
   clustering_method = &quot;average&quot;, annotation_colors = AnnColour, annotation_col = Bac.factorsDS
 )</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="using-heatmaps-after-statistical-analyses" class="section level3">
 <h3>Using heatmaps after statistical analyses</h3>
@@ -158,7 +158,7 @@ pheatmap(Bac.Log10.counts500[SpeciesDiffs, DS],
   clustering_method = &quot;average&quot;, annotation_col = Bac.factorsDS,
   cutree_rows = 2, cutree_cols = 2
 )</code></pre>
-<p><img src="/graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="/Graphics/multivariate-vis/heatmaps/_index_files/figure-html/unnamed-chunk-17-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>And the results are as expected. The top half of the heatmap shows those variables over-represented in the Species level Caulerpa. The bottom half are those over-represented in seagrass.</p>
 <p>Happy heatmapping!</p>
 </div>

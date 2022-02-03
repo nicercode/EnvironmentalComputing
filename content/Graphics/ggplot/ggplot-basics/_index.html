@@ -8,7 +8,7 @@ aliases: /plotting-with-ggplot-the-basics/
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <div id="creating-a-ggplot" class="section level3">
 <h3>Creating a ggplot</h3>
 <p>First, you will need to install the package ggplot2 on your machine, then load the package with the usual <code>library</code> function.</p>
@@ -39,23 +39,23 @@ print(plot1)</code></pre>
 <pre class="r"><code>plot1 &lt;- ggplot(iris, aes(Species, Petal.Length)) +
   geom_boxplot()
 print(plot1)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Note how <code>aes</code> included the <em>x</em> then the <em>y</em> variables which you wanted to plot, and that <code>+ geom_boxplot()</code> specified a boxplot.</p>
 <p>To plot a <strong>frequency histogram</strong> of petal length, we would use:</p>
 <pre class="r"><code>plot2 &lt;- ggplot(iris, aes(Petal.Length)) +
   geom_histogram()
 print(plot2)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>To use a <strong>scatter plot</strong> the visualise the relationship between petal length and sepal length, we would use:</p>
 <pre class="r"><code>plot3 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length)) +
   geom_point()
 print(plot3)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>These points could then be coloured according to the levels of a categorical variable. To do this, add <code>colour="categorical.variable"</code> in the <code>aes</code> brackets. To colour by species, we would use:</p>
 <pre class="r"><code>plot4 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
   geom_point()
 print(plot4)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="adding-a-basic-theme" class="section level3">
 <h3>Adding a basic theme</h3>
@@ -64,12 +64,12 @@ print(plot4)</code></pre>
   geom_point() +
   theme_bw()
 print(plot5)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>plot6 &lt;- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
   geom_point() +
   theme_classic()
 print(plot6)</code></pre>
-<p><img src="/graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="/Graphics/ggplot/ggplot-basics/_index_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 <p>###Further help</p>
 <p>To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:<br />
 * <a href="/graphics/ggplot/ggplot-appearance/">altering the overall appearance</a><br />

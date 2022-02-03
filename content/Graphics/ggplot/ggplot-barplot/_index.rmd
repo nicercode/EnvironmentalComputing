@@ -2,6 +2,7 @@
 title: 'Barplot with Errorbars'
 weight: 5
 output: html_document
+aliases: /plotting-with-ggplot-bar-plots-with-error-bars/
 ---
 
 Bar plots with error bars are very frequently used in the environmental sciences to represent the variation in a continuous variable within one or more categorical variables. These are not always straightforward to make with the base functions in R. This page introduces you to making these plots with the package ggplot2.

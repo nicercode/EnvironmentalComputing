@@ -66,12 +66,12 @@ summary(Mink.nested)</code></pre>
 <p>We advocate a qualitative evalutation of the assumptions, rather than a formal test suc has Cochran’s test. Linear models in general are quite ‘robust’ for violating these assumptions (heterogeneity and normality), within reason.</p>
 <p>The assumption of normality can be checked by a frequency histogram of the residuals or using a quantile plot where the residuals are plotted against the values expected from a normal distribution. The historgram of residuals should follow a normal distribution. If the points in the quantile plot lie mostly on the line, the residuals are normally distributed. Violations of normality can be fixed via transformations or by using a different error-distribution in a GLM. See the GLM module for more information. The plot() function on a model object provides a series of four graphical model diagnostics, the second of which is a quantile plot.</p>
 <pre class="r"><code>hist(Mink.nested$residuals)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre class="r"><code>plot(Mink.nested, which = 2)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <p>Heterogenous variances is indicated by non-random pattern in the residuals vs. fitted plot. If there is strong patterns, one potential solution is to transform the response variable <em>y</em>. If this doesn’t fix the problem the best solution is to use a different error disturbiton in a gnerealised linear model framework (GLM).</p>
 <pre class="r"><code>plot(Mink.nested$residuals ~ Mink.nested$fitted)</code></pre>
-<p><img src="/statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/Statistics/linear-models/anova/anova-nested/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code># Alternative option
 plot(Turtles.ANOVA, which = 1)</code></pre>
 </div>

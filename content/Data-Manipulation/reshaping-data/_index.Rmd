@@ -2,6 +2,7 @@
 title: "Reshaping data"
 weight: 5
 output: html_document
+aliases: /reshaping-data/
 ---
 
 Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](/../getting-started-with-r/data-entry/)). For some types of variables, however, there are choices to be made about how you input the data.

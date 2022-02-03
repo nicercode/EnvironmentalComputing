@@ -67,12 +67,12 @@ aliases: /mixed-models-1/
 <p><strong>Assumption 2</strong>: The response <span class="math inline">\(y\)</span> are normally distributed conditional on some predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
 <p>This assumption is only critical when we have a small sample size or very skewed data. We can check it with a normal quantile plot of residuals.</p>
 <pre class="r"><code>qqnorm(residuals(ft.estu))</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-5-1.png" width="500px" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-5-1.png" width="500px" /></p>
 <p>We are looking for a straight line relationship. Here, the assumption of normality seems reasonable.</p>
 <p><strong>Assumption 3</strong>: The response <span class="math inline">\(y\)</span> has constant variance, conditional on some fixed effects <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
 <p>Like a linear model, a mixed model assumes constant variance. We can check this by looking for a fan shape in the residual plot (residuals vs fitted values).</p>
 <pre class="r"><code>scatter.smooth(residuals(ft.estu) ~ fitted(ft.estu))</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-6-1.png" width="500px" /></p>
 <p>This residual plot seems reasonable, there are differences in variability between estuaries, but variability does not increase with the mean. Note, that the function <code>scatter.smooth</code> is just a scatter plot with a fitted, smoothed curve.</p>
 <p><strong>Assumption 4</strong>: There is a straight line relationship between <span class="math inline">\(y\)</span> and the predictors <span class="math inline">\(x\)</span> and random effects <span class="math inline">\(z\)</span></p>
 <p>To check this assumption, we check the residual plot again for non-linearity, or a U-shape. In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the <code>poly</code> function.</p>
@@ -166,7 +166,7 @@ Est.means &lt;- coef(ft.estu)$Estuary[, 1] + coef(ft.estu)$Estuary[, 2] * is.mod
 <pre><code>## Warning in coef(ft.estu)$Estuary[, 2] * is.mod: longer object length is not a
 ## multiple of shorter object length</code></pre>
 <pre class="r"><code>stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = &quot;red&quot;, vertical = TRUE, add = TRUE)</code></pre>
-<p><img src="/statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/Statistics/mixed-models/mixed-model-1/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

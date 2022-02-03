@@ -9,7 +9,7 @@ aliases: /intro-to-gams/
 
 
 <p>Many data in the environmental sciences do not fit simple linear models and are best described by “wiggly models”, also known as Generalised Additive Models (GAMs).</p>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-1-1.png" width="480" /></p>
 <p>Let’s start with a famous <a href="https://twitter.com/ucfagls/status/842444686513991680">tweet</a> by one Gavin Simpson, which amounts to:<br />
 1. GAMs are just GLMs<br />
 2. GAMs fit wiggly terms<br />
@@ -41,7 +41,7 @@ Sample_data &lt;- data.frame(y, x)</code></pre>
 <pre class="r"><code>library(ggplot2)
 ggplot(Sample_data, aes(x, y)) +
   geom_point()</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Try fitting a normal linear model:</p>
 <pre class="r"><code>lm_y &lt;- lm(y ~ x, data = Sample_data)</code></pre>
 <p>and plotting the fitted line with data using <code>geom_smooth</code> in <code>ggplot</code></p>
@@ -49,10 +49,10 @@ ggplot(Sample_data, aes(x, y)) +
   geom_point() +
   geom_smooth(method = lm)</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Looking at the plot or <code>summary(lm_y)</code>, you might think the model fits nicely, but look at the residual plot - eek!</p>
 <pre class="r"><code>plot(lm_y, which = 1)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Clearly, the residuals are not evenly spread across values of <span class="math inline">\(x\)</span>, and we need to consider a better model.</p>
 </div>
 <div id="running-the-analysis" class="section level3">
@@ -68,25 +68,25 @@ y_pred &lt;- predict(gam_y, data.frame(x = x_new))</code></pre>
 <pre class="r"><code>ggplot(Sample_data, aes(x, y)) +
   geom_point() +
   geom_smooth(method = &quot;gam&quot;, formula = y ~ s(x))</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>You can see the model is better fit to the data, but always check the diagnostics.</p>
 <p><code>check.gam</code> is quick and easy to view the residual plots.</p>
 <pre class="r"><code>par(mfrow = c(2, 2))
 gam.check(gam_y)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre><code>## 
 ## Method: REML   Optimizer: outer newton
 ## full convergence after 6 iterations.
-## Gradient range [-5.835055e-09,5.281155e-09]
-## (score 35.33426 &amp; scale 0.1288606).
-## Hessian positive definite, eigenvalue range [1.995652,30.71975].
+## Gradient range [-1.414605e-09,8.821477e-11]
+## (score 42.06195 &amp; scale 0.1691468).
+## Hessian positive definite, eigenvalue range [1.940833,30.65633].
 ## Model rank =  10 / 10 
 ## 
 ## Basis dimension (k) checking results. Low p-value (k-index&lt;1) may
 ## indicate that k is too low, especially if edf is close to k&#39;.
 ## 
 ##        k&#39;  edf k-index p-value
-## s(x) 9.00 6.01     1.1    0.65</code></pre>
+## s(x) 9.00 5.23    1.06    0.65</code></pre>
 <p>Using <code>summary</code> with the model object will give you the significance of the smooth term (along with any parametric terms, if you’ve included them), along with the variance explained. In this example, a pretty decent fit. The ‘edf’ is the estimated degrees of freedom - essentially, the larger the number, the more wiggly the fitted model. Values of around 1 tend to be close to a linear term. You can read about penalisation and shrinkage for more on what the edf reflects.</p>
 <pre class="r"><code>summary(gam_y)</code></pre>
 <pre><code>## 
@@ -97,17 +97,17 @@ gam.check(gam_y)</code></pre>
 ## y ~ s(x)
 ## 
 ## Parametric coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  0.05768    0.04523   1.275    0.207
+##              Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) -0.001923   0.051816  -0.037    0.971
 ## 
 ## Approximate significance of smooth terms:
 ##        edf Ref.df     F p-value    
-## s(x) 6.006  7.166 33.76  &lt;2e-16 ***
+## s(x) 5.226  6.345 25.54  &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## R-sq.(adj) =  0.796   Deviance explained = 81.6%
-## -REML = 35.334  Scale est. = 0.12886   n = 63</code></pre>
+## R-sq.(adj) =  0.722   Deviance explained = 74.6%
+## -REML = 42.062  Scale est. = 0.16915   n = 63</code></pre>
 </div>
 <div id="smooth-terms" class="section level3">
 <h3>Smooth terms</h3>
@@ -122,7 +122,7 @@ plot(y ~ x)
 abline(h = 0)
 lines(x, model_matrix[, &quot;s(x).1&quot;], type = &quot;l&quot;, lty = 2)
 lines(x, model_matrix[, &quot;s(x).2&quot;], type = &quot;l&quot;, lty = 2)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Let’s plot all of the basis functions now, and then add that to the predictions from the GAM (<code>y_pred</code>) on top again.</p>
 <pre class="r"><code>plot(y ~ x)
 abline(h = 0)
@@ -132,10 +132,10 @@ y_pred &lt;- predict(gam_y, data.frame(x = x_new))
 
 matplot(x, model_matrix[, -1], type = &quot;l&quot;, lty = 2, add = T)
 lines(y_pred ~ x_new, col = &quot;red&quot;, lwd = 2)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Now, it’s difficult at first to see what has happened, but it’s easiest to think about it like this - each of those dotted lines represents a function (<span class="math inline">\(b_j\)</span>) for which <code>gam</code> estimates a coefficient (<span class="math inline">\(\beta_j\)</span>), and when you sum them you get the contribution for the corresponding <span class="math inline">\(f(x)\)</span> (i.e. the previous equation). It’s nice and simple for this example, because we model <span class="math inline">\(y\)</span> only as a function of the smooth term, so it’s fairly relatable. As an aside, you can also just use <code>plot.gam</code> to plot the smooth terms.</p>
 <pre class="r"><code>plot(gam_y)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>OK, now let’s look a little closer at how the basis functions are constructed. You’ll see that the construction of the functions is separate to the response data. Just to prove it, we’ll use <code>smoothCon</code>.</p>
 <pre class="r"><code>x_sin_smooth &lt;- smoothCon(s(x), data = data.frame(x), absorb.cons = TRUE)
 X &lt;- x_sin_smooth[[1]]$X
@@ -143,7 +143,7 @@ X &lt;- x_sin_smooth[[1]]$X
 par(mfrow = c(1, 2))
 matplot(x, X, type = &quot;l&quot;, main = &quot;smoothCon()&quot;)
 matplot(x, model_matrix[, -1], type = &quot;l&quot;, main = &quot;predict(gam_y)&quot;)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>And now to prove that you can go from the basis functions and the estimated coefficients to the fitted smooth term. Again note that this is simplified here because the model is just one smooth term. If you had more terms, we would need to add up all of the terms in the linear predictor.</p>
 <pre class="r"><code>betas &lt;- gam_y$coefficients
 linear_pred &lt;- model_matrix %*% betas
@@ -153,12 +153,12 @@ plot(y ~ x, main = &quot;manual from basis/coefs&quot;)
 lines(linear_pred ~ x, col = &quot;red&quot;, lwd = 2)
 plot(y ~ x, main = &quot;predict(gam_y)&quot;)
 lines(y_pred ~ x_new, col = &quot;red&quot;, lwd = 2)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Out of interest, take a look at the following plot, remembering that <code>X</code> is the matrix of basis functions.</p>
 <pre class="r"><code>par(mfrow = c(1, 2))
 plot(y ~ x)
 plot(y ~ rowSums(X))</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Not so scary huh? Of course this is not quite the whole story - see <code>gam.models</code> and <code>smooth.terms</code> to see all of the options for types of smoothers, how the basis functions are constructed (penalisation etc.), types of models we can specify (random effects, linear functionals, interactions, penalisation) plus much more.</p>
 </div>
 <div id="a-quick-real-example" class="section level2">
@@ -175,16 +175,16 @@ CO2 &lt;- CO2[CO2$year %in% (2000:2010), ]</code></pre>
 <span class="math display">\[y = \beta_0 + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span></p>
 <pre class="r"><code>ggplot(CO2_dat, aes(time, co2)) +
   geom_line()</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>We can fit a GAM for these data using:</p>
 <pre class="r"><code>CO2_time &lt;- gam(co2 ~ s(time), data = CO2, method = &quot;REML&quot;)</code></pre>
 <p>which fits a model with a single smooth term for time. We can look at the predicted values for this:</p>
 <pre class="r"><code>plot(CO2_time)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Note how the smooth term actually reduces to a ‘normal’ linear term here (with an edf of 1) - that’s the nice thing about penalised regression splines. But if we check the model, then we see something is amuck.</p>
 <pre class="r"><code>par(mfrow = c(2, 2))
 gam.check(CO2_time)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>The residual plots have a very odd looking rise-and-fall pattern - clearly there is some dependance structure (and we can probably guess it has something to do with intra-annual fluctuations). Let’s try again, and introduce something called a cyclical smoother.
 <span class="math display">\[y = \beta_0 + f_{\mathrm{intrannual}}(month) + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
 The cyclical smooth term, <span class="math inline">\(f_{\mathrm{intrannual}}(month)\)</span>, is comprised of basis functions just the same as we have seen already, except that the end points of the spline are constrained to be equal - which makes sense when we’re modelling a variable that is cyclical (across months/years).</p>
@@ -193,16 +193,16 @@ The cyclical smooth term, <span class="math inline">\(f_{\mathrm{intrannual}}(mo
 <p>Let’s look at the fitted smooth terms:</p>
 <pre class="r"><code>par(mfrow = c(1, 2))
 plot(CO2_season_time)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Looking at both smooth terms, we can see that the monthly smoother is picking up that monthly rise and fall of CO<span class="math inline">\(_2\)</span> - looking at the relative magnitudes (i.e. monthly fluctuation vs. long-term trend), we can see how important it is to disintangle the components of the time series. Let’s see how the model diagnostics look now:</p>
 <pre class="r"><code>par(mfrow = c(2, 2))
 gam.check(CO2_season_time)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Much better. Let’s look at how the seasonal component stacks up against the full long term trend.</p>
 <pre class="r"><code>CO2_season_time &lt;- gam(co2 ~ s(month, bs = &quot;cc&quot;, k = 12) + s(time), data = CO2_dat, method = &quot;REML&quot;)
 par(mfrow = c(1, 2))
 plot(CO2_season_time)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>There’s more to the story - pephaps spatial autocorrelations of some kind? <code>gam</code> can make use of the spatial autocorrelation structures available in the <code>nlme</code> package, more on that next time. Hopefully for the meantime GAMs now don’t seem qutie so scary or magical, and you can start to make use of what is really an inrecibly flexible and powerful modelling framework.</p>
 <div id="communicating-the-results" class="section level3">
 <h3>Communicating the results</h3>
@@ -216,7 +216,7 @@ plot(CO2_season_time)</code></pre>
 ggplot(CO2_pred, aes(x = time)) +
   geom_point(aes(y = co2), size = 1, alpha = 0.5) +
   geom_line(aes(y = predicted_values), colour = &quot;red&quot;)</code></pre>
-<p><img src="/statistics/gams/_index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="/Statistics/gams/_index_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

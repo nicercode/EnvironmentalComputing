@@ -31,7 +31,7 @@ aliases: /multidimensional-scaling/
 <p>where <code>comm = Herb_community</code> specifies the data frame holding the community data, <code>distance = "bray"</code> indicates you want to use a Bray-Curtis distance measure and <code>trace = FALSE</code> indicates you wish to ignore in progress output of results. <code>autotransform = FALSE</code> stops vegan from automatically transforming the data (see below for advice on transformation).</p>
 <p>Calling the <code>plot</code> function on the x-y coordinates of the <code>metaMDS</code> output creates an MDS ordination plot.</p>
 <pre class="r"><code>plot(Herb_community.mds$points)</code></pre>
-<p><img src="/graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>This is not informative until we plot samples from each habitat type (macroalgal species) as a different colour.</p>
 <p>To do this we can extract the x and y coordinates from the MDS plot into a new data frame.</p>
 <pre class="r"><code>MDS_xy &lt;- data.frame(Herb_community.mds$points)</code></pre>
@@ -43,7 +43,7 @@ MDS_xy$DayNight &lt;- Herbivores$DayNight</code></pre>
 ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
   geom_point() +
   theme_bw()</code></pre>
-<p><img src="/graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="interpreting-the-results" class="section level3">
 <h3>Interpreting the results</h3>
@@ -53,7 +53,7 @@ ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
 <pre class="r"><code>ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) +
   geom_point() +
   theme_bw()</code></pre>
-<p><img src="/graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Graphics/multivariate-vis/mds/_index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="assumptions-to-check" class="section level2">
 <h2>Assumptions to check</h2>
@@ -61,7 +61,7 @@ ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
 <p><strong>Stress.</strong> Not an assumption of the process, but the most important factor to consider after generating an MDS plot is the ‘stress’. The stress provides a measure of the degree to which the distance between samples in reduced dimensional space (usually 2-dimensions) corresponds with the actual multivariate distance between the samples. Lower stress values indicate greater conformity and therefore are desirable. High stress values indicate that there was no 2-dimensional arrangement of your points that reflect their similarities. A rule of thumb is that stress values should ideally be less than 0.2 or even 0.1.</p>
 <p>You can obtain the stress value from your plot with:</p>
 <pre class="r"><code>Herb_community.mds$stress</code></pre>
-<pre><code>## [1] 0.1485342</code></pre>
+<pre><code>## [1] 0.1485343</code></pre>
 <p>If the stress value is greater than 0.2, it is advisable to include an additional dimension, but remember that human brains are not very well equipped to visualise objects in more than 2-dimensions.</p>
 <p><strong>Transformation and standardisation.</strong> Transforming data sets prior to creating a MDS plot is often desirable, not to meet assumptions of normality, but to reduce the influence of extreme values. For example,</p>
 <pre class="r"><code>Herb_community.sq &lt;- sqrt(Herb_community)

@@ -1,8 +1,8 @@
 ---
 weight: 5
 title: "Importing Data"
-author: "Keryn Bain"
 output: html_document
+aliases: /importing-data/
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -49,14 +49,30 @@ output: html_document
 ##  $ X.4     : logi  NA NA NA NA NA NA ...</code></pre>
 <p><code>summary</code> allows you to look at basic statistics for each of your variables and can be used to identify any obvious typos (i.e., extreme maximums or minimums relative to the mean or median or extra groups within a categorical vector).</p>
 <pre class="r"><code>summary(Snail_feeding)
-##     Snail.ID         Sex                Size            Feeding          Distance             Depth              Temp          X             X.1            X.2            X.3            X.4         
-##  Min.   : 1.00   Length:768         Length:768         Mode :logical   Length:768         Min.   :  1.000   Min.   :18.00   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  1st Qu.: 4.75   Class :character   Class :character   FALSE:502       Class :character   1st Qu.:  1.260   1st Qu.:19.00   NA&#39;s:768       NA&#39;s:768       NA&#39;s:768       NA&#39;s:768       NA&#39;s:768      
-##  Median : 8.50   Mode  :character   Mode  :character   TRUE :266       Mode  :character   Median :  1.510   Median :19.00                                                                             
-##  Mean   : 8.50                                                                            Mean   :  1.716   Mean   :19.49                                                                             
-##  3rd Qu.:12.25                                                                            3rd Qu.:  1.760   3rd Qu.:20.00                                                                             
-##  Max.   :16.00                                                                            Max.   :162.000   Max.   :21.00                                                                             
-##                                                                                                             NA&#39;s   :6</code></pre>
+##     Snail.ID         Sex                Size            Feeding       
+##  Min.   : 1.00   Length:768         Length:768         Mode :logical  
+##  1st Qu.: 4.75   Class :character   Class :character   FALSE:502      
+##  Median : 8.50   Mode  :character   Mode  :character   TRUE :266      
+##  Mean   : 8.50                                                        
+##  3rd Qu.:12.25                                                        
+##  Max.   :16.00                                                        
+##                                                                       
+##    Distance             Depth              Temp          X          
+##  Length:768         Min.   :  1.000   Min.   :18.00   Mode:logical  
+##  Class :character   1st Qu.:  1.260   1st Qu.:19.00   NA&#39;s:768      
+##  Mode  :character   Median :  1.510   Median :19.00                 
+##                     Mean   :  1.716   Mean   :19.49                 
+##                     3rd Qu.:  1.760   3rd Qu.:20.00                 
+##                     Max.   :162.000   Max.   :21.00                 
+##                                       NA&#39;s   :6                     
+##    X.1            X.2            X.3            X.4         
+##  Mode:logical   Mode:logical   Mode:logical   Mode:logical  
+##  NA&#39;s:768       NA&#39;s:768       NA&#39;s:768       NA&#39;s:768      
+##                                                             
+##                                                             
+##                                                             
+##                                                             
+## </code></pre>
 <p>Note that for the factor of sex, errors in data entry resulted in five levels (female, female s, male, Male and males) when there should be only two. See below for the fix.</p>
 </div>
 <div id="common-problems-when-importing-data" class="section level3">
@@ -147,14 +163,22 @@ levels(Snail_feeding$Sex)
 ##  $ Temp    : int  21 21 18 19 21 21 20 20 19 19 ...
 ##  $ Snail   : Factor w/ 16 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 summary(Snail_feeding)
-##     Snail.ID         Sex          Size            Feeding           Distance          Depth            Temp           Snail    
-##  Min.   : 1.00   female:384   Length:768         Mode :logical   Min.   :0.0000   Min.   :1.000   Min.   :18.00   1      : 48  
-##  1st Qu.: 4.75   male  :384   Class :character   FALSE:502       1st Qu.:0.2775   1st Qu.:1.260   1st Qu.:19.00   2      : 48  
-##  Median : 8.50                Mode  :character   TRUE :266       Median :0.5100   Median :1.510   Median :19.00   3      : 48  
-##  Mean   : 8.50                                                   Mean   :0.5120   Mean   :1.507   Mean   :19.49   4      : 48  
-##  3rd Qu.:12.25                                                   3rd Qu.:0.7500   3rd Qu.:1.760   3rd Qu.:20.00   5      : 48  
-##  Max.   :16.00                                                   Max.   :1.0000   Max.   :2.000   Max.   :21.00   6      : 48  
-##                                                                                                   NA&#39;s   :6       (Other):480</code></pre>
+##     Snail.ID         Sex          Size            Feeding       
+##  Min.   : 1.00   female:384   Length:768         Mode :logical  
+##  1st Qu.: 4.75   male  :384   Class :character   FALSE:502      
+##  Median : 8.50                Mode  :character   TRUE :266      
+##  Mean   : 8.50                                                  
+##  3rd Qu.:12.25                                                  
+##  Max.   :16.00                                                  
+##                                                                 
+##     Distance          Depth            Temp           Snail    
+##  Min.   :0.0000   Min.   :1.000   Min.   :18.00   1      : 48  
+##  1st Qu.:0.2775   1st Qu.:1.260   1st Qu.:19.00   2      : 48  
+##  Median :0.5100   Median :1.510   Median :19.00   3      : 48  
+##  Mean   :0.5120   Mean   :1.507   Mean   :19.49   4      : 48  
+##  3rd Qu.:0.7500   3rd Qu.:1.760   3rd Qu.:20.00   5      : 48  
+##  Max.   :1.0000   Max.   :2.000   Max.   :21.00   6      : 48  
+##                                   NA&#39;s   :6       (Other):480</code></pre>
 </div>
 <div id="further-help" class="section level3">
 <h3>Further help</h3>

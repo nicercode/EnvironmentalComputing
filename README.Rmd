@@ -13,43 +13,53 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Environmental Computing Website
+# Welcome to Environmental Computing
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of Environmental Computing Website is to ...
+The goal of **Environmental Computing** is to provide accessible coding and statistical tutorials to R users. If you would like to learn more about this site, click [here](https://deploy-preview-18--brave-bose-da028a.netlify.app/about-this-site/)
 
-## Installation
+This repository contains the [blogdown](https://bookdown.org/yihui/blogdown/) and [hugo](https://gohugo.io/) backbone to build and maintain the website. Below are important details to quickly orientate you to the behind-the-scenes of this website
 
-You can install the development version of Environmental Computing Website from [GitHub](https://github.com/) with:
+## Installation of `blogdown` and `hugo`
 
-``` r
-# install.packages("devtools")
-devtools::install_github("nicercode/EnvironmentalComputing")
+`blogdown` is a R interface to `hugo` and is super handy for our purposes as most tutorials are written as R Markdown files which is rendered into a hugo-friendly format. 
+
+Blogdown can be installed from either CRAN or directly from the RStudio blogdown Github repository using the `remotes` package:
+
+```{r, blogdown, eval = FALSE}
+# Install from CRAN
+install.packages("blogdown")
+
+# Install from Github
+remotes::install_github('rstudio/blogdown')
 ```
 
-## Example
+Once blogdown is installed, we can use this package to install `hugo`!
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(Environmental Computing Website)
-## basic example code
+```{r hugo, eval = FALSE}
+blogdown::install_hugo()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+If you have old versions of `hugo` on your computer or having issues installing hugo via blogdown you may want to run:
 
-```{r cars}
-summary(cars)
+```{r, hugo trouble, eval = FALSE}
+# Search for where hugo was previously installed, option to remove previous versions
+blogdown::find_hugo() 
+
+# Having issues with hugo, try using this handy function!
+blogdown::check_hugo()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
+## Install dependencies 
 
-You can also embed plots, for example:
+Once you have `blogdown` and `hugo` running happily, you will want to make sure you have all the different packages that were used in the tutorials. We created a `DESCRIPTION` file which lists out all the current dependencies under `Imports`. As the website continues to grow, you will need to manually edit the `DESCRIPTION` file to ensure the dependencies match accordingly!
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+To install the dependencies listed in the `DESCRIPTION` file
+
+```{r, depend, eval = FALSE}
+remotes::install_deps()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## Structure of the  director

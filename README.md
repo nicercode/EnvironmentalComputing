@@ -4,6 +4,10 @@
 # Welcome to Environmental Computing 👋
 
 <!-- badges: start -->
+
+[![Netlify
+Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status)](https://app.netlify.com/sites/environmentalcomputing/deploys)
+
 <!-- badges: end -->
 
 The goal of **Environmental Computing** is to provide accessible coding
@@ -95,7 +99,7 @@ given topic, use numbers beginning from 1 e.g `mixed-model-1`
 We used the `styler` package to format all the content within chunks.
 
 ``` r
-styler::????
+styler::style_file("content/Data-Manipulation/combining-datasets/_index.Rmd")
 ```
 
 ### The anatomy of nested menus in `content/`

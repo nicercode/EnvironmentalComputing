@@ -30,6 +30,7 @@ Imports:
     devtools,
     dismo,
     dplyr,
+    emo,
     forecast,
     formatR,
     gganimate,
@@ -72,3 +73,5 @@ Imports:
     tidyverse,
     vegan,
     XML
+Remotes:
+  hadley/emo

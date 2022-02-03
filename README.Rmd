@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 # Welcome to \n Environmental Computing `r emo::ji("wave")`
 
 <!-- badges: start -->
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status)](https://app.netlify.com/sites/environmentalcomputing/deploys)
+
 <!-- badges: end -->
 
 The goal of **Environmental Computing** is to provide accessible coding and statistical tutorials to R users. If you would like to learn more about this site, click [here](https://deploy-preview-18--brave-bose-da028a.netlify.app/about-this-site/)
@@ -85,8 +87,8 @@ Please follow these conventions when creating new folders:
 
 We used the `styler` package to format all the content within chunks.
 
-```{r}
-styler::????
+```{r, eval=F}
+styler::style_file("content/Data-Manipulation/combining-datasets/_index.Rmd")
 ```
 
 

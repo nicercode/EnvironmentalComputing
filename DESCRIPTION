@@ -1,14 +1,21 @@
-Package: EnvironmentalComputing
-Title: What the Package Does (One Line, Title Case)
+Package: Environmental Computing Website
+Title: Website containing R tutorials for coding and statistical skills
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Daniel", "Falster", , "daniel.falster@unsw.edu.au", role = c("aut", "cre"),
+    person("Daniel", "Falster", 
+           email = "daniel.falster@unsw.edu.au", role = c("aut", "cre"),
            comment = c(ORCID = "0002-9814-092X")),
-    person("Fonti", "Kar"),
-    person("William", "Cornwell"),
-    person("Alistair", "Poore")
+    person("Fonti", "Kar",
+           email = "f.kar@unsw.edu.au", role = "cre",
+           comment = c(ORCID = "0000-0002-2760-3974")),
+    person("William", "Cornwell",
+           email = "w.cornwell@unsw.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-4080-4073")),
+    person("Alistair", "Poore",
+           email = "a.poore@unsw.edu.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-3560-3659"))
   )
-Description: What the package does (one paragraph).
+Description: Skeleton for blogdown + hugo to create all tutorials on the website
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en

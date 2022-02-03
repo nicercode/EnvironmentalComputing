@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Welcome to Environmental Computing
+# Welcome to Environmental Computing `r emo::ji("wave")`
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -22,9 +22,9 @@ The goal of **Environmental Computing** is to provide accessible coding and stat
 
 This repository contains the [blogdown](https://bookdown.org/yihui/blogdown/) and [hugo](https://gohugo.io/) backbone to build and maintain the website. Below are important details to quickly orientate you to the behind-the-scenes of this website
 
-## Installation of `blogdown` and `hugo`
+## Installation of `blogdown` and Hugo
 
-`blogdown` is a R interface to `hugo` and is super handy for our purposes as most tutorials are written as R Markdown files which is rendered into a hugo-friendly format. 
+`blogdown` is a R interface to Hugo  and is super handy for our purposes as most tutorials are written as R Markdown files which is rendered into a hugo-friendly format. 
 
 Blogdown can be installed from either CRAN or directly from the RStudio blogdown Github repository using the `remotes` package:
 
@@ -62,4 +62,20 @@ To install the dependencies listed in the `DESCRIPTION` file
 remotes::install_deps()
 ```
 
-## Structure of the  director
+## Structure of the major directories
+
+The most important folders for this website are `content/`,  `static/` and  `public/`.
+
+Briefly:
+- `content/` is  the backend of the website and is where you will be working in the most. This is where all the .Rmd files for each tutorial are kept. 
+- `static/` is where the [theme](https://learn.netlify.app/en/) of the website lives. Hugo translates the websites content into static files. 
+- These are automatically copied into the `public/` directory each thing Hugo renders the website. You don't know need to physically edit the items in `public/`. 
+
+For more info about this directories see [here](https://bookdown.org/yihui/blogdown/hugo.html)
+
+### The anatomy of nested menus
+
+```{r}
+
+```
+

@@ -27,15 +27,15 @@ body {
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<h1 id="welcome-to-environmental-computing">Welcome to Environmental Computing</h1>
+<h1 id="welcome-to-environmental-computing-">Welcome to Environmental Computing 👋</h1>
 <!-- badges: start -->
 
 <!-- badges: end -->
 
 <p>The goal of <strong>Environmental Computing</strong> is to provide accessible coding and statistical tutorials to R users. If you would like to learn more about this site, click <a href="https://deploy-preview-18--brave-bose-da028a.netlify.app/about-this-site/">here</a></p>
 <p>This repository contains the <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> and <a href="https://gohugo.io/">hugo</a> backbone to build and maintain the website. Below are important details to quickly orientate you to the behind-the-scenes of this website</p>
-<h2 id="installation-of-blogdown-and-hugo">Installation of <code>blogdown</code> and <code>hugo</code></h2>
-<p><code>blogdown</code> is a R interface to <code>hugo</code> and is super handy for our purposes as most tutorials are written as R Markdown files which is rendered into a hugo-friendly format.</p>
+<h2 id="installation-of-blogdown-and-hugo">Installation of <code>blogdown</code> and Hugo</h2>
+<p><code>blogdown</code> is a R interface to Hugo and is super handy for our purposes as most tutorials are written as R Markdown files which is rendered into a hugo-friendly format.</p>
 <p>Blogdown can be installed from either CRAN or directly from the RStudio blogdown Github repository using the <code>remotes</code> package:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install from CRAN</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;blogdown&quot;</span>)</span>
@@ -54,7 +54,11 @@ body {
 <p>Once you have <code>blogdown</code> and <code>hugo</code> running happily, you will want to make sure you have all the different packages that were used in the tutorials. We created a <code>DESCRIPTION</code> file which lists out all the current dependencies under <code>Imports</code>. As the website continues to grow, you will need to manually edit the <code>DESCRIPTION</code> file to ensure the dependencies match accordingly!</p>
 <p>To install the dependencies listed in the <code>DESCRIPTION</code> file</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_deps</span>()</span></code></pre></div>
-<h2 id="structure-of-the-director">Structure of the director</h2>
+<h2 id="structure-of-the-major-directories">Structure of the major directories</h2>
+<p>The most important folders for this website are <code>content/</code>, <code>static/</code> and <code>public/</code>.</p>
+<p>Briefly: - <code>content/</code> is the backend of the website and is where you will be working in the most. This is where all the .Rmd files for each tutorial are kept. - <code>static/</code> is where the <a href="https://learn.netlify.app/en/">theme</a> of the website lives. Hugo translates the websites content into static files. - These are automatically copied into the <code>public/</code> directory each thing Hugo renders the website. You don’t know need to physically edit the items in <code>public/</code>.</p>
+<p>For more info about this directories see <a href="https://bookdown.org/yihui/blogdown/hugo.html">here</a></p>
+<h3 id="the-anatomy-of-nested-menus">The anatomy of nested menus</h3>
 
 </body>
 </html>

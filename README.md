@@ -26,7 +26,7 @@ behind-the-scenes of this website
 
 `blogdown` is a R interface to Hugo and is super handy for our purposes
 as most tutorials are written as R Markdown files which is rendered into
-a hugo-friendly format.
+a Hugo-friendly format.
 
 Blogdown can be installed from either CRAN or directly from the RStudio
 blogdown Github repository using the `remotes` package:
@@ -152,15 +152,15 @@ looks a bit like this and this section controls the order of the pages.
     to. For Hugo’s sake, we need it to render an `html_document`.
 
 In the yaml example above, the `weight:` parameter is 2, notice that the
-second menu on the [website](environmentalcomputing.net) is
-`Getting Started in R`.
+second menu on the [website](environmentalcomputing.net) is “Getting
+Started in R”.
 
-Once you enter a menu e.g. `Getting Started in R`, the sequence for the
+Once you enter a menu e.g. “Getting Started in R”, the sequence for the
 `weight:` restarts so that you can set the order for subtopics within
-`Getting Started in R`.
+“Getting Started in R”.
 
-For example, `weight: 1` for `Installing R and RStudio`, `weight: 2` for
-`Using R Notebooks` and so forth.
+For example, `weight: 1` for “Installing R and RStudio”, `weight: 2` for
+“Using R Notebooks” and so forth.
 
 I recommend taking a look at this
 [website](https://mingchen0919.github.io/blogdown-website-with-hugo-theme-learn/)
@@ -170,7 +170,8 @@ using subfolders and `_index.Rmd` files.
 ### Building the site
 
 Once you are happy with the format of a new page you created, using the
-function to render your page. Knitting your .rmd will also do the trick!
+following function to render your page. Knitting your .rmd will also do
+the trick!
 
 ``` r
 blogdown::build_site(build_rmd = 'newfile')
@@ -179,8 +180,8 @@ blogdown::build_site(build_rmd = 'newfile')
 blogdown::serve_site()
 ```
 
-Occasionally, you will made edits to some .rmds, to re-render these
-pages
+Occasionally, you will want to make edits to some .rmds, to re-render
+these pages use:
 
 ``` r
 blogdown::build_site(build_rmd = 'timestamp')
@@ -196,8 +197,8 @@ blogdown::check_site()
 # There are various blogdown::check_ functions, check_site() does it all-in-one
 ```
 
-This function will prompt to you fix your issues, usually you need to
-remove incompatible files, restart RStudio and use again. No worries!
+This function will prompt to you fix your issues, usually you will need
+to remove incompatible files, restart RStudio and use again. No worries!
 
 If you are already previewing your site, you will notice upon saving
 your .rmd, the site will usually dynamically update itself but its good
@@ -212,11 +213,10 @@ blogdown::stop_server()
 
 ### Internal links
 
-You will notice in some tutorials there will be references to other
-pages. For example the [Statistics
-page](environmentalcomputing.net/statistics) provides links to all the
-subtopics. Please follow these conventions when adding internal links in
-your .rmd
+In some tutorials there are references to other pages. For example the
+[Statistics page](environmentalcomputing.net/statistics) provides links
+to all the subtopics under “Statistics”. Please follow these conventions
+when adding internal links in your .rmd
 
 Lets say you are working on a page under `data-manipulation/` and you
 want to reference to a page under `graphics/`. In this circumstance, you
@@ -249,7 +249,7 @@ Code Questions’ page was accessed using:
     environmentalcomputing.net/asking-coding-questions/ # OLD
 
 In the new generation of the website the same ‘Asking Code Questions’
-page is accessed using:
+page is accessed via:
 
     environmentalcomputing.net/coding-skills/asking-coding-questions/ # NEW
 

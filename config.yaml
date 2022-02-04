@@ -14,7 +14,7 @@ params:
   disableLandingPageButton: yes
   disableMermaid: no
   disableNextPrev: no
-  editURL: https://github.com/nicercode/EnvironmentalComputing/edit/develop/content/
+  editURL: https://github.com/nicercode/EnvironmentalComputing/edit/master/content/
   showVisitedLinks: yes
   titleSeparator: '::'
   themeVariant: 'green'

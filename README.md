@@ -44,25 +44,26 @@ Once blogdown is installed, we can use this package to install Hugo!
 blogdown::install_hugo()
 ```
 
-If you have old versions of Hugo on your computer or having issues
+If you have older versions of Hugo on your computer or having issues
 installing Hugo via blogdown you may want to run:
 
 ``` r
 # Search for where Hugo was previously installed, option to remove previous versions
 blogdown::find_hugo() 
 
-# Having issues with Hugo, try using this handy function!
+# Having issues with Hugo? Try using this handy function!
 blogdown::check_hugo()
 ```
 
 ### Install dependencies
 
-Once you have `blogdown` and Hugo running happily, you will want to make
-sure you have all the different packages that were used in the
-tutorials. We created a `DESCRIPTION` file which lists out all the
-current dependencies under `Imports`. As the website continues to grow,
-you will need to manually edit the `DESCRIPTION` file to ensure the
-dependencies match accordingly!
+Once you have `blogdown` and Hugo installed, you will want to make sure
+you have all the different packages that were used in the tutorials. We
+created a `DESCRIPTION` file which lists out all the current
+dependencies under `Imports`. As the website continues to grow, you will
+need to manually edit the `DESCRIPTION` file to ensure the dependencies
+match accordingly! Please make sure the dependencies are listed in
+**alphabetical order**.
 
 To install the dependencies listed in the `DESCRIPTION` file
 
@@ -72,7 +73,7 @@ remotes::install_deps()
 
 ### Structure of the major directories
 
-The most important folders for this website are `content/`, `static/`
+The most important directories for the website are `content/`, `static/`
 and `public/`.
 
 Briefly:
@@ -87,7 +88,7 @@ Briefly:
     thing Hugo renders the website. You don’t know need to physically
     edit the items in `public/`.
 
-For more info about this directories see
+For more info about these directories see
 [here](https://bookdown.org/yihui/blogdown/hugo.html)
 
 ### Name and code style conventions
@@ -106,6 +107,8 @@ Please follow these conventions when creating new folders:
 We used the `styler` package to format all the content within chunks.
 
 ``` r
+# An example
+
 styler::style_file("content/Data-Manipulation/combining-datasets/_index.Rmd")
 ```
 
@@ -113,10 +116,10 @@ styler::style_file("content/Data-Manipulation/combining-datasets/_index.Rmd")
 
 All of our tutorials are organised into major menus (`coding-skills/`,
 `statistics/`, `graphics/` etc). Sub-menus are created by putting a
-folder within a main folder e.g. `asking-code-questions/` is a subfolder
-within `coding-skills/`. Any files (.Rmd, .html and images) associated
-with the subtopic will live in that subfolder e.g. \_index.rmd,
-stack.png
+folder within the main folder e.g. `asking-code-questions/` is a
+subfolder within `coding-skills/`. Any files (.Rmd, .html and images)
+associated with the subtopic will live in that subfolder
+e.g. \_index.rmd, stack.png
 
     content/
     ├── about-this-site
@@ -208,4 +211,54 @@ blogdown::stop_server()
 
 ### Internal links
 
+You will notice in some tutorials there will be references to other
+pages. For example the [Statistics
+page](environmentalcomputing.net/statistics) provides links to all the
+subtopics. Please follow these conventions when adding internal links in
+your .rmd
+
+Lets say you are working on a page under `data-manipulation/` and you
+want to reference to a page under `graphics/`. In this circumstance, you
+are linking to an entirely different major menu, so we recommend using
+**absolute paths**. This is denoted by the `/` preceding `statistics/`
+which searches for a folder in the entire project directory named
+`statistics`
+
+    Once you have summarised your data, you can easily [plot it!]("/statistics/graphics/ggplot")
+
+Alternatively, if you are working of a page within the same menu
+e.g. `data-manipulation/subsetting-data` and want to reference a page
+within the same menu e.g. `data-manipulation/combining-datasets`, we
+recommend using **relative paths**. This is denoted by the `..`
+preceding `/combining-datasets`. The `..` means ‘going up a directory
+level’ and then `/combining-datasets` means going into the
+`combining-datasets` subfolder.
+
+    You can [merge]("../combining-datasets") your newly subsetted data to another dataframe.
+
 ### Aliases
+
+[Aliases](https://gohugo.io/content-management/urls/#example-aliases)
+help redirect existing, outdated or alternative URLs to specific pages
+in the website. Aliases were particularly useful when we were
+reorganising old tutorial pages to the new blogdown/Hugo system. For
+example, in the first generation of the website the URL for the ‘Asking
+Code Questions’ page was accessed using:
+
+    environmentalcomputing.net/asking-coding-questions/ # OLD
+
+In the new generation of the website the same ‘Asking Code Questions’
+page is accessed using:
+
+    environmentalcomputing.net/coding-skills/asking-coding-questions/ # NEW
+
+We created an aliases so that the old URL can still work and direct to
+the new site. This can be achieved by simply adding an `aliases:`
+parameter in the yaml in the .rmd.
+
+    ---
+    title: "Asking Code Questions"
+    output: html_document
+    aliases: /asking-coding-questions/
+    weight: 5
+    ---

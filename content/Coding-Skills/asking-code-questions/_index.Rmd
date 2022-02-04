@@ -1,6 +1,6 @@
 ---
 weight: 5
-title: "Asking code questions"
+title: "Asking Code Questions"
 output: html_document
 aliases: /asking-coding-questions/
 ---

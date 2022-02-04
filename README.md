@@ -3,11 +3,12 @@
 
 # Welcome to Environmental Computing 👋
 
+<img src="static/images/hexsticker_EC.png" align="right" alt="" width="150" />
+
 <!-- badges: start -->
 
 [![Netlify
 Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status)](https://app.netlify.com/sites/environmentalcomputing/deploys)
-
 <!-- badges: end -->
 
 The goal of **Environmental Computing** is to provide accessible coding

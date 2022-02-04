@@ -70,6 +70,7 @@ remotes::install_deps()
 The most important folders for this website are `content/`,  `static/` and  `public/`.
 
 Briefly:
+
 - `content/` is  the backend of the website and is where you will be working in the most. This is where all the .Rmd files for each tutorial are kept. 
 - `static/` is where the [theme](https://learn.netlify.app/en/) of the website lives. Hugo translates the websites content into static files. 
 - These are automatically copied into the `public/` directory each thing Hugo renders the website. You don't know need to physically edit the items in `public/`. 
@@ -79,11 +80,12 @@ For more info about this directories see [here](https://bookdown.org/yihui/blogd
 ### Name and code style conventions
 
 Please follow these conventions when creating new folders: 
+
 - lowercase names
-- using `-` hypthens to join separate words and numbers e.g. `data-manipulation`
+- using `-` hypthens to join separate words and numbers e.g. `meta-analysis-1`
 - keep folder names to less than 3 concise words if possible
 - use commonly used abbreviations e.g. `glms` instead of `generalised-linear-models`
-- If there are multiple tutorials for a given topic, use numbers beginning from 1 e.g `mixed-model-1`
+- If there are multiple tutorials for a given topic, use numbers beginning from 1 e.g. `mixed-model-1`
 
 We used the `styler` package to format all the content within chunks.
 
@@ -91,10 +93,9 @@ We used the `styler` package to format all the content within chunks.
 styler::style_file("content/Data-Manipulation/combining-datasets/_index.Rmd")
 ```
 
+### The anatomy of nested menus
 
-### The anatomy of nested menus in `content/`
-
-All of our tutorials are organised into major menus
+All of our tutorials are organised into major menus (`coding-skills/`, `statistics/`, `graphics/` etc). Sub-menus are created by putting a folder within a main folder e.g. `asking-code-questions/` is a subfolder within `coding-skills/`. Any files (.Rmd, .html and images) associated with the subtopic will live in that subfolder e.g. _index.rmd, stack.png
 
 ```
 content/
@@ -107,19 +108,68 @@ content/
 │   ├── good-practice
 ```
 
-I recommend taking a look at this [website](https://mingchen0919.github.io/blogdown-website-with-hugo-theme-learn/) to better understand the nestedness of the menus and how to set this up using subfolders and `_index.Rmd` files.
+#### The order of menus
 
-### R Markdown and yamls
-
-```{r}
+Each folder contains a `_index.rmd` which creates its associated `_index.html` file. It is crucial to set this file up correctly to organise the menu and pages. The yaml header of each `_index.rmd` file looks a bit like this and this section controls the order of the pages. 
 
 ```
+---
+title: "Getting Started with R"
+output: html_document
+weight: 2
+---
+```
 
+- The `title:` parameter becomes the name of the menu. Note that each word in `title:` is **capitalised**
+- The `weight:` parameter denotes the **order** of the page. 1 being the first, 2 being the second and so forth. 
+- The `output:` parameter determines what format the .rmd is rendered to. For Hugo's sake, we need it to render an `html_document`.
+
+In the yaml example above, the `weight:` parameter is 2, notice that the second menu on the [website](environmentalcomputing.net) is `Getting Started in R`. 
+
+Once you enter a menu e.g. `Getting Started in R`, the sequence for the `weight:` restarts so that you can set the order for subtopics within `Getting Started in R`. 
+
+For example, `weight: 1` for `Installing R and RStudio`, `weight: 2` for `Using R Notebooks` and so forth.
+
+I recommend taking a look at this [website](https://mingchen0919.github.io/blogdown-website-with-hugo-theme-learn/) to better understand the nestedness of the menus and how to set this up using subfolders and `_index.Rmd` files.
 
 ### Building the site
 
-```{r}
+Once you are happy with the format of a new page you created, using the function to render your page. Knitting your .rmd will also do the trick!
 
+```{r}
+blogdown::build_site(build_rmd = 'newfile')
+
+# and then to preview your site, open in browser and explore your work :) 
+blogdown::serve_site()
+```
+
+Occasionally, you will made edits to some .rmds, to re-render these pages
+
+```{r}
+blogdown::build_site(build_rmd = 'timestamp')
+```
+
+Sometimes, you'll notice that despite knitting or using the above functions, your page is not showing up. This is where the following function comes in handy:
+
+```{r}
+blogdown::check_site()
+
+# There are various blogdown::check_ functions, check_site() does it all-in-one
+```
+
+This function will prompt to you fix your issues, usually you need to remove incompatible files, restart RStudio and use `r blogdown::build_site(build_rmd = 'newfile')` again. No worries! 
+
+If you are already previewing your site, you will notice upon saving your .rmd, the site will usually dynamically  update itself but its good practice to occasionally use the above ` r blogdown::build_site()` functions to ensure proper rendering. 
+
+To stop previewing the site: 
+
+```{r}
+blogdown::stop_server()
 ```
 
 ### Internal links
+
+
+
+### Aliases
+

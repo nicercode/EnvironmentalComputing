@@ -1,6 +1,6 @@
 ---
 weight: 1
-title: "Installing R and R Studio"
+title: "Installing R and RStudio"
 aliases: /installing-r-r-studio/
 output: html_document
 ---

@@ -16,7 +16,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-3560-3659"))
   )
 Description: Skeleton for blogdown + hugo to create all tutorials on the website
-License: MIT + file LICENSE
+License: CC BY 4.0
 Encoding: UTF-8
 Language: en
 LazyData: true

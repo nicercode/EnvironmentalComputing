@@ -6,7 +6,7 @@ editor_options:
   chunk_output_type: console
 aliases: /mixed-models-2/
 ---
-[Mixed models 1](/statistics/mixed-models/mixed-models-1/) is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.
+[Mixed models 1](/statistics/mixed-models/mixed-model-1/) is an introduction to mixed models with one random factor. After reading that, if you think you have more than one random factor, then read on. For example, you might have crossed or nested factors.
 
 Many experimental designs in ecology and environmental sciences require mixed models with several random effects (factors). You might have heard of nested and crossed factors. We often define these as quite distinct designs (e.g., from [www.theanalysisfactor.com](http://www.theanalysisfactor.com))
 
@@ -25,7 +25,7 @@ We will use the package [lme4](https://cran.r-project.org/web/packages/lme4/inde
 library(lme4)
 ```
 
-We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in [Mixed models 3](/statistics/mixed-models/mixed-models-3/), we'll model counts as discrete using Generalised linear mixed models (GLMMs). 
+We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in [Mixed models 3](/statistics/mixed-models/mixed-model-3/), we'll model counts as discrete using Generalised linear mixed models (GLMMs). 
 
 ![](Mixed_models_2_image.jpg)
 
@@ -102,7 +102,7 @@ The assumptions are the same as for one random factor, but it doesn't hurt to li
 6. Random effects $z$ are normally distributed  
   
 
-See [Mixed models 1](/statistics/mixed-models/mixed-models-1/) for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.  
+See [Mixed models 1](/statistics/mixed-models/mixed-model-1/) for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.  
 
 ```{r}
 par(mfrow = c(1, 2))
@@ -137,7 +137,7 @@ We find weak evidence of an effect of Modification (p=0.05047).
 
 **Hypothesis test for random effects**
 
-As in  [Mixed models 1](/statistics/mixed-models/mixed-models-1/) we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I've taken the code from [Mixed models 1](/statistics/mixed-models/mixed-models-1/) and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.
+As in  [Mixed models 1](/statistics/mixed-models/mixed-model-1/) we will use a parametric bootstrap. We will test if we need to have a random effect for Site given we have a random effect for Estuary in the model. I've taken the code from [Mixed models 1](/statistics/mixed-models/mixed-model-1/) and changed the relevant parts, you can compare the two to get an idea of how to write your own parametric bootstrap code.
 
 ```{r, error=FALSE, message=FALSE, warning=FALSE}
 nBoot <- 1000
@@ -180,7 +180,7 @@ Est.means <- summarize(means, Estuaries$SiteWithin, mean)$means # extract means 
 stripchart(Est.means ~ sort(unique(SiteWithin)), data = Estuaries, pch = 18, col = "red", vertical = TRUE, add = TRUE) # plot means by site
 ```
 
-Alternatively, you can plot by Estuary as before (see [Mixed models 1](/statistics/mixed-models/mixed-models-1/)).
+Alternatively, you can plot by Estuary as before (see [Mixed models 1](/statistics/mixed-models/mixed-model-1/)).
   
 
 ### Further help

@@ -153,7 +153,7 @@ boxplot(abundance ~ modification, data = Pilot, main = "modification")
 boxplot(abundance ~ site, data = Pilot, main = "site")
 ```
 
-These count data with a random effect of site are best modelled with a [generalised linear mixed model](../mixed-model-3) using `glmer` from the package lme4.
+These count data with a random effect of site are best modelled with a [generalised linear mixed model](../mixed-models/mixed-model-3) using `glmer` from the package lme4.
 
 ```{r}
 library(lme4)

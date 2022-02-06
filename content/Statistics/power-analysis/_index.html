@@ -192,7 +192,7 @@ Pilot$modification &lt;- factor(Pilot$modification)</code></pre>
 boxplot(abundance ~ modification, data = Pilot, main = &quot;modification&quot;)
 boxplot(abundance ~ site, data = Pilot, main = &quot;site&quot;)</code></pre>
 <p><img src="/Statistics/power-analysis/_index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>These count data with a random effect of site are best modelled with a <a href="../mixed-model-3">generalised linear mixed model</a> using <code>glmer</code> from the package lme4.</p>
+<p>These count data with a random effect of site are best modelled with a <a href="../mixed-models/mixed-model-3">generalised linear mixed model</a> using <code>glmer</code> from the package lme4.</p>
 <pre class="r"><code>library(lme4)
 
 Pilot.mod &lt;- glmer(abundance ~ temperature + modification + (1 | site), family = &quot;poisson&quot;, data = Pilot)

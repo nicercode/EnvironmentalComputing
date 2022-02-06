@@ -2,7 +2,7 @@
 weight: 5
 title: "Asking Code Questions"
 output: html_document
-aliases: /asking-coding-questions/
+aliases: /asking-code-questions/
 ---
 
 When you started to learn R, one of the first things you probably figured out was how to get your data into R. You had to use some method to read your lovely excel datasets into R so you could achieve what you wanted. Maybe ```read.csv``` or ```read.table```, or maybe you use Hadley Wickham's recent package ```readr```.
@@ -25,7 +25,7 @@ By doing this, you avoid the need to send your code file and entire data set as 
 
 It's important to note here that in order for someone to help you, they don't need the whole dataset. They only need to be able to see the problem and have the associated question to fix/solve!
 
-![](help-me-help-you.gif)
+![](https://cdn.shopify.com/s/files/1/1202/6984/files/1nenhs_large.jpg?v=1565849932)
 
 This tutorial is intended to help people who are relatively new to R create a reproducible example and also make fake data for other purposes.
   
@@ -182,7 +182,7 @@ The ```nrow``` argument is used in order to replace the correct amount of data i
  
 You could use a built in dataset that is loaded in base R, in order to reproduce your problem. You can quickly see the list of built-in datasets.
 
-```{r}
+```{r, eval=FALSE}
 library(help = "datasets")
 ```
 

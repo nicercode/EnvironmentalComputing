@@ -14,11 +14,11 @@ Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd
 The goal of **Environmental Computing** is to provide accessible coding
 and statistical tutorials to R users. If you would like to learn more
 about this site, click
-[here](https://deploy-preview-18--brave-bose-da028a.netlify.app/about-this-site/)
+[here](https://environmentalcomputing.net/about-this-site/)
 
 This repository contains the
 [blogdown](https://bookdown.org/yihui/blogdown/) and
-[hugo](https://gohugo.io/) backbone to build and maintain the website.
+[Hugo](https://gohugo.io/) backbone to build and maintain the website.
 Below are important details to quickly orientate you to the
 behind-the-scenes of this website
 
@@ -29,7 +29,7 @@ as most tutorials are written as R Markdown files which is rendered into
 a Hugo-friendly format.
 
 Blogdown can be installed from either CRAN or directly from the RStudio
-blogdown Github repository using the `remotes` package:
+`blogdown` Github repository using the `remotes` package:
 
 ``` r
 # Install from CRAN
@@ -97,15 +97,15 @@ For more info about these directories see
 Please follow these conventions when creating new folders:
 
 -   lowercase names
--   using `-` hypthens to join separate words and numbers
+-   use `-` hypthens to join separate words and numbers
     e.g. `meta-analysis-1`
--   keep folder names to less than 3 concise words if possible
+-   if possible, keep folder names to less than 3 concise words
 -   use commonly used abbreviations e.g. `glms` instead of
     `generalised-linear-models`
 -   If there are multiple tutorials for a given topic, use numbers
     beginning from 1 e.g. `mixed-model-1`
 
-We used the `styler` package to format all the content within chunks.
+We used the `styler` package to format all the content within each .Rmd
 
 ``` r
 # An example
@@ -136,7 +136,7 @@ e.g. \_index.rmd, stack.png
 Each folder contains a `_index.rmd` which creates its associated
 `_index.html` file. It is crucial to set this file up correctly to
 organise the menu and pages. The yaml header of each `_index.rmd` file
-looks a bit like this and this section controls the order of the pages.
+looks a bit like this. The yaml section controls the order of the pages.
 
     ---
     title: "Getting Started with R"
@@ -148,8 +148,9 @@ looks a bit like this and this section controls the order of the pages.
     word in `title:` is **capitalised**
 -   The `weight:` parameter denotes the **order** of the page. 1 being
     the first, 2 being the second and so forth.
--   The `output:` parameter determines what format the .rmd is rendered
-    to. For Hugo’s sake, we need it to render an `html_document`.
+-   The `output:` parameter determines what format the .Rmd is rendered
+    to. For Hugo’s sake, we need it to render the .Rmd into a
+    `html_document`.
 
 In the yaml example above, the `weight:` parameter is 2, notice that the
 second menu on the [website](environmentalcomputing.net) is “Getting
@@ -169,8 +170,8 @@ using subfolders and `_index.Rmd` files.
 
 ### Building the site
 
-Once you are happy with the format of a new page you created, using the
-following function to render your page. Knitting your .rmd will also do
+Once you are happy with the format of a new page you created, use the
+following functions to render your page. Knitting your .Rmd will also do
 the trick!
 
 ``` r
@@ -180,7 +181,7 @@ blogdown::build_site(build_rmd = 'newfile')
 blogdown::serve_site()
 ```
 
-Occasionally, you will want to make edits to some .rmds, to re-render
+Occasionally, you will want to make edits to some .Rmds, to re-render
 these pages use:
 
 ``` r
@@ -198,11 +199,12 @@ blogdown::check_site()
 ```
 
 This function will prompt to you fix your issues, usually you will need
-to remove incompatible files, restart RStudio and use again. No worries!
+to remove incompatible files, restart RStudio and use
+`blogdown::build_site(build_rmd = 'newfile')` again. No worries!
 
 If you are already previewing your site, you will notice upon saving
-your .rmd, the site will usually dynamically update itself but its good
-practice to occasionally use the above `r blogdown::build_site()`
+your .Rmd, the site will usually dynamically update itself but its good
+practice to occasionally use the above `blogdown::build_site()`
 functions to ensure proper rendering.
 
 To stop previewing the site:
@@ -213,10 +215,11 @@ blogdown::stop_server()
 
 ### Internal links
 
-In some tutorials there are references to other pages. For example the
-[Statistics page](environmentalcomputing.net/statistics) provides links
-to all the subtopics under “Statistics”. Please follow these conventions
-when adding internal links in your .rmd
+In some tutorials there are references to other pages on the website.
+For example, the [Statistics
+page](environmentalcomputing.net/statistics) provides links to all the
+subtopics under “Statistics”. Please follow these conventions when
+adding internal links in your .rmd
 
 Lets say you are working on a page under `data-manipulation/` and you
 want to reference to a page under `graphics/`. In this circumstance, you
@@ -224,6 +227,8 @@ are linking to an entirely different major menu, so we recommend using
 **absolute paths**. This is denoted by the `/` preceding `statistics/`
 which searches for a folder in the entire project directory named
 `statistics`
+
+For example:
 
     Once you have summarised your data, you can easily [plot it!]("/statistics/graphics/ggplot")
 
@@ -235,13 +240,15 @@ preceding `/combining-datasets`. The `..` means ‘going up a directory
 level’ and then `/combining-datasets` means going into the
 `combining-datasets` subfolder.
 
+Like this:
+
     You can [merge]("../combining-datasets") your newly subsetted data to another dataframe.
 
 ### Aliases
 
 [Aliases](https://gohugo.io/content-management/urls/#example-aliases)
 help redirect existing, outdated or alternative URLs to specific pages
-in the website. Aliases were particularly useful when we were
+oxsn the website. Aliases were particularly useful when we were
 reorganising old tutorial pages to the new blogdown/Hugo system. For
 example, in the first generation of the website the URL for the ‘Asking
 Code Questions’ page was accessed using:
@@ -255,7 +262,7 @@ page is accessed via:
 
 We created an aliases so that the old URL can still work and direct to
 the new site. This can be achieved by simply adding an `aliases:`
-parameter in the yaml in the .rmd.
+parameter in the yaml in the .Rmd
 
     ---
     title: "Asking Code Questions"

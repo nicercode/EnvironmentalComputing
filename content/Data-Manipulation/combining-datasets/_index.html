@@ -18,7 +18,6 @@ output: html_document
 <pre class="r"><code>Bats &lt;- read.csv(file = &quot;Bats_data.csv&quot;)
 Geo &lt;- read.csv(file = &quot;Geo_data.csv&quot;)
 Weather &lt;- read.csv(file = &quot;Weather_vars.csv&quot;)</code></pre>
-<p>You’ll notice that we used the argument <code>stringsAsFactors=F</code>. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as “character” vectors.</p>
 <div id="joining-data" class="section level3">
 <h3>Joining data</h3>
 <p>dplyr has a function for simply adding all columns from one data set (z) to another (y):</p>

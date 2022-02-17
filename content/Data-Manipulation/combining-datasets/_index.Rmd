@@ -27,9 +27,6 @@ Geo <- read.csv(file = "Geo_data.csv")
 Weather <- read.csv(file = "Weather_vars.csv")
 ```
 
-You'll notice that we used the argument `stringsAsFactors=F`. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as "character" vectors.
-  
-
 ### Joining data
  
 dplyr has a function for simply adding all columns from one data set (z) to another (y):

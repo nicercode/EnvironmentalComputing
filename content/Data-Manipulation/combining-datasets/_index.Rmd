@@ -22,9 +22,9 @@ We will also read in a dataset giving geographic locations for each site (for ex
 Download the three sample data sets ([Bats_data.csv](/datasets/Bats_data.csv), [Geo_data.csv](/datasets/Geo_data.csv), and [Weather_vars.csv](/datasets/Weather_vars.csv)) and import into R.
 
 ```{r}
-Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
-Geo <- read.csv(file = "Geo_data.csv", header = T, stringsAsFactors = F)
-Weather <- read.csv(file = "Weather_vars.csv", header = T, stringsAsFactors = F)
+Bats <- read.csv(file = "Bats_data.csv")
+Geo <- read.csv(file = "Geo_data.csv")
+Weather <- read.csv(file = "Weather_vars.csv")
 ```
 
 You'll notice that we used the argument `stringsAsFactors=F`. This is because the factor format can confuse the joining process, so best to leave our non-numeric columns as "character" vectors.
@@ -52,7 +52,14 @@ To add the geographic locations to the Bats data set, using the Site column to m
 Bats_withGeo <- left_join(Bats, Geo, by = "Site")
 ```
 
-To now add the weather data to that new data set, using the Date variable to match rows, we would use:
+The `by="Site"` part is actually optional, and if you leave it out `left_join` will search for columns with the same name to use as the matching column, and you'll be told this in a message back from the function. This is equivalent to the line above: 
+
+```{r}
+Bats_withGeo <- left_join(Bats, Geo)
+```
+
+
+We encourage specifying the matching column though, just to be more explicit about the desired behavior of the match.  To now add the weather data to that new data set, using the Date variable to match rows, we would use:
 
 ```{r}
 Bats_withGeoWeather <- left_join(Bats_withGeo, Weather, by = "Date")
@@ -81,12 +88,12 @@ Let's simulate a couple of messy datasets. Imagine you have bat activity data fo
 Bat_sim <- as.data.frame(cbind(
   Site = c("A", "B", "C", "D", "E"),
   Activity = c(62, 29, 30, 23, 24)
-), stringsAsFactors = F)
+))
 
 Tree_sim <- as.data.frame(cbind(
   Site = c("D", "E", "F", "G", "H"),
   Tree_density = c(525, 390, 477, 778, 817)
-), stringsAsFactors = F)
+))
 ```
 
 ```{r,echo=F}
@@ -156,6 +163,6 @@ This tutorial was based on the excellent [Data wrangling with dplyr and tidyr ch
 
 **Author**: Rachel V. Blakey
 
-**Year:** 2016
+**Year:** 2016 updated 2022 by Will Cornwell
 
 **Last updated:** `r format(Sys.time(), "%b %Y")`

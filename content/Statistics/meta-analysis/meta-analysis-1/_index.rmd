@@ -119,7 +119,7 @@ The oject created now has an effect size (yi) and its variance (vi) for each stu
 head(SMD)
 ```
 
-To obtain the response ratio (log transformed ratio of menas), we would use:
+To obtain the response ratio (log transformed ratio of means), we would use:
 ```{r effect-size-2, tidy=TRUE}
 lnRR <- escalc(
   measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,

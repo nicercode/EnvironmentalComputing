@@ -38,6 +38,8 @@ install.packages("blogdown")
 
 # Install from Github
 remotes::install_github('rstudio/blogdown')
+
+library(blogdown)
 ```
 
 Once blogdown is installed, we can use this package to install Hugo!
@@ -135,9 +137,44 @@ For example, `weight: 1` for "Installing R and RStudio", `weight: 2` for "Using 
 
 I recommend taking a look at this [website](https://mingchen0919.github.io/blogdown-website-with-hugo-theme-learn/) to better understand the nestedness of the menus and how to set this up using subfolders and `_index.Rmd` files.
 
+### Working with git
+
+The recommended workflow with git
+
+1. **PULL** down remote changes at the beginning of your work session. 
+2. Proceed to work on the files for the website
+3. **STAGE** your changes (In RStudio, check the box next to file)
+4. **COMMIT** your changes. Generally, I make a commit for changes that is related e.g. all in the same file or directory. That way the changes are grouped together with one informative message. 
+5. **PUSH** your committed changes. 
+
+Note: Should a merge conflict arise, reach out of one of the maintainers and we can help ya out
+
+### Creating a new page
+
+So you want to make a tutorial!? Here's my recommended workflow for creating a brand-spanking-new page! 
+
+1. Decide where the new page should live within the existing menu structure. e.g. Coding skill? Graphics/ggplot? etc
+2. Create a new folder in the desired location and name it following conventions above. 
+3. Enter the new folder you created
+4. Create a new .Rmd file and name it `_index.Rmd`
+5. Copy and paste the yaml template at the top of the file and edit accordingly. 
+
+```
+---
+title: "Title of your new tutorial
+output: html_document
+weight: 
+---
+```
+
+- Remember the `weight:` denotes the **order** of the page, so change this according to the existing page order. I recommend opening the website in a browser and counting the number of menu items to determine what `weight:`you want your new page to be. 
+- If you need to slot the new page in between existing pages, you will need to update the  `weight:` for the pages that comes AFTER your new page. 
+
+6. Proceed with writing your page like any .Rmd file
+
 ### Building the site
 
-Once you are happy with the format of a new page you created, use the following functions to render your page. Knitting your .Rmd will also do the trick!
+Once you are happy with the format of a new page/updates you've made, use the following functions to render your page. **Knitting and saving your .Rmd** will also do the trick!
 
 ```{r}
 blogdown::build_site(build_rmd = 'newfile')
@@ -146,10 +183,16 @@ blogdown::build_site(build_rmd = 'newfile')
 blogdown::serve_site()
 ```
 
-Occasionally, you will want to make edits to some .Rmds, to re-render these pages use:
+Occasionally, you will want to make edits to multiple .Rmds, to re-render these pages use:
 
 ```{r}
 blogdown::build_site(build_rmd = 'timestamp')
+```
+
+If you want to re-render a specific .Rmd, without rebuilding the entire site: 
+
+```{r}
+blogdown::build_site(build_rmd = "file/path/to/RMD")
 ```
 
 Sometimes, you'll notice that despite knitting or using the above functions, your page is not showing up. This is where the following function comes in handy:
@@ -212,5 +255,6 @@ aliases: /asking-coding-questions/
 weight: 5
 ---
 ```
+
 
 

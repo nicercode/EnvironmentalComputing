@@ -115,7 +115,7 @@ SMD &lt;- escalc(measure = &quot;SMD&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = 
 ## 4 -0.3798 0.4072 
 ## 5  0.3321 0.5069 
 ## 6  2.5137 0.9282</code></pre>
-<p>To obtain the response ratio (log transformed ratio of menas), we would use:</p>
+<p>To obtain the response ratio (log transformed ratio of means), we would use:</p>
 <pre class="r"><code>lnRR &lt;- escalc(measure = &quot;ROM&quot;, n1i = dat$n1i, n2i = dat$n2i, m1i = dat$m1i, m2 = dat$m2i,
     sd1i = dat$sd1i, sd2i = dat$sd2i)</code></pre>
 <p>The original paper used lnRR so we will use it, but you may want to repeat analysis below using SMD to see whether results are consistent.</p>

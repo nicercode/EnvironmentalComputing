@@ -5,6 +5,7 @@ title: Environmental Computing
 theme: hugo-theme-learn
 metaDataFormat: yaml
 defaultContentLanguageInSubdir: yes
+googleAnalyticsID: G-KVTJFRWP8M
 googleAnalytics: UA-77528433-1
 params:
   author: Fonti Kar, Daniel Falster, and Will Cornwell

@@ -41,6 +41,17 @@
     </style>
     {{ partial "custom-header.html" . }}
   </head>
+  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KVTJFRWP8M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KVTJFRWP8M');
+</script>
+
   <body class="" data-url="{{ .RelPermalink }}">
     {{ partial "menu.html" . }}
         <section id="body">

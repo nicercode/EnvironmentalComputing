@@ -14,7 +14,7 @@ E.g. I would like more explanation on [...]
 Please provide a URL or title of the existing tutorial would be super helpful!
 
 **Which submenu would this new tutorial belong?**
- Can you categorise the new tutorial under any of the submenus? E.g. Graphics, Statistics, Data Manipulation, Coding Skills.
+ Can you categorise the new tutorial under any of the submenus?
 
 **Describe the new tutorial you'd like**
 Concisely describe the goal of the requested tutorial. Please provide links to a package or specific functions the tutorial will likely use

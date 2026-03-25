@@ -1,0 +1,19 @@
+---
+title: "Linear Models"
+---
+
+This section introduces linear-model-based methods for testing differences among groups and understanding factor effects.
+
+The core chapters are:
+
+1. [Confidence intervals](confidence-intervals.qmd)
+2. [Simple linear regression](linear-regression.qmd)
+3. [Interpreting linear regressions](interpret-lm-coeffs.qmd)
+4. [T-tests](t-tests.qmd)
+5. [ANOVA](anova.qmd)
+6. [Understanding interactions](understanding-interactions.qmd)
+7. [Generalised linear models](generalised-linear-models.qmd)
+8. [Interpreting GLMs](interpret-glm-coeffs.qmd)
+9. [Mixed effects models](mixed-effects-models.qmd)
+10. [Generalised additive models](generalised-additive-models.qmd)
+11. [Time series analysis](time-series-analysis.qmd)

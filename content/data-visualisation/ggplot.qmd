@@ -1,0 +1,909 @@
+---
+title: "Plotting in R"
+---
+
+This page introduces plotting in R. We start with base R graphics for quick exploratory plots, then cover ggplot2 for producing publication-quality figures.
+
+## One continuous variable
+
+Being able to visualise the properties of data is a critical step in data exploration and needed for effective communication of results. This section covers two common ways to display data from a single continuous variable: frequency histograms and box-and-whisker plots.
+
+The sample data used below are the lengths (cm) of 80 fish caught in an estuary at sites with different management zones (protected versus unprotected) and shores (urbanised versus healthy).
+
+![](images/Single_continuous_variable_image.jpg)
+
+### Frequency histograms
+
+Frequency histograms plot how often the values of a continuous variable fall into certain ranges. They are an effective way to visualise the range of values obtained and the distribution of your data (i.e. is it symmetrical or skewed?).
+
+Download the sample data set [Estuary_fish.csv](/datasets/Estuary_fish.csv) and import into R.
+
+```{r}
+#| label: basic-plotting-one-continuous-1
+Fish <- read.csv(file = "data/Estuary_fish.csv")
+```
+
+A frequency histogram of the variable Length from the data frame Fish is easily produced with the `hist` function.
+
+```{r}
+#| label: basic-plotting-one-continuous-2
+hist(Fish$Length)
+```
+
+You can see straight away that all the fish were less than 30 cm long and that these length data are positively skewed - small fish are more frequent and large fish are rare.
+
+You can alter the number of bins or the range of each bin with `breaks` argument. This will change the width and shape of the histogram. For example, if you wanted 15 bins, you would use:
+
+```{r}
+#| label: basic-plotting-one-continuous-3
+hist(Fish$Length, breaks = 15)
+```
+
+If you wanted each bin to have a range of 2 cm, you would use `breaks=seq(0,30,by=2)` where the numbers in the brackets are the minimum, maximum and range for each bin.
+
+
+### Box and whisker plots
+
+A box and whisker plot, or boxplot, is another useful way to visualise the distribution of a single, continuous variable. They are easily made with the `boxplot` function. The `horizontal=TRUE` argument makes the single axis horizontal.
+
+```{r}
+#| label: basic-plotting-one-continuous-4
+boxplot(Fish$Length, horizontal = TRUE)
+```
+
+The plot shows the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.
+
+The boxplot will indicate skewness in your data if the median is not equally distant from the quartiles or maximum and minimum values. In this example, you can see that the median is closer to the minimum value than the maximum (indicating that low values are more common).
+
+
+### Formatting plots
+
+**Add axis labels or titles**
+
+Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument.
+
+```{r}
+#| label: basic-plotting-one-continuous-5
+hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length")
+
+boxplot(Fish$Length, xlab = "Fish length (cm)", main = "Box plot of fish length", horizontal = TRUE)
+```
+
+Using `main=NULL` removes the title, which is often unnecessary as details of what a plot illustrates are usually written in a figure legend below the plot.
+
+**Edit axis limits**
+
+Axis limits are set by the `xlim` and `ylim` arguments.
+
+```{r, eval = FALSE}
+#| label: basic-plotting-one-continuous-6
+hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length", xlim = c(0, 40))
+
+boxplot(Fish$Length, xlab = "Fish length (cm)", main = "Box plot of fish length", ylim = c(0, 40), horizontal = TRUE)
+```
+
+Note that `ylim` is needed here to set the range for the single response variable (Fish length) even though it ends up on the horizontal axis after using `horizontal=TRUE`.
+
+**Adding colour**
+
+Colour can be added to any part of the plots (axis, fonts etc.) using the `col` argument. There are over 600 colours that can be plotted; type `colors()` for the names of the whole range.
+
+```{r}
+#| label: basic-plotting-one-continuous-7
+hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length", col = "red")
+```
+
+Type `?hist` and `?boxplot` to get R help for these functions.
+
+
+## Two continuous variables
+
+Visualising the relationship between two continuous variables is one of the most commonly used graphical techniques in the sciences. This section covers how to produce simple scatterplots in base R.
+
+![](images/Two_continuous_variables_image.jpg)
+
+Download a data set on plant heights around the world, [Plant_height.csv](/datasets/Plant_height.csv), and import into R.
+
+```{r}
+#| label: basic-plotting-two-continuous-1
+Plant_height <- read.csv(file = "data/Plant_height.csv", header = TRUE)
+```
+
+### Scatterplots
+
+To visualise how plant height varies with temperature, use the `plot` function. Place the Y variable on the left of the tilde (~) and the X variable on the right.
+
+```{r}
+#| label: basic-plotting-two-continuous-2
+plot(height ~ temp, data = Plant_height)
+```
+
+If the two variables you would like to plot are in different objects in R, you would use:
+
+```{r, eval=F}
+#| label: basic-plotting-two-continuous-3
+plot(y ~ x)
+```
+
+### Formatting plots
+
+**Add axis labels or titles**
+
+Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument.
+
+```{r}
+#| label: basic-plotting-two-continuous-4
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", main = "Plant height vs temperature")
+```
+
+**Edit axis limits**
+
+```{r,eval=FALSE}
+#| label: basic-plotting-two-continuous-5
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", ylim = c(0, 80), xlim = c(-20, 30))
+```
+
+**Symbol style**
+
+The choice of symbols is extensive and accessed using the `pch` argument. Type `?pch` to see all choices.
+
+![](images/pch.png)
+
+Solid circles `pch=16` or `pch=19` are often the neatest way to display data on a scatterplot.
+
+```{r}
+#| label: basic-plotting-two-continuous-6
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", ylim = c(0, 80), pch = 16)
+```
+
+**Adding colour**
+
+```{r}
+#| label: basic-plotting-two-continuous-7
+plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", pch = 16, col = "blue")
+```
+
+**Adding a line of best fit**
+
+To add the line of best fit from a simple linear regression, use `lm` to obtain the slope and intercept, then add this line via `abline`.
+
+```{r}
+#| label: basic-plotting-two-continuous-8
+plot(loght ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "log(Plant height)", pch = 16)
+abline(lm(loght ~ temp, data = Plant_height))
+```
+
+Type `?plot` and `?abline` to get R help for these functions.
+
+
+## One continuous and one categorical variable
+
+Visualising how a measured variable relates to a categorical predictor is essential for data exploration and communicating results.
+
+![](images/Single_continuous_vs_categorical_variable_image.jpg)
+
+We will use sample data from an experiment that contrasted the metabolic rate of two species of prawns. Download [Prawns_MR.csv](/datasets/Prawns_MR.csv) and import into R.
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-1
+Prawns <- read.csv(file = "data/Prawns_MR.csv")
+```
+
+### Boxplots
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-2
+boxplot(Metabolic_rate ~ Species, data = Prawns)
+```
+
+The continuous variable is on the left of the tilde (~) and the categorical variable is on the right. You can immediately see that species B has a higher metabolic rate than species A.
+
+
+### Bar plots
+
+These data are also commonly visualised with a bar plot displaying the means of the continuous variable for each level of the categorical variable, with error bars showing variation. The code below uses `summarise` and `group_by` from [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html).
+
+```{r,warning=F,message=F}
+#| label: basic-plotting-one-continuous-one-factor-3
+library(dplyr)
+
+Species.summary <- Prawns %>%
+  group_by(Species) %>%
+  summarise(
+    mean = mean(Metabolic_rate),
+    sd = sd(Metabolic_rate),
+    lower = mean(Metabolic_rate) - sd(Metabolic_rate),
+    upper = mean(Metabolic_rate) + sd(Metabolic_rate)
+  )
+```
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-4
+Prawn.plot <- barplot(Species.summary$mean,
+  names.arg = Species.summary$Species,
+  ylab = "Metabolic rate", xlab = "Species", ylim = c(0, 1)
+)
+
+arrows(Prawn.plot, Species.summary$lower, Prawn.plot, Species.summary$upper, angle = 90, code = 3)
+```
+
+Note that plots of means and error bars can be misleading as they hide the true distributions of the data.
+
+### Formatting plots
+
+**Add axis labels**
+
+```{r,eval=FALSE}
+#| label: basic-plotting-one-continuous-one-factor-5
+boxplot(Metabolic_rate ~ Species, data = Prawns, xlab = "Species", ylab = "Metabolic rate")
+```
+
+**Edit axis limits**
+
+```{r,eval=FALSE}
+#| label: basic-plotting-one-continuous-one-factor-6
+boxplot(Metabolic_rate ~ Species,
+  data = Prawns, xlab = "Species", ylab = "Metabolic rate",
+  ylim = c(0, 1)
+)
+```
+
+**Rename levels of the categorical factor**
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-7
+boxplot(Metabolic_rate ~ Species,
+  data = Prawns, xlab = "Species", ylab = "Metabolic rate",
+  names = c("Penaeus monodon", "Fenneropenaeus merguiensis")
+)
+```
+
+**Adding colour**
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-8
+barplot(Species.summary$mean,
+  names.arg = Species.summary$Species,
+  ylab = "Metabolic rate", xlab = "Species", ylim = c(0, 1), col = "red"
+)
+```
+
+Type `?boxplot` and `?barplot` to get R help for these functions.
+
+
+## Introduction to ggplot2
+
+```{r, echo=FALSE, warning=F}
+#| label: ggplot-1
+library(ggplot2)
+g1 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_classic()
+print(g1 + labs(y = "Petal length (cm)", x = "Sepal length (cm)"))
+```
+
+### Creating a ggplot
+
+First, install and load ggplot2:
+
+```{r}
+#| label: ggplot-2
+library(ggplot2)
+```
+
+The starting point for creating a plot is:
+
+```{r,eval=FALSE}
+#| label: ggplot-3
+plot1 <- ggplot(data, aes(x_variable, y_variable)) +
+  geom_graph.type()
+
+print(plot1)
+```
+
+`data` is a data frame that holds the variables that you would like to plot.
+
+`aes` specifies which variables to plot. While `aes` stands for aesthetics, in ggplot it does not relate to the visual look of the graph but rather what data you want to see in the graph.
+
+`+ geom_graph.type` specifies what sort of plot you want to make. Commonly used examples include:
+
+* scatterplot — `+ geom_point()`
+* boxplot — `+ geom_boxplot()`
+* histogram — `+ geom_histogram()`
+* bar plot — `+ geom_bar()`
+
+The type of graph has to match the classes of the inputs. You can check the class of any variable with the `class` function, or all variables in a data frame with the `str` function.
+
+A helpful practice is to assign the plot to an object (e.g., `plot1` above) and then `print` it separately.
+
+
+### Example plots
+
+![](images/ggplot1_basics_image.JPG)
+
+```{r}
+#| label: ggplot-4
+data(iris)
+```
+
+To contrast petal length across the three species of iris with a **box plot**:
+
+```{r}
+#| label: ggplot-5
+plot1 <- ggplot(iris, aes(Species, Petal.Length)) +
+  geom_boxplot()
+print(plot1)
+```
+
+To plot a **frequency histogram** of petal length:
+
+```{r, message=F}
+#| label: ggplot-6
+plot2 <- ggplot(iris, aes(Petal.Length)) +
+  geom_histogram()
+print(plot2)
+```
+
+To use a **scatter plot** to visualise the relationship between petal length and sepal length:
+
+```{r}
+#| label: ggplot-7
+plot3 <- ggplot(iris, aes(Sepal.Length, Petal.Length)) +
+  geom_point()
+print(plot3)
+```
+
+These points could then be coloured according to the levels of a categorical variable by adding `colour="categorical.variable"` in the `aes` brackets:
+
+```{r}
+#| label: ggplot-8
+plot4 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
+print(plot4)
+```
+
+
+### Adding a basic theme
+
+The overall look of the ggplot can be altered with different set themes by adding `+ theme_bw()` or `+ theme_classic()` to your code.
+
+```{r}
+#| label: ggplot-9
+plot5 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_bw()
+print(plot5)
+
+plot6 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point() +
+  theme_classic()
+print(plot6)
+```
+
+
+## Titles and axis labels
+
+This section covers adding titles, legends and axis labels to ggplots.
+
+The following scatter plot is used as the base throughout this section:
+
+```{r, echo=TRUE}
+#| label: ggplot-labels-3
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
+```
+
+```{r,echo=F}
+#| label: ggplot-labels-4
+print(IrisPlot)
+```
+
+### Adding a title
+
+Add `+ggtitle("Your Title Here")` to your ggplot code.
+
+```{r echo=TRUE}
+#| label: ggplot-labels-5
+print(IrisPlot + ggtitle("Petal and sepal length of iris"))
+```
+
+For a long title, use `\n` for a new line:
+
+```{r echo=TRUE}
+#| label: ggplot-labels-6
+print(IrisPlot + ggtitle("Petal and sepal length \nof three species of iris"))
+```
+
+
+### Changing axis labels
+
+Add `+labs(y= "y axis name", x = "x axis name")` to your ggplot code.
+
+```{r echo=TRUE}
+#| label: ggplot-labels-7
+print(IrisPlot + labs(y = "Petal length (cm)", x = "Sepal length (cm)"))
+```
+
+You can also use `+labs(title = "Title")` which is equivalent to `ggtitle`.
+
+```{r eval=F}
+#| label: ggplot-labels-8
+print(IrisPlot + labs(
+  title = "Petal and Sepal Length \nof Iris",
+  y = "Petal Length (cm)", x = "Sepal Length (cm)"
+))
+```
+
+
+### Changing the legend title
+
+Add `+labs(colour = "Legend Title")` to the end of your plot code. This only works if you have added an extra variable to your `aes` code.
+
+```{r}
+#| label: ggplot-labels-9
+print(IrisPlot + labs(colour = "Iris species"))
+```
+
+If you are using a histogram, boxplot or bar graph, use `fill` instead of `colour`:
+
+```{r,eval =F}
+#| label: ggplot-labels-10
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
+print(IrisBox + labs(fill = "Iris species"))
+```
+
+
+### Altering text style
+
+The font, colour, size and emphasis of labels can all be altered using `theme()` with `element_text()`.
+
+The basic format is: `mytheme <- theme(title type = element_text(your formats))`
+
+Where "title type" is one of:
+
+* `plot.title = element_text()`
+* `axis.title = element_text()`
+* `legend.title = element_text()`
+* `legend.text = element_text()`
+* `axis.text = element_text()`
+
+**Formatting choices** within `element_text()`:
+
+* `family` — the font style, e.g. `"Palatino"`, `"Helvetica"`, `"Courier"`, `"Times"`
+* `face` — emphasis: `"bold"`, `"italic"`, or `"bold.italic"`
+* `colour` — e.g. `colour = "steelblue2"`
+* `size` — e.g. `size = (3)`
+
+```{r,warning=F}
+#| label: ggplot-labels-11
+mynamestheme <- theme(
+  plot.title = element_text(family = "Helvetica", face = "bold", size = (15)),
+  legend.title = element_text(colour = "steelblue", face = "bold.italic", family = "Helvetica"),
+  legend.text = element_text(face = "italic", colour = "steelblue4", family = "Helvetica"),
+  axis.title = element_text(family = "Helvetica", size = (10), colour = "steelblue4"),
+  axis.text = element_text(family = "Courier", colour = "cornflowerblue", size = (10))
+)
+
+print(IrisPlot + mynamestheme + labs(title = "Petal and sepal \nlength of iris", y = "Petal length (cm)", x = "Sepal length (cm)"))
+```
+
+To remove a text element entirely, use `= element_blank()`:
+
+```{r,eval=F}
+#| label: ggplot-labels-12
+myblanktheme <- theme(
+  plot.title = element_text(family = "Helvetica", face = "bold", size = (15)),
+  legend.title = element_blank(),
+  legend.text = element_text(face = "italic", colour = "steelblue4", family = "Helvetica"),
+  axis.title = element_text(family = "Helvetica", size = (10), colour = "steelblue4"),
+  axis.text = element_blank()
+)
+
+print(IrisPlot + myblanktheme + labs(title = "Petal and sepal \nlength of iris", y = "Petal length (cm)", x = "Sepal length (cm)"))
+```
+
+
+## Colours and shapes
+
+This section covers changing the colours and symbol shapes in your ggplots.
+
+The following three plots will serve as base code throughout this section:
+
+```{r, echo=TRUE, message=F, warning=F}
+#| label: ggplot-colour-shapes-3
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length)) +
+  geom_point()
+
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
+
+IrisHist <- ggplot(iris, aes(Sepal.Length)) +
+  geom_histogram()
+```
+
+```{r,echo=F,message=F, warning=F}
+#| label: ggplot-colour-shapes-4
+library(gridExtra)
+grid.arrange(IrisPlot, IrisBox, IrisHist, ncol = 2)
+```
+
+
+### Changing the colour of the whole plot
+
+Add `fill = "colour"` or `colour = "colour"` inside the `geom_...` brackets. For most plots, `fill` colours the whole shape whereas `colour` fills the outline.
+
+```{r}
+#| label: ggplot-colour-shapes-5
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length)) +
+  geom_boxplot(fill = "blue", colour = "red")
+
+IrisHist <- ggplot(iris, aes(Sepal.Length)) +
+  geom_histogram(fill = "yellow", colour = "green")
+```
+
+```{r,echo=F,message=F, warning=F}
+#| label: ggplot-colour-shapes-6
+grid.arrange(IrisBox, IrisHist, ncol = 2)
+```
+
+For scatterplots, `colour = "colour"` specifies the fill colour for the point shape:
+
+```{r}
+#| label: ggplot-colour-shapes-7
+IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
+  geom_point(colour = "red")
+print(IrisPlot)
+```
+
+
+### Using colour to visualise additional variables
+
+**Additional categorical variables**
+
+To colour points on a scatter plot by a third categorical variable, add `colour = variable.name` within your `aes` brackets:
+
+```{r}
+#| label: ggplot-colour-shapes-9
+IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Species)) +
+  geom_point()
+print(IrisPlot)
+```
+
+To colour box plots or bar plots by a categorical variable, use `fill = variable.name` instead:
+
+```{r}
+#| label: ggplot-colour-shapes-11
+IrisBox <- ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
+print(IrisBox)
+```
+
+**Additional continuous variables**
+
+Use `+ scale_colour_gradient(low = "colour1", high = "colour2")` to map a continuous variable to colour:
+
+```{r}
+#| label: ggplot-colour-shapes-13
+IrisPlot.continuous <- ggplot(iris, aes(Petal.Length, Sepal.Length, colour = Sepal.Width)) +
+  geom_point()
+
+print(IrisPlot.continuous)
+```
+
+```{r}
+#| label: ggplot-colour-shapes-14
+print(IrisPlot.continuous + scale_colour_gradient(low = "black", high = "white"))
+
+print(IrisPlot.continuous + scale_colour_gradient(low = "darkolivegreen1", high = "darkolivegreen"))
+```
+
+
+### Choosing your own colours
+
+The basic format is to add `+ scale_colour_yourchoice()` for scatter plots or `+ scale_fill_yourchoice()` for box plots.
+
+**Individually select colours** with `+ scale_colour_manual()` or `+ scale_fill_manual()`:
+
+```{r}
+#| label: ggplot-colour-shapes-15
+print(IrisPlot + scale_colour_manual(values = c("Blue", "Red", "Green")))
+
+print(IrisBox + scale_fill_manual(values = c("Black", "Orange", "Brown")))
+```
+
+**Assign tones on a greyscale** with `+ scale_colour_grey()` or `+ scale_fill_grey()`:
+
+```{r}
+#| label: ggplot-colour-shapes-16
+print(IrisPlot + scale_colour_grey())
+
+print(IrisBox + scale_fill_grey())
+```
+
+**Assign colours from a pre-made palette** using [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html):
+
+```{r, echo= TRUE, warning=F}
+#| label: ggplot-colour-shapes-17
+library(RColorBrewer)
+```
+
+![](images/RColourBrewer_palette.png)
+
+```{r}
+#| label: ggplot-colour-shapes-18
+print(IrisPlot + scale_colour_brewer(palette = "Dark2"))
+
+print(IrisBox + scale_fill_brewer(palette = "Oranges"))
+```
+
+
+### Changing symbols in a scatterplot
+
+In a simple scatterplot, change the shape of the symbol by adding `shape = ?` to the `geom_point()` code:
+
+![](images/pch.png)
+
+For example, to use a filled triangle:
+
+```{r}
+#| label: ggplot-colour-shapes-19
+IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
+  geom_point(shape = 17)
+print(IrisPlot)
+```
+
+To use different symbols for each group, add `shape = variable.name` within your `aes` brackets:
+
+```{r}
+#| label: ggplot-colour-shapes-21
+IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species)) +
+  geom_point()
+print(IrisPlot.shape)
+```
+
+To set the symbols manually, use `scale_shape_manual()`:
+
+```{r}
+#| label: ggplot-colour-shapes-23
+print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)))
+```
+
+Combine with colour to further distinguish groups:
+
+```{r}
+#| label: ggplot-colour-shapes-24
+IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species, colour = Species)) +
+  geom_point()
+
+print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)) + scale_colour_manual(values = c("chartreuse4", "chocolate", "slateblue4")))
+```
+
+
+## Bar plots with error bars
+
+Bar plots with error bars are very frequently used in the environmental sciences to represent the variation in a continuous variable within one or more categorical variables.
+
+We first need to summarise the data to obtain means and a measure of variation for each species using `summarise` and `group_by` from [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html).
+
+```{r,warning=F,message=F}
+#| label: ggplot-barplot-3
+Iris_summary <- iris %>%
+  group_by(Species) %>%
+  summarise(
+    mean_PL = mean(Petal.Length),
+    sd_PL = sd(Petal.Length),
+    n_PL = n(),
+    SE_PL = sd(Petal.Length) / sqrt(n())
+  )
+```
+
+We can now make a bar plot of means vs species, with standard deviations as the error bar:
+
+```{r}
+#| label: ggplot-barplot-4
+IrisPlot <- ggplot(Iris_summary, aes(Species, mean_PL)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = mean_PL - sd_PL, ymax = mean_PL + sd_PL), width = 0.2)
+
+IrisPlot + labs(y = "Petal length (cm) +/- s.d.", x = "Species") + theme_classic()
+```
+
+`geom_col` uses the value of the y variable (`mean_PL`) as the height of the bars.
+
+In the `geom_errorbar` code, `ymin` and `ymax` are the top and bottom of the error bars (defined here as mean +/- sd), and `width` defines how wide the error bars are.
+
+
+## Customising your ggplot
+
+This section covers customising the overall appearance of a ggplot by changing the style or presence of grid lines, axis notches, panel colour and legend formatting.
+
+```{r, echo=FALSE, warning =F}
+#| label: ggplot-appearance-1
+IrisBox <-
+  ggplot(iris, aes(Species, Sepal.Length, fill = Species)) +
+  geom_boxplot()
+
+mytheme1 <-
+  theme(
+    legend.text = element_text(family = "Palatino", size = rel(1)),
+    axis.title.y = element_text(colour = "black", family = "Palatino"),
+    axis.title.x = element_blank(),
+    axis.text = element_text(family = "Palatino", colour = "black", size = rel(1.1)),
+    axis.line = element_line(size = 0.5, colour = "grey"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "white"),
+    legend.key = element_rect(fill = "white"),
+    legend.title = element_text(colour = "black", size = rel(1.1), face = "bold", family = "Palatino"),
+    plot.title = element_text(face = "bold", size = rel(1.7), family = "Palatino")
+  )
+
+print(
+  IrisBox + mytheme1 + labs(y = "Sepal length (cm)") +
+    scale_fill_manual(name = "Species", values = c("maroon3", "sienna1", "chartreuse4"))
+)
+```
+
+### Creating a customised theme
+
+One of the most effective ways to customise your plot is to create a theme and separate it from your basic ggplot code. By separating and saving your theme, it will be much easier to edit, alter and reuse.
+
+```{r, echo=TRUE}
+#| label: ggplot-appearance-4
+IrisPlot <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
+  geom_point()
+print(IrisPlot)
+```
+
+To change the design of an element, create a theme then print the plot with the theme applied:
+
+```{r}
+#| label: ggplot-appearance-6
+mytheme <-
+  theme(legend.title = element_text(colour = "steelblue", size = rel(2)))
+
+print(IrisPlot + mytheme)
+```
+
+Themes can have many different elements, separated within the `theme` code with a comma.
+
+
+### Formatting the plot and legend background
+
+* `panel.background = element_rect(your format)` — alters the panel behind the graph
+* `legend.key = element_rect(your format)` — alters the boxes next to each category name
+* `legend.background = element_rect(your format)` — alters the box around the legend
+
+For each of these, the formats you can alter are:
+
+* `fill = "colour"` — colour the panel behind the plot
+* `colour = "colour"` — alter the axis outline of the graph
+* `size = (number)` — alter the thickness of this outline
+
+```{r}
+#| label: ggplot-appearance-8
+mytheme <-
+  theme(
+    panel.background = element_rect(fill = "black", colour = "yellow", size = 4),
+    legend.key = element_rect(fill = "darkgrey", colour = "yellow"),
+    legend.background = (element_rect(colour = "yellow", fill = "blue"))
+  )
+
+print(IrisPlot + mytheme)
+```
+
+
+### Altering the size, colour or presence of grid lines
+
+* `panel.grid.major = element_line(your format)` — alters the major grid lines
+* `panel.grid.minor = element_line(your format)` — alters the minor grid lines
+
+```{r}
+#| label: ggplot-appearance-9
+mytheme <-
+  theme(
+    panel.grid.major = element_line(colour = "black", size = (1.5)),
+    panel.grid.minor = element_line(size = (0.2), colour = "grey")
+  )
+
+print(IrisPlot + mytheme)
+```
+
+To remove the grid lines, use `element_blank()`:
+
+```{r}
+#| label: ggplot-appearance-10
+mytheme <- theme(panel.grid.minor = element_blank(), panel.grid.major = element_blank())
+
+print(IrisPlot + mytheme)
+```
+
+
+### Altering the axis lines
+
+```{r}
+#| label: ggplot-appearance-11
+mytheme <-
+  theme(
+    axis.line = element_line(size = 1.5, colour = "red"),
+    panel.background = element_rect(fill = "white")
+  )
+
+print(IrisPlot + mytheme)
+```
+
+
+### Altering the axis ticks
+
+```{r}
+#| label: ggplot-appearance-12
+mytheme <- theme(axis.ticks = element_line(colour = "red", size = (2)))
+
+print(IrisPlot + mytheme)
+```
+
+
+### Removing any element of a theme
+
+Use `= element_blank()` to entirely remove an element of the formatting:
+
+```{r}
+#| label: ggplot-appearance-13
+mytheme <-
+  theme(
+    axis.ticks = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.background = element_blank()
+  )
+
+print(IrisPlot + mytheme)
+```
+
+
+### Example of a fully customised ggplot
+
+```{r, warning =F}
+#| label: ggplot-appearance-14
+IrisPlot <-
+  ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species, shape = Species)) +
+  geom_point()
+
+mytheme3 <-
+  theme(
+    legend.text = element_text(face = "italic", colour = "steelblue4", family = "Helvetica", size = rel(1)),
+    axis.title = element_text(colour = "steelblue4", family = "Helvetica", size = rel(1.5)),
+    axis.text = element_text(family = "Helvetica", colour = "steelblue1", size = rel(1.5)),
+    axis.line = element_line(size = 1, colour = "black"),
+    axis.ticks = element_line(colour = "grey", size = rel(1.4)),
+    panel.grid.major = element_line(colour = "grey", size = rel(0.5)),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(fill = "whitesmoke"),
+    legend.key = element_rect(fill = "whitesmoke"),
+    legend.title = element_text(colour = "steelblue", size = rel(1.5), family = "Helvetica"),
+    plot.title = element_text(colour = "steelblue4", face = "bold", size = rel(1.7), family = "Helvetica")
+  )
+
+print(
+  IrisPlot + mytheme3 + ggtitle("Iris species petal and sepal length")
+    + labs(y = "Petal length (cm)", x = "Sepal length (cm)", colour = "Species")
+    + scale_colour_manual(values = c("slateblue", "slateblue2", "slateblue4"))
+)
+```
+
+
+## Further help
+
+Help on all the ggplot functions can be found at [The master ggplot help site](https://ggplot2.tidyverse.org).
+
+A useful cheat sheet on commonly used functions can be downloaded [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
+
+<p style="margin-left: .5in; text-indent: -.5in;">Chang, W (2012) *R Graphics cookbook.* O'Reilly Media. - a guide to ggplot with quite a bit of help online [here](http://www.cookbook-r.com/Graphs/)</p>
+
+
+**Authors**: Stephanie Brodie, Alistair Poore, Fiona Robinson (small edits by Will Cornwell)
+
+**Year:** 2016
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`

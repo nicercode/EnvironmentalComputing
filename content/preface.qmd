@@ -1,0 +1,259 @@
+---
+title: "About This Site"
+---
+
+```{r}
+#| label: preface-1
+#| echo: false
+source("../_common.R")
+```
+
+
+This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
+
+* how to organise your data during data entry
+* how to manipulate and manage your data so there is transparency and version control
+* instructions for running statistical analyses with sample code in R or other relevant software (first see Getting started with R)
+* the rationale for the technique in plain language (why is it used)
+* how to interpret the results and assumptions that you need to check
+* visualisation of your results and ways to effectively communicate the results in scientific reports or publications
+* where to go for further help
+
+This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
+
+Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](http://www.bees.unsw.edu.au/) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford. Development of the second generation of this site saw migration to Gihub and Hugo, led by Dr Fonti Kar and A/Prof Daniel Falster and with the support of the [Evolution and Ecology Research Centre](http://www.eerc.unsw.edu.au/). In 2026 we undertook a major upgrade to Quarto and a new structure, led by A/Prof Daniel Falster, Prof Will Cornwell and Prof Alistair Poore.  
+
+## Acknowledgments
+
+```{r}
+#| label: preface-2
+#| eval: false
+#| echo: false
+library(tidyverse)
+contribs_all_json <- gh::gh("/repos/:owner/:repo/contributors",
+  owner = "nicercode",
+  repo = "EnvironmentalComputing",
+  .limit = Inf
+)
+
+contribs_all <- tibble(
+  login = contribs_all_json |> map_chr("login"),
+  n = contribs_all_json |> map_int("contributions")
+)
+
+contribs_old <- read_csv("contributors.csv", col_types = list())
+contribs_new <- contribs_all |> anti_join(contribs_old, by = "login")
+
+# Get info for new contributors
+needed_json <- map(
+  contribs_new$login,
+  ~ gh::gh("/users/:username", username = .x),
+  .progress = TRUE
+)
+info_new <- tibble(
+  login = contribs_new$login,
+  name = map_chr(needed_json, "name", .default = NA),
+  blog = map_chr(needed_json, "blog", .default = NA)
+)
+info_old <- contribs_old |> select(login, name, blog)
+info_all <- bind_rows(info_old, info_new)
+
+contribs_all <- contribs_all |>
+  left_join(info_all, by = "login") |>
+  mutate(login_lowercase = str_to_lower(login)) |>
+  arrange(login_lowercase) |>
+  select(-login_lowercase)
+write_csv(contribs_all, "contributors.csv")
+```
+
+```{r}
+#| label: preface-3
+#| results: asis
+#| echo: false
+#| message: false
+library(dplyr)
+contributors <- readr::read_csv("../contributors.csv")
+contributors <- contributors |>
+  filter(!login %in% c("nicercode", "dfalster", "wcornwell", "fontikar", "alistairpoore")) |>
+  mutate(
+    login = paste0("\\@", login),
+    desc = ifelse(is.na(name), login, paste0(name, " (", login, ")"))
+  )
+
+cat("This site has been improved by many people who contributed new content and fixes. Big thanks to the ", nrow(contributors), " contributors (in alphabetical order by username): ", sep = "")
+cat(paste0(contributors$desc, collapse = ", "))
+cat(".\n")
+```
+
+Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for the code which generated the list of contribturors shown above.
+
+## Colophon
+
+The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code.
+
+```{r}
+#| label: preface-4
+#| eval: false
+#| echo: false
+#| results: asis
+pkgs <- sessioninfo::package_info(
+  tidyverse:::tidyverse_packages(),
+  dependencies = FALSE
+)
+df <- tibble(
+  package = pkgs$package,
+  version = pkgs$ondiskversion,
+  source = gsub("@", "\\\\@", pkgs$source)
+)
+knitr::kable(df, format = "markdown")
+```
+
+```{r}
+#| label: preface-5
+#| include: false
+cli:::ruler()
+```
+
+
+
+## Site migration history
+
+### 2026 migration from Hugo to Quarto
+
+In 2026 we migrated the site from Hugo to Quarto and substantially updated the website structure.
+
+Key structural changes:
+
+* Getting Started with R → split between `content/basics/` (installing R, projects) and `content/data-literacy/` (importing data) and `content/misc/` (data entry, data types, notebooks)
+* Data Manipulation → `content/data-literacy/` with renamed pages (e.g. "subsetting" → "filter-rows", "combining datasets" → "joining-tables")
+* Coding Skills → `content/coding-skills/`
+* Graphics → split between `content/data-visualisation/` (ggplot basics, PCA) and `content/misc/` (remaining ggplot variants, spatial, multivariate vis)
+* Statistics → `content/statistical-methods/` for major topics, `content/misc/` for sub-pages; several multi-part series (GLMs, mixed models, meta-analysis) consolidated into single pages
+
+Page migration table:
+
+| Old Hugo path | New Quarto path |
+|---|---|
+| `/getting-started-with-r/` | `content/basics/basics.html` |
+| `/getting-started-with-r/installing-r-r-studio/` | `content/basics/r.html` |
+| `/getting-started-with-r/basic-project-management/` | `content/basics/projects.html` |
+| `/getting-started-with-r/importing-data/` | `content/data-literacy/reading/` |
+| `/getting-started-with-r/data-entry/` | `content/misc/data-entry.html` |
+| `/getting-started-with-r/data-types-and-structure/` | `content/misc/data-types-structure.html` |
+| `/getting-started-with-r/using-rstudio-notebooks/` | `content/misc/rstudio-notebooks.html` |
+| `/data-manipulation/subsetting-data/` | `content/data-literacy/filter-rows/` |
+| `/data-manipulation/combining-datasets/` | `content/data-literacy/joining-tables/` |
+| `/data-manipulation/making-new-variables/` | `content/data-literacy/mutate/` |
+| `/data-manipulation/reshaping-data/` | `content/data-literacy/pivotting/` |
+| `/data-manipulation/summarising-data/` | `content/data-literacy/summarising-tables/` |
+| `/coding-skills/writing-simple-functions/` | `content/coding-skills/functions.html` |
+| `/coding-skills/version-control/` | `content/coding-skills/version-control.html` |
+| `/graphics/ggplot/plotting-with-ggplot-the-basics/` | `content/data-visualisation/ggplot.html` |
+| `/graphics/ggplot/plotting-with-ggplot-altering-the-overall-appearance/` | `content/misc/ggplot-appearance.html` |
+| `/graphics/ggplot/plotting-with-ggplot-bar-plots-with-error-bars/` | `content/misc/ggplot-barplot.html` |
+| `/graphics/ggplot/plotting-with-ggplot-colours-and-symbols/` | `content/misc/ggplot-colour-shapes.html` |
+| `/graphics/ggplot/plotting-with-ggplot-adding-titles-and-axis-names/` | `content/misc/ggplot-labels.html` |
+| `/graphics/basic-plotting/one-continuous-variable/` | `content/misc/basic-plotting-one-continuous.html` |
+| `/graphics/basic-plotting/two-continuous-variables/` | `content/misc/basic-plotting-two-continuous.html` |
+| `/graphics/basic-plotting/single-continuous-vs-categorical-variables/` | `content/misc/basic-plotting-one-continuous-one-factor.html` |
+| `/graphics/multivariate-vis/principal-components-analysis/` | `content/data-visualisation/pca.html` |
+| `/graphics/multivariate-vis/cluster-analysis/` | `content/misc/cluster-analysis.html` |
+| `/graphics/multivariate-vis/multidimensional-scaling/` | `content/misc/mds.html` |
+| `/graphics/multivariate-vis/heat-maps/` | `content/misc/heatmaps.html` |
+| `/graphics/spatial-vis/making-simple-maps/` | `content/misc/simple-maps.html` |
+| `/graphics/spatial-vis/making-interactive-maps-in-r-with-leaflet/` | `content/misc/interactive-maps.html` |
+| `/graphics/spatial-vis/basic-raster/` | `content/misc/basic-raster.html` |
+| `/statistics/t-tests/one-sample-t-test/` | `content/statistical-methods/t-tests.html` |
+| `/statistics/t-tests/two-sample-t-test/` | `content/statistical-methods/t-tests.html` |
+| `/statistics/t-tests/paired-t-test/` | `content/statistical-methods/t-tests.html` |
+| `/statistics/categorical/contingency-tables/` | `content/misc/contingency-tables.html` |
+| `/statistics/categorical/fishers-exact/` | `content/misc/fishers-exact.html` |
+| `/statistics/categorical/goodness-of-fit/` | `content/misc/goodness-of-fit.html` |
+| `/statistics/linear-models/linear-regression/` | `content/statistical-methods/linear-models.html` |
+| `/statistics/linear-models/linear-regression/interpret-lm-coeffs/` | `content/misc/interpret-lm-coeffs.html` |
+| `/statistics/linear-models/anova/anova-single/` | `content/statistical-methods/anova.html` |
+| `/statistics/linear-models/anova/anova-factorial/` | `content/statistical-methods/anova.html` |
+| `/statistics/linear-models/anova/anova-nested/` | `content/statistical-methods/anova.html` |
+| `/statistics/linear-models/interactions/` | `content/statistical-methods/understanding-interactions.html` |
+| `/statistics/glms/` (glm-1 and glm-2 combined) | `content/statistical-methods/generalised-linear-models.html` |
+| `/statistics/glms/interpret-glm-coeffs/` | `content/misc/interpret-glm-coeffs.html` |
+| `/statistics/mixed-models/` (mixed-model-1, -2, -3 combined) | `content/statistical-methods/mixed-effects-models.html` |
+| `/statistics/gams/` | `content/statistical-methods/generalised-additive-models.html` |
+| `/statistics/time-series/` | `content/statistical-methods/time-series-analysis.html` |
+| `/statistics/meta-analysis/` (meta-analysis-1, -2, -3 combined) | `content/statistical-methods/meta-analysis.html` |
+| `/statistics/mvabund/` | `content/statistical-methods/MVabund.html` |
+| `/statistics/power-analysis/` | `content/misc/power-analysis.html` |
+
+### 2022 migration from Wordpress to Hugo
+
+In Feb 2022, the site was migrated from Wordpress to Hugo. These old Wordpress URLs should be redirected to their current pages using aliases, as they have been embedded in various course materials and distributed over the web.
+
+- [/analysis-variance-factorial/](/analysis-variance-factorial/)
+- [/analysis-variance-single-factor/](/analysis-variance-single-factor/)
+- [/asking-code-questions/](/asking-code-questions/)
+- [/basic-plotting-in-r/](/basic-plotting-in-r/)
+- [/basic-project-management/](/basic-project-management/)
+- [/categorical-data-analyses/](/categorical-data-analyses/)
+- [/cluster-analysis/](/cluster-analysis/)
+- [/coding-skills/](/coding-skills/)
+- [/combining-data-sets/](/combining-data-sets/)
+- [/contingency-tables/](/contingency-tables/)
+- [/data-entry/](/data-entry/)
+- [/data-manipulation/](/data-manipulation/)
+- [/data-types-and-structure/](/data-types-and-structure/)
+- [/forecasting-time-series/](/forecasting-time-series/)
+- [/generalised-linear-models-1/](/generalised-linear-models-1/)
+- [/generalised-linear-models-2/](/generalised-linear-models-2/)
+- [/generalised-linear-models/](/generalised-linear-models/)
+- [/getting-started-with-r/](/getting-started-with-r/)
+- [/good-practice-for-writing-scripts/](/good-practice-for-writing-scripts/)
+- [/goodness-of-fit-tests/](/goodness-of-fit-tests/)
+- [/graphics/](/graphics/)
+- [/heat-maps/](/heat-maps/)
+- [/how-to-interpret-linear-models/](/how-to-interpret-linear-models/)
+- [/importing-data/](/importing-data/)
+- [/independent-samples-t-test/](/independent-samples-t-test/)
+- [/installing-r-r-studio/](/installing-r-r-studio/)
+- [/interpreting-coefficients-in-glms/](/interpreting-coefficients-in-glms/)
+- [/intro-to-gams/](/intro-to-gams/)
+- [/introduction-to-mvabund/](/introduction-to-mvabund/)
+- [/linear-models/](/linear-models/)
+- [/linear-regression/](/linear-regression/)
+- [/making-maps-of-your-study-sites/](/making-maps-of-your-study-sites/)
+- [/making-new-variables/](/making-new-variables/)
+- [/making-simple-maps/](/making-simple-maps/)
+- [/meta-analysis-1/](/meta-analysis-1/)
+- [/meta-analysis-2/](/meta-analysis-2/)
+- [/meta-analysis-3/](/meta-analysis-3/)
+- [/meta-analysis/](/meta-analysis/)
+- [/mixed-models-1/](/mixed-models-1/)
+- [/mixed-models-2/](/mixed-models-2/)
+- [/mixed-models-3/](/mixed-models-3/)
+- [/mixed-models/](/mixed-models/)
+- [/multidimensional-scaling/](/multidimensional-scaling/)
+- [/one-continuous-variable/](/one-continuous-variable/)
+- [/one-sample-t-test/](/one-sample-t-test/)
+- [/paired-t-tests/](/paired-t-tests/)
+- [/plotting-with-ggplot-adding-titles-and-axis-names/](/plotting-with-ggplot-adding-titles-and-axis-names/)
+- [/plotting-with-ggplot-altering-the-overall-appearance/](/plotting-with-ggplot-altering-the-overall-appearance/)
+- [/plotting-with-ggplot-bar-plots-with-error-bars/](/plotting-with-ggplot-bar-plots-with-error-bars/)
+- [/plotting-with-ggplot-colours-and-symbols/](/plotting-with-ggplot-colours-and-symbols/)
+- [/plotting-with-ggplot-the-basics/](/plotting-with-ggplot-the-basics/)
+- [/plotting-with-ggplot/](/plotting-with-ggplot/)
+- [/power-analysis/](/power-analysis/)
+- [/principal-components-analysis/](/principal-components-analysis/)
+- [/reshaping-data/](/reshaping-data/)
+- [/single-continuous-vs-categorical-variables/](/single-continuous-vs-categorical-variables/)
+- [/statistics/](/statistics/)
+- [/subsetting-data/](/subsetting-data/)
+- [/summarising-data/](/summarising-data/)
+- [/t-tests/](/t-tests/)
+- [/two-continuous-variables/](/two-continuous-variables/)
+- [/understanding-interactions/](/understanding-interactions/)
+- [/using-loops/](/using-loops/)
+- [/using-rstudio-notebooks/](/using-rstudio-notebooks/)
+- [/version-control/](/version-control/)
+- [/visualising-multivariate-data/](/visualising-multivariate-data/)
+- [/visualising-spatial-data/](/visualising-spatial-data/)
+- [/visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/](/visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/)
+- [/writing-simple-functions/](/writing-simple-functions/)

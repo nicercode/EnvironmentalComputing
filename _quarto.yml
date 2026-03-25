@@ -2,6 +2,12 @@ project:
   type: book
   output-dir: _book
 
+execute:
+  freeze: auto
+  warning: false
+  message: false
+  error: true
+
 book:
   title: "Environmental Computing"
   reader-mode: true
@@ -19,103 +25,120 @@ book:
   repo-actions: [edit, issue]
   chapters:
     - index.qmd
-    - content2/preface.qmd
-    - content2/intro.qmd
-
-    - part: content2/big-picture/big-picture.qmd
+    - content/preface.qmd
+    - part: content/big-picture/big-picture.qmd
       chapters:
-        - content2/big-picture/skills-and-the-scientific-method.qmd
-        - content2/big-picture/what-is-data-science.qmd
-        - content2/big-picture/why-write-code.qmd
+        - content/big-picture/skills-and-the-scientific-method.qmd
+        - content/big-picture/what-is-data-science.qmd
+        - content/big-picture/why-write-code.qmd
 
-    - part: content2/basics/basics.qmd
+    - part: content/basics/basics.qmd
       chapters:
-        - content2/basics/r.qmd
-        - content2/basics/python.qmd
-        - content2/basics/projects.qmd
-        - content2/basics/data
+        - content/basics/r.qmd
+        - content/basics/python.qmd
+        - content/basics/projects.qmd
+        - content/basics/data
 
-    - part: content2/data-literacy/data-literacy.qmd
+    - part: content/data-literacy/data-literacy.qmd
       chapters:
-        - content2/data-literacy/tidy-data-principles.qmd
-        - content2/data-literacy/data-principles.qmd
-        - content2/data-literacy/access.qmd
-        - content2/data-literacy/metadata.qmd
-        - content2/data-literacy/data-types.qmd
-        - content2/data-literacy/tables.qmd
-        - content2/data-literacy/data-frames.qmd
-        - content2/data-literacy/csv.qmd
-        - content2/data-literacy/excel.qmd
-        - content2/data-literacy/time-series.qmd
-        - content2/data-literacy/relational.qmd
-        - content2/data-literacy/sequence.qmd
-        - content2/data-literacy/databases.qmd
-        - content2/data-literacy/photos.qmd
-        - content2/data-literacy/audio.qmd
-        - content2/data-literacy/remotesensing.qmd
-        - content2/data-literacy/making-analysis-ready-data.qmd
-        - content2/data-literacy/reading
-        - content2/data-literacy/arrange
-        - content2/data-literacy/filter-rows
-        - content2/data-literacy/select-columns
-        - content2/data-literacy/mutate
-        - content2/data-literacy/joining-tables
-        - content2/data-literacy/group_by
-        - content2/data-literacy/summarising-tables
-        - content2/data-literacy/pivotting
+        - content/data-literacy/tidy-data-principles.qmd
+        - content/data-literacy/data-principles.qmd
+        - content/data-literacy/access.qmd
+        - content/data-literacy/metadata.qmd
+        - content/data-literacy/data-types.qmd
+        - content/data-literacy/tables.qmd
+        - content/data-literacy/data-frames.qmd
+        - content/data-literacy/csv.qmd
+        - content/data-literacy/excel.qmd
+        - content/data-literacy/time-series.qmd
+        - content/data-literacy/relational.qmd
+        - content/data-literacy/sequence.qmd
+        - content/data-literacy/databases.qmd
+        - content/data-literacy/photos.qmd
+        - content/data-literacy/audio.qmd
+        - content/data-literacy/remotesensing.qmd
+        - content/data-literacy/making-analysis-ready-data.qmd
+        - content/data-literacy/reading
+        - content/data-literacy/arrange
+        - content/data-literacy/filter-rows
+        - content/data-literacy/select-columns
+        - content/data-literacy/mutate
+        - content/data-literacy/joining-tables
+        - content/data-literacy/group_by
+        - content/data-literacy/summarising-tables
+        - content/data-literacy/pivotting
 
-    - part: content2/data-visualisation/data-visualisation.qmd
+    - part: content/data-visualisation/data-visualisation.qmd
       chapters:
-        - content2/data-visualisation/plotting-frameworks.qmd
-        - content2/data-visualisation/choosing-the-right-plot.qmd
-        - content2/data-visualisation/ggplot.qmd
-        - content2/data-visualisation/mutli-panel-figures.qmd
-        - content2/data-visualisation/spatial-maps.qmd
-        - content2/data-visualisation/pca.qmd
+        - content/data-visualisation/plotting-frameworks.qmd
+        - content/data-visualisation/choosing-the-right-plot.qmd
+        - content/data-visualisation/ggplot.qmd
+        - content/data-visualisation/mutli-panel-figures.qmd
+        - content/data-visualisation/rasters.qmd
+        - content/data-visualisation/simple-maps.qmd
+        - content/data-visualisation/pca.qmd
+        - content/data-visualisation/heatmaps.qmd
 
-    - part: content2/essential-maths/essential-maths.qmd
+    - part: content/essential-maths/essential-maths.qmd
       chapters:
-        - content2/essential-maths/log-exp.qmd
-        - content2/essential-maths/probability-of-events.qmd
-        - content2/essential-maths/probability-distributions.qmd
-        - content2/essential-maths/rates-of-change.qmd
-        - content2/essential-maths/cyclic-variables.qmd
-        - content2/essential-maths/derivatives.qmd
-        - content2/essential-maths/integrals.qmd
-        - content2/essential-maths/optimisation.qmd
+        - content/essential-maths/log-exp.qmd
+        - content/essential-maths/probability-of-events.qmd
+        - content/essential-maths/probability-distributions.qmd
+        - content/essential-maths/rates-of-change.qmd
+        - content/essential-maths/cyclic-variables.qmd
+        - content/essential-maths/derivatives.qmd
+        - content/essential-maths/integrals.qmd
+        - content/essential-maths/optimisation.qmd
 
-    - part: content2/statistical-methods/statistical-methods.qmd
+    - part: content/statistical-methods/statistical-methods.qmd
       chapters:
-        - content2/statistical-methods/confidence-intervals.qmd
-        - content2/statistical-methods/linear-models.qmd
-        - content2/statistical-methods/simple-linear-regression.qmd
-        - content2/statistical-methods/multiple-linear-regression.qmd
-        - content2/statistical-methods/generalised-linear-models.qmd
-        - content2/statistical-methods/mixed-effects-models.qmd
-        - content2/statistical-methods/generalised-additive-models.qmd
-        - content2/statistical-methods/time-series-analysis.qmd
-        - content2/statistical-methods/understanding-interactions.qmd
-        - content2/statistical-methods/multi-variate-models.qmd
-        - content2/statistical-methods/MVabund.qmd
-        - content2/statistical-methods/machine-learning.qmd
-        - content2/statistical-methods/supervised-learning.qmd
-        - content2/statistical-methods/random-forests.qmd
-        - content2/statistical-methods/support-vector-machines.qmd
-        - content2/statistical-methods/neural-networks.qmd
-        - content2/statistical-methods/unsupervised-learning.qmd
-        - content2/statistical-methods/meta-analysis.qmd
-        - content2/statistical-methods/bayesian-inference.qmd
-        - content2/statistical-methods/Markov-Chain-Monte-Carlo.qmd
+        - content/statistical-methods/confidence-intervals.qmd
+        - content/statistical-methods/linear-models.qmd
+        - content/statistical-methods/linear-regression.qmd
+        - content/statistical-methods/interpret-lm-coeffs.qmd
+        - content/statistical-methods/t-tests.qmd
+        - content/statistical-methods/anova.qmd
+        - content/statistical-methods/understanding-interactions.qmd
+        - content/statistical-methods/generalised-linear-models.qmd
+        - content/statistical-methods/interpret-glm-coeffs.qmd
+        - content/statistical-methods/mixed-effects-models.qmd
+        - content/statistical-methods/generalised-additive-models.qmd
+        - content/statistical-methods/time-series-analysis.qmd
+        - content/statistical-methods/multi-variate-models.qmd
+        - content/statistical-methods/MVabund.qmd
+        - content/statistical-methods/cluster-analysis.qmd
+        - content/statistical-methods/mds.qmd
+        - content/statistical-methods/machine-learning.qmd
+        - content/statistical-methods/supervised-learning.qmd
+        - content/statistical-methods/random-forests.qmd
+        - content/statistical-methods/support-vector-machines.qmd
+        - content/statistical-methods/neural-networks.qmd
+        - content/statistical-methods/unsupervised-learning.qmd
+        - content/statistical-methods/meta-analysis.qmd
+        - content/statistical-methods/bayesian-inference.qmd
+        - content/statistical-methods/Markov-Chain-Monte-Carlo.qmd
 
-    - part: content2/dynamic-systems/dynamic-systems.qmd
+    - part: content/dynamic-systems/dynamic-systems.qmd
       chapters: []
 
-    - part: content2/coding-skills/coding-skills.qmd
+    - part: content/coding-skills/coding-skills.qmd
       chapters:
-        - content2/coding-skills/pipes.qmd
-        - content2/coding-skills/functions.qmd
-        - content2/coding-skills/version-control.qmd
+        - content/coding-skills/pipes.qmd
+        - content/coding-skills/functions.qmd
+        - content/coding-skills/version-control.qmd
 
+    - part: content/misc/misc.qmd
+      chapters:
+        - content/misc/data-entry.qmd
+        - content/misc/data-types-structure.qmd
+        - content/misc/rstudio-notebooks.qmd
+        - content/misc/interactive-maps.qmd
+        - content/misc/contingency-tables.qmd
+        - content/misc/fishers-exact.qmd
+        - content/misc/goodness-of-fit.qmd
+
+    - content/contributing.qmd
+    
 format:
   html:
     theme:

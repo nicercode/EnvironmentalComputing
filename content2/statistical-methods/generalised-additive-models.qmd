@@ -1,5 +1,0 @@
----
-title: "Generalised Additive Models"
----
-
-Placeholder content.

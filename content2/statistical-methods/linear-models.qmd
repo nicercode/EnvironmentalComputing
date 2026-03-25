@@ -1,5 +1,0 @@
----
-title: "Linear Models"
----
-
-Placeholder content.

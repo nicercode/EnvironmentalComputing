@@ -1,0 +1,282 @@
+---
+title: "Generalised Linear Models"
+---
+
+## Introduction and Binary Data
+
+[Linear models](/statistics/linear-models/) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
+
+![](images/GLM1_binary_image.jpg)
+
+For example, if had surveyed a beach and wanted to analyse how the presence of a crab varied with time and distance from the water line, the response variable is discrete: the presence or absence of a crab in a given replicate. The first few rows of the data set would look like this:
+
+```{r}
+#| label: generalised-linear-models-1
+#| echo: false
+CrabDat <- read.csv("data/Crabs.csv", header = T)
+head(CrabDat)
+```
+
+
+**Properties of GLM's.** Discrete response data, like counts and presence/absence data, generally exhibit a mean-variance relationship. For example; for counts that are on average 5, we would expect most samples to be between about 1 and 9, but for counts that are on average 500, most of the observations will tend to be between 450 and 550, giving us a much larger variance when the mean is large.
+
+Linear models assume constant variance. You might have learned to transform count data and then fit a linear model. This can reduce the mean variance relationship, but it won't get rid of it completely, especially if you have a lot of zeros in your data. To analyse discrete data accurately we need to use GLM's.
+
+A GLM makes some important assumptions (we'll check these later for our examples)
+
+1. The observed $y$ are independent, conditional on some predictors $x$
+2. The response $y$ come from a known distribution with a known mean-variance relationship
+3. There is a straight line relationship between a known function $g$ of the mean of $y$ and the predictors $x$
+
+$$ g(\mu_y) = \alpha + \beta_1 x_1 + \beta_2 x_2 + \cdots $$
+
+Note: link functions `g()` are an important part of fitting GLM's, but beyond the scope of this introductory tutorial. All you need to know is that the default link for binomial data is the `logit()` and for count data it's `log()`. For more information see `?family`.
+
+
+### Running the analysis
+
+
+**Binomial data**
+
+First, we will show you how to fit a model to binomial data, i.e., presence/absence data or data as 0/1. Fitting GLM's uses very similar syntax to fitting linear models. We use the `glm` function instead of `lm`. We also need to add a `family` argument to specify whether your data are counts, binomial etc.
+
+For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](/datasets/Crabs.csv) and import into R.
+
+```{r}
+#| label: generalised-linear-models-2
+Crab_PA <- read.csv("data/Crabs.csv", header = T)
+```
+
+To test whether the probability of crab presence changes with time (a factor) and distance (a continuous variable), we fit the following model. The response variable (presence/absence of crabs) is binomial, so we use `family=binomial`.
+
+```{r}
+#| label: generalised-linear-models-3
+ft.crab <- glm(CrabPres ~ Time * Dist, family = binomial, data = Crab_PA)
+```
+
+
+### Assumptions to check
+
+Before we look at the results of our analysis it's important to check that our data met the assumptions of the model we used. Let's look at all the assumptions in order.
+
+**Assumption 1 : The observed $y$ are independent, conditional on some predictors $x$**
+
+We can't check this assumption from the results, but you can ensure it's true by taking a random sample for your experimental design. If your experimental design involves any pseudo-replication, this assumption will be violated. For certain types of pseudo-replication you can use mixed models instead.
+
+**Assumption 2 : The response $y$ come from a known distribution with a known mean-variance relationship**
+
+The mean variance relationship is the main reason we use GLM's instead of linear models. We need to check that the distribution models the mean-variance relationship of our data well. For binomial data this is not a big concern, but later on when we analyse count data it'll be very important. To check this assumption we look at a plot of residuals, and try to see if there is a fan shape.
+
+```{r}
+#| label: generalised-linear-models-4
+#| out-width: "500px"
+plot(ft.crab, which = 1)
+```
+
+Unfortunately the `glm` plot function gives us a very odd looking plot due to the discreteness of the data (i.e., many points on top of each other).
+
+For a more useful plot we can instead fit the model using the `manyglm` function in the [mvabund](https://cran.r-project.org/web/packages/mvabund/index.html) package. We need a slight change to the family argument, for `manyglm` we write `family = "binomial"`.
+
+```{r}
+#| label: generalised-linear-models-5
+#| echo: false
+set.seed(1)
+```
+
+```{r}
+#| label: generalised-linear-models-6
+#| out-width: "500px"
+#| warning: false
+library(mvabund)
+ft.crab.many <- manyglm(CrabPres ~ Time * Dist, family = "binomial", data = Crab_PA)
+plot(ft.crab.many)
+```
+
+Now we can look for a fan shape in the residual plot. For these data, there doesn't seem to be a fan shape, so we can conclude the mean-variance assumption the model made was reasonable for our data. The residuals in this plot have a random component. If you see a pattern it's best to repeat the plot a few times to see if the pattern is real.
+
+**Assumption 3 : There is a straight line relationship between a known function $g$ of the mean of $y$ and the predictors $x$**
+
+To check this assumption, we check the residual plot above for non-linearity, or a U-shape. In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the `poly` function.
+
+
+### Interpreting the results
+
+If all the assumption checks are okay, we can have a look at the results the model gave us. The two main functions for inference are the same as for linear models: `summary` and `anova`.
+
+The p-values these give you if you use `glm` for fitting the model work well in large samples, although they are still approximate. For binomial models in particular the p-values from the `summary` function can be funny, and we prefer to use the `anova` function to see if predictors are significant. The `summary()` function is still useful to look at the model equation.
+
+```{r}
+#| label: generalised-linear-models-7
+anova(ft.crab, test = "Chisq")
+```
+
+The p-value for Time is small (P<0.01), so we conclude there is an effect of time on the presence of crabs, but no effect of distance or an interaction between time and distance. This sample is reasonably large, so these p-values should be a good approximation. For a small sample it is often better to use resampling to calculate p-values. When you use `manyglm` the `summary` and `anova` functions use resampling by default.
+
+```{r}
+#| label: generalised-linear-models-8
+anova(ft.crab.many)
+```
+
+In this case the results are quite similar, but in small samples it can often make a big difference.
+
+You can also use `summary` with either the `glm` or `manyglm` function. This is interpreted in a similar manner as for linear regression, but we need to include the link function, `g`.
+
+```{r}
+#| label: generalised-linear-models-9
+summary(ft.crab)
+```
+
+If $p$ is the probability of crab presence, this output tells us
+
+$$ logit(p) = -3.01 + 0.26 \times \text{Time} -0.03 \times \text{Dist} +0.01 \times \text{Time} \times \text{Dist}$$
+
+
+### Communicating the results
+
+Results of GLM's are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g., "There is strong evidence that the presence of crabs varies with time (p = 0.01). For multiple predictors it's best to display the results in a table. You should also indicate which distribution was used (e.g. Binomial for presence/absence, Poisson or negative-binomial for counts) and if resampling was used for inference.
+
+
+### Further help
+
+You can type `?glm` and `?manyglm` into R for help with these functions.
+
+<p style="margin-left: .5in; text-indent: -.5in;">Faraway, JJ. 2005. *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC press.</p>
+
+<p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 2007. *Analysing ecological data*. Springer Science & Business Media.</p>
+
+
+**Author**: Gordana Popovic
+
+**Year:** 2016
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`
+
+---
+
+## Count Data
+
+This is a continuation of the introduction to GLMs which introduced GLMs and gave instructions for binary data. Read that section first to understand when GLMs are used. On this page, we will cover the use of GLM's for count data and briefly introduce how they can be used for other data types you may have.
+
+
+### Running the analysis
+
+![](images/GLM2_counts_image.jpg)
+
+For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.
+
+Download the sample data set, [Revegetation.csv](/datasets/Revegetation.csv), and import into R to see how the data are arranged:
+
+```{r}
+#| label: generalised-linear-models-10
+Reveg <- read.csv("data/Revegetation.csv", header = T)
+```
+
+If you view the frequency histogram of the slug counts, you will see that it is very skewed, with many small values and few large counts (the variable name, Soleolifera, is the order name of terrestrial slugs).
+
+```{r}
+#| label: generalised-linear-models-11
+#| out-width: "500px"
+hist(Reveg$Soleolifera)
+```
+
+The default distribution for count data is the Poisson. The Poisson distribution assumes the variance equals the mean. This is quite a restrictive assumption which ecological count data often violate. We may need to use the more flexible negative-binomial distribution instead.
+
+We can use a GLM to test whether the counts of slugs (from the order Soleolifera) differ between control and regenerated sites. To fit the GLM, we will use the `manyglm` function instead of `glm` so we have access to more useful residual plots.
+
+To fit the GLM, load the mvabund package then fit the following model:
+
+```{r}
+#| label: generalised-linear-models-12
+library(mvabund)
+ft.sol.pois <- manyglm(Soleolifera ~ Treatment, family = "poisson", data = Reveg)
+```
+
+where Soleolifera is the response variable, and Treatment is the predictor variable (with two levels, control and revegetated).
+
+
+### Assumptions to check
+
+Before we look at the results, we need to look at the residual plot to check the assumptions.
+
+```{r}
+#| label: generalised-linear-models-13
+#| out-width: "500px"
+plot(ft.sol.pois)
+```
+
+It's hard to say whether there is any non-linearity in this plot, this is because the predictor is binary (treatment vs revegetated). Looking at the variance assumption, it does appear as though there is a fan shape. The residuals are more spread out on the right than the left - we call this overdispersion.
+
+This tells us the variance assumption of the Poisson may be too restrictive and we should try a different distribution. We can instead fit a negative-binomial distribution in `manyglm` by changing the family argument to `family="negative binomial"`.
+
+```{r}
+#| label: generalised-linear-models-14
+ft.sol.nb <- manyglm(Soleolifera ~ Treatment, family = "negative binomial", data = Reveg)
+```
+
+Look again at the residual plot:
+
+```{r}
+#| label: generalised-linear-models-15
+#| out-width: "500px"
+plot(ft.sol.nb)
+```
+
+This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.
+
+
+### Interpreting the results
+
+If all the assumption checks are okay, we can have a look at the results the model gave us with the same two functions for inference as used for linear models: `summary` and `anova`.
+
+```{r}
+#| label: generalised-linear-models-16
+anova(ft.sol.nb)
+summary(ft.sol.nb)
+```
+
+Both tests indicate strong evidence of a treatment effect (p<0.01). To extract the model equation we can look at the coefficients from the fit.
+
+```{r}
+#| label: generalised-linear-models-17
+ft.sol.nb$coefficients
+```
+
+The default link function for Poisson and negative binomial models is $log()$. If we write the mean count as $\lambda$
+
+$$ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}$$
+
+
+### Communicating the results
+
+**Written.** Results of GLM's are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g. "There is strong evidence of positive effect of bush regeneration on the abundance of slugs from the order Soleolifera (p < 0.001)". For multiple predictors it's best to display the results in a table. You should also indicate which distribution was used (e.g. negative-binomial) and if resampling was used for inference. "We used a negative-binomial generalised linear model due to overdispersion evident in the data. Inference was carried out using bootstrap resampling with 1000 resamples (default when using manyglm)."
+
+**Visual.** In this example, a boxplot would be an effective way to visualise the differences in slug counts between control and revegetated sites.
+
+```{r}
+#| label: generalised-linear-models-18
+#| out-width: "500px"
+boxplot(Soleolifera ~ Treatment, ylab = "Count", xlab = "Treatment", data = Reveg)
+```
+
+
+### Other types of data
+
+If you have continuous positive data with zeros, like biomass data, the `tweedie` distribution might be able to model this, although it does have some quite restrictive assumptions. You can use `family="tweedie"` with the `manyglm` function. Be sure to look at residual plots for violations of assumptions.
+
+For strictly positive continuous data a `gamma` distribution can be used. This is available in the `glm` function using `family=gamma`.
+
+
+### Further help
+
+You can type `?glm` and `?manyglm` into R for help with these functions.
+
+<p style="margin-left: .5in; text-indent: -.5in;">Faraway, JJ. 2005. *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC press.</p>
+
+<p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 2007. *Analysing ecological data*. Springer Science & Business Media.</p>
+
+
+**Author**: Gordana Popovic
+
+**Year:** 2016
+
+**Last updated:** `r format(Sys.time(), "%b %Y")`

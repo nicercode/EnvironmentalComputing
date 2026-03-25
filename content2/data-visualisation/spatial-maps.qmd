@@ -1,5 +1,0 @@
----
-title: "Spatial Maps"
----
-
-Placeholder content.

@@ -11,5 +11,9 @@ Thumbs.db
 .hugo_build.lock
 *.lock*
 _book/
+site_libs/
 /.quarto/
+*_cache*
+_freeze/*
+*.html
 **/*.quarto_ipynb

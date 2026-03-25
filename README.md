@@ -1,14 +1,15 @@
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # Welcome to Environmental Computing 👋
 
-<img src="static/images/hexsticker_EC.png" align="right" alt="" width="150" />
+<img src="images/hexsticker_EC.png" align="right" alt="" width="150" />
 
 <!-- badges: start -->
 
 [![Netlify
-Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status)](https://app.netlify.com/sites/environmentalcomputing/deploys)
+Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status.png)](https://app.netlify.com/sites/environmentalcomputing/deploys)
 <!-- badges: end -->
 
 The goal of **Environmental Computing** is to provide accessible coding
@@ -17,144 +18,31 @@ about this site, click
 [here](https://environmentalcomputing.net/about-this-site/).
 
 This repository uses [Quarto](https://quarto.org/) to build and maintain
-the website as a Quarto book. Below are important details to orientate
-you to the behind-the-scenes of this website.
+the website as a Quarto book.
 
-### Installation of Quarto
+Contributor workflow, naming conventions, page structure, and image/data
+storage guidance now live in the book chapter:
 
-Download and install Quarto from <https://quarto.org/docs/get-started/>.
+- [Contributing](content/contributing.qmd)
 
-To preview the site locally from R, you can also use the `quarto` R
-package:
+<!-- -->
 
-``` r
-install.packages("quarto")
-```
+    Warning: package 'ggplot2' was built under R version 4.4.3
 
-### Install R dependencies
+    Warning: package 'tibble' was built under R version 4.4.3
 
-All R packages used across tutorials are listed in the `DESCRIPTION`
-file under `Imports`. Please make sure dependencies are listed in
-**alphabetical order** and keep this file up to date as the site grows.
+    Warning: package 'tidyr' was built under R version 4.4.3
 
-To install all dependencies:
+    Warning: package 'purrr' was built under R version 4.4.3
 
-``` r
-remotes::install_deps()
-```
+    Warning: package 'dplyr' was built under R version 4.4.3
 
-### Structure of the major directories
+    Warning: package 'lubridate' was built under R version 4.4.3
 
-    EnvironmentalComputing/
-    ├── _quarto.yml         # Book configuration and chapter order
-    ├── index.qmd           # Home page (must stay at root)
-    ├── content2/           # All tutorial content, organised by section
-    │   ├── big-picture/
-    │   ├── basics/
-    │   ├── data-literacy/
-    │   ├── data-visualisation/
-    │   ├── essential-maths/
-    │   ├── statistical-methods/
-    │   ├── dynamic-systems/
-    │   └── coding-skills/
-    ├── _book/              # Rendered output (do not edit manually)
-    └── static/             # Static assets (images, etc.)
+This site has been improved by many people who contributed new content
+and fixes. Big thanks to the 3 contributors (in alphabetical order by
+username): Brendan Schuetze (@Brendan-Schuetze), John Wilshire
+(@johnWilshire), Mitchell Lyons (@mitchest).
 
-- `_quarto.yml` controls the book title, chapter order, and HTML theme.
-- `content2/` is where you will do most of your work. Each section is a
-  subfolder, and each page is a `.qmd` file within it.
-- `_book/` is generated automatically by Quarto — do not edit files here
-  directly.
-
-### Name and code style conventions
-
-Please follow these conventions when creating new files and folders:
-
-- lowercase names
-- use `-` hyphens to join separate words e.g. `meta-analysis`
-- keep folder names concise (3 words or fewer)
-- use commonly used abbreviations e.g. `glms` instead of
-  `generalised-linear-models`
-
-Use the `styler` package to format R code within `.qmd` files:
-
-``` r
-# An example
-styler::style_file("content2/coding-skills/functions.qmd")
-```
-
-### Anatomy of a page
-
-Each tutorial is a `.qmd` file inside the relevant section folder under
-`content2/`. The YAML header of each `.qmd` should include at minimum a
-`title`:
-
-``` yaml
----
-title: "Title of Your Tutorial"
----
-```
-
-Page order is controlled by the `chapters:` list in `_quarto.yml`, not
-by a `weight:` field. To change the order of pages, edit `_quarto.yml`
-directly.
-
-### Working with git
-
-The recommended workflow:
-
-1.  **PULL** down remote changes at the beginning of your work session.
-2.  Proceed to work on the `.qmd` files.
-3.  **STAGE** your changes.
-4.  **COMMIT** your changes with an informative message — group related
-    changes in a single commit.
-5.  **PUSH** your committed changes.
-
-Note: Should a merge conflict arise, reach out to one of the maintainers
-and we can help.
-
-### Creating a new page
-
-1.  Decide which section the new page belongs to (e.g. `coding-skills/`,
-    `data-visualisation/`).
-2.  Create a new `.qmd` file in the relevant subfolder under
-    `content2/`, following naming conventions above.
-3.  Add a YAML header with at minimum a `title:`.
-4.  Add the new file path to the `chapters:` list in `_quarto.yml` in
-    the desired position.
-5.  Write your tutorial content.
-
-### Building and previewing the site
-
-To render the entire book:
-
-``` r
-quarto::quarto_render()
-```
-
-To preview the site with live reloading:
-
-``` r
-quarto::quarto_preview()
-```
-
-Or equivalently from the terminal:
-
-``` bash
-quarto render
-quarto preview
-```
-
-### Internal links
-
-To link to another page within the book, use its file path relative to
-the project root:
-
-``` markdown
-See the [data manipulation](/content2/data-literacy/making-analysis-ready-data.qmd) section.
-```
-
-For cross-references to sections, figures, or tables within the book,
-use Quarto’s `@sec-`, `@fig-`, and `@tbl-` notation. See the [Quarto
-cross-reference docs](https://quarto.org/docs/books/book-crossrefs.html)
-for details.
+Extra thanks to [R for Data Science](https://github.com/hadley/r4ds)
+team for the code which generated the list of contribturors shown above.

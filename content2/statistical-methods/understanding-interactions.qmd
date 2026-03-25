@@ -1,5 +1,0 @@
----
-title: "Understanding Interactions"
----
-
-Placeholder content.

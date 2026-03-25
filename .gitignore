@@ -10,3 +10,6 @@ Environmental Computing-Page list.xlsx
 Thumbs.db
 .hugo_build.lock
 *.lock*
+_book/
+/.quarto/
+**/*.quarto_ipynb

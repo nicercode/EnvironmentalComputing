@@ -1,0 +1,130 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Environmental Computing"
+  reader-mode: true
+
+  page-footer:
+    left: |
+      Environmental Computing was written by XXX
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  cover-image: images/hexsticker_EC.png
+  favicon: images/hexsticker_EC.png 
+  site-url: http://environmentalcomputing.net/
+  repo-url: https://github.com/nicercode/EnvironmentalComputing
+  repo-branch: master
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    - content2/preface.qmd
+    - content2/intro.qmd
+
+    - part: content2/big-picture/big-picture.qmd
+      chapters:
+        - content2/big-picture/skills-and-the-scientific-method.qmd
+        - content2/big-picture/what-is-data-science.qmd
+        - content2/big-picture/why-write-code.qmd
+
+    - part: content2/basics/basics.qmd
+      chapters:
+        - content2/basics/r.qmd
+        - content2/basics/python.qmd
+        - content2/basics/projects.qmd
+        - content2/basics/data
+
+    - part: content2/data-literacy/data-literacy.qmd
+      chapters:
+        - content2/data-literacy/tidy-data-principles.qmd
+        - content2/data-literacy/data-principles.qmd
+        - content2/data-literacy/access.qmd
+        - content2/data-literacy/metadata.qmd
+        - content2/data-literacy/data-types.qmd
+        - content2/data-literacy/tables.qmd
+        - content2/data-literacy/data-frames.qmd
+        - content2/data-literacy/csv.qmd
+        - content2/data-literacy/excel.qmd
+        - content2/data-literacy/time-series.qmd
+        - content2/data-literacy/relational.qmd
+        - content2/data-literacy/sequence.qmd
+        - content2/data-literacy/databases.qmd
+        - content2/data-literacy/photos.qmd
+        - content2/data-literacy/audio.qmd
+        - content2/data-literacy/remotesensing.qmd
+        - content2/data-literacy/making-analysis-ready-data.qmd
+        - content2/data-literacy/reading
+        - content2/data-literacy/arrange
+        - content2/data-literacy/filter-rows
+        - content2/data-literacy/select-columns
+        - content2/data-literacy/mutate
+        - content2/data-literacy/joining-tables
+        - content2/data-literacy/group_by
+        - content2/data-literacy/summarising-tables
+        - content2/data-literacy/pivotting
+
+    - part: content2/data-visualisation/data-visualisation.qmd
+      chapters:
+        - content2/data-visualisation/plotting-frameworks.qmd
+        - content2/data-visualisation/choosing-the-right-plot.qmd
+        - content2/data-visualisation/ggplot.qmd
+        - content2/data-visualisation/mutli-panel-figures.qmd
+        - content2/data-visualisation/spatial-maps.qmd
+        - content2/data-visualisation/pca.qmd
+
+    - part: content2/essential-maths/essential-maths.qmd
+      chapters:
+        - content2/essential-maths/log-exp.qmd
+        - content2/essential-maths/probability-of-events.qmd
+        - content2/essential-maths/probability-distributions.qmd
+        - content2/essential-maths/rates-of-change.qmd
+        - content2/essential-maths/cyclic-variables.qmd
+        - content2/essential-maths/derivatives.qmd
+        - content2/essential-maths/integrals.qmd
+        - content2/essential-maths/optimisation.qmd
+
+    - part: content2/statistical-methods/statistical-methods.qmd
+      chapters:
+        - content2/statistical-methods/confidence-intervals.qmd
+        - content2/statistical-methods/linear-models.qmd
+        - content2/statistical-methods/simple-linear-regression.qmd
+        - content2/statistical-methods/multiple-linear-regression.qmd
+        - content2/statistical-methods/generalised-linear-models.qmd
+        - content2/statistical-methods/mixed-effects-models.qmd
+        - content2/statistical-methods/generalised-additive-models.qmd
+        - content2/statistical-methods/time-series-analysis.qmd
+        - content2/statistical-methods/understanding-interactions.qmd
+        - content2/statistical-methods/multi-variate-models.qmd
+        - content2/statistical-methods/MVabund.qmd
+        - content2/statistical-methods/machine-learning.qmd
+        - content2/statistical-methods/supervised-learning.qmd
+        - content2/statistical-methods/random-forests.qmd
+        - content2/statistical-methods/support-vector-machines.qmd
+        - content2/statistical-methods/neural-networks.qmd
+        - content2/statistical-methods/unsupervised-learning.qmd
+        - content2/statistical-methods/meta-analysis.qmd
+        - content2/statistical-methods/bayesian-inference.qmd
+        - content2/statistical-methods/Markov-Chain-Monte-Carlo.qmd
+
+    - part: content2/dynamic-systems/dynamic-systems.qmd
+      chapters: []
+
+    - part: content2/coding-skills/coding-skills.qmd
+      chapters:
+        - content2/coding-skills/pipes.qmd
+        - content2/coding-skills/functions.qmd
+        - content2/coding-skills/version-control.qmd
+
+format:
+  html:
+    theme:
+      - cosmo
+      - EC.scss
+    code-link: true
+
+    author-meta: "XXX"
+    include-in-header: "plausible.html"
+    callout-appearance: simple
+
+editor: source

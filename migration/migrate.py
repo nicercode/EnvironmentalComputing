@@ -89,6 +89,38 @@ class OldSite:
 # helpers
 # --------------------------------------------------------------------------
 
+def exists_exact(path):
+    """os.path.exists, but case-sensitive even on macOS: the site is built on
+    Linux, where "x.jpg" does not find "x.JPG"."""
+    path = os.path.normpath(path)
+    if not os.path.exists(path):
+        return False
+    parent, name = os.path.split(path)
+    if not name:
+        return True
+    return name in os.listdir(parent or ".") and \
+        (not parent or parent == os.sep or exists_exact(parent))
+
+
+def real_case(path):
+    """The path of an existing file with the letter case it has on disk, or
+    None if there is no such file (in any case)."""
+    path = os.path.normpath(path)
+    parent, name = os.path.split(path)
+    if parent and not os.path.isdir(parent):
+        parent = real_case(parent)
+        if parent is None:
+            return None
+    try:
+        names = os.listdir(parent or ".")
+    except FileNotFoundError:
+        return None
+    match = [n for n in names if n.lower() == name.lower()]
+    if name in match:
+        return os.path.join(parent, name) if parent else name
+    return os.path.join(parent, match[0]) if match else None
+
+
 def pandoc_id(text):
     """Identifier pandoc gives a heading (auto_identifiers extension)."""
     text = re.sub(r"\{#([^}]+)\}\s*$", "", text).strip()
@@ -353,7 +385,7 @@ class Chapter:
         rel, to_copy = self.asset_target(posixpath.basename(src))
         if to_copy:
             dest = os.path.join(CONTENT, self.dir, to_copy)
-            if not os.path.exists(dest):
+            if not exists_exact(dest):
                 os.makedirs(os.path.dirname(dest), exist_ok=True)
                 with open(dest, "wb") as fh:
                     fh.write(self.site.read_bytes(src))
@@ -456,7 +488,7 @@ class LinkMap:
             for base in (here, re.sub(r"(/index)?\.qmd$", "", chapter)):
                 p = posixpath.normpath(posixpath.join(base, url.rstrip("/")))
                 for cand in (p + ".qmd", p + "/index.qmd"):
-                    if os.path.exists(os.path.join(CONTENT, cand)):
+                    if exists_exact(os.path.join(CONTENT, cand)):
                         return posixpath.relpath(cand, here) + \
                             ("#" + frag if frag else "")
         candidates = []
@@ -558,6 +590,7 @@ def main():
     with open(os.path.join(ROOT, "migration", "page-map.yml")) as fh:
         cfg = yaml.safe_load(fh)
     site = OldSite(cfg["source_ref"])
+    base_site = OldSite(cfg["base_ref"])
     specs = cfg["chapters"]
 
     # every old page mapped exactly once
@@ -640,6 +673,8 @@ def main():
             pool = old_words if prefer_old else \
                 set().union(*(b.words for b in gap_f)) if gap_f else set()
             for b in gap_d:
+                if LAST_UPDATED.fullmatch(b.text.strip()):
+                    continue          # build-date stamp, removed below
                 if gap_f or prefer_old:
                     if rewrite_of(b, pool) and b.kind != "heading" or \
                             prefer_old and b.kind == "heading" and \
@@ -654,12 +689,27 @@ def main():
             gap_f.clear()
             gap_d.clear()
 
+        # the old pages as they were when the first conversion was made:
+        # text changed on the old site since then (e.g. a correction) must
+        # win over the first conversion's copy of the earlier text
+        base_keys = set()
+        base_ch = Chapter(c, base_site, specs)
+        for s in c["sources"]:
+            if s["page"] in base_site.pages:
+                _, md = base_ch.convert(s["page"], s.get("section"))
+                base_keys |= {b.key for b in to_blocks(md)}
+        updated = []
+
         for i, j in pairs:
             if i is not None and j is not None:
                 close_gap()
                 f, d = F[i], D[j]
                 d.origin = f.origin
-                if prefer_old and f.key != d.key or \
+                if f.key not in base_keys and f.key != d.key and \
+                        f.origin in base_site.pages:
+                    out.append(f)
+                    updated.append(f)
+                elif prefer_old and f.key != d.key or \
                         len(d.key) < TRIMMED * len(f.key):
                     if f.kind == "text":
                         f.text = keep_spelling_fixes(f.text, d.text)
@@ -706,13 +756,27 @@ def main():
         with open(path, "w") as fh:
             fh.write(fm.rstrip("\n") + "\n\n" + body.strip("\n") + "\n")
 
-        # check every local asset the chapter refers to exists
-        for ref in re.findall(r"!\[[^\]]*\]\(([^)\s]+)", body) + \
-                re.findall(r"""['"]((?:\.\./|images/|data/)[^'"\s]+)['"]""",
-                           body):
-            if not re.match(r"^(https?:|/)", ref) and not os.path.exists(
-                    os.path.join(CONTENT, ch.dir, ref)):
+        # check every local file the chapter refers to exists, with the same
+        # letter case (fixing references that only worked on macOS)
+        refs = re.findall(r"!?\[[^\]]*\]\(([^)\s#]+)", body) + \
+            re.findall(r"""src=["']([^"']+)["']""", body) + \
+            re.findall(r"""['"]((?:\.\./|images/|data/)[^'"\s]+)['"]""", body)
+        for ref in sorted(set(refs)):
+            if re.match(r"^(https?:|/|mailto:)", ref):
+                continue
+            full = os.path.join(CONTENT, ch.dir, ref)
+            if exists_exact(full):
+                continue
+            fixed = real_case(full)
+            if fixed:
+                new_ref = os.path.relpath(fixed, os.path.join(CONTENT, ch.dir))
+                body = body.replace(ref, new_ref)
+                ch.log.append(f"edit applied: letter case `{ref}` -> "
+                              f"`{new_ref}` (only worked on macOS)")
+            else:
                 ch.log.append(f"missing file `{ref}`")
+        with open(path, "w") as fh:
+            fh.write(fm.rstrip("\n") + "\n\n" + body.strip("\n") + "\n")
 
         report.append(f"## {ch.path}")
         report.append(
@@ -722,6 +786,8 @@ def main():
                f"{len(F) - len(restored)} matched the first conversion; "
                f"**{len(restored)} restored** (missing), "
                f"**{len(trimmed)} restored** (trimmed), "
+               f"**{len(updated)} updated** (changed on the old site since "
+               f"the first conversion), "
                f"{len(dropped)} condensed rewrites replaced by the original, "
                f"{len(kept_new)} new blocks kept."
                + (" Original wording preferred throughout." if prefer_old
@@ -733,8 +799,11 @@ def main():
             report.append(f"- EDIT: {line[len('edit applied: '):]}"
                           if line.startswith("edit applied: ")
                           else f"- REVIEW: {line}")
-        if D and (restored or trimmed or dropped or kept_new):
+        if D and (restored or trimmed or dropped or kept_new or updated):
             report.append("\n<details><summary>Details</summary>\n")
+            for b in updated:
+                report.append(f"- updated `{b.origin}`: "
+                              f"{b.text.splitlines()[0][:110]}")
             for b in restored:
                 report.append(f"- restored `{b.origin}`: "
                               f"{b.text.splitlines()[0][:110]}")

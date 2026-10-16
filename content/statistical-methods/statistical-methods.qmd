@@ -37,7 +37,7 @@ Some simple [hypothesis tests](t-tests.qmd) with the *t* statistic:
 
 [Power analyses](../misc/power-analysis.qmd): calculating power and deciding on sample sizes
 
-[Introduction to mvabund](mvabund.qmd): model-based analysis of multivariate abundance data
+[Introduction to mvabund](MVabund.qmd): model-based analysis of multivariate abundance data
 
 [Forecasting with time series](time-series-analysis.qmd)
 

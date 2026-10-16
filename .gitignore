@@ -11,7 +11,7 @@ Thumbs.db
 .hugo_build.lock
 *.lock*
 _book/
-site_libs/
+/site_libs/
 /.quarto/
 *_cache*
 # _freeze/ holds each chapter's computed results; it is committed so CI only

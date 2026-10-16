@@ -140,7 +140,7 @@ Here all the functions like `fit_model_species` are ones that you've written you
 
 Wow, how much easier is that to engage with, than some long script with 100's of lines?
 
-![](images/Functions_image.jpg)
+![](images/Functions_image.JPG)
 
 ### Reuse code (a.k.a. "Don't repeat yourself")
 

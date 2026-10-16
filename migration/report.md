@@ -3,7 +3,7 @@
 Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 ## preface.qmd
-13 blocks from 1 old page(s). 4 matched the first conversion; **9 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 19 new blocks kept.
+13 blocks from 1 old page(s). 4 matched the first conversion; **9 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 19 new blocks kept.
 
 
 <details><summary>Details</summary>
@@ -44,97 +44,60 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 
 ## basics/r.qmd
-27 blocks from 1 old page(s). 27 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+27 blocks from 1 old page(s). 27 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## basics/projects.qmd
-24 blocks from 1 old page(s). 24 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+24 blocks from 1 old page(s). 24 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## data-literacy/making-analysis-ready-data.qmd
 8 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
 
 
 ## data-literacy/reading/index.qmd
-78 blocks from 1 old page(s). 78 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+78 blocks from 1 old page(s). 78 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
+- EDIT: letter case `Importing_data_image.jpg` -> `Importing_data_image.JPG` (only worked on macOS)
 
 ## data-literacy/filter-rows/index.qmd
-78 blocks from 1 old page(s). 78 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+78 blocks from 1 old page(s). 78 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 
 <details><summary>Details</summary>
 
 - untrimmed `Data-Manipulation/subsetting-data`: You can experiment with a range of logical operators when using the `filter` function:  
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## data-literacy/mutate/index.qmd
-46 blocks from 1 old page(s). 46 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+46 blocks from 1 old page(s). 46 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## data-literacy/joining-tables/index.qmd
-49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## data-literacy/summarising-tables/index.qmd
-50 blocks from 1 old page(s). 50 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+50 blocks from 1 old page(s). 50 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 
 <details><summary>Details</summary>
 
 - untrimmed `Data-Manipulation/summarising-data`: ```{r}
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## data-literacy/pivotting/index.qmd
-56 blocks from 1 old page(s). 56 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+56 blocks from 1 old page(s). 56 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## data-visualisation/data-visualisation.qmd
 11 blocks from 3 old page(s). Existing chapter was a placeholder: written from the old page(s).
 
 
 ## data-visualisation/ggplot.qmd
-345 blocks from 10 old page(s). 195 matched the first conversion; **150 restored** (missing), **0 restored** (trimmed), 27 condensed rewrites replaced by the original, 3 new blocks kept. Original wording preferred throughout.
+345 blocks from 10 old page(s). 195 matched the first conversion; **150 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 27 condensed rewrites replaced by the original, 2 new blocks kept. Original wording preferred throughout.
 
 - EDIT: link target split over two lines on the old page
 
@@ -319,7 +282,6 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - replaced rewrite: **Authors**: Stephanie Brodie, Alistair Poore, Fiona Robinson (small edits by Will Cornwell)
 - kept new: ### Scatterplots
 - kept new: ## Further help
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
@@ -328,7 +290,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 
 ## data-visualisation/rasters.qmd
-102 blocks from 1 old page(s). 102 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), 0 condensed rewrites replaced by the original, 2 new blocks kept.
+102 blocks from 1 old page(s). 102 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **1 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 1 new blocks kept.
 
 - EDIT: Simple maps is its own chapter, not a section of this one
 - EDIT: rgdal was retired from CRAN in 2023; raster now reads files through terra
@@ -338,48 +300,29 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 <details><summary>Details</summary>
 
-- untrimmed `Graphics/spatial-vis/basic-raster`: Download the data files needed for this tutorial: [Cairns_Mangroves_30m.tif](/datasets/Cairns_Mangroves_30m.ti
+- updated `Graphics/spatial-vis/basic-raster`: Download the data files needed for this tutorial: [Cairns_Mangroves_30m.tif](/datasets/Cairns_Mangroves_30m.ti
 - kept new: ## The Basics of Rasters
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## data-visualisation/simple-maps.qmd
-46 blocks from 1 old page(s). 46 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+46 blocks from 1 old page(s). 46 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## data-visualisation/pca.qmd
-49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## data-visualisation/heatmaps.qmd
-60 blocks from 1 old page(s). 60 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+60 blocks from 1 old page(s). 60 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## statistical-methods/statistical-methods.qmd
 17 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
 
 
 ## statistical-methods/linear-models.qmd
-5 blocks from 1 old page(s). 0 matched the first conversion; **5 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 3 new blocks kept.
+5 blocks from 1 old page(s). 0 matched the first conversion; **5 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
 
 - EDIT: duplicate of the numbered chapter list above (whose "Interpreting coefficients" link also went to the GLM page on the old site)
 
@@ -401,17 +344,11 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 
 ## statistical-methods/interpret-lm-coeffs.qmd
-40 blocks from 1 old page(s). 40 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+40 blocks from 1 old page(s). 40 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## statistical-methods/t-tests.qmd
-125 blocks from 4 old page(s). 123 matched the first conversion; **2 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 3 new blocks kept.
+125 blocks from 4 old page(s). 123 matched the first conversion; **2 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
 
 - EDIT: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
 - EDIT: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
@@ -427,7 +364,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 </details>
 
 ## statistical-methods/anova.qmd
-163 blocks from 4 old page(s). 152 matched the first conversion; **11 restored** (missing), **9 restored** (trimmed), 1 condensed rewrites replaced by the original, 2 new blocks kept.
+163 blocks from 4 old page(s). 152 matched the first conversion; **11 restored** (missing), **9 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 1 condensed rewrites replaced by the original, 2 new blocks kept.
 
 
 <details><summary>Details</summary>
@@ -459,19 +396,18 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 </details>
 
 ## statistical-methods/understanding-interactions.qmd
-19 blocks from 1 old page(s). 19 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), 0 condensed rewrites replaced by the original, 2 new blocks kept.
+19 blocks from 1 old page(s). 19 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 1 new blocks kept.
 
 
 <details><summary>Details</summary>
 
 - untrimmed `Statistics/linear-models/interactions`: Sampling or experimental designs with more than one factor give us the opportunity to test whether the factors
 - kept new: - Does the effect of removing predators vary between habitats?  
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## statistical-methods/generalised-linear-models.qmd
-100 blocks from 3 old page(s). 94 matched the first conversion; **6 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 3 new blocks kept.
+100 blocks from 3 old page(s). 94 matched the first conversion; **6 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 1 new blocks kept.
 
 
 <details><summary>Details</summary>
@@ -482,25 +418,17 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - restored `Statistics/glms/glm-1`: More advice on [interpreting coefficients in glms](/statistics/glms/interpret-glm-coeffs/)
 - restored `Statistics/glms/glm-2`: **Count data**
 - restored `Statistics/glms/glm-2`: More advice on [interpreting coefficients in glms](/../statistics/glms/interpret-glm-coeffs/)
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 - kept new: ---
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## statistical-methods/interpret-glm-coeffs.qmd
-43 blocks from 1 old page(s). 43 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+43 blocks from 1 old page(s). 43 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 - EDIT: the old page linked to itself here instead of the linear-models page the text names
 
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
-
 ## statistical-methods/mixed-effects-models.qmd
-209 blocks from 4 old page(s). 202 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 8 new blocks kept.
+209 blocks from 4 old page(s). 202 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 5 new blocks kept.
 
 
 <details><summary>Details</summary>
@@ -513,29 +441,26 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - restored `Statistics/mixed-models/mixed-model-3`: ###Running the analysis
 - restored `Statistics/mixed-models/mixed-model-3`: ###Communicating results
 - kept new: ### FAQ for mixed models
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 - kept new: ---
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 - kept new: ---
 - kept new: ### Running the analysis
 - kept new: ### Communicating results
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## statistical-methods/generalised-additive-models.qmd
-82 blocks from 1 old page(s). 82 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+82 blocks from 1 old page(s). 82 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **1 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 
 <details><summary>Details</summary>
 
+- updated `Statistics/gams`: You can have combinations of linear and smooth terms in your model, for example
 - untrimmed `Statistics/gams`: We'll now look at a quick real example - we'll just scratch the surface, and in a future We'll now look at a q
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## statistical-methods/time-series-analysis.qmd
-47 blocks from 1 old page(s). 44 matched the first conversion; **3 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 4 new blocks kept.
+47 blocks from 1 old page(s). 44 matched the first conversion; **3 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
 
 
 <details><summary>Details</summary>
@@ -546,42 +471,23 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - kept new: ### Simple exponential smoothing models
 - kept new: ### Models incorporating seasonal variability
 - kept new: ### Further help
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
 ## statistical-methods/MVabund.qmd
-60 blocks from 1 old page(s). 60 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+60 blocks from 1 old page(s). 60 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## statistical-methods/cluster-analysis.qmd
-43 blocks from 1 old page(s). 43 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+43 blocks from 1 old page(s). 43 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## statistical-methods/mds.qmd
-52 blocks from 1 old page(s). 52 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+52 blocks from 1 old page(s). 52 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## statistical-methods/meta-analysis.qmd
-174 blocks from 4 old page(s). 167 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 5 new blocks kept.
+174 blocks from 4 old page(s). 167 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 2 new blocks kept.
 
 - EDIT: metafor's example datasets moved to the metadat package
 - EDIT: metafor's example datasets moved to the metadat package
@@ -596,11 +502,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - restored `Statistics/meta-analysis/meta-analysis-1`: Once you have calculated effect sizes, move on to the next page: [Meta-analysis 2: fixed-effect and random-eff
 - restored `Statistics/meta-analysis/meta-analysis-2`: If you are happy with all this, move on the [more complex models](/statistics/meta-analysis/meta-analysis-3)
 - restored `Statistics/meta-analysis/meta-analysis-2`: Any questions? Or email me (s(-dot-)nakagawa(-at-)unsw(-dot-)edu(-dot-)au). Also visit our [website](http://ww
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 - kept new: ---
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 - kept new: ---
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
@@ -613,8 +516,9 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 
 ## coding-skills/functions.qmd
-167 blocks from 1 old page(s). 164 matched the first conversion; **3 restored** (missing), **0 restored** (trimmed), 3 condensed rewrites replaced by the original, 4 new blocks kept.
+167 blocks from 1 old page(s). 164 matched the first conversion; **3 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 3 condensed rewrites replaced by the original, 3 new blocks kept.
 
+- EDIT: letter case `images/Functions_image.jpg` -> `images/Functions_image.JPG` (only worked on macOS)
 
 <details><summary>Details</summary>
 
@@ -627,7 +531,6 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - kept new: ## Types of function {#types}
 - kept new: ## Why use functions? {#why}
 - kept new: ## Writing your own functions {#how}
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
@@ -636,14 +539,13 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 
 ## coding-skills/version-control.qmd
-55 blocks from 1 old page(s). 54 matched the first conversion; **1 restored** (missing), **0 restored** (trimmed), 1 condensed rewrites replaced by the original, 1 new blocks kept.
+55 blocks from 1 old page(s). 54 matched the first conversion; **1 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 1 condensed rewrites replaced by the original, 0 new blocks kept.
 
 
 <details><summary>Details</summary>
 
 - restored `Coding-Skills/version-control`: ```git clone https://UNSW_EnvComp@bitbucket.org/UNSW_EnvComp/unsw_envcomp.git```
 - replaced rewrite: ```
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
 
 </details>
 
@@ -656,84 +558,36 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 
 ## misc/data-entry.qmd
-22 blocks from 1 old page(s). 22 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+22 blocks from 1 old page(s). 22 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/data-types-structure.qmd
-48 blocks from 1 old page(s). 48 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+48 blocks from 1 old page(s). 48 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/rstudio-notebooks.qmd
-62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/interactive-maps.qmd
-26 blocks from 1 old page(s). 26 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+26 blocks from 1 old page(s). 26 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/contingency-tables.qmd
-49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/fishers-exact.qmd
-20 blocks from 1 old page(s). 20 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+20 blocks from 1 old page(s). 20 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/goodness-of-fit.qmd
-44 blocks from 1 old page(s). 44 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+44 blocks from 1 old page(s). 44 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## misc/power-analysis.qmd
-62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 1 new blocks kept.
+62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
-
-<details><summary>Details</summary>
-
-- kept new: **Last updated:** `r format(Sys.time(), "%b %Y")`
-
-</details>
 
 ## datasets.qmd
 47 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).

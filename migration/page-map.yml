@@ -16,6 +16,8 @@
 
 source_ref: 7b59e6f   # old site incl. PRs #44, #45 and the multipanel tutorial (merged to master in #45)
 branch_ref: a31b08e   # first Quarto conversion (refactor_quarto), merged with the above
+base_ref: 3950af0     # the old site as it was when that conversion was made; text
+                      # changed on the old site since then wins over the conversion
 
 chapters:
 

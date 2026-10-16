@@ -40,8 +40,8 @@ The function $f$ can be something more funky or kinky - here, we're going to foc
 You can have combinations of linear and smooth terms in your model, for example
 $$y = \beta_0 + x_1\beta_1 + f(x_2) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
 or we can fit generalised distributions and random effects, for example
-$$ln(y) = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim Poisson(\lambda)$$
-$$ln(y) = \beta_0 + f(x_1) + z_1\gamma + \varepsilon, \quad \varepsilon \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)$$
+$$\ln(\lambda) = \beta_0 + f(x_1), \quad y \sim Poisson(\lambda)$$
+$$\ln(\lambda) = \beta_0 + f(x_1) + z_1\gamma, \quad y \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)$$
 
 ### A simple example
 

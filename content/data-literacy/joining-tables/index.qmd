@@ -15,11 +15,11 @@ We will use the package [dplyr](https://cran.r-project.org/web/packages/dplyr/in
 library(dplyr)
 ```
 
-As with the help page for [Subsetting data](/../data-manipulation/subsetting-data/), we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.
+As with the help page for [Subsetting data](../filter-rows/index.qmd), we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.
 
 We will also read in a dataset giving geographic locations for each site (for example, downloaded from a GPS) and nightly weather data (in this case downloaded and summarised from the Bureau of Meteorology data online).
 
-Download the three sample data sets ([Bats_data.csv](/datasets/Bats_data.csv), [Geo_data.csv](/datasets/Geo_data.csv), and [Weather_vars.csv](/datasets/Weather_vars.csv)) and import into R.
+Download the three sample data sets ([Bats_data.csv](../../../datasets/Bats_data.csv), [Geo_data.csv](../../../datasets/Geo_data.csv), and [Weather_vars.csv](../../../datasets/Weather_vars.csv)) and import into R.
 
 ```{r}
 #| label: index-2
@@ -60,7 +60,6 @@ The `by="Site"` part is actually optional, and if you leave it out `left_join` w
 Bats_withGeo <- left_join(Bats, Geo)
 ```
 
-
 We encourage specifying the matching column though, just to be more explicit about the desired behavior of the match. To now add the weather data to that new data set, using the Date variable to match rows, we would use:
 
 ```{r}
@@ -69,7 +68,6 @@ Bats_withGeoWeather <- left_join(Bats_withGeo, Weather, by = "Date")
 ```
 
 You can check what has happened by viewing the data set, using the function `dim`, to find the dimensions of our datasets, or `colnames` to see a list of column names.
-
 
 ```{r}
 #| label: index-7
@@ -81,7 +79,6 @@ colnames(geo.weather.join)
 ```
 
 You will see that the new dataset, Bats_withGeoWeather has the same number of rows as the original, Bats, but an additional four columns: "Latitude", "Longitude", "Mean_temperature" and "Mean_humidity".
-
 
 ### Dealing with messy datasets
 
@@ -180,7 +177,6 @@ Bat_notinTree <- anti_join(Bat_sim, Tree_sim, by = "Site")
 print(Bat_notinTree)
 ```
 
-
 ### Further help
 
 This tutorial was based on the excellent [Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio. Images were sourced from the same document. You can use `?dplyr` to get help with this package.
@@ -188,5 +184,3 @@ This tutorial was based on the excellent [Data wrangling with dplyr and tidyr ch
 **Author**: Rachel V. Blakey
 
 **Year:** 2016 updated 2022 by Will Cornwell
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

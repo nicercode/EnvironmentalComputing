@@ -14,6 +14,8 @@ library(forecast)
 
 ### Simple exponential smoothing models
 
+###Simple exponential smoothing models
+
 ![](images/Forecasting_image.jpg)
 
 Our first example will use annual rainforest loss (ha) in the in the Tocantins region of the Brazilian Amazon collected by satellite imagery over 25 years (data from [Global Forest Watch](http://data.globalforestwatch.org/) and analysed in further detail in [Virah-Sawmy *et al.* 2015](http://www.sciencedirect.com/science/article/pii/S2351989415000992)).
@@ -93,6 +95,7 @@ fit2_forecast <- forecast(fit2, h = 3)
 ```
 
 We can compare the simple exponential model with the model incorporating the additive trend by plotting them side by side.
+
 ```{r}
 #| label: time-series-analysis-10
 par(mfrow = c(1, 2))
@@ -154,8 +157,9 @@ plot(fit4_forecast)
 
 Bad news! The forecast is for decreasing rainforest area in the Amazon.
 
-
 ### Models incorporating seasonal variability
+
+###Models incorporating seasonal variability
 
 Let's try another example that incorporates not only long-term trends but also seasonal variability. We will use an example used in Rob Hyndman and George Athanasopoulos' [online textbook](https://www.otexts.org/fpp) and included in the *forecast* package: Australian monthly gas production. We will start by plotting the historical data from 1956 to 1995. If we plot the data, we can see two patterns: an overall positive trend and a zig-zagging seasonal pattern.
 
@@ -207,8 +211,9 @@ plot(fit_gas2_forecast, main = "Seasonal trend model")
 plot(fit_gas3_forecast, main = "Best model (lowest AIC)")
 ```
 
-
 ### Further help
+
+###Further help
 
 Type `?forecast` for the R help with the package forecast.
 
@@ -218,5 +223,3 @@ see Rob Hyndman and George Athanasopoulos' [online textbook](https://www.otexts.
 **Author**: Jakub Stoklosa & Rachel V. Blakey
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

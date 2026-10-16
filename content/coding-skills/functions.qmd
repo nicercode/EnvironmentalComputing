@@ -2,6 +2,12 @@
 title: "Writing Functions"
 ---
 
+<!-- ## Goals for this post
+1. Understand *why* to move code from in-place into a function.
+2. Understand R's function syntax (argument lists, defaults, return
+   semantics) and scoping rules.
+ -->
+
 A function is a self contained chunk of code which performs a specified task. Think of them as "mini-scripts" that are written separately from your main script.
 
 Well-written code uses lots of functions. This likely includes:
@@ -25,7 +31,7 @@ library(tidyverse)
 algae <- read_csv("data/Algal_traits.csv")
 ```
 
-(or if you like download the data set, [Algal_traits.csv](/datasets/Algal_traits.csv)).
+(or if you like download the data set, [Algal_traits.csv](../../datasets/Algal_traits.csv)).
 Taking a look we see a bunch of variables like height, weight etc
 
 ```{r}
@@ -33,7 +39,6 @@ Taking a look we see a bunch of variables like height, weight etc
 #| echo: false
 algae
 ```
-
 
 ## Types of function {#types}
 
@@ -50,6 +55,7 @@ For the first type, you'll often save the output in a variable and manipulate it
 #| eval: true
 mean_height <- mean(algae$height)
 ```
+
 This code takes the mean of `algae$height` and stores it in the variable `mean_height`. We can query the answer by running the variable name:
 
 ```{r}
@@ -78,7 +84,6 @@ write.csv(Algae, "data.csv")
 
 So why is it so useful to divide your script into many separate, but cooperating, functions? Why not write one big, long script? There are multiple ways in which writing functions can improve your coding.
 
-
 ### Code with functions is easier to read
 
 Writing functions is a good way of organising your analytical methods into self contained chunks. Generally, code written in this way is much easier to read.
@@ -86,7 +91,6 @@ Writing functions is a good way of organising your analytical methods into self 
 Consider some of the functions that you have already used within R. For example, `mean()`.
 
 This function is already predefined within the R base package, meaning that you didn't have to tell the computer how to compute the mean, and because that programming job has already been done, you can simply use the function in your own script. Imagine if every time you needed a mean you had to write the following:
-
 
 ```{r}
 #| label: functions-7
@@ -111,7 +115,6 @@ Which raises an important point: **functions should have a clear and informative
 Functions quickly increase the ease of which you can read and interpret the code.
 
 It is not obvious what the code `sqrt(var(algae$height)/length(algae$height))` is doing, whereas it is immediately obvious what the code `standard_error(x)` is doing.
-
 
 ### Organise your workflow
 
@@ -138,7 +141,6 @@ Here all the functions like `fit_model_species` are ones that you've written you
 Wow, how much easier is that to engage with, than some long script with 100's of lines?
 
 ![](images/Functions_image.jpg)
-
 
 ### Reuse code (a.k.a. "Don't repeat yourself")
 
@@ -175,7 +177,6 @@ we simply use `standard_error` like we would any other function.
 standard_error(algae$height)
 standard_error(algae$dryweight)
 ```
-
 
 ### Reduce chance of errors
 
@@ -256,7 +257,6 @@ The result is returned but variables `var_x` and `n` are nowhere to be seen. Tha
 
 Any variables created within a function get automatically cleaned up at the end of the function. So using functions leaves us with a nice clean workspace. Moreover, the environment within the function is much safer than the global env, because we're less likely to grab random variables from elsewhere.
 
-
 ### Help your brain to solve big problems
 
 The best way to solve big complex problems is to divide it into a series of smaller problems. It's well known that our brains cannot cope with more than about 5-10 bits of information at any one time.
@@ -266,7 +266,6 @@ Writing functions allows us to identify a series of smaller problems and solve t
 When I look at the function `standard_error` as defined above, I can think about the operations being performed (addition, division, square root) in isolation from the broader problem I'm solving (studying algae).
 
 As a general rule, **a good function does one thing well**. If that one thing is complicated, it be made up a bunch smaller functions (i.e. steps), each doing one thing well.
-
 
 ## Writing your own functions {#how}
 
@@ -353,7 +352,7 @@ Try running the `mean()` function on the *strength* variable.
 mean(algae$strength)
 ```
 
-Notice we get `NA`, this is because by default the function doesn't know how to deal with missing values (`NA` is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on [importing data](/../getting-started-with-r/importing-data/)), but in this case, we're happy remove `NA`s before calculating the mean. This can be achieved by setting the argument for `na.rm` to `TRUE`:
+Notice we get `NA`, this is because by default the function doesn't know how to deal with missing values (`NA` is a missing value) and there is one in that column of the data. How you deal with missing values is highly dependent on what you are trying to calculate (see the help module on [importing data](../data-literacy/reading/index.qmd)), but in this case, we're happy remove `NA`s before calculating the mean. This can be achieved by setting the argument for `na.rm` to `TRUE`:
 
 ```{r,}
 #| label: functions-28
@@ -377,7 +376,6 @@ mean(algae$strength, na.rm = TRUE)
 
 **You'll notice that many functions have arguments with default values set**.
 
-
 Going back to our new function `standard_error`, let's add a new argument `na.rm` so that it behaves like `mean` and the other function listed above:
 
 ```{r,}
@@ -399,7 +397,6 @@ standard_error(algae$strength, na.rm = TRUE)
 ```
 
 Within the function the value for `na.rm` that is received by the function is passed into the `var` function. The `var` function already has a `na.rm` argument already built within it (see help file `?var`), but `length` does not. We can use the code function `sum(!is.na(x)` to calculate `n`. The function `is.na` will test each value of the vector, `x`, to see if it is missing. If it not missing (the `!` means NOT), then it returns a `TRUE` for that position, and by counting the values returned as `TRUE` with `sum`, we are effectively counting only values that are not missing.
-
 
 ### Functions that extend functions
 
@@ -432,7 +429,6 @@ standard_error_narm(algae$strength)
 ```
 
 While the example with `standard_error` is perhaps a bit trivial, you can take this approach all over the place. For example, a function that makes a style of plot with defaults set just the way you like them.
-
 
 ### What's the `...` argument for?
 
@@ -483,7 +479,7 @@ Another common way to annotate functions is using the [roxygen2 syntax](http://k
 
 Once you get into the habit of writing functions it's a good idea to keep them in a separate file containing your functions together. Why? Because otherwise you have these big clunky files clogging up your script. If you've solved the problem of how to do something, why not stuff it away somewhere you can go, but only if needed.
 
-To get your functions out of the way, we recommend keeping all the functions for each project together in a folder called `R` within your project directory. (For more on project set up see our [post on project management](/../getting-started-with-r/project-management/).)
+To get your functions out of the way, we recommend keeping all the functions for each project together in a folder called `R` within your project directory. (For more on project set up see our [post on project management](../basics/projects.qmd).)
 
 To make these functions accessible within your workflow, you then use the function `source` to read the function files into memory, e.g.
 
@@ -507,7 +503,7 @@ It's a matter of preference whether you use a single or multiple files.
 
 ### Writing functions to work with pipes `%>%`
 
-For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](/../data-manipulation/)).
+For many of us, pipes have become an essential part of our workflow. (If this is foreign to you, see our post using pipes under [data manipulation](../data-literacy/making-analysis-ready-data.qmd)).
 
 Importantly, you can write functions that work with the pipe operator. All you need to do is setup your so that the first argument is the object being piped into the function. In fact, our `standard_error` already works with pipes, assuming you are passing in `x`:
 
@@ -534,7 +530,6 @@ summary_stats <- function(x, na.rm = TRUE) {
 ```
 
 If we run this function, we receive an object that has named elements:
-
 
 ```{r,}
 #| label: functions-43
@@ -567,12 +562,23 @@ fit$coefficients
 Finally, let's recap a few pointers on what makes a good function.
 
 **It's short**
+<!-- 
+<blockquote class="twitter-tweet"><p>If you've written a function whose body is 2,996 lines of code, you're doing it wrong.</p>&mdash; M Butcher (@technosophos) <a href="https://twitter.com/technosophos/status/322392537983746049">April 11, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+ -->
 
 Ideally each function does one thing well. Often this means lots of short functions. Short functions are extremely useful. Even if the code in the function body is more complex, ideally it still does one thing well.
 
 **It does one thing well**
-
+<!-- 
+<blockquote class="twitter-tweet"><p>The reason for writing a function is not to reuse its code, but to name the operation it performs.</p>&mdash; Tim Ottinger (@tottinge) <a href="https://twitter.com/tottinge/status/293776089099153408">January 22, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+ -->
 **It has an intuitive name**
+<!-- 
+<blockquote class="twitter-tweet"><p>"The name of a variable, function, or class, should answer all the big questions." - Uncle Bob Martin, Clean Code</p>&mdash; Gustavo Rod. Baldera (@gbaldera) <a href="https://twitter.com/gbaldera/status/327063173721100288">April 24, 2013</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+ -->
 
 ## Further help
 
@@ -582,9 +588,6 @@ You can find more help on functions at
 - [Hadley Wickam's](https://twitter.com/hadleywickham) information on [functions for intermediate and advanced users](http://adv-r.had.co.nz/Functions.html).
 - The [official R intro material on writing your own functions](http://cran.r-project.org/doc/manuals/R-intro.html#Writing-your-own-R-intro.html#Writing-your-own-functions)
 
-
 **Author**: Original by Keryn F Bain; revised by Daniel S Falster
 
 **Year:** 2018
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

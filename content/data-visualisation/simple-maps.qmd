@@ -60,7 +60,6 @@ and then plot it with the function `ggmap`:
 ggmap(basemap)
 ```
 
-
 The argument of `get_map` is simply any place searchable on Google Maps (in this case 'Royal National Park') - easy!
 
 To add point data for our five survey sites, we first need to make a new data frame holding the place name, latitude and longitude of each site (or import this data from a spreadsheet).
@@ -91,9 +90,7 @@ We can add these points to our map based on the Latitude (y) and Longitude (x) c
 ggmap(basemap) + geom_point(data = ptdata, aes(x = Long, y = Lat))
 ```
 
-
-Well done -you made your first map with R! Easy! You may have noticed that `ggmap` uses familiar graphics code from the package ggplot (see [plotting with ggplot](/graphics/ggplot/)).
-
+Well done -you made your first map with R! Easy! You may have noticed that `ggmap` uses familiar graphics code from the package ggplot (see [plotting with ggplot](ggplot.qmd#introduction-to-ggplot2)).
 
 ### Making a presentation-ready map
 
@@ -165,7 +162,6 @@ ggmap(Pres_basemap) +
   labs(x = "Longitude", y = "Latitude")
 ```
 
-
 ### Making a publication-ready map
 
 For a paper or report, you probably want a simpler black and white map.
@@ -173,7 +169,6 @@ For a paper or report, you probably want a simpler black and white map.
 * use `bound` to set the extent as above
 * try `get_stamenmap` to get an austere basemap (eg. Stamen "toner-lite")
 * use `theme_bw()` from ggplot to get a stripped-back theme
-
 
 ```{r}
 #| label: simple-maps-14
@@ -197,7 +192,6 @@ saveRDS(Pub_basemap, "data/Pub_basemap.rds")
 Pub_basemap <- readRDS("data/Pub_basemap.rds")
 ```
 
-
 ```{r}
 #| label: simple-maps-17
 ggmap(Pub_basemap) +
@@ -213,16 +207,12 @@ ggmap(Pub_basemap) +
   theme(axis.title = element_blank())
 ```
 
-
 ### Further help
 
 Read the [ggmap](https://cran.r-project.org/web/packages/ggmap/index.html) documentation for more examples and ideas.
 
 [ggmap cheat sheet](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf) from the National Centre for Ecological Analysis and Synthesis.
 
-
 **Author**: Kingsley Griffin, edits by Daniel Falster
 
 **Year:** 2017
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

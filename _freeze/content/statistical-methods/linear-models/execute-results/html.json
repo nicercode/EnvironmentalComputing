@@ -1,0 +1,17 @@
+{
+  "hash": "6825ca1a9bd217a93cd82a1b416d4b39",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Linear Models\"\n---\n\nThis section introduces linear-model-based methods for testing differences among groups and understanding factor effects.\n\nThe core chapters are:\n\n1. [Confidence intervals](confidence-intervals.qmd)\n2. [Simple linear regression](linear-regression.qmd)\n3. [Interpreting linear regressions](interpret-lm-coeffs.qmd)\n4. [T-tests](t-tests.qmd)\n5. [ANOVA](anova.qmd)\n6. [Understanding interactions](understanding-interactions.qmd)\n7. [Generalised linear models](generalised-linear-models.qmd)\n8. [Interpreting GLMs](interpret-glm-coeffs.qmd)\n9. [Mixed effects models](mixed-effects-models.qmd)\n10. [Generalised additive models](generalised-additive-models.qmd)\n11. [Time series analysis](time-series-analysis.qmd)\n\nThese pages have some introductions to commonly used linear models that test the response of a continuous dependent variable against one or more predictor variables that may be continuous or categorical. Note that these are only named as different techniques (e.g., regression vs ANOVA) due to common usage in the literature that you will encounter - they all involve the same linear modelling framework.\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](linear-models_files/figure-html/linear-models-1-1.png){width=672}\n:::\n:::\n\n\n\n**Author**: Alistair Poore\n\n**Year:** 2016\n",
+    "supporting": [
+      "linear-models_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

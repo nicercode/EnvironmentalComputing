@@ -2,4 +2,47 @@
 title: "Statistical Methods"
 ---
 
-Placeholder content.
+These pages have some introductions to a wide range of commonly used statistical analyses in the environmental sciences.
+
+Some simple [hypothesis tests](t-tests.qmd) with the *t* statistic:
+
+* [One sample t tests](t-tests.qmd#one-sample-t-test) - contrasting a single sample parameter to a population parameter  
+* [Independent samples](t-tests.qmd#two-sample-t-test) - contrasting the means of two samples
+* [Paired t-tests](t-tests.qmd#paired-t-test) - contrasting two groups when data are paired  
+
+[Linear models](linear-models.qmd):
+
+* [Linear regression](linear-regression.qmd)
+* [Analysis of variance: single factor](anova.qmd#single-factor-anova)
+* [Analysis of variance: factorial](anova.qmd#factorial-anova)  
+* [Understanding interactions](understanding-interactions.qmd)
+
+[Generalised linear models](generalised-linear-models.qmd):
+
+* [Generalised linear models 1](generalised-linear-models.qmd#introduction-and-binary-data): Introduction and binomial data  
+* [Generalised linear models 2](generalised-linear-models.qmd#count-data): Count data  
+
+[Mixed models](mixed-effects-models.qmd):
+
+* [Mixed models 1](mixed-effects-models.qmd#linear-mixed-models-with-one-random-effect): Linear mixed models with one random effect  
+* [Mixed models 2](mixed-effects-models.qmd#crossed-and-nested-factors): Linear mixed models with several random effects  
+* [Mixed models 3](mixed-effects-models.qmd#generalised-mixed-models): Generalised linear mixed models  
+
+[Generalised additive models](generalised-additive-models.qmd)
+
+[Categorical data analyses](../misc/misc.qmd):
+
+* [Goodness of fit tests](../misc/goodness-of-fit.qmd)  
+* [Contingency tables](../misc/contingency-tables.qmd)
+
+[Power analyses](../misc/power-analysis.qmd): calculating power and deciding on sample sizes
+
+[Introduction to mvabund](mvabund.qmd): model-based analysis of multivariate abundance data
+
+[Forecasting with time series](time-series-analysis.qmd)
+
+[Meta-analyses](meta-analysis.qmd) 
+
+* [Meta-analyses 1](meta-analysis.qmd#introduction): Introduction and calculating effect sizes  
+* [Meta-analyses 2](meta-analysis.qmd#fixed-effect-and-random-effect-models): Fixed effect and random effect models  
+* [Meta-analyses 3](meta-analysis.qmd#multilevel-models): More complex models 

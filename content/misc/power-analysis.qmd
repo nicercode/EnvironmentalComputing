@@ -3,9 +3,10 @@ title: "Power Analyses"
 ---
 
 ### What is power analysis and why is it important?
+
 You collect data to answer a question, usually with the aim of detecting a particular effect (e.g., treatment effect). The power of your test is *the probability of detecting an effect (i.e., getting a p-value < 0.05) with the experimental design you have and the effect size that you expect or consider meaningful*.
 
-I'll start by simulating a dataset which has an effect (a difference between the control and treatment), and we'll see if we can detect the effect. We'll do a simple [two sample t-test](../t-tests/two-sample-t-test) for illustration.
+I'll start by simulating a dataset which has an effect (a difference between the control and treatment), and we'll see if we can detect the effect. We'll do a simple [two sample t-test](../statistical-methods/t-tests.qmd#two-sample-t-test) for illustration.
 
 ```{r}
 #| label: power-analysis-1
@@ -53,11 +54,10 @@ t.test(control, treatment)
 ```
 
 This time we did detect an effect. This always happens, no matter what your experimental design, if an effect is present, you have some chance of detecting it, this is called power. So as not to waste time and money, we should only conduct experiments that have high power, i.e. high probability of detecting an effect if there is one. We can calculate the power of this experiment.
-  
 
 ### Simple power analysis with 'pwr'
- 
-There are various packages which do power analysis in R. [pwr](https://cran.r-project.org/web/packages/pwr/index.html) does simple stuff up to `lm` and [simR](https://cran.r-project.org/web/packages/simr/index.html) does more complex [mixed models](../mixed-models) and [glms](../glms).
+
+There are various packages which do power analysis in R. [pwr](https://cran.r-project.org/web/packages/pwr/index.html) does simple stuff up to `lm` and [simR](https://cran.r-project.org/web/packages/simr/index.html) does more complex [mixed models](../statistical-methods/mixed-effects-models.qmd) and [glms](../statistical-methods/generalised-linear-models.qmd).
 
 First, download and install the package.
 
@@ -103,7 +103,6 @@ plot(nvals, powvals,
 abline(h = 0.8)
 ```
 
-
 The *pwr* package has a bunch of functions, but they all pretty much work the same way. 
 
 Function       | Description
@@ -118,15 +117,13 @@ Function       | Description
 `pwr.t.test`     | t-tests (one sample, 2 sample, paired)
 `pwr.t2n.test`   | t-test (two samples with unequal n)
 
-
 It is generally a bit tricky to specify effect size, you can find a good guide for this package [here](http://www.statmethods.net/stats/power.html).
 
 Note that specifying effect size is not a statistical question, it's an ecological question of what effect size is meaningful for your particular study? For example, do you want to be able to detect a 10% decline in the abundance of a rare animal or would you be happy with a sampling design able to detect a 25% decline?
-  
 
 ### Analysis with linear and mixed models with 'simr'
- 
-If you are conducting an experiment with random factors, and you need to do a [mixed model](../mixed-models/) and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package [simR](https://cran.r-project.org/web/packages/simr/index.html) is designed to do this.
+
+If you are conducting an experiment with random factors, and you need to do a [mixed model](../statistical-methods/mixed-effects-models.qmd) and your power analysis needs to reflect that. This is much harder to do than the above examples, and we will need to use simulation methods. The package [simR](https://cran.r-project.org/web/packages/simr/index.html) is designed to do this.
 
 Download and install the package.
 
@@ -145,7 +142,7 @@ We have conducted a pilot study, and now want to decide how we should allocate s
 
 We have a pilot dataset 'pilot' which has a continuous fixed effect of temperature, a fixed effect of modification and a random effect for site (nested within modification). The response variable is the abundance of a species of interest.
 
-Download this pilot data, [Pilot.csv](/datasets/Pilot.csv), import into R and change the modification variable into a factor (labelled as 1,2 and 3, but not an integer).
+Download this pilot data, [Pilot.csv](../../datasets/Pilot.csv), import into R and change the modification variable into a factor (labelled as 1,2 and 3, but not an integer).
 
 ```{r}
 #| label: power-analysis-9
@@ -163,7 +160,7 @@ boxplot(abundance ~ modification, data = Pilot, main = "modification")
 boxplot(abundance ~ site, data = Pilot, main = "site")
 ```
 
-These count data with a random effect of site are best modelled with a [generalised linear mixed model](../mixed-models/mixed-model-3) using `glmer` from the package lme4.
+These count data with a random effect of site are best modelled with a [generalised linear mixed model](../statistical-methods/mixed-effects-models.qmd#generalised-mixed-models) using `glmer` from the package lme4.
 
 ```{r}
 #| label: power-analysis-11
@@ -235,28 +232,21 @@ powerSim(full3, fixed("modification", "lr"), nsim = 50)
 ```
 
 This gives 75% power, which is midway between the others. So in this case it is again better to add more sites than more observations per site. This is by no means always true, and depended to a large extent on the variability within and between sites, your experimental design, your question.
-  
 
 ### Some notes
- 
+
 Power analysis give the probability of detecting a particular effect (of a particular strength), at a particular alpha level (usually 0.05) if this effect is present. If you are interested in multiple questions from the same data, to do power analysis you generally have to chose a question of primary interest.
 
 You need to specify the level of the effect that you want to be able to detect, if you use the estimated level from a pilot study, this is called an "observed power" calculation, and is not a valid use of power analysis.
-  
 
 ### Further information
- 
+
 [Some more examples from pilot studies from the simR package](https://cran.r-project.org/web/packages/simr/vignettes/examples.html)
 
 [Power analysis from scratch with no pilot study](https://cran.r-project.org/web/packages/simr/vignettes/fromscratch.html)
 
 More on [specifying effect size](http://www.statmethods.net/stats/power.html)
-  
 
 **Author**: Gordana Popovic
- 
+
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`
-
-

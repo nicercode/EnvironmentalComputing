@@ -1,0 +1,124 @@
+name: Book
+
+# Every push and pull request: render the book (re-running only the code of
+# chapters that changed, thanks to the committed _freeze/ folder), check
+# internal links, and deploy to Netlify (a preview for pull requests,
+# production for master).
+#
+# Monthly: re-run the code of every chapter from scratch and check external
+# links too, so tutorials broken by package updates or link rot get noticed.
+# Problems are reported in a GitHub issue.
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  statuses: write
+
+concurrency:
+  group: book-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  book:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      FULL_RUN: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          dependencies: '"hard"'
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+
+      - name: Forget saved results (monthly full run)
+        if: env.FULL_RUN == 'true'
+        run: rm -rf _freeze
+
+      - name: Render
+        run: quarto render
+
+      - name: Find code that errors
+        # chunks run with `error: true`, so a broken tutorial still renders,
+        # showing the error; list them
+        run: |
+          grep -rl 'cell-output-error' _book --include='*.html' \
+            | sed 's|^_book/||' > chunk-errors.txt || true
+          if [ -s chunk-errors.txt ]; then
+            echo "### Chapters with code that errors" >> "$GITHUB_STEP_SUMMARY"
+            sed 's/^/- /' chunk-errors.txt >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Check links
+        id: links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --root-dir ${{ github.workspace }}/_book
+            --no-progress
+            ${{ env.FULL_RUN != 'true' && '--offline' || '' }}
+            '_book/**/*.html'
+          output: lychee-report.md
+          fail: false
+
+      - name: Fail on broken internal links
+        if: env.FULL_RUN != 'true' && steps.links.outputs.exit_code != 0
+        run: |
+          cat lychee-report.md >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
+      - name: Deploy to Netlify
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        uses: nwtgck/actions-netlify@v3
+        with:
+          publish-dir: ./_book
+          production-branch: master
+          production-deploy: ${{ github.ref == 'refs/heads/master' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: ${{ github.event.pull_request.title || github.event.head_commit.message }}
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Report problems found by the monthly run
+        if: env.FULL_RUN == 'true' && (hashFiles('chunk-errors.txt') != '' || steps.links.outputs.exit_code != 0)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo "The monthly re-run of every tutorial found problems."
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
+            if [ -s chunk-errors.txt ]; then
+              echo "## Chapters with code that errors"
+              sed 's/^/- [ ] /' chunk-errors.txt
+              echo
+            fi
+            if [ "${{ steps.links.outputs.exit_code }}" != "0" ]; then
+              echo "## Broken links"
+              cat lychee-report.md
+            fi
+          } > issue.md
+          if [ -s chunk-errors.txt ] || [ "${{ steps.links.outputs.exit_code }}" != "0" ]; then
+            gh issue create --title "Monthly check: broken tutorials or links ($(date +%Y-%m))" \
+              --body-file issue.md
+          fi

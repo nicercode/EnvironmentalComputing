@@ -8,16 +8,13 @@ One of the most common sources of frustration for beginners in R is dealing with
 
 The terms 'structure' and 'type' are often used interchangable. To avoid confusion, for this help page, data structure refers whether the data is a vector, matrix or data frame etc. and type refers to  whether the data or variable is an integer, character or numeric etc.
 
-
 ### One dimensional data (vectors)
 
 The most basic data structure in R is a vector, a one-dimensional set of numbers or characters. This is the data structure that you will work with the most, albeit from within a data frame (see below). Vectors can be either atomic or list, atomic vectors differ to lists in that all elements within an atomic vector must be of the **same** type (see below). For the most part we work with atomic vector and the following help file refers to this type of data.
 
-
 #### Common types of vectors
 
 Common types of atomic vectors are logical, integer, numeric (i.e., double), character and factor. You can easily create each of these data types by using `c()`. In the integer example, the L forces R to consider those numbers as integers rather than numerical.
-
 
 ```{r}
 #| label: data-types-structure-1
@@ -28,9 +25,7 @@ eg_character <- c("things", "in", "apostrophe", "are", "characters")
 eg_factor <- factor(c("NSW", "NSW", "ACT", "WA", "WA"))
 ```
 
-
 #### Factors (a special data type)
-
 
 Notice how I couldn't just use the `c()` to create a factor. Though factors look (and behave for the most part) like characters, they are actually a special type of integer with predefined categories, known as levels. The factor in this example has three levels: NSW, ACT and WA.
 
@@ -56,7 +51,6 @@ sizes
 
 See [here](http://www.cookbook-r.com/Manipulating_data/Changing_the_order_of_levels_of_a_factor/) for more info on ordered factors.
 
-
 #### Checking data types
 
 You can check the data type of any vector using the `class` or `is` functions.
@@ -69,7 +63,6 @@ is.integer(eg_integer)
 is.factor(eg_factor)
 ```
 
-
 #### Automatic coercion
 
 As all elements within an atomic vector must be the same type, combining different types will coerce the data to the most flexible. Types from least to most flexible are: logical, integer, double, and character. For example, combining and integers and character will produce a character vector. This is something to be aware whilst manipulating your own data, especially when merging data frames.
@@ -80,7 +73,6 @@ As all elements within an atomic vector must be the same type, combining differe
 eg_coerced <- c("tricks", 1, 2, 3, 4)
 class(eg_coerced)
 ```
-
 
 #### Coercing data
 
@@ -93,11 +85,9 @@ as.numeric(eg_logical)
 as.numeric(eg_character)
 ```
 
-
 ### Two dimensional data (matrices and data frames)
 
 For the most part, we tend to work with two dimensional data containing both columns and rows. Like the one dimensional vectors, they come in two forms: matrices, where all vectors must be of all the same type of data, and data frames, which can be made up of vectors containing different data types.
-
 
 #### Matrices
 
@@ -108,7 +98,6 @@ Matrices are easily constructed in R and can you check if its a matrix using the
 eg_matrix <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, ncol = 2)
 ```
 
-
 ```{r}
 #| label: data-types-structure-8
 #| echo: false
@@ -117,14 +106,12 @@ eg_matrix
 
 Think of matrices as atomic vectors with dimensions; the number of rows and columns. Like atomic matrices, you can check the type of data with `is` and coerce using the `as` functions.
 
-
 ```{r}
 #| label: data-types-structure-9
 #| collapse: true
 is.logical(eg_matrix)
 as.numeric(eg_logical)
 ```
-
 
 #### Data frames
 
@@ -143,8 +130,7 @@ eg_data_frame <- data.frame(eg_character, eg_factor, eg_numeric)
 eg_data_frame
 ```
 
-
-More commonly, we import data entered into a spreadsheet straight into a data frame using `read.csv` (see help [Importing data](../importing-data/)).
+More commonly, we import data entered into a spreadsheet straight into a data frame using `read.csv` (see help [Importing data](../data-literacy/reading/index.qmd)).
 
 To check the data types within a data frame, use the `str` function. This gives an output listing for each column (i.e., variables) and the respective data type.
 
@@ -165,15 +151,11 @@ levels(eg_data_frame$eg_factor)
 is.numeric(eg_data_frame$numeric)
 ```
 
-
 ### Further help
 
 Further information on data types in R can be found [here](https://www.stat.auckland.ac.nz/~paul/ItDT/HTML/node64.html)
 and [here](http://www.statmethods.net/input/datatypes.html)
 
-
 **Author**: Keryn Bain
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

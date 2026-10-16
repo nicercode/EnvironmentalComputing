@@ -14,10 +14,9 @@ Multidimensional scaling can create an ordination plot from any measure of simil
 
 In addition to the choice of distance measure there are a number of different classes of MDS. Here we focus on what is referred to as non-metric MDS (nMDS), a non-parametric rank-based method that is comparatively robust to non-linear relationships between the calculated dissimilarity measure and the projected distance between objects.
 
-
 ### Running the analysis
 
-Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](/datasets/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
+Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](../../datasets/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
 
 ```{r}
 #| label: mds-1
@@ -38,7 +37,6 @@ Creating a MDS plot involves two steps:
 * creating an ordination plot from that dissimilarity matrix
 
 These can be done in the package [vegan](https://cran.r-project.org/web/packages/vegan/index.html). First, install and load the package.
-
 
 ```{r}
 #| label: mds-3
@@ -90,7 +88,6 @@ ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
   theme_bw()
 ```
 
-
 ### Interpreting the results
 
 Interpreting an MDS plot is reasonably straightforward and the same as for any other ordination plot; objects that are closer together on the plot are more alike than those further apart. MDS arranges the points on the plot so that the distances among each pair of points correlates as best as possible to the dissimilarity between those two samples. The values on the two axes tell you nothing about the variables for a given sample - the plot is just a two dimensional space to arrange the points.
@@ -105,7 +102,6 @@ ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) +
   geom_point() +
   theme_bw()
 ```
-
 
 ## Assumptions to check
 
@@ -137,13 +133,11 @@ Remember that any of these modifications do actually change your question. If th
 
 Please also note that ordination based on distances has been criticised for failing to account for the mean-variance relationships that are commonplace in abundance data sets like the one used here, and for lacking an underlying statistical model - see Hui *et al.* (2014) Model-based approaches to unconstrained ordination. *Methods in Ecology and Evolution* 6:399-411. [link](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12236/abstract).
 
-
 ### Communicating the results
 
 **Visual.** The results from a MDS are best presented visually as a 2-dimensional ordination plot (as above). Rarely, a 3-dimensional plot may be used.
 
 **Written.** The written description of the MDS analyses (often in the figure legend) should mention what dissimilarity metric was used, whether data were transformed or standardised, and present the stress value. In a formal analysis, MDS plots are usually accompanied by some multivariate statistical test of dissimilarity between treatment/observational groups, e.g., via the `adonis` function in vegan.
-
 
 ### Further help
 
@@ -153,9 +147,6 @@ Type `?metaMDS` for the R help for this function.
 
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup, S (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 22. Introductory concepts of multivariate analysis.</p>
 
-
 **Author:** Andrew Letten
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

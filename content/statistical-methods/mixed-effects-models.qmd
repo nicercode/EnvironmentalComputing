@@ -2,7 +2,18 @@
 title: "Mixed Effects Models"
 ---
 
+Mixed models are those with a mixture of fixed and random effects. Random effects are categorical factors where the levels have been selected from many possible levels and the investigator would like to make inferences beyond just the levels chosen. Tricky concept, but imagine contrasting two habitat types (forest and grassland) by sampling five sites within each, and five replicate measures within each site. Habitat type is a fixed factor with the researcher only interested in those two levels of habitat type. If the five sites were chosen from a larger collection of possible sites, then site is considered a random effect with 10 levels.
+
+* [Mixed models 1](#linear-mixed-models-with-one-random-effect): Linear mixed models with one random effect  
+* [Mixed models 2](#crossed-and-nested-factors): Linear mixed models with several random effects  
+* [Mixed models 3](#generalised-mixed-models): Generalised linear mixed models
+
+![](images/Mixed_models_intro_image.jpg)
+Photo: N. Murray
+
 ## Linear mixed models with one random effect
+
+**Linear mixed models with one random effect**
 
 You will need to use mixed effect models if you have a random factor in your experimental design. A random factor
 
@@ -25,7 +36,6 @@ We will introduce mixed models in three parts
 
 All three sections will use the same data for illustration.
 
-
 **Properties of mixed models**
 
 **Assumptions**. Mixed models make some important assumptions (we'll check these later for our examples)
@@ -36,7 +46,6 @@ All three sections will use the same data for illustration.
 4. There is a straight line relationship between $y$ and the predictors $x$ and random effects $z$
 5. Random effects $z$ are independent of $y$.
 6. Random effects $z$ are normally distributed
-
 
 ### Running the analysis
 
@@ -51,7 +60,7 @@ library(lme4)
 
 We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data is continuous. Later on in [Mixed models 3](#generalised-mixed-models), we'll model counts as discrete using Generalised linear mixed models (GLMMs).
 
-Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
+Download the sample data set, [Estuaries.csv](../../datasets/Estuaries.csv), and load into R.
 
 ```{r}
 #| label: mixed-effects-models-2
@@ -78,7 +87,6 @@ where Total is the dependent variable (left of the ~), Modification is the fixed
 Note the syntax for one random effect is `(1|Estuary)` - this is fitting a different intercept (hence `1`) for each Estuary.
 
 This model can be fit by maximum likelihood (`REML=F`) or restricted maximum likelihood (`REML=T`). For fitting models it's best to use REML, as it is less biased (unbiased for balanced samples), particularly in small samples. However to use the `anova` function below we need to refit with maximum likelihood.
-
 
 ### Assumptions to check
 
@@ -124,9 +132,7 @@ We can't check this assumption, but you can ensure it's true by taking a random 
 
 This assumption is not crucial (and difficult) to check.
 
-
 ### Interpreting the results
-
 
 **Hypothesis test for the fixed effect**
 
@@ -165,6 +171,7 @@ This also provides evidence for an effect of Modification as this parameter (i.e
 You can use the `anova` function to test for random effects, but the p-values are very approximate and we do not recommend this procedure. Instead we will use a parametric bootstrap. This is a simulation based method which involves a fair chunk of code, but there's not much about the code you have to change for different models, it's mostly just a matter of copy-paste.
 
 Parametric bootstrap
+
 ```{r}
 #| label: mixed-effects-models-10
 #| error: false
@@ -187,8 +194,9 @@ mean(lrStat > lrObs) # P-value for test of Estuary effect
 
 There is strong evidence for including estuary in your model (p = 0.001). You could use similar code to test for the effect of Modification with a parametric bootstrap.
 
-
 ### FAQ for mixed models
+
+###FAQ for mixed models
 
 **1.** Do I need balanced samples to fit a mixed model?
 
@@ -205,7 +213,6 @@ Not necessarily. If you have a random factor (i.e., you have a random sample of 
 **4.** What if the levels of my factor aren't really random?
 
 This might be a problem as assumption 4 may not hold. You should always sample the random effect randomly to avoid bias and incorrect conclusions.
-
 
 ### Communicating the results
 
@@ -239,7 +246,6 @@ Est.means <- coef(ft.estu)$Estuary[, 1] + coef(ft.estu)$Estuary[, 2] * is.mod # 
 stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = "red", vertical = TRUE, add = TRUE)
 ```
 
-
 ### Further help
 
 You can type `?lmer` into R for help with these functions.
@@ -250,12 +256,9 @@ You can type `?lmer` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. *Analysing ecological data*. Springer Science & Business Media, 2007.</p>
 
-
 **Author**: Gordana Popovic
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 ---
 
@@ -270,7 +273,6 @@ Two factors are **crossed** when every category (level) of one factor co-occurs 
 A factor is **nested** within another factor when each category of the first factor co-occurs with only one category of the other. In other words, an observation has to be within one category of Factor 2 in order to have a specific category of Factor 1. All combinations of categories are not represented.
 
 There are also intermediate designs that are partially crossed, where some levels of one factor occur in several (but not all) levels of the second factor. These designs have often been taught as separate problems with different ways to carry out analyses of variance (ANOVAs) depending on if you have crossed or nested factors. Using mixed models with the package lme4, we can think if all of these in one framework, where nested and crossed designs are modelled in the same way. Thinking about factors as crossed or nested is simplified to careful labelling of factor levels - more on this later.
-
 
 ### Running the analysis
 
@@ -293,13 +295,12 @@ We will analyse a data set that aimed to test the effect of water pollution on t
 set.seed(1)
 ```
 
-Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
+Download the sample data set, [Estuaries.csv](../../datasets/Estuaries.csv), and load into R.
 
 ```{r}
 #| label: mixed-effects-models-14
 Estuaries <- read.csv("data/Estuaries.csv", header = T)
 ```
-
 
 **Fitting a model with a fixed effect and several random effects**
 
@@ -357,7 +358,6 @@ The only place we can see an obvious difference is under the Random effects tabl
 
 Note: fit.wrong would be correct if we had crossed factors
 
-
 ### Checking assumptions
 
 The assumptions are the same as for one random factor, but it doesn't hurt to list them again
@@ -368,7 +368,6 @@ The assumptions are the same as for one random factor, but it doesn't hurt to li
 4. There is a straight line relationship between $y$ and the predictors $x$ and random effects $z$
 5. Random effects $z$ are independent of $y$.
 6. Random effects $z$ are normally distributed
-
 
 See [Mixed models 1](#linear-mixed-models-with-one-random-effect) for detailed guidance about assumptions in linear mixed models. Briefly, assumptions 1 and 5 cannot be checked, but can be ensured by taking random samples, and assumption 6 is not crucial and difficult to check. To check assumption 2 we look for a straight line relationship on the normal quantile plot. To check assumptions 3, and 4 we look for a fan shape and U shape on the residual vs. fitted plot.
 
@@ -391,7 +390,6 @@ scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot
 
 This scatterplot is much better, the fan shape is all but gone. The smooth line is below zero on the left, but there are relatively few points there, so it's not of great concern.
 
-
 ### Interpreting the results
 
 **Hypothesis test for the fixed effect**
@@ -404,6 +402,7 @@ ft.mod <- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), dat
 ft.mod.0 <- lmer(log(Total) ~ (1 | Estuary) + (1 | SiteWithin), data = Estuaries, REML = F)
 anova(ft.mod.0, ft.mod)
 ```
+
 We find weak evidence of an effect of Modification (p=0.05047).
 
 **Hypothesis test for random effects**
@@ -429,8 +428,8 @@ for (iBoot in 1:nBoot)
 }
 mean(lrStat > lrObs) # P-value for test of Estuary effect
 ```
-The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.
 
+The p-value is 0, so very small. We have strong evidence of an effect of Site and should keep it in the model.
 
 ## Communicating results
 
@@ -460,7 +459,6 @@ stripchart(Est.means ~ sort(unique(SiteWithin)), data = Estuaries, pch = 18, col
 
 Alternatively, you can plot by Estuary as before (see [Mixed models 1](#linear-mixed-models-with-one-random-effect)).
 
-
 ### Further help
 
 You can type `?lmer` into R for help with these functions.
@@ -471,12 +469,9 @@ You can type `?lmer` into R for help with these functions.
 
 <p style="margin-left:.5in;text-indent:-.5in">Zuur, A, EN Ieno and GM Smith (2007) *Analysing ecological data*. Springer Science & Business Media.</p>
 
-
 **Author**: Gordana Popovic
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 ---
 
@@ -484,10 +479,9 @@ You can type `?lmer` into R for help with these functions.
 
 **Generalised linear mixed models**
 
-You will need to read [Mixed models 1](#linear-mixed-models-with-one-random-effect) and [Mixed models 2](#crossed-and-nested-factors) as an introduction to mixed models for continuous data, as well as the help pages on [Generalised linear models](/statistics/glms/) as an introduction to modelling discrete data.
+You will need to read [Mixed models 1](#linear-mixed-models-with-one-random-effect) and [Mixed models 2](#crossed-and-nested-factors) as an introduction to mixed models for continuous data, as well as the help pages on [Generalised linear models](generalised-linear-models.qmd) as an introduction to modelling discrete data.
 
 This section will combine the two to allow you to model discrete data (e.g., presence/absence) with random effects using generalised linear mixed models (GLMMs).
-
 
 **Properties of mixed models**
 
@@ -499,8 +493,9 @@ This section will combine the two to allow you to model discrete data (e.g., pre
 4. Random effects $z$ are independent of $y$.
 5. Random effects $z$ are normally distributed
 
-
 ### Running the analysis
+
+###Running the analysis
 
 We will analyse the same data set as the first two mixed model tutorials. This data set aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. In the first two tutorials, we analysed the total count of invertebrates, which we assumed to be continuous as the total counts were large. Here, we will analyse the counts and presence/absences of individual species, which require generalised linear mixed models.
 
@@ -523,7 +518,7 @@ First, load the package:
 library(lme4)
 ```
 
-Download the sample data set, [Estuaries.csv](/datasets/Estuaries.csv), and load into R.
+Download the sample data set, [Estuaries.csv](../../datasets/Estuaries.csv), and load into R.
 
 ```{r}
 #| label: mixed-effects-models-26
@@ -694,13 +689,13 @@ Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunat
 
 As before you could run hypothesis tests on the random effects using a parametric bootstrap. See [Mixed models 1](#linear-mixed-models-with-one-random-effect) and [Mixed models 2](#crossed-and-nested-factors) for code that you could modify for this situation.
 
-
 ### Communicating results
+
+###Communicating results
 
 **Written.** Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the `anova`) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. "There is strong evidence (p<0.001) of negative effect of modification on total abundance". For multiple predictors it's best to display the results in a table.
 
 **Visual.** The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility.
-
 
 ```{r}
 #| label: mixed-effects-models-37
@@ -720,7 +715,6 @@ Est.means <- summarize(means, Estuaries$Estuary, mean)$means # extract means by 
 stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = "red", vertical = TRUE, add = TRUE) # plot means by estuary
 ```
 
-
 ### Further help
 
 You can type `?glmer` into R for help with this function.
@@ -731,9 +725,6 @@ You can type `?glmer` into R for help with this function.
 
 <p style="margin-left:.5in;text-indent:-.5in">Zuur, A, EN Ieno and GM Smith (2007) *Analysing ecological data*. Springer Science & Business Media.</p>
 
-
 **Author**: Gordana Popovic
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

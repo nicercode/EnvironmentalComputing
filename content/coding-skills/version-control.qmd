@@ -36,7 +36,6 @@ Ideally, it would be nice to easily see the current (and hopefully best) set of 
 
 **Solutions.** Fortunately, there are some very easy and simple solutions to many of the problems above. For example, there are now very useful and easy to use graphical user interfaces (GUI's) like [SourceTree](https://www.sourcetreeapp.com) that remove the need to use the command line all together, make it easy and seamless to set up repositories and are cross platform (i.e., Windows, Mac etc).
 
-
 ### How it works
 
 Given that not everyone will want to use the command line, we'll show some basics using both the command line and a GUI (SourceTree). We'll do this because we believe that the benefits of using version control far outweigh the costs of not using it, and so this should ensure mostly people can get started straight away.
@@ -45,7 +44,7 @@ We will also demonstrate how the command line relates to the GUI. We will not co
 
 **Setting up a repository.**
 
-To begin tracking files for a project, we need to set up a project repository that keeps all the relevant files (i.e., data, meta-data, code, functions, manuscript etc) in one place. The project directory will form the basis of a reproducible project (see [project management](/../getting-started-with-r/project-management) for more details).
+To begin tracking files for a project, we need to set up a project repository that keeps all the relevant files (i.e., data, meta-data, code, functions, manuscript etc) in one place. The project directory will form the basis of a reproducible project (see [project management](../basics/projects.qmd) for more details).
 
 To take full advantage of version control, we want to have both a local (on your computer) and remote (cloud) copy of our repository. There are a number of hosting sites that will allow you to create an cloud repository including [GitHub](https://github.com) and [BitBucket](https://bitbucket.org). Bitbucket allows you to create private repositories for free, whereas anything on GitHub is open (although you can pay for private repositories).
 
@@ -55,23 +54,19 @@ To set up a remote server, you will need to first create an account on one of th
 
 ![**Figure 2** - Bitbucket's explanation of how to link the repository on the server to a local repository. See also Figure 4 below](images/Version_control_Fig1b.png)
 
-
 If you're using the command line, you can literally just navigate to the place you want the folder and type in the commands in Figure 2 above. It will also take you through a few important steps on how Git works, but we'll get to those later. The **key component** from this repository that is needed to set it up and connect it to a folder on your computer is the ssh or http pathname:
 
 **`https://UNSW_EnvComp@bitbucket.org/UNSW_EnvComp/unsw_envcomp.git`**.
 
 This path name will make the connection between a local project folder (i.e. a folder on your computer) and the existing one on the server (i.e. Bitbucket). It will also allow you to clone the entire repository on your computer if needed. If you want to clone the repository on your computer, use the command line to navigate to where you want the folder and type in the following:
 
-```
-git clone https://UNSW_EnvComp@bitbucket.org/UNSW_EnvComp/unsw_envcomp.git
-```
+```git clone https://UNSW_EnvComp@bitbucket.org/UNSW_EnvComp/unsw_envcomp.git```
 
 This will effectively copy down from the server your entire repository in the location you desire and is nearly identical to the commands suggested in Figure 2. It will also automatically create a connection between your local directory and the server. You can also provide this pathname to collaborators, and provided they are given access to reading and writing the repository (can be changed in repository settings online), they can grab everything from the server as well in the same way described above.
 
 Creating a repository in SourceTree is also quite easy. Once you have the pathname for your repository, go into source tree, click `New Repository` -> `Clone from URL` (Figure 3). Add in the ssh or http:// pathname, decide where you want the repository to live on your computer and then click `clone`. This will then bring down the contents of the repository (if it is not empty) and set this connection up in SourceTree for you to begin tracking and pushing to the server. If the repository already exists on your computer and you want to add it to SourceTree, just click `Add existing local repository` instead of `Clone from URL`.
 
 ![**Figure 3** - Setting up a repository in your computer in SourceTree](images/Version_control_Fig31.png)
-
 
 ### Tracking files and pushing to the cloud
 
@@ -114,14 +109,10 @@ In many cases there will be files within a project that you do not want to track
 
 In Figure 6, I've ignored a "photos/" folder. We can see that this now disappears (compare with Figure 4) from our staging area in the Terminal window. We can just add any file or folder we don't want tracked here before adding it so that Git ignores them. If we want to start tracking a file we have ignore, just open the .gitignore file up in a text editor and remove the file you want to track. Save the .gitignore file and then add, commit and push this as above.
 
-
 ### Further help
 
 Version control systems, and Git in particular, can do quite a lot more then what we have covered above. We have just provided an brief introduction on how to get started and use Git to track your project files. If you want to know more about how to create branches, deal with conflicts and many other useful features you can visit the [Git](https://git-scm.com) web page where you can find all the relevant information to do more advanced stuff.
 
-
 **Author**: Daniel Noble
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

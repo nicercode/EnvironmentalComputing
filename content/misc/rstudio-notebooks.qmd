@@ -29,7 +29,6 @@ This can get messy if you have lots of comments, so we recommend looking at [RSt
 
 RStudio notebooks are a form of markdown document, a widely used format for exporting text and code to various report formats. All web pages on this site start their life as markdown files with all the text, code needed to make the html file. Rstudio notebooks have the added benefits of displaying the output from your code directly in the document.
 
-
 ### Creating a new notebook
 
 Creating a new notebook is as simple as clicking **File, New File, R Notebook** from the RStudio menu. You will need a recent version of RStudio (1.0 or higher), so update that if necessary.
@@ -39,7 +38,6 @@ Save the file in a folder on your computer. This folder will become the working 
 Edit the title at the top, have a quick read of the notes then delete the template provided (from "This is an [R Markdown]..."" onwards). Make sure you leave the first few lines in between the --- marks.
 
 Your notebook is now just a big blank page for you to start writing down all the steps involved in your work. For example, you might want to start with a brief description of the project.
-
 
 ### Adding code to your notebook
 
@@ -55,15 +53,13 @@ Any code that you want to run then be added inside the chunk. I like to use the 
 
 Be careful not to delete the ``` marks as the text will no longer be recognised as code.
 
-
 ### Running the code
 
 Running all the code in your chunk is done by clicking the little green arrow at the top right of your chunk. Just like in a script you can still run individual lines of code by entering *Ctrl+Enter* with your cursor on that line.
 
 Use the chunks to organise your workflow, grouping code that does a particular task within a chunk and preceding these by plain text comments that explain what each chunk will do. Avoid putting every single line of code in a separate chunk and avoid having very many lines of code that do different things within the same chunk.
 
-Output from your code will appear directly below the code chunk rather than in the console below or the plots pane to the right. For example, a plot of plant height vs temperature from the data set used in our [linear regression tutorial](/statistics/linear-models/linear-regression).
-
+Output from your code will appear directly below the code chunk rather than in the console below or the plots pane to the right. For example, a plot of plant height vs temperature from the data set used in our [linear regression tutorial](../statistical-methods/linear-regression.qmd).
 
 ```{r}
 #| label: rstudio-notebooks-3
@@ -78,7 +74,6 @@ ggplot(Plant_height, aes(temp, loght, color = growthform)) +
 
 You can hide or show any output within your notebook by clicking on the little upward arrows (top right of output).
 
-
 ![](images/Menu2.png)
 
 To expand or collapse all output click on the cog symbol next to Preview at the top of the notebook. The settings in there can also be used to send all output to the console (**Chunk output in Console**) or keep in the notebook (**Chunk Output Inline**).
@@ -88,7 +83,6 @@ If you save the notebook and leave RStudio, the output is saved and you will see
 ![](images/Menu3.png)
 
 This is easily done by clicking **Run, Run all**. Also very useful when you are part way through a document is **Run All Chunks Above** to ensure everything is refreshed and running correctly.
-
 
 ### Exporting your notebook to other formats
 
@@ -106,9 +100,7 @@ When you first look at your html file, you may also realise that there are some 
 
 These are nicely detailed on RStudio's [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). Here are a just few of the more useful options:
 
-
 ### Some basic markdown formatting
-
 
 | Markdown  | Output  |
 |-----|----|
@@ -118,8 +110,7 @@ These are nicely detailed on RStudio's [R Markdown cheatsheet](https://www.rstud
 | *italics*  | *italics* |
 | **bold** |  **bold** |
 |Inserting an image:  | ![](images/E_C_Logo_black_square.png)  |
-| Inserting a link: More help at Environmental Computing-/.. | More help at [Environmental Computing](/..)  |
-
+| Inserting a link: More help at Environmental Computing-/.. | More help at [Environmental Computing](../../index.qmd)  |
 
 ## Controlling chunk behaviour
 
@@ -154,7 +145,6 @@ To hide all messages and warnings:
 2 + 2
 ```
 
-
 ```{r}
 #| label: rstudio-notebooks-7
 #| echo: false
@@ -180,7 +170,6 @@ These can also be set once at the top of the document rather than individually f
 knitr::opts_chunk$set(fig.width = 10, fig.height = 10)
 ```
 
-
 ### Further help
 
 RStudio's [introduction to notebooks](http://rmarkdown.rstudio.com/r_notebooks.html)
@@ -191,9 +180,6 @@ Nathan Stephen's [Why I love R notebooks](https://rviews.rstudio.com/2017/03/15/
 
 Jonathan McPherson's [R Notebooks](https://www.rstudio.com/resources/webinars/introducing-notebooks/)
 
-
 **Author**: Alistair Poore
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

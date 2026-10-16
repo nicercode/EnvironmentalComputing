@@ -227,6 +227,16 @@ chapters:
   - chapter: statistical-methods/generalised-additive-models.qmd
     sources:
       - page: Statistics/gams
+    edits:
+      - reason: "further reading suggested in #38"
+        old: "A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/"
+        new: |-
+          A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/
+
+          Two full courses on GAMs, free to work through:
+
+          * Gavin Simpson's [Generalized Additive Models](https://github.com/gavinsimpson/physalia-gam-course) course (slides, R code and data)
+          * Noam Ross's interactive [GAMs in R](https://noamross.github.io/gams-in-r-course/) course
   - chapter: statistical-methods/time-series-analysis.qmd
     sources:
       - page: Statistics/time-series

@@ -451,6 +451,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/generalised-additive-models.qmd
 82 blocks from 1 old page(s). 82 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **1 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: further reading suggested in #38
 
 <details><summary>Details</summary>
 

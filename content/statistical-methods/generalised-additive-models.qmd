@@ -337,6 +337,11 @@ Check out `?gamm`, `?gamm4` and `?bam`.
 Use `citation("mgcv")` for a range of papers with more technical explanations - the book on GAMs with R is particularly good (there's a 2017 version).
 A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/
 
+Two full courses on GAMs, free to work through:
+
+* Gavin Simpson's [Generalized Additive Models](https://github.com/gavinsimpson/physalia-gam-course) course (slides, R code and data)
+* Noam Ross's interactive [GAMs in R](https://noamross.github.io/gams-in-r-course/) course
+
 **Author**: Mitchell Lyons
 
 **Year:** 2017

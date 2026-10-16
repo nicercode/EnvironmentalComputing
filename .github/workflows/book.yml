@@ -44,9 +44,20 @@ jobs:
         with:
           dependencies: '"hard"'
 
+      # the runner image usually ships a recent Quarto; installing a pinned
+      # older one fails (apt refuses to downgrade), so only install if missing
+      - name: Check for Quarto
+        id: quarto
+        run: |
+          if command -v quarto >/dev/null; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: 1.10.18
+        if: steps.quarto.outputs.found != 'true'
+
+      - name: Quarto version
+        run: quarto --version
 
       - name: Forget saved results (monthly full run)
         if: env.FULL_RUN == 'true'

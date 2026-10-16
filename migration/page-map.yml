@@ -14,8 +14,8 @@
 #           reworded it (default: keep the first conversion's wording unless
 #           it dropped text)
 
-source_ref: fix-gam-poisson-notation   # master + PRs #44, #45 and the multipanel tutorial
-branch_ref: origin/refactor_quarto      # first Quarto conversion, merged with the above
+source_ref: 7b59e6f   # old site incl. PRs #44, #45 and the multipanel tutorial (merged to master in #45)
+branch_ref: a31b08e   # first Quarto conversion (refactor_quarto), merged with the above
 
 chapters:
 

@@ -1,6 +1,6 @@
 # Migration report
 
-Old site: `fix-gam-poisson-notation` (75 pages). Book chapters written: 50.
+Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 ## preface.qmd
 13 blocks from 1 old page(s). 4 matched the first conversion; **9 restored** (missing), **0 restored** (trimmed), 0 condensed rewrites replaced by the original, 19 new blocks kept.

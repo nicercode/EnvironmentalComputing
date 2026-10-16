@@ -28,8 +28,8 @@ This simply means that the contribution to the linear predictor is now some func
 <p>You can have combinations of linear and smooth terms in your model, for example
 <span class="math display">\[y = \beta_0 + x_1\beta_1 + f(x_2) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)\]</span>
 or we can fit generalised distributions and random effects, for example
-<span class="math display">\[ln(y) = \beta_0 + f(x_1) + \varepsilon, \quad \varepsilon \sim Poisson(\lambda)\]</span>
-<span class="math display">\[ln(y) = \beta_0 + f(x_1) + z_1\gamma + \varepsilon, \quad \varepsilon \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)\]</span></p>
+<span class="math display">\[\ln(\lambda) = \beta_0 + f(x_1), \quad y \sim Poisson(\lambda)\]</span>
+<span class="math display">\[\ln(\lambda) = \beta_0 + f(x_1) + z_1\gamma, \quad y \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)\]</span></p>
 </div>
 <div id="a-simple-example" class="section level3">
 <h3>A simple example</h3>
@@ -224,6 +224,11 @@ ggplot(CO2_pred, aes(x = time)) +
 Check out <code>?gamm</code>, <code>?gamm4</code> and <code>?bam</code>
 Use <code>citation("mgcv")</code> for a range of papers with more technical explanations - the book on GAMs with R is particularly good (there’s a 2017 version)
 A great blog with lots of stuff on GAMs: <a href="https://www.fromthebottomoftheheap.net/" class="uri">https://www.fromthebottomoftheheap.net/</a></p>
+<p>Two full courses on GAMs, free to work through:</p>
+<ul>
+<li>Gavin Simpson’s <a href="https://github.com/gavinsimpson/physalia-gam-course">Generalized Additive Models</a> course (slides, R code and data)</li>
+<li>Noam Ross’s interactive <a href="https://noamross.github.io/gams-in-r-course/">GAMs in R</a> course</li>
+</ul>
 <p><strong>Author</strong>: Mitchell Lyons</p>
 <p><strong>Year:</strong> 2017</p>
 <p><strong>Last updated:</strong> Feb 2022</p>

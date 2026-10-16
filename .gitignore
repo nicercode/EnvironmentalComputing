@@ -18,3 +18,5 @@ _book/
 # re-runs the code of chapters that changed
 *.html
 **/*.quarto_ipynb
+# R graphics output from code run outside a knitr chunk device
+Rplots.pdf

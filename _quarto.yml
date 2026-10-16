@@ -1,7 +1,8 @@
 project:
   type: book
   output-dir: _book
-  # placeholder chapters (see "planned" below) are not rendered
+  # placeholder chapters (see "planned" below) are not rendered. To publish
+  # one, delete its "!" line here AND uncomment it under book: chapters
   render:
     - "*.qmd"
     - "content/**/*.qmd"
@@ -73,7 +74,9 @@ book:
   repo-branch: master
   repo-actions: [edit, issue]
   # Chapters marked "planned" are placeholders, left out until written.
-  # Uncomment a line (and add the part back if needed) to publish it.
+  # To publish one, uncomment its line (and add the part back if needed) AND
+  # delete its "!" exclusion under project: render, or it is listed but
+  # never built.
   chapters:
     - index.qmd
     - content/preface.qmd

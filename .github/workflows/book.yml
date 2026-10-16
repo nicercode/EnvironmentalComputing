@@ -23,9 +23,12 @@ permissions:
   pull-requests: write
   statuses: write
 
+# a newer push supersedes an older one, but scheduled and manual runs (also on
+# master) get their own group, so a merge doesn't cancel the monthly full run
+# and a manual run doesn't cancel a deploy
 concurrency:
-  group: book-${{ github.ref }}
-  cancel-in-progress: true
+  group: book-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' || github.event_name == 'pull_request' }}
 
 jobs:
   book:
@@ -111,25 +114,39 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Report problems found by the monthly run
-        if: env.FULL_RUN == 'true' && (hashFiles('chunk-errors.txt') != '' || steps.links.outputs.exit_code != 0)
+        # always(): a failed render is the main thing this run is for; the
+        # script below decides whether there is anything to report
+        if: always() && env.FULL_RUN == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
         run: |
+          # a step that failed (installing packages, rendering) stops the
+          # later ones, so their outputs may be missing
+          failed=${{ job.status != 'success' }}
+          links_broken=${{ steps.links.outputs.exit_code != '' && steps.links.outputs.exit_code != '0' }}
+          if [ -s chunk-errors.txt ]; then chunk_errors=true; else chunk_errors=false; fi
+          if [ "$failed$links_broken$chunk_errors" = falsefalsefalse ]; then
+            exit 0
+          fi
           {
             echo "The monthly re-run of every tutorial found problems."
             echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             echo
-            if [ -s chunk-errors.txt ]; then
+            if [ "$failed" = true ]; then
+              echo "## The build failed"
+              echo "A step of the run failed (for example installing packages or rendering), so later checks may not have run. See the run log."
+              echo
+            fi
+            if [ "$chunk_errors" = true ]; then
               echo "## Chapters with code that errors"
               sed 's/^/- [ ] /' chunk-errors.txt
               echo
             fi
-            if [ "${{ steps.links.outputs.exit_code }}" != "0" ]; then
+            if [ "$links_broken" = true ]; then
               echo "## Broken links"
               cat lychee-report.md
             fi
           } > issue.md
-          if [ -s chunk-errors.txt ] || [ "${{ steps.links.outputs.exit_code }}" != "0" ]; then
-            gh issue create --title "Monthly check: broken tutorials or links ($(date +%Y-%m))" \
-              --body-file issue.md
-          fi
+          gh issue create --title "Monthly check: broken tutorials or links ($(date +%Y-%m))" \
+            --body-file issue.md

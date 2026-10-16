@@ -208,7 +208,7 @@ Type `?dcast` and `?melt` to get the R help for these reshape2 functions.
 
 [Data wrangling with dplyr and tidyr](https://rpubs.com/bradleyboehmke/data_wrangling)
 
-[An introduction to reshape2](http://seananderson.ca/2013/10/19/reshape.html)
+[Pivoting](https://tidyr.tidyverse.org/articles/pivot.html), tidyr's guide to `pivot_longer()` and `pivot_wider()`, which replace `gather()`/`spread()` and reshape2's `melt()`/`dcast()`
 
 **Author**: Alistair Poore
 

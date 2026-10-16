@@ -102,6 +102,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 56 blocks from 1 old page(s). 56 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: dead link; reshape2 is superseded by tidyr's pivot functions
 
 ## data-visualisation/data-visualisation.qmd
 11 blocks from 3 old page(s). Existing chapter was a placeholder: written from the old page(s).
@@ -112,6 +113,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 - EDIT: tidied markup (heading space: 6)
 - EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: colour chart PDF gone
 - EDIT: link target split over two lines on the old page
 
 <details><summary>Details</summary>
@@ -358,6 +360,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/linear-regression.qmd
 46 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
 
+- EDIT: words in maths were typeset as italic variables ("plantheight"), and "." used for multiplication
 
 ## statistical-methods/interpret-lm-coeffs.qmd
 40 blocks from 1 old page(s). 40 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
@@ -450,6 +453,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 209 blocks from 4 old page(s). 202 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 5 new blocks kept.
 
 - EDIT: tidied markup (heading space: 3)
+- EDIT: glmmADMB is no longer maintained; glmmTMB is its successor
+- EDIT: the draft chapter is gone; the published paper by lme4's authors replaces it
 
 <details><summary>Details</summary>
 
@@ -473,6 +478,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 - EDIT: tidied markup (stray ## made siblings of ###: 1)
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: words in maths were typeset as italic variables; "intrannual" misspelt
+- EDIT: words in maths were typeset as italic variables
 - EDIT: further reading suggested in #38
 
 <details><summary>Details</summary>
@@ -519,6 +526,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/meta-analysis.qmd
 174 blocks from 4 old page(s). 167 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 2 new blocks kept.
 
+- EDIT: ape's site moved
 - EDIT: metafor's example datasets moved to the metadat package
 - EDIT: metafor's example datasets moved to the metadat package
 - EDIT: metafor's example datasets moved to the metadat package
@@ -586,6 +594,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 - EDIT: tidied markup (<font>/<center> tags: 1)
 - EDIT: tidied markup (stray ## made siblings of ###: 1)
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: Stack Overflow renamed the page
 
 ## misc/misc.qmd
 2 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
@@ -601,6 +610,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 48 blocks from 1 old page(s). 48 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: Quick-R page gone
 
 ## misc/rstudio-notebooks.qmd
 62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.

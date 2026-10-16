@@ -49,7 +49,7 @@ summary(model)
 
 The estimates for the coefficients give you the slope and intercept. In this example, the regression equation for (log) plant height as a function of temperature is:
 
-$$log(plant height) = -0.22566 +0.0421.temperature + \varepsilon $$ 
+$$\log(\text{plant height}) = -0.22566 + 0.0421 \times \text{temperature} + \varepsilon$$ 
 
 Calling `summary` on a model object produces a lot of useful information but one of the main things to look out for are the *t*-statistics and *p*-values for each coefficient. These test the null hypothesis that the true value for the coefficient is 0. 
 

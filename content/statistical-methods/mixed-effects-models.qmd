@@ -250,7 +250,7 @@ stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = 
 
 You can type `?lmer` into R for help with these functions.
 
-[Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4.
+[Fitting linear mixed-effects models using lme4](https://doi.org/10.18637/jss.v067.i01) (Bates et al. 2015, *Journal of Statistical Software*), from the authors of lme4.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Faraway, JJ. *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC press, 2005.</p>
 
@@ -463,7 +463,7 @@ Alternatively, you can plot by Estuary as before (see [Mixed models 1](#linear-m
 
 You can type `?lmer` into R for help with these functions.
 
-[Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4.
+[Fitting linear mixed-effects models using lme4](https://doi.org/10.18637/jss.v067.i01) (Bates et al. 2015, *Journal of Statistical Software*), from the authors of lme4.
 
 <p style="margin-left:.5in;text-indent:-.5in">Faraway, JJ (2005) *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC Press.</p>
 
@@ -685,7 +685,7 @@ plot(residuals(fit.pois) ~ fitted(fit.pois), main = "residuals vs. Fitted")
 qqnorm(residuals(fit.pois))
 ```
 
-Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunately lme4 can't handle this situation (overdispersion), and there is no easy way to model these data. If this happens in your data try the [glmmADMB](http://glmmadmb.r-forge.r-project.org/) package.
+Here we can see a distinct fan shape in the residual vs. fitted plot. Unfortunately lme4 can't handle this situation (overdispersion), and there is no easy way to model these data. If this happens in your data try the [glmmTMB](https://glmmtmb.github.io/glmmTMB/) package, which can fit negative binomial and other models for overdispersed data with random effects (it replaces the older glmmADMB package).
 
 **Hypothesis test for random effects**
 
@@ -721,7 +721,7 @@ stripchart(Est.means ~ sort(unique(Estuary)), data = Estuaries, pch = 18, col = 
 
 You can type `?glmer` into R for help with this function.
 
-[Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4.
+[Fitting linear mixed-effects models using lme4](https://doi.org/10.18637/jss.v067.i01) (Bates et al. 2015, *Journal of Statistical Software*), from the authors of lme4.
 
 <p style="margin-left:.5in;text-indent:-.5in">Faraway, JJ (2005) *Extending the linear model with R: generalized linear, mixed effects and nonparametric regression models*. CRC Press.</p>
 

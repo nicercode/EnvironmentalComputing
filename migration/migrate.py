@@ -730,6 +730,7 @@ def main():
                 if u != "/":
                     redirects.append((u, html + ("#" + anchor if anchor else "")))
 
+    link_fix_used = set()
     report = ["# Migration report", "",
               f"Old site: `{cfg['source_ref']}` ({len(site.pages)} pages). "
               f"Book chapters written: {len(specs)}.", ""]
@@ -839,11 +840,21 @@ def main():
             body = fix_preface(body, specs, site)
         origins = [s["page"] for s in c["sources"]]
         body = rewrite_links(body, ch.path, origins, links, ch.log)
+        # dead external links, fixed in every chapter
+        for k, e in enumerate(cfg.get("link_fixes", [])):
+            n = body.count(e["old"])
+            if n:
+                body = body.replace(e["old"], e["new"]) if e.get("all") \
+                    else body.replace(e["old"], e["new"], 1)
+                link_fix_used.add(k)
+                ch.log.append(f"edit applied: {e['reason']}")
         for e in c.get("edits", []):
             # match ignoring trailing spaces on each line (markdown line
             # breaks, which YAML block scalars don't keep)
-            pattern = "\n".join(re.escape(l.rstrip()) + r"[ \t]*"
-                                for l in e["old"].split("\n"))
+            # (only at line ends inside the match, not after its last line)
+            parts = e["old"].split("\n")
+            pattern = "".join(re.escape(l.rstrip()) + r"[ \t]*\n"
+                              for l in parts[:-1]) + re.escape(parts[-1])
             body, n = re.subn(pattern, lambda _: e["new"], body,
                               count=0 if e.get("all") else 1)
             if not n:
@@ -922,6 +933,11 @@ def main():
                 report.append(f"- kept new: {b.text.splitlines()[0][:110]}")
             report.append("\n</details>")
         report.append("")
+
+    for k, e in enumerate(cfg.get("link_fixes", [])):
+        if k not in link_fix_used:
+            sys.exit(f"ERROR: link fix not applicable ({e['reason']}): "
+                     f"{e['old'][:60]!r}")
 
     # data files previously served at /datasets/
     for f in sorted(site.files):

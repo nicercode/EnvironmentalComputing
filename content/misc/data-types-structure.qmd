@@ -154,7 +154,7 @@ is.numeric(eg_data_frame$numeric)
 ## Further help
 
 Further information on data types in R can be found [here](https://www.stat.auckland.ac.nz/~paul/ItDT/HTML/node64.html)
-and [here](http://www.statmethods.net/input/datatypes.html)
+and in the [Vectors chapter](https://adv-r.hadley.nz/vectors-chap.html) of *Advanced R*
 
 **Author**: Keryn Bain
 

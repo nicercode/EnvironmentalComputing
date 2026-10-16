@@ -22,6 +22,33 @@ branch_ref: a31b08e   # first Quarto conversion (refactor_quarto), merged with t
 base_ref: 3950af0     # the old site as it was when that conversion was made; text
                       # changed on the old site since then wins over the conversion
 
+# Replacements for dead external links, applied to every chapter (checked
+# 2026-10-16). Each must match somewhere, or migrate.py stops.
+link_fixes:
+  - reason: ape's site moved
+    old: "[ape](http://ape-package.ird.fr/)"
+    new: "[ape](https://emmanuelparadis.github.io/)"
+  - reason: glmmADMB is no longer maintained; glmmTMB is its successor
+    old: "try the [glmmADMB](http://glmmadmb.r-forge.r-project.org/) package."
+    new: "try the [glmmTMB](https://glmmtmb.github.io/glmmTMB/) package, which can fit negative binomial and other models for overdispersed data with random effects (it replaces the older glmmADMB package)."
+  - reason: the draft chapter is gone; the published paper by lme4's authors replaces it
+    all: true
+    old: "[Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4."
+    new: "[Fitting linear mixed-effects models using lme4](https://doi.org/10.18637/jss.v067.i01) (Bates et al. 2015, *Journal of Statistical Software*), from the authors of lme4."
+  - reason: dead link; reshape2 is superseded by tidyr's pivot functions
+    old: "[An introduction to reshape2](http://seananderson.ca/2013/10/19/reshape.html)"
+    new: "[Pivoting](https://tidyr.tidyverse.org/articles/pivot.html), tidyr's guide to `pivot_longer()` and `pivot_wider()`, which replace `gather()`/`spread()` and reshape2's `melt()`/`dcast()`"
+  - reason: Quick-R page gone
+    old: "and [here](http://www.statmethods.net/input/datatypes.html)"
+    new: "and in the [Vectors chapter](https://adv-r.hadley.nz/vectors-chap.html) of *Advanced R*"
+  - reason: colour chart PDF gone
+    all: true
+    old: "http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf"
+    new: "https://r-graph-gallery.com/42-colors-names.html"
+  - reason: Stack Overflow renamed the page
+    old: "https://stackoverflow.com/help/mcve"
+    new: "https://stackoverflow.com/help/minimal-reproducible-example"
+
 chapters:
 
   # ---- front matter ---------------------------------------------------------
@@ -198,6 +225,10 @@ chapters:
   - chapter: statistical-methods/linear-regression.qmd
     sources:
       - page: Statistics/linear-models/linear-regression
+    edits:
+      - reason: words in maths were typeset as italic variables ("plantheight"), and "." used for multiplication
+        old: '$$log(plant height) = -0.22566 +0.0421.temperature + \varepsilon $$'
+        new: '$$\log(\text{plant height}) = -0.22566 + 0.0421 \times \text{temperature} + \varepsilon$$'
   - chapter: statistical-methods/interpret-lm-coeffs.qmd
     seed: 1
     sources:
@@ -265,6 +296,14 @@ chapters:
     sources:
       - page: Statistics/gams
     edits:
+      - reason: words in maths were typeset as italic variables; "intrannual" misspelt
+        all: true
+        old: 'f_{\mathrm{intrannual}}(month)'
+        new: 'f_{\text{intra-annual}}(\text{month})'
+      - reason: words in maths were typeset as italic variables
+        all: true
+        old: 'f_{\mathrm{trend}}(time)'
+        new: 'f_{\text{trend}}(\text{time})'
       - reason: "further reading suggested in #38"
         old: "A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/"
         new: |-

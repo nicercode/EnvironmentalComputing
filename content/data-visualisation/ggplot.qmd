@@ -632,7 +632,7 @@ The font, colour, size and emphasis of any of these labels can be altered by arg
 * family. - the font style. Examples of fonts include: "Palatino", "Helvetica", "Courier", "Times". Further font choices can be seen 
 [here](http://www.cookbook-r.com/Graphs/Fonts/). For example, `family = "Palatino"`  
 * face. - the type of emphasis, with options including **bold**, *italic* and "bold.italic". For example, `face = "bold.italic"`  
-* colour. - the colour can be changed to any of the colours listed [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf). Remember to include "" before and after the colour name. For example, `colour = "steelblue2"`.  
+* colour. - the colour can be changed to any of the colours listed [here](https://r-graph-gallery.com/42-colors-names.html). Remember to include "" before and after the colour name. For example, `colour = "steelblue2"`.  
 * size. - the size of the text. This is specified by entering a number. For example, `size = (3)`.  
 
 ### Example code
@@ -767,7 +767,7 @@ IrisPlot <- ggplot(iris, aes(Petal.Length, Sepal.Length)) +
 print(IrisPlot)
 ```
 
-The plots and outlines can be changed to any colour listed [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf). Remember to include "" before and after the colour name. 
+The plots and outlines can be changed to any colour listed [here](https://r-graph-gallery.com/42-colors-names.html). Remember to include "" before and after the colour name. 
 
 ### Using colour to visualise additional variables
 
@@ -960,7 +960,7 @@ In this examples, let's use a data set that is already in R with the length and 
 data(iris)
 ```
 
-To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the `summarise` and `group_by` functions in the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html). See [here](../data-literacy/summarising-tables/index.qmd)for more details on using dplyr for summarising data.
+To contrast a variable across species, we first need to summarise the data to obtain means and a measure of variation for each of the three species in the data set. There are several ways to do this in R, but we like the `summarise` and `group_by` functions in the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html). See [here](../data-literacy/summarising-tables/index.qmd) for more details on using dplyr for summarising data.
 
 The following code will make a new data frame with the summary data per species.
 
@@ -1123,7 +1123,7 @@ Themes can have many different elements, that relate to legends, axes, titles et
 
 ### Formatting the plot and legend background
 
-The plot and legend background can be changed to any colour listed [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf) using the following code:
+The plot and legend background can be changed to any colour listed [here](https://r-graph-gallery.com/42-colors-names.html) using the following code:
 
 * `panel.background = element_rect(your format)` will alters the panel behind the graph  
 * `legend.key = element_rect(your format)` alters the boxes next to each category name  

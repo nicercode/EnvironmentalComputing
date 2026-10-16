@@ -246,7 +246,7 @@ CO2 <- CO2[CO2$year %in% (2000:2010), ]
 ```
 
 OK, so let's plot it and look at a smooth term for time.
-$$y = \beta_0 + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+$$y = \beta_0 + f_{\text{trend}}(\text{time}) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
 
 ```{r}
 #| label: generalised-additive-models-21
@@ -279,8 +279,8 @@ gam.check(CO2_time)
 ```
 
 The residual plots have a very odd looking rise-and-fall pattern - clearly there is some dependence structure (and we can probably guess it has something to do with intra-annual fluctuations). Let's try again, and introduce something called a cyclical smoother.
-$$y = \beta_0 + f_{\mathrm{intrannual}}(month) + f_{\mathrm{trend}}(time) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
-The cyclical smooth term, $f_{\mathrm{intrannual}}(month)$, is comprised of basis functions just the same as we have seen already, except that the end points of the spline are constrained to be equal - which makes sense when we're modelling a variable that is cyclical (across months/years).
+$$y = \beta_0 + f_{\text{intra-annual}}(\text{month}) + f_{\text{trend}}(\text{time}) + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
+The cyclical smooth term, $f_{\text{intra-annual}}(\text{month})$, is comprised of basis functions just the same as we have seen already, except that the end points of the spline are constrained to be equal - which makes sense when we're modelling a variable that is cyclical (across months/years).
 
 We'll now see the `bs =` argument to choose the type of smoother, and the `k =` argument to choose the number of knots, because cubic regression splines have a set number of knots. We use 12 knots, because there are 12 months.
 

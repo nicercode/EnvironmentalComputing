@@ -494,7 +494,7 @@ Actually, we just need to model phylogenetic non-independence by adding the degr
 
 This means that we need a phylogenetic tree for our data set. For this data set, we have prepared a tree for you to download [here](https://www.dropbox.com/s/d5pzkb9ezgx6798/tree_curtis1998.tre?dl=0). But it is not that difficult to get a tree together by using the package called `rotl`.
 
-First install and load the package [ape](http://ape-package.ird.fr/) that we will use to import the tree file and visualise the phylogeny.
+First install and load the package [ape](https://emmanuelparadis.github.io/) that we will use to import the tree file and visualise the phylogeny.
 
 ```{r}
 #| label: prep1

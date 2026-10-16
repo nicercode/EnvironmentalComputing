@@ -20,7 +20,7 @@ You probably already have your data in a nice fancy excel document and, as such,
 **3. You might want to simulate data you expect to collect, to ensure you have the right methods listed in your proposal
 **4. You might get stuck and want to ask for help  
 
-The focus here will be on the last point. It is pretty inevitable you'll get stuck with some sort of coding problem. We all do! When this happens, and you want to send some code to a friend, colleague, or even ask a question on the internet, you need to provide a [reproducible example](https://stackoverflow.com/help/mcve)! 
+The focus here will be on the last point. It is pretty inevitable you'll get stuck with some sort of coding problem. We all do! When this happens, and you want to send some code to a friend, colleague, or even ask a question on the internet, you need to provide a [reproducible example](https://stackoverflow.com/help/minimal-reproducible-example)! 
 
 By doing this, you avoid the need to send your code file and entire data set as attachments to a friend or colleague to have a look. A reproducible example means that someone can quickly, and efficiently copy and paste just the code that you send and reproduce your error or issue you are having. 
 

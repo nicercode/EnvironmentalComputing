@@ -22,6 +22,7 @@ migration/report.md.
 Usage (from the repository root):
     python3 migration/migrate.py
 """
+import collections
 import difflib
 import os
 import posixpath
@@ -311,6 +312,68 @@ def similarity(a, b):
             sm.quick_ratio() < MATCH_THRESHOLD:
         return 0.0
     return sm.ratio()
+
+
+def tidy_markdown(body, log, sectioned=False):
+    """Fix markup the old site's renderer tolerated (or rendered wrongly
+    too) but Pandoc doesn't, outside code chunks."""
+    out, in_code, changed = [], False, collections.Counter()
+    for line in body.split("\n"):
+        if FENCE.match(line):
+            in_code = not in_code
+        elif not in_code:
+            # "###Heading": Pandoc needs a space after the #s
+            new = re.sub(r"^(#{1,6})([^#\s])", r"\1 \2", line)
+            # <font face="monospace">x</font> -> `x`
+            new = re.sub(r'<font face="monospace">(.*?)</font>', r"`\1`", new)
+            # <center>![](img)</center> -> centred figure
+            new = re.sub(r"<center>\s*(!\[[^\]]*\]\([^)]+\))\s*</center>",
+                         r'\1{fig-align="center"}', new)
+            if new != line:
+                changed["heading space" if new.startswith("#") and
+                        not line.startswith("# ") and "font" not in line
+                        else "<font>/<center> tags"] += 1
+            line = new
+        out.append(line)
+    body = "\n".join(out)
+
+    # chapters start their sections at ##; a chapter starting at ### gets
+    # numbered "N.0.1"
+    levels, in_code = [], False
+    for line in body.split("\n"):
+        if FENCE.match(line):
+            in_code = not in_code
+        elif not in_code and (m := re.match(r"^(#{2,6})\s", line)):
+            levels.append(len(m.group(1)))
+    if not sectioned and levels and levels[0] > 2 and 2 in levels:
+        # a single old page whose sections are ###, with the odd stray ##
+        # among them (e.g. "## Assumptions to check" between ### siblings):
+        # make the strays siblings too
+        out, in_code = [], False
+        for line in body.split("\n"):
+            if FENCE.match(line):
+                in_code = not in_code
+            elif not in_code and re.match(r"^##\s", line):
+                line = "#" + line
+            out.append(line)
+        body = "\n".join(out)
+        levels = [3 if l == 2 else l for l in levels]
+        changed["stray ## made siblings of ###"] += 1
+    if levels and min(levels) > 2:
+        shift = min(levels) - 2
+        out, in_code = [], False
+        for line in body.split("\n"):
+            if FENCE.match(line):
+                in_code = not in_code
+            elif not in_code and (m := re.match(r"^(#{3,6})(\s.*)$", line)):
+                line = "#" * (len(m.group(1)) - shift) + m.group(2)
+            out.append(line)
+        body = "\n".join(out)
+        changed["headings raised to start at ##"] += 1
+
+    for what, n in changed.items():
+        log.append(f"edit applied: tidied markup ({what}: {n})")
+    return body
 
 
 def keep_spelling_fixes(old, new):
@@ -769,6 +832,7 @@ def main():
             fm = "---\ntitle: " + yaml.safe_dump(title).strip().replace(
                 "\n...", "") + "\n---\n"
         body = "\n\n".join(b.text for b in out)
+        body = tidy_markdown(body, ch.log, ch.sectioned)
         body = LAST_UPDATED.sub("", body)
         body = re.sub(r"\n{3,}", "\n\n", body)
         if ch.path == "preface.qmd":

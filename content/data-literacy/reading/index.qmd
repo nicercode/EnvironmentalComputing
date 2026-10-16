@@ -6,7 +6,7 @@ Before we can run any data analyses or create figures in R, we need to import th
 
 Importing data is a major challenge for beginners. This module will give instructions for one of most common ways we import data, and some of challenges you may face and how to overcome them. Some of these issues can be avoided by following good data entry and management practices (first read [Data entry](../../misc/data-entry.qmd) to get help with this.
 
-### Importing data as a data frame
+## Importing data as a data frame
 
 We recommend entering data into a spreadsheet program (e.g., Excel), and saving that data as a comma separated values (.csv) file. These are easily read into R and shared among users with different spreadsheet programs.
 
@@ -23,7 +23,7 @@ Second, import the data file to a data frame called Snail_feeding with the `read
 Snail_feeding <- read.csv("Snail_feeding.csv")
 ```
 
-### Cleaning data frames
+## Cleaning data frames
 
 When you use `read.csv`, R uses several default arguments which can be altered to ensure your data are imported with fewer errors. Have a look at the help file within R (by typing `?read.csv` to familiarise yourself with some of these arguments.
 
@@ -43,9 +43,9 @@ Putting all these together in the `read.csv` function will give us a cleaner dat
 Snail_feeding <- read.csv("Snail_feeding.csv", header = T, strip.white = T, na.strings = "")
 ```
 
-###  Checking the data
+##  Checking the data
 
-If something is a character when it should be numeric you might see messages such as <font face="monospace">"'x' must be numeric "</font> or <font face="monospace">"non-numeric argument to binary operator"</font>. Likewise, if something is a factor when it should be character, some character operations might fail. To avoid some of these issues, check your data using `str` and `summary` before analyses.
+If something is a character when it should be numeric you might see messages such as `"'x' must be numeric "` or `"non-numeric argument to binary operator"`. Likewise, if something is a factor when it should be character, some character operations might fail. To avoid some of these issues, check your data using `str` and `summary` before analyses.
 
 `str`  enables you to check the structure of your data and that your variables are the correct type (i.e., numeric, characters, integers, or factors). See [Data types and structure](../../misc/data-types-structure.qmd) for explanations of these different types.
 
@@ -65,7 +65,7 @@ summary(Snail_feeding)
 
 Note that for the factor of sex, errors in data entry resulted in five levels (female, female s, male, Male and males) when there should be only two. See below for the fix.
 
-### Common problems when importing data
+## Common problems when importing data
 
 **You don't get the number of columns or rows you expect**
 
@@ -210,13 +210,13 @@ There is only 1 row. After confirming with our original data that this is in fac
 Snail_feeding[which(Snail_feeding$Depth > 2), 6] <- 1.62
 ```
 
-### Why do this in R ?
+## Why do this in R ?
 
 You might be wondering why go through the trouble of fixing this in R? Why not just go to the .csv file and fix all the problems directly. It is usually OK to do this if you know the problem is a typo etc. However to maintain data integrity it is important to have a record of every change that has been made to your original data set. By doing all the manipulations and fixes in R, you are also keeping a record of all the changes that are occurring to your data.
 
 Also, you may want to start to explore data before you have collected the entire data set. If you set up a script that checks all of these things before making graphs and running analyses, it is quick to run the script again on the full data once you have it all. The script acts to remind you of all the things to check and is better at picking up typos than you are in a huge spreadsheet.
 
-### The final check
+## The final check
 
 Finally, once you have checked and fixed all the problems in your data re run `str` and `summary`. Actually it is a good idea to run these functions regularly throughout data cleaning to keep tabs on any changes you make.
 
@@ -225,7 +225,7 @@ str(Snail_feeding)
 summary(Snail_feeding)
 ```
 
-### Further help
+## Further help
 
 [Intro to data cleaning in R by de jonge and van de Loo](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
 

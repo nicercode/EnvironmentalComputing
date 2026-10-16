@@ -33,7 +33,7 @@ Let's start with a famous [tweet](https://twitter.com/ucfagls/status/84244468651
 
 This is basically all there is too it - an extension of [generalised linear models (GLMs)](generalised-linear-models.qmd) with a smoothing function. Of course, there may be many sophisticated things going on when you fit a model with smooth terms, but you only need to understand the rationale and some basic theory. There are also lots of what would be apparently magic things happening when we try to understand what is under the hood of say `lmer` or `glmer`, but we use them all the time without reservation!
 
-### GAMs in a nutshell
+## GAMs in a nutshell
 
 Let's start with an equation for a Gaussian [linear model](linear-regression.qmd):
 $$y = \beta_0 + x_1\beta_1 + \varepsilon, \quad \varepsilon \sim N(0, \sigma^2)$$
@@ -49,7 +49,7 @@ or we can fit generalised distributions and random effects, for example
 $$\ln(\lambda) = \beta_0 + f(x_1), \quad y \sim Poisson(\lambda)$$
 $$\ln(\lambda) = \beta_0 + f(x_1) + z_1\gamma, \quad y \sim Poisson(\lambda), \quad \gamma \sim N(0,\Sigma)$$
 
-### A simple example
+## A simple example
 
 Lets try a simple example. First, let's create a data frame and fill it with some simulated data with an obvious non-linear trend and compare how well some models fit to that data.
 
@@ -93,7 +93,7 @@ plot(lm_y, which = 1)
 
 Clearly, the residuals are not evenly spread across values of $x$, and we need to consider a better model.
 
-### Running the analysis
+## Running the analysis
 
 Before we consider a GAM, we need to load the package [mgcv](https://cran.r-project.org/web/packages/mgcv/index.html) - *the* choice for running GAMs in R.
 
@@ -145,7 +145,7 @@ Using `summary` with the model object will give you the significance of the smoo
 summary(gam_y)
 ```
 
-### Smooth terms
+## Smooth terms
 
 As mentioned above, we'll focus on splines, as they are the smooth functions that are most commonly implemented (and are pretty quick and stable). So what was actually going on when we specified `s(x)`?
 
@@ -318,7 +318,7 @@ plot(CO2_season_time)
 
 There's more to the story - perhaps spatial autocorrelations of some kind? `gam` can make use of the spatial autocorrelation structures available in the `nlme` package, more on that next time. Hopefully for the meantime GAMs now don't seem quite so scary or magical, and you can start to make use of what is really an incredibly flexible and powerful modelling framework.
 
-### Communicating the results
+## Communicating the results
 
 You can essentially present model results from a GAM as if it were any other linear model, the main difference being that for the smooth terms, there is no single coefficient you can make inference from (i.e. negative, positive, effect size etc.). So you need to rely on either interpreting the partial effects of the smooth terms visually (e.g. from a call to `plot(gam_model)`) or make inference from the predicted values. You can of course include normal linear terms in the model (either continuous or categorical, and in an ANOVA type framework even) and make inference from them like you normally would. Indeed, GAMs are often useful for accounting for a non-linear phenomenon that is not directly of interest, but needs to be accounted for when making inference about other variables.
 
@@ -336,7 +336,7 @@ ggplot(CO2_pred, aes(x = time)) +
   geom_line(aes(y = predicted_values), colour = "red")
 ```
 
-### Further help
+## Further help
 
 The R help `?gam` is very good, and there is masses of information to read.
 Check out `?gamm`, `?gamm4` and `?bam`.

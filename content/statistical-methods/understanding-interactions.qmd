@@ -151,7 +151,7 @@ plotIG <- ggplot(IntPlots_figG, aes(pH, Growth, group = Temperature, col = Tempe
 
 In this figure, there is an effect of pH (reduced growth in the acid treatment) in the warm and hot temperature treatments, but not the control temperature. Coral growth was always reduced in the hot treatment, but in the warm treatment, growth was slowed relative to the control only in the acid treatment.
 
-### Communicating results
+## Communicating results
 
 **Written.** If you have significant interaction between two factors in your design, then communicating your results requires text that describes how the effects of one factor depend on the other. In the examples with interactions above, you could not simply say that "ocean acidification reduced the growth of corals" because this result varied across the temperature treatments.
 

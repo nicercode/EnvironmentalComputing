@@ -32,7 +32,7 @@ We could reduce this into a univariate dataset by calculating the 4950 (100*99/2
 
 Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models.
 
-### Running the analysis
+## Running the analysis
 
 First, install and load the mvabund package.
 
@@ -107,7 +107,7 @@ The model syntax below fits our response variable (the mvabund object Herb_spp w
 mod1 <- manyglm(Herb_spp ~ Herbivores$Habitat, family = "poisson")
 ```
 
-### Assumptions to check
+## Assumptions to check
 
 Before we examine the output, we need to check our model assumptions. We can use the `plot` function to generate a plot of residuals.
 
@@ -130,7 +130,7 @@ plot(mod2)
 
 This residual plot is much better, there is now no discernible fan shape and we will use this model for all further analysis.
 
-### Interpreting the results
+## Interpreting the results
 
 We can test the multivariate hypothesis of whether species composition varied across the habitats by using the `anova` function. This gives an analysis of deviance table where we use likelihood ratio tests and resampled p values to look for a significant effect of Habitat on the community data.
 
@@ -162,13 +162,13 @@ anova(mod3)
 
 You can see that the species composition of herbivores varies with habitat, but not between day and night.
 
-### Communicating the results
+## Communicating the results
 
 **Written.** If we were writing a paper about the differences in habitat use by marine herbivores, we may write the following: There were different marine herbivores communities on different algal substrates (LRT = 625, P < 0.001). We can be more descriptive about the community differences by using a graphical representation of our results.
 
 **Visual.** Multivariate data are best visualised by ordination plots. See the [boral](https://cran.r-project.org/web/packages/boral/index.html) package for model based ordination. To get started, watch [this](https://www.youtube.com/watch?v=XmrVVMG1HXI) video.
 
-### Further help
+## Further help
 
 This method was created by UNSW's Ecostats research group, you can keep up with their latest research on their [blog](http://eco-stats.blogspot.com/). They have been updating the mvabund package with many new exciting features, including block resampling and fourth corner analyses.
 

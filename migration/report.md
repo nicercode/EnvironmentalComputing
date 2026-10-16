@@ -47,10 +47,12 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## basics/r.qmd
 27 blocks from 1 old page(s). 27 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## basics/projects.qmd
 24 blocks from 1 old page(s). 24 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## data-literacy/making-analysis-ready-data.qmd
 8 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
@@ -59,11 +61,15 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## data-literacy/reading/index.qmd
 78 blocks from 1 old page(s). 78 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 - EDIT: letter case `Importing_data_image.jpg` -> `Importing_data_image.JPG` (only worked on macOS)
 
 ## data-literacy/filter-rows/index.qmd
 78 blocks from 1 old page(s). 78 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (<font>/<center> tags: 8)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 <details><summary>Details</summary>
 
@@ -74,14 +80,17 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## data-literacy/mutate/index.qmd
 46 blocks from 1 old page(s). 46 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## data-literacy/joining-tables/index.qmd
 49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## data-literacy/summarising-tables/index.qmd
 50 blocks from 1 old page(s). 50 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 <details><summary>Details</summary>
 
@@ -92,6 +101,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## data-literacy/pivotting/index.qmd
 56 blocks from 1 old page(s). 56 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## data-visualisation/data-visualisation.qmd
 11 blocks from 3 old page(s). Existing chapter was a placeholder: written from the old page(s).
@@ -100,6 +110,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## data-visualisation/ggplot.qmd
 345 blocks from 10 old page(s). 195 matched the first conversion; **150 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 27 condensed rewrites replaced by the original, 2 new blocks kept. Original wording preferred throughout.
 
+- EDIT: tidied markup (heading space: 6)
+- EDIT: tidied markup (<font>/<center> tags: 1)
 - EDIT: link target split over two lines on the old page
 
 <details><summary>Details</summary>
@@ -313,10 +325,13 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## data-visualisation/pca.qmd
 49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (stray ## made siblings of ###: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## data-visualisation/heatmaps.qmd
 60 blocks from 1 old page(s). 60 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## statistical-methods/statistical-methods.qmd
 17 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
@@ -347,6 +362,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/interpret-lm-coeffs.qmd
 40 blocks from 1 old page(s). 40 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## statistical-methods/t-tests.qmd
 125 blocks from 4 old page(s). 123 matched the first conversion; **2 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
@@ -399,6 +415,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/understanding-interactions.qmd
 19 blocks from 1 old page(s). 19 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 1 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 <details><summary>Details</summary>
 
@@ -426,11 +443,13 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/interpret-glm-coeffs.qmd
 43 blocks from 1 old page(s). 43 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 - EDIT: the old page linked to itself here instead of the linear-models page the text names
 
 ## statistical-methods/mixed-effects-models.qmd
 209 blocks from 4 old page(s). 202 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 5 new blocks kept.
 
+- EDIT: tidied markup (heading space: 3)
 
 <details><summary>Details</summary>
 
@@ -452,6 +471,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/generalised-additive-models.qmd
 82 blocks from 1 old page(s). 82 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **1 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (stray ## made siblings of ###: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 - EDIT: further reading suggested in #38
 
 <details><summary>Details</summary>
@@ -464,6 +485,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/time-series-analysis.qmd
 47 blocks from 1 old page(s). 44 matched the first conversion; **3 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
 
+- EDIT: tidied markup (heading space: 3)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 <details><summary>Details</summary>
 
@@ -479,14 +502,19 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/MVabund.qmd
 60 blocks from 1 old page(s). 60 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## statistical-methods/cluster-analysis.qmd
 43 blocks from 1 old page(s). 43 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## statistical-methods/mds.qmd
 52 blocks from 1 old page(s). 52 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (stray ## made siblings of ###: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## statistical-methods/meta-analysis.qmd
 174 blocks from 4 old page(s). 167 matched the first conversion; **7 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 2 new blocks kept.
@@ -543,6 +571,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## coding-skills/version-control.qmd
 55 blocks from 1 old page(s). 54 matched the first conversion; **1 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 1 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 <details><summary>Details</summary>
 
@@ -554,6 +583,9 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## coding-skills/asking-code-questions.qmd
 81 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
 
+- EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: tidied markup (stray ## made siblings of ###: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## misc/misc.qmd
 2 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
@@ -562,14 +594,19 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## misc/data-entry.qmd
 22 blocks from 1 old page(s). 22 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## misc/data-types-structure.qmd
 48 blocks from 1 old page(s). 48 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## misc/rstudio-notebooks.qmd
 62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (stray ## made siblings of ###: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## misc/interactive-maps.qmd
 26 blocks from 1 old page(s). 26 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
@@ -578,6 +615,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## misc/contingency-tables.qmd
 49 blocks from 1 old page(s). 49 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## misc/fishers-exact.qmd
 20 blocks from 1 old page(s). 20 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
@@ -586,10 +625,13 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## misc/goodness-of-fit.qmd
 44 blocks from 1 old page(s). 44 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (<font>/<center> tags: 1)
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## misc/power-analysis.qmd
 62 blocks from 1 old page(s). 62 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
+- EDIT: tidied markup (headings raised to start at ##: 1)
 
 ## datasets.qmd
 47 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).

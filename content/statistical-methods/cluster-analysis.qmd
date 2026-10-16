@@ -13,7 +13,7 @@ There are many methods available for clustering (agglomerative, divisive, non hi
 * recalculate the similarity matrix for that cluster vs all remaining objects
 * repeat last two steps until all objects are joined
 
-### Running the analysis
+## Running the analysis
 
 ![](images/Cluster_analysis_image2.jpg)
 
@@ -56,7 +56,7 @@ We then use `hclust` function with an argument that specifies the linkage method
 H_metals.cluster <- hclust(H_metals.sim, method = "single")
 ```
 
-Finally, plot the object that was created by the <font face="monospace">hclust</font> function.
+Finally, plot the object that was created by the `hclust` function.
 
 ```{r}
 #| label: cluster-analysis-6
@@ -70,13 +70,13 @@ We can make this a bit neater with all the samples lined up along the bottom by 
 plot(as.dendrogram(H_metals.cluster), ylab = "Euclidean distance")
 ```
 
-### Interpreting the results
+## Interpreting the results
 
 A dendrogram has a branch for each sample joined at nodes that relate to the value of the similarity coefficient that joined the two objects. Interpretation of all the relationships comes from examination of the branching structure (which objects join most closely with each other) and from the similarities at which they join. Objects that join together close the tips of the branches are more similar to each other than those that join further toward the base of the tree (note that the default dendogram in R is like an upside down tree with the branches at the bottom and trunk at the top).
 
 Strong evidence for distinct groups would be evident if there were clusters where the samples within a cluster are much more similar to each other than samples in other clusters.
 
-### Assumptions to check
+## Assumptions to check
 
 Before running a cluster analysis to create a dendrogram, you need to consider:
 
@@ -86,7 +86,7 @@ Before running a cluster analysis to create a dendrogram, you need to consider:
 
 **What method will be used to create the dendrogram.** The structure of dendrograms can also be sensitive to algorithm used to construct the tree (the linkage method). In the previous example, you used the single linkage method. The `hclust` function in R has several available: `"ward"`, `"single"`, `"complete"`, `"average"`, `"mcquitty"`, `"median"` and `"centroid"`.
 
-### Communicating the results
+## Communicating the results
 
 **Written.**  The interpretation of the dendrogram would be described in the text of a Results section (i.e, were there any obvious clusters of samples? were there any samples that were very different from the rest?). There are no numerical results to report.
 
@@ -109,7 +109,7 @@ labels_colors(dend) <- sample_colours
 plot(dend, ylab = "Euclidean distance")
 ```
 
-### Further help
+## Further help
 
 You can access R help for the main functions used here by typing `?hclust`, `?dist` or `?as.dendrogram`. There are many R packages associated with the many different types of cluster analysis. See a long list of possibly useful packages [here](http://cran.cnr.berkeley.edu/web/views/Cluster.html).
 

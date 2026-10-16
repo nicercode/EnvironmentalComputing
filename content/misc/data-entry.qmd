@@ -4,7 +4,7 @@ title: "Data Entry"
 
 Data is the life-blood of science. As part of the scientific process, we invest an enormous amount of time collecting, analysing and presenting data. Before we can analyse data, however, we typically need to get it into a format that can be interpreted by others, and more importantly by the software used for analysis. Do this well and you can save yourself a lot of time; do this badly and you may end up wasting considerable time 'cleaning' and structuring the data to make it usable.
 
-### What should a data set look like?
+## What should a data set look like?
 
 Most data sets consist of rectangular tables of **values** (usually numbers or text). Each value belongs to a **variable** and an **observation**. A variable consists of values of the same type (e.g., temperature, duration or abundance). An observation consists of all values measured on the same unit (e.g., plot or individual). The convention is to store variables in columns and observations in rows.
 
@@ -38,7 +38,7 @@ raw_dat
 
 This table is structured so that new data can be added with ease. For instance, we may wish to combine the data for multiple 'collecting groups', in which case it is straight-forward to add news rows to the existing dataset.  If an additional set of samples has new insect species, we do not need to add new columns for each new species, just new values for the Insect variable. This is known as a long format. Some analyses (e.g., contrasts of species composition) will require each species as a separate column. See our [Reshaping data](../data-literacy/pivotting/index.qmd) for help on swapping between long and wide formats.
 
-### 6 Golden rules of data entry
+## 6 Golden rules of data entry
 
 **1.** Each column should contain only one type of information (i.e., text, numbers, dates, boolean). For instance, if text is inserted within or below the dataset, R or other analysis software will try to interpret the text as a **value** in the corresponding column. Similarly, if summary text is provided above the data (a common mistake), this will be interpreted as the first line or header of the actual data.
 
@@ -50,9 +50,9 @@ This table is structured so that new data can be added with ease. For instance, 
 
 **5.** Do not manipulate the raw data once digitized. Ideally the raw data should be treated as 'read-only' and any further transformations or manipulations should be done using saved R scripts (or an alternative programming language). This avoids accidentally inserting errors into the raw data each time you want to tweak something.
 
-**6.** Finally, always store data as <font face="monospace">.csv</font> or <font face="monospace">.txt</font> **NOT** <font face="monospace">.xls</font>, <font face="monospace">.xlsx</font> or other proprietary formats as those cannot be easily read into R or shared with collaborators. Text files do not require specific software to be read.
+**6.** Finally, always store data as `.csv` or `.txt` **NOT** `.xls`, `.xlsx` or other proprietary formats as those cannot be easily read into R or shared with collaborators. Text files do not require specific software to be read.
 
-### Further help
+## Further help
 
 Once your data is entered in .csv or .txt format, see [Importing data](../data-literacy/reading/index.qmd) for help on importing into R.
 

@@ -30,7 +30,8 @@ DROPPED = [
 
 
 def norm(line):
-    line = re.sub(r"^\s*#+\s", "", line)                  # heading level
+    line = re.sub(r"^\s*#+\s*", "", line)                 # heading level
+    line = re.sub(r"</?(font|center)[^>]*>|\{fig-align=[^}]*\}", "", line)
     line = re.sub(r'<a id="[^"]*"></a>|\{#[^}]*\}', "", line)   # anchors
     line = re.sub(r"\]\([^)]*\)", "]", line)              # link targets
     line = re.sub(r"""(['"])[^'"\s]*/([^/'"\s]+)\1""", r"\1\2\1", line)

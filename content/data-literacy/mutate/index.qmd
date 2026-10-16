@@ -17,7 +17,7 @@ Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
 
 The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.
 
-### Adding a new variable
+## Adding a new variable
 
 ![](Making_new_variables_image.jpg)
 
@@ -71,7 +71,7 @@ In the above examples, note that the new variables have been added to the existi
 
 These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](../filter-rows/index.qmd) and [summarising](../summarising-tables/index.qmd) data.
 
-### Renaming a variable
+## Renaming a variable
 
 dplyr offers a straightforward function, `rename`, to change the name of any variable. For example, to change Mass to Biomass, we simply use:
 
@@ -80,7 +80,7 @@ dplyr offers a straightforward function, `rename`, to change the name of any var
 Herbivores <- rename(Herbivores, Biomass = Mass)
 ```
 
-### Uniting several columns into one
+## Uniting several columns into one
 
 ![](Unite_image.jpg)
 
@@ -113,7 +113,7 @@ View the data frame again and you will notice the new variable, and the fact tha
 Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep = "_", remove = FALSE)
 ```
 
-### Separating one column into several
+## Separating one column into several
 
 ![](Separate_image.jpg)
 
@@ -136,7 +136,7 @@ The arguments of `separate` are:
 
 Note that this was only possible because there was a character separating the two variables in the text of the one to be separated (e.g., we couldn't do this is if the species names in the Habitat variable were originally GenusSpecies, rather than Genus_species).
 
-### Further help
+## Further help
 
 Type `?mutate`, `?unite`, and `?separate` for the R help for these functions.
 

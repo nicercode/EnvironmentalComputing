@@ -17,7 +17,7 @@ For this example,
 
 $\chi^2 = \frac{(60-50)^2}{50}+\frac{(40-50)^2}{50}$
 
-### Running the analysis
+## Running the analysis
 
 You can calculate $\chi^2$ pretty easily with a calculator. You would then need to determine the probability of obtaining that $\chi^2$ value from the known probability distribution of $\chi^2$.
 
@@ -59,7 +59,7 @@ You are not constrained to just two categories, or an expectation that the count
 chisq.test(x = c(10, 20, 70), p = c(0.25, 0.25, 0.5))
 ```
 
-### Interpreting the results
+## Interpreting the results
 
 The output from a goodness of fit test is very simple: the value of $\chi^2$, the degrees of freedom (number of categories - 1) and the p-value. The p-value gives the likelihood of your observed counts coming from a population with the expected frequencies that you specified.
 
@@ -83,11 +83,11 @@ These are the differences between the observed and expected, standardised by the
 
 Exploring the residuals becomes important when there are more than two categories in the test, as the $\chi^2$ test will only tell you if the observed frequencies differ from the expected across all categories, not which particular category is over- or under-represented.
 
-### Assumptions to check
+## Assumptions to check
 
 **Independence.** The $\chi^2$ test assumes that the observations are classfied into each category independently of each other. This is a sampling design issue and is usually avoided by random sampling. In the sex ratio example, there would be problems is you deliberately chose women to add to your sample if you thought that you had enough men already.  
 
-**Sample size.** The $\chi^2$ statistic can only be reliably compared to the $\chi^2$ distribution if sample sizes are sufficiently large. You should check that at least 20% of the expected frequencies are larger than 5. You can see the expected counts for each category by adding <font face="monospace">$expected</font> to the end of your $\chi^2$ test. For example,
+**Sample size.** The $\chi^2$ statistic can only be reliably compared to the $\chi^2$ distribution if sample sizes are sufficiently large. You should check that at least 20% of the expected frequencies are larger than 5. You can see the expected counts for each category by adding `$expected` to the end of your $\chi^2$ test. For example,
 
 ```{r}
 #| label: goodness-of-fit-7
@@ -97,7 +97,7 @@ chisq.test(x = c(60, 40), p = c(0.5, 0.5))$expected
 
 If this assumption has not been met, you could combine categories (if you have more than two), run a randomisation test or consider log-linear modelling.
 
-### Communicating the results
+## Communicating the results
 
 **Written.** The results of a $\chi^2$ goodness of fit test can be easily presented in the text of a results section. For example, "The sex ratio of the class of 100 students differed significantly from a 1:1 ratio ("$\chi^2$ = 4, df = 1, P = 0.0455)."  
 
@@ -110,7 +110,7 @@ barplot(c(60, 40), xlab = "Sex", ylab = "Count", names = c("Female", "Male"))
 
 See the graphing modules for making better versions of these figures that are suitable for reports or publications.
 
-### Further help
+## Further help
 
 Type `?chisq.test` to get the R help for this function. 
 

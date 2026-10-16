@@ -2,7 +2,7 @@
 title: "Version Control"
 ---
 
-### Advantages, disadvantages and solutions
+## Advantages, disadvantages and solutions
 
 Fundamental to project organization is maintaining a consistent, uniform and simple set of working files that can be understood by your future self, collaborators and interested folks wanting to reproduce your analyses or re-use code or your data. However, for complex projects with many collaborators maintaining tidiness and keeping track of changing files can be very challenging!
 
@@ -36,7 +36,7 @@ Ideally, it would be nice to easily see the current (and hopefully best) set of 
 
 **Solutions.** Fortunately, there are some very easy and simple solutions to many of the problems above. For example, there are now very useful and easy to use graphical user interfaces (GUI's) like [SourceTree](https://www.sourcetreeapp.com) that remove the need to use the command line all together, make it easy and seamless to set up repositories and are cross platform (i.e., Windows, Mac etc).
 
-### How it works
+## How it works
 
 Given that not everyone will want to use the command line, we'll show some basics using both the command line and a GUI (SourceTree). We'll do this because we believe that the benefits of using version control far outweigh the costs of not using it, and so this should ensure mostly people can get started straight away.
 
@@ -68,7 +68,7 @@ Creating a repository in SourceTree is also quite easy. Once you have the pathna
 
 ![**Figure 3** - Setting up a repository in your computer in SourceTree](images/Version_control_Fig31.png)
 
-### Tracking files and pushing to the cloud
+## Tracking files and pushing to the cloud
 
 Now that you are set up and have cloned or initiated a repository in a local folder, the trick is to keep track of important files, such as data, R code and manuscripts (i.e., .Rmd, .md, .txt etc.). How does Git do this? Well, there are basically a set of key commands that are needed and that are continually implemented to keep track a new or modified files. You use these commands at the end of your working day, or when you have made huge progress and want to get the changes to the server ASAP. The key commands and their order of execution are as follows:
 
@@ -109,7 +109,7 @@ In many cases there will be files within a project that you do not want to track
 
 In Figure 6, I've ignored a "photos/" folder. We can see that this now disappears (compare with Figure 4) from our staging area in the Terminal window. We can just add any file or folder we don't want tracked here before adding it so that Git ignores them. If we want to start tracking a file we have ignore, just open the .gitignore file up in a text editor and remove the file you want to track. Save the .gitignore file and then add, commit and push this as above.
 
-### Further help
+## Further help
 
 Version control systems, and Git in particular, can do quite a lot more then what we have covered above. We have just provided an brief introduction on how to get started and use Git to track your project files. If you want to know more about how to create branches, deal with conflicts and many other useful features you can visit the [Git](https://git-scm.com) web page where you can find all the relevant information to do more advanced stuff.
 

@@ -32,7 +32,7 @@ If, however, you would like to contrast the abundance of one of the species, or 
 
 Fortunately, there are some very handy packages in R that make this possible. If you have ever used pivot tables in Excel, they are doing similar things.
 
-### Reshaping from long to wide format
+## Reshaping from long to wide format
 
 In this example, we will use the package [tidyr](https://cran.r-project.org/web/packages/tidyr/index.html) to convert this data frame to a **wide format** that will allow further data exploration. First, install and load the package.
 
@@ -68,7 +68,7 @@ You can now plot or analyse any single species against possible predictor variab
 
 *Note that if you had a transect with no fish observations, you would need to add a row to the original data set, perhaps with a species code of "none". If you didn't, that replicate observation would be missing from the wide format - needed if you want to contrast abundance across reefs etc.
 
-### Reshaping from wide to long format
+## Reshaping from wide to long format
 
 The function `gather` will convert data from the wide format to a long format.
 
@@ -104,7 +104,7 @@ ReefFish.long <- gather(ReefFish.wide, Species, Abundance, BlackFish:RedFish)
 
 We have now recreated our original data set. The only difference is that the rows have been sorted and that species that were absent from a given transect have their own row with an abundance value of zero.
 
-### Reshaping with reshape2
+## Reshaping with reshape2
 
 The package [reshape2](https://cran.r-project.org/web/packages/reshape2/) also allows us to reshape data, and has a few extra capabilities that are not present in tidyr.
 
@@ -198,7 +198,7 @@ ReefFish.wide_combined <- dcast(ReefFish,
 head(ReefFish.wide_combined[, 1 - 4])
 ```
 
-### Further help
+## Further help
 
 Type `?gather` and `?spread` to get the R help for these tidyr functions.
 

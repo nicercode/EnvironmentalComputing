@@ -11,7 +11,7 @@ In linear models, the interpretation of model parameters is linear. For example,
 
 For generalised linear models, the interpretation is not this straightforward. Here, I will explain how to interpret the co-efficients in generalised linear models (glms). First you will want to read our pages on glms for [binary](generalised-linear-models.qmd#introduction-and-binary-data) and [count](generalised-linear-models.qmd#count-data) data page on [interpreting coefficients in linear models](interpret-lm-coeffs.qmd).
 
-### Poisson and negative binomial GLMs
+## Poisson and negative binomial GLMs
 
 In Poisson and negative binomial glms, we use a log link. The actual model we fit with one covariate $x$ looks like this
 
@@ -45,9 +45,9 @@ exp(glm1$coefficients[2])
 
 So here increasing $x$ by 1 unit multiplies the mean value of Y by $exp( \beta_1 ) = 1.25$. The same thing is true for negative binomial glms as they have the same link function.
 
-### Binomial GLMs
+## Binomial GLMs
 
-#### Logistic regression
+### Logistic regression
 
 Things become much more complicated in binomial glms. The model here is actually a model of log odds, so we need to start with an explanation of those. The odds of an event are the probability success divided by the probability of failure. So if the probability of success is $p$ then the odds are:
 
@@ -69,7 +69,7 @@ summary(bin1)
 
 So when we increase $x$ by one unit, the odds of Y are multiplied by $exp( \beta_1 ) = 2.11$
 
-#### Complementary log-log
+### Complementary log-log
 
 Possibly a more intuitive model is a binomial regression with a complementary log-log link function. This link function is based on the assumption that you have some counts, which are Poisson distributed, but you've decided to turn them into presence/absence. 
 
@@ -88,11 +88,11 @@ coef(bin2)
 
 The interpretation is now the same as in the Poisson case, when we increase $x$ by 1, the mean of the underlying count is multiplied by $exp( \beta_1 )$.
 
-#### Log binomial model
+### Log binomial model
 
 It is possible to use a log link function with the binomial distribution `family = binomial(link = log)`. In this case you can interpret the coefficients as multiplying the probabilities by $exp( \beta_1 )$, however these models can give you predicted probabilities greater than 1, and often don't converge (don't give an answer).
 
-### Offsets
+## Offsets
 
 Sometimes we know the effect of a particular variable (call it $z$) on the response is proportional, so that when we double $z$ we expect the response to double on average. The most common time you see this is with sampling intensity. 
 

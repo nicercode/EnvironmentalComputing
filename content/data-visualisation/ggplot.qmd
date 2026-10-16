@@ -146,7 +146,7 @@ Plant_height <- read.csv(file = "data/Plant_height.csv", header = TRUE)
 
 ### Scatterplots
 
-###Scatterplots###
+### Scatterplots###
 
 To visualise how plant height varies with temperature, we can use a simple scatterplot, using the `plot` function. Place the Y variable on the left of the tilde (~) and the X variable on the right. The `data=Plant_height` argument tells R to look in the data frame Plant_height for those two variables.
 
@@ -310,7 +310,7 @@ boxplot(Metabolic_rate ~ Species, data = Prawns, xlab = "Species", ylab = "Metab
 ```
 
 **Edit axis limits**  
-Axis limits are set by the <font face="monospace">xlim</font> and <font face="monospace">ylim</font> arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 1, use:
+Axis limits are set by the `xlim` and `ylim` arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 1, use:
 
 ```{r,eval=FALSE}
 #| label: basic-plotting-one-continuous-one-factor-6
@@ -500,7 +500,7 @@ plot6 <- ggplot(iris, aes(Sepal.Length, Petal.Length, colour = Species)) +
 print(plot6)
 ```
 
-###Further help
+### Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 
@@ -669,7 +669,7 @@ myblanktheme <- theme(
 print(IrisPlot + myblanktheme + labs(title = "Petal and sepal \nlength of iris", y = "Petal length (cm)", x = "Sepal length (cm)"))
 ```
 
-###Further help
+### Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 
@@ -923,7 +923,7 @@ IrisPlot.shape <- ggplot(iris, aes(Petal.Length, Sepal.Length, shape = Species, 
 print(IrisPlot.shape + scale_shape_manual(values = c(0, 16, 3)) + scale_colour_manual(values = c("chartreuse4", "chocolate", "slateblue4")))
 ```
 
-###Further help
+### Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 *[altering overall appearance](#customising-your-ggplot).  
@@ -995,7 +995,7 @@ IrisPlot + labs(y = "Petal length (cm) +/- s.d.", x = "Species") + theme_classic
 
 In the `geom_errorbar` code, `ymin` and `ymax` are the top and bottom of the error bars (defined here as mean +/- sd), and `width` defines how wide the error bars are.
 
-###Further help
+### Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 
@@ -1262,7 +1262,7 @@ print(
 
 ## Further help
 
-###Further help
+### Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
 

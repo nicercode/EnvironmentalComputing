@@ -22,10 +22,11 @@ The package is named after a book called [The Grammar of Graphics](https://books
 
 Start with the [basics](/graphics/ggplot/ggplot-basics) to learn the basic syntax of making a graph
 
-Then, visit our other pages to further customise the aesthetics of the graph, including colour and formatting:  
-* [altering the overall appearance](/graphics/ggplot/ggplot-appearance/)  
-* [adding titles and axis names](/graphics/ggplot/ggplot-labels/)  
-* [colours and symbols](/graphics/ggplot/ggplot-colour-shapes/).   
+Then, visit our other pages to further customise the aesthetics of the graph, including colour and formatting:
+* [altering the overall appearance](/graphics/ggplot/ggplot-appearance/)
+* [adding titles and axis names](/graphics/ggplot/ggplot-labels/)
+* [colours and symbols](/graphics/ggplot/ggplot-colour-shapes/)
+* [multipanel figures](/graphics/ggplot/ggplot-multipanel/).
 
 Help on all the ggplot functions can be found at the [The master ggplot help site](https://ggplot2.tidyverse.org).
 

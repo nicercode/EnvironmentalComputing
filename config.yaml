@@ -4,7 +4,7 @@ defaultContentLanguage: en
 title: Environmental Computing
 theme: hugo-theme-learn
 metaDataFormat: yaml
-defaultContentLanguageInSubdir: yes
+defaultContentLanguageInSubdir: true
 googleAnalyticsID: G-KVTJFRWP8M
 googleAnalytics: UA-77528433-1
 params:

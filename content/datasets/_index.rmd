@@ -82,6 +82,10 @@ This page contains the datasets or files that are used throughout the tutorials 
 
 [Snail_feeding.csv](/datasets/Snail_feeding.csv)
 
+[SST_feb_2013.img](/datasets/SST_feb_2013.img)
+
+[SST_feb_mean.img](/datasets/SST_feb_mean.img)
+
 ## T
 
 [tree_curtis1998.tre](/datasets/tree_curtis1998.tre)

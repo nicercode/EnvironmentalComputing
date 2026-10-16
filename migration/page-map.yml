@@ -13,6 +13,9 @@
 # prefer:   "old" uses the old page's wording wherever the first conversion
 #           reworded it (default: keep the first conversion's wording unless
 #           it dropped text)
+# seed:     random number seed set by a hidden chunk at the top of the
+#           chapter, for chapters whose code draws random numbers, so a
+#           re-run gives the same output and the same frozen figures
 
 source_ref: 7b59e6f   # old site incl. PRs #44, #45 and the multipanel tutorial (merged to master in #45)
 branch_ref: a31b08e   # first Quarto conversion (refactor_quarto), merged with the above
@@ -31,6 +34,33 @@ chapters:
             reason: reworded to add the 2026 Quarto history
           - starts: "Thanks to them"
             reason: old GitHub-contributors shortcode, replaced by the generated contributor list
+    edits:
+      - reason: chunks left over from the R for Data Science template that show nothing (one never runs, the other is hidden)
+        old: |+
+          ```{r}
+          #| label: preface-4
+          #| eval: false
+          #| echo: false
+          #| results: asis
+          pkgs <- sessioninfo::package_info(
+            tidyverse:::tidyverse_packages(),
+            dependencies = FALSE
+          )
+          df <- tibble(
+            package = pkgs$package,
+            version = pkgs$ondiskversion,
+            source = gsub("@", "\\\\@", pkgs$source)
+          )
+          knitr::kable(df, format = "markdown")
+          ```
+
+          ```{r}
+          #| label: preface-5
+          #| include: false
+          cli:::ruler()
+          ```
+
+        new: ""
 
   # ---- basics ---------------------------------------------------------------
   - chapter: basics/basics.qmd
@@ -68,6 +98,7 @@ chapters:
 
   # ---- data visualisation ---------------------------------------------------
   - chapter: data-visualisation/data-visualisation.qmd
+    seed: 1
     sources:
       - page: Graphics
       - page: Graphics/multivariate-vis
@@ -105,6 +136,7 @@ chapters:
     sources:
       - page: Graphics/ggplot/ggplot-multipanel
   - chapter: data-visualisation/rasters.qmd
+    seed: 1
     sources:
       - page: Graphics/spatial-vis/basic-raster
         coverage_exceptions:
@@ -135,9 +167,11 @@ chapters:
     sources:
       - page: Graphics/spatial-vis/simple-maps
   - chapter: data-visualisation/pca.qmd
+    seed: 1
     sources:
       - page: Graphics/multivariate-vis/pca
   - chapter: data-visualisation/heatmaps.qmd
+    seed: 1
     sources:
       - page: Graphics/multivariate-vis/heatmaps
 
@@ -165,6 +199,7 @@ chapters:
     sources:
       - page: Statistics/linear-models/linear-regression
   - chapter: statistical-methods/interpret-lm-coeffs.qmd
+    seed: 1
     sources:
       - page: Statistics/linear-models/linear-regression/interpret-lm-coeffs
   - chapter: statistical-methods/t-tests.qmd
@@ -209,6 +244,7 @@ chapters:
       - page: Statistics/glms/glm-2
         section: Count Data
   - chapter: statistical-methods/interpret-glm-coeffs.qmd
+    seed: 1
     sources:
       - page: Statistics/glms/interpret-glm-coeffs
     edits:
@@ -225,6 +261,7 @@ chapters:
       - page: Statistics/mixed-models/mixed-model-3
         section: Generalised Mixed Models
   - chapter: statistical-methods/generalised-additive-models.qmd
+    seed: 1
     sources:
       - page: Statistics/gams
     edits:
@@ -241,12 +278,14 @@ chapters:
     sources:
       - page: Statistics/time-series
   - chapter: statistical-methods/MVabund.qmd
+    seed: 1
     sources:
       - page: Statistics/mvabund
   - chapter: statistical-methods/cluster-analysis.qmd
     sources:
       - page: Graphics/multivariate-vis/cluster-analysis
   - chapter: statistical-methods/mds.qmd
+    seed: 1
     sources:
       - page: Graphics/multivariate-vis/mds
   - chapter: statistical-methods/meta-analysis.qmd
@@ -287,6 +326,7 @@ chapters:
     sources:
       - page: Coding-Skills/version-control
   - chapter: coding-skills/asking-code-questions.qmd
+    seed: 1
     sources:
       - page: Coding-Skills/asking-code-questions
 

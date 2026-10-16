@@ -371,6 +371,7 @@ The package is named after a book called [The Grammar of Graphics](https://books
 Start with the [basics](#introduction-to-ggplot2) to learn the basic syntax of making a graph
 
 Then, visit our other pages to further customise the aesthetics of the graph, including colour and formatting:
+
 * [altering the overall appearance](#customising-your-ggplot)
 * [adding titles and axis names](#titles-and-axis-labels)
 * [colours and symbols](#colours-and-shapes)
@@ -421,6 +422,7 @@ print(plot1)
 `+ geom_graph.type` specifies what sort of plot you want to make. ggplot will not work unless you have this added on. You don't actually type 'graph.type()', but choose one of the types of graph.
 
 Commonly used examples include:  
+
 * scatterplot - `+ geom_point()`  
 * boxplot - `+ geom_boxplot()`  
 * histogram - `+ geom_histogram()`  
@@ -501,6 +503,7 @@ print(plot6)
 ###Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
+
 * [altering the overall appearance](#customising-your-ggplot)  
 * [adding titles and axis names](#titles-and-axis-labels)  
 * [colours and symbols](#colours-and-shapes).   
@@ -669,6 +672,7 @@ print(IrisPlot + myblanktheme + labs(title = "Petal and sepal \nlength of iris",
 ###Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
+
 * [altering overall appearance](#customising-your-ggplot).  
 * [colours and symbols](#colours-and-shapes).
 
@@ -702,6 +706,7 @@ data(iris)
 ```
 
 The following plots will be used as the base code throughout of this tutorial  
+
 * a scatter plot of petal length vs sepal length  
 * a box plot of sepal length vs species  
 * a frequency histogram of sepal length  
@@ -993,6 +998,7 @@ In the `geom_errorbar` code, `ymin` and `ymax` are the top and bottom of the err
 ###Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
+
 * [altering the overall appearance](#customising-your-ggplot)  
 * [adding titles and axis names](#titles-and-axis-labels)  
 * [colours and symbols](#colours-and-shapes)   
@@ -1146,12 +1152,14 @@ print(IrisPlot + mytheme)
 ### Altering the size, colour or presence of grid lines
 
 The grid lines are divided into two sets of grid lines; major and minor. This allows you to accentuate or remove half the grid lines.  
+
 * `panel.grid.major = element_line(your format)` - alters the format of major grid lines  
 * `panel.grid.minor = element_line(your format)` - alters the format of minor grid lines  
 
 where `(your format)` specifies the colour and thickness of the lines. 
 
 Formats include:  
+
 * Colour. For example, `colour = "steelblue2"` - remember to include "" before and after the colour name.  
 * Size. Specified by entering a number, for example, `size = (3)`.  
 
@@ -1257,6 +1265,7 @@ print(
 ###Further help
 
 To further customise the aesthetics of the graph, including colour and formatting, see our other ggplot help pages:  
+
 * [adding titles and axis names](#titles-and-axis-labels)  
 * [colours and symbols](#colours-and-shapes).   
 

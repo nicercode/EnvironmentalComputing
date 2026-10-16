@@ -5,6 +5,7 @@ title: "Reshaping data"
 Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](../../misc/data-entry.qmd)). For some types of variables, however, there are choices to be made about how you input the data.
 
 For example, it is very common in the biological sciences that we record the abundance of many species of organisms from each of our replicate observations (transects, quadrats, surveys etc). We then have two choices for how to input that data:
+
 1. a separate column for every species that records its abundance, or,
 2. two columns - one that identifies the species and one that records the abundance.
 
@@ -49,6 +50,7 @@ ReefFish.wide <- spread(ReefFish, Species, Abundance, fill = 0)
 ```
 
 The arguments of `spread` are:
+
 * The data frame you would like to convert (in this case, ReefFish)
 * The variable whose levels are being converted to new columns (in this case, Species)
 * The variable that holds the values that will fill in the new columns (in this case, Abundance)
@@ -84,6 +86,7 @@ head(ReefFish.long)
 ```
 
 The arguments of `gather` are:
+
 * The data frame that we would like to convert
 * key - the name of the new variable that will hold the names of the variables being gathers (in this case, Species)
 * value - the name of the new variable that will hold the values from the variables being gathered (in this case, Abundance)
@@ -123,6 +126,7 @@ ReefFish.wide <- dcast(ReefFish,
 ```
 
 The arguments of `dcast` are:
+
 * The data frame you would like to convert (in this case, ReefFish)
 * The variable(s) you would like to include unchanged as columns in the new data frame are to the left of the ~ (Site, Month and Transect)
 * The variable(s) that is being converted to new columns are to the right of the ~ (in this case, Species)
@@ -141,6 +145,7 @@ ReefFish.long <- melt(ReefFish.wide,
 ```
 
 The arguments of `melt` are:
+
 * The data frame that we would like to convert
 * `id.vars` specifies the columns that remain unchanged (here the predictor variables that label each replicate observation)
 * `measure.vars` specifies which variables hold the data that will go into the new column

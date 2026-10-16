@@ -2,6 +2,11 @@
 title: "Raster"
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 ## The Basics of Rasters
 
 This tutorial is focused on introducing the basics of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with the [Simple maps](simple-maps.qmd) chapter.

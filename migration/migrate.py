@@ -107,7 +107,8 @@ def real_case(path):
     None if there is no such file (in any case)."""
     path = os.path.normpath(path)
     parent, name = os.path.split(path)
-    if parent and not os.path.isdir(parent):
+    # not os.path.isdir: on macOS that is true for a folder in the wrong case
+    if parent and not exists_exact(parent):
         parent = real_case(parent)
         if parent is None:
             return None
@@ -129,6 +130,36 @@ def pandoc_id(text):
     s = re.sub(r"\s+", "-", s)
     s = re.sub(r"^[^a-z]+", "", s)
     return s or "section"
+
+
+LIST_ITEM = re.compile(r"^([*+-]|\d+[.)])\s+\S")
+
+
+def blank_line_before_lists(text):
+    """Pandoc only starts a list after a blank line. The old site's parser
+    didn't need one, so "Intro:\\n* item" rendered there as a list but here
+    as one paragraph with literal asterisks."""
+    out, in_code, in_list = [], False, False
+    for line in text.splitlines():
+        if FENCE.match(line):
+            in_code = not in_code
+        elif not in_code:
+            if not line.strip():
+                in_list = False
+            elif LIST_ITEM.match(line):
+                # a list item further down a list (or after a list item that
+                # wraps onto unindented lines) needs nothing
+                if out and out[-1].strip() and not in_list:
+                    out.append("")
+                in_list = True
+        out.append(line)
+    return "\n".join(out)
+
+
+def seed_chunk(seed):
+    """A hidden chunk fixing the random number seed, so re-running a chapter
+    reproduces its output (and its frozen figures)."""
+    return f"```{{r}}\n#| include: false\nset.seed({seed})\n```"
 
 
 def split_front_matter(text):
@@ -356,7 +387,14 @@ class Chapter:
     # -- assets --------------------------------------------------------------
     def asset_target(self, basename):
         """Where (relative to the chapter) an asset should live. Reuse a copy
-        that already exists in this part of the book."""
+        that already exists in this part of the book.
+
+        Each part keeps its own copy, rather than every chapter reading the
+        one in datasets/, so the code readers copy keeps short paths. The
+        copies are not all the same file: the old site had different
+        versions under one name (Herbivore_specialisation.csv has three, with
+        different columns), and each chapter's code expects its own, so
+        don't merge them without checking the chapters."""
         part = self.dir.split("/")[0]
         for dirpath, _, files in os.walk(os.path.join(CONTENT, part)):
             if basename in files:
@@ -748,6 +786,9 @@ def main():
                 sys.exit(f"ERROR: {ch.path}: edit not applicable "
                          f"({e['reason']}): {e['old'][:60]!r}")
             ch.log.append(f"edit applied: {e['reason']}")
+        body = blank_line_before_lists(body)
+        if "seed" in c:
+            body = seed_chunk(c["seed"]) + "\n\n" + body.lstrip("\n")
 
         old_path = os.path.join(CONTENT, c.get("replaces", ch.path))
         if old_path != path and os.path.exists(old_path):

@@ -24,7 +24,6 @@ LazyData: true
 Imports:
     ape,
     car,
-    cli,
     dendextend,
     dismo,
     dplyr,
@@ -55,7 +54,6 @@ Imports:
     readr,
     reshape2,
     rgbif,
-    sessioninfo,
     simr,
     sp,
     tidyr,

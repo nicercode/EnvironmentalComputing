@@ -2,6 +2,11 @@
 title: "Principal Component Analysis"
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 Principal Components Analysis (PCA) is the one of the most widely used multivariate statistical techniques. The primary motivation behind PCA is to reduce, or summarize, a large number of variables into a smaller number of derived variables that may be readily visualised in 2- or 3-dimensional space. For example, PCA might be used to compare the chemistry of different watersheds based on multiple variables or to quantify phenotypic variation amongst species based on multiple morphological measurements.
 
 The new set of variables created by PCA can be used in other analyses, but most commonly as a new set of axes on which to plot your multivariate data.

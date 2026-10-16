@@ -106,29 +106,6 @@ Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for th
 
 The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code.
 
-```{r}
-#| label: preface-4
-#| eval: false
-#| echo: false
-#| results: asis
-pkgs <- sessioninfo::package_info(
-  tidyverse:::tidyverse_packages(),
-  dependencies = FALSE
-)
-df <- tibble(
-  package = pkgs$package,
-  version = pkgs$ondiskversion,
-  source = gsub("@", "\\\\@", pkgs$source)
-)
-knitr::kable(df, format = "markdown")
-```
-
-```{r}
-#| label: preface-5
-#| include: false
-cli:::ruler()
-```
-
 ## Site migration history
 
 ### 2026 migration from Hugo to Quarto

@@ -2,6 +2,11 @@
 title: Asking Code Questions
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 When you started to learn R, one of the first things you probably figured out was how to get your data into R. You had to use some method to read your lovely excel datasets into R so you could achieve what you wanted. Maybe ```read.csv``` or ```read.table```, or maybe you use Hadley Wickham's recent package ```readr```.
 
 This tutorial is intended to 'go back to the basics' a little bit, and learn how to 'create' our own data.
@@ -264,11 +269,13 @@ sessionInfo()
 ```
 
 **Other important notes**
+
 1. Be sure to clearly define what you are after. Do you have a purely statistics question, or do you have a coding question?
 2. It is a good idea to include any neccessary packages that you are using in which the problem occurs.
 3. You should always note what you have already tried, as far as code, and/or any reference sites you are using.
 
 **Concluding remarks**  
+
 1. There are a number of reasons we may want to use fake data.  
 2. It is pretty easy to create fake data.  
 3. If you send the easiest possible reproducible example to someone, the greater the likelihood they will help you, and more efficiently.  

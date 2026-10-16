@@ -2,6 +2,11 @@
 title: "Generalised Additive Models (GAMs)"
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 Many data in the environmental sciences do not fit simple linear models and are best described by "wiggly models", also known as Generalised Additive Models (GAMs).
 
 ```{r}
@@ -19,6 +24,7 @@ ggplot(mpg, aes(displ, hwy)) +
 ```
 
 Let's start with a famous [tweet](https://twitter.com/ucfagls/status/842444686513991680) by one Gavin Simpson, which amounts to:
+
 1. GAMs are just GLMs
 2. GAMs fit wiggly terms
 3. use `+ s(x)` not `x` in your syntax

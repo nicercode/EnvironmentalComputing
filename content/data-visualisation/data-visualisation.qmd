@@ -2,6 +2,11 @@
 title: "Data Visualisation"
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 R has a very wide range of functions and packages for visualising data.
 
 These pages have a brief introduction to:

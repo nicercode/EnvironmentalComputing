@@ -2,6 +2,11 @@
 title: 'Multidimensional Scaling'
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 Multidimensional scaling (MDS) is a popular approach for graphically representing relationships between objects (e.g. plots or samples) in multidimensional space. Dimension reduction via MDS is achieved by taking the original set of samples and calculating a dissimilarity (distance) measure for each pairwise comparison of samples. The samples are then usually represented graphically in two dimensions such that the distance between points on the plot approximates their multivariate dissimilarity as closely as possible.
 
 One of the most common applications of MDS in the environmental sciences is to examine the similarity of different ecological communities based on their species composition. In those analyses, the abundance of all species within replicated samples (plots or quadrats in the field, different sites etc.) is recorded and the raw data takes the form of a matrix of species (the variables) by samples.
@@ -33,6 +38,7 @@ Herb_community <- Herbivores[5:11]
 ```
 
 Creating a MDS plot involves two steps:
+
 * creating a dissimilarity matrix with your chosen metric that measures the similarity between every pair of samples
 * creating an ordination plot from that dissimilarity matrix
 

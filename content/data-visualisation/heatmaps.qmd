@@ -3,6 +3,11 @@ title: 'Heatmaps'
 ---
 
 ```{r}
+#| include: false
+set.seed(1)
+```
+
+```{r}
 #| label: setup
 #| include: false
 knitr::opts_chunk$set(

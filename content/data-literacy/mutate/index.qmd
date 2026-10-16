@@ -100,6 +100,7 @@ Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep = 
 ```
 
 The arguments of `unite` are:
+
 * the data frame to be used (in this case Herbivores)
 * the name of the new variable (in this case "Habitat_DayNight")
 * the columns to be united, within `c()`
@@ -126,6 +127,7 @@ Herbivores <- separate(Herbivores, Habitat, c("Genus", "species"), sep = "_", re
 ```
 
 The arguments of `separate` are:
+
 * the data frame to be used (in this case Herbivores)
 * the name of the new variable to be separated (in this case "Habitat")
 * the names of the new variables, within `c()` (in this case "Genus" and "species")

@@ -179,11 +179,13 @@ Frequently, we want to test for differences in a response variable due to two or
 Consider an example where a researcher is testing the effects of metal contamination on the number of species found in sessile marine invertebrates (sponges, bryozoans and sea squirts etc.). They would like to know whether copper reduces species richness, but also know that the richness of invertebrates can depend on whether the substrate is vertical or horizontal. Consequently, they ran an experiment where species richness was recorded in replicate samples in each of the six combinations of copper enrichment ("None","Low","High") and orientation ("Vertical","Horizontal"). The experimental design in termed factorial because all levels of one treatment are represented in all levels of the other treatment (also termed orthogonal).
 
 The factorial ANOVA will test:
+
 * whether there are any differences in richness among the three levels of copper enrichment
 * whether there are any differences in richness among the two levels of substrate orientation
 * whether there is any interaction between copper and orientation
 
 You have three null hypotheses:
+
 * there is no difference between the means for each level of copper, H~o~: $\mu_{None} = \mu_{Low} = \mu_{High}$
 * there is no difference between the means for each level of orientation, H~o~: $\mu_{Vertical} = \mu_{Horizontal}$
 * there is no interaction between the factors
@@ -265,6 +267,7 @@ summary(Sessile.aov)
 The summary output of an ANOVA object is a table with the degrees of freedom (Df), sums of squares (Sum Sq), mean squares (Mean Sq) for the each of predictor variable (i.e., variation among levels of your treatments), their interaction and for the Residuals (i.e., varation within the levels). The test statistic, *F* value and its associated *p*-value (Pr(>F)) are also presented.
 
 Check that you have the correct degrees of freedom. For a two factor design with fixed factors they are:
+
 * Factor A: *a* - 1 (where *a* = number of levels of Factor A)
 * Factor B: *b* - 1 (where *b* = number of levels of Factor B)
 * Interaction (AB): (*a*-1)(*b*-1)
@@ -273,6 +276,7 @@ Check that you have the correct degrees of freedom. For a two factor design with
 The sums of squares and mean squares are measures of variation. There are three *F* statistics, corresponding to a test of each of the main effects and one for the interaction. The *p*-values are the probabilities of the observed *F* values from the *F* distribution (with the given degrees of freedom).
 
 In this example, there is strong evidence to reject all three null hypotheses:
+
 * that all levels of the copper treatment are equal (P < 0.001),
 * that the vertical and horizontal orientations are equal (P < 0.001)
 * that there is no interaction between copper and orientation (P < 0.001)

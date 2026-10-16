@@ -135,6 +135,7 @@ Pres_basemap <- readRDS("data/Pres_basemap.rds")
 Second, adjust some of the options for plotting:
 
 `geom_point` tweaks for the dots at each site location:
+
 * use `colour = "white"` to have the points stand out
 * use `size` to change point size
 

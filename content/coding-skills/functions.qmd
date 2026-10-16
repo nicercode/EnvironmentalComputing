@@ -3,6 +3,7 @@ title: "Writing Functions"
 ---
 
 <!-- ## Goals for this post
+
 1. Understand *why* to move code from in-place into a function.
 2. Understand R's function syntax (argument lists, defaults, return
    semantics) and scoping rules.

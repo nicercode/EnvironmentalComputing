@@ -35,6 +35,7 @@ The bottom left panel is the console (or command window) where you can also run 
 The top right is the workspace window that lists the various R objects that you are currently using. These can be data sets or objects created by various analyses.
 
 The panel on the bottom right has:
+
 * lists of the files in your working directory
 * the R packages that you are currently using
 * any graphical output in the Plots window

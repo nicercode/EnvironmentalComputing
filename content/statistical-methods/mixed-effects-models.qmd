@@ -502,10 +502,12 @@ We will analyse the same data set as the first two mixed model tutorials. This d
 We will use the package [lme4](https://cran.r-project.org/web/packages/lme4/index.html) for all our mixed effect modelling. It allows us to model both continuous and discrete data with one or more random effects. There are however some limitations for discrete data.
 
 **What lme4 can do**
+
 * model binary data (e.g., presence/absence)
 * model counts with Poisson distribution
 
 **What lme4 can't do**
+
 * model overdispersed counts (unfortunately these are really common in ecology)
 * provide good residual plots (we need these for assumption checking)
 

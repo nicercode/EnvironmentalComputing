@@ -56,3 +56,43 @@ code a:any-link {
 pre {
   background-image: linear-gradient(160deg,#f8f8f8 0,#f1f1f1 100%);
 }
+
+/* Homepage hero ------------------------------------------------- */
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 0.5rem 0 2rem;
+}
+.hero-text { flex: 1 1 auto; }
+.hero-text h1 { margin-top: 0; font-size: 2.1rem; }
+.hero-text .lead {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #599a3e;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.hero-text p:last-child { margin-bottom: 0; }
+.hero-logo { width: 220px; height: auto; box-shadow: none; }
+.hero-banner {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 .25rem .75rem rgba(0,0,0,.12);
+}
+@media (max-width: 767px) {
+  .hero { flex-direction: column-reverse; gap: 1rem; }
+  .hero-logo { width: 140px; }
+}
+
+/* Homepage: the hero replaces Quarto's cover image and title block. */
+main.content:has(.hero) #title-block-header,
+main.content:has(.hero) img.quarto-cover-image { display: none; }
+.hero > p { flex: 0 0 220px; margin: 0; }
+.hero-text h1 { padding-top: 0; }
+@media (max-width: 767px) {
+  .hero > p { flex-basis: auto; }
+}

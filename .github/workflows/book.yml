@@ -102,6 +102,20 @@ jobs:
           cat lychee-report.md >> "$GITHUB_STEP_SUMMARY"
           exit 1
 
+      # without these the deploy step below skips silently and still passes,
+      # so the live site would stop updating unnoticed; only checked on
+      # master, because pull requests from forks never get secrets
+      - name: Check Netlify credentials
+        if: github.event_name == 'push'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN or NETLIFY_SITE_ID repository secret is missing; the site was not deployed"
+            exit 1
+          fi
+
       - name: Deploy to Netlify
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         uses: nwtgck/actions-netlify@v3

@@ -1,7 +1,18 @@
+---
+title: "Welcome"
+pagetitle: "Environmental Computing"
+---
+
 # Welcome to Environmental Computing {.unnumbered}
 
-### Getting started with R, data manipulation, graphics, and statistics for the environmental sciences
+::: {.hero}
+::: {.hero-text}
+<p class="lead">Getting started with R, data manipulation, graphics, and statistics for the environmental sciences</p>
 
 Students and researchers in the environmental sciences require a wide range of quantitative skills in analytical and data processing software, including R, geographic information systems (GIS) and the processing of remotely sensed data. There is increasingly a need to ensure transparency of data processing supported by statistical analyses to justify conclusions of scientific research and monitoring for management and policy. This site is a brief introduction to techniques for data organisation, graphics and statistical analyses.
+:::
 
-![](images/DSC06364.jpg)
+![](images/hexsticker_EC.png){.hero-logo fig-alt="Environmental Computing hex logo"}
+:::
+
+![](images/DSC06364.jpg){.hero-banner fig-alt="A diver surveying a coral reef"}

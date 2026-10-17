@@ -8,7 +8,7 @@ To demonstrate a few of the commonly used functions in R for doing this, let's c
 
 ![](MDS_image.jpg)
 
-Download the data set, [Herbivore_specialisation.csv](/datasets/Herbivore_specialisation.csv), and load into R.
+Download the data set, [Herbivore_specialisation.csv](../../../datasets/Herbivore_specialisation.csv), and load into R.
 
 ```{r}
 #| label: index-1
@@ -17,8 +17,7 @@ Herbivores <- read.csv(file = "Herbivore_specialisation.csv", header = TRUE)
 
 The first two columns are categorical variables that label the samples as coming from each of the five habitats or as being collected during the day or the night. The third column is the replicate number per combination of habitat and day/night. The fourth column is the biomass of the habitat sampled and the rest of the columns are the counts of each herbivore species in each sample.
 
-
-### Adding a new variable
+## Adding a new variable
 
 ![](Making_new_variables_image.jpg)
 
@@ -70,10 +69,9 @@ The arguments of `mutate` are simply the name of the data frame followed by any 
 
 In the above examples, note that the new variables have been added to the existing data frame, and all old variables have been kept. You can use `transmute` if you want to drop the original variables.
 
-These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](/../data-manipulation/subsetting-data/) and [summarising](/../data-manipulation/summarising-data/) data.
+These functions become especially powerful when combined with some of the others in dplyr. See our pages on [subsetting](../filter-rows/index.qmd) and [summarising](../summarising-tables/index.qmd) data.
 
-
-### Renaming a variable
+## Renaming a variable
 
 dplyr offers a straightforward function, `rename`, to change the name of any variable. For example, to change Mass to Biomass, we simply use:
 
@@ -82,8 +80,7 @@ dplyr offers a straightforward function, `rename`, to change the name of any var
 Herbivores <- rename(Herbivores, Biomass = Mass)
 ```
 
-
-### Uniting several columns into one
+## Uniting several columns into one
 
 ![](Unite_image.jpg)
 
@@ -103,6 +100,7 @@ Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep = 
 ```
 
 The arguments of `unite` are:
+
 * the data frame to be used (in this case Herbivores)
 * the name of the new variable (in this case "Habitat_DayNight")
 * the columns to be united, within `c()`
@@ -115,8 +113,7 @@ View the data frame again and you will notice the new variable, and the fact tha
 Herbivores <- unite(Herbivores, "Habitat_DayNight", c(Habitat, DayNight), sep = "_", remove = FALSE)
 ```
 
-
-### Separating one column into several
+## Separating one column into several
 
 ![](Separate_image.jpg)
 
@@ -130,6 +127,7 @@ Herbivores <- separate(Herbivores, Habitat, c("Genus", "species"), sep = "_", re
 ```
 
 The arguments of `separate` are:
+
 * the data frame to be used (in this case Herbivores)
 * the name of the new variable to be separated (in this case "Habitat")
 * the names of the new variables, within `c()` (in this case "Genus" and "species")
@@ -138,8 +136,7 @@ The arguments of `separate` are:
 
 Note that this was only possible because there was a character separating the two variables in the text of the one to be separated (e.g., we couldn't do this is if the species names in the Habitat variable were originally GenusSpecies, rather than Genus_species).
 
-
-### Further help
+## Further help
 
 Type `?mutate`, `?unite`, and `?separate` for the R help for these functions.
 
@@ -147,9 +144,6 @@ Type `?mutate`, `?unite`, and `?separate` for the R help for these functions.
 
 [Introducing tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/)
 
-
 **Author:** Alistair Poore
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

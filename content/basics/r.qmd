@@ -8,8 +8,7 @@ We recommend using R Studio as a user friendly interface for using R.
 First, install the latest version of **R** - download from [here](http://cran.rstudio.com/)
 Second, install the latest version of **R Studio** - download from [here](http://www.rstudio.com/products/rstudio/download/)
 
-
-### Setting the working directory
+## Setting the working directory
 
 Once you have installed R and R Studio, you need to set the working directory. This is the location on your computer where any data files to imported can be found, and where any R scripts (the files that save your code) will be saved.
 
@@ -23,8 +22,7 @@ setwd("Drive:/Folder1/Folder2")
 
 If you are working with any of the example data files on this site, you will first need to download them to a folder on your computer and specify that folder as the working directory.
 
-
-### The layout of R Studio
+## The layout of R Studio
 
 ![](images/Installing_R_and_R_Studio_image.jpg)
 
@@ -37,6 +35,7 @@ The bottom left panel is the console (or command window) where you can also run 
 The top right is the workspace window that lists the various R objects that you are currently using. These can be data sets or objects created by various analyses.
 
 The panel on the bottom right has:
+
 * lists of the files in your working directory
 * the R packages that you are currently using
 * any graphical output in the Plots window
@@ -44,13 +43,11 @@ The panel on the bottom right has:
 
 You can change the size of these by dragging the edges of the windows.
 
+## Saving your code in a script
 
-### Saving your code in a script
+You should save all the code you use for a given analysis or graphic. Use the menus in R Studio to create a new R script (*File >> New >> R script*) and save that with the disk icon or menu (*File >> Save*). See [Project management](projects.qmd) for advice on how to structure these files.
 
-You should save all the code you use for a given analysis or graphic. Use the menus in R Studio to create a new R script (*File >> New >> R script*) and save that with the disk icon or menu (*File >> Save*). See [Project management](../projects/) for advice on how to structure these files.
-
-
-### Installing R packages
+## Installing R packages
 
 If your required analyses or graphics need a package that is not in the initial installation of R, then new packages can be installed from the menus (*Tools >> Install packages*) or from the panel on the bottom right. Once installed, they can be loaded with the `library` function (recommended) or by ticking the little box next to the package name (not recommended). It is better practice to use the `library` function in your script as that will remind you what packages need to be loaded.
 
@@ -62,18 +59,14 @@ For example, this code will load the package `maptools` if it is installed on yo
 library(maptools)
 ```
 
+## Further help
 
-### Further help
-
-Our help modules on [Good practice for writing scripts](/coding-skills/good-practice) and [Importing data and data cleaning](../data-literacy/reading/)
+Our help modules on [Good practice for writing scripts](../coding-skills/good-practice.qmd) and [Importing data and data cleaning](../data-literacy/reading/index.qmd)
 
 [Online help with R Studio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 
 [Online training in R](https://education.rstudio.com/learn/beginner/)
 
-
 **Author**: Alistair Poore & Will Cornwell
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

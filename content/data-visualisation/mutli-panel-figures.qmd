@@ -1,5 +1,0 @@
----
-title: "Mutli Panel Figures"
----
-
-Placeholder content.

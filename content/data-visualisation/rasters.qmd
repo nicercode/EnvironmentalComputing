@@ -2,13 +2,19 @@
 title: "Raster"
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 ## The Basics of Rasters
 
-This tutorial is focused on introducing the basics of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with the [Simple Maps](#simple-maps) section below.
+This tutorial is focused on introducing the basics of what a raster is, and then how to get raster data into R and do some basic manipulation. If you just need to make a pretty site location map, or something similar, then you might be best starting with the [Simple maps](simple-maps.qmd) chapter.
 
 ### Let's get set up first
 
-Check if you can see the data we'll be using (your working directory should be this file's location)
+Download the data files needed for this tutorial: [Cairns_Mangroves_30m.tif](../../datasets/Cairns_Mangroves_30m.tif), [SST_feb_2013.img](../../datasets/SST_feb_2013.img), [SST_feb_mean.img](../../datasets/SST_feb_mean.img), [Landsat_TIR.tif](../../datasets/Landsat_TIR.tif), and [multiband.tif](../../datasets/multiband.tif). Place them in your working directory, then check if you can see the data we'll be using (your working directory should be this file's location)
+
 ```{r}
 #| label: basic-raster-1
 #| eval: false
@@ -17,14 +23,16 @@ file.exists("SST_feb_2013.img")
 file.exists("SST_feb_mean.img")
 ```
 
-Install the packages we're going to need - the raster package is the key library for raster objects in R, dismo has some nice wrappers for various sampling functions (plus some other neat SDM related stuff), and rgdal has a lot of the drivers for reading and writing various spatial data formats
+Install the packages we're going to need - the raster package is the key library for raster objects in R, dismo has some nice wrappers for various sampling functions (plus some other neat SDM related stuff). (Older versions of this tutorial also used rgdal for reading spatial file formats; it was retired from CRAN in 2023, and raster now does this itself through the terra package.)
+
 ```{r}
 #| label: basic-raster-2
 #| eval: false
-install.packages(c("raster", "dismo", "rgdal"))
+install.packages(c("raster", "dismo"))
 ```
 
 Check that you can load them
+
 ```{r}
 #| label: basic-raster-3
 #| eval: true
@@ -32,11 +40,10 @@ Check that you can load them
 #| warning: false
 library(raster)
 library(dismo)
-library(rgdal)
 ```
 
-
 ### What is a raster?
+
 Now we're ready to go, but firstly, what is a raster? Well, simply, it is a grid of coordinates for which we can define certain values across, and we display the corresponding grid elements according to those values. The raster data is essentially a matrix, but a raster is special in that we define what shape and how big each grid element is, and usually where the grid should sit in some known space (i.e. a geographic projected coordinate system).
 
 ![ ](images/teaser_plot.png)
@@ -44,6 +51,7 @@ Now we're ready to go, but firstly, what is a raster? Well, simply, it is a grid
 ### Understanding Raster Data
 
 Make a raster object, and query it
+
 ```{r}
 #| label: basic-raster-4
 #| eval: false
@@ -58,6 +66,7 @@ plot(dummy_raster) # entire raster has a pixel value of 1
 ```
 
 Make a random number raster so we can see what's happening a little easier
+
 ```{r}
 #| label: basic-raster-5
 #| eval: false
@@ -71,6 +80,7 @@ dummy_raster[, 1]
 ```
 
 Use this to interactively query the raster - press esc to exit
+
 ```{r}
 #| label: basic-raster-6
 #| eval: false
@@ -78,6 +88,7 @@ click(dummy_raster)
 ```
 
 What's special about a raster object?
+
 ```{r}
 #| label: basic-raster-7
 #| eval: false
@@ -94,6 +105,7 @@ yres(dummy_raster) # just pixel height
 ```
 
 #### Excercises
+
 * make a raster with a smiley face (tip: make a blank raster, then use indexing to change values sequentially)
 * extract some vector and matrix data from the raster (tip: use indexing or things like ```?as.matrix```)
 * subset the raster into a smaller chunk (tricker - see ```?crop```)
@@ -101,6 +113,7 @@ yres(dummy_raster) # just pixel height
 ### Working with real raster data
 
 Import the Cairns mangrove data and have a look at it
+
 ```{r}
 #| label: basic-raster-8
 #| eval: false
@@ -112,6 +125,7 @@ plot(mangrove, col = "mediumseagreen")
 ```
 
 The legend is a little odd - we can change to a categorical legend by doign this - but we'll stick to the default continous bar generally so as to reduce clutter in the code
+
 ```{r}
 #| label: basic-raster-9
 #| eval: false
@@ -121,6 +135,7 @@ legend(x = "bottomleft", legend = c("no mangrove", "mangrove"), fill = cols)
 ```
 
 Simple processing
+
 ```{r}
 #| label: basic-raster-10
 #| eval: false
@@ -134,6 +149,7 @@ plot(mangrove, col = "mediumseagreen", add = TRUE) # add information to current 
 ```
 
 Create a simple buffer
+
 ```{r}
 #| label: basic-raster-11
 #| eval: false
@@ -145,6 +161,7 @@ plot(mangrove, col = "mediumseagreen", add = T) # note add= argument
 Note at this point, we could mess around with the margins if we cared about that, e.g. ```par(mar = c(2,1,2,1), oma = c(2,1,2,1))```.
 
 Convert raster to point data, and then import point data as raster
+
 ```{r}
 #| label: basic-raster-12
 #| eval: false
@@ -164,6 +181,7 @@ dev.off()
 ```
 
 Export your data - lets try the aggregated raster
+
 ```{r}
 #| label: basic-raster-13
 #| eval: false
@@ -172,6 +190,7 @@ writeRaster(agg_mangrove, "agg_mangrove.tif", format = "GTiff")
 ```
 
 Now, what about multiband rasters? The raster package handles them in the same way, just the ```nbands()``` attribute is >1 - think about an array instead of a matrix
+
 ```{r}
 #| label: basic-raster-14
 #| eval: false
@@ -183,6 +202,7 @@ ncell(multiband)
 ```
 
 What about making our own multiband raster?
+
 ```{r}
 #| label: basic-raster-15
 #| eval: false
@@ -199,6 +219,7 @@ plot(multiband_stack)
 ```
 
 Plotting an RGB image?
+
 ```{r}
 #| label: basic-raster-16
 #| eval: false
@@ -210,6 +231,7 @@ plotRGB(multiband_stack, r = 2, g = 3, b = 4, scale = 1)
 ```
 
 Other handy processing functions
+
 ```{r}
 #| label: basic-raster-17
 #| eval: false
@@ -222,6 +244,7 @@ Other handy processing functions
 ```
 
 Some handy analysis functions
+
 ```{r}
 #| label: basic-raster-18
 #| eval: false
@@ -235,6 +258,7 @@ Some handy analysis functions
 ```
 
 We won't go into detail on coordinate and projection systems today, but *very* briefly, ```CRS()``` and ```crs()``` are they key functions/objects
+
 ```{r}
 #| label: basic-raster-19
 #| eval: false
@@ -252,8 +276,8 @@ projected_pts_mangrove <- spTransform(latlongs_mangrove, CRS(eastnorth))
 projected_pts_mangrove
 ```
 
-
 #### Excercises
+
 ```{r}
 #| label: basic-raster-20
 #| eval: false
@@ -294,12 +318,12 @@ zonal_mean_temps <- zonal(x = tir_temp, z = temp_zones, fun = "mean")
 zonal_sd_temps <- zonal(x = tir_temp, z = temp_zones, fun = "sd")
 ```
 
-
 ### Extending raster analyses
 
 Now let's take a bit of a whirlwind tour of the types of analyses we can do, and hopefully discover a bit deeper understanding of raster analysis in R.
 
 Load up some SST data - Feb 2013 for the globe (as an aside, check [this link](http://oceancolor.gsfc.nasa.gov/cms/) for more great ocean global data sets:
+
 ```{r}
 #| label: basic-raster-22
 #| eval: true
@@ -308,6 +332,7 @@ plot(sst_feb)
 ```
 
 Crop it to the pacific so we can compare our mangrove data
+
 ```{r}
 #| label: basic-raster-23
 #| eval: false
@@ -318,6 +343,7 @@ plot(sst_feb_crop)
 ```
 
 Load up the long term mean SST data for Feb
+
 ```{r}
 #| label: basic-raster-24
 #| eval: false
@@ -328,6 +354,7 @@ plot(sst_mn_crop)
 ```
 
 Now let's make an SST anomoly map
+
 ```{r}
 #| label: basic-raster-25
 #| eval: false
@@ -350,6 +377,7 @@ sst_anomaly <- sst_feb_crop - sst_mn_crop
 ```
 
 Query single values,
+
 ```{r}
 #| label: basic-raster-27
 #| eval: false
@@ -359,6 +387,7 @@ plot(sst_anomaly == maxValue(sst_anomaly))
 ```
 
 or plots/stats for the entire image,
+
 ```{r}
 #| label: basic-raster-28
 #| eval: false
@@ -368,6 +397,7 @@ hist(sst_anomaly, main = "February SST Anomaly", xlab = "sst anomaly")
 ```
 
 or let's be a litle more tricky!
+
 ```{r}
 #| label: basic-raster-29
 #| eval: true
@@ -381,6 +411,7 @@ points(max_xy, pch = 8, cex = 2)
 ```
 
 Sampling points conditionally? Sure. We'll see a better wrapper for this further down though.
+
 ```{r}
 #| label: basic-raster-30
 #| eval: false
@@ -390,6 +421,7 @@ extract(sst_feb, xy)
 ```
 
 Try out ```?getValues``` too. OK, re-capping writing back to disk
+
 ```{r}
 #| label: basic-raster-31
 #| eval: false
@@ -401,6 +433,7 @@ save(sst_feb_mn, file = "sst_feb_mn.RData") # check the file size, huh?
 ```
 
 What's going on with those last two ```save()``` commands? Something else to understand about the way the ```raster``` package handles raster files is that for larger rasters, the whole file is not stored in memory, rather it is just a pointer to the file. You can test whether or not it is
+
 ```{r}
 #| label: basic-raster-32
 #| eval: false
@@ -409,6 +442,7 @@ inMemory(sst_anomaly) # it's in memory.
 ```
 
 We saw ```stack()``` earlier, and we can use it for multi-band imagery, but also to stack up different information sources. ```brick()``` works in the same way, except that ```RasterBrick``` objects are designed for smaller data, and a ```RasterBrick``` can only point to one file, opposed to a ```RasterStack``` objects, which can point to multiple files.
+
 ```{r}
 #| label: basic-raster-33
 #| eval: false
@@ -416,15 +450,15 @@ sst_stack <- stack(sst_mn_crop, sst_feb_crop, sst_anomaly)
 plot(sst_stack)
 nlayers(sst_stack)
 plot(sst_stack, 2)
-names(sst_stack)[3] <- "SST_anomaly"
+names(sst_stack) <- c("SST_feb_mean", "SST_feb_2013", "SST_anomaly")
 ```
 
 So we can see why that might be useful for various remote sensing and modelling applicaitons.
 
-
 ### Modelling and interpolation
 
 Now let's look at quick example of what we can do with rasters in context of species distribution modelling and spatial modelling. First lets extract some random points - make sure you've run ```library(dismo)```
+
 ```{r}
 #| label: basic-raster-34
 #| eval: false
@@ -442,6 +476,7 @@ plot(sst_samp$SST_anomaly ~ sst_samp$SST_feb_2013)
 ```
 
 What if we had some real biological data at those points? Well, let's make some up, and then fit a model to it
+
 ```{r}
 #| label: basic-raster-35
 #| eval: false
@@ -454,6 +489,7 @@ summary(shark_glm)
 ```
 
 We would usually use ```predict()``` on a model fit object, and we can use it similarly for predicting out to raster data
+
 ```{r}
 #| label: basic-raster-36
 #| eval: false
@@ -470,7 +506,7 @@ plot(shark_predict,
 #| eval: true
 #| echo: false
 sst_stack <- stack(sst_mn_crop, sst_feb_crop, sst_anomaly)
-names(sst_stack)[3] <- "SST_anomaly"
+names(sst_stack) <- c("SST_feb_mean", "SST_feb_2013", "SST_anomaly")
 rpoints_sst <- randomPoints(sst_stack, 500)
 sst_samp <- extract(sst_stack, rpoints_sst)
 sst_samp <- data.frame(sst_samp, lat = rpoints_sst[, 2], lon = rpoints_sst[, 1])
@@ -485,8 +521,8 @@ plot(shark_predict,
 )
 ```
 
-
 Let's try somethign else, say attack risk. It's not just about abdundance, something else like how mean or aggressive they are?
+
 ```{r}
 #| label: basic-raster-38
 #| eval: true
@@ -504,13 +540,12 @@ plot(shark_attack,
 
 This is a quick and silly example. If we were less lazy, we might create a new image stack with the abundance predicitons and the lattitude values, pull the random samples out again, and re-fit the model and predictions.
 
-
 #### Excercises
+
 * try generating some stats (values or plots) for SST anomaly for different regions, either across the globe or across Australia
 * try some band math, or some conditional statements using multiple rasters or a RasterStack
 * create another SDM scenario - either using downloaded data, or totally simulated data
 * if we just had the physical data at some points, and wanted to make those into a geographically weighted or interpolated SST map? You could sample some of the points then use ```library(gstat)``` to try an IDW (inverse distance weighted) interpolation. Do some interpolations, varying the number of points used, and see how that effects your interpollated product
-
 
 ```{r}
 #| label: basic-raster-39
@@ -550,10 +585,10 @@ plot(sst.feb)
 plot(sst.ordkrig)
 ```
 
-
 ### Some more stuff to investigate
 
 Some of the other commonly used packages for spatial data analysis
+
 ```{r}
 #| label: basic-raster-41
 #| eval: false
@@ -603,9 +638,6 @@ library(maps)
 map(database = "world", col = "grey")
 ```
 
-
 **Author**: Mitchell Lyons
 
 **Year:** 2017
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

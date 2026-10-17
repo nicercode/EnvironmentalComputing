@@ -2,7 +2,7 @@
 title: 'Interactive Maps in R'
 ---
 
-Being able to produce interactive maps on the fly can greatly speed up exploratory analysis and is a useful tool for displaying data that would be less informative on a [static map](../simple-maps).
+Being able to produce interactive maps on the fly can greatly speed up exploratory analysis and is a useful tool for displaying data that would be less informative on a [static map](../data-visualisation/simple-maps.qmd).
 
 Leaflet is an open source JavaScript library that is used to create interactive maps on websites. In this post we will look at the the [leaflet R package](https://github.com/rstudio/leaflet) and create some cool interactive maps!
 
@@ -41,7 +41,6 @@ leaflet() %>%
   setView(lng = 151.2, lat = -33.86, zoom = 10) %>%
   addMiniMap()
 ```
-
 
 ## Markers
 
@@ -121,5 +120,3 @@ base %>%
 **Author**: John Wilshire
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

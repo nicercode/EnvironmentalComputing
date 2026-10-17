@@ -2,6 +2,11 @@
 title: "T-tests"
 ---
 
+Some simple hypothesis tests with the t statistic:
+
+* [One sample t tests](#one-sample-t-test) to contrasting a single sample parameter to a population parameter  
+* [Independent samples](#two-sample-t-test) t tests to contrast the means of two samples
+* [Paired t-tests](#paired-t-test) to contrast two groups of values where each pair is measured from the same object.
 
 ## One Sample T-test
 
@@ -26,7 +31,6 @@ $$t = \frac{\bar{x}-\mu}{SE}$$
 where $\bar{x}$ is the sample mean, $\mu$ is the population mean and *SE* is the standard error of the sample.
 
 Note that the size of test statistic depends on two things: 1) how different the sample mean is to the population mean (the numerator) and 2) how much variation is present within the sample (the denominator). The null hypothesis is that the population mean from which the sample was taken is the known value, i.e., $H_o: \mu=125$.
-
 
 ### Running the analysis
 
@@ -61,7 +65,6 @@ pollen <- c(94, 135, 78, 98, 137, 114, 114, 101, 112, 121)
 t.test(pollen, mu = 125)
 ```
 
-
 ### Interpreting the results
 
 ```{r}
@@ -75,7 +78,6 @@ The output of a one sample *t*-test is straight-forward to interpret. In the abo
 
 You also get the mean of your sample (109) and the 95% confidence interval for population mean estimated from that sample (this will not overlap your hypothesised mean when the test is significant).
 
-
 ### Assumptions to check
 
 *t*-tests are parametric tests, which implies we can specify a probability distribution for the population of the variable from which samples were taken. Parametric (and non-parametric) tests have a number of assumptions. If these assumptions are violated we can no longer be sure that the test statistic follows a *t* distribution, in which case *p*-values may be inaccurate.
@@ -83,7 +85,6 @@ You also get the mean of your sample (109) and the 95% confidence interval for p
 **Normality**. The *t* distribution describes paramaters sampled from a normal population, so assumes that the data are normally distributed. Note however that *t tests* are reasonably robust to violations of normality (although watch out for the influence of outliers).
 
 **Independence**. The observations should have been sampled randomly from a defined population so that sample mean is an unbiased estimate of the population mean. If individual replicates are linked in any way, then the assumption of independence will be violated.
-
 
 ### Communicating the results
 
@@ -99,7 +100,6 @@ boxplot(pollen, xlab = "Pollen count", horizontal = TRUE)
 abline(v = 125, col = "red")
 ```
 
-
 ### Further help
 
 Type `?t.test` to get the R help for this function.
@@ -107,7 +107,6 @@ Type `?t.test` to get the R help for this function.
 <p style="margin-left:.5in;text-indent:-.5in">Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Chapter 3: Hypothesis testing.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.</p>
-
 
 **Author**: Alistair Poore
 
@@ -139,7 +138,6 @@ $$\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$$
 
 Note that a *t* test is a special case of a linear model with a single continuous response variable and a single categorical predictor variable that has two levels.
 
-
 ### Running the analysis
 
 An independent samples *t*-test can be run with the same `t.test` function as used for [one sample](#one-sample-t-test) or [paired *t*-tests](#paired-t-test). For an independent samples *t*-test assuming equal variances, we would use:
@@ -154,7 +152,7 @@ where *my_sample1* and *my_sample2* are vectors containing the measurements from
 
 More commonly, we would use a data frame with the response and predictor variables as separate columns. You can then use a formula statement, `y ~ x`, to specify the response and predictor variables rather than the code above. Consider the simple example where you wanted to compare the pH of two rivers. Ten replicate pH measures were taken from each river.
 
-Download the sample data set, [River_pH.csv](/datasets/River_pH.csv), and import into R.
+Download the sample data set, [River_pH.csv](../../datasets/River_pH.csv), and import into R.
 
 ```{r}
 #| label: two-sample-t-test-2
@@ -172,7 +170,6 @@ t.test(pH ~ River_name, data = River_pH, var.equal = TRUE)
 
 The argument `var.equal = TRUE` specifies that we are assuming equal variances. Note the default `t-test` argument for the alternative hypothesis is a two-tailed test. If you want to conduct a one-tailed test you must add an argument to the function specifying `alternative = "greater"` or `alternative = "less"`.
 
-
 ### Interpreting the results
 
 ```{r}
@@ -186,7 +183,6 @@ The output of a *t*-test is straight-forward to interpret. In the above output, 
 
 You also get the means from the two samples (needed to know which one is larger if the test is significant), and the 95% confidence interval for the difference between the two means (this will not overlap zero when the test is signficant).
 
-
 ### Assumptions to check
 
 *t*-tests are parametric tests, which implies we can specify a probability distribution for the population of the variable from which samples were taken. Parametric (and non-parametric) tests have a number of assumptions. If these assumptions are violated we can no longer be sure that the test statistic follows a *t* distribution, in which case *p*-values may be inaccurate.
@@ -199,7 +195,6 @@ In the event of unequal variances, it may be better to perform a Welch's *t* tes
 
 **Independence**. The observations should have been sampled randomly from the population so that the two sample means are unbiased estimates of the population means. If individual replicates are linked in any way, then the assumption of independence will be violated.
 
-
 ### Communicating the results
 
 **Written.** As a minimum, the observed *t* statistic, the P-value and the number of degrees of freedom should be reported. For example, you could write "the pH was significantly higher in River A than River B (independent samples *t*-test: *t* = 6.98, df = 18, P < 0.001)".
@@ -211,7 +206,6 @@ In the event of unequal variances, it may be better to perform a Welch's *t* tes
 boxplot(pH ~ River_name, data = River_pH, xlab = "River name", ylab = "pH")
 ```
 
-
 ### Further help
 
 Type `?t.test` to get the R help for this function.
@@ -219,7 +213,6 @@ Type `?t.test` to get the R help for this function.
 <p style="margin-left:.5in;text-indent:-.5in">Quinn and Keough (2002) *Experimental design and data analysis for biologists*. Cambridge University Press. Chapter 3: Hypothesis testing.</p>
 
 <p style="margin-left:.5in;text-indent:-.5in">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.</p>
-
 
 **Author**: Alistair Poore
 
@@ -249,7 +242,6 @@ Note that this equation is identical to a [one sample *t*-test](#one-sample-t-te
 
 $$t = \frac{\bar{x}-\mu}{SE}$$
 
-
 ### Running the analysis
 
 The test statistic *t* is relatively straightforward to calculate manually. The test statistic can then checked against a *t* distribution in order to determine the probability of obtaining that value of the test statistic if the null hypothesis is true. In R, to calculate the probability associated with a given value of *t* use:
@@ -274,7 +266,7 @@ where *my_sample1* and *my_sample2* are vectors containing the measurements from
 
 Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, `y ~ x`, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).
 
-Download a sample data set in this format, [Greenhouse.csv](/datasets/Greenhouse.csv/), and import into R
+Download a sample data set in this format, [Greenhouse.csv](../../datasets/Greenhouse.csv), and import into R
 
 ```{r}
 #| label: paired-t-test-3
@@ -282,14 +274,19 @@ Download a sample data set in this format, [Greenhouse.csv](/datasets/Greenhouse
 Greenhouse <- read.csv(file = "data/Greenhouse.csv", header = TRUE)
 ```
 
-The paired *t*-test is run with the `t.test` function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired *t*-test.
+For the paired *t*-test, the two measurements from each plant need to be side by side, so we first reshape the data to have one row per plant and a column for each treatment (see [reshaping data](../data-literacy/pivotting/index.qmd)). The `t.test` function is then given the two columns and told that they are paired. (Older versions of R also allowed `Greenhouse_wide <- tidyr::pivot_wider(Greenhouse, id_cols = Plant,
+  names_from = Treatment, values_from = Performance
+)
+t.test(Greenhouse_wide$Sunny, Greenhouse_wide$Shady, paired = TRUE)`; since R 4.4 this is an error.)
 
 ```{r}
 #| label: paired-t-test-4
 #| eval: false
-t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
+Greenhouse_wide <- tidyr::pivot_wider(Greenhouse, id_cols = Plant,
+  names_from = Treatment, values_from = Performance
+)
+t.test(Greenhouse_wide$Sunny, Greenhouse_wide$Shady, paired = TRUE)
 ```
-
 
 ### Interpreting the results
 
@@ -297,13 +294,15 @@ t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
 #| label: paired-t-test-5
 #| echo: false
 Greenhouse <- read.csv(file = "data/Greenhouse.csv", header = TRUE)
-t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
+Greenhouse_wide <- tidyr::pivot_wider(Greenhouse, id_cols = Plant,
+  names_from = Treatment, values_from = Performance
+)
+t.test(Greenhouse_wide$Sunny, Greenhouse_wide$Shady, paired = TRUE)
 ```
 
 The important output of a paired *t*-test includes the test statistic *t*, in this case 18.8, the degrees of freedom (in this case 9) and the probability associated with that value of *t*. In this case, we have a very low *p* value (*p* < 0.001) and can reject the null hypothesis that the plants can photosynthesise with the same performance in the two light environments.
 
 You also get the mean and 95% confidence intervals for the differences between measurements in each pair (this will not overlap zero when the test is significant).
-
 
 ### Assumptions to check
 
@@ -312,7 +311,6 @@ You also get the mean and 95% confidence intervals for the differences between m
 **Normality.** For a paired *t*-test, it is assumed the the sample of differences is normally distributed. If these are highly skewed, transformations may be used to achieve a distribution closer to normal.
 
 **Independence.** The paired design takes into account that the two measures from each pair are not independent. It is still important, however, that each pair of objects measured are independent from other pairs. If they are linked in any way (e.g., groups of plants sharing a water tray) then more complex analytical design that account for additional factors may be required.
-
 
 ### Communicating the results
 
@@ -325,7 +323,6 @@ You also get the mean and 95% confidence intervals for the differences between m
 boxplot(Performance ~ Treatment, data = Greenhouse, xlab = "Light environment", ylab = "Photosynthetic performance (FvFm)")
 ```
 
-
 ### Further help
 
 Type `?t.test` to get the R help for this function.
@@ -334,10 +331,8 @@ Type `?t.test` to get the R help for this function.
 
 <p style="margin-left:.5in;text-indent:-.5in">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Chapter 9: Comparing the means of one and two samples of normally distributed data.</p>
 
-
 **Author**: Alistair Poore
 
 **Year:** 2016
 
 ---
-

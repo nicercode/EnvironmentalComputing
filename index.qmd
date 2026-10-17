@@ -1,5 +1,4 @@
 ---
-title: "Welcome"
 pagetitle: "Environmental Computing"
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Summarising data"
+title: Summarising Data
 ---
 
 Summarising our data is often the first step in data exploration and needed to understanding patterns in the magnitude and variability of our measurements.

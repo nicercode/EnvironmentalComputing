@@ -1,5 +1,5 @@
 ---
-title: "Subsetting data"
+title: Subsetting Data
 ---
 
 We often want to subset our data, whether it's to examine particular rows or columns of our dataset, or to pull out observations with particular properties. We may conduct subsetting at the data exploration stage to investigate whether our response variable differs in its relationship to a particular predictor variable across categories (e.g., to look for an interaction). We may also like to pull out elements of our dataset for separate analyses.

@@ -78,7 +78,8 @@ book:
   # delete its "!" exclusion under project: render, or it is listed but
   # never built.
   chapters:
-    - index.qmd
+    - href: index.qmd
+      text: Welcome
     - content/preface.qmd
 
     # planned part: content/big-picture/big-picture.qmd

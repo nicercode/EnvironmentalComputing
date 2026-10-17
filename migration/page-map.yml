@@ -108,18 +108,22 @@ chapters:
     sources:
       - page: getting-started-with-r/importing-data
   - chapter: data-literacy/filter-rows/index.qmd
+    title: Subsetting Data
     sources:
       - page: Data-Manipulation/subsetting-data
   - chapter: data-literacy/mutate/index.qmd
     sources:
       - page: Data-Manipulation/making-new-variables
   - chapter: data-literacy/joining-tables/index.qmd
+    title: Combining Datasets
     sources:
       - page: Data-Manipulation/combining-datasets
   - chapter: data-literacy/summarising-tables/index.qmd
+    title: Summarising Data
     sources:
       - page: Data-Manipulation/summarising-data
   - chapter: data-literacy/pivotting/index.qmd
+    title: Reshaping Data
     sources:
       - page: Data-Manipulation/reshaping-data
 
@@ -159,7 +163,7 @@ chapters:
         new: "See [here](../data-literacy/summarising-tables/index.qmd)"
   - chapter: data-visualisation/multi-panel-figures.qmd
     replaces: data-visualisation/mutli-panel-figures.qmd
-    title: Multipanel figures with ggplot2
+    title: Multipanel Figures with ggplot2
     sources:
       - page: Graphics/ggplot/ggplot-multipanel
   - chapter: data-visualisation/rasters.qmd
@@ -222,6 +226,9 @@ chapters:
           * [Interpreting coefficients in linear models](interpret-glm-coeffs.qmd)
 
         new: ""
+      - reason: the confidence intervals chapter is still a placeholder and is not published, so the link would point at its raw source file
+        old: "1. [Confidence intervals](confidence-intervals.qmd)"
+        new: "1. Confidence intervals (planned)"
   - chapter: statistical-methods/linear-regression.qmd
     sources:
       - page: Statistics/linear-models/linear-regression
@@ -260,10 +267,24 @@ chapters:
       - page: Statistics/linear-models/anova
       - page: Statistics/linear-models/anova/anova-single
         section: Single Factor ANOVA
+        coverage_exceptions:
+          - starts: "Analysis of variance (ANOVA) is one of the most"
+            reason: repeats the introduction of the parent ANOVA page word for word (see edits)
+          - starts: "Where an independent samples"
+            reason: repeats the introduction of the parent ANOVA page (see edits)
       - page: Statistics/linear-models/anova/anova-factorial
         section: Factorial ANOVA
       - page: Statistics/linear-models/anova/anova-nested
         section: Nested ANOVA
+    edits:
+      - reason: the single-factor page repeated the parent page's introduction, so it appeared twice in a row
+        old: |-
+          ## Single Factor ANOVA
+
+          Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. In this module, we will start with the simplest design - those with a single factor.
+
+          Where an independent samples *t*-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of >2 group means, or when there are more than two or more predictor variables (see [Factorial ANOVA](#factorial-anova)). The logic of this test is essentially the same as the *t*-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.
+        new: "## Single Factor ANOVA"
   - chapter: statistical-methods/understanding-interactions.qmd
     sources:
       - page: Statistics/linear-models/interactions

@@ -1,5 +1,5 @@
 ---
-title: Multipanel figures with ggplot2
+title: Multipanel Figures with ggplot2
 ---
 
 ```{r}

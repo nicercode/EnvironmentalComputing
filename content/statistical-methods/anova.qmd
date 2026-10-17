@@ -8,10 +8,6 @@ Where an independent samples *t*-test would be used for comparison of group mean
 
 ## Single Factor ANOVA
 
-Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. In this module, we will start with the simplest design - those with a single factor.
-
-Where an independent samples *t*-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of >2 group means, or when there are more than two or more predictor variables (see [Factorial ANOVA](#factorial-anova)). The logic of this test is essentially the same as the *t*-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.
-
 ![](images/ANOVA_single_factor_image.png)
 
 For example, to contrast the the hatching times of turtle eggs incubated at four different temperatures (15°C, 20°C, 25°C and 30°C), hatching time is the continuous response variable and temperature is the categorical predictor variable with with four levels. The null hypothesis would be that mean hatching time is equal for all temperatures (H~o~: $\mu_{15} = \mu_{20} = \mu_{25} = \mu_{30}$).

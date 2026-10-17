@@ -6,7 +6,7 @@ This section introduces linear-model-based methods for testing differences among
 
 The core chapters are:
 
-1. [Confidence intervals](confidence-intervals.qmd)
+1. Confidence intervals (planned)
 2. [Simple linear regression](linear-regression.qmd)
 3. [Interpreting linear regressions](interpret-lm-coeffs.qmd)
 4. [T-tests](t-tests.qmd)

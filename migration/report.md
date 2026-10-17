@@ -343,6 +343,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 5 blocks from 1 old page(s). 0 matched the first conversion; **5 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
 
 - EDIT: duplicate of the numbered chapter list above (whose "Interpreting coefficients" link also went to the GLM page on the old site)
+- EDIT: the confidence intervals chapter is still a placeholder and is not published, so the link would point at its raw source file
 
 <details><summary>Details</summary>
 
@@ -386,6 +387,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## statistical-methods/anova.qmd
 163 blocks from 4 old page(s). 152 matched the first conversion; **11 restored** (missing), **9 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 1 condensed rewrites replaced by the original, 2 new blocks kept.
 
+- EDIT: the single-factor page repeated the parent page's introduction, so it appeared twice in a row
 
 <details><summary>Details</summary>
 

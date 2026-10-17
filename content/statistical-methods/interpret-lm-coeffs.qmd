@@ -50,7 +50,7 @@ lm_both <- lm(height ~ temp + alt)
 data.frame(estimated = round(lm_both$coefficients, 2), true = beta)
 ```
 
-The interpretation of these coefficients is that if you hold everything else in the model constant (i.e., temperature) and add 1 to altitude, then the estimated mean height will decrease by 1.09. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter.
+The interpretation of these coefficients is that if you hold everything else in the model constant (i.e., temperature) and add 1 to altitude, then the estimated mean height will decrease by `r round(-coef(lm_both)["alt"], 2)`. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter.
 
 The intercept is the predicted value when all the other variables are set to 0, which sometimes makes sense (here it would be the height of plants at sea level and 0 temperature). Other times 0 is not a meaningful value, and if you would like to interpret the intercept it might make sense to rescale your other variables so that their mean is 0. If you do this, then the intercept is the predicted value when all other variables are at their mean level.
 
@@ -62,7 +62,7 @@ lm1 <- lm(height ~ temp)
 lm1$coefficients
 ```
 
-The coefficient of temperature is now 1.38, what's going on? Altitude is an important predictor of plant height, and some of the information about altitude is contained in temperature (remember they are correlated, so as altitude increases temperature decreases). The model accounts for this by changing the effect of temperature to take account of the information it contains about altitude. Notice the coefficient of temperature is wrong by approximately 0.4, the amount of correlation between the variables. 
+The coefficient of temperature is now `r round(coef(lm1)["temp"], 2)`, what's going on? Altitude is an important predictor of plant height, and some of the information about altitude is contained in temperature (remember they are correlated, so as altitude increases temperature decreases). The model accounts for this by changing the effect of temperature to take account of the information it contains about altitude. Notice the coefficient of temperature is wrong by approximately 0.4, the amount of correlation between the variables. 
 
 Note: When statisticians talk about this, they use the words **conditional** and **marginal**. Conditional is the effect of a variable when others are held constant (as in lm_both), while marginal is the overall effect (as in lm1).
 Note: If you use the code above to simulate your own data sets, you will get slightly different values for the coefficients.
@@ -81,7 +81,7 @@ summary(mod_temp)
 anova(mod_temp)
 ```
 
-The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by 0.45 (remember the correlation was 0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
+The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by `r round(coef(mod_temp)["temp"], 2)` (remember the correlation was 0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
 
 But what about altitude? We know the temperature effect we observe is because it is correlated with altitude, temperature does not directly predict height. If we want to know if there is an effect of temperature after controlling for altitude (holding altitude constant, so conditional), then we fit the model with altitude and then test for temperature.
 
@@ -92,7 +92,7 @@ summary(mod_temp_alt)
 anova(mod_temp_alt)
 ```
 
-The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.
+The p-value is `r signif(anova(mod_temp_alt)["temp", "Pr(>F)"], 3)`, which is above 0.05. At the 5% significance level, we do not reject the null hypothesis of no temperature effect after controlling for altitude.
 
 Note: The distinction between conditional and marginal interpretations is also true for generalised linear models and mixed models.
 
@@ -123,7 +123,7 @@ cat_lm <- lm(Y ~ treatment)
 summary(cat_lm)
 ```
 
-So here group "high" has a mean of 2.65, and the difference between the means of group "low" and group "high" is -0.66, and the difference between group "med" and group "high" is -1.48. If you would like to have another group as the reference group, you can use `relevel` to recode your treatment factor.
+So here group "high" has a mean of `r round(coef(cat_lm)["(Intercept)"], 2)`, and the difference between the means of group "low" and group "high" is `r round(coef(cat_lm)["treatmentlow"], 2)`, and the difference between group "med" and group "high" is `r round(coef(cat_lm)["treatmentmed"], 2)`. If you would like to have another group as the reference group, you can use `relevel` to recode your treatment factor.
 
 ```{r}
 #| label: interpret-lm-coeffs-9
@@ -156,7 +156,7 @@ cont <- glht(cat_lm, linfct = mcp(treatment = "Tukey"))
 summary(cont)
 ```
 
-Each line of this output compares two groups against one another. The first line, for example, compares the "high" group to the "low" group. So the difference between the means of the "high" and "low" groups is 1.84. The p-values and the confidence intervals given by` glht` control for multiple testing, which is handy. If you want to see the confidence intervals for the differences between the groups. 
+Each line of this output compares two groups against one another. The first line, for example, compares the "high" group to the "low" group. So the difference between the means of the "high" and "low" groups is `r round(unname(coef(cat_lm)["treatmenthigh"] - coef(cat_lm)["treatmentlow"]), 2)`. The p-values and the confidence intervals given by` glht` control for multiple testing, which is handy. If you want to see the confidence intervals for the differences between the groups. 
 
 ```{r}
 #| label: interpret-lm-coeffs-12

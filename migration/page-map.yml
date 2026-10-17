@@ -240,6 +240,38 @@ chapters:
     seed: 1
     sources:
       - page: Statistics/linear-models/linear-regression/interpret-lm-coeffs
+        coverage_exceptions:
+          - starts: The interpretation of these coefficients is that if you hold everything else in the model constant (i.e., temperature) and add 1 to altitude, then the estimated mean height will decrease by 1.09. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: The coefficient of temperature is now 1.38, what's going on? Altitude is an important predictor of plant height, and some of the information about altitude is contained in temperature (remember they are correlated, so as altitude increases temperature decreases). The model accounts for this by changing the effect of temperature to take account of the information it contains about altitude. Notice the coefficient of temperature is wrong by approximately 0.4, the amount of correlation between the variables.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by 0.45 (remember the correlation was 0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: So here group "high" has a mean of 2.65, and the difference between the means of group "low" and group "high" is -0.66, and the difference between group "med" and group "high" is -1.48. If you would like to have another group as the reference group, you can use `relevel` to recode your treatment factor.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: Each line of this output compares two groups against one another. The first line, for example, compares the "high" group to the "low" group. So the difference between the means of the "high" and "low" groups is 1.84. The p-values and the confidence intervals given by` glht` control for multiple testing, which is handy. If you want to see the confidence intervals for the differences between the groups.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+    edits:
+      - reason: keep the interpretation consistent with the seeded model output
+        old: decrease by 1.09
+        new: decrease by `r round(-coef(lm_both)["alt"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: coefficient of temperature is now 1.38
+        new: coefficient of temperature is now `r round(coef(lm1)["temp"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: effect of temperature of increasing height by 0.45
+        new: effect of temperature of increasing height by `r round(coef(mod_temp)["temp"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.
+        new: The p-value is `r signif(anova(mod_temp_alt)["temp", "Pr(>F)"], 3)`, which is above 0.05. At the 5% significance level, we do not reject the null hypothesis of no temperature effect after controlling for altitude.
+      - reason: keep the interpretation consistent with the seeded model output
+        old: group "high" has a mean of 2.65, and the difference between the means of group "low" and group "high" is -0.66, and the difference between group "med" and group "high" is -1.48
+        new: group "high" has a mean of `r round(coef(cat_lm)["(Intercept)"], 2)`, and the difference between the means of group "low" and group "high" is `r round(coef(cat_lm)["treatmentlow"], 2)`, and the difference between group "med" and group "high" is `r round(coef(cat_lm)["treatmentmed"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: difference between the means of the "high" and "low" groups is 1.84
+        new: difference between the means of the "high" and "low" groups is `r round(unname(coef(cat_lm)["treatmenthigh"] - coef(cat_lm)["treatmentlow"]), 2)`
   - chapter: statistical-methods/t-tests.qmd
     sources:
       - page: Statistics/t-tests
@@ -250,18 +282,21 @@ chapters:
       - page: Statistics/t-tests/paired-t-test
         section: Paired T-test
         coverage_exceptions:
-          - starts: "The paired *t*-test is run with the `t.test` function"
+          - starts: The paired *t*-test is run with the `t.test` function
             reason: R 4.4 no longer accepts paired = TRUE with a formula (see edits)
-          - starts: "t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)"
+          - starts: t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
             reason: R 4.4 no longer accepts paired = TRUE with a formula (see edits)
     edits:
       - reason: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
-        old: "The paired *t*-test is run with the `t.test` function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired *t*-test."
-        new: "For the paired *t*-test, the two measurements from each plant need to be side by side, so we first reshape the data to have one row per plant and a column for each treatment (see [reshaping data](../data-literacy/pivotting/index.qmd)). The `t.test` function is then given the two columns and told that they are paired. (Older versions of R also allowed `t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)`; since R 4.4 this is an error.)"
-      - reason: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
         all: true
-        old: "t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)"
+        old: t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
         new: "Greenhouse_wide <- tidyr::pivot_wider(Greenhouse, id_cols = Plant,\n  names_from = Treatment, values_from = Performance\n)\nt.test(Greenhouse_wide$Sunny, Greenhouse_wide$Shady, paired = TRUE)"
+      - reason: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
+        old: The paired *t*-test is run with the `t.test` function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired *t*-test.
+        new: For the paired *t*-test, the two measurements from each plant need to be side by side, so we first reshape the data to have one row per plant and a column for each treatment (see [reshaping data](../data-literacy/pivotting/index.qmd)). The `t.test` function is then given the two columns and told that they are paired. (Older versions of R also allowed `t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)`; since R 4.4 this is an error.)
+      - reason: paired formula syntax is no longer supported; match pairs by identifier
+        old: Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, `y ~ x`, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).
+        new: If your data frame has one row per measurement, with the response and treatment in separate columns, reshape it so that each pair occupies one row before running the paired test. Use the plant identifier to match measurements rather than relying on their row order.
   - chapter: statistical-methods/anova.qmd
     sources:
       - page: Statistics/linear-models/anova

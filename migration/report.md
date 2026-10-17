@@ -367,12 +367,19 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 40 blocks from 1 old page(s). 40 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: keep the interpretation consistent with the seeded model output
+- EDIT: keep the interpretation consistent with the seeded model output
+- EDIT: keep the interpretation consistent with the seeded model output
+- EDIT: keep the interpretation consistent with the seeded model output
+- EDIT: keep the interpretation consistent with the seeded model output
+- EDIT: keep the interpretation consistent with the seeded model output
 
 ## statistical-methods/t-tests.qmd
 125 blocks from 4 old page(s). 123 matched the first conversion; **2 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 3 new blocks kept.
 
 - EDIT: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
 - EDIT: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
+- EDIT: paired formula syntax is no longer supported; match pairs by identifier
 
 <details><summary>Details</summary>
 

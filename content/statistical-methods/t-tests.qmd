@@ -264,7 +264,7 @@ t.test(x = my_sample1, y = my_sample2, paired = TRUE)
 
 where *my_sample1* and *my_sample2* are vectors containing the measurements from each sample. You would need to make sure the two vectors have the same number of values and that data from each pair were in the matching rows.
 
-Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, `y ~ x`, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).
+If your data frame has one row per measurement, with the response and treatment in separate columns, reshape it so that each pair occupies one row before running the paired test. Use the plant identifier to match measurements rather than relying on their row order.
 
 Download a sample data set in this format, [Greenhouse.csv](../../datasets/Greenhouse.csv), and import into R
 
@@ -274,10 +274,7 @@ Download a sample data set in this format, [Greenhouse.csv](../../datasets/Green
 Greenhouse <- read.csv(file = "data/Greenhouse.csv", header = TRUE)
 ```
 
-For the paired *t*-test, the two measurements from each plant need to be side by side, so we first reshape the data to have one row per plant and a column for each treatment (see [reshaping data](../data-literacy/pivotting/index.qmd)). The `t.test` function is then given the two columns and told that they are paired. (Older versions of R also allowed `Greenhouse_wide <- tidyr::pivot_wider(Greenhouse, id_cols = Plant,
-  names_from = Treatment, values_from = Performance
-)
-t.test(Greenhouse_wide$Sunny, Greenhouse_wide$Shady, paired = TRUE)`; since R 4.4 this is an error.)
+For the paired *t*-test, the two measurements from each plant need to be side by side, so we first reshape the data to have one row per plant and a column for each treatment (see [reshaping data](../data-literacy/pivotting/index.qmd)). The `t.test` function is then given the two columns and told that they are paired. (Older versions of R also allowed `t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)`; since R 4.4 this is an error.)
 
 ```{r}
 #| label: paired-t-test-4

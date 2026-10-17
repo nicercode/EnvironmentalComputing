@@ -71,13 +71,15 @@ jobs:
 
       - name: Find code that errors
         # chunks run with `error: true`, so a broken tutorial still renders,
-        # showing the error; list them
+        # showing the error; report them and block deployment
         run: |
           grep -rl 'cell-output-error' _book --include='*.html' \
             | sed 's|^_book/||' > chunk-errors.txt || true
           if [ -s chunk-errors.txt ]; then
             echo "### Chapters with code that errors" >> "$GITHUB_STEP_SUMMARY"
             sed 's/^/- /' chunk-errors.txt >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Tutorial code errors found; see the job summary"
+            exit 1
           fi
 
       - name: Check links

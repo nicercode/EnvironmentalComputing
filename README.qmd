@@ -72,7 +72,7 @@ Old site addresses are redirected to book chapters by `_redirects`, which is gen
 
 ## Authors and licence
 
-Environmental Computing is maintained by [Daniel Falster](https://github.com/dfalster), [Will Cornwell](https://github.com/wcornwell), [Fonti Kar](https://github.com/fontikar) and [Alistair Poore](https://github.com/alistairpoore) at UNSW Sydney. Tutorial authors are credited on each page.
+Environmental Computing is maintained by [Daniel Falster](https://github.com/dfalster), [Will Cornwell](https://github.com/wcornwell) and [Alistair Poore](https://www.unsw.edu.au/staff/alistair-poore) at UNSW Sydney, and [Fonti Kar](https://github.com/fontikar) at Monash University (Monash Business School). Tutorial authors are credited on each page.
 
 The content is licensed under [CC BY 4.0](LICENSE.md): you are free to reuse and adapt it, including for teaching, as long as you credit the source.
 
@@ -90,6 +90,7 @@ library(tidyverse)
 
 ```{r}
 #| echo: false
+#| output: false
 contribs_all_json <- gh::gh("/repos/:owner/:repo/contributors",
   owner = "nicercode",
   repo = "EnvironmentalComputing",
@@ -130,17 +131,15 @@ write_csv(contribs_all, "contributors.csv")
 #| results: asis
 #| echo: false
 #| message: false
+# List adapted from the R for Data Science README (https://github.com/hadley/r4ds)
 contributors <- readr::read_csv("contributors.csv")
 contributors <- contributors |>
   filter(!login %in% c("nicercode", "dfalster", "wcornwell", "fontikar", "alistairpoore")) |>
   mutate(
-    login = paste0("\\@", login),
-    desc = ifelse(is.na(name), login, paste0(name, " (", login, ")"))
+    profile = paste0("[@", login, "](https://github.com/", login, ")"),
+    desc = ifelse(is.na(name), profile, paste0(name, " (", profile, ")"))
   )
 
-cat("Besides the maintainers, ", nrow(contributors), " people have contributed new content and fixes. Big thanks to (in alphabetical order by username): ", sep = "")
-cat(paste0(contributors$desc, collapse = ", "))
-cat(".\n")
+cat("Thanks to everyone who has contributed new content and fixes on GitHub:\n\n")
+cat(paste0("- ", contributors$desc, collapse = "\n"), "\n")
 ```
-
-Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for the code which generated the list of contributors shown above.

@@ -120,10 +120,10 @@ render time.
 
 Environmental Computing is maintained by [Daniel
 Falster](https://github.com/dfalster), [Will
-Cornwell](https://github.com/wcornwell), [Fonti
-Kar](https://github.com/fontikar) and [Alistair
-Poore](https://github.com/alistairpoore) at UNSW Sydney. Tutorial
-authors are credited on each page.
+Cornwell](https://github.com/wcornwell) and [Alistair
+Poore](https://www.unsw.edu.au/staff/alistair-poore) at UNSW Sydney, and
+[Fonti Kar](https://github.com/fontikar) at Monash University (Monash
+Business School). Tutorial authors are credited on each page.
 
 The content is licensed under [CC BY 4.0](LICENSE.md): you are free to
 reuse and adapt it, including for teaching, as long as you credit the
@@ -131,12 +131,9 @@ source.
 
 ## Contributors
 
-    ⠙ 6 items, page 1 | 2ms
+Thanks to everyone who has contributed new content and fixes on GitHub:
 
-Besides the maintainers, 3 people have contributed new content and
-fixes. Big thanks to (in alphabetical order by username): Brendan
-Schuetze (@Brendan-Schuetze), John Wilshire (@johnWilshire), Mitchell
-Lyons (@mitchest).
-
-Extra thanks to [R for Data Science](https://github.com/hadley/r4ds)
-team for the code which generated the list of contributors shown above.
+- Brendan Schuetze
+  ([@Brendan-Schuetze](https://github.com/Brendan-Schuetze))
+- John Wilshire ([@johnWilshire](https://github.com/johnWilshire))
+- Mitchell Lyons ([@mitchest](https://github.com/mitchest))

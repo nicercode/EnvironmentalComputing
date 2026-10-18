@@ -95,11 +95,9 @@ Snail_feeding <- Snail_feeding[rowSums(is.na(Snail_feeding)) != ncol(Snail_feedi
 
 **The columns are not the type of data you expect**
 
-**Characters as factors** When data frames are imported into R, characters are automatically coerced as factors. For statistical work this makes a lot of sense; we are more likely to want to work over factors (defined earlier) than over characters. Factors are fantastic when one is doing statistical analysis and actually exploring the data. However, prior to that when one is reading, cleaning, troubleshooting, merging and generally manipulating the data, factors are a total pain.
+**Characters and factors** Factors (defined earlier) are fantastic when one is doing statistical analysis and actually exploring the data. However, prior to that when one is reading, cleaning, troubleshooting, merging and generally manipulating the data, factors are a total pain. Since R 4.0.0, `read.csv()` and `data.frame()` keep text columns as characters, which is usually what you want while cleaning. Older versions of R converted them to factors automatically, which is why older code often sets `stringsAsFactors = FALSE`; you no longer need it.
 
-You can use the argument `stringsAsFactors=FALSE` when importing the data to avoid automatic coercion to factors or you can use `as.character` to convert individual vectors to characters.
-
-Tip: Use factors as late as possible in the analysis process. Set `stringsAsFactors=FALSE` when importing your data, and when you need factors someplace within your script, then coerce the data to a factor.
+Tip: Use factors as late as possible in the analysis process. Keep text as characters while you clean your data, and when you need factors someplace within your script, convert those columns with `as.factor()`.
 
 **Factors as integers** In this data frame, Snail ID is an integer where it should be a factor or character. This is because in the original data sheet Snail ID was coded using numbers. This is a common problem and is easy to fix. Simply use `as.factor()` or `as.character()`, and then `class()` to check our coercion worked. Remember to use `$` to access the vector from within the data frame.
 

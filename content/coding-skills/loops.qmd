@@ -111,7 +111,7 @@ Now we can use your new loop skills in an ecological context. As with the [Subse
 
 ```{r}
 #| label: loops-8
-Bats <- read.csv(file = "data/Bats_data.csv", header = T, stringsAsFactors = F)
+Bats <- read.csv(file = "data/Bats_data.csv", header = T)
 str(Bats)
 ```
 
@@ -138,8 +138,7 @@ rows <- ncol(Bats_subset) - 1 # the number of rows needed in our output datafram
 
 Correlations <- data.frame(
   variable = character(length = rows),
-  correlation = numeric(length = rows),
-  stringsAsFactors = F
+  correlation = numeric(length = rows)
 )
 ```
 

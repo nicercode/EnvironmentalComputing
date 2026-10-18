@@ -49,6 +49,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 27 blocks from 1 old page(s). 27 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: maptools was retired from CRAN in 2023, so the example package no longer installs
+- EDIT: maptools was retired from CRAN in 2023 (see above)
 
 ## basics/projects.qmd
 24 blocks from 1 old page(s). 24 matched the first conversion; **0 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
@@ -64,6 +66,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 - EDIT: tidied markup (<font>/<center> tags: 1)
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: since R 4.0.0 (2020) read.csv() no longer turns text into factors, so stringsAsFactors = FALSE is not needed
 - EDIT: letter case `Importing_data_image.jpg` -> `Importing_data_image.JPG` (only worked on macOS)
 
 ## data-literacy/filter-rows/index.qmd
@@ -71,6 +74,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 
 - EDIT: tidied markup (<font>/<center> tags: 8)
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: stringsAsFactors = FALSE has been the default since R 4.0.0
 
 <details><summary>Details</summary>
 
@@ -92,6 +96,7 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 50 blocks from 1 old page(s). 50 matched the first conversion; **0 restored** (missing), **1 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 0 condensed rewrites replaced by the original, 0 new blocks kept.
 
 - EDIT: tidied markup (headings raised to start at ##: 1)
+- EDIT: stringsAsFactors = FALSE has been the default since R 4.0.0
 
 <details><summary>Details</summary>
 
@@ -585,6 +590,8 @@ Old site: `7b59e6f` (75 pages). Book chapters written: 50.
 ## coding-skills/loops.qmd
 39 blocks from 1 old page(s). Existing chapter was a placeholder: written from the old page(s).
 
+- EDIT: stringsAsFactors = FALSE has been the default since R 4.0.0
+- EDIT: stringsAsFactors = FALSE has been the default since R 4.0.0
 
 ## coding-skills/version-control.qmd
 55 blocks from 1 old page(s). 54 matched the first conversion; **1 restored** (missing), **0 restored** (trimmed), **0 updated** (changed on the old site since the first conversion), 1 condensed rewrites replaced by the original, 0 new blocks kept.

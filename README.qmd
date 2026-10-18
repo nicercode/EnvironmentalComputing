@@ -90,6 +90,7 @@ library(tidyverse)
 
 ```{r}
 #| echo: false
+#| output: false
 contribs_all_json <- gh::gh("/repos/:owner/:repo/contributors",
   owner = "nicercode",
   repo = "EnvironmentalComputing",
@@ -130,17 +131,15 @@ write_csv(contribs_all, "contributors.csv")
 #| results: asis
 #| echo: false
 #| message: false
+# List adapted from the R for Data Science README (https://github.com/hadley/r4ds)
 contributors <- readr::read_csv("contributors.csv")
 contributors <- contributors |>
   filter(!login %in% c("nicercode", "dfalster", "wcornwell", "fontikar", "alistairpoore")) |>
   mutate(
-    login = paste0("\\@", login),
-    desc = ifelse(is.na(name), login, paste0(name, " (", login, ")"))
+    profile = paste0("[@", login, "](https://github.com/", login, ")"),
+    desc = ifelse(is.na(name), profile, paste0(name, " (", profile, ")"))
   )
 
-cat("Besides the maintainers, ", nrow(contributors), " people have contributed new content and fixes. Big thanks to (in alphabetical order by username): ", sep = "")
-cat(paste0(contributors$desc, collapse = ", "))
-cat(".\n")
+cat("Thanks to everyone who has contributed new content and fixes on GitHub:\n\n")
+cat(paste0("- ", contributors$desc, collapse = "\n"), "\n")
 ```
-
-Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for the code which generated the list of contributors shown above.

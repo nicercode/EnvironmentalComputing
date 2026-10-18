@@ -131,12 +131,9 @@ source.
 
 ## Contributors
 
-    ⠙ 6 items, page 1 | 2ms
+Thanks to everyone who has contributed new content and fixes on GitHub:
 
-Besides the maintainers, 3 people have contributed new content and
-fixes. Big thanks to (in alphabetical order by username): Brendan
-Schuetze (@Brendan-Schuetze), John Wilshire (@johnWilshire), Mitchell
-Lyons (@mitchest).
-
-Extra thanks to [R for Data Science](https://github.com/hadley/r4ds)
-team for the code which generated the list of contributors shown above.
+- Brendan Schuetze
+  ([@Brendan-Schuetze](https://github.com/Brendan-Schuetze))
+- John Wilshire ([@johnWilshire](https://github.com/johnWilshire))
+- Mitchell Lyons ([@mitchest](https://github.com/mitchest))

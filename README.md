@@ -121,9 +121,8 @@ render time.
 Environmental Computing is maintained by [Daniel
 Falster](https://github.com/dfalster), [Will
 Cornwell](https://github.com/wcornwell), [Fonti
-Kar](https://github.com/fontikar) and [Alistair
-Poore](https://github.com/alistairpoore) at UNSW Sydney. Tutorial
-authors are credited on each page.
+Kar](https://github.com/fontikar) and Alistair Poore at UNSW Sydney.
+Tutorial authors are credited on each page.
 
 The content is licensed under [CC BY 4.0](LICENSE.md): you are free to
 reuse and adapt it, including for teaching, as long as you credit the

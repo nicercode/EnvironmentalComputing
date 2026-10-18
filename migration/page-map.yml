@@ -13,6 +13,8 @@
 # prefer:   "old" uses the old page's wording wherever the first conversion
 #           reworded it (default: keep the first conversion's wording unless
 #           it dropped text)
+# unnumbered: true  show the chapter in the contents without a number
+#           (the title becomes an unnumbered level-1 heading)
 # seed:     random number seed set by a hidden chunk at the top of the
 #           chapter, for chapters whose code draws random numbers, so a
 #           re-run gives the same output and the same frozen figures
@@ -53,6 +55,7 @@ chapters:
 
   # ---- front matter ---------------------------------------------------------
   - chapter: preface.qmd
+    unnumbered: true
     sources:
       - page: about-this-site
         # deliberate changes, accepted by migration/check_coverage.py
@@ -62,6 +65,9 @@ chapters:
           - starts: "Thanks to them"
             reason: old GitHub-contributors shortcode, replaced by the generated contributor list
     edits:
+      - reason: Will Cornwell is now a full professor
+        old: "[Associate Professor Will Cornwell]"
+        new: "[Professor Will Cornwell]"
       - reason: chunks left over from the R for Data Science template that show nothing (one never runs, the other is hidden)
         old: |+
           ```{r}

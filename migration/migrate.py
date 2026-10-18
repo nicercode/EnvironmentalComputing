@@ -833,6 +833,13 @@ def main():
             fm = "---\ntitle: " + yaml.safe_dump(title).strip().replace(
                 "\n...", "") + "\n---\n"
         body = "\n\n".join(b.text for b in out)
+        if c.get("unnumbered"):
+            # top-level chapters take their heading from the body, so the
+            # book can leave it out of the chapter numbering
+            m = re.search(r"^title:\s*(.+)$", fm, re.M)
+            heading = yaml.safe_load(m.group(1))
+            fm = fm.replace(m.group(0), "pagetitle: " + m.group(1))
+            body = f"# {heading} {{.unnumbered}}\n\n" + body
         body = tidy_markdown(body, ch.log, ch.sectioned)
         body = LAST_UPDATED.sub("", body)
         body = re.sub(r"\n{3,}", "\n\n", body)

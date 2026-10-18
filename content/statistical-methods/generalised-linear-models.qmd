@@ -2,9 +2,17 @@
 title: "Generalised Linear Models"
 ---
 
+Generalised linear models (GLMs) are used when the distribution of data do not conform to the assumptions of linear models, specifically the assumptions of normally distributed residuals and no relationship between the variance and the mean (e.g., presence/absence, count or highly skewed data).
+
+* [Generalised linear models 1](#introduction-and-binary-data): Introduction and binomial data  
+* [Generalised linear models 2](#count-data): Count data
+* [Interpreting coefficients in glms](interpret-glm-coeffs.qmd)
+
 ## Introduction and Binary Data
 
-[Linear models](/statistics/linear-models/) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
+**Introduction and binomial data**
+
+[Linear models](linear-models.qmd) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
 
 ![](images/GLM1_binary_image.jpg)
 
@@ -16,7 +24,6 @@ For example, if had surveyed a beach and wanted to analyse how the presence of a
 CrabDat <- read.csv("data/Crabs.csv", header = T)
 head(CrabDat)
 ```
-
 
 **Properties of GLM's.** Discrete response data, like counts and presence/absence data, generally exhibit a mean-variance relationship. For example; for counts that are on average 5, we would expect most samples to be between about 1 and 9, but for counts that are on average 500, most of the observations will tend to be between 450 and 550, giving us a much larger variance when the mean is large.
 
@@ -32,15 +39,13 @@ $$ g(\mu_y) = \alpha + \beta_1 x_1 + \beta_2 x_2 + \cdots $$
 
 Note: link functions `g()` are an important part of fitting GLM's, but beyond the scope of this introductory tutorial. All you need to know is that the default link for binomial data is the `logit()` and for count data it's `log()`. For more information see `?family`.
 
-
 ### Running the analysis
-
 
 **Binomial data**
 
 First, we will show you how to fit a model to binomial data, i.e., presence/absence data or data as 0/1. Fitting GLM's uses very similar syntax to fitting linear models. We use the `glm` function instead of `lm`. We also need to add a `family` argument to specify whether your data are counts, binomial etc.
 
-For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](/datasets/Crabs.csv) and import into R.
+For this worked example, download the sample data set on the presence and absence of crabs on the beach, [Crabs.csv](../../datasets/Crabs.csv) and import into R.
 
 ```{r}
 #| label: generalised-linear-models-2
@@ -53,7 +58,6 @@ To test whether the probability of crab presence changes with time (a factor) an
 #| label: generalised-linear-models-3
 ft.crab <- glm(CrabPres ~ Time * Dist, family = binomial, data = Crab_PA)
 ```
-
 
 ### Assumptions to check
 
@@ -98,7 +102,6 @@ Now we can look for a fan shape in the residual plot. For these data, there does
 
 To check this assumption, we check the residual plot above for non-linearity, or a U-shape. In our case there is no evidence of non-linearity. If the residuals seem to go down then up, or up then down, we may need to add a polynomial function of the predictors using the `poly` function.
 
-
 ### Interpreting the results
 
 If all the assumption checks are okay, we can have a look at the results the model gave us. The two main functions for inference are the same as for linear models: `summary` and `anova`.
@@ -130,11 +133,9 @@ If $p$ is the probability of crab presence, this output tells us
 
 $$ logit(p) = -3.01 + 0.26 \times \text{Time} -0.03 \times \text{Dist} +0.01 \times \text{Time} \times \text{Dist}$$
 
-
 ### Communicating the results
 
 Results of GLM's are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g., "There is strong evidence that the presence of crabs varies with time (p = 0.01). For multiple predictors it's best to display the results in a table. You should also indicate which distribution was used (e.g. Binomial for presence/absence, Poisson or negative-binomial for counts) and if resampling was used for inference.
-
 
 ### Further help
 
@@ -144,19 +145,19 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 2007. *Analysing ecological data*. Springer Science & Business Media.</p>
 
+More advice on [interpreting coefficients in glms](interpret-glm-coeffs.qmd)
 
 **Author**: Gordana Popovic
 
 **Year:** 2016
 
-**Last updated:** `r format(Sys.time(), "%b %Y")`
-
 ---
 
 ## Count Data
 
-This is a continuation of the introduction to GLMs which introduced GLMs and gave instructions for binary data. Read that section first to understand when GLMs are used. On this page, we will cover the use of GLM's for count data and briefly introduce how they can be used for other data types you may have.
+**Count data**
 
+This is a continuation of the introduction to GLMs which introduced GLMs and gave instructions for binary data. Read that section first to understand when GLMs are used. On this page, we will cover the use of GLM's for count data and briefly introduce how they can be used for other data types you may have.
 
 ### Running the analysis
 
@@ -164,7 +165,7 @@ This is a continuation of the introduction to GLMs which introduced GLMs and gav
 
 For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.
 
-Download the sample data set, [Revegetation.csv](/datasets/Revegetation.csv), and import into R to see how the data are arranged:
+Download the sample data set, [Revegetation.csv](../../datasets/Revegetation.csv), and import into R to see how the data are arranged:
 
 ```{r}
 #| label: generalised-linear-models-10
@@ -192,7 +193,6 @@ ft.sol.pois <- manyglm(Soleolifera ~ Treatment, family = "poisson", data = Reveg
 ```
 
 where Soleolifera is the response variable, and Treatment is the predictor variable (with two levels, control and revegetated).
-
 
 ### Assumptions to check
 
@@ -223,7 +223,6 @@ plot(ft.sol.nb)
 
 This seems to have improved the residual plot. There is no longer a strong fan shape, so we can go ahead and look at the results.
 
-
 ### Interpreting the results
 
 If all the assumption checks are okay, we can have a look at the results the model gave us with the same two functions for inference as used for linear models: `summary` and `anova`.
@@ -245,7 +244,6 @@ The default link function for Poisson and negative binomial models is $log()$. I
 
 $$ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}$$
 
-
 ### Communicating the results
 
 **Written.** Results of GLM's are communicated in the same way as results for linear models. For one predictor it suffices to write one line, e.g. "There is strong evidence of positive effect of bush regeneration on the abundance of slugs from the order Soleolifera (p < 0.001)". For multiple predictors it's best to display the results in a table. You should also indicate which distribution was used (e.g. negative-binomial) and if resampling was used for inference. "We used a negative-binomial generalised linear model due to overdispersion evident in the data. Inference was carried out using bootstrap resampling with 1000 resamples (default when using manyglm)."
@@ -258,13 +256,11 @@ $$ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}$$
 boxplot(Soleolifera ~ Treatment, ylab = "Count", xlab = "Treatment", data = Reveg)
 ```
 
-
 ### Other types of data
 
 If you have continuous positive data with zeros, like biomass data, the `tweedie` distribution might be able to model this, although it does have some quite restrictive assumptions. You can use `family="tweedie"` with the `manyglm` function. Be sure to look at residual plots for violations of assumptions.
 
 For strictly positive continuous data a `gamma` distribution can be used. This is available in the `glm` function using `family=gamma`.
-
 
 ### Further help
 
@@ -274,9 +270,8 @@ You can type `?glm` and `?manyglm` into R for help with these functions.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Zuur, A, EN Ieno and GM Smith. 2007. *Analysing ecological data*. Springer Science & Business Media.</p>
 
+More advice on [interpreting coefficients in glms](interpret-glm-coeffs.qmd)
 
 **Author**: Gordana Popovic
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

@@ -4,7 +4,17 @@ execute:
   error: true
 ---
 
+Meta-analyses are increasingly used in ecology, evolution and the environmental sciences to find general patterns among many studies, settle controversies among conflicting studies and to generate new hypotheses. These tutorials provide an introduction to running meta-analyses with the R package [metafor](http://www.metafor-project.org/doku.php).
+
+* [Meta-analyses 1](#introduction): Introduction and calculating effect sizes  
+* [Meta-analyses 2](#fixed-effect-and-random-effect-models): Fixed effect and random effect models  
+* [Meta-analyses 3](#multilevel-models): More complex models 
+
+![](images/4666102_orig.jpg)
+
 ## Introduction
+
+### Background
 
 What is a meta-analysis?
 
@@ -45,7 +55,6 @@ We only consider the step iv in this tutorial. You will need to learn the other 
 9. Are results really robust and unbiased?
 10. Is the current state (and lack) of knowledge summarized?
 
-
 ### Metafor for meta-analysis
 
 I think the R package [metafor](http://www.metafor-project.org/doku.php) (Viechtbauer 2010) is the most comprehensive meta-analytic software and the author [Wolfgang Viechtbauer](http://www.wvbauer.com/doku.php), who, I have to say, has the coolest name among my friends, is still actively developing it.
@@ -60,11 +69,11 @@ First, install and load the `metafor` package.
 library(metafor)
 ```
 
-Have a look at the data set named `dat.curtis1998` included in the package. If you have to see the other data sets included in this package, try `help(package="metafor")`.
+Have a look at the data set named `dat.curtis1998`, from the metadat package that comes with metafor. To see the other data sets included in that package, try `help(package="metadat")`.
 
 ```{r}
 #| label: meta-analysis-2
-dat <- metafor::dat.curtis1998
+dat <- metadat::dat.curtis1998
 str(dat)
 ```
 
@@ -127,6 +136,7 @@ head(SMD)
 ```
 
 To obtain the response ratio (log transformed ratio of means), we would use:
+
 ```{r}
 #| label: effect-size-2
 #| tidy: true
@@ -176,6 +186,8 @@ forest(dat$yi[1:12], dat$vi[1:12])
 
 We can calculate many different kinds of effect sizes with `escalc`; other common effect size statistics include $Zr$ (Fisher's z-transformed correlation). By the way, along with my colleagues, I have proposed a new standardized effect size called lnCVR (the log of coefficient of variation ratio -- mouthful!), which compares the variability of two groups rather than means. See whether you can calculate it with these data. Actually, the development version of `metafor`, let you do this with `escalc`-- [github page](https://github.com/cran/metafor). lnCVR is called "CVR" in `escalc`. Actually, if you re-analysis this data with lnCVR, you may be able to publish a paper! Nobody has done it yet. Do it tonight!
 
+Once you have calculated effect sizes, move on to the next page: [Meta-analysis 2: fixed-effect and random-effect models](#fixed-effect-and-random-effect-models)
+
 ### Further help (references)
 
 Go to the metafor package's [website](http://www.metafor-project.org/doku.php). There you find many worked examples.
@@ -189,8 +201,6 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 ---
 
@@ -243,7 +253,7 @@ Let's use the function `rma` from `metafor` to run a common-effect model.
 #| warning: false
 library(metafor)
 library(dplyr)
-dat <- get(data(dat.curtis1998))
+dat <- metadat::dat.curtis1998
 lnRR <- escalc(
   measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
   m1i = dat$m1i, m2 = dat$m2i,
@@ -391,7 +401,11 @@ Actually, this point estimate is the exactly the same as that of the common-effe
 
 This model is based on the paper by Henmi and Copas (2010). Although it is more robust to publication bias, I do not know any meta-analyses in the field of ecology and evolution, which uses this model. Probably we should be using this model rather than a random-effect model? I think so - let's call this model the 'robust' model. I think we should use this robust model for meta-regression too. I acknowledge Wolfgang telling me about this model to me.
 
+If you are happy with all this, move on the [more complex models](#multilevel-models)
+
 ### Further help (references)
+
+Any questions? Or email me (s(-dot-)nakagawa(-at-)unsw(-dot-)edu(-dot-)au). Also visit our [website](http://www.i-deel.org/)
 
 Go to the metafor package's [website](http://www.metafor-project.org/doku.php). There you find many worked examples.
 
@@ -406,8 +420,6 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`
 
 ---
 
@@ -446,7 +458,7 @@ knitr::include_graphics(c("images/Legend.png", "images/Multi.png"))
 #| warning: false
 library(metafor)
 library(dplyr)
-dat <- get(data(dat.curtis1998))
+dat <- metadat::dat.curtis1998
 lnRR <- escalc(
   measure = "ROM", n1i = dat$n1i, n2i = dat$n2i,
   m1i = dat$m1i, m2 = dat$m2i,
@@ -482,7 +494,7 @@ Actually, we just need to model phylogenetic non-independence by adding the degr
 
 This means that we need a phylogenetic tree for our data set. For this data set, we have prepared a tree for you to download [here](https://www.dropbox.com/s/d5pzkb9ezgx6798/tree_curtis1998.tre?dl=0). But it is not that difficult to get a tree together by using the package called `rotl`.
 
-First install and load the package [ape](http://ape-package.ird.fr/) that we will use to import the tree file and visualise the phylogeny.
+First install and load the package [ape](https://emmanuelparadis.github.io/) that we will use to import the tree file and visualise the phylogeny.
 
 ```{r}
 #| label: prep1
@@ -573,5 +585,3 @@ Go to the metafor package's [website](http://www.metafor-project.org/doku.php). 
 **Authors**: Shinichi Nakagawa and Malgorzata (Losia) Lagisz
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

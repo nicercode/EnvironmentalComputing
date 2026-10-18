@@ -2,6 +2,11 @@
 title: "Multivariate Analysis with mvabund"
 ---
 
+```{r}
+#| include: false
+set.seed(1)
+```
+
 Multivariate data are common in the environmental sciences, occurring when ever we measure several response variables from each replicate sample. Questions like how does the species composition of a community vary across sites, or how does the shape of trees (as measured by several morphological traits) vary with altitude are multivariate questions.
 
 We will use the package [mvabund](https://cran.r-project.org/web/packages/mvabund/index.html) to specify and fit multivariate statistical models to these sorts of data.
@@ -11,7 +16,7 @@ Many commonly used analyses for multivariate data sets (e.g. PERMANOVA, ANOSIM, 
 
 There are a couple of problems with these kinds of analysis. First, their statistical power is very low, except for variables with high variance. This means that for variables which are less variable, the analyses are less likely to detect a treatment effect. Second, they do not account for a very important property of multivariate data, which is the mean-variance relationship. Typically, in multivariate datasets like species-abundance data sets, counts for rare species will have many zeros with little variance, and the higher counts for more abundant species will be more variable.
 
-The mvabund approach improves power across a range of species with different variances and includes an assumption of a mean-variance relationship. It does this by fitting a single [generalised linear model](../glms/) (GLM) to each response variable with a common set of predictor variables. We can then use resampling to test for significant community level or species level responses to our predictors.
+The mvabund approach improves power across a range of species with different variances and includes an assumption of a mean-variance relationship. It does this by fitting a single [generalised linear model](generalised-linear-models.qmd) (GLM) to each response variable with a common set of predictor variables. We can then use resampling to test for significant community level or species level responses to our predictors.
 
 Also, the model-based framework makes it easier to check our assumptions and interpret uncertainty around our findings.
 
@@ -23,12 +28,11 @@ In this example, we use a data set where researchers wanted to contrast the spec
 
 ![](images/MDS_image.jpg)
 
-We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](/graphics/multivariate-vis/mds/) example) or test hypotheses about groups of samples by resampling these differences.
+We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](mds.qmd) example) or test hypotheses about groups of samples by resampling these differences.
 
 Here, we will use mvabund to contrast species composition across habitats using models that are appropriate for the mean-variance relationships and allowing us to check assumptions of those models.
 
-
-### Running the analysis
+## Running the analysis
 
 First, install and load the mvabund package.
 
@@ -40,7 +44,7 @@ First, install and load the mvabund package.
 library(mvabund)
 ```
 
-Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](/datasets/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
+Your data should be formatted so that each sample is a row and each variable is a column. Download the [herbivore specialisation](../../datasets/Herbivore_specialisation.csv) data set, and import into R to see the desired format.
 
 ```{r}
 #| label: MVabund-2
@@ -103,8 +107,7 @@ The model syntax below fits our response variable (the mvabund object Herb_spp w
 mod1 <- manyglm(Herb_spp ~ Herbivores$Habitat, family = "poisson")
 ```
 
-
-### Assumptions to check
+## Assumptions to check
 
 Before we examine the output, we need to check our model assumptions. We can use the `plot` function to generate a plot of residuals.
 
@@ -127,8 +130,7 @@ plot(mod2)
 
 This residual plot is much better, there is now no discernible fan shape and we will use this model for all further analysis.
 
-
-### Interpreting the results
+## Interpreting the results
 
 We can test the multivariate hypothesis of whether species composition varied across the habitats by using the `anova` function. This gives an analysis of deviance table where we use likelihood ratio tests and resampled p values to look for a significant effect of Habitat on the community data.
 
@@ -160,23 +162,18 @@ anova(mod3)
 
 You can see that the species composition of herbivores varies with habitat, but not between day and night.
 
-
-### Communicating the results
+## Communicating the results
 
 **Written.** If we were writing a paper about the differences in habitat use by marine herbivores, we may write the following: There were different marine herbivores communities on different algal substrates (LRT = 625, P < 0.001). We can be more descriptive about the community differences by using a graphical representation of our results.
 
 **Visual.** Multivariate data are best visualised by ordination plots. See the [boral](https://cran.r-project.org/web/packages/boral/index.html) package for model based ordination. To get started, watch [this](https://www.youtube.com/watch?v=XmrVVMG1HXI) video.
 
-
-### Further help
+## Further help
 
 This method was created by UNSW's Ecostats research group, you can keep up with their latest research on their [blog](http://eco-stats.blogspot.com/). They have been updating the mvabund package with many new exciting features, including block resampling and fourth corner analyses.
 
 <p style="margin-left: .5in; text-indent: -.5in;">Wang, Y, U Naumann, ST Wright & DI Warton (2012) mvabund - an R package for model-based analysis of multivariate abundance data. *Methods in Ecology and Evolution* 3: 471-474.</p>
 
-
 **Authors**: Rachel V. Blakey & Andrew Letten
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

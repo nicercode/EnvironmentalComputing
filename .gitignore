@@ -11,9 +11,12 @@ Thumbs.db
 .hugo_build.lock
 *.lock*
 _book/
-site_libs/
+/site_libs/
 /.quarto/
 *_cache*
-_freeze/*
+# _freeze/ holds each chapter's computed results; it is committed so CI only
+# re-runs the code of chapters that changed
 *.html
 **/*.quarto_ipynb
+# R graphics output from code run outside a knitr chunk device
+Rplots.pdf

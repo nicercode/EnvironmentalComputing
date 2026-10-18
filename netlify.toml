@@ -1,0 +1,6 @@
+# The book is built and deployed by GitHub Actions (.github/workflows/book.yml),
+# because Netlify's build image can't run the R code. This stops Netlify from
+# also trying to build the site itself on every push.
+[build]
+  publish = "_book"
+  ignore = "exit 0"

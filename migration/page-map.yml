@@ -1,0 +1,460 @@
+# Mapping from every page of the old Hugo/blogdown site to its chapter in
+# the Quarto book. Used by migration/migrate.py, which refuses to run if any
+# old page is missing from this file or listed twice.
+#
+# chapter:  path of the .qmd under content/ (or the project root)
+# sources:  old pages (folder under content/ on the Hugo site), in order
+#   section: heading (##) to place that page under when several pages are
+#            merged into one chapter; omit to continue the previous section
+#            (or, for the first source, to form the chapter's introduction)
+# edits:    exact find/replace fixes applied after merging, each with a
+#           reason; the script stops if the text to replace isn't found.
+#           `all: true` replaces every occurrence (default: the first)
+# prefer:   "old" uses the old page's wording wherever the first conversion
+#           reworded it (default: keep the first conversion's wording unless
+#           it dropped text)
+# seed:     random number seed set by a hidden chunk at the top of the
+#           chapter, for chapters whose code draws random numbers, so a
+#           re-run gives the same output and the same frozen figures
+
+source_ref: 7b59e6f   # old site incl. PRs #44, #45 and the multipanel tutorial (merged to master in #45)
+branch_ref: a31b08e   # first Quarto conversion (refactor_quarto), merged with the above
+base_ref: 3950af0     # the old site as it was when that conversion was made; text
+                      # changed on the old site since then wins over the conversion
+
+# Replacements for dead external links, applied to every chapter (checked
+# 2026-10-16). Each must match somewhere, or migrate.py stops.
+link_fixes:
+  - reason: ape's site moved
+    old: "[ape](http://ape-package.ird.fr/)"
+    new: "[ape](https://emmanuelparadis.github.io/)"
+  - reason: glmmADMB is no longer maintained; glmmTMB is its successor
+    old: "try the [glmmADMB](http://glmmadmb.r-forge.r-project.org/) package."
+    new: "try the [glmmTMB](https://glmmtmb.github.io/glmmTMB/) package, which can fit negative binomial and other models for overdispersed data with random effects (it replaces the older glmmADMB package)."
+  - reason: the draft chapter is gone; the published paper by lme4's authors replaces it
+    all: true
+    old: "[Draft book chapter](http://lme4.r-forge.r-project.org/book/Ch2.pdf) from the authors of lme4."
+    new: "[Fitting linear mixed-effects models using lme4](https://doi.org/10.18637/jss.v067.i01) (Bates et al. 2015, *Journal of Statistical Software*), from the authors of lme4."
+  - reason: dead link; reshape2 is superseded by tidyr's pivot functions
+    old: "[An introduction to reshape2](http://seananderson.ca/2013/10/19/reshape.html)"
+    new: "[Pivoting](https://tidyr.tidyverse.org/articles/pivot.html), tidyr's guide to `pivot_longer()` and `pivot_wider()`, which replace `gather()`/`spread()` and reshape2's `melt()`/`dcast()`"
+  - reason: Quick-R page gone
+    old: "and [here](http://www.statmethods.net/input/datatypes.html)"
+    new: "and in the [Vectors chapter](https://adv-r.hadley.nz/vectors-chap.html) of *Advanced R*"
+  - reason: colour chart PDF gone
+    all: true
+    old: "http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf"
+    new: "https://r-graph-gallery.com/42-colors-names.html"
+  - reason: Stack Overflow renamed the page
+    old: "https://stackoverflow.com/help/mcve"
+    new: "https://stackoverflow.com/help/minimal-reproducible-example"
+
+chapters:
+
+  # ---- front matter ---------------------------------------------------------
+  - chapter: preface.qmd
+    sources:
+      - page: about-this-site
+        # deliberate changes, accepted by migration/check_coverage.py
+        coverage_exceptions:
+          - starts: "Resources were developed initially"
+            reason: reworded to add the 2026 Quarto history
+          - starts: "Thanks to them"
+            reason: old GitHub-contributors shortcode, replaced by the generated contributor list
+    edits:
+      - reason: chunks left over from the R for Data Science template that show nothing (one never runs, the other is hidden)
+        old: |+
+          ```{r}
+          #| label: preface-4
+          #| eval: false
+          #| echo: false
+          #| results: asis
+          pkgs <- sessioninfo::package_info(
+            tidyverse:::tidyverse_packages(),
+            dependencies = FALSE
+          )
+          df <- tibble(
+            package = pkgs$package,
+            version = pkgs$ondiskversion,
+            source = gsub("@", "\\\\@", pkgs$source)
+          )
+          knitr::kable(df, format = "markdown")
+          ```
+
+          ```{r}
+          #| label: preface-5
+          #| include: false
+          cli:::ruler()
+          ```
+
+        new: ""
+
+  # ---- basics ---------------------------------------------------------------
+  - chapter: basics/basics.qmd
+    sources:
+      - page: getting-started-with-r
+  - chapter: basics/r.qmd
+    sources:
+      - page: getting-started-with-r/installing-r-rstudio
+  - chapter: basics/projects.qmd
+    sources:
+      - page: getting-started-with-r/project-management
+
+  # ---- data literacy --------------------------------------------------------
+  - chapter: data-literacy/making-analysis-ready-data.qmd
+    sources:
+      - page: Data-Manipulation
+  - chapter: data-literacy/reading/index.qmd
+    sources:
+      - page: getting-started-with-r/importing-data
+  - chapter: data-literacy/filter-rows/index.qmd
+    title: Subsetting Data
+    sources:
+      - page: Data-Manipulation/subsetting-data
+  - chapter: data-literacy/mutate/index.qmd
+    sources:
+      - page: Data-Manipulation/making-new-variables
+  - chapter: data-literacy/joining-tables/index.qmd
+    title: Combining Datasets
+    sources:
+      - page: Data-Manipulation/combining-datasets
+  - chapter: data-literacy/summarising-tables/index.qmd
+    title: Summarising Data
+    sources:
+      - page: Data-Manipulation/summarising-data
+  - chapter: data-literacy/pivotting/index.qmd
+    title: Reshaping Data
+    sources:
+      - page: Data-Manipulation/reshaping-data
+
+  # ---- data visualisation ---------------------------------------------------
+  - chapter: data-visualisation/data-visualisation.qmd
+    seed: 1
+    sources:
+      - page: Graphics
+      - page: Graphics/multivariate-vis
+        section: Visualising multivariate data
+      - page: Graphics/spatial-vis
+        section: Visualising spatial data
+  - chapter: data-visualisation/ggplot.qmd
+    prefer: old        # restore the original pages in full
+    sources:
+      - page: Graphics/basic-plotting
+      - page: Graphics/basic-plotting/one-continuous
+        section: One continuous variable
+      - page: Graphics/basic-plotting/two-continuous
+        section: Two continuous variables
+      - page: Graphics/basic-plotting/one-continuous-one-factor
+        section: One continuous and one categorical variable
+      - page: Graphics/ggplot
+        section: Introduction to ggplot2
+      - page: Graphics/ggplot/ggplot-basics
+      - page: Graphics/ggplot/ggplot-labels
+        section: Titles and axis labels
+      - page: Graphics/ggplot/ggplot-colour-shapes
+        section: Colours and shapes
+      - page: Graphics/ggplot/ggplot-barplot
+        section: Bar plots with error bars
+      - page: Graphics/ggplot/ggplot-appearance
+        section: Customising your ggplot
+    edits:
+      - reason: link target split over two lines on the old page
+        old: "See [here](/data-manipulation/summarising-data/\n)"
+        new: "See [here](../data-literacy/summarising-tables/index.qmd)"
+  - chapter: data-visualisation/multi-panel-figures.qmd
+    replaces: data-visualisation/mutli-panel-figures.qmd
+    title: Multipanel Figures with ggplot2
+    sources:
+      - page: Graphics/ggplot/ggplot-multipanel
+  - chapter: data-visualisation/rasters.qmd
+    seed: 1
+    sources:
+      - page: Graphics/spatial-vis/basic-raster
+        coverage_exceptions:
+          - starts: "Install the packages we're going to need"
+            reason: rgdal (retired from CRAN in 2023) no longer needed
+          - starts: "install.packages(c(\"raster\", \"dismo\", \"rgdal\"))"
+            reason: rgdal (retired from CRAN in 2023) no longer needed
+          - starts: "names(sst_stack)[3]"
+            reason: layer names now set explicitly (see edits)
+    edits:
+      - reason: Simple maps is its own chapter, not a section of this one
+        old: "[Simple Maps](#simple-maps) section below"
+        new: "[Simple maps](simple-maps.qmd) chapter"
+      - reason: rgdal was retired from CRAN in 2023; raster now reads files through terra
+        old: ", and rgdal has a lot of the drivers for reading and writing various spatial data formats"
+        new: ". (Older versions of this tutorial also used rgdal for reading spatial file formats; it was retired from CRAN in 2023, and raster now does this itself through the terra package.)"
+      - reason: rgdal was retired from CRAN in 2023
+        old: 'install.packages(c("raster", "dismo", "rgdal"))'
+        new: 'install.packages(c("raster", "dismo"))'
+      - reason: rgdal was retired from CRAN in 2023
+        old: "library(dismo)\nlibrary(rgdal)\n"
+        new: "library(dismo)\n"
+      - reason: reading .img files through terra names layers "Layer_1", not after the file, so name them explicitly
+        all: true
+        old: 'names(sst_stack)[3] <- "SST_anomaly"'
+        new: 'names(sst_stack) <- c("SST_feb_mean", "SST_feb_2013", "SST_anomaly")'
+  - chapter: data-visualisation/simple-maps.qmd
+    sources:
+      - page: Graphics/spatial-vis/simple-maps
+  - chapter: data-visualisation/pca.qmd
+    seed: 1
+    sources:
+      - page: Graphics/multivariate-vis/pca
+  - chapter: data-visualisation/heatmaps.qmd
+    seed: 1
+    sources:
+      - page: Graphics/multivariate-vis/heatmaps
+
+  # ---- statistical methods --------------------------------------------------
+  - chapter: statistical-methods/statistical-methods.qmd
+    sources:
+      - page: Statistics
+  - chapter: statistical-methods/linear-models.qmd
+    sources:
+      - page: Statistics/linear-models
+        coverage_exceptions:
+          - starts: "* ["
+            reason: old link list, superseded by the numbered chapter list
+    edits:
+      - reason: duplicate of the numbered chapter list above (whose "Interpreting coefficients" link also went to the GLM page on the old site)
+        old: |
+          * [Linear regression](linear-regression.qmd)
+          * [Analysis of variance: single factor](anova.qmd#single-factor-anova)
+          * [Analysis of variance: factorial](anova.qmd#factorial-anova)
+          * [Understanding interactions](understanding-interactions.qmd)
+          * [Interpreting coefficients in linear models](interpret-glm-coeffs.qmd)
+
+        new: ""
+      - reason: the confidence intervals chapter is still a placeholder and is not published, so the link would point at its raw source file
+        old: "1. [Confidence intervals](confidence-intervals.qmd)"
+        new: "1. Confidence intervals (planned)"
+  - chapter: statistical-methods/linear-regression.qmd
+    sources:
+      - page: Statistics/linear-models/linear-regression
+    edits:
+      - reason: words in maths were typeset as italic variables ("plantheight"), and "." used for multiplication
+        old: '$$log(plant height) = -0.22566 +0.0421.temperature + \varepsilon $$'
+        new: '$$\log(\text{plant height}) = -0.22566 + 0.0421 \times \text{temperature} + \varepsilon$$'
+  - chapter: statistical-methods/interpret-lm-coeffs.qmd
+    seed: 1
+    sources:
+      - page: Statistics/linear-models/linear-regression/interpret-lm-coeffs
+        coverage_exceptions:
+          - starts: The interpretation of these coefficients is that if you hold everything else in the model constant (i.e., temperature) and add 1 to altitude, then the estimated mean height will decrease by 1.09. Note that the coefficient depends on the units in which altitude is measured. If altitude is in meters then the coefficient tells you what happens when you go up 1 meter.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: The coefficient of temperature is now 1.38, what's going on? Altitude is an important predictor of plant height, and some of the information about altitude is contained in temperature (remember they are correlated, so as altitude increases temperature decreases). The model accounts for this by changing the effect of temperature to take account of the information it contains about altitude. Notice the coefficient of temperature is wrong by approximately 0.4, the amount of correlation between the variables.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by 0.45 (remember the correlation was 0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: So here group "high" has a mean of 2.65, and the difference between the means of group "low" and group "high" is -0.66, and the difference between group "med" and group "high" is -1.48. If you would like to have another group as the reference group, you can use `relevel` to recode your treatment factor.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+          - starts: Each line of this output compares two groups against one another. The first line, for example, compares the "high" group to the "low" group. So the difference between the means of the "high" and "low" groups is 1.84. The p-values and the confidence intervals given by` glht` control for multiple testing, which is handy. If you want to see the confidence intervals for the differences between the groups.
+            reason: numeric interpretation now uses inline R expressions from the fitted model
+    edits:
+      - reason: keep the interpretation consistent with the seeded model output
+        old: decrease by 1.09
+        new: decrease by `r round(-coef(lm_both)["alt"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: coefficient of temperature is now 1.38
+        new: coefficient of temperature is now `r round(coef(lm1)["temp"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: effect of temperature of increasing height by 0.45
+        new: effect of temperature of increasing height by `r round(coef(mod_temp)["temp"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: The p-value is about 0.95, so we have no evidence of an effect of temperature after controlling for altitude.
+        new: The p-value is `r signif(anova(mod_temp_alt)["temp", "Pr(>F)"], 3)`, which is above 0.05. At the 5% significance level, we do not reject the null hypothesis of no temperature effect after controlling for altitude.
+      - reason: keep the interpretation consistent with the seeded model output
+        old: group "high" has a mean of 2.65, and the difference between the means of group "low" and group "high" is -0.66, and the difference between group "med" and group "high" is -1.48
+        new: group "high" has a mean of `r round(coef(cat_lm)["(Intercept)"], 2)`, and the difference between the means of group "low" and group "high" is `r round(coef(cat_lm)["treatmentlow"], 2)`, and the difference between group "med" and group "high" is `r round(coef(cat_lm)["treatmentmed"], 2)`
+      - reason: keep the interpretation consistent with the seeded model output
+        old: difference between the means of the "high" and "low" groups is 1.84
+        new: difference between the means of the "high" and "low" groups is `r round(unname(coef(cat_lm)["treatmenthigh"] - coef(cat_lm)["treatmentlow"]), 2)`
+  - chapter: statistical-methods/t-tests.qmd
+    sources:
+      - page: Statistics/t-tests
+      - page: Statistics/t-tests/one-sample-t-test
+        section: One Sample T-test
+      - page: Statistics/t-tests/two-sample-t-test
+        section: Two Sample T-test
+      - page: Statistics/t-tests/paired-t-test
+        section: Paired T-test
+        coverage_exceptions:
+          - starts: The paired *t*-test is run with the `t.test` function
+            reason: R 4.4 no longer accepts paired = TRUE with a formula (see edits)
+          - starts: t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
+            reason: R 4.4 no longer accepts paired = TRUE with a formula (see edits)
+    edits:
+      - reason: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
+        all: true
+        old: t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)
+        new: "Greenhouse_wide <- tidyr::pivot_wider(Greenhouse, id_cols = Plant,\n  names_from = Treatment, values_from = Performance\n)\nt.test(Greenhouse_wide$Sunny, Greenhouse_wide$Shady, paired = TRUE)"
+      - reason: since R 4.4, t.test() no longer accepts paired = TRUE with a formula
+        old: The paired *t*-test is run with the `t.test` function, with the arguments specifying the response variable (Performance) to the left of the ~, the predictor variable (Treatment) to the right of the ~, the data frame to be used and the fact that it is a paired *t*-test.
+        new: For the paired *t*-test, the two measurements from each plant need to be side by side, so we first reshape the data to have one row per plant and a column for each treatment (see [reshaping data](../data-literacy/pivotting/index.qmd)). The `t.test` function is then given the two columns and told that they are paired. (Older versions of R also allowed `t.test(Performance ~ Treatment, data = Greenhouse, paired = TRUE)`; since R 4.4 this is an error.)
+      - reason: paired formula syntax is no longer supported; match pairs by identifier
+        old: Alternatively, if you have a data frame with the response and predictor variables in separate columns you can use a formula statement, `y ~ x`, rather than the code above. Again, you would need to ensure the matching pairs were in the right order (e.g., the fourth row of the shady treatment is the data collected from the same plant as the fourth row of the sunny treatment).
+        new: If your data frame has one row per measurement, with the response and treatment in separate columns, reshape it so that each pair occupies one row before running the paired test. Use the plant identifier to match measurements rather than relying on their row order.
+  - chapter: statistical-methods/anova.qmd
+    sources:
+      - page: Statistics/linear-models/anova
+      - page: Statistics/linear-models/anova/anova-single
+        section: Single Factor ANOVA
+        coverage_exceptions:
+          - starts: "Analysis of variance (ANOVA) is one of the most"
+            reason: repeats the introduction of the parent ANOVA page word for word (see edits)
+          - starts: "Where an independent samples"
+            reason: repeats the introduction of the parent ANOVA page (see edits)
+      - page: Statistics/linear-models/anova/anova-factorial
+        section: Factorial ANOVA
+      - page: Statistics/linear-models/anova/anova-nested
+        section: Nested ANOVA
+    edits:
+      - reason: the single-factor page repeated the parent page's introduction, so it appeared twice in a row
+        old: |-
+          ## Single Factor ANOVA
+
+          Analysis of variance (ANOVA) is one of the most frequently used techniques in the biological and environmental sciences. ANOVA is used to contrast a continuous dependent variable *y* across levels of one or more categorical independent variables *x*. The independent variables are termed the factor or treatment, and the various categories within that treatment are termed the levels. In this module, we will start with the simplest design - those with a single factor.
+
+          Where an independent samples *t*-test would be used for comparison of group means across two levels, ANOVA is used for the comparison of >2 group means, or when there are more than two or more predictor variables (see [Factorial ANOVA](#factorial-anova)). The logic of this test is essentially the same as the *t*-test - it compares variation between groups to variation within groups to determine whether the observed differences are due to chance or not.
+        new: "## Single Factor ANOVA"
+  - chapter: statistical-methods/understanding-interactions.qmd
+    sources:
+      - page: Statistics/linear-models/interactions
+  - chapter: statistical-methods/generalised-linear-models.qmd
+    sources:
+      - page: Statistics/glms
+      - page: Statistics/glms/glm-1
+        section: Introduction and Binary Data
+      - page: Statistics/glms/glm-2
+        section: Count Data
+  - chapter: statistical-methods/interpret-glm-coeffs.qmd
+    seed: 1
+    sources:
+      - page: Statistics/glms/interpret-glm-coeffs
+    edits:
+      - reason: the old page linked to itself here instead of the linear-models page the text names
+        old: "[interpreting coefficients in linear models](interpret-glm-coeffs.qmd)"
+        new: "[interpreting coefficients in linear models](interpret-lm-coeffs.qmd)"
+  - chapter: statistical-methods/mixed-effects-models.qmd
+    sources:
+      - page: Statistics/mixed-models
+      - page: Statistics/mixed-models/mixed-model-1
+        section: Linear mixed models with one random effect
+      - page: Statistics/mixed-models/mixed-model-2
+        section: Crossed and Nested Factors
+      - page: Statistics/mixed-models/mixed-model-3
+        section: Generalised Mixed Models
+  - chapter: statistical-methods/generalised-additive-models.qmd
+    seed: 1
+    sources:
+      - page: Statistics/gams
+    edits:
+      - reason: words in maths were typeset as italic variables; "intrannual" misspelt
+        all: true
+        old: 'f_{\mathrm{intrannual}}(month)'
+        new: 'f_{\text{intra-annual}}(\text{month})'
+      - reason: words in maths were typeset as italic variables
+        all: true
+        old: 'f_{\mathrm{trend}}(time)'
+        new: 'f_{\text{trend}}(\text{time})'
+      - reason: "further reading suggested in #38"
+        old: "A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/"
+        new: |-
+          A great blog with lots of stuff on GAMs: https://www.fromthebottomoftheheap.net/
+
+          Two full courses on GAMs, free to work through:
+
+          * Gavin Simpson's [Generalized Additive Models](https://github.com/gavinsimpson/physalia-gam-course) course (slides, R code and data)
+          * Noam Ross's interactive [GAMs in R](https://noamross.github.io/gams-in-r-course/) course
+  - chapter: statistical-methods/time-series-analysis.qmd
+    sources:
+      - page: Statistics/time-series
+  - chapter: statistical-methods/MVabund.qmd
+    seed: 1
+    sources:
+      - page: Statistics/mvabund
+  - chapter: statistical-methods/cluster-analysis.qmd
+    sources:
+      - page: Graphics/multivariate-vis/cluster-analysis
+  - chapter: statistical-methods/mds.qmd
+    seed: 1
+    sources:
+      - page: Graphics/multivariate-vis/mds
+  - chapter: statistical-methods/meta-analysis.qmd
+    sources:
+      - page: Statistics/meta-analysis
+      - page: Statistics/meta-analysis/meta-analysis-1
+        section: Introduction
+      - page: Statistics/meta-analysis/meta-analysis-2
+        section: Fixed-effect and Random-effect Models
+      - page: Statistics/meta-analysis/meta-analysis-3
+        section: Multilevel Models
+    edits:
+      - reason: metafor's example datasets moved to the metadat package
+        old: 'Have a look at the data set named `dat.curtis1998` included in the package. If you have to see the other data sets included in this package, try `help(package="metafor")`.'
+        new: 'Have a look at the data set named `dat.curtis1998`, from the metadat package that comes with metafor. To see the other data sets included in that package, try `help(package="metadat")`.'
+      - reason: metafor's example datasets moved to the metadat package
+        old: "dat <- metafor::dat.curtis1998"
+        new: "dat <- metadat::dat.curtis1998"
+      - reason: metafor's example datasets moved to the metadat package
+        all: true
+        old: "dat <- get(data(dat.curtis1998))"
+        new: "dat <- metadat::dat.curtis1998"
+
+  # ---- coding skills --------------------------------------------------------
+  - chapter: coding-skills/coding-skills.qmd
+    sources:
+      - page: Coding-Skills
+  - chapter: coding-skills/good-practice.qmd
+    sources:
+      - page: Coding-Skills/good-practice
+  - chapter: coding-skills/functions.qmd
+    sources:
+      - page: Coding-Skills/writing-functions
+  - chapter: coding-skills/loops.qmd
+    sources:
+      - page: Coding-Skills/loops
+  - chapter: coding-skills/version-control.qmd
+    sources:
+      - page: Coding-Skills/version-control
+  - chapter: coding-skills/asking-code-questions.qmd
+    seed: 1
+    sources:
+      - page: Coding-Skills/asking-code-questions
+
+  # ---- miscellaneous --------------------------------------------------------
+  - chapter: misc/misc.qmd
+    sources:
+      - page: Statistics/categorical
+  - chapter: misc/data-entry.qmd
+    sources:
+      - page: getting-started-with-r/data-entry
+  - chapter: misc/data-types-structure.qmd
+    sources:
+      - page: getting-started-with-r/data-types-structure
+  - chapter: misc/rstudio-notebooks.qmd
+    sources:
+      - page: getting-started-with-r/rstudio-notebooks
+  - chapter: misc/interactive-maps.qmd
+    sources:
+      - page: Graphics/spatial-vis/interactive
+  - chapter: misc/contingency-tables.qmd
+    sources:
+      - page: Statistics/categorical/contingency-tables
+  - chapter: misc/fishers-exact.qmd
+    sources:
+      - page: Statistics/categorical/fishers-exact
+  - chapter: misc/goodness-of-fit.qmd
+    sources:
+      - page: Statistics/categorical/goodness-of-fit
+  - chapter: misc/power-analysis.qmd
+    sources:
+      - page: Statistics/power-analysis
+
+  # ---- appendix -------------------------------------------------------------
+  - chapter: datasets.qmd
+    sources:
+      - page: datasets

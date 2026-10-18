@@ -3,6 +3,11 @@ title: 'Heatmaps'
 ---
 
 ```{r}
+#| include: false
+set.seed(1)
+```
+
+```{r}
 #| label: setup
 #| include: false
 knitr::opts_chunk$set(
@@ -28,10 +33,9 @@ library(pheatmap)
 library(dplyr)
 ```
 
+## Reading in the data
 
-### Reading in the data
-
-With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, [Bac.counts.csv](/datasets/Bac.counts.csv) and [Bac.factors.csv](/datasets/Bac.factors.csv), and import into R.
+With multivariate data, we often have two data frames with 1) the counts per sample and 2) the factors that group samples. Download these two data files, [Bac.counts.csv](../../datasets/Bac.counts.csv) and [Bac.factors.csv](../../datasets/Bac.factors.csv), and import into R.
 
 ```{r}
 #| label: heatmaps-3
@@ -62,10 +66,9 @@ Next we can check the structure of the factor information using `str`. In this e
 str(Bac.factors)
 ```
 
+## Drawing a heatmap
 
-### Drawing a heatmap
-
-The basic function is `pheatmap`. Let's try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function `slice` in dplyr can take any subset of numbered rows (see [Subsetting data](/data-manipulation/subsetting-data/)).
+The basic function is `pheatmap`. Let's try it without special arguments, except that we will only look at the first 500 OTUs (they are arranged from highest to lowest total abundance already). The function `slice` in dplyr can take any subset of numbered rows (see [Subsetting data](../data-literacy/filter-rows/index.qmd)).
 
 ```{r}
 #| label: heatmaps-7
@@ -74,7 +77,7 @@ Bac.counts500 <- slice(Bac.counts, 1:500)
 pheatmap(Bac.counts500)
 ```
 
-In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see [Cluster analysis](/graphics/cluster-analysis/)).
+In the figure, samples are columns and bacterial OTUs are rows, with the colour representing the range of counts of each OTU in each sample. Red means most abundant (~3500 counts), blue the least abundant (0 counts) and light yellow somewhere in the middle. Note that both the rows and columns have been rearranged based on measures of similarity among rows and columns (see [Cluster analysis](../statistical-methods/cluster-analysis.qmd)).
 
 **Data transformation**. Now you might notice that we have a scale issue. The data are full of rare-ish bacteria (blue) and that is all we can see on the heatmap. To visualise this more effectively, we can try a log10 transformation with + 1 constant to deal with zeros.
 
@@ -93,8 +96,7 @@ This would not have been seen so clearly if we did not cluster the rows and colu
 pheatmap(Bac.Log10.counts500, cluster_rows = FALSE, cluster_cols = FALSE)
 ```
 
-
-### Colouring sample groups
+## Colouring sample groups
 
 Before looking further at how clustering effects the patterns observed, we should add some colours associated with the treatment groups next. The simplest method is to use the Bac.factors dataframe as input, taking care that you 1) specify categorical covariates (factor groups) and numerical covariates (e.g. concentration) properly, 2) that row names in Bac.factors match those in Bac.counts, and 3) then remove the factors you do not want to show.
 
@@ -140,8 +142,7 @@ pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS, annotation_colors 
 
 In this case, letting the data speak for itself (with default row and column clustering) shows that the unvegetated samples (Other) are dissimilar to the macrophyte samples (regardless of density) and that the seagrass samples generally cluster together. Note that other methods (e.g., ordination) can show sample to sample comparisons much better than heatmaps, but heatmaps reveal the patterns of the variables unlike those methods. Understanding what the data is doing is often overlooked in multivariate analysis.
 
-
-### Row and column clustering methods
+## Row and column clustering methods
 
 By default, `pheatmap` is using Euclidean distance as the similarity measure and clustering samples based on the 'complete' method. There are various other distance and clustering methods available by using additional arguments: `clustering_distance_rows`, `clustering_distance_cols` and `clustering_method`.
 
@@ -160,8 +161,7 @@ pheatmap(Bac.Log10.counts500,
 
 You can see that changing the clustering has significantly changed the heatmap produced.
 
-
-### Scaling variables
+## Scaling variables
 
 We may want to compare the abundance of each bacterial OTU only among samples rather than contrasting their abundance with other OTUs of varying abundance. To do this, we can scale the abundances within each OTU such that the colour scale shows only the relative range of abundance for each individual OTU. In this example, that involves scaling abundance for each row with `scale="row"`.
 
@@ -176,8 +176,7 @@ pheatmap(Bac.Log10.counts500,
 
 We can now see how many standard deviations the Log10 abundance of a single OTU is away from the mean for that OTU in a sample compared only with other samples for that OTU. The legend shows that the number of standard deviations ranges from +3 to -3. We can see how a number of the bacterial OTUs are under-represented in the in the unvegetated sediment (blue abundances in the bottom left) compared with the sediment with macrophytes (yellow/red abundances).
 
-
-### Sorting by group
+## Sorting by group
 
 We can also sort the samples by their groups or treatments rather than sorting by similarity among rows or columns. This is done by ordering the input data and turning off the clustering of the columns with `cluster_cols=FALSE`.
 
@@ -191,12 +190,11 @@ pheatmap(Bac.Log10.counts500[, SampleOrder],
 )
 ```
 
-
-### Using heatmaps after statistical analyses
+## Using heatmaps after statistical analyses
 
 If we have analysed our multivariate data and identified those variables that differed between treatments, we can choose to plot only them in the heatmap. In this example, we will only look at those bacterial OTUs that differed between the two levels of the Species factor after removal of the unvegetated samples.
 
-We will analyse the abundances of all OTUs with multivariate generalised linear models using the function `manyglm` in the package mvabund. The specifics of that analysis are not described further here (see the [Introduction to mvabund](/statistics/mvabund/) for help with that package). Note that running `anova.manyglm` is quite slow.
+We will analyse the abundances of all OTUs with multivariate generalised linear models using the function `manyglm` in the package mvabund. The specifics of that analysis are not described further here (see the [Introduction to mvabund](../statistical-methods/MVabund.qmd) for help with that package). Note that running `anova.manyglm` is quite slow.
 
 ```{r}
 #| label: heatmaps-16
@@ -239,14 +237,10 @@ And the results are as expected. The top half of the heatmap shows those variabl
 
 Happy heatmapping!
 
-
-### Further help
+## Further help
 
 Type `?pheatmap` for the R help on this function.
-
 
 **Author:** Shaun Nielsen
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

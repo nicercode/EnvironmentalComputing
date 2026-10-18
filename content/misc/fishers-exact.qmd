@@ -35,7 +35,6 @@ chisq.test(asparagus, correct = F)$expected
 fisher.test(asparagus)
 ```
 
-
 ```{r}
 #| label: fishers-exact-4
 #| echo: false
@@ -55,7 +54,6 @@ You notice that possums at site A tend to eat  *E. ovata* and that at location B
 
 At location A you see six possums eat *E. ovata* and one (1) eat *E. sideroxylon*. At location B, none eat *E. ovata* and you see all eight eat *E. sideroxylon*. 
 
-
 **Q1** What is the exact probability of observing this or a more extreme pattern by chance alone?
 
 ```{r}
@@ -67,10 +65,6 @@ fisher.test(possum)
 
 **Q2** Is there evidence to suggest that the possums at site A and B differ in their use of food trees?
 
-
-
 **Author**: Alistair Poore
- 
-**Year:** 2016
 
-**Last updated:** `r format(Sys.time(), "%b %Y")`
+**Year:** 2016

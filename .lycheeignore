@@ -1,0 +1,5 @@
+# Links the link check should skip (regular expressions), with reasons.
+
+# downlit links package names in code to the URL in each package's own
+# DESCRIPTION; multcomp's still points to its retired R-Forge site
+^https?://multcomp\.R-forge\.R-project\.org

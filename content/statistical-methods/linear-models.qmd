@@ -6,7 +6,7 @@ This section introduces linear-model-based methods for testing differences among
 
 The core chapters are:
 
-1. [Confidence intervals](confidence-intervals.qmd)
+1. Confidence intervals (planned)
 2. [Simple linear regression](linear-regression.qmd)
 3. [Interpreting linear regressions](interpret-lm-coeffs.qmd)
 4. [T-tests](t-tests.qmd)
@@ -17,3 +17,19 @@ The core chapters are:
 9. [Mixed effects models](mixed-effects-models.qmd)
 10. [Generalised additive models](generalised-additive-models.qmd)
 11. [Time series analysis](time-series-analysis.qmd)
+
+These pages have some introductions to commonly used linear models that test the response of a continuous dependent variable against one or more predictor variables that may be continuous or categorical. Note that these are only named as different techniques (e.g., regression vs ANOVA) due to common usage in the literature that you will encounter - they all involve the same linear modelling framework.
+
+```{r}
+#| label: linear-models-1
+#| echo: false
+Plant_height <- read.csv(file = "data/Plant_height.csv", header = TRUE)
+model <- lm(loght ~ temp, data = Plant_height)
+plot(loght ~ temp, data = Plant_height, col = "darkgreen", xlab = "Temperature (C)", ylab = "log(Plant height)", pch = 16)
+abline(model, col = "red")
+```
+
+
+**Author**: Alistair Poore
+
+**Year:** 2016

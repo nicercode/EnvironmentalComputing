@@ -1,5 +1,5 @@
 ---
-title: "Summarising data"
+title: Summarising Data
 ---
 
 Summarising our data is often the first step in data exploration and needed to understanding patterns in the magnitude and variability of our measurements.
@@ -15,15 +15,14 @@ We will use the package [dplyr](https://cran.r-project.org/web/packages/dplyr/in
 library(dplyr)
 ```
 
-As with the help page on [Subsetting data](/../data-manipulation/subsetting-data/), we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set, [Bats_data.csv](/datasets/Bats_data.csv), and import into R.
+As with the help page on [Subsetting data](../filter-rows/index.qmd), we will use a data set where bats were sampled across regrowth forest in south-eastern Australia that had been thinned to reduce the density of trees. Download the data set, [Bats_data.csv](../../../datasets/Bats_data.csv), and import into R.
 
 ```{r}
-#| label: index-2
-Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
+#| label: summarising-data-2
+Bats <- read.csv(file = "../filter-rows/Bats_data.csv", header = T, stringsAsFactors = F)
 ```
 
-
-### Summarising data with dplyr
+## Summarising data with dplyr
 
 **Obtaining summary measures from a single variable**
 
@@ -64,7 +63,6 @@ summarise(Bats,
   n.Sites = n_distinct(Site)
 ) # number of distinct sites
 ```
-
 
 **Obtaining summary measures from groups of rows**
 
@@ -131,13 +129,11 @@ Treatment.summary <- Bats %>%
   ) # interquartile range
 ```
 
-
 **Issues with missing data**
 
 Things can go wrong in the field and we don't always collect all the data we need at each site.
 
 To show you how this affects the `summarise` function, we can make a new variable (Activity2), which is a copy of Activity but with some of the activity data (the first four rows) now missing.
-
 
 ```{r}
 #| label: index-11
@@ -166,10 +162,9 @@ Just remember that this will decrease your sample size. This will work for the s
 length(Bats$Activity2[!is.na(Bats$Activity2)])
 ```
 
-This calculates the number of values, `length`, of the vector of bat activity values, Bats$Activity2, where they are not NA, `!is.na`. Revising the [Subsetting data](/../data-manipulation/subsetting-data/) may help you understand this statement.
+This calculates the number of values, `length`, of the vector of bat activity values, Bats$Activity2, where they are not NA, `!is.na`. Revising the [Subsetting data](../filter-rows/index.qmd) may help you understand this statement.
 
-
-### Communicating the results
+## Communicating the results
 
 **Written** If we were writing a paper about bat activity across different forest thinning treatments, we could use our summarised data to make some broad observations at the beginning of our results section, prior to further analysis. For example: "Bats were twice as active in in mature open (reference) forest (365 ± 27) compared to unthinned regrowth (166 ± 21) (mean ± SE). However bat activity was similar across medium-term (385 ± 36) and short-term (350 ± 27) thinned and reference forests".
 
@@ -203,8 +198,7 @@ plot1 <- ggplot(data = Treatment.summary, aes(x = Treatment.thinned, y = mean.Ac
 print(plot1)
 ```
 
-
-### Further help
+## Further help
 
 This tutorial was based on the excellent [Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio. Images were sourced from the same document.
 
@@ -212,10 +206,8 @@ You can type `?dplyr` to get help with this package.
 
 [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
-If you'd like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with [Plotting with ggplot: the basics](/../graphics).
+If you'd like to learn more about the ggplot language for plotting, have a look at our worksheets on plotting, starting with [Plotting with ggplot: the basics](../../data-visualisation/data-visualisation.qmd).
 
 **Author**: Rachel V. Blakey
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

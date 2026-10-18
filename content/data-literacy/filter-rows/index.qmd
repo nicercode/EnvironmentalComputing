@@ -1,5 +1,5 @@
 ---
-title: "Subsetting data"
+title: Subsetting Data
 ---
 
 We often want to subset our data, whether it's to examine particular rows or columns of our dataset, or to pull out observations with particular properties. We may conduct subsetting at the data exploration stage to investigate whether our response variable differs in its relationship to a particular predictor variable across categories (e.g., to look for an interaction). We may also like to pull out elements of our dataset for separate analyses.
@@ -10,15 +10,14 @@ In this exercise, we will load a dataset where bats were sampled across regrowth
 
 The dataset includes measurements of total number of bat calls ("Activity") and number of bat calls that indicate foraging behaviour ("Foraging") recorded over one night for 47 sites and 173 sampling nights in total. Variables relating to forest thinning have been collected and are listed as columns ending in "thinned". As the forest studied was in a floodplain, covariates relating to water availability were also collected and are listed in columns ending "water".
 
-First, download the data set, [Bats_data.csv](/datasets/Bats_data.csv), and load into R.
+First, download the data set, [Bats_data.csv](../../../datasets/Bats_data.csv), and load into R.
 
 ```{r}
 #| label: index-1
 Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
 ```
 
-
-### Basics of subsetting in R
+## Basics of subsetting in R
 
 Check the structure after you have loaded the data with the `str` function.
 
@@ -64,8 +63,7 @@ Rather than working out which variable is in which numbered column, it is often 
 Bats$Site
 ```
 
-
-### Subsetting rows in dplyr
+## Subsetting rows in dplyr
 
 ![](Subsetting_data_image1.jpg)
 
@@ -98,16 +96,16 @@ We can subset these rows using the `filter` function. For example, if wanted onl
 Bats.foraging <- filter(Bats, Foraging > 0)
 ```
 
-You can experiment with a range of logical operators when using the `filter` function:
-- `<` less than
-- `>` greater than
-- `==` equal to
-- `<=` less than or equal to
-- `>=` greater than or equal to
-- `!=` not equal to
-- `is.na` is NA
-- `!is.na` is not NA
-and more.
+You can experiment with a range of logical operators when using the `filter` function:  
+`<` less than  
+`>`greater than  
+`==`equal to  
+`<=`less than or equal to  
+`>=`greater than or equal to  
+`!=`not equal to  
+`in.NA=`is NA  
+`!is.na=`is not NA  
+and more. 
 
 You can use the commands `?base::Logic` and `?Comparison` to learn more about these operators.
 
@@ -139,7 +137,6 @@ Bats.top <- top_n(Bats, 3, Activity)
 print(Bats.top)
 ```
 
-
 Wow, over 1000 bat calls in one night!
 
 **Removing duplicate rows**
@@ -161,8 +158,7 @@ nrow(Bats.distinct)
 
 In this case, the dataframes are identical because our data doesn't have any duplicate rows.
 
-
-### Subsetting columns in dplyr
+## Subsetting columns in dplyr
 
 ![](Subsetting_data_image2.jpg)
 
@@ -244,8 +240,7 @@ Finally, if you have numbered columns, we can use the `numrange` helper function
 select(data, num_range("var", 1:3))
 ```
 
-
-### Further help
+## Further help
 
 This tutorial was based on the excellent [Data wrangling with dplyr and tidyr cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) produced by Rstudio. Images were sourced from the same document.
 
@@ -253,9 +248,6 @@ You can type `?dplyr` to get help with this package.
 
 [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
-
 **Author**: Rachel V. Blakey
 
 **Year:** 2016
-
-**Last updated:** `r format(Sys.time(), "%b %Y")`

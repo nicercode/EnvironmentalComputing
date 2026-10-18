@@ -2,24 +2,53 @@
 format: gfm
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.qmd. Please edit that file, then run `quarto render README.qmd` (needs R and a GitHub token for the contributor list). -->
 
+# Environmental Computing 👋
 
-# Welcome to Environmental Computing `r emo::ji("wave")`
-
-<img src="images/hexsticker_EC.png" align="right" alt="" width="150" />
+<img src="images/hexsticker_EC.png" align="right" alt="Environmental Computing hex sticker" width="150" />
 
 <!-- badges: start -->
+[![Book](https://github.com/nicercode/EnvironmentalComputing/actions/workflows/book.yml/badge.svg)](https://github.com/nicercode/EnvironmentalComputing/actions/workflows/book.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status)](https://app.netlify.com/sites/environmentalcomputing/deploys)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE.md)
 <!-- badges: end -->
 
-The goal of **Environmental Computing** is to provide accessible coding and statistical tutorials to R users. If you would like to learn more about this site, click [here](https://environmentalcomputing.net/about-this-site/).
+**[Environmental Computing](https://environmentalcomputing.net/)** is a free online book of tutorials on R coding, data handling, graphics and statistics for environmental scientists. It began as teaching material for courses at UNSW Sydney, and is written by researchers, for researchers and students. More about the site is in the [preface](https://environmentalcomputing.net/content/preface.html).
 
-This repository uses [Quarto](https://quarto.org/) to build and maintain the website as a Quarto book.
+The book covers:
 
-Contributor workflow, naming conventions, page structure, and image/data storage guidance now live in the book chapter:
+- **Basics:** installing R and RStudio, and organising projects
+- **Data literacy:** importing, subsetting, combining, reshaping and summarising data
+- **Data visualisation:** ggplot2, multi-panel figures, rasters and maps
+- **Statistical methods:** t-tests, linear models, ANOVA, GLMs, mixed models, GAMs, meta-analysis and multivariate methods
+- **Coding skills:** good practice, functions, loops, version control and asking code questions
 
-- [Contributing](content/contributing.qmd)
+The book is built with [Quarto](https://quarto.org/). Pages that moved from the old Hugo and WordPress sites still work, because their old addresses redirect to the matching chapters.
+
+## Found a problem or want a new tutorial?
+
+[Open an issue](https://github.com/nicercode/EnvironmentalComputing/issues). Every page also has "Edit this page" and "Report an issue" links.
+
+## Contributing
+
+Contributions are welcome, from typo fixes to whole tutorials. Read the [contributing guide](content/contributing.qmd) first. It covers file layout, naming, where images and data go, and caching.
+
+To build the book locally, you need [R](https://cran.r-project.org/) and [Quarto](https://quarto.org/docs/get-started/):
+
+```sh
+git clone https://github.com/nicercode/EnvironmentalComputing.git
+cd EnvironmentalComputing
+Rscript -e 'install.packages("remotes"); remotes::install_deps()'   # packages from DESCRIPTION
+quarto preview                                                        # live preview in your browser
+```
+
+Things to know before opening a pull request:
+
+- **Commit `_freeze/`.** Chapters are only re-run when their source changes. After editing a chapter, render it (`quarto render path/to/chapter.qmd`) and commit the updated `_freeze/` entry along with it.
+- **Add new packages to `DESCRIPTION`**, in alphabetical order, so CI can install them.
+- **Many chapters were generated from the old site by `migration/migrate.py`.** Re-running it overwrites hand edits to those chapters unless the edits are also recorded in `migration/page-map.yml`; see [migration/README.md](migration/README.md).
+- **Every pull request gets a deploy preview.** It is linked in a comment on the PR, and CI checks that every chapter renders without errors and that internal links work.
 
 ## How the site is deployed
 
@@ -29,6 +58,7 @@ Netlify does not build the site itself, because its build image cannot run the R
 
 - every push to `master` deploys to the live site, environmentalcomputing.net;
 - every pull request gets a deploy preview, linked in a comment on the PR;
+- once a month, a scheduled run re-renders every chapter from scratch and checks external links. If a tutorial has broken (for example, after a package update), it opens an issue;
 - `netlify.toml` tells Netlify to skip its own builds (`ignore = "exit 0"`).
 
 The upload needs two repository secrets (Settings → Secrets and variables → Actions):
@@ -38,7 +68,15 @@ The upload needs two repository secrets (Settings → Secrets and variables → 
 
 If either secret is missing, CI on `master` fails at the "Check Netlify credentials" step; if the token has expired or been revoked, it fails at "Deploy to Netlify". Either way the live site stops updating until the secret is replaced: create a new token and run `gh secret set NETLIFY_AUTH_TOKEN`.
 
-Old site addresses are redirected to book chapters by `_redirects`, which is generated by `migration/migrate.py` and copied into `_book/` at render time. To re-run the migration and check its output, see [migration/README.md](migration/README.md); note that re-running overwrites hand edits to mapped chapters unless they are recorded in `migration/page-map.yml`.
+Old site addresses are redirected to book chapters by `_redirects`, which is generated by `migration/migrate.py` and copied into `_book/` at render time.
+
+## Authors and licence
+
+Environmental Computing is maintained by [Daniel Falster](https://github.com/dfalster), [Will Cornwell](https://github.com/wcornwell), [Fonti Kar](https://github.com/fontikar) and [Alistair Poore](https://github.com/alistairpoore) at UNSW Sydney. Tutorial authors are credited on each page.
+
+The content is licensed under [CC BY 4.0](LICENSE.md): you are free to reuse and adapt it, including for teaching, as long as you credit the source.
+
+## Contributors
 
 ```{r}
 #| echo: false
@@ -100,9 +138,9 @@ contributors <- contributors |>
     desc = ifelse(is.na(name), login, paste0(name, " (", login, ")"))
   )
 
-cat("This site has been improved by many people who contributed new content and fixes. Big thanks to the ", nrow(contributors), " contributors (in alphabetical order by username): ", sep = "")
+cat("Besides the maintainers, ", nrow(contributors), " people have contributed new content and fixes. Big thanks to (in alphabetical order by username): ", sep = "")
 cat(paste0(contributors$desc, collapse = ", "))
 cat(".\n")
 ```
 
-Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for the code which generated the list of contribturors shown above.
+Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for the code which generated the list of contributors shown above.

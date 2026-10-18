@@ -102,6 +102,13 @@ chapters:
   - chapter: basics/r.qmd
     sources:
       - page: getting-started-with-r/installing-r-rstudio
+    edits:
+      - reason: maptools was retired from CRAN in 2023, so the example package no longer installs
+        old: "load the package `maptools` if"
+        new: "load the package `ggplot2` if"
+      - reason: maptools was retired from CRAN in 2023 (see above)
+        old: "library(maptools)"
+        new: "library(ggplot2)"
   - chapter: basics/projects.qmd
     sources:
       - page: getting-started-with-r/project-management
@@ -113,10 +120,27 @@ chapters:
   - chapter: data-literacy/reading/index.qmd
     sources:
       - page: getting-started-with-r/importing-data
+    edits:
+      - reason: since R 4.0.0 (2020) read.csv() no longer turns text into factors, so stringsAsFactors = FALSE is not needed
+        old: |+
+          **Characters as factors** When data frames are imported into R, characters are automatically coerced as factors. For statistical work this makes a lot of sense; we are more likely to want to work over factors (defined earlier) than over characters. Factors are fantastic when one is doing statistical analysis and actually exploring the data. However, prior to that when one is reading, cleaning, troubleshooting, merging and generally manipulating the data, factors are a total pain.
+
+          You can use the argument `stringsAsFactors=FALSE` when importing the data to avoid automatic coercion to factors or you can use `as.character` to convert individual vectors to characters.
+
+          Tip: Use factors as late as possible in the analysis process. Set `stringsAsFactors=FALSE` when importing your data, and when you need factors someplace within your script, then coerce the data to a factor.
+        new: |+
+          **Characters and factors** Factors (defined earlier) are fantastic when one is doing statistical analysis and actually exploring the data. However, prior to that when one is reading, cleaning, troubleshooting, merging and generally manipulating the data, factors are a total pain. Since R 4.0.0, `read.csv()` and `data.frame()` keep text columns as characters, which is usually what you want while cleaning. Older versions of R converted them to factors automatically, which is why older code often sets `stringsAsFactors = FALSE`; you no longer need it.
+
+          Tip: Use factors as late as possible in the analysis process. Keep text as characters while you clean your data, and when you need factors someplace within your script, convert those columns with `as.factor()`.
   - chapter: data-literacy/filter-rows/index.qmd
     title: Subsetting Data
     sources:
       - page: Data-Manipulation/subsetting-data
+    edits:
+      - &saf
+        reason: stringsAsFactors = FALSE has been the default since R 4.0.0
+        old: ", stringsAsFactors = F)"
+        new: ")"
   - chapter: data-literacy/mutate/index.qmd
     sources:
       - page: Data-Manipulation/making-new-variables
@@ -128,6 +152,8 @@ chapters:
     title: Summarising Data
     sources:
       - page: Data-Manipulation/summarising-data
+    edits:
+      - *saf
   - chapter: data-literacy/pivotting/index.qmd
     title: Reshaping Data
     sources:
@@ -423,6 +449,11 @@ chapters:
   - chapter: coding-skills/loops.qmd
     sources:
       - page: Coding-Skills/loops
+    edits:
+      - *saf
+      - reason: stringsAsFactors = FALSE has been the default since R 4.0.0
+        old: "  correlation = numeric(length = rows),\n  stringsAsFactors = F\n"
+        new: "  correlation = numeric(length = rows)\n"
   - chapter: coding-skills/version-control.qmd
     sources:
       - page: Coding-Skills/version-control

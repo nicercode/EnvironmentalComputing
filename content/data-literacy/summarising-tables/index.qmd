@@ -19,7 +19,7 @@ As with the help page on [Subsetting data](../filter-rows/index.qmd), we will us
 
 ```{r}
 #| label: summarising-data-2
-Bats <- read.csv(file = "../filter-rows/Bats_data.csv", header = T, stringsAsFactors = F)
+Bats <- read.csv(file = "../filter-rows/Bats_data.csv", header = T)
 ```
 
 ## Summarising data with dplyr

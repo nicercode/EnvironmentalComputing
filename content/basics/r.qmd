@@ -51,12 +51,12 @@ You should save all the code you use for a given analysis or graphic. Use the me
 
 If your required analyses or graphics need a package that is not in the initial installation of R, then new packages can be installed from the menus (*Tools >> Install packages*) or from the panel on the bottom right. Once installed, they can be loaded with the `library` function (recommended) or by ticking the little box next to the package name (not recommended). It is better practice to use the `library` function in your script as that will remind you what packages need to be loaded.
 
-For example, this code will load the package `maptools` if it is installed on your computer.
+For example, this code will load the package `ggplot2` if it is installed on your computer.
 
 ```{r}
 #| label: r-2
 #| eval: false
-library(maptools)
+library(ggplot2)
 ```
 
 ## Further help

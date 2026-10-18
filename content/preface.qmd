@@ -1,0 +1,270 @@
+---
+pagetitle: "About This Site"
+---
+
+# About This Site {.unnumbered}
+
+```{r}
+#| label: preface-1
+#| echo: false
+source("../_common.R")
+```
+
+This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
+
+* how to organise your data during data entry
+* how to manipulate and manage your data so there is transparency and version control
+* instructions for running statistical analyses with sample code in R or other relevant software (first see Getting started with R)
+* the rationale for the technique in plain language (why is it used)
+* how to interpret the results and assumptions that you need to check
+* visualisation of your results and ways to effectively communicate the results in scientific reports or publications
+* where to go for further help
+
+This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
+
+Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](http://www.bees.unsw.edu.au/) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford. Development of the second generation of this site saw migration to Gihub and Hugo, led by Dr Fonti Kar and A/Prof Daniel Falster and with the support of the [Evolution and Ecology Research Centre](http://www.eerc.unsw.edu.au/). In 2026 we undertook a major upgrade to Quarto and a new structure, led by A/Prof Daniel Falster, Prof Will Cornwell and Prof Alistair Poore.  
+
+## Editors and authors
+
+**Site editors:**
+
+[Professor Alistair Poore](https://alistairpoore.org) 
+
+[Professor Will Cornwell](http://willcornwell.org/)
+
+[Associate Professor Daniel Falster](https://danielfalster.com/)
+
+[Dr. Fonti Kar](https://fontikar.wordpress.com/)
+
+**Page authors:** Keryn Bain, Rachel Blakey, Stephanie Brodie, Corey Callaghan, Will Cornwell, Kingsley Griffin, Matt Holland, James Lavender, Andrew Letten, Shinichi Nakagawa, Shaun Nielsen, Alistair Poore, Gordana Popovic, Fiona Robinson and Jakub Stoklosa.
+
+**Year:** 2016
+
+## Acknowledgments
+
+```{r}
+#| label: preface-2
+#| eval: false
+#| echo: false
+library(tidyverse)
+contribs_all_json <- gh::gh("/repos/:owner/:repo/contributors",
+  owner = "nicercode",
+  repo = "EnvironmentalComputing",
+  .limit = Inf
+)
+
+contribs_all <- tibble(
+  login = contribs_all_json |> map_chr("login"),
+  n = contribs_all_json |> map_int("contributions")
+)
+
+contribs_old <- read_csv("contributors.csv", col_types = list())
+contribs_new <- contribs_all |> anti_join(contribs_old, by = "login")
+
+# Get info for new contributors
+needed_json <- map(
+  contribs_new$login,
+  ~ gh::gh("/users/:username", username = .x),
+  .progress = TRUE
+)
+info_new <- tibble(
+  login = contribs_new$login,
+  name = map_chr(needed_json, "name", .default = NA),
+  blog = map_chr(needed_json, "blog", .default = NA)
+)
+info_old <- contribs_old |> select(login, name, blog)
+info_all <- bind_rows(info_old, info_new)
+
+contribs_all <- contribs_all |>
+  left_join(info_all, by = "login") |>
+  mutate(login_lowercase = str_to_lower(login)) |>
+  arrange(login_lowercase) |>
+  select(-login_lowercase)
+write_csv(contribs_all, "contributors.csv")
+```
+
+```{r}
+#| label: preface-3
+#| results: asis
+#| echo: false
+#| message: false
+library(dplyr)
+contributors <- readr::read_csv("../contributors.csv")
+contributors <- contributors |>
+  filter(!login %in% c("nicercode", "dfalster", "wcornwell", "fontikar", "alistairpoore")) |>
+  mutate(
+    login = paste0("\\@", login),
+    desc = ifelse(is.na(name), login, paste0(name, " (", login, ")"))
+  )
+
+cat("This site has been improved by many people who contributed new content and fixes. Big thanks to the ", nrow(contributors), " contributors (in alphabetical order by username): ", sep = "")
+cat(paste0(contributors$desc, collapse = ", "))
+cat(".\n")
+```
+
+Extra thanks to [R for Data Science](https://github.com/hadley/r4ds) team for the code which generated the list of contribturors shown above.
+
+## Colophon
+
+The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code.
+
+## Site migration history
+
+### 2026 migration from Hugo to Quarto
+
+In 2026 we migrated the site from Hugo to Quarto and substantially updated the website structure.
+
+The old site had one page per topic. In the book, related pages are combined into chapters (for example, the three mixed-model pages are now one chapter with three sections), grouped into parts. Every old address redirects to its new chapter and section.
+
+Page migration table:
+
+| Old page | Now in |
+|---|---|
+| `/about-this-site/` | [preface](preface.qmd) |
+| `/getting-started-with-r/` | [basics/basics](basics/basics.qmd) |
+| `/getting-started-with-r/installing-r-rstudio/` | [basics/r](basics/r.qmd) |
+| `/getting-started-with-r/project-management/` | [basics/projects](basics/projects.qmd) |
+| `/data-manipulation/` | [data-literacy/making-analysis-ready-data](data-literacy/making-analysis-ready-data.qmd) |
+| `/getting-started-with-r/importing-data/` | [data-literacy/reading](data-literacy/reading/index.qmd) |
+| `/data-manipulation/subsetting-data/` | [data-literacy/filter-rows](data-literacy/filter-rows/index.qmd) |
+| `/data-manipulation/making-new-variables/` | [data-literacy/mutate](data-literacy/mutate/index.qmd) |
+| `/data-manipulation/combining-datasets/` | [data-literacy/joining-tables](data-literacy/joining-tables/index.qmd) |
+| `/data-manipulation/summarising-data/` | [data-literacy/summarising-tables](data-literacy/summarising-tables/index.qmd) |
+| `/data-manipulation/reshaping-data/` | [data-literacy/pivotting](data-literacy/pivotting/index.qmd) |
+| `/graphics/` | [data-visualisation/data-visualisation](data-visualisation/data-visualisation.qmd) |
+| `/graphics/multivariate-vis/` | [data-visualisation/data-visualisation](data-visualisation/data-visualisation.qmd#visualising-multivariate-data), section *Visualising multivariate data* |
+| `/graphics/spatial-vis/` | [data-visualisation/data-visualisation](data-visualisation/data-visualisation.qmd#visualising-spatial-data), section *Visualising spatial data* |
+| `/graphics/basic-plotting/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd) |
+| `/graphics/basic-plotting/one-continuous/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#one-continuous-variable), section *One continuous variable* |
+| `/graphics/basic-plotting/two-continuous/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#two-continuous-variables), section *Two continuous variables* |
+| `/graphics/basic-plotting/one-continuous-one-factor/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#one-continuous-and-one-categorical-variable), section *One continuous and one categorical variable* |
+| `/graphics/ggplot/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#introduction-to-ggplot2), section *Introduction to ggplot2* |
+| `/graphics/ggplot/ggplot-basics/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#introduction-to-ggplot2), section *Introduction to ggplot2* |
+| `/graphics/ggplot/ggplot-labels/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#titles-and-axis-labels), section *Titles and axis labels* |
+| `/graphics/ggplot/ggplot-colour-shapes/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#colours-and-shapes), section *Colours and shapes* |
+| `/graphics/ggplot/ggplot-barplot/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#bar-plots-with-error-bars), section *Bar plots with error bars* |
+| `/graphics/ggplot/ggplot-appearance/` | [data-visualisation/ggplot](data-visualisation/ggplot.qmd#customising-your-ggplot), section *Customising your ggplot* |
+| `/graphics/ggplot/ggplot-multipanel/` | [data-visualisation/multi-panel-figures](data-visualisation/multi-panel-figures.qmd) |
+| `/graphics/spatial-vis/basic-raster/` | [data-visualisation/rasters](data-visualisation/rasters.qmd) |
+| `/graphics/spatial-vis/simple-maps/` | [data-visualisation/simple-maps](data-visualisation/simple-maps.qmd) |
+| `/graphics/multivariate-vis/pca/` | [data-visualisation/pca](data-visualisation/pca.qmd) |
+| `/graphics/multivariate-vis/heatmaps/` | [data-visualisation/heatmaps](data-visualisation/heatmaps.qmd) |
+| `/statistics/` | [statistical-methods/statistical-methods](statistical-methods/statistical-methods.qmd) |
+| `/statistics/linear-models/` | [statistical-methods/linear-models](statistical-methods/linear-models.qmd) |
+| `/statistics/linear-models/linear-regression/` | [statistical-methods/linear-regression](statistical-methods/linear-regression.qmd) |
+| `/statistics/linear-models/linear-regression/interpret-lm-coeffs/` | [statistical-methods/interpret-lm-coeffs](statistical-methods/interpret-lm-coeffs.qmd) |
+| `/statistics/t-tests/` | [statistical-methods/t-tests](statistical-methods/t-tests.qmd) |
+| `/statistics/t-tests/one-sample-t-test/` | [statistical-methods/t-tests](statistical-methods/t-tests.qmd#one-sample-t-test), section *One Sample T-test* |
+| `/statistics/t-tests/two-sample-t-test/` | [statistical-methods/t-tests](statistical-methods/t-tests.qmd#two-sample-t-test), section *Two Sample T-test* |
+| `/statistics/t-tests/paired-t-test/` | [statistical-methods/t-tests](statistical-methods/t-tests.qmd#paired-t-test), section *Paired T-test* |
+| `/statistics/linear-models/anova/` | [statistical-methods/anova](statistical-methods/anova.qmd) |
+| `/statistics/linear-models/anova/anova-single/` | [statistical-methods/anova](statistical-methods/anova.qmd#single-factor-anova), section *Single Factor ANOVA* |
+| `/statistics/linear-models/anova/anova-factorial/` | [statistical-methods/anova](statistical-methods/anova.qmd#factorial-anova), section *Factorial ANOVA* |
+| `/statistics/linear-models/anova/anova-nested/` | [statistical-methods/anova](statistical-methods/anova.qmd#nested-anova), section *Nested ANOVA* |
+| `/statistics/linear-models/interactions/` | [statistical-methods/understanding-interactions](statistical-methods/understanding-interactions.qmd) |
+| `/statistics/glms/` | [statistical-methods/generalised-linear-models](statistical-methods/generalised-linear-models.qmd) |
+| `/statistics/glms/glm-1/` | [statistical-methods/generalised-linear-models](statistical-methods/generalised-linear-models.qmd#introduction-and-binary-data), section *Introduction and Binary Data* |
+| `/statistics/glms/glm-2/` | [statistical-methods/generalised-linear-models](statistical-methods/generalised-linear-models.qmd#count-data), section *Count Data* |
+| `/statistics/glms/interpret-glm-coeffs/` | [statistical-methods/interpret-glm-coeffs](statistical-methods/interpret-glm-coeffs.qmd) |
+| `/statistics/mixed-models/` | [statistical-methods/mixed-effects-models](statistical-methods/mixed-effects-models.qmd) |
+| `/statistics/mixed-models/mixed-model-1/` | [statistical-methods/mixed-effects-models](statistical-methods/mixed-effects-models.qmd#linear-mixed-models-with-one-random-effect), section *Linear mixed models with one random effect* |
+| `/statistics/mixed-models/mixed-model-2/` | [statistical-methods/mixed-effects-models](statistical-methods/mixed-effects-models.qmd#crossed-and-nested-factors), section *Crossed and Nested Factors* |
+| `/statistics/mixed-models/mixed-model-3/` | [statistical-methods/mixed-effects-models](statistical-methods/mixed-effects-models.qmd#generalised-mixed-models), section *Generalised Mixed Models* |
+| `/statistics/gams/` | [statistical-methods/generalised-additive-models](statistical-methods/generalised-additive-models.qmd) |
+| `/statistics/time-series/` | [statistical-methods/time-series-analysis](statistical-methods/time-series-analysis.qmd) |
+| `/statistics/mvabund/` | [statistical-methods/MVabund](statistical-methods/MVabund.qmd) |
+| `/graphics/multivariate-vis/cluster-analysis/` | [statistical-methods/cluster-analysis](statistical-methods/cluster-analysis.qmd) |
+| `/graphics/multivariate-vis/mds/` | [statistical-methods/mds](statistical-methods/mds.qmd) |
+| `/statistics/meta-analysis/` | [statistical-methods/meta-analysis](statistical-methods/meta-analysis.qmd) |
+| `/statistics/meta-analysis/meta-analysis-1/` | [statistical-methods/meta-analysis](statistical-methods/meta-analysis.qmd#introduction), section *Introduction* |
+| `/statistics/meta-analysis/meta-analysis-2/` | [statistical-methods/meta-analysis](statistical-methods/meta-analysis.qmd#fixed-effect-and-random-effect-models), section *Fixed-effect and Random-effect Models* |
+| `/statistics/meta-analysis/meta-analysis-3/` | [statistical-methods/meta-analysis](statistical-methods/meta-analysis.qmd#multilevel-models), section *Multilevel Models* |
+| `/coding-skills/` | [coding-skills/coding-skills](coding-skills/coding-skills.qmd) |
+| `/coding-skills/good-practice/` | [coding-skills/good-practice](coding-skills/good-practice.qmd) |
+| `/coding-skills/writing-functions/` | [coding-skills/functions](coding-skills/functions.qmd) |
+| `/coding-skills/loops/` | [coding-skills/loops](coding-skills/loops.qmd) |
+| `/coding-skills/version-control/` | [coding-skills/version-control](coding-skills/version-control.qmd) |
+| `/coding-skills/asking-code-questions/` | [coding-skills/asking-code-questions](coding-skills/asking-code-questions.qmd) |
+| `/statistics/categorical/` | [misc/misc](misc/misc.qmd) |
+| `/getting-started-with-r/data-entry/` | [misc/data-entry](misc/data-entry.qmd) |
+| `/getting-started-with-r/data-types-structure/` | [misc/data-types-structure](misc/data-types-structure.qmd) |
+| `/getting-started-with-r/rstudio-notebooks/` | [misc/rstudio-notebooks](misc/rstudio-notebooks.qmd) |
+| `/graphics/spatial-vis/interactive/` | [misc/interactive-maps](misc/interactive-maps.qmd) |
+| `/statistics/categorical/contingency-tables/` | [misc/contingency-tables](misc/contingency-tables.qmd) |
+| `/statistics/categorical/fishers-exact/` | [misc/fishers-exact](misc/fishers-exact.qmd) |
+| `/statistics/categorical/goodness-of-fit/` | [misc/goodness-of-fit](misc/goodness-of-fit.qmd) |
+| `/statistics/power-analysis/` | [misc/power-analysis](misc/power-analysis.qmd) |
+| `/datasets/` | [datasets](datasets.qmd) |
+
+### 2022 migration from Wordpress to Hugo
+
+In Feb 2022, the site was migrated from Wordpress to Hugo. These old Wordpress URLs should be redirected to their current pages using aliases, as they have been embedded in various course materials and distributed over the web.
+
+- [/analysis-variance-factorial/](statistical-methods/anova.qmd#factorial-anova)
+- [/analysis-variance-single-factor/](statistical-methods/anova.qmd#single-factor-anova)
+- [/asking-code-questions/](coding-skills/asking-code-questions.qmd)
+- [/basic-plotting-in-r/](data-visualisation/ggplot.qmd)
+- [/basic-project-management/](basics/projects.qmd)
+- [/categorical-data-analyses/](misc/misc.qmd)
+- [/cluster-analysis/](statistical-methods/cluster-analysis.qmd)
+- [/coding-skills/](coding-skills/coding-skills.qmd)
+- [/combining-data-sets/](data-literacy/joining-tables/index.qmd)
+- [/contingency-tables/](misc/contingency-tables.qmd)
+- [/data-entry/](misc/data-entry.qmd)
+- [/data-manipulation/](data-literacy/making-analysis-ready-data.qmd)
+- [/data-types-and-structure/](misc/data-types-structure.qmd)
+- [/forecasting-time-series/](statistical-methods/time-series-analysis.qmd)
+- [/generalised-linear-models-1/](statistical-methods/generalised-linear-models.qmd#introduction-and-binary-data)
+- [/generalised-linear-models-2/](statistical-methods/generalised-linear-models.qmd#count-data)
+- [/generalised-linear-models/](statistical-methods/generalised-linear-models.qmd)
+- [/getting-started-with-r/](basics/basics.qmd)
+- [/good-practice-for-writing-scripts/](coding-skills/good-practice.qmd)
+- [/goodness-of-fit-tests/](misc/goodness-of-fit.qmd)
+- [/graphics/](data-visualisation/data-visualisation.qmd)
+- [/heat-maps/](data-visualisation/heatmaps.qmd)
+- [/how-to-interpret-linear-models/](statistical-methods/interpret-lm-coeffs.qmd)
+- [/importing-data/](data-literacy/reading/index.qmd)
+- [/independent-samples-t-test/](statistical-methods/t-tests.qmd#two-sample-t-test)
+- [/installing-r-r-studio/](basics/r.qmd)
+- [/interpreting-coefficients-in-glms/](statistical-methods/interpret-glm-coeffs.qmd)
+- [/intro-to-gams/](statistical-methods/generalised-additive-models.qmd)
+- [/introduction-to-mvabund/](statistical-methods/MVabund.qmd)
+- [/linear-models/](statistical-methods/linear-models.qmd)
+- [/linear-regression/](statistical-methods/linear-regression.qmd)
+- [/making-new-variables/](data-literacy/mutate/index.qmd)
+- [/making-simple-maps/](data-visualisation/simple-maps.qmd)
+- [/meta-analysis-1/](statistical-methods/meta-analysis.qmd#introduction)
+- [/meta-analysis-2/](statistical-methods/meta-analysis.qmd#fixed-effect-and-random-effect-models)
+- [/meta-analysis-3/](statistical-methods/meta-analysis.qmd#multilevel-models)
+- [/meta-analysis/](statistical-methods/meta-analysis.qmd)
+- [/mixed-models-1/](statistical-methods/mixed-effects-models.qmd#linear-mixed-models-with-one-random-effect)
+- [/mixed-models-2/](statistical-methods/mixed-effects-models.qmd#crossed-and-nested-factors)
+- [/mixed-models-3/](statistical-methods/mixed-effects-models.qmd#generalised-mixed-models)
+- [/mixed-models/](statistical-methods/mixed-effects-models.qmd)
+- [/multidimensional-scaling/](statistical-methods/mds.qmd)
+- [/one-continuous-variable/](data-visualisation/ggplot.qmd#one-continuous-variable)
+- [/one-sample-t-test/](statistical-methods/t-tests.qmd#one-sample-t-test)
+- [/paired-t-tests/](statistical-methods/t-tests.qmd#paired-t-test)
+- [/plotting-with-ggplot-adding-titles-and-axis-names/](data-visualisation/ggplot.qmd#titles-and-axis-labels)
+- [/plotting-with-ggplot-altering-the-overall-appearance/](data-visualisation/ggplot.qmd#customising-your-ggplot)
+- [/plotting-with-ggplot-bar-plots-with-error-bars/](data-visualisation/ggplot.qmd#bar-plots-with-error-bars)
+- [/plotting-with-ggplot-colours-and-symbols/](data-visualisation/ggplot.qmd#colours-and-shapes)
+- [/plotting-with-ggplot-the-basics/](data-visualisation/ggplot.qmd#introduction-to-ggplot2)
+- [/plotting-with-ggplot/](data-visualisation/ggplot.qmd#introduction-to-ggplot2)
+- [/power-analysis/](misc/power-analysis.qmd)
+- [/principal-components-analysis/](data-visualisation/pca.qmd)
+- [/reshaping-data/](data-literacy/pivotting/index.qmd)
+- [/single-continuous-vs-categorical-variables/](data-visualisation/ggplot.qmd#one-continuous-and-one-categorical-variable)
+- [/statistics/](statistical-methods/statistical-methods.qmd)
+- [/subsetting-data/](data-literacy/filter-rows/index.qmd)
+- [/summarising-data/](data-literacy/summarising-tables/index.qmd)
+- [/t-tests/](statistical-methods/t-tests.qmd)
+- [/two-continuous-variables/](data-visualisation/ggplot.qmd#two-continuous-variables)
+- [/understanding-interactions/](statistical-methods/understanding-interactions.qmd)
+- [/using-loops/](coding-skills/loops.qmd)
+- [/using-rstudio-notebooks/](misc/rstudio-notebooks.qmd)
+- [/version-control/](coding-skills/version-control.qmd)
+- [/visualising-multivariate-data/](data-visualisation/data-visualisation.qmd#visualising-multivariate-data)
+- [/visualising-spatial-data/](data-visualisation/data-visualisation.qmd#visualising-spatial-data)
+- [/visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/](misc/interactive-maps.qmd)
+- [/writing-simple-functions/](coding-skills/functions.qmd)

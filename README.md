@@ -1,328 +1,67 @@
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # Welcome to Environmental Computing 👋
 
-<img src="static/images/hexsticker_EC.png" align="right" alt="" width="150" />
+<img src="images/hexsticker_EC.png" align="right" alt="" width="150" />
 
 <!-- badges: start -->
 
 [![Netlify
-Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status)](https://app.netlify.com/sites/environmentalcomputing/deploys)
+Status](https://api.netlify.com/api/v1/badges/7ebc3505-9fc4-4bed-b0d4-fd75daa3bd7f/deploy-status.png)](https://app.netlify.com/sites/environmentalcomputing/deploys)
 <!-- badges: end -->
 
 The goal of **Environmental Computing** is to provide accessible coding
 and statistical tutorials to R users. If you would like to learn more
 about this site, click
-[here](https://environmentalcomputing.net/about-this-site/)
+[here](https://environmentalcomputing.net/about-this-site/).
 
-This repository contains the
-[blogdown](https://bookdown.org/yihui/blogdown/) and
-[Hugo](https://gohugo.io/) backbone to build and maintain the website.
-Below are important details to quickly orientate you to the
-behind-the-scenes of this website
+This repository uses [Quarto](https://quarto.org/) to build and maintain
+the website as a Quarto book.
 
-### Installation of `blogdown` and Hugo
+Contributor workflow, naming conventions, page structure, and image/data
+storage guidance now live in the book chapter:
 
-`blogdown` is a R interface to Hugo and is super handy for our purposes
-as most tutorials are written as R Markdown files which is rendered into
-a Hugo-friendly format.
+- [Contributing](content/contributing.qmd)
 
-Blogdown can be installed from either CRAN or directly from the RStudio
-`blogdown` Github repository using the `remotes` package:
+## How the site is deployed
 
-``` r
-# Install from CRAN
-install.packages("blogdown")
+The site is hosted on [Netlify](https://app.netlify.com/sites/environmentalcomputing/deploys), on Daniel Falster's (@dfalster) Netlify account. Ask him for access.
 
-# Install from Github
-remotes::install_github('rstudio/blogdown')
+Netlify does not build the site itself, because its build image cannot run the R code. Instead, GitHub Actions ([.github/workflows/book.yml](.github/workflows/book.yml)) renders the book and uploads `_book/` to Netlify:
 
-library(blogdown)
-```
+- every push to `master` deploys to the live site, environmentalcomputing.net;
+- every pull request gets a deploy preview, linked in a comment on the PR;
+- `netlify.toml` tells Netlify to skip its own builds (`ignore = "exit 0"`).
 
-Once blogdown is installed, we can use this package to install Hugo!
+The upload needs two repository secrets (Settings → Secrets and variables → Actions):
 
-``` r
-blogdown::install_hugo()
-```
+- `NETLIFY_AUTH_TOKEN`: a personal access token from dfalster's Netlify account (User settings → Applications → Personal access tokens);
+- `NETLIFY_SITE_ID`: the Site ID of the `environmentalcomputing` site (Site configuration → Site details). Do not use the other site, `friendly-albattani-0a0cb6`.
 
-If you have older versions of Hugo on your computer or having issues
-installing Hugo via blogdown you may want to run:
+If either secret is missing, CI on `master` fails at the "Check Netlify credentials" step; if the token has expired or been revoked, it fails at "Deploy to Netlify". Either way the live site stops updating until the secret is replaced: create a new token and run `gh secret set NETLIFY_AUTH_TOKEN`.
 
-``` r
-# Search for where Hugo was previously installed, option to remove previous versions
-blogdown::find_hugo() 
-
-# Having issues with Hugo? Try using this handy function!
-blogdown::check_hugo()
-```
-
-### Install dependencies
-
-Once you have `blogdown` and Hugo installed, you will want to make sure
-you have all the different packages that were used in the tutorials. We
-created a `DESCRIPTION` file which lists out all the current
-dependencies under `Imports`. As the website continues to grow, you will
-need to manually edit the `DESCRIPTION` file to ensure the dependencies
-match accordingly! Please make sure the dependencies are listed in
-**alphabetical order**.
-
-To install the dependencies listed in the `DESCRIPTION` file
-
-``` r
-remotes::install_deps()
-```
-
-### Structure of the major directories
-
-The most important directories for the website are `content/`, `static/`
-and `public/`.
-
-Briefly:
-
--   `content/` is the backend of the website and is where you will be
-    working in the most. This is where all the .Rmd files for each
-    tutorial are kept.
--   `static/` is where the [theme](https://learn.netlify.app/en/) of the
-    website lives. Hugo translates the websites content into static
-    files.
--   These are automatically copied into the `public/` directory each
-    thing Hugo renders the website. You don’t know need to physically
-    edit the items in `public/`.
-
-For more info about these directories see
-[here](https://bookdown.org/yihui/blogdown/hugo.html)
-
-### Name and code style conventions
-
-Please follow these conventions when creating new folders:
-
--   lowercase names
--   use `-` hypthens to join separate words and numbers
-    e.g. `meta-analysis-1`
--   if possible, keep folder names to less than 3 concise words
--   use commonly used abbreviations e.g. `glms` instead of
-    `generalised-linear-models`
--   If there are multiple tutorials for a given topic, use numbers
-    beginning from 1 e.g. `mixed-model-1`
-
-We used the `styler` package to format all the content within each .Rmd
-
-``` r
-# An example
-
-styler::style_file("content/Data-Manipulation/combining-datasets/_index.Rmd")
-```
-
-### The anatomy of nested menus
-
-All of our tutorials are organised into major menus (`coding-skills/`,
-`statistics/`, `graphics/` etc). Sub-menus are created by putting a
-folder within the main folder e.g. `asking-code-questions/` is a
-subfolder within `coding-skills/`. Any files (.Rmd, .html and images)
-associated with the subtopic will live in that subfolder
-e.g. \_index.rmd, stack.png
-
-    content/
-    ├── about-this-site
-    ├── coding-skills
-    │   ├── asking-code-questions
-    │   │   ├── _index.html
-    │   │   ├── _index.rmd
-    │   │   ├── stack.png
-    │   ├── good-practice
-
-#### The order of menus
-
-Each folder contains a `_index.rmd` which creates its associated
-`_index.html` file. It is crucial to set this file up correctly to
-organise the menu and pages. The yaml header of each `_index.rmd` file
-looks a bit like this. The yaml section controls the order of the pages.
-
-    ---
-    title: "Getting Started with R"
-    output: html_document
-    weight: 2
-    ---
-
--   The `title:` parameter becomes the name of the menu. Note that each
-    word in `title:` is **capitalised**
--   The `weight:` parameter denotes the **order** of the page. 1 being
-    the first, 2 being the second and so forth.
--   The `output:` parameter determines what format the .Rmd is rendered
-    to. For Hugo’s sake, we need it to render the .Rmd into a
-    `html_document`.
-
-In the yaml example above, the `weight:` parameter is 2, notice that the
-second menu on the [website](environmentalcomputing.net) is “Getting
-Started in R”.
-
-Once you enter a menu e.g. “Getting Started in R”, the sequence for the
-`weight:` restarts so that you can set the order for subtopics within
-“Getting Started in R”.
-
-For example, `weight: 1` for “Installing R and RStudio”, `weight: 2` for
-“Using R Notebooks” and so forth.
-
-I recommend taking a look at this
-[website](https://mingchen0919.github.io/blogdown-website-with-hugo-theme-learn/)
-to better understand the nestedness of the menus and how to set this up
-using subfolders and `_index.Rmd` files.
-
-### Working with git
-
-The recommended workflow with git
-
-1.  **PULL** down remote changes at the beginning of your work session.
-2.  Proceed to work on the files for the website
-3.  **STAGE** your changes (In RStudio, check the box next to file)
-4.  **COMMIT** your changes. Generally, I make a commit for changes that
-    is related e.g. all in the same file or directory. That way the
-    changes are grouped together with one informative message.
-5.  **PUSH** your committed changes.
-
-Note: Should a merge conflict arise, reach out of one of the maintainers
-and we can help ya out
-
-### Creating a new page
-
-So you want to make a tutorial!? Here’s my recommended workflow for
-creating a brand-spanking-new page!
-
-1.  Decide where the new page should live within the existing menu
-    structure. e.g. Coding skill? Graphics/ggplot? etc
-2.  Create a new folder in the desired location and name it following
-    conventions above.
-3.  Enter the new folder you created
-4.  Create a new .Rmd file and name it `_index.Rmd`
-5.  Copy and paste the yaml template at the top of the file and edit
-    accordingly.
+Old site addresses are redirected to book chapters by `_redirects`, which is generated by `migration/migrate.py` and copied into `_book/` at render time. To re-run the migration and check its output, see [migration/README.md](migration/README.md); note that re-running overwrites hand edits to mapped chapters unless they are recorded in `migration/page-map.yml`.
 
 <!-- -->
 
-    ---
-    title: "Title of your new tutorial
-    output: html_document
-    weight: 
-    ---
+    Warning: package 'ggplot2' was built under R version 4.4.3
 
--   Remember the `weight:` denotes the **order** of the page, so change
-    this according to the existing page order. I recommend opening the
-    website in a browser and counting the number of menu items to
-    determine what `weight:`you want your new page to be.
--   If you need to slot the new page in between existing pages, you will
-    need to update the `weight:` for the pages that comes AFTER your new
-    page.
+    Warning: package 'tibble' was built under R version 4.4.3
 
-6.  Proceed with writing your page like any .Rmd file
+    Warning: package 'tidyr' was built under R version 4.4.3
 
-### Building the site
+    Warning: package 'purrr' was built under R version 4.4.3
 
-Once you are happy with the format of a new page/updates you’ve made,
-use the following functions to render your page. **Knitting and saving
-your .Rmd** will also do the trick!
+    Warning: package 'dplyr' was built under R version 4.4.3
 
-``` r
-blogdown::build_site(build_rmd = 'newfile')
+    Warning: package 'lubridate' was built under R version 4.4.3
 
-# and then to preview your site, open in browser and explore your work :) 
-blogdown::serve_site()
-```
+This site has been improved by many people who contributed new content
+and fixes. Big thanks to the 3 contributors (in alphabetical order by
+username): Brendan Schuetze (@Brendan-Schuetze), John Wilshire
+(@johnWilshire), Mitchell Lyons (@mitchest).
 
-Occasionally, you will want to make edits to multiple .Rmds, to
-re-render these pages use:
-
-``` r
-blogdown::build_site(build_rmd = 'timestamp')
-```
-
-If you want to re-render a specific .Rmd, without rebuilding the entire
-site:
-
-``` r
-blogdown::build_site(build_rmd = "file/path/to/RMD")
-```
-
-Sometimes, you’ll notice that despite knitting or using the above
-functions, your page is not showing up. This is where the following
-function comes in handy:
-
-``` r
-blogdown::check_site()
-
-# There are various blogdown::check_ functions, check_site() does it all-in-one
-```
-
-This function will prompt to you fix your issues, usually you will need
-to remove incompatible files, restart RStudio and use
-`blogdown::build_site(build_rmd = 'newfile')` again. No worries!
-
-If you are already previewing your site, you will notice upon saving
-your .Rmd, the site will usually dynamically update itself but its good
-practice to occasionally use the above `blogdown::build_site()`
-functions to ensure proper rendering.
-
-To stop previewing the site:
-
-``` r
-blogdown::stop_server()
-```
-
-### Internal links
-
-In some tutorials there are references to other pages on the website.
-For example, the [Statistics
-page](environmentalcomputing.net/statistics) provides links to all the
-subtopics under “Statistics”. Please follow these conventions when
-adding internal links in your .rmd
-
-Lets say you are working on a page under `data-manipulation/` and you
-want to reference to a page under `graphics/`. In this circumstance, you
-are linking to an entirely different major menu, so we recommend using
-**absolute paths**. This is denoted by the `/` preceding `statistics/`
-which searches for a folder in the entire project directory named
-`statistics`
-
-For example:
-
-    Once you have summarised your data, you can easily [plot it!]("/statistics/graphics/ggplot")
-
-Alternatively, if you are working of a page within the same menu
-e.g. `data-manipulation/subsetting-data` and want to reference a page
-within the same menu e.g. `data-manipulation/combining-datasets`, we
-recommend using **relative paths**. This is denoted by the `..`
-preceding `/combining-datasets`. The `..` means ‘going up a directory
-level’ and then `/combining-datasets` means going into the
-`combining-datasets` subfolder.
-
-Like this:
-
-    You can [merge]("../combining-datasets") your newly subsetted data to another dataframe.
-
-### Aliases
-
-[Aliases](https://gohugo.io/content-management/urls/#example-aliases)
-help redirect existing, outdated or alternative URLs to specific pages
-oxsn the website. Aliases were particularly useful when we were
-reorganising old tutorial pages to the new blogdown/Hugo system. For
-example, in the first generation of the website the URL for the ‘Asking
-Code Questions’ page was accessed using:
-
-    environmentalcomputing.net/asking-coding-questions/ # OLD
-
-In the new generation of the website the same ‘Asking Code Questions’
-page is accessed via:
-
-    environmentalcomputing.net/coding-skills/asking-coding-questions/ # NEW
-
-We created an aliases so that the old URL can still work and direct to
-the new site. This can be achieved by simply adding an `aliases:`
-parameter in the yaml in the .Rmd
-
-    ---
-    title: "Asking Code Questions"
-    output: html_document
-    aliases: /asking-coding-questions/
-    weight: 5
-    ---
+Extra thanks to [R for Data Science](https://github.com/hadley/r4ds)
+team for the code which generated the list of contribturors shown above.

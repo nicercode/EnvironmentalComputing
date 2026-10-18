@@ -1,14 +1,6 @@
+# The book is built and deployed by GitHub Actions (.github/workflows/book.yml),
+# because Netlify's build image can't run the R code. This stops Netlify from
+# also trying to build the site itself on every push.
 [build]
-command = "hugo"
-publish = "public"
-[build.environment]
-HUGO_VERSION = "0.91.2"
-
-[context]
-[context.branch-deploy]
-command = "hugo -F -b $DEPLOY_PRIME_URL"
-[context.deploy-preview]
-command = "hugo -F -b $DEPLOY_PRIME_URL"
-[context.production]
-[context.production.environment]
-HUGO_ENV = "production"
+  publish = "_book"
+  ignore = "exit 0"

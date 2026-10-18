@@ -1,0 +1,98 @@
+/*-- scss:defaults --*/
+
+$primary: #599a3e !default;
+$font-size-root: 18px !default;
+
+/*-- scss:rules --*/
+
+.sidebar-title {
+  color: #599a3e;
+}
+
+div.sidebar-item-container .active {
+  font-weight: bold;
+}
+
+.sidebar nav[role=doc-toc] ul>li>a.active, .sidebar nav[role=doc-toc] ul>li>ul>li>a.active{
+  font-weight: bold;
+}
+
+img.quarto-cover-image {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+}
+
+/* Headings ------------------------------------------------------ */
+
+#title-block-header.quarto-title-block.default .quarto-title h1.title {
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+h3 { margin-top: 1.5em; font-size: 1.2rem; font-weight: 500; }
+h4 { margin-top: 1.5em; font-size: 1.1rem; }
+h5 { margin-top: 1.5em; font-size: 1rem; }
+
+.quarto-section-identifier {
+  color: #5e5e5e;
+  font-weight: normal;
+}
+
+/* Code ------------------------------------------------ */
+
+code {
+  color: #323232;
+}
+
+code a:any-link {
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+}
+
+pre {
+  background-image: linear-gradient(160deg,#f8f8f8 0,#f1f1f1 100%);
+}
+
+main.content:has(.hero) h1 { margin-bottom: 1.25rem; }
+
+/* Homepage hero ------------------------------------------------- */
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin: 0.5rem 0 2rem;
+}
+.hero-text { flex: 1 1 auto; }
+.hero-text .lead {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #599a3e;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.hero-text p:last-child { margin-bottom: 0; }
+.hero-logo { width: 220px; height: auto; box-shadow: none; }
+.hero-banner {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 .25rem .75rem rgba(0,0,0,.12);
+}
+@media (max-width: 767px) {
+  .hero { flex-direction: column-reverse; gap: 1rem; }
+  .hero-logo { width: 140px; }
+}
+
+/* Homepage: the hero replaces Quarto's cover image and title block. */
+main.content:has(.hero) #title-block-header,
+main.content:has(.hero) img.quarto-cover-image { display: none; }
+.hero > p { flex: 0 0 220px; margin: 0; }
+@media (max-width: 767px) {
+  .hero > p { flex-basis: auto; }
+}

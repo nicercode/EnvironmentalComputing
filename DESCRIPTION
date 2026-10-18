@@ -1,4 +1,4 @@
-Package: Environmental Computing Website
+Package: EnvironmentalComputing
 Title: Website containing R tutorials for coding and statistical skills
 Version: 0.0.0.9000
 Authors@R: c(
@@ -15,63 +15,49 @@ Authors@R: c(
            email = "a.poore@unsw.edu.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3560-3659"))
   )
-Description: Skeleton for blogdown + hugo to create all tutorials on the website
+Description: R packages used by the tutorials in the Environmental Computing
+    Quarto book. CI installs these before rendering.
 License: CC BY 4.0
 Encoding: UTF-8
 Language: en
 LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-Imports: 
-    blogdown,
+Imports:
     ape,
     car,
     dendextend,
-    devtools,
     dismo,
+    downlit,
     dplyr,
-    emo,
     forecast,
     formatR,
-    gganimate,
     ggmap,
     ggplot2,
     gridExtra,
+    gstat,
     Hmisc,
-    httr,
-    installr,
     knitr,
     leaflet,
     lme4,
-    lubridate,
-    mapdata,
     mapproj,
     maps,
-    maptools,
+    metadat,
     metafor,
     mgcv,
     multcomp,
     mvabund,
     mvtnorm,
-    ncdf4,
+    patchwork,
     pheatmap,
     pwr,
     raster,
     rasterVis,
     RColorBrewer,
-    RCurl,
     readr,
     reshape2,
-    Reshape2,
     rgbif,
-    rgdal,
-    rgeos,
     simr,
     sp,
-    survival,
     tidyr,
     tidyverse,
     vegan,
     XML
-Remotes:
-  hadley/emo

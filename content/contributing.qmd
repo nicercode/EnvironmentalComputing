@@ -1,0 +1,244 @@
+---
+pagetitle: "Contributing to Environmental Computing"
+execute:
+  eval: false
+---
+
+# Contributing to Environmental Computing {.unnumbered}
+
+Thanks for helping improve this book.
+
+This repository uses [Quarto](https://quarto.org/) to build and maintain the website as a Quarto book.
+
+## Installation of Quarto
+
+Download and install Quarto from <https://quarto.org/docs/get-started/>.
+
+To preview the site locally from R, you can also use the `quarto` R package:
+
+```{r}
+#| label: contributing-1
+#| eval: false
+install.packages("quarto")
+```
+
+## Install R dependencies
+
+All R packages used across tutorials are listed in the `DESCRIPTION` file under `Imports`. Please keep dependencies in alphabetical order and keep this file up to date.
+
+To install all dependencies:
+
+```{r}
+#| label: contributing-2
+#| eval: false
+remotes::install_deps()
+```
+
+## Project structure
+
+```
+EnvironmentalComputing/
+├── _quarto.yml         # Book configuration and chapter order
+├── index.qmd           # Home page (must stay at root)
+├── content/           # All tutorial content, organised by section
+│   ├── big-picture/
+│   ├── basics/
+│   ├── data-literacy/
+│   ├── data-visualisation/
+│   ├── essential-maths/
+│   ├── statistical-methods/
+│   ├── dynamic-systems/
+│   └── coding-skills/
+├── _book/              # Rendered output (do not edit manually)
+├── images/             # Shared images used in multiple chapters
+└── data/               # Shared datasets used in multiple chapters
+```
+
+- `_quarto.yml` controls title, chapter order, and formatting.
+- `content/` is where most authoring happens.
+- `_book/` is generated output and should not be edited manually.
+
+## Naming and style conventions
+
+Please follow these conventions when creating new files and folders:
+
+- lowercase names
+- use `-` hyphens to join words, for example `meta-analysis`
+- keep folder names concise (3 words or fewer)
+- use common abbreviations where appropriate, for example `glms`
+
+Use the `styler` package to format R code within `.qmd` files:
+
+```{r}
+#| label: contributing-3
+#| eval: false
+styler::style_file("content/coding-skills/functions.qmd")
+```
+
+## Anatomy of a page
+
+Each tutorial is a `.qmd` file inside a section folder under `content/`.
+
+At minimum, include a title in the YAML header:
+
+```yaml
+---
+title: "Title of Your Tutorial"
+---
+```
+
+Page order is controlled by the `chapters:` list in `_quarto.yml`.
+
+## Images and data: where to store files
+
+Use a section-level structure throughout `content/`.
+
+For each first-level section folder (for example `content/statistical-methods/`, `content/data-visualisation/`, `content/misc/`), keep:
+
+- chapter files (`.qmd`) at the section root
+- images in `images/`
+- local datasets and other data files in `data/`
+
+### Standard layout
+
+```
+content/
+  statistical-methods/
+    linear-models.qmd
+    t-tests.qmd
+    images/
+      One_sample_t_test_image.png
+    data/
+      Interaction_plots.csv
+```
+
+### Referencing assets in pages
+
+From a chapter in that same section:
+
+- images: `![](images/example.png)`
+- data in code: `read.csv("data/example.csv")`
+
+### Shared assets across multiple sections
+
+If a file is genuinely shared across many sections, it can still live in project-level `images/` or `data/`. Keep this as the exception, not the default.
+
+### Practical guidance
+
+- do not keep loose image/data files at the same level as section `.qmd` files
+- avoid `../../` path chains where possible
+- use stable section-relative paths (`images/...`, `data/...`)
+
+## Working with git
+
+Recommended workflow:
+
+1. Pull remote changes at the start of your work session.
+2. Make changes to relevant `.qmd` files and assets.
+3. Stage your changes.
+4. Commit with an informative message.
+5. Push your branch.
+
+If you hit a merge conflict, contact a maintainer for help.
+
+## Creating a new page
+
+1. Decide which section the new page belongs to.
+2. Create a new `.qmd` file in the relevant `content/` subfolder.
+3. Add a YAML header with at least `title:`.
+4. Add the new file path to `chapters:` in `_quarto.yml`.
+5. Write your tutorial content.
+
+## Building and previewing
+
+Render the whole book:
+
+```{r}
+#| label: contributing-4
+#| eval: false
+quarto::quarto_render()
+```
+
+Preview with live reloading:
+
+```{r}
+#| label: contributing-5
+#| eval: false
+quarto::quarto_preview()
+```
+
+Equivalent terminal commands:
+
+```bash
+quarto render
+quarto preview
+```
+
+## Fast reruns with caching
+
+Use a 3-layer caching strategy:
+
+1. document-level freeze in `_quarto.yml`
+2. chunk-level caching for expensive code blocks
+3. file-based cache for shared derived datasets
+
+### 1) Document-level freeze
+
+At the project level in `_quarto.yml`:
+
+```yaml
+execute:
+  freeze: auto
+```
+
+With `freeze: auto`, Quarto skips re-executing pages whose source has not changed.
+
+### 2) Chunk-level cache for expensive code
+
+For slow chunks, turn cache on explicitly:
+
+```{r}
+#| label: fit-big-model
+#| cache: true
+#| dependson: prep-data
+#| cache.extra: !expr file.mtime("data/raw/surveys.csv")
+
+model <- my_expensive_fit(df)
+```
+
+Use `dependson` when a chunk relies on earlier work, and use `cache.extra` to invalidate cache when source data changes.
+
+### 3) Cache derived data for reuse across chapters
+
+Write expensive preprocessing outputs once, then read them elsewhere:
+
+```{r}
+#| label: build-derived
+#| cache: true
+
+dir.create("data/derived", showWarnings = FALSE, recursive = TRUE)
+derived <- heavy_preprocess(raw_df)
+readr::write_rds(derived, "data/derived/cleaned-surveys.rds")
+```
+
+```{r}
+#| label: contributing-8
+cleaned <- readr::read_rds("data/derived/cleaned-surveys.rds")
+```
+
+### Caching guidelines
+
+- cache only slow chunks, not every chunk
+- set seeds for stochastic code so cached outputs are reproducible
+- treat `data/raw/` as read-only and write generated files to `data/derived/`
+- clear stale cache if outputs become inconsistent
+
+## Internal links and cross-references
+
+To link to another page within the book, use a path from project root:
+
+```markdown
+See the [data manipulation](/content/data-literacy/making-analysis-ready-data.qmd) section.
+```
+
+For sections, figures, and tables, use Quarto cross-references (`@sec-`, `@fig-`, `@tbl-`).

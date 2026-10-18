@@ -61,6 +61,8 @@ execute:
 book:
   title: "Environmental Computing"
   reader-mode: true
+  sidebar:
+    collapse-level: 1
 
   page-footer:
     left: |

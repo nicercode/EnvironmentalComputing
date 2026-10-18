@@ -1,6 +1,8 @@
 ---
-title: "About This Site"
+pagetitle: "About This Site"
 ---
+
+# About This Site {.unnumbered}
 
 ```{r}
 #| label: preface-1

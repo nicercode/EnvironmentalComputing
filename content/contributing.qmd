@@ -1,8 +1,10 @@
 ---
-title: "Contributing to Environmental Computing"
+pagetitle: "Contributing to Environmental Computing"
 execute:
   eval: false
 ---
+
+# Contributing to Environmental Computing {.unnumbered}
 
 Thanks for helping improve this book.
 

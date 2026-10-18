@@ -14,7 +14,7 @@ First, download the data set, [Bats_data.csv](../../../datasets/Bats_data.csv), 
 
 ```{r}
 #| label: index-1
-Bats <- read.csv(file = "Bats_data.csv", header = T, stringsAsFactors = F)
+Bats <- read.csv(file = "Bats_data.csv", header = T)
 ```
 
 ## Basics of subsetting in R

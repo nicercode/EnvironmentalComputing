@@ -149,6 +149,16 @@ If you hit a merge conflict, contact a maintainer for help.
 4. Add the new file path to `chapters:` in `_quarto.yml`.
 5. Write your tutorial content.
 
+## Moving or renaming a page
+
+Addresses from the old site (linked from course materials and elsewhere) are redirected to book chapters by the `_redirects` file at the project root. Each line sends an old address to a chapter, often to a section within it:
+
+```
+/statistics/linear-models/linear-regression/  /content/statistical-methods/linear-regression.html  301
+```
+
+If you move or rename a chapter, or change a section heading that a redirect points to (the part after `#`), update the matching lines in `_redirects`. Never delete a redirect. CI checks that every redirect still lands on a real chapter and section.
+
 ## Building and previewing
 
 Render the whole book:

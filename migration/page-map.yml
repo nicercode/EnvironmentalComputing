@@ -1,3 +1,6 @@
+# ARCHIVED: the migration finished in October 2026 and the chapters are now
+# edited directly. This file is no longer updated; see migration/README.md.
+#
 # Mapping from every page of the old Hugo/blogdown site to its chapter in
 # the Quarto book. Used by migration/migrate.py, which refuses to run if any
 # old page is missing from this file or listed twice.

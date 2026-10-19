@@ -19,8 +19,13 @@ For every chapter in migration/page-map.yml this script
 A report of everything restored or needing review goes to
 migration/report.md.
 
+The migration finished in October 2026. The chapters and _redirects are now
+edited by hand, and re-running this script would overwrite those edits, so
+it refuses to run unless given --force. It is kept as a record of how the
+port was done.
+
 Usage (from the repository root):
-    python3 migration/migrate.py
+    python3 migration/migrate.py --force
 """
 import collections
 import difflib
@@ -688,6 +693,10 @@ def fix_preface(text, specs, site):
 # --------------------------------------------------------------------------
 
 def main():
+    if "--force" not in sys.argv[1:]:
+        sys.exit("The migration is finished: chapters and _redirects are now edited "
+                 "by hand, and re-running migrate.py would overwrite them. "
+                 "See migration/README.md.")
     with open(os.path.join(ROOT, "migration", "page-map.yml")) as fh:
         cfg = yaml.safe_load(fh)
     site = OldSite(cfg["source_ref"])

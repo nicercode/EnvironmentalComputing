@@ -39,10 +39,6 @@ jobs:
       FULL_RUN: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          # the migration check reads the old site from the commits pinned
-          # in migration/page-map.yml, so it needs full history
-          fetch-depth: 0
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -87,15 +83,10 @@ jobs:
             exit 1
           fi
 
-      # migrate.py generates _redirects and check_coverage.py reads the old
-      # site from git; both need PyYAML. Neither file is edited by hand: fix
-      # problems in migration/page-map.yml and re-run migrate.py.
-      - name: Check migration and redirects
-        run: |
-          python3 -m venv "$RUNNER_TEMP/migration-venv"
-          "$RUNNER_TEMP/migration-venv/bin/pip" install --quiet pyyaml
-          "$RUNNER_TEMP/migration-venv/bin/python" migration/check_coverage.py
-          "$RUNNER_TEMP/migration-venv/bin/python" migration/check_redirects.py
+      # every old Hugo/WordPress address in _redirects must still land on a
+      # real chapter and section; fix failures by editing _redirects
+      - name: Check redirects
+        run: python3 migration/check_redirects.py
 
       - name: Check links
         id: links

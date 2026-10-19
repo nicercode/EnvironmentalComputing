@@ -1,15 +1,32 @@
 # Migrating the old Hugo site into the Quarto book
 
 The scripts here ported the 73 pages of the old Hugo/blogdown site into the
-book's chapters without losing content, and generate the redirects from the
-old addresses. They can be re-run, but read "Before you re-run" first.
+book's chapters without losing content, and generated the redirects from the
+old addresses.
+
+## Status: finished (October 2026)
+
+The book went live in #54. Since then:
+
+- **The `.qmd` files under `content/` are the source.** Edit chapters
+  directly; `page-map.yml` is no longer updated.
+- **`_redirects` is edited by hand.** If you move or rename a chapter, or
+  change a heading that a redirect points to (`#section` anchors), update the
+  matching lines. `check_redirects.py` runs in CI and fails if a destination
+  no longer exists.
+- **`migrate.py` refuses to run** without `--force`, because it would
+  overwrite the hand-edited chapters and `_redirects`. `check_coverage.py`
+  no longer runs in CI, since chapters are now expected to diverge from the
+  old pages.
+
+The rest of this file describes how the port was done, for the record.
 
 | File | Purpose |
 | --- | --- |
 | `page-map.yml` | Maps every old page to a chapter and section; holds all deliberate edits |
-| `migrate.py` | Rebuilds the chapters listed in the map and writes `_redirects` and `report.md` |
+| `migrate.py` | Rebuilt the chapters listed in the map and wrote `_redirects` and `report.md` (now needs `--force`) |
 | `check_coverage.py` | Checks each old page survives in its chapter (at least 95% of its lines) |
-| `check_redirects.py` | Checks every `_redirects` destination exists in the built book, anchor included |
+| `check_redirects.py` | Checks every `_redirects` destination exists in the built book, anchor included (still runs in CI) |
 | `report.md` | Generated list of every restored passage and edit, for review |
 
 ## Set up
@@ -67,7 +84,7 @@ From the repository root:
 
 ```sh
 # 1. rebuild the chapters, _redirects and migration/report.md
-.venv-migration/bin/python migration/migrate.py
+.venv-migration/bin/python migration/migrate.py --force
 
 # 2. confirm every old page still survives in its chapter
 .venv-migration/bin/python migration/check_coverage.py
@@ -82,8 +99,9 @@ quarto render
 lychee --root-dir "$PWD/_book" --no-progress --offline --include-fragments '_book/**/*.html'
 ```
 
-Each check exits non-zero on failure. Steps 2 and 4 also run in CI
-(`.github/workflows/book.yml`), as does the `lychee` check.
+Each check exits non-zero on failure. Step 4 also runs in CI
+(`.github/workflows/book.yml`), as does the `lychee` check. Step 2 ran in CI
+until the migration finished.
 
 ## What to commit
 

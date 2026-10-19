@@ -134,7 +134,7 @@ write_csv(contribs_all, "contributors.csv")
 # List adapted from the R for Data Science README (https://github.com/hadley/r4ds)
 contributors <- readr::read_csv("contributors.csv")
 contributors <- contributors |>
-  filter(!login %in% c("nicercode", "dfalster", "wcornwell", "fontikar", "alistairpoore")) |>
+  filter(!login %in% c("nicercode", "dfalster", "wcornwell", "fontikar")) |>
   mutate(
     profile = paste0("[@", login, "](https://github.com/", login, ")"),
     desc = ifelse(is.na(name), profile, paste0(name, " (", profile, ")"))

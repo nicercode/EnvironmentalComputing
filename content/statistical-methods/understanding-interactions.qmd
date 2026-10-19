@@ -17,7 +17,7 @@ Do the benefits of establishing a reserve vary with reserve size?
 
 These are all questions that would be answered by a formal statistical test of the interaction between factors.
 
-![](images/Interactions_image.jpg)
+![](images/Interactions_image.jpg){fig-alt="Bleached white branching coral, with small fish swimming around it"}
 
 Understanding interactions can be best understood visually. Let's consider how the growth of coral may be affected by two very important stressors currently affecting the world's oceans: increasing temperature and increasing acidification. An experimental design to test this could be one that grows corals in the laboratory in all combinations of several temperatures and several pH conditions.
 

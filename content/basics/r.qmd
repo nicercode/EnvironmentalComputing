@@ -2,7 +2,7 @@
 title: "Installing R and RStudio"
 ---
 
-![](images/blue-125.png)
+![](images/blue-125.png){fig-alt="RStudio logo"}
 We recommend using R Studio as a user friendly interface for using R.
 
 First, install the latest version of **R** - download from [here](http://cran.rstudio.com/)
@@ -24,7 +24,7 @@ If you are working with any of the example data files on this site, you will fir
 
 ## The layout of R Studio
 
-![](images/Installing_R_and_R_Studio_image.jpg)
+![](images/Installing_R_and_R_Studio_image.jpg){fig-alt="The RStudio window with four panels: an R script top left, the console bottom left, the environment top right, and a scatterplot of log plant height against temperature with a fitted regression line bottom right"}
 
 R Studio has four panels:
 

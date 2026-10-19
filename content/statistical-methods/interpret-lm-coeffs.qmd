@@ -9,7 +9,7 @@ set.seed(1)
 
 The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about **marginal vs. conditional interpretations** of model parameters. 
 
-![](images/Linear_regression_image.jpg)
+![](images/Linear_regression_image.jpg){fig-alt="Dense forest of tree ferns beneath tall eucalypt trunks"}
 
 In this example, we model plant height as a function of altitude and temperature. These variables are negatively correlated: it is colder the higher you go. We start by simulating some data to reflect this.
 

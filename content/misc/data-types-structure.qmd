@@ -2,7 +2,7 @@
 title: "Data Types + Structure"
 ---
 
-![](images/Data_types_structure_image.jpg)
+![](images/Data_types_structure_image.jpg){fig-alt="Diagram comparing a vector (a single column of cells), a matrix (a grid of cells all the same colour) and a data frame (a grid whose columns are different colours, so each column can hold a different type of data)"}
 
 One of the most common sources of frustration for beginners in R is dealing with different data structures and types. Here is an overview of the most important data structures, types and how to check and manipulate them.
 

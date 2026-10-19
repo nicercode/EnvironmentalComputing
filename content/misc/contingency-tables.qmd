@@ -4,7 +4,7 @@ title: "Contingency Tables"
 
 Contingency tables are used to test for associations between two or more categorical variables. The data take the form of counts of observations that have been classified by these categorical variables. 
 
-![](images/Contingency_tables_image.jpg)
+![](images/Contingency_tables_image.jpg){fig-alt="Three brightly coloured Gouldian finches perched on a branch, one with a red head, one with an orange head and one with a black head"}
 
 For example, consider the bill and face colours of the endangered Gouldian Finch (*Erythrura gouldiae*) living in the savannahs of northern Australia. They are polymorphic, having either red, yellow or black faces. Their bills are also either red, yellow or black, but bill colour is not always the same as face colour. All birds in a sample could be classified into all nine combinations of face and bill colour and the counts of each held in a two-way table:
 

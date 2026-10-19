@@ -11,7 +11,7 @@ When undertaking any project that involves data analyses in R, it is a very good
 
 R scripts are very useful when collaborating with others as you can share your methods. We also tend to reuse and adapt scripts for future projects, so you may need to read a script you wrote months or even years ago.  It is important to format your script for easy transfer across computers and for easy interpretation by others (and yourself). It is the digital equivalent of being organised and avoiding the problem of never knowing where anything is.
 
-![](images/Good_script_practice_image.jpg)
+![](images/Good_script_practice_image.jpg){fig-alt="A very messy office, with desks buried under piles of papers and folders"}
 
 If you have never made an R script, first read [Getting started with R](../basics/basics.qmd).
 

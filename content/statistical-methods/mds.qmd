@@ -11,7 +11,7 @@ Multidimensional scaling (MDS) is a popular approach for graphically representin
 
 One of the most common applications of MDS in the environmental sciences is to examine the similarity of different ecological communities based on their species composition. In those analyses, the abundance of all species within replicated samples (plots or quadrats in the field, different sites etc.) is recorded and the raw data takes the form of a matrix of species (the variables) by samples.
 
-![](images/MDS_image.jpg)
+![](images/MDS_image.jpg){fig-alt="Underwater photo of seaweeds beside close-ups of five species of small crustaceans (amphipods)"}
 
 Consider an example where researchers wanted to contrast the feeding specificity of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of seven species of macroalgae were collected from Sydney Harbour, and the abundance of seven species of herbivorous crustacean recorded from each replicate (a raw data matrix of 100 samples x 7 variables, data from [Poore *et al*. 2000)](http://www.int-res.com/abstracts/meps/v208/p183-196/).
 

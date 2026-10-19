@@ -12,7 +12,7 @@ library(ggplot2)
 
 If you are working in the laboratory or in the field, it is essential to keep good notes on what you are doing so that you can remember your methods and ensure that your work is reproducible.
 
-![](images/Notebooks_image.jpg)
+![](images/Notebooks_image.jpg){fig-alt="A page from Charles Darwin's notebook with his 'I think' sketch of a branching tree of species"}
 
 Similarly, once you are dealing with the data you have collected, good notes on how you have processed that data are essential. They help you in understanding exactly what you are doing and are needed to write methods sections, and to communicate both methods and results to collaborators or supervisors.
 
@@ -41,15 +41,15 @@ Your notebook is now just a big blank page for you to start writing down all the
 
 ## Adding code to your notebook
 
-![](images/Menu1.png)
+![](images/Menu1.png){fig-alt="The RStudio notebook toolbar with the Insert button circled"}
 
 Executable code is added to your notebook in what are called chunks. To do this, click on **Insert, R** from the top right of your notebook (or use **Ctrl + Alt + I** on the keyboard). This will add an empty chunk that looks like this:
 
-![](images/Chunk1.png)
+![](images/Chunk1.png){fig-alt="An empty R code chunk in an RStudio notebook"}
 
 Any code that you want to run then be added inside the chunk. I like to use the first chunk in the notebook to load any R packages that might be required for the upcoming work. E.g.,
 
-![](images/Chunk2.png)
+![](images/Chunk2.png){fig-alt="An R code chunk containing library(dplyr) and library(ggplot2)"}
 
 Be careful not to delete the ``` marks as the text will no longer be recognised as code.
 
@@ -70,17 +70,17 @@ ggplot(Plant_height, aes(temp, loght, color = growthform)) +
   geom_point()
 ```
 
-![](images/Chunk3.png)
+![](images/Chunk3.png){fig-alt="An R chunk that reads Plant_height.csv and plots it with ggplot, with the resulting scatterplot of log height against temperature, coloured by growth form, shown directly below the chunk"}
 
 You can hide or show any output within your notebook by clicking on the little upward arrows (top right of output).
 
-![](images/Menu2.png)
+![](images/Menu2.png){fig-alt="The RStudio notebook toolbar with the settings (gear) button circled"}
 
 To expand or collapse all output click on the cog symbol next to Preview at the top of the notebook. The settings in there can also be used to send all output to the console (**Chunk output in Console**) or keep in the notebook (**Chunk Output Inline**).
 
 If you save the notebook and leave RStudio, the output is saved and you will see plots etc when you reopen the file. If you have made any changes to code or data files, however, you will need to run the code again.
 
-![](images/Menu3.png)
+![](images/Menu3.png){fig-alt="The RStudio notebook toolbar with the Run button circled"}
 
 This is easily done by clicking **Run, Run all**. Also very useful when you are part way through a document is **Run All Chunks Above** to ensure everything is refreshed and running correctly.
 
@@ -88,7 +88,7 @@ This is easily done by clicking **Run, Run all**. Also very useful when you are 
 
 In addition to being a visually appealing way to combine code and comments, notebooks can also be used to create reports in various formats (html, pdf and word).
 
-![](images/Menu4.png)
+![](images/Menu4.png){fig-alt="The RStudio notebook toolbar with the Knit button circled"}
 
 Clicking on **Preview** will give you a sneak preview of what this might look like. To make the documents, you would then choose **Knit to HTML** for example to make an html file.
 
@@ -109,7 +109,7 @@ These are nicely detailed on RStudio's [R Markdown cheatsheet](https://www.rstud
 | Header 3 |  ## Header 2 |
 | *italics*  | *italics* |
 | **bold** |  **bold** |
-|Inserting an image:  | ![](images/E_C_Logo_black_square.png)  |
+|Inserting an image:  | ![](images/E_C_Logo_black_square.png){fig-alt="Environmental Computing logo: a seedling with two leaves growing out of a laptop screen"}  |
 | Inserting a link: More help at Environmental Computing-/.. | More help at [Environmental Computing](../../index.qmd)  |
 
 ## Controlling chunk behaviour

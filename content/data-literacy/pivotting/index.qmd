@@ -9,7 +9,7 @@ For example, it is very common in the biological sciences that we record the abu
 1. a separate column for every species that records its abundance, or,
 2. two columns - one that identifies the species and one that records the abundance.
 
-![](Reshaping_data_image.jpg)
+![](Reshaping_data_image.jpg){fig-alt="Cover of Dr. Seuss's book One Fish Two Fish Red Fish Blue Fish"}
 
 Consider a data set that recorded the abundance of fish from each of three transects that were set up on two reefs in two separate months. First, import this sample data set, [ReefFish.csv](../../../datasets/ReefFish.csv), to see the way it is formatted.
 

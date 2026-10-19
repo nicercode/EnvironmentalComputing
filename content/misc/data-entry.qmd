@@ -8,7 +8,7 @@ Data is the life-blood of science. As part of the scientific process, we invest 
 
 Most data sets consist of rectangular tables of **values** (usually numbers or text). Each value belongs to a **variable** and an **observation**. A variable consists of values of the same type (e.g., temperature, duration or abundance). An observation consists of all values measured on the same unit (e.g., plot or individual). The convention is to store variables in columns and observations in rows.
 
-![](images/Data_entry_image.jpg)
+![](images/Data_entry_image.jpg){fig-alt="A spreadsheet of plant data with one row per observation and columns such as species, family, growth form, height, country, latitude, longitude and temperature"}
 
 Here is an abridged data set from some insect sampling that shows you the desired format. It consists of five variables and data from  the first nine replicate observations. Note the first row consists of a **header** listing the names of each variable in each column. The variables are:
 

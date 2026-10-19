@@ -70,6 +70,7 @@ book:
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/hexsticker_EC.png
+  cover-image-alt: "Environmental Computing hex sticker"
   favicon: images/hexsticker_EC.png 
   site-url: https://environmentalcomputing.net/
   repo-url: https://github.com/nicercode/EnvironmentalComputing

@@ -14,7 +14,7 @@ Generalised linear models (GLMs) are used when the distribution of data do not c
 
 [Linear models](linear-models.qmd) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
 
-![](images/GLM1_binary_image.jpg)
+![](images/GLM1_binary_image.jpg){fig-alt="Three shore crabs on wet rocks and seaweed"}
 
 For example, if had surveyed a beach and wanted to analyse how the presence of a crab varied with time and distance from the water line, the response variable is discrete: the presence or absence of a crab in a given replicate. The first few rows of the data set would look like this:
 
@@ -161,7 +161,7 @@ This is a continuation of the introduction to GLMs which introduced GLMs and gav
 
 ### Running the analysis
 
-![](images/GLM2_counts_image.jpg)
+![](images/GLM2_counts_image.jpg){fig-alt="Close-up of a slug in grass and moss"}
 
 For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.
 

@@ -4,7 +4,7 @@ title: "Goodness of Fit"
 
 $\chi^2$ goodness of fit tests are used to test whether the counts of observations belonging to two or more categories differ from those under an expected model. For example, what is the likelihood of a sample of 60 women and 40 men in a class coming from a population where the sex ratio is actually 1:1? In this example, there is a single categorical variable of sex, with two categories of male and female.
 
-![](images/Goodness_of_fit_test_image.jpg)  
+![](images/Goodness_of_fit_test_image.jpg){fig-alt="Students seated in a university lecture theatre facing two projection screens"}  
 
 The test statistic is: 
 

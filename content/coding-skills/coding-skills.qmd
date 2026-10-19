@@ -13,7 +13,7 @@ On these pages, we give some advice for writing effective code and some of the v
 * Logical control...coming soon
 * [Version control](version-control.qmd)
 
-![](images/Coding_image.jpg)
+![](images/Coding_image.jpg){fig-alt="R code showing two for loops: one filling a vector with squared values, and one filling the two columns of a data frame"}
 
 **Author**: Alistair Poore & Will Cornwell
 

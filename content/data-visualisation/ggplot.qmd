@@ -32,7 +32,7 @@ Being able to visualise the properties of data is a critical step in data explor
 
 The sample data used below are the lengths (cm) of 80 fish caught in an estuary at sites with different management zones (protected versus unprotected) and shores (urbanised versus healthy).
 
-![](images/Single_continuous_variable_image.jpg)
+![](images/Single_continuous_variable_image.jpg){fig-alt="A flathead fish lying on a sandy seabed"}
 
 ### Frequency histograms
 
@@ -135,7 +135,7 @@ Type `?hist` and `?boxplot` to get the R help for these functions.
 
 Visualising the relationship between two continuous variables is one of the most commonly used graphical techniques in the sciences. This page details how to produce simple scatterplots to display how one continuous variable is related to another.
 
-![](images/Two_continuous_variables_image.jpg)
+![](images/Two_continuous_variables_image.jpg){fig-alt="Dense forest of tree ferns beneath tall eucalypt trunks"}
 
 For this worked example, download a data set on plant heights around the world, [Plant_height.csv](../../datasets/Plant_height.csv), and import into R.
 
@@ -187,7 +187,7 @@ plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Pla
 **Symbol style**
 The choice of symbols to use in plotting is extensive and choices are accessed using the `pch` argument in the graphical parameters. Type `?pch` to see all the choices. 
 
-![](images/pch.png)
+![](images/pch.png){fig-alt="Chart of R's plotting symbols numbered 0 to 25, including open and filled circles, squares, triangles and diamonds, crosses and pluses, and symbols 21 to 25 with a separate fill colour"}
 
 A solid circles `pch=16` or `pch=19` are often the neatest way to display data on a scatterplot.
 
@@ -233,7 +233,7 @@ Visualising how a measured variable relates to other variables of interest is es
 
 These sorts of plots are very commonly used in the biological, earth and environmental sciences. For example, to view how a given variable differs between an experimental treatment and a control, or among sites and sampling times in environmental sampling. 
 
-![](images/Single_continuous_vs_categorical_variable_image.jpg)
+![](images/Single_continuous_vs_categorical_variable_image.jpg){fig-alt="The Big Prawn, a giant orange prawn sculpture on a frame against a blue sky"}
 
 We will use sample data from an experiment that contrasted the metabolic rate of two species of prawns and introduce two commonly used types of plots for this purpose: boxplots and bar plots.
 
@@ -436,7 +436,7 @@ A helpful practise when making ggplots is to assign the plot you've made to an o
 
 ### Example plots
 
-![](images/ggplot1_basics_image.JPG)
+![](images/ggplot1_basics_image.JPG){fig-alt="Purple irises flowering in long grass"}
 
 In these examples, let's use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:
 
@@ -532,7 +532,7 @@ Before you get started, read the page on the [basics](#introduction-to-ggplot2) 
 library(ggplot2)
 ```
 
-![](images/ggplot1_basics_image.JPG)
+![](images/ggplot1_basics_image.JPG){fig-alt="Purple irises flowering in long grass"}
 
 In these examples, let's use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:
 
@@ -696,7 +696,7 @@ Before you get started, read the page on the [basics](#introduction-to-ggplot2) 
 library(ggplot2)
 ```
 
-![](images/ggplot1_basics_image.JPG)
+![](images/ggplot1_basics_image.JPG){fig-alt="Purple irises flowering in long grass"}
 
 In these examples, let's use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:
 
@@ -859,7 +859,7 @@ print(IrisBox + scale_fill_grey())
 library(RColorBrewer)
 ```
 
-![](images/RColourBrewer_palette.png)
+![](images/RColourBrewer_palette.png){fig-alt="The RColorBrewer palettes: sequential palettes such as YlOrRd, Blues and Greens, qualitative palettes such as Set1, Set2 and Paired, and diverging palettes such as Spectral, RdBu and BrBG"}
 
 This can then be added to the end of your graph code just like the others `+ scale_colour_brewer(palette = "chosen.palette")` for scatterplots and `+ scale_fill_brewer(palette = "chosen.palette")` for boxplots, where `"chosen.pallete"` is one of the available palletes. For example,
 
@@ -874,7 +874,7 @@ print(IrisBox + scale_fill_brewer(palette = "Oranges"))
 
 In a simple scatterplot with no grouping variables, you can change the shape of the symbol by adding `shape = ?` to the `geom_point()` code, where ? is one of the following numbers for different shapes.
 
-![](images/pch.png)
+![](images/pch.png){fig-alt="Chart of R's plotting symbols numbered 0 to 25, including open and filled circles, squares, triangles and diamonds, crosses and pluses, and symbols 21 to 25 with a separate fill colour"}
 
 For example, to use a filled triangle:
 
@@ -951,7 +951,7 @@ Before you get started, read the page on the [basics](#introduction-to-ggplot2) 
 library(ggplot2)
 ```
 
-![](images/ggplot1_basics_image.JPG)
+![](images/ggplot1_basics_image.JPG){fig-alt="Purple irises flowering in long grass"}
 
 In this examples, let's use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:
 
@@ -1080,7 +1080,7 @@ library(ggplot2)
 
 One of the most effective ways to customise your plot is to create a customised theme and separate this from your basic ggplot code. By separating and saving your theme, it will be much easier to edit, alter and reuse for other projects.  
 
-![](images/ggplot1_basics_image.JPG)
+![](images/ggplot1_basics_image.JPG){fig-alt="Purple irises flowering in long grass"}
 
 In these examples, let's use a data set that is already in R with the length and width of floral parts for three species of iris. First, load the data set:
 

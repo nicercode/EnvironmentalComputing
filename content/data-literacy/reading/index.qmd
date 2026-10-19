@@ -10,7 +10,7 @@ Importing data is a major challenge for beginners. This module will give instruc
 
 We recommend entering data into a spreadsheet program (e.g., Excel), and saving that data as a comma separated values (.csv) file. These are easily read into R and shared among users with different spreadsheet programs.
 
-![](Importing_data_image.JPG)
+![](Importing_data_image.JPG){fig-alt="Underwater photo of a rock surrounded by bright green seaweeds"}
 
 In this module, we are going to use a sample data set on feeding behaviour of a marine snail to demonstrate how to import the data, and the most common issues that arise with data import and cleaning in R.
 

@@ -4,7 +4,7 @@ title: Summarising Data
 
 Summarising our data is often the first step in data exploration and needed to understanding patterns in the magnitude and variability of our measurements.
 
-![](Summarising_data_image.jpg)
+![](Summarising_data_image.jpg){fig-alt="Diagram of summarising data: a whole table collapses to a single summary row, and a table split into coloured groups collapses to one summary row per group"}
 
 We will use the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) which has many convenient functions for summarising data, so let's start by loading the package.
 

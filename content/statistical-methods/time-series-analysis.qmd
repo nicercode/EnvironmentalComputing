@@ -16,7 +16,7 @@ library(forecast)
 
 ## Simple exponential smoothing models
 
-![](images/Forecasting_image.jpg)
+![](images/Forecasting_image.jpg){fig-alt="Rainforest cleared for farming, with tree stumps and felled logs in front of the remaining forest"}
 
 Our first example will use annual rainforest loss (ha) in the in the Tocantins region of the Brazilian Amazon collected by satellite imagery over 25 years (data from [Global Forest Watch](http://data.globalforestwatch.org/) and analysed in further detail in [Virah-Sawmy *et al.* 2015](http://www.sciencedirect.com/science/article/pii/S2351989415000992)).
 

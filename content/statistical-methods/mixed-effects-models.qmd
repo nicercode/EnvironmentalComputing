@@ -8,7 +8,7 @@ Mixed models are those with a mixture of fixed and random effects. Random effect
 * [Mixed models 2](#crossed-and-nested-factors): Linear mixed models with several random effects  
 * [Mixed models 3](#generalised-mixed-models): Generalised linear mixed models
 
-![](images/Mixed_models_intro_image.jpg)
+![](images/Mixed_models_intro_image.jpg){fig-alt="Aerial photo of a coastal floodplain, with green pasture surrounding a patch of wetland forest"}
 Photo: N. Murray
 
 ## Linear mixed models with one random effect
@@ -24,7 +24,7 @@ You will need to use mixed effect models if you have a random factor in your exp
 
 This is a tough concept to get your head around, and is best explained with an example. The data we will analyse here are counts of invertebrates at 3-4 sites in each of 7 (randomly chosen) estuaries. Here the estuaries are the random effect, as there are a large number of possible estuaries, and we only sample from a random few of them, but we would like to make inference about estuaries in general.
 
-![](images/Mixed_models_1_image.jpg)
+![](images/Mixed_models_1_image.jpg){fig-alt="Aerial photo of an estuary on the Sydney coast, with a river mouth, sand flats, moored boats and suburbs along the shore"}
 
 We will introduce mixed models in three parts
 
@@ -287,7 +287,7 @@ library(lme4)
 
 We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in [Mixed models 3](#generalised-mixed-models), we'll model counts as discrete using Generalised linear mixed models (GLMMs).
 
-![](images/Mixed_models_2_image.jpg)
+![](images/Mixed_models_2_image.jpg){fig-alt="Colourful subtidal invertebrates, including sponges, ascidians and bryozoans, covering a rock surface"}
 
 ```{r}
 #| label: mixed-effects-models-13
@@ -537,7 +537,7 @@ set.seed(2)
 
 In this example, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). To test whether there is an effect of modification on individual species counts and presence/absences, we need to use generalised linear mixed models with the `glmer` function.
 
-![](images/Mixed_models_3_image.jpg)
+![](images/Mixed_models_3_image.jpg){fig-alt="Close-up of small orange invertebrates with fine tentacles growing on a pink sponge"}
 
 Consider the counts of hydroids (the variable Hydroid).
 

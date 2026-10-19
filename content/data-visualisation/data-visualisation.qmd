@@ -67,4 +67,4 @@ R has a very wide range of functions and packages for visualising spatial data. 
 * [Making maps from shapefiles]
 * More soon...
 
-![](images/Visualising_spatial_data_intro_image.jpg)
+![](images/Visualising_spatial_data_intro_image.jpg){fig-alt="Map of a raster of values from about 21.8 to 23, shaded from pink through yellow to green, with crosses marking sampling sites"}

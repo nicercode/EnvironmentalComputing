@@ -286,7 +286,7 @@ sessionInfo()
 
 All of this information isn't really useful unless you have someone to answer your question after you've made your nice reproducible example. One alternative to asking for help from colleagues and friends is to use online websites, such as [Stack Overflow](https://stackoverflow.com/). The tips in this tutorial will help you to ask a question that is not removed or banned. Also, when you [ask a question](http://www.wikihow.com/Ask-a-Question-on-Stack-Overflow) be sure to show you have done previous research.
 
-![](images/stack.png){fig-align="center"}
+![](images/stack.png){fig-align="center" fig-alt="Meme of Princess Leia's hologram from Star Wars with the caption 'Help me StackOverflow... you are my only hope'"}
 
 There is more help on the web for making reproducible examples. For instance, see [here](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example), [here](http://clayford.github.io/dwir/dwr_12_generating_data.html), [here](http://adv-r.had.co.nz/Reproducibility.html), or [here](https://www.r-bloggers.com/minimal-reproducible-examples/). 
 

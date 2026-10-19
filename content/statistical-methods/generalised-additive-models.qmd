@@ -225,7 +225,7 @@ Not so scary huh? Of course this is not quite the whole story - see `gam.models`
 
 ## A quick real example
 
-![](images/Mauna_Loa.jpg)
+![](images/Mauna_Loa.jpg){fig-alt="The domed buildings of the Mauna Loa Observatory in Hawaii, with a volcano in the background"}
 
 We'll now look at a quick real example - we'll just scratch the surface, and in a future We'll now look at a quick real example - we'll just scratch the surface, and in a future tutorial we will look at it in more detail. We're going to look at some CO$_2$ data from Manua Loa. We will fit a couple GAMs to the data to try and pick apart the intra- and inter-annual trends.
 

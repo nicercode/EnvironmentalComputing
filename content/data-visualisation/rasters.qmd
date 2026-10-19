@@ -46,7 +46,7 @@ library(dismo)
 
 Now we're ready to go, but firstly, what is a raster? Well, simply, it is a grid of coordinates for which we can define certain values across, and we display the corresponding grid elements according to those values. The raster data is essentially a matrix, but a raster is special in that we define what shape and how big each grid element is, and usually where the grid should sit in some known space (i.e. a geographic projected coordinate system).
 
-![ ](images/teaser_plot.png)
+![ ](images/teaser_plot.png){fig-alt="Raster map titled 'Modelled shark abundance' covering Australia and the surrounding oceans, with abundance highest (red) in the tropics and declining (yellow to green) towards the south"}
 
 ### Understanding Raster Data
 

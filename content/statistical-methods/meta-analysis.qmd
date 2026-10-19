@@ -10,7 +10,7 @@ Meta-analyses are increasingly used in ecology, evolution and the environmental 
 * [Meta-analyses 2](#fixed-effect-and-random-effect-models): Fixed effect and random effect models  
 * [Meta-analyses 3](#multilevel-models): More complex models 
 
-![](images/4666102_orig.jpg)
+![](images/4666102_orig.jpg){fig-alt="Two forest plots of effect sizes, as log hazard ratios, for female, male, mixed-sex and hermaphrodite groups, each with a confidence interval and a dotted line at zero, illustrated with silhouettes of invertebrates"}
 
 ## Introduction
 
@@ -28,7 +28,7 @@ c. Exploring differences between studies
 d. Settling controversies from conflicting studies (testing hypotheses)
 e. Generating new hypotheses
 
-![](images/4666102_orig.jpg)
+![](images/4666102_orig.jpg){fig-alt="Two forest plots of effect sizes, as log hazard ratios, for female, male, mixed-sex and hermaphrodite groups, each with a confidence interval and a dotted line at zero, illustrated with silhouettes of invertebrates"}
 
 **The process of meta-analysis**
 
@@ -79,7 +79,7 @@ str(dat)
 
 This data set is from the paper by Curtis and Wang (1998). They looked at the effect of increased CO$_2$ on plant traits (mainly changes in biomass). So we have information on control group (1) and experimental group (2) (m = mean, sd = standard deviation) along with species information and experimental details. In meta-analysis, these variables are often referred to as 'moderators' (we will get to this a bit later).
 
-![](images/Linear_regression_image.jpg)
+![](images/Linear_regression_image.jpg){fig-alt="Dense forest of tree ferns beneath tall eucalypt trunks"}
 
 ### Calculating 'standardized' effect sizes
 

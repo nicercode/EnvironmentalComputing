@@ -22,11 +22,11 @@ Also, the model-based framework makes it easier to check our assumptions and int
 
 If you're interested in this method, watch the introductory video, [Introducing mvabund and why multivariate statistics in ecology is a bit like Rick Astley...](http://eco-stats.blogspot.com/2012/03/introducing-mvabund-package-and-why.html)
 
-![](images/Rick-Astley.jpg)
+![](images/Rick-Astley.jpg){fig-alt="Portrait photo of the singer Rick Astley in the 1980s"}
 
 In this example, we use a data set where researchers wanted to contrast the species composition of marine herbivores on five species of macroalgae. Twenty replicate individuals of each of seven species of macroalgae were collected from Sydney Harbour, and the abundance of seven species of herbivorous crustacean recorded from each replicate (data from [Poore *et al*. 2000)](http://www.int-res.com/abstracts/meps/v208/p183-196/)). The data are multivariate because seven response variables (the species) were measured from each of the samples.
 
-![](images/MDS_image.jpg)
+![](images/MDS_image.jpg){fig-alt="Underwater photo of seaweeds beside close-ups of five species of small crustaceans (amphipods)"}
 
 We could reduce this into a univariate dataset by calculating the 4950 (100*99/2) pairwise differences between samples, and use these differences to visualise patterns in the data (e.g, as we did in our [multi-dimensional scaling](mds.qmd) example) or test hypotheses about groups of samples by resampling these differences.
 

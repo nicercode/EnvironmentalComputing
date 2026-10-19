@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 Heatmaps are a useful method to explore large multivariate data sets. Response variables (e.g., abundances) are visualised using colour gradients or colour schemes. With the right transformation, and row and column clustering, interesting patterns within the data can be seen. They can also be used to show the results after statistical analysis, for example, to show those variables that differ between treatment groups.
 
-![](images/Heatmaps_image.png)
+![](images/Heatmaps_image.png){fig-alt="Example heatmap of bacterial taxa (rows) by samples (columns), coloured from blue (low) to red (high), with dendrograms clustering both rows and columns, and coloured bars marking each sample's species and density"}
 
 In this tutorial, we will use heatmaps to visualise patterns in the bacterial communities found within marine habitats in the presence of two macrophytes (seagrass and *Caulerpa*) at two densities (sparse and dense). There are also samples from unvegetated sediment (Other). There are three replicate samples in each group.
 

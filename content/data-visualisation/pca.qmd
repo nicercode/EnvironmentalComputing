@@ -47,7 +47,7 @@ Visualising this in two dimensions helps to understand the approach. The data po
 
 Consider a plant physiologist attempting to quantify differences in leaf shape between two species of tree. She recorded total length (leaf + petiole), leaf length, width at the widest point, width half way along the leaf and petiole length from ten leaves of each species. These data are five dimensional (i.e., five measured variables) and we can use PCA to extract two new variables that will allow us to visualise the data in fewer dimensions.
 
-![](images/PCA_image.png)
+![](images/PCA_image.png){fig-alt="A leaf labelled with the five measurements: total length, leaf length, petiole length, and two widths, one at the widest point and one halfway along the leaf"}
 
 It is highly likely that there are strong relationships between variables in our example data set (e.g., leaf length vs total length). This means that the principal components are likely to explain a fair bit of the variation (imagine fitting a straight line along a sausage-shaped collection of points in multivariate space). If all variables were completely uncorrelated with each other, then PCA is not going to work very well (imagine trying to fit a line of best fit a ball-shaped collection of points in multivariate space).
 

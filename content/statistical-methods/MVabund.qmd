@@ -64,6 +64,7 @@ We can have a quick look at the spread of our data using the `boxplot` function.
 
 ```{r}
 #| label: MVabund-4
+#| fig-alt: "Horizontal boxplots of the abundance of seven herbivorous amphipod species: most are strongly right-skewed with many zeros and some very large counts, and the species differ greatly in their typical abundance"
 #| message: false
 #| warning: false
 par(mar = c(2, 10, 2, 2)) # adjusts the margins
@@ -74,6 +75,7 @@ It looks like some species of marine herbivores (e.g. *Ampithoe ngana*) are much
 
 ```{r}
 #| label: MVabund-5
+#| fig-alt: "Mean-variance plot on log scales for the seven species: the points lie close to a rising straight line, so species with higher mean abundance also have much higher variance"
 #| message: false
 #| warning: false
 meanvar.plot(Herb_spp)
@@ -89,6 +91,7 @@ There is a 'quick and dirty' built-in plotting function in the *mvabund* package
 
 ```{r}
 #| label: MVabund-6
+#| fig-alt: "Abundances of the seven amphipod species on a log scale, with each sample plotted as a symbol coloured by the seaweed habitat it came from; the species differ in which habitats they are most abundant in"
 #| message: false
 #| warning: false
 plot(Herb_spp ~ as.factor(Herbivores$Habitat), cex.axis = 0.8, cex = 0.8)
@@ -113,6 +116,7 @@ Before we examine the output, we need to check our model assumptions. We can use
 
 ```{r}
 #| label: MVabund-8
+#| fig-alt: "Dunn-Smyth residuals versus linear predictor for the Poisson manyglm, coloured by species: the residuals fan out widely, from about -10 to 8, at higher predicted values"
 #| message: false
 #| warning: false
 plot(mod1)
@@ -124,6 +128,7 @@ In this example, we see a clear fan shape in the residual plot, this means we ha
 
 ```{r}
 #| label: MVabund-9
+#| fig-alt: "Dunn-Smyth residuals versus linear predictor for the negative binomial manyglm: residuals now stay between about -3 and 3 with no fan shape"
 mod2 <- manyglm(Herb_spp ~ Herbivores$Habitat, family = "negative_binomial")
 plot(mod2)
 ```

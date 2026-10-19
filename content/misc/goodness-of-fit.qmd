@@ -105,6 +105,7 @@ If this assumption has not been met, you could combine categories (if you have m
 
 ```{r}
 #| label: goodness-of-fit-8
+#| fig-alt: "Bar chart of the number of students by sex: 60 female and 40 male"
 barplot(c(60, 40), xlab = "Sex", ylab = "Count", names = c("Female", "Male"))
 ```
 

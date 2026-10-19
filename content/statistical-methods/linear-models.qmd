@@ -22,6 +22,7 @@ These pages have some introductions to commonly used linear models that test the
 
 ```{r}
 #| label: linear-models-1
+#| fig-alt: "Scatterplot of log(plant height) against temperature (C) in green, with a red fitted regression line rising from left to right"
 #| echo: false
 Plant_height <- read.csv(file = "data/Plant_height.csv", header = TRUE)
 model <- lm(loght ~ temp, data = Plant_height)

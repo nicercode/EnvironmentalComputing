@@ -326,6 +326,7 @@ Load up some SST data - Feb 2013 for the globe (as an aside, check [this link](h
 
 ```{r}
 #| label: basic-raster-22
+#| fig-alt: "World map of sea surface temperature for February 2013, from near 0 degrees C (pink and white) at the poles to about 30 degrees C (green) in the tropics, with land left blank"
 #| eval: true
 sst_feb <- raster("SST_feb_2013.img")
 plot(sst_feb)
@@ -400,6 +401,7 @@ or let's be a litle more tricky!
 
 ```{r}
 #| label: basic-raster-29
+#| fig-alt: "Map of the February 2013 sea surface temperature anomaly around Australia, coloured from pale yellow (cooler than average) to red (warmer), with a star marking the hottest point off the coast of Western Australia"
 #| eval: true
 max_anom <- which.max(sst_anomaly)
 max_xy <- xyFromCell(sst_anomaly, max_anom)
@@ -503,6 +505,7 @@ plot(shark_predict,
 
 ```{r}
 #| label: basic-raster-37
+#| fig-alt: "Map of predicted shark abundance around Australia from a model of sea surface temperature, highest (red) in the warm tropical waters to the north and lowest (green) in the cold waters to the south"
 #| eval: true
 #| echo: false
 sst_stack <- stack(sst_mn_crop, sst_feb_crop, sst_anomaly)
@@ -525,6 +528,7 @@ Let's try somethign else, say attack risk. It's not just about abdundance, somet
 
 ```{r}
 #| label: basic-raster-38
+#| fig-alt: "Map of a made-up shark attack index around Australia, highest (red) in the southern waters and lowest (green) to the north and east"
 #| eval: true
 sst_samp$shark_aggression <- sst_samp$lat * -1 # so agression goes up with lattitude
 sst_samp$shark_attack <- scale(sst_samp$shark_abund * sst_samp$shark_aggression)

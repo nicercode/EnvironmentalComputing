@@ -15,6 +15,7 @@ The first principal component (PC) is fitted such that it explains the maximum a
 
 ```{r}
 #| label: pca-1
+#| fig-alt: "Diagram of principal components: a cloud of red points stretched along a diagonal, with a blue line labelled PC1 along the direction of greatest spread, and a second blue line labelled PC2 at right angles to it"
 #| echo: false
 #| fig-width: 5
 #| fig-height: 5
@@ -79,6 +80,7 @@ Calling the `plot` function on the scores of the `princomp` output produces a sc
 
 ```{r}
 #| label: pca-5
+#| fig-alt: "Scores of the leaves on the first two principal components: species A (black) on the left and species B (red) on the right are completely separated along Comp.1"
 plot(Leaf_PCA$scores, pch = 16, col = as.factor(Species))
 legend(0, 0.4, c("Species A", "Species B"), pch = 16, col = c("black", "red"))
 ```
@@ -102,6 +104,7 @@ The relative contribution of each component can also also visualised by a scree 
 
 ```{r}
 #| label: pca-7
+#| fig-alt: "Scree plot of the variance explained by each of the five principal components: Comp.1 explains most of the variance (about 0.69), and the rest explain very little"
 screeplot(Leaf_PCA, type = "lines")
 ```
 
@@ -122,6 +125,7 @@ You can also produce a biplot with the relationships between the original variab
 
 ```{r}
 #| label: pca-9
+#| fig-alt: "PCA biplot with numbered leaves split into two groups on the left and right, and red arrows for the five leaf measurements, with Width1 pointing strongly to the left"
 biplot(Leaf_PCA)
 ```
 

@@ -20,6 +20,7 @@ These pages have a brief introduction to:
 
 ```{r}
 #| label: multivariate-vis-1
+#| fig-alt: "Two example multivariate plots side by side: an MDS ordination with points coloured by habitat forming distinct groups, and a cluster dendrogram of samples"
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4

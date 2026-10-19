@@ -26,7 +26,7 @@ By doing this, you avoid the need to send your code file and entire data set as 
 
 It's important to note here that in order for someone to help you, they don't need the whole dataset. They only need to be able to see the problem and have the associated question to fix/solve!
 
-![](https://cdn.shopify.com/s/files/1/1202/6984/files/1nenhs_large.jpg?v=1565849932)
+![](https://cdn.shopify.com/s/files/1/1202/6984/files/1nenhs_large.jpg?v=1565849932){fig-alt="Meme of Tom Cruise in Jerry Maguire, arms spread in exasperation, with the caption 'Help me, help you!'"}
 
 This tutorial is intended to help people who are relatively new to R create a reproducible example and also make fake data for other purposes.
 

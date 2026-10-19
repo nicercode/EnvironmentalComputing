@@ -172,6 +172,7 @@ This calculates the number of values, `length`, of the vector of bat activity va
 
 ```{r}
 #| label: index-15
+#| fig-alt: "Bar chart of mean total bat activity with standard error bars for four thinning treatments: medium-term, reference and short-term are all around 350 to 385, and unthinned forest is much lower, at about 165"
 #| warning: false
 #| echo: false
 library(ggplot2)

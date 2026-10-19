@@ -25,6 +25,7 @@ For simplicity, let's consider just two levels of each treatment: a control and 
 
 ```{r}
 #| label: interactions-1
+#| fig-alt: "Three interaction plots of growth against pH (control, acid), with one line per temperature (control in blue, warm in red), showing no interaction: in A the lines are flat and apart (temperature effect only), in B they slope down together (pH effect only), and in C they are parallel and both slope down (both effects, no interaction)"
 #| echo: false
 #| warning: false
 #| message: false
@@ -92,6 +93,7 @@ The next three plots for coral growth illustrate scenarios where there is an int
 
 ```{r}
 #| label: interactions-2
+#| fig-alt: "Three interaction plots showing interactions between pH and temperature: in D acid reduces growth only at warm temperature, in E acid reduces growth at both temperatures but much more at warm temperature, and in F the lines cross, so acid reduces growth at control temperature but increases it at warm temperature"
 #| echo: false
 # Plots with interactions
 # D -  Effect of pH only at warm temperatures

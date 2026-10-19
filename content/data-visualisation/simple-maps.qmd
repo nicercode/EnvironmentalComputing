@@ -57,6 +57,7 @@ and then plot it with the function `ggmap`:
 
 ```{r}
 #| label: simple-maps-6
+#| fig-alt: "Google terrain map of Royal National Park, south of Sydney, showing forested hills, the coastline and nearby suburbs, with latitude and longitude axes"
 ggmap(basemap)
 ```
 
@@ -87,6 +88,7 @@ We can add these points to our map based on the Latitude (y) and Longitude (x) c
 
 ```{r}
 #| label: simple-maps-8
+#| fig-alt: "The same Google map with five black points marking the sampling sites"
 ggmap(basemap) + geom_point(data = ptdata, aes(x = Long, y = Lat))
 ```
 
@@ -148,6 +150,7 @@ Second, adjust some of the options for plotting:
 
 ```{r}
 #| label: simple-maps-13
+#| fig-alt: "Terrain map of the Royal National Park area with the five sites marked as white points and labelled Hacking R., Cabbage Tree Ck., Marley Ck., Wattamolla Ck. and Waratah R., with axes labelled Longitude and Latitude"
 ggmap(Pres_basemap) +
   geom_point(
     data = ptdata, aes(x = Long, y = Lat),
@@ -195,6 +198,7 @@ Pub_basemap <- readRDS("data/Pub_basemap.rds")
 
 ```{r}
 #| label: simple-maps-17
+#| fig-alt: "Black and white road map of the same area with the five sites marked as black points and labelled in bold text"
 ggmap(Pub_basemap) +
   geom_point(data = ptdata, aes(x = Long, y = Lat, label = PlaceName)) +
   geom_text(

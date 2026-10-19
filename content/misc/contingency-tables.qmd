@@ -122,6 +122,7 @@ If this assumption has not been met, you could combine categories (if you have m
 
 ```{r}
 #| label: contingency-tables-10
+#| fig-alt: "Grouped bar chart of Gouldian finch counts by face colour (black, red, yellow) and bill colour: black-faced birds have similar numbers of each bill colour, while red-faced and yellow-faced birds mostly have yellow bills, and red-faced birds also often have red bills"
 barplot(Gfinch, beside = T, ylab = "Count", xlab = "Face colour", col = c("black", "red", "yellow"))
 legend("topright", inset = 0.15, c("Black bill", "Red bill", "Yellow bill"), pch = 15, col = c("black", "red", "yellow"))
 ```

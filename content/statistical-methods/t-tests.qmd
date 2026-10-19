@@ -94,6 +94,9 @@ You also get the mean of your sample (109) and the 95% confidence interval for p
 
 ```{r}
 #| label: one-sample-t-test-5
+#| fig-alt:
+#|   - "Histogram of pollen counts from about 70 to 140, mostly between 90 and 130, with a red vertical line at the hypothesised mean of 125"
+#|   - "Horizontal boxplot of pollen counts with a median of about 113, below the red line at 125"
 hist(pollen, xlab = "Pollen count", main = NULL)
 abline(v = 125, col = "red")
 boxplot(pollen, xlab = "Pollen count", horizontal = TRUE)
@@ -203,6 +206,7 @@ In the event of unequal variances, it may be better to perform a Welch's *t* tes
 
 ```{r}
 #| label: two-sample-t-test-5
+#| fig-alt: "Boxplots of pH for rivers A and B: river A's pH (median about 8.8) is clearly higher than river B's (median about 6.6), and the boxes don't overlap"
 boxplot(pH ~ River_name, data = River_pH, xlab = "River name", ylab = "pH")
 ```
 
@@ -317,6 +321,7 @@ You also get the mean and 95% confidence intervals for the differences between m
 
 ```{r}
 #| label: paired-t-test-6
+#| fig-alt: "Boxplots of photosynthetic performance (FvFm) in shady and sunny light environments: performance is much higher in sun (median about 0.84) than in shade (about 0.66)"
 boxplot(Performance ~ Treatment, data = Greenhouse, xlab = "Light environment", ylab = "Photosynthetic performance (FvFm)")
 ```
 

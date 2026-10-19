@@ -72,6 +72,7 @@ confint(model)
 
 ```{r}
 #| label: linear-regression-5
+#| fig-alt: "Residuals versus fitted values for the regression of log plant height on temperature: points scatter evenly around zero with no clear pattern or funnel shape, and points 22, 73 and 102 are labelled"
 #| fig-width: 5
 #| fig-height: 4
 plot(model, which = 1)
@@ -87,6 +88,7 @@ Click [here](https://gallery.shinyapps.io/slr_diag/) to see a nice interactive a
 
 ```{r}
 #| label: linear-regression-6
+#| fig-alt: "Two diagnostic plots side by side: a histogram of the residuals that is roughly symmetric and bell-shaped around zero, and a normal Q-Q plot where the residuals lie close to the straight line"
 par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(model$residuals) # Histogram of residuals
 plot(model, which = 2) # Quantile plot
@@ -104,6 +106,7 @@ There are a variety of measures for dealing with non-independence. These include
 
 ```{r}
 #| label: linear-regression-7
+#| fig-alt: "Scatterplot of log(plant height) against temperature (C), from about -10 to 28 degrees, with a red fitted regression line rising from left to right: taller plants at warmer sites, with a lot of scatter"
 plot(loght ~ temp, data = Plant_height, xlab = "Temperature (C)", ylab = "log(Plant height)", pch = 16)
 abline(model, col = "red")
 ```

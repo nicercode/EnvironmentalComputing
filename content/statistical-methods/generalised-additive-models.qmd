@@ -11,6 +11,7 @@ Many data in the environmental sciences do not fit simple linear models and are 
 
 ```{r}
 #| label: generalised-additive-models-1
+#| fig-alt: "Decorative example of a scatterplot with a wiggly smooth curve and shaded confidence band drawn through it, without axes"
 #| echo: false
 #| fig-height: 5
 #| fig-width: 5
@@ -63,6 +64,7 @@ Sample_data <- data.frame(y, x)
 
 ```{r}
 #| label: generalised-additive-models-3
+#| fig-alt: "Scatterplot of the simulated data: y rises to a peak near x = 1.5, falls to a trough near x = 4.5 and rises again, following a sine-like wave with noise"
 library(ggplot2)
 ggplot(Sample_data, aes(x, y)) +
   geom_point()
@@ -79,6 +81,7 @@ and plotting the fitted line with data using `geom_smooth` in `ggplot`
 
 ```{r}
 #| label: generalised-additive-models-5
+#| fig-alt: "The same scatterplot with a straight linear regression line sloping downwards, which misses the wave shape of the data"
 ggplot(Sample_data, aes(x, y)) +
   geom_point() +
   geom_smooth(method = lm)
@@ -88,6 +91,7 @@ Looking at the plot or `summary(lm_y)`, you might think the model fits nicely, b
 
 ```{r}
 #| label: generalised-additive-models-6
+#| fig-alt: "Residuals versus fitted values for the linear model, with a clear wave-shaped pattern in the residuals, showing that a straight line is a poor fit"
 plot(lm_y, which = 1)
 ```
 
@@ -123,6 +127,7 @@ But for simple models, we can also utilise the `method =` argument in `geom_smoo
 
 ```{r}
 #| label: generalised-additive-models-10
+#| fig-alt: "The same scatterplot with a GAM smooth curve and shaded confidence band that follows the wave shape of the data closely"
 ggplot(Sample_data, aes(x, y)) +
   geom_point() +
   geom_smooth(method = "gam", formula = y ~ s(x))
@@ -134,6 +139,7 @@ You can see the model is better fit to the data, but always check the diagnostic
 
 ```{r}
 #| label: generalised-additive-models-11
+#| fig-alt: "Four gam.check diagnostic plots for the GAM: a Q-Q plot close to the line, residuals scattered evenly against the linear predictor, a roughly bell-shaped histogram of residuals, and response values rising in line with fitted values"
 par(mfrow = c(2, 2))
 gam.check(gam_y)
 ```
@@ -158,6 +164,7 @@ First we extract the set of *basis functions* (that is, the $b_j(x_j)$ part of t
 
 ```{r}
 #| label: generalised-additive-models-13
+#| fig-alt: "Scatterplot of the data with two of the GAM's basis functions drawn as dashed curves, each a smooth S-shape across the range of x"
 model_matrix <- predict(gam_y, type = "lpmatrix")
 plot(y ~ x)
 abline(h = 0)
@@ -169,6 +176,7 @@ Let's plot all of the basis functions now, and then add that to the predictions 
 
 ```{r}
 #| label: generalised-additive-models-14
+#| fig-alt: "Scatterplot of the data with all the GAM's basis functions drawn as coloured dashed curves, and the fitted GAM curve in red following the wave shape of the data"
 plot(y ~ x)
 abline(h = 0)
 
@@ -183,6 +191,7 @@ Now, it's difficult at first to see what has happened, but it's easiest to think
 
 ```{r}
 #| label: generalised-additive-models-15
+#| fig-alt: "The estimated smooth term s(x) from the GAM, a wave-shaped curve with dashed lines marking its confidence interval"
 plot(gam_y)
 ```
 
@@ -190,6 +199,7 @@ OK, now let's look a little closer at how the basis functions are constructed. Y
 
 ```{r}
 #| label: generalised-additive-models-16
+#| fig-alt: "Two side-by-side plots of the GAM basis functions, one from smoothCon() and one from predict(), which are identical"
 x_sin_smooth <- smoothCon(s(x), data = data.frame(x), absorb.cons = TRUE)
 X <- x_sin_smooth[[1]]$X
 
@@ -202,6 +212,7 @@ And now to prove that you can go from the basis functions and the estimated coef
 
 ```{r}
 #| label: generalised-additive-models-17
+#| fig-alt: "Two side-by-side scatterplots of the data with a red fitted curve: one calculated by hand from the basis functions and coefficients, one from predict(); the curves are identical"
 betas <- gam_y$coefficients
 linear_pred <- model_matrix %*% betas
 
@@ -216,6 +227,7 @@ Out of interest, take a look at the following plot, remembering that `X` is the 
 
 ```{r}
 #| label: generalised-additive-models-18
+#| fig-alt: "Two scatterplots side by side: y against x, which shows the wave shape, and y against the row sums of the basis matrix, which shows no clear relationship"
 par(mfrow = c(1, 2))
 plot(y ~ x)
 plot(y ~ rowSums(X))
@@ -250,6 +262,7 @@ $$y = \beta_0 + f_{\text{trend}}(\text{time}) + \varepsilon, \quad \varepsilon \
 
 ```{r}
 #| label: generalised-additive-models-21
+#| fig-alt: "Line plot of monthly atmospheric CO2 concentration at Mauna Loa over time, rising steadily from about 315 to 400 ppm with a regular seasonal cycle"
 ggplot(CO2_dat, aes(time, co2)) +
   geom_line()
 ```
@@ -265,6 +278,7 @@ which fits a model with a single smooth term for time. We can look at the predic
 
 ```{r}
 #| label: generalised-additive-models-23
+#| fig-alt: "The estimated smooth of time from the first CO2 GAM, which is a straight rising line with narrow confidence bands"
 plot(CO2_time)
 ```
 
@@ -272,6 +286,7 @@ Note how the smooth term actually reduces to a 'normal' linear term here (with a
 
 ```{r}
 #| label: generalised-additive-models-24
+#| fig-alt: "Four gam.check diagnostic plots for the CO2 model with time only: the Q-Q plot bends away from the line, the histogram of residuals is flat rather than bell-shaped, and response against fitted values shows a wavy seasonal pattern the model misses"
 #| results: "hide"
 #| fig-keep: "all"
 par(mfrow = c(2, 2))
@@ -293,6 +308,7 @@ Let's look at the fitted smooth terms:
 
 ```{r}
 #| label: generalised-additive-models-26
+#| fig-alt: "Two smooth terms from the CO2 model with season and time: a cyclic smooth of month that peaks around May and dips around October, and a nearly straight rising smooth of time"
 par(mfrow = c(1, 2))
 plot(CO2_season_time)
 ```
@@ -301,6 +317,7 @@ Looking at both smooth terms, we can see that the monthly smoother is picking up
 
 ```{r}
 #| label: generalised-additive-models-27
+#| fig-alt: "Four gam.check diagnostic plots for the CO2 model with season and time: the Q-Q plot follows the line, residuals are evenly scattered, the histogram is bell-shaped, and response against fitted values is a tight straight line"
 #| results: "hide"
 #| fig-keep: "all"
 par(mfrow = c(2, 2))
@@ -311,6 +328,7 @@ Much better. Let's look at how the seasonal component stacks up against the full
 
 ```{r}
 #| label: generalised-additive-models-28
+#| fig-alt: "The two smooth terms from the model fitted to the full CO2 data: the seasonal smooth of month, and a smooth of time that curves upwards, showing CO2 rising faster in recent years"
 CO2_season_time <- gam(co2 ~ s(month, bs = "cc", k = 12) + s(time), data = CO2_dat, method = "REML")
 par(mfrow = c(1, 2))
 plot(CO2_season_time)
@@ -326,6 +344,7 @@ You can plot the partial effects by calling the `plot` function on a fitted gam 
 
 ```{r}
 #| label: generalised-additive-models-29
+#| fig-alt: "Observed monthly CO2 concentrations as grey points with the GAM predictions as a red line, which tracks both the long-term rise and the seasonal cycle closely"
 CO2_pred <- data.frame(
   time = CO2_dat$time,
   co2 = CO2_dat$co2,

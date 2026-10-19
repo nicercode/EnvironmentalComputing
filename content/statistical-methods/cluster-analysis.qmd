@@ -60,6 +60,7 @@ Finally, plot the object that was created by the `hclust` function.
 
 ```{r}
 #| label: cluster-analysis-6
+#| fig-alt: "Cluster dendrogram of harbour samples from single linkage clustering of heavy metal concentrations, with crowded, overlapping sample labels beginning with P or S"
 plot(H_metals.cluster)
 ```
 
@@ -67,6 +68,7 @@ We can make this a bit neater with all the samples lined up along the bottom by 
 
 ```{r}
 #| label: cluster-analysis-7
+#| fig-alt: "The same dendrogram drawn with as.dendrogram, with a y axis of Euclidean distance; samples join into groups at heights from near 0 up to about 44"
 plot(as.dendrogram(H_metals.cluster), ylab = "Euclidean distance")
 ```
 
@@ -98,6 +100,7 @@ With many samples in your dendrogram it is often necessary to label them in some
 
 ```{r}
 #| label: cluster-analysis-8
+#| fig-alt: "The same dendrogram again, with code intended to colour the sample labels by location; the labels are all drawn in black"
 #| fig-width: 6
 #| warning: false
 #| message: false

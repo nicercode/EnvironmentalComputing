@@ -32,6 +32,7 @@ We can view the differences between the groups with a boxplot and test for those
 
 ```{r}
 #| label: power-analysis-2
+#| fig-alt: "Boxplots of simulated control and treatment groups with very similar medians and widely overlapping spread"
 boxplot(cbind(control, treatment))
 t.test(control, treatment)
 ```
@@ -40,6 +41,7 @@ We know there is an effect of treatment, with effect size 0.2, but the test was 
 
 ```{r}
 #| label: power-analysis-3
+#| fig-alt: "Boxplots of a second simulated control and treatment pair, with the treatment median slightly higher but the boxes still overlapping a lot"
 #
 set.seed(3)
 N <- 20
@@ -91,6 +93,7 @@ We can also plot power for various sample sizes. Here is some code that calculat
 
 ```{r}
 #| label: power-analysis-7
+#| fig-alt: "Power curve for a difference in proportions: power rises from near 0 with small samples to about 0.98 at a sample size of 200, crossing the 0.8 line at a sample size of about 100"
 nvals <- seq(2, 200, length.out = 200)
 powvals <- sapply(nvals, function(x) pwr.2p.test(h = trt.effect / sigma, n = x, sig.level = 0.05)$power)
 
@@ -154,6 +157,7 @@ Plotting abundance against site and the levels of the modification factor tells 
 
 ```{r}
 #| label: power-analysis-10
+#| fig-alt: "Two boxplots from the pilot study: abundance by modification level (1, 2, 3), increasing from level 1 to level 3, and abundance by site (a to f), which varies widely between sites"
 
 par(mfrow = c(1, 2))
 boxplot(abundance ~ modification, data = Pilot, main = "modification")

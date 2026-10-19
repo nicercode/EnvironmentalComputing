@@ -64,6 +64,7 @@ Calling the `plot` function on the x-y coordinates of the `metaMDS` output creat
 
 ```{r}
 #| label: mds-5
+#| fig-alt: "MDS ordination plot of herbivore communities, with each sample as a point on axes MDS1 and MDS2; one cluster of points sits on the left and a larger cluster on the right"
 plot(Herb_community.mds$points)
 ```
 
@@ -88,6 +89,7 @@ To plot those points, color coded by Habitat, we can use:
 
 ```{r}
 #| label: mds-8
+#| fig-alt: "The MDS ordination with points coloured by seaweed habitat: samples from Colpomenia peregrina form a separate group on the left, and the four other habitats overlap partly on the right, with Sargassum vestitum samples lower down"
 library(ggplot2)
 ggplot(MDS_xy, aes(MDS1, MDS2, color = Habitat)) +
   geom_point() +
@@ -104,6 +106,7 @@ In contrast, if we colour our samples by time of day, you will see that these tw
 
 ```{r}
 #| label: mds-9
+#| fig-alt: "The MDS ordination with points coloured by day (D) or night (N) sampling: the two colours are mixed throughout, with no clear separation"
 ggplot(MDS_xy, aes(MDS1, MDS2, color = DayNight)) +
   geom_point() +
   theme_bw()

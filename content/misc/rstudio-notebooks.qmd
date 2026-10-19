@@ -155,6 +155,7 @@ To change the size of any plots:
 
 ```{r}
 #| label: rstudio-notebooks-8
+#| fig-alt: "A wide, short scatterplot of log plant height against temperature, showing the effect of setting fig-height to 3 and fig-width to 10"
 #| fig-height: 3
 #| fig-width: 10
 # ```{r, fig.height=3, fig.width=10}

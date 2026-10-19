@@ -205,8 +205,13 @@ book:
 format:
   html:
     theme:
-      - cosmo
-      - EC.scss
+      light:
+        - cosmo
+        - EC.scss
+      dark:
+        - darkly
+        - EC.scss
+        - EC-dark.scss
     code-link: true
 
     author-meta: "Alistair Poore, Will Cornwell, Daniel Falster, Fonti Kar and contributors"

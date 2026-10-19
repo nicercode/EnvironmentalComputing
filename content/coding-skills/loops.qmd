@@ -105,7 +105,7 @@ for (i in 1:10) {
 
 ## An ecological example
 
-![](images/Subsetting_data_image.jpg)
+![](images/Subsetting_data_image.jpg){fig-alt="A small brown bat clinging to a piece of bark"}
 
 Now we can use your new loop skills in an ecological context. As with the [Subsetting data](../data-literacy/filter-rows/index.qmd) tutorial, we will use a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees. 
 

@@ -4,6 +4,7 @@ title: Multipanel Figures with ggplot2
 
 ```{r}
 #| label: ggplot-multipanel-1
+#| fig-alt: "Example of a two-panel figure: a scatterplot of petal length against sepal length for the three iris species, with setosa forming a separate cluster of short petals and versicolor and virginica overlapping as petal length rises with sepal length, next to boxplots of sepal length by iris species, increasing from setosa to versicolor to virginica"
 #| echo: false
 #| warning: false
 #| message: false
@@ -52,6 +53,7 @@ The formula syntax `~ variable` specifies which variable to split on. For exampl
 
 ```{r}
 #| label: ggplot-multipanel-4
+#| fig-alt: "Three facets side by side, one per iris species, each a scatterplot of petal length against sepal length on the same axes"
 #| fig-width: 9
 #| fig-height: 3
 p <- ggplot(iris, aes(Sepal.Length, Petal.Length)) +
@@ -65,6 +67,7 @@ By default `facet_wrap` tries to make the panel layout as square as possible. Yo
 
 ```{r}
 #| label: ggplot-multipanel-5
+#| fig-alt: "The same three facets stacked in a single column"
 #| fig-width: 4
 #| fig-height: 9
 p + facet_wrap(~ Species, ncol = 1)
@@ -74,6 +77,7 @@ You can add `scales = "free"` if you want each panel to use its own axis limits,
 
 ```{r}
 #| label: ggplot-multipanel-6
+#| fig-alt: "The same three facets side by side, each with its own axis ranges, so the setosa panel zooms in on its small petals"
 #| fig-width: 9
 #| fig-height: 3
 p + facet_wrap(~ Species, scales = "free")
@@ -87,6 +91,7 @@ Here we use the `mpg` dataset, splitting by drive type (`drv`) in rows and numbe
 
 ```{r}
 #| label: ggplot-multipanel-7
+#| fig-alt: "A grid of scatterplots of highway fuel economy (hwy) against engine displacement (displ) for cars, with rows for drive type (4, f, r) and columns for number of cylinders (4, 5, 6, 8); some combinations have few or no cars"
 #| fig-width: 9
 #| fig-height: 6
 ggplot(mpg, aes(displ, hwy)) +
@@ -101,6 +106,7 @@ To facet on just one variable across rows with `facet_grid`, use `. ~ variable` 
 
 ```{r}
 #| label: ggplot-multipanel-8
+#| fig-alt: "Three facets side by side of highway fuel economy against engine displacement for 4-wheel, front-wheel and rear-wheel drive cars; economy falls as displacement increases"
 #| fig-width: 9
 #| fig-height: 3
 ggplot(mpg, aes(displ, hwy)) +
@@ -115,6 +121,7 @@ By default the facet labels are the values of the grouping variable. You can cha
 
 ```{r}
 #| label: ggplot-multipanel-9
+#| fig-alt: "The three iris facets with the facet labels in white bold text on steel-blue strips"
 #| fig-width: 9
 #| fig-height: 3
 p + facet_wrap(~ Species) +
@@ -128,6 +135,7 @@ To rename the labels without changing the underlying data, supply a named charac
 
 ```{r}
 #| label: ggplot-multipanel-10
+#| fig-alt: "The three iris facets with the facet labels changed to italic species names: I. setosa, I. versicolor and I. virginica"
 #| fig-width: 9
 #| fig-height: 3
 species_labels <- c(
@@ -169,6 +177,7 @@ The `|` operator places plots side by side, and `/` stacks them vertically:
 
 ```{r}
 #| label: ggplot-multipanel-13
+#| fig-alt: "Two plots side by side: a scatterplot of petal length against sepal length for the three iris species, with setosa forming a separate cluster of short petals and versicolor and virginica overlapping as petal length rises with sepal length, and boxplots of sepal length by iris species, increasing from setosa to versicolor to virginica"
 #| fig-width: 9
 #| fig-height: 4
 p1 | p2
@@ -176,6 +185,7 @@ p1 | p2
 
 ```{r}
 #| label: ggplot-multipanel-14
+#| fig-alt: "The same two plots stacked vertically, the scatterplot above the boxplots"
 #| fig-width: 5
 #| fig-height: 8
 p1 / p2
@@ -185,6 +195,7 @@ You can mix `|` and `/` and use brackets to control grouping. For example, to pu
 
 ```{r}
 #| label: ggplot-multipanel-15
+#| fig-alt: "A three-panel layout: the iris scatterplot of petal against sepal length on the left, and on the right the sepal length boxplots stacked above a scatterplot of petal length against petal width coloured by species, with setosa separate at small values and versicolor and virginica rising together"
 #| fig-width: 10
 #| fig-height: 5
 p3 <- ggplot(iris, aes(Petal.Width, Petal.Length, colour = Species)) +
@@ -200,6 +211,7 @@ Publication figures often label each panel with a letter (A, B, C…). patchwork
 
 ```{r}
 #| label: ggplot-multipanel-16
+#| fig-alt: "The same three-panel layout with the panels tagged A, B and C"
 #| fig-width: 10
 #| fig-height: 5
 (p1 | (p2 / p3)) +
@@ -210,6 +222,7 @@ You can also add a shared title across all panels:
 
 ```{r}
 #| label: ggplot-multipanel-17
+#| fig-alt: "The iris scatterplot and boxplots side by side under the bold title 'Iris sepal and petal measurements'"
 #| fig-width: 10
 #| fig-height: 5
 (p1 | p2) +
@@ -225,6 +238,7 @@ When panels share the same colour or fill aesthetic, patchwork can merge their l
 
 ```{r}
 #| label: ggplot-multipanel-18
+#| fig-alt: "Two iris scatterplots side by side, petal length against sepal length and against petal width, sharing a single species legend on the right"
 #| fig-width: 10
 #| fig-height: 4
 (p1 | p3) +
@@ -235,6 +249,7 @@ Combine with `plot_annotation` to get a clean, publication-ready layout in a few
 
 ```{r}
 #| label: ggplot-multipanel-19
+#| fig-alt: "The same two scatterplots tagged A and B under the title 'Iris petal and sepal relationships', with one shared species legend"
 #| fig-width: 10
 #| fig-height: 4
 (p1 | p3) +

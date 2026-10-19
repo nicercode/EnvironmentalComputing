@@ -22,13 +22,13 @@ One goal of this project organization is that your data processing and analysis 
 
 An easy way to access all these files is to use a project file. In R Studio, you can create a new project file with **File, New Project**. You will then be asked if you want a new directory or to associate it with an existing directory.
 
-![](images/projects_new.png)
+![](images/projects_new.png){fig-alt="RStudio's New Project dialog, offering to create a project from a New Directory, an Existing Directory or Version Control"}
 
 Choose this second option to have a project file associated with the folder that you created above.
 
 Once created, you can open your project by directly clicking on that file or from **File, Open** if you have R Studio open already. Once open, you will see your directory structure in the files panel on the bottom right of R Studio and all your scripts and data are easily accessible.
 
-![](images/Basic_project_managment_image.jpg)
+![](images/Basic_project_managment_image.jpg){fig-alt="RStudio's Files panel showing a sample project folder containing Analysis.R, Data, Manuscript, Outputs and R folders, and a Sample project.Rproj file"}
 
 A big benefit of using a project file is that when you import data, you do not need to specify the working directory with `setwd`. R Studio will look within the folder that contains the project file. When using `read.csv("")`, press tab repeatedly when you are within the `""` to choose the local folders and files:
 

@@ -9,12 +9,13 @@ set.seed(1)
 
 The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about **marginal vs. conditional interpretations** of model parameters. 
 
-![](images/Linear_regression_image.jpg)
+![](images/Linear_regression_image.jpg){fig-alt="Dense forest of tree ferns beneath tall eucalypt trunks"}
 
 In this example, we model plant height as a function of altitude and temperature. These variables are negatively correlated: it is colder the higher you go. We start by simulating some data to reflect this.
 
 ```{r}
 #| label: interpret-lm-coeffs-1
+#| fig-alt: "Scatterplot of 1000 simulated values of altitude against temperature, forming a cloud that slopes gently downwards: higher temperatures go with lower altitudes"
 #| warning: false
 library(mvtnorm)
 
@@ -102,6 +103,7 @@ When we have categorical covariates (for example treatment), there are a number 
 
 ```{r}
 #| label: interpret-lm-coeffs-7
+#| fig-alt: "Boxplots of the simulated response Y for the treatment groups high, low and med, in alphabetical order: the high group has the highest values and the low group the lowest"
 N <- 120
 # The effect of treatment
 trt.n <- rep(c(-1, 0, 1), N / 3)
@@ -127,6 +129,7 @@ So here group "high" has a mean of `r round(coef(cat_lm)["(Intercept)"], 2)`, an
 
 ```{r}
 #| label: interpret-lm-coeffs-9
+#| fig-alt: "The same boxplots after releveling, now in the order low, high, med, with low as the reference group"
 treatment <- relevel(treatment, ref = "low")
 cat_lm <- lm(Y ~ treatment)
 summary(cat_lm)

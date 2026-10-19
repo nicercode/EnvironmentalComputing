@@ -14,7 +14,7 @@ Generalised linear models (GLMs) are used when the distribution of data do not c
 
 [Linear models](linear-models.qmd) (e.g., linear regression) are used to model the relationship between a **continuous** response variable $y$ and one or more explanatory variables $x_1, x_2, \cdots$. When we have a **discrete** response we use generalised linear models (GLM's).
 
-![](images/GLM1_binary_image.jpg)
+![](images/GLM1_binary_image.jpg){fig-alt="Three shore crabs on wet rocks and seaweed"}
 
 For example, if had surveyed a beach and wanted to analyse how the presence of a crab varied with time and distance from the water line, the response variable is discrete: the presence or absence of a crab in a given replicate. The first few rows of the data set would look like this:
 
@@ -73,6 +73,7 @@ The mean variance relationship is the main reason we use GLM's instead of linear
 
 ```{r}
 #| label: generalised-linear-models-4
+#| fig-alt: "Residuals versus fitted plot for the binomial GLM of crab presence: points fall in two curved bands, one above and one below zero, a pattern typical of binary data that makes the plot hard to interpret"
 #| out-width: "500px"
 plot(ft.crab, which = 1)
 ```
@@ -89,6 +90,7 @@ set.seed(1)
 
 ```{r}
 #| label: generalised-linear-models-6
+#| fig-alt: "Dunn-Smyth residuals versus linear predictor for the same crab model fitted with manyglm: points scatter evenly around zero with no pattern"
 #| out-width: "500px"
 #| warning: false
 library(mvabund)
@@ -161,7 +163,7 @@ This is a continuation of the introduction to GLMs which introduced GLMs and gav
 
 ### Running the analysis
 
-![](images/GLM2_counts_image.jpg)
+![](images/GLM2_counts_image.jpg){fig-alt="Close-up of a slug in grass and moss"}
 
 For this worked example, we have counts of different animal groups at control sites and sites where bush regeneration has been carried out (treatment). We want to know if the the bush regeneration activities have affected the count of slugs.
 
@@ -176,6 +178,7 @@ If you view the frequency histogram of the slug counts, you will see that it is 
 
 ```{r}
 #| label: generalised-linear-models-11
+#| fig-alt: "Histogram of Soleolifera counts: most samples have 0 to 2 individuals, with a long right tail up to about 17"
 #| out-width: "500px"
 hist(Reveg$Soleolifera)
 ```
@@ -200,6 +203,7 @@ Before we look at the results, we need to look at the residual plot to check the
 
 ```{r}
 #| label: generalised-linear-models-13
+#| fig-alt: "Dunn-Smyth residuals versus linear predictor for the Poisson model of Soleolifera counts: residuals in the revegetated group spread from about -4 to 5, a fan shape indicating overdispersion"
 #| out-width: "500px"
 plot(ft.sol.pois)
 ```
@@ -217,6 +221,7 @@ Look again at the residual plot:
 
 ```{r}
 #| label: generalised-linear-models-15
+#| fig-alt: "Dunn-Smyth residuals versus linear predictor for the negative binomial model of Soleolifera counts: residuals in both groups now spread evenly between about -2.5 and 2"
 #| out-width: "500px"
 plot(ft.sol.nb)
 ```
@@ -252,6 +257,7 @@ $$ \log(\lambda) = -0.92 + 2.12 \times \text{Treatment}$$
 
 ```{r}
 #| label: generalised-linear-models-18
+#| fig-alt: "Boxplots of Soleolifera counts for control and revegetated sites: counts are near zero at control sites and higher and more variable at revegetated sites"
 #| out-width: "500px"
 boxplot(Soleolifera ~ Treatment, ylab = "Count", xlab = "Treatment", data = Reveg)
 ```

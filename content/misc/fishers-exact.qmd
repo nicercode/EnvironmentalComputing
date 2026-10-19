@@ -2,7 +2,7 @@
 title: "Fisher's Exact Test"
 ---
 
-![](images/Fishers_exact_test_Q1_image.jpg)
+![](images/Fishers_exact_test_Q1_image.jpg){fig-alt="Cartoon titled 'What's for breakfast?' of two asparagus spears standing at urinals, one sniffing, with the caption 'With horror Arnie realized that standing beside him at the next urinal was the Cannibal Killer'"}
 
 Some people notice a distinctive smell from their urine after eating asparagus, while others never notice the smell. These differences could arise from variation among people in the chemical profile of the urine (i.e., how compounds from asparagus are metabolised), or from variation in the ability of different people to detect the smell.
 
@@ -46,7 +46,7 @@ if (INST == TRUE) opts_chunk$set(fig.keep = "all", results = "markup", echo = TR
 if (INST == FALSE) opts_chunk$set(fig.keep = "none", results = "hide", echo = FALSE)
 ```
 
-![](images/Fishers_exact_test_Q2_image.jpg)
+![](images/Fishers_exact_test_Q2_image.jpg){fig-alt="A ringtail possum climbing along a eucalyptus branch at night"}
 
 You are a behavioural ecologist studying the diet of common ringtail possums (*Pseudocheirus peregrinus*) at two sites (sites A and B) dominated by two species of Eucalyptus, (*E. ovata* and *E. sideroxylon*).
 

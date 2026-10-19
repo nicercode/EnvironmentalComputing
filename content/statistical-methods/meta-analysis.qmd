@@ -10,7 +10,7 @@ Meta-analyses are increasingly used in ecology, evolution and the environmental 
 * [Meta-analyses 2](#fixed-effect-and-random-effect-models): Fixed effect and random effect models  
 * [Meta-analyses 3](#multilevel-models): More complex models 
 
-![](images/4666102_orig.jpg)
+![](images/4666102_orig.jpg){fig-alt="Two forest plots of effect sizes, as log hazard ratios, for female, male, mixed-sex and hermaphrodite groups, each with a confidence interval and a dotted line at zero, illustrated with silhouettes of invertebrates"}
 
 ## Introduction
 
@@ -28,7 +28,7 @@ c. Exploring differences between studies
 d. Settling controversies from conflicting studies (testing hypotheses)
 e. Generating new hypotheses
 
-![](images/4666102_orig.jpg)
+![](images/4666102_orig.jpg){fig-alt="Two forest plots of effect sizes, as log hazard ratios, for female, male, mixed-sex and hermaphrodite groups, each with a confidence interval and a dotted line at zero, illustrated with silhouettes of invertebrates"}
 
 **The process of meta-analysis**
 
@@ -79,7 +79,7 @@ str(dat)
 
 This data set is from the paper by Curtis and Wang (1998). They looked at the effect of increased CO$_2$ on plant traits (mainly changes in biomass). So we have information on control group (1) and experimental group (2) (m = mean, sd = standard deviation) along with species information and experimental details. In meta-analysis, these variables are often referred to as 'moderators' (we will get to this a bit later).
 
-![](images/Linear_regression_image.jpg)
+![](images/Linear_regression_image.jpg){fig-alt="Dense forest of tree ferns beneath tall eucalypt trunks"}
 
 ### Calculating 'standardized' effect sizes
 
@@ -172,6 +172,7 @@ str(dat)
 
 ```{r}
 #| label: forest
+#| fig-alt: "Forest plot of 102 studies, each showing the log ratio of means with a 95% confidence interval; most estimates are above zero, but the plot is crowded and the labels are very small"
 #| tidy: true
 forest(dat$yi, dat$vi)
 ```
@@ -180,6 +181,7 @@ The problem you see is that when there are many studies, a forest plot does not 
 
 ```{r}
 #| label: forest2
+#| fig-alt: "Forest plot of the first 12 studies, with estimates mostly between 0.1 and 0.55 and only study 4 below zero; several confidence intervals cross zero"
 #| tidy: true
 forest(dat$yi[1:12], dat$vi[1:12])
 ```
@@ -214,6 +216,9 @@ There are two main models of meta-analysis: 1) the fixed-effect model and 2) the
 
 ```{r}
 #| label: fig1
+#| fig-alt:
+#|   - "Diagram of a fixed-effect (common-effect) meta-analysis: three studies (A, B and C, with n = 20, 10 and 30) each have an orange sampling-error distribution centred on one shared overall effect, shown as a grey vertical line ending in a black diamond, and each study's estimate deviates from that line only through sampling error"
+#|   - "Diagram of a random-effects meta-analysis: each study's own true effect (green square) is drawn from a green between-study distribution around the overall effect, and the observed estimate (orange point) deviates from that study-level effect through sampling error; I squared is shown as tau squared over tau squared plus the typical sampling variance"
 #| echo: false
 knitr::include_graphics(c("images/Fixed.png", "images/Random.png"))
 ```
@@ -349,6 +354,7 @@ To create a funnel plot and run Egger's test:
 
 ```{r}
 #| label: funnel
+#| fig-alt: "Funnel plot of standard error against log ratio of means: points cluster near the top, where standard errors are small, and spread out lower down, with more points to the right of the mean than to the left"
 #| tidy: true
 funnel(random_m)
 ```
@@ -366,6 +372,7 @@ There is an alternative method, which has a cool name, the trim-and-fill method.
 
 ```{r}
 #| label: trimfill
+#| fig-alt: "The funnel plot after trim and fill: open circles on the left mark the imputed studies added to make the funnel symmetric, and the estimated mean shifts slightly to the left"
 #| tidy: true
 # Note that we are using the default estimator ("L0"), but there are two others available
 tf_m <- trimfill(random_m)
@@ -447,6 +454,9 @@ We can visualize this (again Figure 4 from Nakagawa *et al.* 2017). And we can s
 
 ```{r}
 #| label: fig2
+#| fig-alt:
+#|   - "Legend for the meta-analysis diagrams: a black diamond for the overall effect; orange, green and blue curves for the sampling error, between-study and within-study distributions; and orange circles, green squares and blue triangles for the matching deviations"
+#|   - "Diagram of a multilevel meta-analysis: three studies (A, B and C) each contribute two effect sizes; study-level effects (green squares) vary around the overall effect, effect sizes within each study (blue triangles) vary around their study's effect, and each observed estimate (orange point) adds sampling error; I squared includes both the between-study and within-study variances"
 #| echo: false
 knitr::include_graphics(c("images/Legend.png", "images/Multi.png"))
 ```
@@ -498,6 +508,7 @@ First install and load the package [ape](https://emmanuelparadis.github.io/) tha
 
 ```{r}
 #| label: prep1
+#| fig-alt: "Phylogenetic tree of the 40 or so tree species in the dataset, with conifers such as Picea and Pinus on one branch and broadleaf genera such as Acer, Betula, Quercus and Populus on the others"
 #| tidy: true
 #| warning: false
 library(ape)

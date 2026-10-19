@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 Heatmaps are a useful method to explore large multivariate data sets. Response variables (e.g., abundances) are visualised using colour gradients or colour schemes. With the right transformation, and row and column clustering, interesting patterns within the data can be seen. They can also be used to show the results after statistical analysis, for example, to show those variables that differ between treatment groups.
 
-![](images/Heatmaps_image.png)
+![](images/Heatmaps_image.png){fig-alt="Example heatmap of bacterial taxa (rows) by samples (columns), coloured from blue (low) to red (high), with dendrograms clustering both rows and columns, and coloured bars marking each sample's species and density"}
 
 In this tutorial, we will use heatmaps to visualise patterns in the bacterial communities found within marine habitats in the presence of two macrophytes (seagrass and *Caulerpa*) at two densities (sparse and dense). There are also samples from unvegetated sediment (Other). There are three replicate samples in each group.
 
@@ -72,6 +72,7 @@ The basic function is `pheatmap`. Let's try it without special arguments, except
 
 ```{r}
 #| label: heatmaps-7
+#| fig-alt: "Heatmap of raw counts for 500 bacterial taxa (rows) across 15 samples (columns), clustered by both: almost every cell is the same dark blue, because a few very large counts dominate the colour scale"
 Bac.counts500 <- slice(Bac.counts, 1:500)
 
 pheatmap(Bac.counts500)
@@ -83,6 +84,7 @@ In the figure, samples are columns and bacterial OTUs are rows, with the colour 
 
 ```{r}
 #| label: heatmaps-8
+#| fig-alt: "The same heatmap after log10 transformation: the colours now vary from blue to red, showing blocks of taxa that are more or less abundant, and the samples cluster into groups"
 Bac.Log10.counts500 <- log10(Bac.counts500 + 1)
 pheatmap(Bac.Log10.counts500)
 ```
@@ -93,6 +95,7 @@ This would not have been seen so clearly if we did not cluster the rows and colu
 
 ```{r}
 #| label: heatmaps-9
+#| fig-alt: "The log-transformed heatmap without clustering, with taxa and samples in their original order, so the patterns are much harder to see"
 pheatmap(Bac.Log10.counts500, cluster_rows = FALSE, cluster_cols = FALSE)
 ```
 
@@ -104,6 +107,7 @@ To extract just the density and species columns from our factors data frame, we 
 
 ```{r}
 #| label: heatmaps-10
+#| fig-alt: "The clustered log-transformed heatmap with coloured bars above the columns showing each sample's species (Caulerpa, seagrass or other) and density (dense, sparse or other)"
 Bac.factorsDS <- select(Bac.factors, Density, Species)
 
 pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS)
@@ -137,6 +141,7 @@ We can now redraw the heatmap with our chosen colours.
 
 ```{r}
 #| label: heatmaps-12
+#| fig-alt: "The same annotated heatmap with custom annotation colours: green for seagrass, blue for Caulerpa and grey for other, with orange and purple for dense and sparse"
 pheatmap(Bac.Log10.counts500, annotation_col = Bac.factorsDS, annotation_colors = AnnColour)
 ```
 
@@ -152,6 +157,7 @@ Let's see what is produced by using the Manhattan distance as the measure of sim
 
 ```{r}
 #| label: heatmaps-13
+#| fig-alt: "The annotated heatmap clustered with Manhattan distance and average linkage instead of the defaults"
 pheatmap(Bac.Log10.counts500,
   clustering_distance_rows = "manhattan",
   clustering_distance_cols = "manhattan", clustering_method = "average",
@@ -167,6 +173,7 @@ We may want to compare the abundance of each bacterial OTU only among samples ra
 
 ```{r}
 #| label: heatmaps-14
+#| fig-alt: "The annotated heatmap with each row scaled to show relative abundance, so colours now range from blue (below the taxon's average) to red (above), and the three unvegetated samples stand out on the left"
 pheatmap(Bac.Log10.counts500,
   scale = "row", clustering_distance_rows = "manhattan",
   clustering_method = "average",
@@ -182,6 +189,7 @@ We can also sort the samples by their groups or treatments rather than sorting b
 
 ```{r}
 #| label: heatmaps-15
+#| fig-alt: "The heatmap with the sample columns ordered by species and density instead of clustered, so the annotation bars form neat blocks"
 SampleOrder <- order(Bac.factorsDS$Species, Bac.factorsDS$Density)
 
 pheatmap(Bac.Log10.counts500[, SampleOrder],
@@ -223,6 +231,7 @@ load("SpeciesDiffs.Rdata")
 
 ```{r}
 #| label: heatmaps-18
+#| fig-alt: "Heatmap of the taxa that differ between seagrass and Caulerpa, with rows scaled and both rows and columns split into two clusters: the seagrass samples and the Caulerpa samples separate cleanly, each with a block of taxa that are more abundant in it"
 # Create a vector that will be used to select samples that are not from the sediment
 DS <- Bac.factors$Treatment_ID != "U"
 

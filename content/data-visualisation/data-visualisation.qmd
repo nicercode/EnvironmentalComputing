@@ -20,6 +20,7 @@ These pages have a brief introduction to:
 
 ```{r}
 #| label: multivariate-vis-1
+#| fig-alt: "Two example multivariate plots side by side: an MDS ordination with points coloured by habitat forming distinct groups, and a cluster dendrogram of samples"
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4
@@ -67,4 +68,4 @@ R has a very wide range of functions and packages for visualising spatial data. 
 * [Making maps from shapefiles]
 * More soon...
 
-![](images/Visualising_spatial_data_intro_image.jpg)
+![](images/Visualising_spatial_data_intro_image.jpg){fig-alt="Map of a raster of values from about 21.8 to 23, shaded from pink through yellow to green, with crosses marking sampling sites"}

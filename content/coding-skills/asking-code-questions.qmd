@@ -26,7 +26,7 @@ By doing this, you avoid the need to send your code file and entire data set as 
 
 It's important to note here that in order for someone to help you, they don't need the whole dataset. They only need to be able to see the problem and have the associated question to fix/solve!
 
-![](https://cdn.shopify.com/s/files/1/1202/6984/files/1nenhs_large.jpg?v=1565849932)
+![](https://cdn.shopify.com/s/files/1/1202/6984/files/1nenhs_large.jpg?v=1565849932){fig-alt="Meme of Tom Cruise in Jerry Maguire, arms spread in exasperation, with the caption 'Help me, help you!'"}
 
 This tutorial is intended to help people who are relatively new to R create a reproducible example and also make fake data for other purposes.
 
@@ -286,7 +286,7 @@ sessionInfo()
 
 All of this information isn't really useful unless you have someone to answer your question after you've made your nice reproducible example. One alternative to asking for help from colleagues and friends is to use online websites, such as [Stack Overflow](https://stackoverflow.com/). The tips in this tutorial will help you to ask a question that is not removed or banned. Also, when you [ask a question](http://www.wikihow.com/Ask-a-Question-on-Stack-Overflow) be sure to show you have done previous research.
 
-![](images/stack.png){fig-align="center"}
+![](images/stack.png){fig-align="center" fig-alt="Meme of Princess Leia's hologram from Star Wars with the caption 'Help me StackOverflow... you are my only hope'"}
 
 There is more help on the web for making reproducible examples. For instance, see [here](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example), [here](http://clayford.github.io/dwir/dwr_12_generating_data.html), [here](http://adv-r.had.co.nz/Reproducibility.html), or [here](https://www.r-bloggers.com/minimal-reproducible-examples/). 
 

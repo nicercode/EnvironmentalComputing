@@ -4,7 +4,7 @@ title: Combining Datasets
 
 Combining data sets is an essential task for many projects. For example, we may have data on the abundance of species, but also a data set from external sources on the environmental conditions during our observations (e.g., temperature, rainfall, elevation, vegetation type).
 
-![](Combining_data_image.jpg)
+![](Combining_data_image.jpg){fig-alt="Diagram of joining two tables: table a with columns x1 and x2 plus table b with columns x1 and x3, which share the key column x1"}
 
 We will use the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) which has many convenient functions for combining data sets, First, load the package:
 

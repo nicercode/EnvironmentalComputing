@@ -4,7 +4,7 @@ title: 'Cluster Analysis'
 
 Cluster analysis is a method of classification, aimed at grouping objects based on the similarity of their attributes. It is commonly used to group a series of samples based on multiple variables that have been measured from each sample. The procedure produces a tree-like diagram (a dendrogram) that illustrates the relationships between all the samples based on a defined measure of similarity.
 
-![](images/Cluster_analysis_image.jpg)
+![](images/Cluster_analysis_image.jpg){fig-alt="Example dendrogram from a cluster analysis, with many samples joined into a branching tree according to their similarity"}
 
 There are many methods available for clustering (agglomerative, divisive, non hierarchical etc.). Here are some instructions for one of the more commonly used methods, agglomerative hierarchical clustering. This procedure involves a series of steps:
 
@@ -15,7 +15,7 @@ There are many methods available for clustering (agglomerative, divisive, non hi
 
 ## Running the analysis
 
-![](images/Cluster_analysis_image2.jpg)
+![](images/Cluster_analysis_image2.jpg){fig-alt="Aerial photo of Sydney Harbour, with the Harbour Bridge, the Opera House and waterfront suburbs"}
 
 In this example, we will use cluster analysis to visualise differences in the composition of metal contaminants in the seaweeds of Sydney Harbour (data from [(Roberts *et al.* 2008)](http://www.sciencedirect.com/science/article/pii/S026974910800033X).). Download the data set, [Harbour_metals.csv](../../datasets/Harbour_metals.csv), and load into R.
 
@@ -60,6 +60,7 @@ Finally, plot the object that was created by the `hclust` function.
 
 ```{r}
 #| label: cluster-analysis-6
+#| fig-alt: "Cluster dendrogram of harbour samples from single linkage clustering of heavy metal concentrations, with crowded, overlapping sample labels beginning with P or S"
 plot(H_metals.cluster)
 ```
 
@@ -67,6 +68,7 @@ We can make this a bit neater with all the samples lined up along the bottom by 
 
 ```{r}
 #| label: cluster-analysis-7
+#| fig-alt: "The same dendrogram drawn with as.dendrogram, with a y axis of Euclidean distance; samples join into groups at heights from near 0 up to about 44"
 plot(as.dendrogram(H_metals.cluster), ylab = "Euclidean distance")
 ```
 
@@ -98,6 +100,7 @@ With many samples in your dendrogram it is often necessary to label them in some
 
 ```{r}
 #| label: cluster-analysis-8
+#| fig-alt: "The same dendrogram again, with code intended to colour the sample labels by location; the labels are all drawn in black"
 #| fig-width: 6
 #| warning: false
 #| message: false

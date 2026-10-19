@@ -20,7 +20,7 @@ where *St* is the value of the statistic from your sample, $\theta$ is the popul
 
 Such tests can be used for a variety of parameters sampled from populations (e.g., means, slopes and intercepts in linear regression etc.). Here, lets look at a simple example where we test whether the mean of a set of replicated measures differs from a hypothesised value.
 
-![](images/One_sample_t_test_image.png)
+![](images/One_sample_t_test_image.png){fig-alt="Glowing footprints on a floor at a crime scene, marked with numbered evidence cards"}
 
 Imagine that a forensic scientist was trying to track the origin of some soil samples taken from footprints at a crime scene. She collected 10 samples and analysed the concentration of pollen from a species of pine tree found in a local forest. It was known that soil from that local forest had an average concentration of 125 grains per gram of soil. The one sample *t*-test will test the likelihood of the ten samples coming from that forest by contrasting the mean concentration in the ten new samples to the value expected if they came from that forest.
 
@@ -94,6 +94,9 @@ You also get the mean of your sample (109) and the 95% confidence interval for p
 
 ```{r}
 #| label: one-sample-t-test-5
+#| fig-alt:
+#|   - "Histogram of pollen counts from about 70 to 140, mostly between 90 and 130, with a red vertical line at the hypothesised mean of 125"
+#|   - "Horizontal boxplot of pollen counts with a median of about 113, below the red line at 125"
 hist(pollen, xlab = "Pollen count", main = NULL)
 abline(v = 125, col = "red")
 boxplot(pollen, xlab = "Pollen count", horizontal = TRUE)
@@ -118,7 +121,7 @@ Type `?t.test` to get the R help for this function.
 
 An independent samples *t*-test aka a two sample *t*-test is one of the most commonly used statistical tests. It is used for comparing whether the means of two samples are statistically different from each other (e.g., control vs. treatment, site A vs site B etc). For example, consider the simple case of whether a sample of pH measurements from one river differs from a sample of pH measurements from a second river.
 
-![](images/Independent_samples_t_test_image.jpg)
+![](images/Independent_samples_t_test_image.jpg){fig-alt="A fast-flowing river running through a rocky gorge, crossed by a bridge"}
 
 The null hypothesis is that the population means from which the two samples are taken are equal $$H_o: \mu_1=\mu_2$$.
 
@@ -203,6 +206,7 @@ In the event of unequal variances, it may be better to perform a Welch's *t* tes
 
 ```{r}
 #| label: two-sample-t-test-5
+#| fig-alt: "Boxplots of pH for rivers A and B: river A's pH (median about 8.8) is clearly higher than river B's (median about 6.6), and the boxes don't overlap"
 boxplot(pH ~ River_name, data = River_pH, xlab = "River name", ylab = "pH")
 ```
 
@@ -224,7 +228,7 @@ Type `?t.test` to get the R help for this function.
 
 Paired *t*-tests are used to compare the means of two groups of measurements when individual objects are measured twice, once for each type of measurement. Data could be paired in various ways: if the same measure is taken from a single object in two different treatments or at two different times, or if different types of measures are being contrasted from the same object.
 
-![](images/Paired_t_test_image.jpg)
+![](images/Paired_t_test_image.jpg){fig-alt="Rows of potted plants in blue pots inside a greenhouse"}
 
 For example, to contrast the photosynthetic performance of ten plants in two environments in a greenhouse (shady and sunny), we could measure performance in each individual plant twice, once in the shade and once in the sun. The measures are paired by belonging to the same individual plant.
 
@@ -317,6 +321,7 @@ You also get the mean and 95% confidence intervals for the differences between m
 
 ```{r}
 #| label: paired-t-test-6
+#| fig-alt: "Boxplots of photosynthetic performance (FvFm) in shady and sunny light environments: performance is much higher in sun (median about 0.84) than in shade (about 0.66)"
 boxplot(Performance ~ Treatment, data = Greenhouse, xlab = "Light environment", ylab = "Photosynthetic performance (FvFm)")
 ```
 

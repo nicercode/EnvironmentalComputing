@@ -8,7 +8,7 @@ Where an independent samples *t*-test would be used for comparison of group mean
 
 ## Single Factor ANOVA
 
-![](images/ANOVA_single_factor_image.png)
+![](images/ANOVA_single_factor_image.png){fig-alt="Hatchling sea turtles crawling across white sand"}
 
 For example, to contrast the the hatching times of turtle eggs incubated at four different temperatures (15°C, 20°C, 25°C and 30°C), hatching time is the continuous response variable and temperature is the categorical predictor variable with with four levels. The null hypothesis would be that mean hatching time is equal for all temperatures (H~o~: $\mu_{15} = \mu_{20} = \mu_{25} = \mu_{30}$).
 
@@ -117,6 +117,7 @@ The important assumptions of ANOVA are independence, homegeneity of variance and
 
 ```{r}
 #| label: anova-single-9
+#| fig-alt: "Two diagnostic plots for the turtle hatching ANOVA: a histogram of residuals that is roughly symmetric around zero, and a normal Q-Q plot where the residuals follow the line except for slight curvature at the ends"
 par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(Turtles.aov$residuals)
 plot(Turtles.aov, which = 2)
@@ -128,6 +129,7 @@ Violations of normality can be fixed via transformations or by using a different
 
 ```{r}
 #| label: anova-single-10
+#| fig-alt: "Residuals versus fitted values for the turtle hatching ANOVA: four vertical columns of points, one per temperature, with similar spread around zero"
 plot(Turtles.aov, which = 1)
 ```
 
@@ -145,6 +147,7 @@ There are a variety of measures for dealing with non-independence. These include
 
 ```{r}
 #| label: anova-single-11
+#| fig-alt: "Boxplots of hatching time (days) at 15, 20, 25 and 30 degrees C: eggs at 30 degrees hatch fastest (median under 20 days), while the other temperatures have medians between about 40 and 60 days"
 boxplot(Days ~ Temperature, data = Turtles, ylab = "Hatching time (days)", xlab = "Temperature (°C)")
 ```
 
@@ -170,7 +173,7 @@ Analysis of variance (ANOVA) is one of the most frequently used techniques in th
 
 Frequently, we want to test for differences in a response variable due to two or more factors. These experimental or sampling designs allow us to test for the effects of each of these factors separately (termed *main effects*), and to test whether the two factors interact. For these designs, we use more complex versions of ANOVA than the most simple design that tests the effects of only one factor.
 
-![](images/ANOVA_factorial_image.JPG)
+![](images/ANOVA_factorial_image.JPG){fig-alt="Close-up of orange encrusting sponges and other invertebrates growing on a rock surface"}
 
 Consider an example where a researcher is testing the effects of metal contamination on the number of species found in sessile marine invertebrates (sponges, bryozoans and sea squirts etc.). They would like to know whether copper reduces species richness, but also know that the richness of invertebrates can depend on whether the substrate is vertical or horizontal. Consequently, they ran an experiment where species richness was recorded in replicate samples in each of the six combinations of copper enrichment ("None","Low","High") and orientation ("Vertical","Horizontal"). The experimental design in termed factorial because all levels of one treatment are represented in all levels of the other treatment (also termed orthogonal).
 
@@ -281,6 +284,7 @@ A significant interaction means that the effect of one factor depends upon the o
 
 ```{r}
 #| label: anova-factorial-7
+#| fig-alt: "Interaction plot of mean species richness against copper level (High, Low, None), with separate lines for horizontal and vertical surfaces: richness rises as copper decreases, and the lines cross, with vertical surfaces lowest at high copper"
 interaction.plot(Sessile$Copper, Sessile$Orientation, Sessile$Richness)
 ```
 
@@ -308,6 +312,7 @@ There is a fair bit of debate on this in the statistical literature, but many ad
 
 ```{r}
 #| label: anova-factorial-8
+#| fig-alt: "Two diagnostic plots for the factorial ANOVA: a roughly symmetric histogram of residuals with one large value near 11, and a normal Q-Q plot that follows the line apart from one outlier (point 13)"
 par(mfrow = c(1, 2)) # This code put two plots in the same window
 hist(Sessile.aov$residuals)
 plot(Sessile.aov, which = 2)
@@ -319,6 +324,7 @@ Violations of normality can be fixed via transformations or by using a different
 
 ```{r}
 #| label: anova-factorial-9
+#| fig-alt: "Residuals versus fitted values for the factorial ANOVA: six columns of points with similar spread around zero, and one outlying residual (point 13) at about 11"
 plot(Sessile.aov, which = 1)
 ```
 
@@ -338,6 +344,7 @@ Remember that the interpretation of the main effects is complicated when there i
 
 ```{r}
 #| label: anova-factorial-10
+#| fig-alt: "Boxplots of species richness for the six combinations of copper (High, Low, None) and orientation (H, V): richness is highest with no copper and lowest for vertical surfaces with high copper (about 45)"
 boxplot(Richness ~ Copper * Orientation, data = Sessile, names = c("High.H", "Low.H", "None.H", "High.V", "Low.V", "None.V"), ylab = "Species richness", xlab = "Copper/Orientation", ylim = c(0, 80))
 ```
 
@@ -369,7 +376,7 @@ Factor B is termed nested within factor A, usually written as B(A). These design
 
 The examples below comes from an experiment investigating the impact of introduced American mink on small rodents (voles) in Finland. The hypothesis was that mink prey upon voles thereby reducing vole numbers and limiting their population size. To test this, minks were removed from large areas (> 20 km2) in the Baltic Sea. The Ho from the experiment is that the mean count of voles on islands in removal sites will be the same as the mean vole count on islands in control areas.
 
-![](images/ANOVA_nested_method_image.png)
+![](images/ANOVA_nested_method_image.png){fig-alt="An American mink in a wire cage trap"}
 
 The data represent two treatments (mink removal and control) and two areas nested within each treatment. Then there are 10 samples in each area. Each of these samples represents the numbers of individual voles trapped on an island (all islands were more than 300 m apart ensuring some independence) over 4 nights.
 
@@ -427,6 +434,9 @@ The assumption of normality can be checked by a frequency histogram of the resid
 
 ```{r}
 #| label: anova-nested-2
+#| fig-alt:
+#|   - "Histogram of residuals from the nested ANOVA of vole counts, peaked just below zero and slightly right-skewed"
+#|   - "Normal Q-Q plot of residuals from the nested ANOVA, close to the line with a few high values (points 12, 26 and 39) above it"
 hist(Mink.nested$residuals)
 plot(Mink.nested, which = 2)
 ```
@@ -435,6 +445,7 @@ Heterogenous variances is indicated by non-random pattern in the residuals vs. f
 
 ```{r}
 #| label: anova-nested-3
+#| fig-alt: "Residuals versus fitted values from the nested ANOVA: four columns of points, with the spread of residuals increasing at higher fitted values"
 plot(Mink.nested$residuals ~ Mink.nested$fitted)
 ```
 

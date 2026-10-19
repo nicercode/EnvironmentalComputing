@@ -11,7 +11,7 @@ Before you get started with making graphics and doing analyses, you will need to
 
 ## Data entry
 
-![](images/Sampling.jpg)
+![](images/Sampling.jpg){fig-alt="Two people crouching on a rocky shore, placing square sampling quadrats over rock pools"}
 
 After collecting data, being able to enter those data and import into various software packages are obviously essential skills for students and researchers in the environmental sciences. You might think that you just write the numbers in a spreadsheet package and open that file in another piece of software, but there is actually quite a bit to be learnt about tidy ways to enter the data and import that data without errors.
 
@@ -21,7 +21,7 @@ On these pages, we give some guidance for data entry that will save a lot of tim
 * [Importing data](../data-literacy/reading/index.qmd) into R  
 * [Data types and structure](../misc/data-types-structure.qmd) - better understanding data objects in R  
 
-![](images/Data_entry_image.jpg)
+![](images/Data_entry_image.jpg){fig-alt="A spreadsheet of plant data with one row per observation and columns such as species, family, growth form, height, country, latitude, longitude and temperature"}
 
 ## Further help
 

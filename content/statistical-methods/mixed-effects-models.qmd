@@ -8,7 +8,7 @@ Mixed models are those with a mixture of fixed and random effects. Random effect
 * [Mixed models 2](#crossed-and-nested-factors): Linear mixed models with several random effects  
 * [Mixed models 3](#generalised-mixed-models): Generalised linear mixed models
 
-![](images/Mixed_models_intro_image.jpg)
+![](images/Mixed_models_intro_image.jpg){fig-alt="Aerial photo of a coastal floodplain, with green pasture surrounding a patch of wetland forest"}
 Photo: N. Murray
 
 ## Linear mixed models with one random effect
@@ -24,7 +24,7 @@ You will need to use mixed effect models if you have a random factor in your exp
 
 This is a tough concept to get your head around, and is best explained with an example. The data we will analyse here are counts of invertebrates at 3-4 sites in each of 7 (randomly chosen) estuaries. Here the estuaries are the random effect, as there are a large number of possible estuaries, and we only sample from a random few of them, but we would like to make inference about estuaries in general.
 
-![](images/Mixed_models_1_image.jpg)
+![](images/Mixed_models_1_image.jpg){fig-alt="Aerial photo of an estuary on the Sydney coast, with a river mouth, sand flats, moored boats and suburbs along the shore"}
 
 We will introduce mixed models in three parts
 
@@ -102,6 +102,7 @@ This assumption is only critical when we have a small sample size or very skewed
 
 ```{r}
 #| label: mixed-effects-models-5
+#| fig-alt: "Normal Q-Q plot of residuals from the mixed model of total invertebrates, with points lying close to a straight line"
 #| out-width: "500px"
 qqnorm(residuals(ft.estu))
 ```
@@ -114,6 +115,7 @@ Like a linear model, a mixed model assumes constant variance. We can check this 
 
 ```{r}
 #| label: mixed-effects-models-6
+#| fig-alt: "Residuals against fitted values from the mixed model of total invertebrates, with a smoother that stays close to zero and no clear pattern in the spread"
 #| out-width: "500px"
 scatter.smooth(residuals(ft.estu) ~ fitted(ft.estu))
 ```
@@ -222,6 +224,7 @@ This might be a problem as assumption 4 may not hold. You should always sample t
 
 ```{r}
 #| label: mixed-effects-models-11
+#| fig-alt: "Boxplots of total invertebrates in each of seven estuaries, coloured blue for modified and pink for pristine, with red diamonds marking the model's estimated mean for each estuary; counts vary a lot between estuaries within each group"
 ModEst <- unique(Estuaries[c("Estuary", "Modification")]) # find which Estuaries are modified
 
 # Prepare a vector of colors with specific color by modification levels
@@ -287,7 +290,7 @@ library(lme4)
 
 We will analyse a data set that aimed to test the effect of water pollution on the abundance of some subtidal marine invertebrates by comparing samples from modified and pristine estuaries. As the total counts are large, we will assume the data are continuous. Later on, in [Mixed models 3](#generalised-mixed-models), we'll model counts as discrete using Generalised linear mixed models (GLMMs).
 
-![](images/Mixed_models_2_image.jpg)
+![](images/Mixed_models_2_image.jpg){fig-alt="Colourful subtidal invertebrates, including sponges, ascidians and bryozoans, covering a rock surface"}
 
 ```{r}
 #| label: mixed-effects-models-13
@@ -373,6 +376,7 @@ See [Mixed models 1](#linear-mixed-models-with-one-random-effect) for detailed g
 
 ```{r}
 #| label: mixed-effects-models-20
+#| fig-alt: "Two diagnostic plots for the model of untransformed totals: a normal Q-Q plot with an S-shaped bend, and residuals against fitted values whose smoother rises from negative values at low fitted values"
 par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
 scatter.smooth(residuals(fit.mod) ~ fitted(fit.mod)) # residual plot
@@ -382,6 +386,7 @@ The normal quantile plot looks reasonable, however we see here a definite fan sh
 
 ```{r}
 #| label: mixed-effects-models-21
+#| fig-alt: "The same two diagnostic plots after log-transforming totals: the Q-Q plot is closer to a straight line, and the residuals mostly scatter around zero, with a few low fitted values pulling the smoother down"
 fit.mod <- lmer(log(Total) ~ Modification + (1 | Estuary) + (1 | SiteWithin), data = Estuaries)
 par(mfrow = c(1, 2))
 qqnorm(residuals(fit.mod))
@@ -441,6 +446,7 @@ You can plot within each site, but this is a bit odd for a boxplot as there are 
 
 ```{r}
 #| label: mixed-effects-models-24
+#| fig-alt: "Boxplots of log total invertebrates for each site within each estuary, with red diamonds marking the model's estimated site means; the boxes are not coloured, so modified and pristine sites aren't distinguished"
 #| fig-height: 8
 #| warning: false
 library(Hmisc)
@@ -537,7 +543,7 @@ set.seed(2)
 
 In this example, we have a fixed effect (Modification; modified vs pristine) and a random effect (Estuary). To test whether there is an effect of modification on individual species counts and presence/absences, we need to use generalised linear mixed models with the `glmer` function.
 
-![](images/Mixed_models_3_image.jpg)
+![](images/Mixed_models_3_image.jpg){fig-alt="Close-up of small orange invertebrates with fine tentacles growing on a pink sponge"}
 
 Consider the counts of hydroids (the variable Hydroid).
 
@@ -569,6 +575,7 @@ fit.bin <- glmer(HydroidPres ~ Modification + (1 | Estuary), family = binomial, 
 
 ```{r}
 #| label: mixed-effects-models-31
+#| fig-alt: "Two diagnostic plots for the binomial mixed model: residuals against fitted values fall in two separate bands, as expected for presence/absence data, and the Q-Q plot is a series of steps"
 par(mfrow = c(1, 2))
 plot(residuals(fit.bin) ~ fitted(fit.bin), main = "residuals v.s. Fitted")
 qqnorm(residuals(fit.bin))
@@ -632,6 +639,7 @@ To check the assumptions:
 
 ```{r}
 #| label: mixed-effects-models-34
+#| fig-alt: "Two diagnostic plots for the Poisson mixed model of Schizoporella counts: residuals against fitted values spread more widely at higher fitted values, and the Q-Q plot shows steps from the many low counts"
 par(mfrow = c(1, 2))
 plot(residuals(fit.pois) ~ fitted(fit.pois), main = "Residuals vs. Fitted")
 qqnorm(residuals(fit.pois))
@@ -679,6 +687,7 @@ Often, count data will not fit a Poisson distribution. Look at what happens if y
 
 ```{r}
 #| label: mixed-effects-models-36
+#| fig-alt: "The same two diagnostic plots as above, for the Poisson mixed model of Schizoporella counts"
 fit.pois2 <- glmer(Schizoporella.errata ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
 par(mfrow = c(1, 2))
 plot(residuals(fit.pois) ~ fitted(fit.pois), main = "residuals vs. Fitted")
@@ -701,6 +710,7 @@ As before you could run hypothesis tests on the random effects using a parametri
 
 ```{r}
 #| label: mixed-effects-models-37
+#| fig-alt: "Boxplots of hydroid counts in each of seven estuaries, with red diamonds marking the model's estimated means; counts are zero or near zero in several estuaries and highest in JER, and the boxes are not coloured by modification"
 #| message: false
 library(Hmisc)
 fit.pois <- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)

@@ -4,7 +4,7 @@ title: Subsetting Data
 
 We often want to subset our data, whether it's to examine particular rows or columns of our dataset, or to pull out observations with particular properties. We may conduct subsetting at the data exploration stage to investigate whether our response variable differs in its relationship to a particular predictor variable across categories (e.g., to look for an interaction). We may also like to pull out elements of our dataset for separate analyses.
 
-![](Subsetting_data_image.jpg)
+![](Subsetting_data_image.jpg){fig-alt="A small brown bat clinging to a piece of bark"}
 
 In this exercise, we will load a dataset where bats were sampled across regrowth forest in south-eastern Australia which has been thinned to reduce the density of trees.
 
@@ -65,7 +65,7 @@ Bats$Site
 
 ## Subsetting rows in dplyr
 
-![](Subsetting_data_image1.jpg)
+![](Subsetting_data_image1.jpg){fig-alt="Diagram of filtering rows: a table of five rows becomes a smaller table keeping only the two highlighted rows"}
 
 The package [dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html) has many convenient functions for subsetting that can be more intuitive and quick for you. First, install then load the package:
 
@@ -160,7 +160,7 @@ In this case, the dataframes are identical because our data doesn't have any dup
 
 ## Subsetting columns in dplyr
 
-![](Subsetting_data_image2.jpg)
+![](Subsetting_data_image2.jpg){fig-alt="Diagram of selecting columns: a table of five columns becomes a smaller table keeping only the three highlighted columns"}
 
 As discussed above, you can select one column `$` or one or more by indexing with `[]`. dplyr has the function `select` which allows you to select columns by name or by using useful helper functions.
 

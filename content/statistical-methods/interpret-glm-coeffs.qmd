@@ -96,7 +96,7 @@ It is possible to use a log link function with the binomial distribution `family
 
 Sometimes we know the effect of a particular variable (call it $z$) on the response is proportional, so that when we double $z$ we expect the response to double on average. The most common time you see this is with sampling intensity. 
 
-![](images/glm_coefficients_image.jpg)
+![](images/glm_coefficients_image.jpg){fig-alt="Earthworms in dark, moist soil"}
 
 If you sample soil and count critters, all other things being equal, you would expect twice the critters in twice the amount of soil. If you have a variable like this it is tempting to divide your response (count) by the amount of soil to standardise the data. Unfortunately this will take counts, which we know how to model with glms, and turn them into something we do not know how to model. Fortunately this situation is easily dealt with using offsets. First, let's simulate some data for amount of soil, depth (our predictor variable) and count data (with a poisson distribution) where the couunts depend on how much soil was sampled.
 

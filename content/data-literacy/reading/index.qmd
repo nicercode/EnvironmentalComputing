@@ -63,7 +63,7 @@ str(Snail_feeding)
 summary(Snail_feeding)
 ```
 
-Note that for the factor of sex, errors in data entry resulted in five levels (female, female s, male, Male and males) when there should be only two. See below for the fix.
+Note that for the character variable Sex, errors in data entry resulted in five different values (`N.unique: 5`: female, female s, male, Male and males) when there should be only two. See below for the fix.
 
 ## Common problems when importing data
 
@@ -109,20 +109,19 @@ Snail_feeding$Snail <- as.factor(Snail_feeding$Snail)
 class(Snail_feeding$Snail)
 ```
 
-**Numerics as characters (factors)** Due to the automatic coercion in R, any non-numeric digits within a numerical variable will result in the whole variable being coerced to a character (R imports as factors). In this example, the variable Distance has been imported as a factor with 768 levels, when we would like it to be a numerical variable. This indicates a typo somewhere within the distance vector. Such typos are common (e.g., accidentally using comma instead of full stop when entering decimals), but a little trickier to solve.
+**Numerics as characters** If a numerical variable contains any non-numeric entries, R imports the whole variable as a character. In this example, `str` shows that Distance has been imported as a character (`chr`), when we would like it to be a numerical variable. This indicates a typo somewhere within the distance vector. Such typos are common (e.g., accidentally using comma instead of full stop when entering decimals), but a little trickier to solve.
 
 With a small data set, it is quickest to go back to the original data and find the error. Once fixed, import again and the variable should now be numeric.
 
-With a larger data set, we have the problem of needing to find the typos. Unfortunately, we can't just convert our data straight into numeric from a vector of type Factor. This is because of the levels attribute (see [Data types and structure](../../misc/data-types-structure.qmd)). If you try and convert a factor directly to a numerical variable, the values become a number that corresponds to the number of levels (1:n, ordered alphabetically or ascending) rather than the actual value.
+With a larger data set, we have the problem of needing to find the typos. When we convert the variable to numeric with `as.numeric`, you will get a warning message, NAs introduced by coercion. This is because the non numeric values (i.e., our typos) cannot be coerced to a numeric and get replaced by NA.
 
-Thus, we must first convert to a character and then to a numeric. When converting to a numeric, you will get a warning message, NAs introduced by coercion. This is because the non numeric values (i.e., our typos) cannot be coerced to a numeric and get replaced by NA.
+(Older versions of R imported text as factors. If your variable is a factor, don't convert it straight to numeric: because of the levels attribute (see [Data types and structure](../../misc/data-types-structure.qmd)), `as.numeric` returns the level numbers (1:n, ordered alphabetically or ascending) rather than the actual values. Convert it to a character first, with `as.numeric(as.character(x))`.)
 
 We can use this to our advantage, `is.na` in combination with `which` will identify where the typos or missing values are within the vector.
 
 ```{r}
 #| label: index-8
 #| collapse: true
-Snail_feeding$Distance <- as.character(Snail_feeding$Distance)
 Snail_feeding$Distance <- as.numeric(Snail_feeding$Distance)
 
 which(is.na(Snail_feeding$Distance))
@@ -139,16 +138,15 @@ Snail_feeding[755, "Distance"] <- 0.42336
 which(is.na(Snail_feeding$Distance))
 ```
 
-**You have more variable levels then expected**
+**You have more categories than expected**
 
-One of the most important steps in any data analyses or processing task is to verify that your data values are correct. For example a variable called "Sex" would be expected to have only two levels.  However in our data frame it has five levels (see `str` and `summary` above).
+One of the most important steps in any data analyses or processing task is to verify that your data values are correct. For example a variable called "Sex" would be expected to have only two values.  However in our data frame it has five (see `summary` above).
 
-You can check the levels of a factor, or unique character values with `levels` (for factors only), or `unique` (for characters and factors).
+You can check the different values of a character variable with `unique`. (For a factor, `levels` lists its categories; it returns `NULL` for a character variable.)
 
 ```{r}
 #| label: index-10
 #| collapse: true
-levels(Snail_feeding$Sex)
 unique(Snail_feeding$Sex)
 ```
 
@@ -168,18 +166,15 @@ To replace any values that are "female s" with "female", we would use:
 Snail_feeding$Sex[which(Snail_feeding$Sex == "female s")] <- "female"
 ```
 
-Check it worked using `unique`, but also look what happens when you check `levels`.
+Check it worked using `unique`.
 
 ```{r}
 #| label: index-13
 #| collapse: true
 unique(Snail_feeding$Sex)
-levels(Snail_feeding$Sex)
 ```
 
-When we use `unique` to check our categories there are just male and female, however when we look at levels we still have the five different levels including the typos. This is because of the behavior of factors. Once the levels have been defined, they will still be there regardless if they are included in any samples. As our extra levels were typos not true levels, we should remove these from the attributes.
-
-`factor` will remove extra levels from a vector.
+Now that the typos are fixed, we can convert Sex to a factor for analysis, and `levels` shows just the two categories. Fixing typos before converting matters: once a factor's levels have been defined, they stay there even if no values use them, so a factor made before the fix would keep the five levels including the typos. If that happens, running `factor` again (or `droplevels`) removes the unused levels.
 
 ```{r}
 #| label: index-14

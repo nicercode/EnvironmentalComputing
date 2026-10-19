@@ -20,7 +20,7 @@ These pages have a brief introduction to:
 
 ```{r}
 #| label: multivariate-vis-1
-#| fig-alt: "Two example multivariate plots side by side: an MDS ordination with points coloured by habitat forming distinct groups, and a cluster dendrogram of samples"
+#| fig-alt: "Two example multivariate plots side by side: an MDS ordination with points coloured by habitat forming distinct groups, and a cluster dendrogram of samples with labels coloured by location"
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4
@@ -48,7 +48,7 @@ rownames(Harbour_metals2) <- Harbour_metals$Rep
 H_metals.sim <- dist(Harbour_metals2, method = "euclidean")
 H_metals.cluster <- hclust(H_metals.sim, method = "single")
 dend <- as.dendrogram(H_metals.cluster)
-sample_colours <- as.numeric(Harbour_metals$Location)
+sample_colours <- as.numeric(factor(Harbour_metals$Location))
 sample_colours <- sample_colours[order.dendrogram(dend)]
 labels_colors(dend) <- sample_colours
 plot(dend, ylab = "")

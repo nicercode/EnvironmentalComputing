@@ -446,17 +446,17 @@ You can plot within each site, but this is a bit odd for a boxplot as there are 
 
 ```{r}
 #| label: mixed-effects-models-24
-#| fig-alt: "Boxplots of log total invertebrates for each site within each estuary, with red diamonds marking the model's estimated site means; the boxes are not coloured, so modified and pristine sites aren't distinguished"
+#| fig-alt: "Boxplots of log total invertebrates for each site within each estuary, with red diamonds marking the model's estimated site means; boxes for sites in modified estuaries are blue and those in pristine estuaries are cyan"
 #| fig-height: 8
 #| warning: false
 library(Hmisc)
 
 ModEst <- unique(Estuaries[c("SiteWithin", "Modification")]) # find which Estuaries are modified
-cols <- as.numeric(ModEst[order(ModEst[, 1]), 2]) + 3 # Assign colour by modification
+cols <- as.numeric(factor(ModEst[order(ModEst[, 1]), 2])) + 3 # Assign colour by modification
 boxplot(log(Total) ~ SiteWithin, data = Estuaries, col = cols, xlab = "Estuary", ylab = "Total invertebrates")
 legend("bottomleft",
   inset = .02,
-  c(" Modified ", " Pristine "), fill = unique(cols), horiz = TRUE, cex = 0.8
+  c(" Modified ", " Pristine "), fill = c(4, 5), horiz = TRUE, cex = 0.8
 )
 means <- fitted(fit.mod) # this will give the estimate at each data point
 Est.means <- summarize(means, Estuaries$SiteWithin, mean)$means # extract means by site
@@ -702,25 +702,23 @@ As before you could run hypothesis tests on the random effects using a parametri
 
 ### Communicating results
 
-### Communicating results
-
 **Written.** Results of generalised linear mixed models are communicated in a similar way to results for linear models. In your results section you should mention that you are using mixed models with R package lme4, and list your random and fixed effects. You should also mention how you carried out inference, i.e. likelihood ratio tests (using the `anova`) or parametric bootstrap. In the results section for one predictor, it suffices to write one line, e.g. "There is strong evidence (p<0.001) of negative effect of modification on total abundance". For multiple predictors it's best to display the results in a table.
 
 **Visual.** The best way to visually communicate results will depend on your question, for a simple mixed model with one random effect, a plot of the raw data with the model means superimposed is one possibility.
 
 ```{r}
 #| label: mixed-effects-models-37
-#| fig-alt: "Boxplots of hydroid counts in each of seven estuaries, with red diamonds marking the model's estimated means; counts are zero or near zero in several estuaries and highest in JER, and the boxes are not coloured by modification"
+#| fig-alt: "Boxplots of hydroid counts in each of seven estuaries, with red diamonds marking the model's estimated means; boxes are blue for modified and cyan for pristine estuaries; counts are zero or near zero in all three modified estuaries and in HAK, and highest in JER"
 #| message: false
 library(Hmisc)
 fit.pois <- glmer(Hydroid ~ Modification + (1 | Estuary), family = poisson, data = Estuaries)
 means <- fitted(fit.pois) # this will give the estimate at each data point
 ModEst <- unique(Estuaries[c("Estuary", "Modification")]) # find which Estuaries are modified
-cols <- as.numeric(ModEst[order(ModEst[, 1]), 2]) + 3 # Assign colour by modification
+cols <- as.numeric(factor(ModEst[order(ModEst[, 1]), 2])) + 3 # Assign colour by modification
 boxplot(Hydroid ~ Estuary, data = Estuaries, col = cols, xlab = "Estuary", ylab = "Count of hydroids")
 legend("topleft",
   inset = .02,
-  c("Modified", "Pristine"), fill = unique(cols), horiz = TRUE, cex = 0.8
+  c("Modified", "Pristine"), fill = c(4, 5), horiz = TRUE, cex = 0.8
 )
 
 Est.means <- summarize(means, Estuaries$Estuary, mean)$means # extract means by Estuary

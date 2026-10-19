@@ -100,13 +100,13 @@ With many samples in your dendrogram it is often necessary to label them in some
 
 ```{r}
 #| label: cluster-analysis-8
-#| fig-alt: "The same dendrogram again, with code intended to colour the sample labels by location; the labels are all drawn in black"
+#| fig-alt: "The same dendrogram with the sample labels coloured by location (five colours); samples from the same location tend to cluster together, though not perfectly"
 #| fig-width: 6
 #| warning: false
 #| message: false
 library(dendextend)
 dend <- as.dendrogram(H_metals.cluster)
-sample_colours <- as.numeric(Harbour_metals$Location)
+sample_colours <- as.numeric(factor(Harbour_metals$Location))
 sample_colours <- sample_colours[order.dendrogram(dend)]
 labels_colors(dend) <- sample_colours
 plot(dend, ylab = "Euclidean distance")

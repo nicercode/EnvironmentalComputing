@@ -1,15 +1,9 @@
-Environmental Computing-Page list.xlsx
 .Rhistory
 *Icon**
-.dropbox
 .DS_Store
 .Rproj.user
 .RData
-/public/
-/resources/
 Thumbs.db
-.hugo_build.lock
-*.lock*
 _book/
 /site_libs/
 /.quarto/

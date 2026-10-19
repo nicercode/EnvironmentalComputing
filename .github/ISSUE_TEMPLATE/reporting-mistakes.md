@@ -1,20 +1,20 @@
 ---
 name: Reporting mistakes
-about: Spot a typo? Broken or missing links? Let us know and so we can fix these errors!
+about: Spotted a typo, a broken link, code that doesn't run or a wrong result? Let us know so we can fix it.
 title: 'Mistake found:'
 labels: ''
 assignees: ''
 
 ---
 
-**Which page(s) do this mistake(s) pertain to?**
-Please provide the title(s) and URL of the pages the error is found.
+**Which chapter is the mistake in?**
+Give the chapter title and its URL (copy it from your browser, including the part after `#` if it's in a particular section).
 
-**Describe the error(s)** 
-Concisely describe the error you discovered, references to specific lines in the code would be helpful.
+**Describe the mistake**
+What's wrong? Quote the text or code, and paste any error message you got.
 
-**Describe a potential solution**
-Provide a description what you expect if the error was resolved. 
+**Suggested fix**
+If you know what it should say or do, tell us.
 
-**Additional context** 
-Feel free to attach any screenshots/screen record of the error.
+**Additional context**
+Screenshots, your R version (`R.version.string`) and package versions (`packageVersion("...")`) help when code doesn't run.

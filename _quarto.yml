@@ -176,7 +176,6 @@ book:
         - content/statistical-methods/generalised-linear-models.qmd
         - content/statistical-methods/interpret-glm-coeffs.qmd
         - content/statistical-methods/mixed-effects-models.qmd
-        - content/statistical-methods/generalised-additive-models.qmd
         - content/statistical-methods/power-analysis.qmd
 
     - part: content/statistical-methods/categorical-data.qmd
@@ -192,6 +191,7 @@ book:
         - content/statistical-methods/cluster-analysis.qmd
         - content/statistical-methods/pca.qmd
         - content/statistical-methods/mds.qmd
+        - content/statistical-methods/generalised-additive-models.qmd
         - content/statistical-methods/time-series-analysis.qmd
         # planned: content/statistical-methods/machine-learning.qmd
         # planned: content/statistical-methods/supervised-learning.qmd

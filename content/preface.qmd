@@ -10,6 +10,8 @@ pagetitle: "About This Site"
 source("../_common.R")
 ```
 
+Environmental Computing has been teaching data skills to environmental scientists since 2016.
+
 This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
 
 * how to organise your data during data entry

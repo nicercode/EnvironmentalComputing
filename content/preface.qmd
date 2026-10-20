@@ -10,6 +10,8 @@ pagetitle: "About This Site"
 source("../_common.R")
 ```
 
+Environmental Computing has been teaching data skills to environmental scientists since 2016. We are working to keep the content up to date, but R and its packages keep changing, so some older code may not run exactly as shown. If you find something that no longer works, please [report an issue](https://github.com/nicercode/EnvironmentalComputing/issues).
+
 This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
 
 * how to organise your data during data entry
@@ -104,7 +106,7 @@ cat(paste0("- ", contributors$desc, collapse = "\n"), "\n")
 
 ## History of this site
 
-The site started on WordPress, moved to Hugo in 2022, and became this book in 2026. The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code. Each move kept the old addresses working, because they are linked from course materials across the web.
+The site started on Moodle, moved to WordPress, then to Hugo in 2022, and became this book in 2026. The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code. Each move kept the old addresses working, because they are linked from course materials across the web.
 
 ### 2026 migration from Hugo to Quarto
 

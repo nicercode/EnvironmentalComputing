@@ -7,6 +7,7 @@ listing:
     - cluster-analysis.qmd
     - pca.qmd
     - mds.qmd
+    - generalised-additive-models.qmd
     - time-series-analysis.qmd
     - meta-analysis.qmd
   sort: false
@@ -24,7 +25,7 @@ Multivariate data are common in the environmental sciences, occurring whenever w
 
 For other ways of plotting multivariate data, see [Visualising multivariate data](../data-visualisation/data-visualisation.qmd#visualising-multivariate-data).
 
-This part also covers [forecasting with time series](time-series-analysis.qmd) and meta-analysis:
+This part also covers [generalised additive models](generalised-additive-models.qmd) (GAMs) for non-linear relationships, [forecasting with time series](time-series-analysis.qmd), and meta-analysis:
 
 * [Meta-analyses 1](meta-analysis.qmd#introduction): Introduction and calculating effect sizes  
 * [Meta-analyses 2](meta-analysis.qmd#fixed-effect-and-random-effect-models): Fixed effect and random effect models  

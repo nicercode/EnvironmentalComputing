@@ -11,7 +11,6 @@ listing:
     - generalised-linear-models.qmd
     - interpret-glm-coeffs.qmd
     - mixed-effects-models.qmd
-    - generalised-additive-models.qmd
     - power-analysis.qmd
   sort: false
   fields: [title, description]

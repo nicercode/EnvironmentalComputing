@@ -1,0 +1,17 @@
+---
+title: "Multivariate and Other Methods"
+---
+
+Multivariate data are common in the environmental sciences, occurring whenever we measure several response variables from each replicate sample (for example, the abundances of many species). These pages cover:
+
+* [Model-based analysis of multivariate abundance data](MVabund.qmd) with mvabund
+* Grouping samples by their similarity with [cluster analysis](cluster-analysis.qmd)
+* Representing relationships among samples with [multidimensional scaling](mds.qmd)
+
+For principal components analysis and other ways of plotting multivariate data, see [Visualising multivariate data](../data-visualisation/data-visualisation.qmd#visualising-multivariate-data).
+
+This part also covers [forecasting with time series](time-series-analysis.qmd) and meta-analysis:
+
+* [Meta-analyses 1](meta-analysis.qmd#introduction): Introduction and calculating effect sizes  
+* [Meta-analyses 2](meta-analysis.qmd#fixed-effect-and-random-effect-models): Fixed effect and random effect models  
+* [Meta-analyses 3](meta-analysis.qmd#multilevel-models): More complex models 

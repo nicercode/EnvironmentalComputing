@@ -147,7 +147,7 @@ Page migration table:
 | `/graphics/spatial-vis/simple-maps/` | [data-visualisation/simple-maps](data-visualisation/simple-maps.qmd) |
 | `/graphics/multivariate-vis/pca/` | [data-visualisation/pca](data-visualisation/pca.qmd) |
 | `/graphics/multivariate-vis/heatmaps/` | [data-visualisation/heatmaps](data-visualisation/heatmaps.qmd) |
-| `/statistics/` | [statistical-methods/statistical-methods](statistical-methods/statistical-methods.qmd) |
+| `/statistics/` | [statistical-methods/linear-models](statistical-methods/linear-models.qmd) |
 | `/statistics/linear-models/` | [statistical-methods/linear-models](statistical-methods/linear-models.qmd) |
 | `/statistics/linear-models/linear-regression/` | [statistical-methods/linear-regression](statistical-methods/linear-regression.qmd) |
 | `/statistics/linear-models/linear-regression/interpret-lm-coeffs/` | [statistical-methods/interpret-lm-coeffs](statistical-methods/interpret-lm-coeffs.qmd) |
@@ -183,15 +183,15 @@ Page migration table:
 | `/coding-skills/loops/` | [coding-skills/loops](coding-skills/loops.qmd) |
 | `/coding-skills/version-control/` | [coding-skills/version-control](coding-skills/version-control.qmd) |
 | `/coding-skills/asking-code-questions/` | [coding-skills/asking-code-questions](coding-skills/asking-code-questions.qmd) |
-| `/statistics/categorical/` | [misc/misc](misc/misc.qmd) |
-| `/getting-started-with-r/data-entry/` | [misc/data-entry](misc/data-entry.qmd) |
-| `/getting-started-with-r/data-types-structure/` | [misc/data-types-structure](misc/data-types-structure.qmd) |
-| `/getting-started-with-r/rstudio-notebooks/` | [misc/rstudio-notebooks](misc/rstudio-notebooks.qmd) |
-| `/graphics/spatial-vis/interactive/` | [misc/interactive-maps](misc/interactive-maps.qmd) |
-| `/statistics/categorical/contingency-tables/` | [misc/contingency-tables](misc/contingency-tables.qmd) |
-| `/statistics/categorical/fishers-exact/` | [misc/fishers-exact](misc/fishers-exact.qmd) |
-| `/statistics/categorical/goodness-of-fit/` | [misc/goodness-of-fit](misc/goodness-of-fit.qmd) |
-| `/statistics/power-analysis/` | [misc/power-analysis](misc/power-analysis.qmd) |
+| `/statistics/categorical/` | [statistical-methods/categorical-data](statistical-methods/categorical-data.qmd) |
+| `/getting-started-with-r/data-entry/` | [data-literacy/data-entry](data-literacy/data-entry.qmd) |
+| `/getting-started-with-r/data-types-structure/` | [data-literacy/data-types-structure](data-literacy/data-types-structure.qmd) |
+| `/getting-started-with-r/rstudio-notebooks/` | [basics/rstudio-notebooks](basics/rstudio-notebooks.qmd) |
+| `/graphics/spatial-vis/interactive/` | [data-visualisation/interactive-maps](data-visualisation/interactive-maps.qmd) |
+| `/statistics/categorical/contingency-tables/` | [statistical-methods/contingency-tables](statistical-methods/contingency-tables.qmd) |
+| `/statistics/categorical/fishers-exact/` | [statistical-methods/fishers-exact](statistical-methods/fishers-exact.qmd) |
+| `/statistics/categorical/goodness-of-fit/` | [statistical-methods/goodness-of-fit](statistical-methods/goodness-of-fit.qmd) |
+| `/statistics/power-analysis/` | [statistical-methods/power-analysis](statistical-methods/power-analysis.qmd) |
 | `/datasets/` | [datasets](datasets.qmd) |
 
 ### 2022 migration from Wordpress to Hugo
@@ -203,21 +203,21 @@ In Feb 2022, the site was migrated from Wordpress to Hugo. These old Wordpress U
 - [/asking-code-questions/](coding-skills/asking-code-questions.qmd)
 - [/basic-plotting-in-r/](data-visualisation/ggplot.qmd)
 - [/basic-project-management/](basics/projects.qmd)
-- [/categorical-data-analyses/](misc/misc.qmd)
+- [/categorical-data-analyses/](statistical-methods/categorical-data.qmd)
 - [/cluster-analysis/](statistical-methods/cluster-analysis.qmd)
 - [/coding-skills/](coding-skills/coding-skills.qmd)
 - [/combining-data-sets/](data-literacy/joining-tables/index.qmd)
-- [/contingency-tables/](misc/contingency-tables.qmd)
-- [/data-entry/](misc/data-entry.qmd)
+- [/contingency-tables/](statistical-methods/contingency-tables.qmd)
+- [/data-entry/](data-literacy/data-entry.qmd)
 - [/data-manipulation/](data-literacy/making-analysis-ready-data.qmd)
-- [/data-types-and-structure/](misc/data-types-structure.qmd)
+- [/data-types-and-structure/](data-literacy/data-types-structure.qmd)
 - [/forecasting-time-series/](statistical-methods/time-series-analysis.qmd)
 - [/generalised-linear-models-1/](statistical-methods/generalised-linear-models.qmd#introduction-and-binary-data)
 - [/generalised-linear-models-2/](statistical-methods/generalised-linear-models.qmd#count-data)
 - [/generalised-linear-models/](statistical-methods/generalised-linear-models.qmd)
 - [/getting-started-with-r/](basics/basics.qmd)
 - [/good-practice-for-writing-scripts/](coding-skills/good-practice.qmd)
-- [/goodness-of-fit-tests/](misc/goodness-of-fit.qmd)
+- [/goodness-of-fit-tests/](statistical-methods/goodness-of-fit.qmd)
 - [/graphics/](data-visualisation/data-visualisation.qmd)
 - [/heat-maps/](data-visualisation/heatmaps.qmd)
 - [/how-to-interpret-linear-models/](statistical-methods/interpret-lm-coeffs.qmd)
@@ -249,20 +249,20 @@ In Feb 2022, the site was migrated from Wordpress to Hugo. These old Wordpress U
 - [/plotting-with-ggplot-colours-and-symbols/](data-visualisation/ggplot.qmd#colours-and-shapes)
 - [/plotting-with-ggplot-the-basics/](data-visualisation/ggplot.qmd#introduction-to-ggplot2)
 - [/plotting-with-ggplot/](data-visualisation/ggplot.qmd#introduction-to-ggplot2)
-- [/power-analysis/](misc/power-analysis.qmd)
+- [/power-analysis/](statistical-methods/power-analysis.qmd)
 - [/principal-components-analysis/](data-visualisation/pca.qmd)
 - [/reshaping-data/](data-literacy/pivotting/index.qmd)
 - [/single-continuous-vs-categorical-variables/](data-visualisation/ggplot.qmd#one-continuous-and-one-categorical-variable)
-- [/statistics/](statistical-methods/statistical-methods.qmd)
+- [/statistics/](statistical-methods/linear-models.qmd)
 - [/subsetting-data/](data-literacy/filter-rows/index.qmd)
 - [/summarising-data/](data-literacy/summarising-tables/index.qmd)
 - [/t-tests/](statistical-methods/t-tests.qmd)
 - [/two-continuous-variables/](data-visualisation/ggplot.qmd#two-continuous-variables)
 - [/understanding-interactions/](statistical-methods/understanding-interactions.qmd)
 - [/using-loops/](coding-skills/loops.qmd)
-- [/using-rstudio-notebooks/](misc/rstudio-notebooks.qmd)
+- [/using-rstudio-notebooks/](basics/rstudio-notebooks.qmd)
 - [/version-control/](coding-skills/version-control.qmd)
 - [/visualising-multivariate-data/](data-visualisation/data-visualisation.qmd#visualising-multivariate-data)
 - [/visualising-spatial-data/](data-visualisation/data-visualisation.qmd#visualising-spatial-data)
-- [/visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/](misc/interactive-maps.qmd)
+- [/visualising-spatial-data/making-interactive-maps-in-r-with-leaflet/](data-visualisation/interactive-maps.qmd)
 - [/writing-simple-functions/](coding-skills/functions.qmd)

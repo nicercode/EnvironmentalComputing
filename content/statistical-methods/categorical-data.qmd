@@ -1,0 +1,5 @@
+---
+title: "Categorical Data Analyses"
+---
+
+These pages cover some commonly used tests for contrasting the counts of observations across categorical variables: whether counts differ from those expected under a hypothesis ([goodness of fit tests](goodness-of-fit.qmd)), and whether two or more categorical variables are associated ([contingency tables](contingency-tables.qmd), and [Fisher's exact test](fishers-exact.qmd) for small samples).

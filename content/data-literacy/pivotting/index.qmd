@@ -2,7 +2,7 @@
 title: Reshaping Data
 ---
 
-Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](../../misc/data-entry.qmd)). For some types of variables, however, there are choices to be made about how you input the data.
+Learning how to format data is an essential skill to allow you to easily produce figures and run analyses. You should always aim for data that are formatted with each observation as a row and each variable as a column (see help on [Data entry](../data-entry.qmd)). For some types of variables, however, there are choices to be made about how you input the data.
 
 For example, it is very common in the biological sciences that we record the abundance of many species of organisms from each of our replicate observations (transects, quadrats, surveys etc). We then have two choices for how to input that data:
 

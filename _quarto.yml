@@ -95,6 +95,7 @@ book:
         - content/basics/r.qmd
         # planned: content/basics/python.qmd
         - content/basics/projects.qmd
+        - content/basics/rstudio-notebooks.qmd
         # planned: content/basics/data
 
     - part: "Data Literacy"   # planned part page: content/data-literacy/data-literacy.qmd
@@ -115,6 +116,8 @@ book:
         # planned: content/data-literacy/photos.qmd
         # planned: content/data-literacy/audio.qmd
         # planned: content/data-literacy/remotesensing.qmd
+        - content/data-literacy/data-entry.qmd
+        - content/data-literacy/data-types-structure.qmd
         - content/data-literacy/making-analysis-ready-data.qmd
         - content/data-literacy/reading/index.qmd
         # planned: content/data-literacy/arrange
@@ -134,6 +137,7 @@ book:
         - content/data-visualisation/multi-panel-figures.qmd
         - content/data-visualisation/rasters.qmd
         - content/data-visualisation/simple-maps.qmd
+        - content/data-visualisation/interactive-maps.qmd
         - content/data-visualisation/pca.qmd
         - content/data-visualisation/heatmaps.qmd
 
@@ -147,10 +151,9 @@ book:
     #   - content/essential-maths/integrals.qmd
     #   - content/essential-maths/optimisation.qmd
 
-    - part: content/statistical-methods/statistical-methods.qmd
+    - part: content/statistical-methods/linear-models.qmd
       chapters:
         # planned: content/statistical-methods/confidence-intervals.qmd
-        - content/statistical-methods/linear-models.qmd
         - content/statistical-methods/linear-regression.qmd
         - content/statistical-methods/interpret-lm-coeffs.qmd
         - content/statistical-methods/t-tests.qmd
@@ -160,11 +163,21 @@ book:
         - content/statistical-methods/interpret-glm-coeffs.qmd
         - content/statistical-methods/mixed-effects-models.qmd
         - content/statistical-methods/generalised-additive-models.qmd
-        - content/statistical-methods/time-series-analysis.qmd
+        - content/statistical-methods/power-analysis.qmd
+
+    - part: content/statistical-methods/categorical-data.qmd
+      chapters:
+        - content/statistical-methods/goodness-of-fit.qmd
+        - content/statistical-methods/contingency-tables.qmd
+        - content/statistical-methods/fishers-exact.qmd
+
+    - part: content/statistical-methods/multivariate-methods.qmd
+      chapters:
         # planned: content/statistical-methods/multi-variate-models.qmd
         - content/statistical-methods/MVabund.qmd
         - content/statistical-methods/cluster-analysis.qmd
         - content/statistical-methods/mds.qmd
+        - content/statistical-methods/time-series-analysis.qmd
         # planned: content/statistical-methods/machine-learning.qmd
         # planned: content/statistical-methods/supervised-learning.qmd
         # planned: content/statistical-methods/random-forests.qmd
@@ -185,17 +198,6 @@ book:
         - content/coding-skills/loops.qmd
         - content/coding-skills/version-control.qmd
         - content/coding-skills/asking-code-questions.qmd
-
-    - part: content/misc/misc.qmd
-      chapters:
-        - content/misc/data-entry.qmd
-        - content/misc/data-types-structure.qmd
-        - content/misc/rstudio-notebooks.qmd
-        - content/misc/interactive-maps.qmd
-        - content/misc/contingency-tables.qmd
-        - content/misc/fishers-exact.qmd
-        - content/misc/goodness-of-fit.qmd
-        - content/misc/power-analysis.qmd
 
     - content/contributing.qmd
 

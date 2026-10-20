@@ -4,7 +4,7 @@ title: "Importing Data"
 
 Before we can run any data analyses or create figures in R, we need to import that data into R. Preparing and cleaning the data for analyses is essential and often more time consuming than the statistical analyses themselves. It is unusual for raw data to be in the correct format and without errors. Data cleaning is the process of identifying and fixing any problems so data can be analysed easily.
 
-Importing data is a major challenge for beginners. This module will give instructions for one of most common ways we import data, and some of challenges you may face and how to overcome them. Some of these issues can be avoided by following good data entry and management practices (first read [Data entry](../../misc/data-entry.qmd) to get help with this.
+Importing data is a major challenge for beginners. This module will give instructions for one of most common ways we import data, and some of challenges you may face and how to overcome them. Some of these issues can be avoided by following good data entry and management practices (first read [Data entry](../data-entry.qmd) to get help with this.
 
 ## Importing data as a data frame
 
@@ -47,7 +47,7 @@ Snail_feeding <- read.csv("Snail_feeding.csv", header = T, strip.white = T, na.s
 
 If something is a character when it should be numeric you might see messages such as `"'x' must be numeric "` or `"non-numeric argument to binary operator"`. Likewise, if something is a factor when it should be character, some character operations might fail. To avoid some of these issues, check your data using `str` and `summary` before analyses.
 
-`str`  enables you to check the structure of your data and that your variables are the correct type (i.e., numeric, characters, integers, or factors). See [Data types and structure](../../misc/data-types-structure.qmd) for explanations of these different types.
+`str`  enables you to check the structure of your data and that your variables are the correct type (i.e., numeric, characters, integers, or factors). See [Data types and structure](../data-types-structure.qmd) for explanations of these different types.
 
 ```{r}
 #| label: index-3
@@ -113,7 +113,7 @@ class(Snail_feeding$Snail)
 
 With a small data set, it is quickest to go back to the original data and find the error. Once fixed, import again and the variable should now be numeric.
 
-With a larger data set, we have the problem of needing to find the typos. Unfortunately, we can't just convert our data straight into numeric from a vector of type Factor. This is because of the levels attribute (see [Data types and structure](../../misc/data-types-structure.qmd)). If you try and convert a factor directly to a numerical variable, the values become a number that corresponds to the number of levels (1:n, ordered alphabetically or ascending) rather than the actual value.
+With a larger data set, we have the problem of needing to find the typos. Unfortunately, we can't just convert our data straight into numeric from a vector of type Factor. This is because of the levels attribute (see [Data types and structure](../data-types-structure.qmd)). If you try and convert a factor directly to a numerical variable, the values become a number that corresponds to the number of levels (1:n, ordered alphabetically or ascending) rather than the actual value.
 
 Thus, we must first convert to a character and then to a numeric. When converting to a numeric, you will get a warning message, NAs introduced by coercion. This is because the non numeric values (i.e., our typos) cannot be coerced to a numeric and get replaced by NA.
 

@@ -102,11 +102,9 @@ cat("Thanks to everyone who has contributed new content and fixes on GitHub:\n\n
 cat(paste0("- ", contributors$desc, collapse = "\n"), "\n")
 ```
 
-## Colophon
+## History of this site
 
-The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code.
-
-## Site migration history
+The site started on WordPress, moved to Hugo in 2022, and became this book in 2026. The book is powered by [Quarto](https://quarto.org), which makes it easy to write books that combine text and executable code. Each move kept the old addresses working, because they are linked from course materials across the web.
 
 ### 2026 migration from Hugo to Quarto
 

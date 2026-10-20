@@ -10,7 +10,7 @@ pagetitle: "About This Site"
 source("../_common.R")
 ```
 
-Environmental Computing has been teaching data skills to environmental scientists since 2016.
+Environmental Computing has been teaching data skills to environmental scientists since 2016. We are working to keep the content up to date, but R and its packages keep changing, so some older code may not run exactly as shown. If you find something that no longer works, please [report an issue](https://github.com/nicercode/EnvironmentalComputing/issues).
 
 This site is a brief introduction to techniques for data organisation, graphics, and analyses, including:
 

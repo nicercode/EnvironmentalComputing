@@ -57,7 +57,7 @@ To save time later and avoid annoying error messages, ensure all the packages an
 #| echo: true
 library(car)
 library(lme4)
-library(reshape2)
+library(tidyr)
 library(ggplot2)
 source("R_scripts/myfunctions.R")
 ```
@@ -81,7 +81,7 @@ my.data <- read.csv("mydata.csv", sep = ",", header = T, check.names = FALSE)
 
 library(car)
 library(lme4)
-library(reshape2)
+library(tidyr)
 library(ggplot2)
 source("R_scripts/myfunctions.R")
 
@@ -90,7 +90,7 @@ source("R_scripts/myfunctions.R")
 summary(my.data)
 str(my.data)
 my.data[which(is.na(my.data)), ]
-levels(my.data$variable1)
+unique(my.data$variable1)
 
 # Data cleaning
 my.data$variable1 <- as.numeric(my.data$variable1)  # changed to numeric.

@@ -211,7 +211,7 @@ where *MS* are the mean squares, a measure of variation. The probability of obta
 
 Your data should be formatted with the measurements from each replicate as a row and each of the variables as columns, corresponding to the dependent variable *y*, Factor A and Factor B.
 
-Download the sample data set for the sessile invertebrates, [Sessile.csv](../../datasets/Sessile.csv), and import into R to to see the desired format. Check that your predictor variables are factors with the function `str`
+Download the sample data set for the sessile invertebrates, [Sessile.csv](../../datasets/Sessile.csv), and import into R to to see the desired format. Check the structure of the data with the function `str`: the predictor variables are imported as characters (`chr`), which `aov` treats as factors
 
 ```{r}
 #| label: anova-factorial-1
@@ -220,7 +220,7 @@ Sessile <- read.csv(file = "data/Sessile.csv", header = TRUE)
 str(Sessile)
 ```
 
-With our predictor variable correctly assigned as factors, we can now run the analysis. As with other forms of linear models we have a model formula with the dependent variable, *y*, to the left of the ~ and the predictor variables to the right. For this two factor design, we use:
+With our predictor variables as categorical variables, we can now run the analysis. As with other forms of linear models we have a model formula with the dependent variable, *y*, to the left of the ~ and the predictor variables to the right. For this two factor design, we use:
 
 ```{r}
 #| label: anova-factorial-2

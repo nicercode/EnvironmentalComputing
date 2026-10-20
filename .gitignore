@@ -15,3 +15,7 @@ _book/
 **/*.quarto_ipynb
 # R graphics output from code run outside a knitr chunk device
 Rplots.pdf
+# package.json files that htmlwidgets copy into _freeze/site_libs list the
+# JavaScript libraries' own build tools; the site never uses them, and
+# Dependabot raises alerts on them
+_freeze/site_libs/**/package.json

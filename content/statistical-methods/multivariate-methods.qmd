@@ -1,5 +1,17 @@
 ---
 title: "Multivariate and Other Methods"
+listing:
+  id: chapters
+  contents:
+    - MVabund.qmd
+    - cluster-analysis.qmd
+    - mds.qmd
+    - time-series-analysis.qmd
+    - meta-analysis.qmd
+  sort: false
+  fields: [title, description]
+  filter-ui: false
+  sort-ui: false
 ---
 
 Multivariate data are common in the environmental sciences, occurring whenever we measure several response variables from each replicate sample (for example, the abundances of many species). These pages cover:
@@ -15,3 +27,8 @@ This part also covers [forecasting with time series](time-series-analysis.qmd) a
 * [Meta-analyses 1](meta-analysis.qmd#introduction): Introduction and calculating effect sizes  
 * [Meta-analyses 2](meta-analysis.qmd#fixed-effect-and-random-effect-models): Fixed effect and random effect models  
 * [Meta-analyses 3](meta-analysis.qmd#multilevel-models): More complex models 
+
+## Chapters in this part
+
+::: {#chapters}
+:::

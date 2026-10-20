@@ -58,11 +58,20 @@ execute:
   message: false
   error: true
 
+# Quarto reads back-to-top-navigation from website: even in a book (setting
+# it under book: has no effect)
+website:
+  back-to-top-navigation: true
+
 book:
   title: "Environmental Computing"
   reader-mode: true
   sidebar:
     collapse-level: 1
+  # results show the part each match is in; more results before "show more"
+  search:
+    show-item-context: true
+    limit: 20
 
   page-footer:
     left: |

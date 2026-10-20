@@ -147,7 +147,7 @@ If you hit a merge conflict, contact a maintainer for help.
 1. Decide which section the new page belongs to.
 2. Create a new `.qmd` file in the relevant `content/` subfolder.
 3. Add a YAML header with at least `title:`.
-4. Add the new file path to `chapters:` in `_quarto.yml`.
+4. Add the new file path to `chapters:` in `_quarto.yml`, and to the `listing: contents:` list in the front matter of its part's landing page (for example `content/basics/basics.qmd`), in the same order.
 5. Write your tutorial content.
 
 ## Moving or renaming a page

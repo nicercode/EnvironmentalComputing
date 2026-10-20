@@ -139,7 +139,7 @@ To check the data types within a data frame, use the `str` function. This gives 
 str(eg_data_frame)
 ```
 
-Note that data types can change. In this example, the character vector has been coerced to a factor in the process of making the data frame.
+Note that the character vector is still a character (`chr`) in the data frame. In versions of R before 4.0, `data.frame()` and `read.csv()` converted character vectors to factors by default (`stringsAsFactors = TRUE`), so in older code and output you may see text columns listed as factors.
 
 If you wish to check the data type of just one variable, or change that variable to another type, we use `$` to access that variable from within the data frame. For example:
 

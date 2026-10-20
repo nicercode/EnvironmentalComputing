@@ -214,4 +214,4 @@ The R Markdown Definitive Guide's [chapter on notebooks](https://bookdown.org/yi
 
 **Author**: Alistair Poore
 
-**Year:** 2016
+**Year:** 2016 (updated 2026)

@@ -20,14 +20,7 @@ listing:
 set.seed(1)
 ```
 
-R has a very wide range of functions and packages for visualising data.
-
-These pages have a brief introduction to:
-
-* [Basic plotting in R](ggplot.qmd)
-* [More advanced plotting with ggplot](ggplot.qmd)
-* [Visualising multivariate data](#visualising-multivariate-data)
-* [Visualising spatial data (incl. mapping)](#visualising-spatial-data)
+R has a very wide range of functions and packages for visualising data. The chapters in this part start with [plotting in R](ggplot.qmd), from base graphics to ggplot2, and [combining several plots into one figure](multi-panel-figures.qmd). They then cover spatial data and maps, and [heatmaps](heatmaps.qmd). Plots for multivariate data are covered alongside the analyses they come from.
 
 ## Visualising multivariate data
 
@@ -67,20 +60,19 @@ labels_colors(dend) <- sample_colours
 plot(dend, ylab = "")
 ```
 
-R has a very wide range of functions and packages for visualising multivariate data. Here is some help for some of the more commonly used techniques:  
+Data with many variables per sample, such as the abundances of many species at each site, are usually visualised by reducing them to a few dimensions or by grouping similar samples. These plots are covered in the [Multivariate and Other Methods](../statistical-methods/multivariate-methods.qmd) part, with the analyses that produce them:
 
-* [multidimensional scaling](../statistical-methods/mds.qmd)  
-* [principal componenents analysis](../statistical-methods/pca.qmd)  
-* [cluster analysis](../statistical-methods/cluster-analysis.qmd)  
+* [multidimensional scaling](../statistical-methods/mds.qmd)
+* [principal components analysis](../statistical-methods/pca.qmd)
+* [cluster analysis](../statistical-methods/cluster-analysis.qmd)
 
 ## Visualising spatial data
 
-R has a very wide range of functions and packages for visualising spatial data. This page will link to a series of tutorials for handling spatial data and making maps.  
+These chapters cover handling spatial data and making maps:
 
-* [Making simple maps with ggmap](simple-maps.qmd)  
-* [Making interactive maps with leaflet](interactive-maps.qmd)  
-* [Making maps from shapefiles]
-* More soon...
+* [Working with rasters](rasters.qmd)
+* [Making simple maps](simple-maps.qmd)
+* [Making interactive maps with leaflet](interactive-maps.qmd)
 
 ![](images/Visualising_spatial_data_intro_image.jpg){fig-alt="Map of a raster of values from about 21.8 to 23, shaded from pink through yellow to green, with crosses marking sampling sites"}
 

@@ -8,7 +8,6 @@ listing:
     - rasters.qmd
     - simple-maps.qmd
     - interactive-maps.qmd
-    - pca.qmd
     - heatmaps.qmd
   sort: false
   fields: [title, description]
@@ -71,7 +70,7 @@ plot(dend, ylab = "")
 R has a very wide range of functions and packages for visualising multivariate data. Here is some help for some of the more commonly used techniques:  
 
 * [multidimensional scaling](../statistical-methods/mds.qmd)  
-* [principal componenents analysis](pca.qmd)  
+* [principal componenents analysis](../statistical-methods/pca.qmd)  
 * [cluster analysis](../statistical-methods/cluster-analysis.qmd)  
 
 ## Visualising spatial data

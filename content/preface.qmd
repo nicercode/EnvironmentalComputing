@@ -145,7 +145,7 @@ Page migration table:
 | `/graphics/ggplot/ggplot-multipanel/` | [data-visualisation/multi-panel-figures](data-visualisation/multi-panel-figures.qmd) |
 | `/graphics/spatial-vis/basic-raster/` | [data-visualisation/rasters](data-visualisation/rasters.qmd) |
 | `/graphics/spatial-vis/simple-maps/` | [data-visualisation/simple-maps](data-visualisation/simple-maps.qmd) |
-| `/graphics/multivariate-vis/pca/` | [data-visualisation/pca](data-visualisation/pca.qmd) |
+| `/graphics/multivariate-vis/pca/` | [statistical-methods/pca](statistical-methods/pca.qmd) |
 | `/graphics/multivariate-vis/heatmaps/` | [data-visualisation/heatmaps](data-visualisation/heatmaps.qmd) |
 | `/statistics/` | [statistical-methods/linear-models](statistical-methods/linear-models.qmd) |
 | `/statistics/linear-models/` | [statistical-methods/linear-models](statistical-methods/linear-models.qmd) |
@@ -250,7 +250,7 @@ In Feb 2022, the site was migrated from Wordpress to Hugo. These old Wordpress U
 - [/plotting-with-ggplot-the-basics/](data-visualisation/ggplot.qmd#introduction-to-ggplot2)
 - [/plotting-with-ggplot/](data-visualisation/ggplot.qmd#introduction-to-ggplot2)
 - [/power-analysis/](statistical-methods/power-analysis.qmd)
-- [/principal-components-analysis/](data-visualisation/pca.qmd)
+- [/principal-components-analysis/](statistical-methods/pca.qmd)
 - [/reshaping-data/](data-literacy/pivotting/index.qmd)
 - [/single-continuous-vs-categorical-variables/](data-visualisation/ggplot.qmd#one-continuous-and-one-categorical-variable)
 - [/statistics/](statistical-methods/linear-models.qmd)

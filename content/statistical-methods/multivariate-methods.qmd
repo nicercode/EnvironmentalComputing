@@ -5,6 +5,7 @@ listing:
   contents:
     - MVabund.qmd
     - cluster-analysis.qmd
+    - pca.qmd
     - mds.qmd
     - time-series-analysis.qmd
     - meta-analysis.qmd
@@ -18,9 +19,10 @@ Multivariate data are common in the environmental sciences, occurring whenever w
 
 * [Model-based analysis of multivariate abundance data](MVabund.qmd) with mvabund
 * Grouping samples by their similarity with [cluster analysis](cluster-analysis.qmd)
+* Summarising many variables into a few with [principal components analysis](pca.qmd)
 * Representing relationships among samples with [multidimensional scaling](mds.qmd)
 
-For principal components analysis and other ways of plotting multivariate data, see [Visualising multivariate data](../data-visualisation/data-visualisation.qmd#visualising-multivariate-data).
+For other ways of plotting multivariate data, see [Visualising multivariate data](../data-visualisation/data-visualisation.qmd#visualising-multivariate-data).
 
 This part also covers [forecasting with time series](time-series-analysis.qmd) and meta-analysis:
 

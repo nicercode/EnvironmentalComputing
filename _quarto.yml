@@ -148,7 +148,6 @@ book:
         - content/data-visualisation/rasters.qmd
         - content/data-visualisation/simple-maps.qmd
         - content/data-visualisation/interactive-maps.qmd
-        - content/data-visualisation/pca.qmd
         - content/data-visualisation/heatmaps.qmd
 
     # planned part: content/essential-maths/essential-maths.qmd
@@ -186,6 +185,7 @@ book:
         # planned: content/statistical-methods/multi-variate-models.qmd
         - content/statistical-methods/MVabund.qmd
         - content/statistical-methods/cluster-analysis.qmd
+        - content/statistical-methods/pca.qmd
         - content/statistical-methods/mds.qmd
         - content/statistical-methods/time-series-analysis.qmd
         # planned: content/statistical-methods/machine-learning.qmd

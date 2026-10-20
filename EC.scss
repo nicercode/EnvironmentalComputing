@@ -104,3 +104,7 @@ main.content:has(.hero) img.quarto-cover-image { display: none; }
 @media (max-width: 767px) {
   .hero > p { flex-basis: auto; }
 }
+
+/* Part pages: chapter listings show only title and description, so drop
+   the empty date/author column Quarto reserves on the right of each row. */
+#listing-chapters div.quarto-post .metadata { display: none; }

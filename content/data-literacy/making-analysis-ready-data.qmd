@@ -6,7 +6,7 @@ Having skills in organising and summarising data is crucial for students and res
 
 ![](images/Data_entry_image.jpg){fig-alt="A spreadsheet of plant data with one row per observation and columns such as species, family, growth form, height, country, latitude, longitude and temperature"}
 
-Data manipulation using the packages [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html), [tidyr](https://blog.rstudio.org/2014/07/22/introducing-tidyr/) and [reshape2](https://cran.r-project.org/web/packages/reshape2/).
+Data manipulation using the packages [dplyr](https://dplyr.tidyverse.org/) and [tidyr](https://tidyr.tidyverse.org/).
 
 * [Making new variables](mutate/index.qmd)
 * [Subsetting data](filter-rows/index.qmd) - selecting rows and columns  

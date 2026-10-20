@@ -51,6 +51,8 @@ project:
   resources:
     - datasets/
     - _redirects
+    - favicon.ico
+    - apple-touch-icon.png
 
 execute:
   freeze: auto
@@ -80,7 +82,10 @@ book:
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/hexsticker_EC.png
   cover-image-alt: "Environmental Computing hex sticker"
-  favicon: images/tabmark-ec.png
+  # 32px icon for browser tabs; favicon.ico and apple-touch-icon.png (180px)
+  # are copied to the site root, where browsers and iOS look for them by name.
+  # All three are made from images/tabmark-ec.png.
+  favicon: images/favicon-32.png
   site-url: https://environmentalcomputing.net/
   google-analytics: "G-KVTJFRWP8M"
   repo-url: https://github.com/nicercode/EnvironmentalComputing

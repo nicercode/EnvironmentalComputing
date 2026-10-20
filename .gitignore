@@ -1,5 +1,6 @@
 .Rhistory
-*Icon**
+# macOS folder icon files ("Icon" plus a carriage return)
+Icon?
 .DS_Store
 .Rproj.user
 .RData

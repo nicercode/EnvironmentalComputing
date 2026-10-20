@@ -73,6 +73,7 @@ book:
   cover-image-alt: "Environmental Computing hex sticker"
   favicon: images/hexsticker_EC.png 
   site-url: https://environmentalcomputing.net/
+  google-analytics: "G-KVTJFRWP8M"
   repo-url: https://github.com/nicercode/EnvironmentalComputing
   repo-branch: master
   repo-actions: [edit, issue]
@@ -210,7 +211,6 @@ format:
     code-link: true
 
     author-meta: "Alistair Poore, Will Cornwell, Daniel Falster, Fonti Kar and contributors"
-    include-in-header: "plausible.html"
     callout-appearance: simple
 
 editor: source

@@ -1,5 +1,5 @@
 ---
-title: "Using R Notebooks"
+title: "Quarto Documents and R Notebooks"
 ---
 
 ```{r}
@@ -25,161 +25,192 @@ plot(y ~ x)
 # code to make a plot of y vs x
 ```
 
-This can get messy if you have lots of comments, so we recommend looking at [RStudio notebooks](http://rmarkdown.rstudio.com/r_notebooks.html) as a very clean way of writing your code with associated comments.
+This can get messy if you have lots of comments. A cleaner way is to write a document that mixes plain text with chunks of code, and shows the output of the code (tables, statistics and figures) right next to it. There are two common formats for this in R:
 
-RStudio notebooks are a form of markdown document, a widely used format for exporting text and code to various report formats. All web pages on this site start their life as markdown files with all the text, code needed to make the html file. Rstudio notebooks have the added benefits of displaying the output from your code directly in the document.
+- **Quarto documents** (`.qmd` files) are the current standard, and RStudio's default for new reports. Every chapter of this book is a Quarto document.
+- **R Markdown documents and R notebooks** (`.Rmd` files) are the older format. You will still meet them in other people's projects and in many online tutorials, so they are covered [at the end of this page](#r-notebooks-and-r-markdown).
 
-## Creating a new notebook
+Both are written in markdown, a simple way of formatting plain text, and both run the same R code. We recommend Quarto for new work.
 
-Creating a new notebook is as simple as clicking **File, New File, R Notebook** from the RStudio menu. You will need a recent version of RStudio (1.0 or higher), so update that if necessary.
+## Creating a Quarto document
 
-Save the file in a folder on your computer. This folder will become the working directory for any code in your notebook and there is no need to set the working directory.
+Quarto comes bundled with recent versions of RStudio. To create a new document, click **File, New File, Quarto Document...** from the RStudio menu, give it a title, and click **Create**. Untick **Use visual markdown editor** if you want to see the markdown source rather than a word-processor style view (you can switch at any time with the **Source** and **Visual** buttons).
 
-Edit the title at the top, have a quick read of the notes then delete the template provided (from "This is an [R Markdown]..."" onwards). Make sure you leave the first few lines in between the --- marks.
+Quarto also works in [Positron](https://quarto.org/docs/tools/positron/) and VS Code, if you use one of those editors instead of RStudio.
 
-Your notebook is now just a big blank page for you to start writing down all the steps involved in your work. For example, you might want to start with a brief description of the project.
+Save the file in a folder on your computer, ideally inside an [RStudio project](projects.qmd). That folder becomes the working directory for the code in your document, so there is no need to set the working directory.
 
-## Adding code to your notebook
+Delete the example text that comes with the new document, but leave the lines at the top between the `---` marks. Your document is now a blank page for writing down all the steps involved in your work. For example, you might want to start with a brief description of the project.
 
-![](images/Menu1.png){fig-alt="The RStudio notebook toolbar with the Insert button circled"}
+## The YAML header
 
-Executable code is added to your notebook in what are called chunks. To do this, click on **Insert, R** from the top right of your notebook (or use **Ctrl + Alt + I** on the keyboard). This will add an empty chunk that looks like this:
+The lines between the `---` marks at the top of the document are called the YAML header. They set the title and control what the finished document looks like. A good starting point is:
+
+```yaml
+---
+title: "Effects of temperature on plant height"
+author: "Your Name"
+format:
+  html:
+    embed-resources: true
+---
+```
+
+`embed-resources: true` puts the figures and styling inside the HTML file itself, so you end up with a single file that you can email to a supervisor or collaborator. Without it, the figures are saved in a separate folder that has to travel with the file.
+
+## Adding code to your document
+
+Executable code goes in what are called chunks. To add one, click the green **+C** button at the top of your document and choose **R**, or press **Ctrl + Alt + I** (**Cmd + Option + I** on a Mac). This adds an empty chunk that looks like this:
 
 ![](images/Chunk1.png){fig-alt="An empty R code chunk in an RStudio notebook"}
 
-Any code that you want to run then be added inside the chunk. I like to use the first chunk in the notebook to load any R packages that might be required for the upcoming work. E.g.,
+Any code that you want to run goes inside the chunk. It is a good idea to use the first chunk to load any R packages that the rest of the document needs. For example,
 
 ![](images/Chunk2.png){fig-alt="An R code chunk containing library(dplyr) and library(ggplot2)"}
 
-Be careful not to delete the ``` marks as the text will no longer be recognised as code.
+Be careful not to delete the ```` ``` ```` marks, or the text will no longer be recognised as code.
 
 ## Running the code
 
-Running all the code in your chunk is done by clicking the little green arrow at the top right of your chunk. Just like in a script you can still run individual lines of code by entering *Ctrl+Enter* with your cursor on that line.
+To run all the code in a chunk, click the little green arrow at the top right of the chunk. Just like in a script, you can still run individual lines of code by pressing **Ctrl + Enter** (**Cmd + Return** on a Mac) with your cursor on that line.
 
-Use the chunks to organise your workflow, grouping code that does a particular task within a chunk and preceding these by plain text comments that explain what each chunk will do. Avoid putting every single line of code in a separate chunk and avoid having very many lines of code that do different things within the same chunk.
+Use the chunks to organise your workflow, grouping code that does a particular task within a chunk and preceding these by plain text that explains what each chunk will do. Avoid putting every single line of code in a separate chunk and avoid having very many lines of code that do different things within the same chunk.
 
-Output from your code will appear directly below the code chunk rather than in the console below or the plots pane to the right. For example, a plot of plant height vs temperature from the data set used in our [linear regression tutorial](../statistical-methods/linear-regression.qmd).
-
-```{r}
-#| label: rstudio-notebooks-3
-#| eval: false
-#| echo: false
-Plant_height <- read.csv(file = "data/Plant_height.csv")
-ggplot(Plant_height, aes(temp, loght, color = growthform)) +
-  geom_point()
-```
+By default, output from your code appears directly below the chunk rather than in the console or the plots pane. For example, a plot of plant height vs temperature from the data set used in our [linear regression tutorial](../statistical-methods/linear-regression.qmd):
 
 ![](images/Chunk3.png){fig-alt="An R chunk that reads Plant_height.csv and plots it with ggplot, with the resulting scatterplot of log height against temperature, coloured by growth form, shown directly below the chunk"}
 
-You can hide or show any output within your notebook by clicking on the little upward arrows (top right of output).
+If you prefer output in the console and plots pane, click the cog symbol next to **Render** and choose **Chunk Output in Console**.
 
-![](images/Menu2.png){fig-alt="The RStudio notebook toolbar with the settings (gear) button circled"}
+If you have changed any code or data files, you will need to run the code again. The **Run** menu at the top right of the document has **Run All**, and **Run All Chunks Above**, which is very useful when you are part way through a document and want to make sure everything before it is up to date.
 
-To expand or collapse all output click on the cog symbol next to Preview at the top of the notebook. The settings in there can also be used to send all output to the console (**Chunk output in Console**) or keep in the notebook (**Chunk Output Inline**).
+## Rendering your document
 
-If you save the notebook and leave RStudio, the output is saved and you will see plots etc when you reopen the file. If you have made any changes to code or data files, however, you will need to run the code again.
+Clicking **Render** (or pressing **Ctrl + Shift + K**, **Cmd + Shift + K** on a Mac) runs all the code from scratch, in a fresh R session, and turns your document into a finished report. Running everything from scratch is a useful check that your analysis really does work from start to finish, and doesn't rely on something you happened to have in your environment.
 
-![](images/Menu3.png){fig-alt="The RStudio notebook toolbar with the Run button circled"}
+By default the report is an HTML file, which opens in the RStudio Viewer or your browser. HTML files are an excellent way to share your work with collaborators and supervisors. The single file can be opened in any browser on any device and has all your text, code, statistical output and figures. Your reader doesn't need to run any code (or even be an R user) to see what you have done.
 
-This is easily done by clicking **Run, Run all**. Also very useful when you are part way through a document is **Run All Chunks Above** to ensure everything is refreshed and running correctly.
+Two more options in the YAML header make HTML reports even more useful:
 
-## Exporting your notebook to other formats
+```yaml
+format:
+  html:
+    embed-resources: true
+    code-fold: true
+    code-tools: true
+```
 
-In addition to being a visually appealing way to combine code and comments, notebooks can also be used to create reports in various formats (html, pdf and word).
+`code-fold: true` hides each chunk of code behind a "Code" button, so readers see the results first and can open the code if they want it. `code-tools: true` adds a menu at the top of the page to show or hide all the code, and to view the source of the whole document.
 
-![](images/Menu4.png){fig-alt="The RStudio notebook toolbar with the Knit button circled"}
+To make a Word document or a PDF instead, change the format to `docx` or `pdf`, or list more than one format and choose between them from the arrow next to **Render**:
 
-Clicking on **Preview** will give you a sneak preview of what this might look like. To make the documents, you would then choose **Knit to HTML** for example to make an html file.
+```yaml
+format:
+  html: default
+  docx: default
+```
 
-The html files created are an excellent way to share your work with collaborators and supervisors. The single document can be opened in any browser on any device and has all comments, code, statistical output and figures. Your reader doesn't need to run any code (or even be an R user) to see what you have done. The html files even have neat little buttons where you can hide and show the code, and the ability to reverse the whole process and download a markdown file from the html.
+Making PDFs needs LaTeX. The simplest way to get it is to run `quarto install tinytex` in RStudio's Terminal tab.
 
-When you knit to HTML for the first time, you may be prompted for some packages that are not on your machine (e.g., knitr, rmarkdown). If this happens, install those and do it again.
-
-When you first look at your html file, you may also realise that there are some unwanted parts (e.g., warning messages) and that the formatting could improved. To fix these, you need to learn a bit more about controlling the behaviour of code chunks, and some basic formatting.
-
-These are nicely detailed on RStudio's [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). Here are a just few of the more useful options:
+When you first look at your report, you may realise that there are some unwanted parts (e.g., warning messages) and that the formatting could be improved. To fix these, you need to learn a bit more about basic formatting and controlling the behaviour of code chunks.
 
 ## Some basic markdown formatting
 
-| Markdown  | Output  |
-|-----|----|
-| Header 1 |  # Header 1 |
-| Header 2 |  ## Header 2 |
-| Header 3 |  ## Header 2 |
-| *italics*  | *italics* |
-| **bold** |  **bold** |
-|Inserting an image:  | ![](images/E_C_Logo_black_square.png){fig-alt="Environmental Computing logo: a seedling with two leaves growing out of a laptop screen"}  |
-| Inserting a link: More help at Environmental Computing-/.. | More help at [Environmental Computing](../../index.qmd)  |
+Text outside the chunks is written in markdown. Here are a few of the most useful bits of formatting:
+
+| You type | You get |
+|----|----|
+| `# Heading 1` | a top-level heading |
+| `## Heading 2` | a second-level heading |
+| `### Heading 3` | a third-level heading |
+| `*italics*` | *italics* |
+| `**bold**` | **bold** |
+| `[Environmental Computing](https://environmentalcomputing.net)` | a link: [Environmental Computing](../../index.qmd) |
+| `![](images/logo.png)` | an image: ![](images/E_C_Logo_black_square.png){fig-alt="Environmental Computing logo: a seedling with two leaves growing out of a laptop screen" width="60"} |
+
+Quarto's [markdown basics](https://quarto.org/docs/authoring/markdown-basics.html) page covers lists, tables, equations and much more.
 
 ## Controlling chunk behaviour
 
-You can control how the code and its output is displayed in the exported document with a series of options for each chunk. There are lots of these (detailed [here](https://yihui.name/knitr/options/)), but a few useful ones are:
+You can control how each chunk's code and output appear in the finished report with chunk options. In a Quarto document, they go at the top of the chunk on lines that start with `#|`. There are lots of these (see Quarto's [execution options](https://quarto.org/docs/computations/execution-options.html)), but a few useful ones are below.
 
-If you want to show the code but not run it, use `eval=F` within the `{r}` at the top of your chunk
-Choose to run code in the output or not
+To show the code but not run it:
 
-```{r}
-#| label: rstudio-notebooks-4
+```{{r}}
 #| eval: false
-# ```{r, eval=F}
 2 + 2
 ```
 
-To run the code, but hide the code in the output:
+To run the code but hide it, showing only the output:
 
-```{r}
-#| label: rstudio-notebooks-5
-#| eval: false
-# ```{r, echo=F}
+```{{r}}
+#| echo: false
 2 + 2
 ```
 
-To hide all messages and warnings:
+To hide messages and warnings, for example the start-up messages printed when some packages load:
 
-```{r}
-#| label: rstudio-notebooks-6
-#| warning: false
+```{{r}}
 #| message: false
-# ```{r, warning=F, message=F}
-2 + 2
+#| warning: false
+library(dplyr)
 ```
 
+To change the size of a plot (in inches):
+
 ```{r}
-#| label: rstudio-notebooks-7
+#| label: rstudio-notebooks-3
 #| echo: false
 Plant_height <- read.csv(file = "data/Plant_height.csv")
 ```
 
-To change the size of any plots:
-
-```{r}
-#| label: rstudio-notebooks-8
-#| fig-alt: "A wide, short scatterplot of log plant height against temperature, showing the effect of setting fig-height to 3 and fig-width to 10"
+```{{r}}
 #| fig-height: 3
 #| fig-width: 10
-# ```{r, fig.height=3, fig.width=10}
 ggplot(Plant_height, aes(temp, loght)) +
   geom_point()
 ```
 
-These can also be set once at the top of the document rather than individually for each chunk (termed Global options). For example, to set the size of all figures, we would use:
-
 ```{r}
-#| label: rstudio-notebooks-9
-#| include: false
-knitr::opts_chunk$set(fig.width = 10, fig.height = 10)
+#| label: rstudio-notebooks-4
+#| echo: false
+#| fig-alt: "A wide, short scatterplot of log plant height against temperature, showing the effect of setting fig-height to 3 and fig-width to 10"
+#| fig-height: 3
+#| fig-width: 10
+ggplot(Plant_height, aes(temp, loght)) +
+  geom_point()
 ```
+
+Options can also be set once in the YAML header, rather than in every chunk. For example, to hide all warnings and make every figure 6 inches wide:
+
+```yaml
+execute:
+  warning: false
+format:
+  html:
+    fig-width: 6
+```
+
+## R notebooks and R Markdown
+
+R Markdown (`.Rmd`) was the standard format before Quarto, and you will still come across it. Most of this page applies to it too, with a few differences:
+
+- Create one with **File, New File, R Markdown...**, or **File, New File, R Notebook** for an R notebook, which is an R Markdown document that saves your chunk output as you work (in a `.nb.html` file next to the `.Rmd`), so you see your plots again when you reopen it.
+- Instead of **Render**, there is **Knit** (or **Preview** in a notebook). **Knit to HTML** makes an HTML report.
+- The format in the YAML header is written `output: html_document` rather than `format: html`.
+- Chunk options are traditionally written inside the curly brackets at the top of the chunk, rather than on `#|` lines. For example, ```` ```{r, eval=FALSE} ```` is the same as an `#| eval: false` line, and ```` ```{r, fig.height=3, fig.width=10} ```` is the same as `#| fig-height: 3` and `#| fig-width: 10`.
+
+![](images/Menu4.png){fig-alt="The RStudio notebook toolbar with the Knit button circled"}
+
+Quarto can render most `.Rmd` files as they are, and turning one into a Quarto document is mostly a matter of renaming it to `.qmd` and changing `output:` to `format:` in the YAML header. Quarto's [FAQ for R Markdown users](https://quarto.org/docs/faq/rmarkdown.html) explains the differences in more detail.
 
 ## Further help
 
-RStudio's [introduction to notebooks](http://rmarkdown.rstudio.com/r_notebooks.html)
+Quarto's [tutorial for RStudio](https://quarto.org/docs/get-started/hello/rstudio.html)
 
-RStudio's [R Markdown cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+Quarto's guide to [using R](https://quarto.org/docs/computations/r.html) and to [HTML code options](https://quarto.org/docs/output-formats/html-code.html) such as code folding
 
-Nathan Stephen's [Why I love R notebooks](https://rviews.rstudio.com/2017/03/15/why-i-love-r-notebooks/)
-
-Jonathan McPherson's [R Notebooks](https://www.rstudio.com/resources/webinars/introducing-notebooks/)
+The R Markdown Definitive Guide's [chapter on notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html)
 
 **Author**: Alistair Poore
 

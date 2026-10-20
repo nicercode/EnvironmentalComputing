@@ -118,4 +118,4 @@ Our introduction to [version control](../coding-skills/version-control.qmd) for 
 
 **Author**: Alistair Poore & Will Cornwell
 
-**Year:** 2016
+**Year:** 2016 (updated 2026)

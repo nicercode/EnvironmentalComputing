@@ -196,4 +196,4 @@ Type `?pivot_wider` and `?pivot_longer` to get the R help for these tidyr functi
 
 **Author**: Alistair Poore
 
-**Year:** 2016
+**Year:** 2016 (updated 2026)

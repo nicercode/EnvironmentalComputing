@@ -19,7 +19,7 @@ If you have never made an R script, first read [Getting started with R](../basic
 
 Good script and data management practices often start before you even open R-Studio. For every project you should start by creating a project folder on your computer. This is where you keep all your data, scripts and outputs (plots and tables) and will be referred to as your project directory. Some people like to further organise project directories by creating more folders such as `Data`, `R_scripts` or `Outputs`, how you manage your project directory is up to you.
 
-**Data integrity.** Once data entry is completed and saved in your project directory (see [Data entry](../misc/data-entry.qmd), this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset. 
+**Data integrity.** Once data entry is completed and saved in your project directory (see [Data entry](../data-literacy/data-entry.qmd), this should be the last time you lay eyes on the raw data. Any manipulation, removal of outliers, renaming variables etc should be conducted in R. This maintains the integrity of your original data and provides a record in your R script of exactly what changes have been made to your dataset. 
 
 ## General script format
 
@@ -62,7 +62,7 @@ library(ggplot2)
 source("R_scripts/myfunctions.R")
 ```
 
-Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See [Data structure](../misc/data-types-structure.qmd) and [Importing data](../data-literacy/reading/index.qmd) for help with these issues.
+Finally, before you start running any data analyses you may need to conduct some housekeeping on your data (checking the structure of the data set, looking for missing values, changing variable types etc). See [Data structure](../data-literacy/data-types-structure.qmd) and [Importing data](../data-literacy/reading/index.qmd) for help with these issues.
 
 Putting all this together, the beginning of a script will look something like the following. 
 

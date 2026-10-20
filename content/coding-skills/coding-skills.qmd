@@ -1,17 +1,25 @@
 ---
 title: "Coding Skills"
+listing:
+  id: chapters
+  contents:
+    - good-practice.qmd
+    - functions.qmd
+    - loops.qmd
+    - version-control.qmd
+    - asking-code-questions.qmd
+  sort: false
+  fields: [title, description]
+  filter-ui: false
+  sort-ui: false
 ---
 
 You might think having skills in computer coding is just for web site and game developers, but skills in coding are increasing valuable for environmental scientists. Running your data analyses and graphics using code means that your research methods are explicitly saved, reproducible and easily shared with colleagues or supervisors.
 
 On these pages, we give some advice for writing effective code and some of the very useful coding skills that will save you lots of time.
 
-* [Good practice for writing scripts](good-practice.qmd)
-* [Writing simple functions](functions.qmd)  
-* [Using loops](loops.qmd)
-* Using Lists...coming soon
-* Logical control...coming soon
-* [Version control](version-control.qmd)
+::: {#chapters}
+:::
 
 ![](images/Coding_image.jpg){fig-alt="R code showing two for loops: one filling a vector with squared values, and one filling the two columns of a data frame"}
 

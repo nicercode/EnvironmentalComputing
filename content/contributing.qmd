@@ -55,6 +55,7 @@ EnvironmentalComputing/
 ```
 
 - `_quarto.yml` controls title, chapter order, and formatting.
+- `content/statistical-methods/` holds three parts (Linear Models, Categorical Data Analyses, and Multivariate and Other Methods), each with its own landing page in that folder.
 - `content/` is where most authoring happens.
 - `_book/` is generated output and should not be edited manually.
 
@@ -93,7 +94,7 @@ Page order is controlled by the `chapters:` list in `_quarto.yml`.
 
 Use a section-level structure throughout `content/`.
 
-For each first-level section folder (for example `content/statistical-methods/`, `content/data-visualisation/`, `content/misc/`), keep:
+For each first-level section folder (for example `content/statistical-methods/`, `content/data-visualisation/`, `content/basics/`), keep:
 
 - chapter files (`.qmd`) at the section root
 - images in `images/`
@@ -146,7 +147,7 @@ If you hit a merge conflict, contact a maintainer for help.
 1. Decide which section the new page belongs to.
 2. Create a new `.qmd` file in the relevant `content/` subfolder.
 3. Add a YAML header with at least `title:`.
-4. Add the new file path to `chapters:` in `_quarto.yml`.
+4. Add the new file path to `chapters:` in `_quarto.yml`, and to the `listing: contents:` list in the front matter of its part's landing page (for example `content/basics/basics.qmd`), in the same order.
 5. Write your tutorial content.
 
 ## Moving or renaming a page

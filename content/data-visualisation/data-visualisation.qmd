@@ -1,5 +1,18 @@
 ---
 title: "Data Visualisation"
+listing:
+  id: chapters
+  contents:
+    - ggplot.qmd
+    - multi-panel-figures.qmd
+    - rasters.qmd
+    - simple-maps.qmd
+    - interactive-maps.qmd
+    - heatmaps.qmd
+  sort: false
+  fields: [title, description]
+  filter-ui: false
+  sort-ui: false
 ---
 
 ```{r}
@@ -57,7 +70,7 @@ plot(dend, ylab = "")
 R has a very wide range of functions and packages for visualising multivariate data. Here is some help for some of the more commonly used techniques:  
 
 * [multidimensional scaling](../statistical-methods/mds.qmd)  
-* [principal componenents analysis](pca.qmd)  
+* [principal componenents analysis](../statistical-methods/pca.qmd)  
 * [cluster analysis](../statistical-methods/cluster-analysis.qmd)  
 
 ## Visualising spatial data
@@ -65,7 +78,13 @@ R has a very wide range of functions and packages for visualising multivariate d
 R has a very wide range of functions and packages for visualising spatial data. This page will link to a series of tutorials for handling spatial data and making maps.  
 
 * [Making simple maps with ggmap](simple-maps.qmd)  
+* [Making interactive maps with leaflet](interactive-maps.qmd)  
 * [Making maps from shapefiles]
 * More soon...
 
 ![](images/Visualising_spatial_data_intro_image.jpg){fig-alt="Map of a raster of values from about 21.8 to 23, shaded from pink through yellow to green, with crosses marking sampling sites"}
+
+## Chapters in this part
+
+::: {#chapters}
+:::

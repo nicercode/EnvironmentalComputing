@@ -104,3 +104,11 @@ main.content:has(.hero) img.quarto-cover-image { display: none; }
 @media (max-width: 767px) {
   .hero > p { flex-basis: auto; }
 }
+
+/* Part pages: chapter listings show only title and description, so drop
+   the empty date/author column Quarto reserves on the right of each row. */
+#listing-chapters div.quarto-post .metadata { display: none; }
+
+/* Quarto truncates each description from the chapter's first paragraph but
+   keeps the markup after the cut, e.g. a run of <br> that adds blank lines. */
+#listing-chapters .listing-description br { display: none; }

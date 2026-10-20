@@ -1,13 +1,23 @@
 ---
 title: "Basics"
+listing:
+  id: chapters
+  contents:
+    - r.qmd
+    - projects.qmd
+    - rstudio-notebooks.qmd
+  sort: false
+  fields: [title, description]
+  filter-ui: false
+  sort-ui: false
 ---
 
 Throughout this site, instructions for statistical analyses, data management and graphical techniques are provided in the software language R. R is a free, open source language that has rapidly become standard usage in the biological and environmental sciences. Apart from the cost, the language has the benefits of being able to explicitly share methods with colleague, and a very active community of people who are developing packages that will run very many types of analyses and graphics.
 
-Before you get started with making graphics and doing analyses, you will need to:
+Before you get started with making graphics and doing analyses, you will need to install R and learn the basics of using it, plan how you are going to organise your files, and learn to keep your code, results and notes together in an R notebook:
 
-* [Install R and learn the basics of using R](r.qmd)  
-* Think about [project management](projects.qmd) to plan how you are going to organise your files 
+::: {#chapters}
+:::
 
 ## Data entry
 
@@ -17,9 +27,9 @@ After collecting data, being able to enter those data and import into various so
 
 On these pages, we give some guidance for data entry that will save a lot of time when it comes to analysing data and making effective figures. We also describe the types and structure of data objects in R that you will see once you have imported your data. 
 
-* [Data entry](../misc/data-entry.qmd) - organising data when first entering it into a spreadsheet.  
+* [Data entry](../data-literacy/data-entry.qmd) - organising data when first entering it into a spreadsheet.  
 * [Importing data](../data-literacy/reading/index.qmd) into R  
-* [Data types and structure](../misc/data-types-structure.qmd) - better understanding data objects in R  
+* [Data types and structure](../data-literacy/data-types-structure.qmd) - better understanding data objects in R  
 
 ![](images/Data_entry_image.jpg){fig-alt="A spreadsheet of plant data with one row per observation and columns such as species, family, growth form, height, country, latitude, longitude and temperature"}
 

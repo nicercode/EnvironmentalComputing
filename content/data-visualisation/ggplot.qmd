@@ -154,8 +154,6 @@ Plant_height <- read.csv(file = "data/Plant_height.csv", header = TRUE)
 
 ### Scatterplots
 
-### Scatterplots###
-
 To visualise how plant height varies with temperature, we can use a simple scatterplot, using the `plot` function. Place the Y variable on the left of the tilde (~) and the X variable on the right. The `data=Plant_height` argument tells R to look in the data frame Plant_height for those two variables.
 
 ```{r}
@@ -171,7 +169,7 @@ If the two variables you would like to plot are in different objects in R, you w
 plot(y ~ x)
 ```
 
-where *y* and *X* are two vectors of equal length. 
+where *y* and *x* are two vectors of equal length. 
 
 ### Formatting plots
 

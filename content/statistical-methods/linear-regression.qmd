@@ -100,7 +100,7 @@ There are a variety of measures for dealing with non-independence. These include
 
 ## Communicating the results
 
-**Written**  The results of linear regression may be presented in the text in a number of different ways, but a short sentence is often adequate, e.g., "plant height exhibited a significant (*F* = 57.5, *p* < 0.01) negative relationship with temperature". However, if you have run several analyses (or if  there is more than one predictor), it may be useful to present the results as a table with coefficient values, standard errors and *p*-values for each explanatory variable.  
+**Written**  The results of linear regression may be presented in the text in a number of different ways, but a short sentence is often adequate, e.g., "plant height exhibited a significant (*F* = 57.5, *p* < 0.01) positive relationship with temperature". However, if you have run several analyses (or if  there is more than one predictor), it may be useful to present the results as a table with coefficient values, standard errors and *p*-values for each explanatory variable.  
 
 **Visual** For a linear regression with a single explanatory variable, it is useful to present the results as a scatter plot. The line of best fit derived from the model can be added with the `abline` function.
 
@@ -119,7 +119,7 @@ Type `?lm` to get the R help for this function.
 
 <p style="margin-left: .5in; text-indent: -.5in;">McKillup (2012) *Statistics explained. An introductory guide for life scientists.* Cambridge University Press. Ch. 17 Regression.</p>
 
-More advice on [interpreting coefficients in linear models](interpret-glm-coeffs.qmd)
+More advice on [interpreting coefficients in linear models](interpret-lm-coeffs.qmd)
 
 **Author**: Andrew Letten
 

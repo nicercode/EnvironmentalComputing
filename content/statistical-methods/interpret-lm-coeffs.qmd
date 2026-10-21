@@ -4,7 +4,7 @@ title: "Interpreting Linear Regressions"
 
 ```{r}
 #| include: false
-set.seed(1)
+set.seed(4)
 ```
 
 The interpretation of coefficients in (generalized) linear models is more subtle than you many realise, and has consequences for how we test hypotheses and report findings. We will start by talking about **marginal vs. conditional interpretations** of model parameters. 
@@ -82,7 +82,7 @@ summary(mod_temp)
 anova(mod_temp)
 ```
 
-The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by `r round(coef(mod_temp)["temp"], 2)` (remember the correlation was 0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
+The output of this model is telling us there is an effect of temperature, even though technically there isn't. It is not giving us false information if you understand how to interpret model outputs. Because temperature is correlated with altitude, and there is an effect of altitude, when altitude is not in the model, the model tells us overall there is an effect of temperature of increasing height by `r round(coef(mod_temp)["temp"], 2)` (remember the correlation was -0.4). If our hypothesis is 'Does plant height change with temperature?', the answer is yes, the higher the temperature, the taller the plants.
 
 But what about altitude? We know the temperature effect we observe is because it is correlated with altitude, temperature does not directly predict height. If we want to know if there is an effect of temperature after controlling for altitude (holding altitude constant, so conditional), then we fit the model with altitude and then test for temperature.
 

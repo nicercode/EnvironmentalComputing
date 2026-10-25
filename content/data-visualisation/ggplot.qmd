@@ -21,11 +21,13 @@ abline(model, col = "red")
 boxplot(loght ~ hemisphere, data = Plant_height, ylab = "log(Plant height)", xlab = "Hemisphere", names = c("South", "North"), col = "lightblue")
 ```
 
-R has a very wide range of functions and packages for visualising data. Here is some help for some very simple plots using the base functions in R for data with:  
+R has a very wide range of functions and packages for visualising data. Here is some help for some very simple plots for data with:
 
-* [one continuous variable](#one-continuous-variable) - histograms and box plots  
-* [two continuous variables](#two-continuous-variables) - scatter plots  
-* [one continuous vs categorical variables](#one-continuous-and-one-categorical-variable) - box plots and bar plots  
+* [one continuous variable](#one-continuous-variable) - histograms and box plots
+* [two continuous variables](#two-continuous-variables) - scatter plots
+* [one continuous vs categorical variables](#one-continuous-and-one-categorical-variable) - box plots and bar plots
+
+Each plot is shown two ways: with the plotting functions built into R (**Base R**) and with the package [ggplot2](https://ggplot2.tidyverse.org) (**ggplot2**). Pick a tab to see one version; your choice applies to every example on the page. The sections after these, starting with [Introduction to ggplot2](#introduction-to-ggplot2), explain how ggplot2 works in more detail.
 
 ## One continuous variable
 
@@ -46,6 +48,9 @@ Firstly, download the sample data set  [Estuary_fish.csv](../../datasets/Estuary
 Fish <- read.csv(file = "data/Estuary_fish.csv")
 ```
 
+::: {.panel-tabset group="framework"}
+#### Base R
+
 A frequency histogram of the variable Length from the data frame Fish is easily produced with the `hist` function.
 
 ```{r}
@@ -54,7 +59,25 @@ A frequency histogram of the variable Length from the data frame Fish is easily 
 hist(Fish$Length)
 ```
 
+#### ggplot2
+
+Give the data frame to `ggplot`, say which variable goes on the x axis with `aes`, and add `geom_histogram`.
+
+```{r}
+#| label: basic-plotting-one-continuous-gg-2
+#| fig-alt: "Default ggplot histogram of fish lengths from 0 to 30 cm, right-skewed with most fish under 12 cm"
+#| message: false
+library(ggplot2)
+
+ggplot(Fish, aes(x = Length)) +
+  geom_histogram()
+```
+:::
+
 You can see straight away that all the fish were less than 30 cm long and that these length data are positively skewed - small fish are more frequent and large fish are rare.
+
+::: {.panel-tabset group="framework"}
+#### Base R
 
 You can alter the number of bins or the range of each bin with `breaks` argument. This will change the width and shape of the histogram. For example, if you wanted 15 bins, you would use:
 
@@ -66,9 +89,28 @@ hist(Fish$Length, breaks = 15)
 
 If you wanted each bin to be have a range of 2 cm, you would use `breaks=seq(0,30,by=2)` where the numbers in the brackets are the minimum, maximum and range for each bin.
 
+#### ggplot2
+
+`geom_histogram` uses 30 bins unless you tell it otherwise, and prints a message saying so. Set the number of bins with the `bins` argument. For example, if you wanted 15 bins, you would use:
+
+```{r}
+#| label: basic-plotting-one-continuous-gg-3
+#| fig-alt: "The same ggplot histogram of fish length with 15 wider bars, still right-skewed with most fish under 12 cm"
+ggplot(Fish, aes(x = Length)) +
+  geom_histogram(bins = 15)
+```
+
+If you wanted each bin to have a range of 2 cm, you would use `geom_histogram(binwidth = 2, boundary = 0)`, where `boundary = 0` makes the bins start at 0 rather than being centred on it.
+:::
+
 ### Box and whisker plots
 
-A box and whisker plot, or boxplot, is another useful way to visualise the distribution of a single, continuous variable. They are easily made with the `boxplot` function. The `horizontal=TRUE` argument makes the single axis horizontal.
+A box and whisker plot, or boxplot, is another useful way to visualise the distribution of a single, continuous variable.
+
+::: {.panel-tabset group="framework"}
+#### Base R
+
+Boxplots are easily made with the `boxplot` function. The `horizontal=TRUE` argument makes the single axis horizontal.
 
 ```{r}
 #| label: basic-plotting-one-continuous-4
@@ -76,15 +118,30 @@ A box and whisker plot, or boxplot, is another useful way to visualise the distr
 boxplot(Fish$Length, horizontal = TRUE)
 ```
 
-The plot shows the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.
+#### ggplot2
 
-Remember that the median is the value that has 50% of values larger and 50% of values smaller. Similarly, the quartiles represent the values with 25% of the values lower (the lower quartile) or 25% of values higher (the upper quartile). 
+Boxplots are made with `geom_boxplot`. Putting the variable on the x axis makes the box horizontal.
+
+```{r}
+#| label: basic-plotting-one-continuous-gg-4
+#| fig-alt: "Horizontal ggplot boxplot of fish length, with a median of about 8 cm, a long right whisker and a few outliers above 20 cm"
+ggplot(Fish, aes(x = Length)) +
+  geom_boxplot()
+```
+:::
+
+The plot shows the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The ends of the whiskers are the maximum and minimum values (excluding any outliers, which are drawn as separate points). The thick line is the median, with the boxes either side of the median line the lower and upper quartiles.
+
+Remember that the median is the value that has 50% of values larger and 50% of values smaller. Similarly, the quartiles represent the values with 25% of the values lower (the lower quartile) or 25% of values higher (the upper quartile).
 
 The boxplot will indicate skewness in your data if the median is not equally distant from the quartiles or maximum and minimum values. In this example, you can see that the median is closer to the minimum value than the maximum (indicating that low values are more common).
 
 ### Formatting plots
 
-These simple plots can be formatted using the basic R formatting in the graphics package. The code below gives you some of the more commonly used formatting commands to give you higher control over your plots.
+These simple plots can be formatted to give you more control over how they look. The code below gives you some of the more commonly used formatting commands.
+
+::: {.panel-tabset group="framework"}
+#### Base R
 
 **Add axis labels or titles**
 
@@ -131,13 +188,75 @@ Here we will simply change the colour of the histogram.
 hist(Fish$Length, xlab = "Fish length (cm)", main = "Frequency histogram of fish length", col = "red")
 ```
 
+#### ggplot2
+
+**Add axis labels or titles**
+
+Axis labels and titles are set with `labs`, by adding it to the plot with `+`.
+
+```{r}
+#| label: basic-plotting-one-continuous-gg-5
+#| fig-alt:
+#|   - "The ggplot histogram of fish lengths from 0 to 30 cm, right-skewed with most fish under 12 cm, with the title 'Frequency histogram of fish length' and x axis labelled 'Fish length (cm)'"
+#|   - "Horizontal ggplot boxplot of fish length with the title 'Box plot of fish length' and x axis labelled 'Fish length (cm)'"
+#| message: false
+ggplot(Fish, aes(x = Length)) +
+  geom_histogram() +
+  labs(x = "Fish length (cm)", y = "Frequency", title = "Frequency histogram of fish length")
+
+ggplot(Fish, aes(x = Length)) +
+  geom_boxplot() +
+  labs(x = "Fish length (cm)", title = "Box plot of fish length")
+```
+
+Leave out `title` to have no title, which is often unnecessary as details of what a plot illustrates are usually written in a figure legend below the plot. See [Titles and axis labels](#titles-and-axis-labels) for more options.
+
+**Edit axis limits**
+
+Axis limits are set with `coord_cartesian`, where a vector of the minimum and maximum limits is required. For example, to have each of these plot the data between 0 and 40, you would use:
+
+```{r, eval = FALSE}
+#| label: basic-plotting-one-continuous-gg-6
+ggplot(Fish, aes(x = Length)) +
+  geom_histogram() +
+  coord_cartesian(xlim = c(0, 40))
+
+ggplot(Fish, aes(x = Length)) +
+  geom_boxplot() +
+  coord_cartesian(xlim = c(0, 40))
+```
+
+You may also see `xlim(0, 40)` used for this. Unlike `coord_cartesian`, it drops any data outside the limits before plotting, which changes the histogram and boxplot rather than just zooming in.
+
+**Plot alignment**
+
+Put the variable on the y axis, with `aes(y = Length)`, if you want a vertical box plot.
+
+**Adding colour**
+
+In ggplot2, `fill` sets the colour inside bars and boxes, and `colour` sets the colour of their outlines. The same colour names work as in base R; type `colors()` for the whole range.
+
+Here we will simply change the colour of the histogram.
+
+```{r}
+#| label: basic-plotting-one-continuous-gg-7
+#| fig-alt: "The ggplot fish length histogram with the bars filled red"
+#| message: false
+ggplot(Fish, aes(x = Length)) +
+  geom_histogram(fill = "red") +
+  labs(x = "Fish length (cm)", y = "Frequency")
+```
+
+See [Colours and shapes](#colours-and-shapes) for more options.
+:::
+
 ### Further help
 
-Type `?hist` and `?boxplot` to get the R help for these functions. 
+Type `?hist` and `?boxplot`, or `?geom_histogram` and `?geom_boxplot`, to get the R help for these functions.
 
 **Author**: Stephanie Brodie
 
-**Year:** 2016
+**Year:** 2016 (updated 2026)
 
 ## Two continuous variables
 
@@ -154,7 +273,8 @@ Plant_height <- read.csv(file = "data/Plant_height.csv", header = TRUE)
 
 ### Scatterplots
 
-### Scatterplots###
+::: {.panel-tabset group="framework"}
+#### Base R
 
 To visualise how plant height varies with temperature, we can use a simple scatterplot, using the `plot` function. Place the Y variable on the left of the tilde (~) and the X variable on the right. The `data=Plant_height` argument tells R to look in the data frame Plant_height for those two variables.
 
@@ -171,11 +291,36 @@ If the two variables you would like to plot are in different objects in R, you w
 plot(y ~ x)
 ```
 
-where *y* and *X* are two vectors of equal length. 
+where *y* and *x* are two vectors of equal length.
+
+#### ggplot2
+
+To visualise how plant height varies with temperature, we can use a simple scatterplot. Give the data frame to `ggplot`, say which variables go on the x and y axes with `aes`, and add `geom_point`.
+
+```{r}
+#| label: basic-plotting-two-continuous-gg-2
+#| fig-alt: "Default ggplot scatterplot of plant height (m) against temperature (degrees C): most plants are under 10 m tall, with taller plants mainly at warmer sites"
+ggplot(Plant_height, aes(x = temp, y = height)) +
+  geom_point()
+```
+
+ggplot2 works with data frames, so if the two variables you would like to plot are in different objects in R, put them in a data frame first:
+
+```{r, eval=F}
+#| label: basic-plotting-two-continuous-gg-3
+ggplot(data.frame(x, y), aes(x = x, y = y)) +
+  geom_point()
+```
+
+where *y* and *x* are two vectors of equal length.
+:::
 
 ### Formatting plots
 
-Scatterplots can be formatted using the basic R formatting in the graphics package. The code below details some of the more commonly used formatting commands for simple scatterplots. These commands can be used for any plotting function in the graphics package.
+Scatterplots can be formatted to give you more control over how they look. The code below details some of the more commonly used formatting commands for simple scatterplots. These commands can be used for other types of plot too.
+
+::: {.panel-tabset group="framework"}
+#### Base R
 
 **Add axis labels or titles**
 Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.
@@ -195,7 +340,7 @@ plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Pla
 ```
 
 **Symbol style**
-The choice of symbols to use in plotting is extensive and choices are accessed using the `pch` argument in the graphical parameters. Type `?pch` to see all the choices. 
+The choice of symbols to use in plotting is extensive and choices are accessed using the `pch` argument in the graphical parameters. Type `?pch` to see all the choices.
 
 ![](images/pch.png){fig-alt="Chart of R's plotting symbols numbered 0 to 25, including open and filled circles, squares, triangles and diamonds, crosses and pluses, and symbols 21 to 25 with a separate fill colour"}
 
@@ -219,11 +364,69 @@ Here we will simply change the colour of the symbols to blue.
 plot(height ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "Plant height (m)", pch = 16, col = "blue")
 ```
 
+#### ggplot2
+
+**Add axis labels or titles**
+Axis labels and titles are set with `labs`. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.
+
+```{r}
+#| label: basic-plotting-two-continuous-gg-4
+#| fig-alt: "The same ggplot scatterplot of plant height (m) against temperature (degrees C): most plants are under 10 m tall, with taller plants mainly at warmer sites, with axis labels and the title 'Plant height vs temperature'"
+ggplot(Plant_height, aes(x = temp, y = height)) +
+  geom_point() +
+  labs(x = "Temperature (°C)", y = "Plant height (m)", title = "Plant height vs temperature")
+```
+
+**Edit axis limits**
+Axis limits are set with `coord_cartesian`, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 80 m, and the x axis to range between -20 and 30, use:
+
+```{r,eval=FALSE}
+#| label: basic-plotting-two-continuous-gg-5
+ggplot(Plant_height, aes(x = temp, y = height)) +
+  geom_point() +
+  labs(x = "Temperature (°C)", y = "Plant height (m)") +
+  coord_cartesian(xlim = c(-20, 30), ylim = c(0, 80))
+```
+
+**Symbol style**
+ggplot2 draws solid circles by default. Change the symbol with the `shape` argument of `geom_point`, which takes the same numbers as `pch` in base R (type `?pch` to see all the choices). For example, open circles (`shape = 1`) can make crowded points easier to see.
+
+```{r}
+#| label: basic-plotting-two-continuous-gg-6
+#| fig-alt: "The ggplot plant height scatterplot drawn with open circles and the y axis extended to 80 m"
+ggplot(Plant_height, aes(x = temp, y = height)) +
+  geom_point(shape = 1) +
+  labs(x = "Temperature (°C)", y = "Plant height (m)") +
+  coord_cartesian(ylim = c(0, 80))
+```
+
+**Adding colour**
+
+Colour the symbols with the `colour` argument of `geom_point`. There are over 600 colours that can be plotted, type `colours()` for the whole range.
+
+Here we will simply change the colour of the symbols to blue.
+
+```{r}
+#| label: basic-plotting-two-continuous-gg-7
+#| fig-alt: "The ggplot plant height scatterplot with filled blue circles"
+ggplot(Plant_height, aes(x = temp, y = height)) +
+  geom_point(colour = "blue") +
+  labs(x = "Temperature (°C)", y = "Plant height (m)")
+```
+
+See [Colours and shapes](#colours-and-shapes) for more options, including colouring points by another variable.
+:::
+
 **Adding a line of best fit**
 
-To further explore the relationship between two variables you can add a line of best fit. For example, to add the line of best fit from a simple linear regression, we would use the linear modelling function, `lm`, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter `abline`.
+To further explore the relationship between two variables you can add a line of best fit, such as the line from a simple linear regression.
 
 See the page on [linear regression](../statistical-methods/linear-regression.qmd) for the analysis of tree height versus temperature for this data set. The dependent variable analysed was the log transformed data for tree height (loght). To plot this against temperature with the line of best fit from the linear model, we would use:
+
+::: {.panel-tabset group="framework"}
+#### Base R
+
+Use the linear modelling function, `lm`, to obtain the slope and intercept, and add this line to the scatterplot via the graphical parameter `abline`.
 
 ```{r}
 #| label: basic-plotting-two-continuous-8
@@ -232,19 +435,34 @@ plot(loght ~ temp, data = Plant_height, xlab = "Temperature (°C)", ylab = "log(
 abline(lm(loght ~ temp, data = Plant_height))
 ```
 
+#### ggplot2
+
+Add `geom_smooth` with `method = "lm"`, which fits the linear model and draws its line. `se = FALSE` leaves out the shaded 95% confidence band around the line.
+
+```{r}
+#| label: basic-plotting-two-continuous-gg-8
+#| fig-alt: "ggplot scatterplot of log plant height against temperature with a straight regression line rising from left to right"
+#| message: false
+ggplot(Plant_height, aes(x = temp, y = loght)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "Temperature (°C)", y = "log(Plant height)")
+```
+:::
+
 ### Further help
 
-Type `?plot` and `?abline` to get the R help for these functions. 
+Type `?plot` and `?abline`, or `?geom_point` and `?geom_smooth`, to get the R help for these functions.
 
 **Authors**: Stephanie Brodie & Alistair Poore
 
-**Year:** 2016
+**Year:** 2016 (updated 2026)
 
 ## One continuous and one categorical variable
 
-Visualising how a measured variable relates to other variables of interest is essential for data exploration and communicating the results of scientific research. This page details how to plot a single, continuous variable against levels of a categorical predictor variable. 
+Visualising how a measured variable relates to other variables of interest is essential for data exploration and communicating the results of scientific research. This page details how to plot a single, continuous variable against levels of a categorical predictor variable.
 
-These sorts of plots are very commonly used in the biological, earth and environmental sciences. For example, to view how a given variable differs between an experimental treatment and a control, or among sites and sampling times in environmental sampling. 
+These sorts of plots are very commonly used in the biological, earth and environmental sciences. For example, to view how a given variable differs between an experimental treatment and a control, or among sites and sampling times in environmental sampling.
 
 ![](images/Single_continuous_vs_categorical_variable_image.jpg){fig-alt="The Big Prawn, a giant orange prawn sculpture on a frame against a blue sky"}
 
@@ -259,9 +477,12 @@ Prawns <- read.csv(file = "data/Prawns_MR.csv")
 
 ### Boxplots
 
-Boxplots are easily made with the `boxplot` function. Boxplots show the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The top and bottom whiskers are the maximum and minimum values (excluding any outliers that are indicated by a circle). The thick black line is the median, with the boxes either side of the median line the lower and upper quartiles.
+Boxplots show the distribution of a variable by indicating the median, quartiles, maximum and minimum of a variable. The ends of the whiskers are the maximum and minimum values (excluding any outliers, which are drawn as separate points). The thick line is the median, with the boxes either side of the median line the lower and upper quartiles.
 
 To contrast metabolic rate across the two species, we would use:
+
+::: {.panel-tabset group="framework"}
+#### Base R
 
 ```{r}
 #| label: basic-plotting-one-continuous-one-factor-2
@@ -269,15 +490,29 @@ To contrast metabolic rate across the two species, we would use:
 boxplot(Metabolic_rate ~ Species, data = Prawns)
 ```
 
-The continuous variable is on the left of the tilde (~) and the categorical variable is on the right. Straight away you can see that species B has a higher metabolic rate than species A.
+The continuous variable is on the left of the tilde (~) and the categorical variable is on the right.
+
+#### ggplot2
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-gg-2
+#| fig-alt: "Default ggplot boxplots of metabolic rate for two prawn species: species B (median about 0.75) is clearly higher than species A (median about 0.53)"
+ggplot(Prawns, aes(x = Species, y = Metabolic_rate)) +
+  geom_boxplot()
+```
+
+The categorical variable is on the x axis and the continuous variable is on the y axis.
+:::
+
+Straight away you can see that species B has a higher metabolic rate than species A.
 
 ### Bar plots
 
 These sorts of data are also commonly visualised with a bar plot that displays the means of the continuous variable for each level of the categorical variable, with error bars displaying some measures of variation within each category. The error bars could be the standard deviation, standard error or 95% confidence intervals.
 
-While commonly used, they are not so easy to create in the base functions in R. There are various ways to do this, but one is to use the `summarise` and `group_by` functions from the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) to calculate the means and measures of variation for each level of your categorical variable (see [Summarising data](../data-literacy/summarising-tables/index.qmd)).
+To make these, first calculate the means and measures of variation for each level of your categorical variable. There are various ways to do this, but one is to use the `summarise` and `group_by` functions from the package [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html) (see [Summarising data](../data-literacy/summarising-tables/index.qmd)).
 
-Here is some sample code to plot means +/- standard deviations. For more control over error bars, we recommend using the more advanced plotting options in the package ggplot2 (see [bar plots with error bars](#bar-plots-with-error-bars)).
+Here is some sample code to calculate means +/- standard deviations.
 
 ```{r}
 #| label: one-continuous-one-factor-3
@@ -297,6 +532,9 @@ Species.summary <- Prawns %>% # the names of the new data frame and the data fra
 
 In a new data frame called Species.summary, we now have the means, standard deviations and the lower and upper values that set the size of the error bars for each level of the grouping variable. The  limits for the error bars were calculated by adding (upper) or subtracting (lower) the standard deviation from the mean.
 
+::: {.panel-tabset group="framework"}
+#### Base R
+
 We can now use the `barplot` and `arrows` functions to make a plot with error bars.
 
 ```{r}
@@ -310,13 +548,32 @@ Prawn.plot <- barplot(Species.summary$mean,
 arrows(Prawn.plot, Species.summary$lower, Prawn.plot, Species.summary$upper, angle = 90, code = 3)
 ```
 
-Note that plots of means and error bars can be misleading as they hide the true distributions of the data. Means can also be misleading when data are very skewed, and calculations for error bars using *t* statistics (e.g., 95% confidence intervals) assume the data are normally distributed. 
+#### ggplot2
+
+We can now use `geom_col` to draw the bars and `geom_errorbar` to add the error bars. `ymin` and `ymax` set the bottom and top of each error bar, and `width` sets how wide they are.
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-gg-4
+#| fig-alt: "ggplot bar chart of mean metabolic rate with error bars for prawn species A (about 0.52) and B (about 0.76)"
+ggplot(Species.summary, aes(x = Species, y = mean)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = lower, ymax = upper), width = 0.2) +
+  labs(y = "Metabolic rate")
+```
+
+See [Bar plots with error bars](#bar-plots-with-error-bars) for more on this.
+:::
+
+Note that plots of means and error bars can be misleading as they hide the true distributions of the data. Means can also be misleading when data are very skewed, and calculations for error bars using *t* statistics (e.g., 95% confidence intervals) assume the data are normally distributed.
 
 ### Formatting plots
 
-Box plots and bar plots can be formatted using the basic R formatting in the base graphics package. The code below details some of the more commonly used formatting commands for these plots. These commands can be used for any plotting function in the graphics package.
+Box plots and bar plots can be formatted to give you more control over how they look. The code below details some of the more commonly used formatting commands for these plots. These commands can be used for other types of plot too.
 
-**Add axis labels or titles**  
+::: {.panel-tabset group="framework"}
+#### Base R
+
+**Add axis labels or titles**
 Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provided with the `main` argument. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.
 
 ```{r,eval=FALSE}
@@ -324,7 +581,7 @@ Axis labels are produced with the `xlab` and `ylab` arguments. Titles are provid
 boxplot(Metabolic_rate ~ Species, data = Prawns, xlab = "Species", ylab = "Metabolic rate")
 ```
 
-**Edit axis limits**  
+**Edit axis limits**
 Axis limits are set by the `xlim` and `ylim` arguments, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 1, use:
 
 ```{r,eval=FALSE}
@@ -335,8 +592,8 @@ boxplot(Metabolic_rate ~ Species,
 )
 ```
 
-**Renaming levels of the categorical factor**  
-If the levels of your categorical factor are not ideal for the plot, you can rename those with the 
+**Renaming levels of the categorical factor**
+If the levels of your categorical factor are not ideal for the plot, you can rename those with the
 `names` argument. For example, to put the actual species names on:
 
 ```{r}
@@ -348,7 +605,7 @@ boxplot(Metabolic_rate ~ Species,
 )
 ```
 
-**Adding colour** 
+**Adding colour**
 Colour can be added to any part of the plots (axis, fonts etc.) using `col` argument. There are over 600 colours that can be plotted, type `colours()` for the whole range.
 
 Here we will simply change the colour of the bars in the bar plot to red.
@@ -362,13 +619,64 @@ barplot(Species.summary$mean,
 )
 ```
 
+#### ggplot2
+
+**Add axis labels or titles**
+Axis labels and titles are set with `labs`. Note that figures in scientific publications rarely have a title, but include information about the plot in a figure legend presented below the plot.
+
+```{r,eval=FALSE}
+#| label: basic-plotting-one-continuous-one-factor-gg-5
+ggplot(Prawns, aes(x = Species, y = Metabolic_rate)) +
+  geom_boxplot() +
+  labs(x = "Species", y = "Metabolic rate")
+```
+
+**Edit axis limits**
+Axis limits are set with `coord_cartesian`, where a vector of the minimum and maximum limits is required. For example to set the Y axis to have a minimum of zero and a maximum of 1, use:
+
+```{r,eval=FALSE}
+#| label: basic-plotting-one-continuous-one-factor-gg-6
+ggplot(Prawns, aes(x = Species, y = Metabolic_rate)) +
+  geom_boxplot() +
+  labs(x = "Species", y = "Metabolic rate") +
+  coord_cartesian(ylim = c(0, 1))
+```
+
+**Renaming levels of the categorical factor**
+If the levels of your categorical factor are not ideal for the plot, you can rename those with the `labels` argument of `scale_x_discrete`. For example, to put the actual species names on:
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-gg-7
+#| fig-alt: "The ggplot prawn boxplots with axis labels and the species named Penaeus monodon and Fenneropenaeus merguiensis"
+ggplot(Prawns, aes(x = Species, y = Metabolic_rate)) +
+  geom_boxplot() +
+  labs(x = "Species", y = "Metabolic rate") +
+  scale_x_discrete(labels = c(A = "Penaeus monodon", B = "Fenneropenaeus merguiensis"))
+```
+
+**Adding colour**
+In ggplot2, `fill` sets the colour inside bars and boxes, and `colour` sets the colour of their outlines. There are over 600 colours that can be plotted, type `colours()` for the whole range.
+
+Here we will simply change the colour of the bars in the bar plot to red.
+
+```{r}
+#| label: basic-plotting-one-continuous-one-factor-gg-8
+#| fig-alt: "The ggplot prawn bar chart of mean metabolic rate with red bars"
+ggplot(Species.summary, aes(x = Species, y = mean)) +
+  geom_col(fill = "red") +
+  labs(x = "Species", y = "Metabolic rate")
+```
+
+See [Colours and shapes](#colours-and-shapes) for more options.
+:::
+
 ### Further help
 
-Type `?boxplot` and `?barplot` to get the R help for these functions. 
+Type `?boxplot` and `?barplot`, or `?geom_boxplot` and `?geom_col`, to get the R help for these functions.
 
 **Authors**: Stephanie Brodie & Alistair Poore
 
-**Year:** 2016
+**Year:** 2016 (updated 2026)
 
 ## Introduction to ggplot2
 

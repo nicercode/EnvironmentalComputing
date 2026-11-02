@@ -48,6 +48,11 @@ jobs:
         with:
           dependencies: '"hard"'
 
+      # mvabund's binary needs the GSL library, but mvabund doesn't declare it
+      # as a system requirement, so the step above doesn't install it
+      - name: Install GSL
+        run: sudo apt-get update -qq && sudo apt-get install -y libgsl-dev
+
       # the runner image usually ships a recent Quarto; installing a pinned
       # older one fails (apt refuses to downgrade), so only install if missing
       - name: Check for Quarto
@@ -68,6 +73,7 @@ jobs:
         run: rm -rf _freeze
 
       - name: Render
+        id: render
         run: quarto render
 
       - name: Find code that errors
@@ -84,12 +90,17 @@ jobs:
           fi
 
       # every old Hugo/WordPress address in _redirects must still land on a
-      # real chapter and section; fix failures by editing _redirects
+      # real chapter and section; fix failures by editing _redirects.
+      # This and the link checks run even if chapter code errors, as long as
+      # the book rendered, so the monthly run still checks external links.
       - name: Check redirects
+        id: redirects
+        if: ${{ !cancelled() && steps.render.outcome == 'success' }}
         run: python3 migration/check_redirects.py
 
       - name: Check links
         id: links
+        if: ${{ !cancelled() && steps.render.outcome == 'success' }}
         uses: lycheeverse/lychee-action@v2
         with:
           # 403/429: sites that refuse automated checkers (Stack Overflow,
@@ -107,7 +118,7 @@ jobs:
           fail: false
 
       - name: Fail on broken internal links
-        if: env.FULL_RUN != 'true' && steps.links.outputs.exit_code != 0
+        if: ${{ !cancelled() && env.FULL_RUN != 'true' && steps.links.outputs.exit_code != 0 }}
         run: |
           cat lychee-report.md >> "$GITHUB_STEP_SUMMARY"
           exit 1
@@ -149,9 +160,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
-          # a step that failed (installing packages, rendering) stops the
-          # later ones, so their outputs may be missing
-          failed=${{ job.status != 'success' }}
+          # chapter code errors and broken links are reported in their own
+          # sections, so only a failed install, render or redirect check
+          # counts as the build failing (a render that didn't run also
+          # counts, because an earlier step failed)
+          failed=${{ steps.render.outcome != 'success' || steps.redirects.outcome == 'failure' }}
           links_broken=${{ steps.links.outputs.exit_code != '' && steps.links.outputs.exit_code != '0' }}
           if [ -s chunk-errors.txt ]; then chunk_errors=true; else chunk_errors=false; fi
           if [ "$failed$links_broken$chunk_errors" = falsefalsefalse ]; then

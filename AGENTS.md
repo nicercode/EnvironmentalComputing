@@ -14,3 +14,12 @@ Rules that are easy to break without noticing:
 - **Keep `_redirects` in step with the chapters.** It maps old Hugo and WordPress addresses (linked from course materials) to book chapters and sections, and is copied into `_book/` through `resources` in `_quarto.yml`. When you move or rename a chapter, or change a heading a redirect points to, update the matching lines; CI's "Check redirects" step fails otherwise. Never delete redirects.
 - **Edit chapters directly.** The `.qmd` files are the source. `migration/` is a record of the 2026 port from Hugo; don't re-run `migrate.py` (it refuses without `--force`) or record edits in `page-map.yml`.
 - **Edit `README.qmd`, not only `README.md`.** `README.md` is rendered from it (`quarto render README.qmd`, which needs R and the GitHub API); if you change one by hand, make the same change to the other.
+
+## Cross-repo context (maintainers)
+
+This book is a shared resource for UNSW's BEES quantitative-skills subjects, which link to its chapters as reading. Conventions that span those repos (labels, `[prefix]` issue titles, the project board, cross-repo playbooks) live in the hub, `nicercode/UNSW_BEES_quantitative_curriculum`. The hub is **private**: it needs nicercode access, and its content must not be copied into this public repo. Guidance for outside contributors stays here, in [content/contributing.qmd](content/contributing.qmd).
+
+Two rules follow from this book's place in the family:
+
+- Course materials link to chapters by URL, so the `_redirects` rule above protects every subject, not only this site.
+- Nothing from a subject's assessments (solutions, answer keys, exam questions) or any student data belongs in this repo, even as an example.

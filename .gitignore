@@ -19,3 +19,5 @@ Rplots.pdf
 # JavaScript libraries' own build tools; the site never uses them, and
 # Dependabot raises alerts on them
 _freeze/site_libs/**/package.json
+# Claude Code: per-user settings stay local
+.claude/settings.local.json

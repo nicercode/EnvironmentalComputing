@@ -1,0 +1,46 @@
+# Fails if the repo contains anything that looks like UNSW student data.
+# This repo is public: student zIDs, rosters, marks, submissions and scans
+# must never be committed. Use fake zIDs in examples and tests: z9 numbers
+# (UNSW does not issue them), repeated digits (z1111111) or z1234567.
+# A deliberate exception goes on its own line in .github/privacy-allow.txt.
+name: Privacy guard
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  privacy-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: No real-looking zIDs
+        shell: bash
+        run: |
+          allow=.github/privacy-allow.txt
+          hits=$(git grep -InowE 'z[0-9]{7}' -- . ':!.github/privacy-allow.txt' \
+            | grep -vE ':z9[0-9]{6}$|:z1234567$' \
+            | grep -vE ':z(0{7}|1{7}|2{7}|3{7}|4{7}|5{7}|6{7}|7{7}|8{7}|9{7})$' \
+            | { if [ -f "$allow" ]; then grep -vwFf <(grep -vE '^\s*(#|$)' "$allow"); else cat; fi; } \
+            || true)
+          if [ -n "$hits" ]; then
+            echo "::error::Real-looking zIDs found. Use fake ones (z9xxxxxx, z1111111, z1234567)."
+            echo "$hits"
+            exit 1
+          fi
+
+      - name: No student-data files
+        shell: bash
+        run: |
+          hits=$(git ls-files | grep -iE \
+            '(^|/)(roster|grades?|marks)[^/]*\.(csv|tsv|xlsx?)$|submission|(^|/)scans?_merged/|(^|/)completed_quiz|(^|/)responses/|\.eml$' \
+            || true)
+          if [ -n "$hits" ]; then
+            echo "::error::Files that look like student data (rosters, marks, submissions, scans, email)."
+            echo "$hits"
+            exit 1
+          fi

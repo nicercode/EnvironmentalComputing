@@ -77,7 +77,8 @@ book:
 
   page-footer:
     left: |
-      Environmental Computing is written by [its editors, authors and contributors](/content/preface.html).
+      Environmental Computing is written by [its editors, authors and contributors](/content/preface.html).\
+      [Supported by](/content/preface.html#acknowledgments) the UNSW School of Biological, Earth and Environmental Sciences, a UNSW Learning and Teaching Innovation Grant and the UNSW Evolution and Ecology Research Centre.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/hexsticker_EC.png

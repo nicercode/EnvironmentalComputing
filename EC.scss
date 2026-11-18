@@ -134,6 +134,36 @@ main.content:has(.hero) img.quarto-cover-image { display: none; }
   .hero > p { flex-basis: auto; }
 }
 
+/* About page: supporters' logos, all the same height. The logos are dark on
+   white, so they sit on a white card in dark mode too. 80px is about the
+   largest the source PNGs (140-160px tall) stay sharp at on 2x screens. */
+.supporter-logos p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2.5rem;
+}
+.supporter-logos img {
+  height: 80px;
+  width: auto;
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+@media (max-width: 575.98px) {
+  .supporter-logos img { height: 60px; }
+}
+
+/* Footer: Quarto splits it into three equal columns, but the centre one is
+   empty on wide screens (it holds only the mobile "Edit this page" links).
+   Let the left column, with the authors and supporters, take all the width
+   the short "built with Quarto" note on the right does not need. */
+@media (min-width: 768px) {
+  .nav-footer-left { flex: 1 1 0px; }
+  .nav-footer-center { flex: 0 0 0px; }
+  .nav-footer-right { flex: 0 0 auto; padding-left: 2rem; }
+}
+
 /* Part pages: chapter listings show only title and description, so drop
    the empty date/author column Quarto reserves on the right of each row. */
 #listing-chapters div.quarto-post .metadata { display: none; }

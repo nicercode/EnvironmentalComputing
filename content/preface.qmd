@@ -24,7 +24,7 @@ This site is a brief introduction to techniques for data organisation, graphics,
 
 This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
 
-Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](https://www.unsw.edu.au/science/our-schools/bees) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford. Development of the second generation of this site saw migration to GitHub and Hugo, led by Dr Fonti Kar and A/Prof Daniel Falster and with the support of the [Evolution and Ecology Research Centre](https://www.unsw.edu.au/research/eerc). In 2026 we undertook a major upgrade to Quarto and a new structure, led by A/Prof Daniel Falster, Prof Will Cornwell and Prof Alistair Poore.  
+Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](https://www.unsw.edu.au/science/our-schools/bees) at the University of New South Wales. Development of the second generation of this site saw migration to GitHub and Hugo, led by Dr Fonti Kar and A/Prof Daniel Falster. In 2026 we undertook a major upgrade to Quarto and a new structure, led by A/Prof Daniel Falster, Prof Will Cornwell and Prof Alistair Poore.  
 
 ## Editors and authors
 
@@ -43,6 +43,17 @@ Resources were developed initially to assist with teaching quantitative skills t
 **Year:** 2016
 
 ## Acknowledgments
+
+Environmental Computing has been supported by:
+
+- the [School of Biological, Earth and Environmental Sciences](https://www.unsw.edu.au/science/our-schools/bees) at UNSW Sydney, where the site began and where it is used in teaching
+- a UNSW Learning and Teaching Innovation Grant to Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford, which funded the first version of the site
+- the [Evolution and Ecology Research Centre](https://www.unsw.edu.au/research/eerc) at UNSW, which funded the 2022 rebuild on GitHub and Hugo
+
+::: {.supporter-logos}
+![UNSW Sydney logo](../images/logos/unsw.png)
+![UNSW Evolution & Ecology Research Centre logo](../images/logos/eerc.png)
+:::
 
 ```{r}
 #| label: preface-2
@@ -100,7 +111,7 @@ contributors <- contributors |>
     desc = ifelse(is.na(name), profile, paste0(name, " (", profile, ")"))
   )
 
-cat("Thanks to everyone who has contributed new content and fixes on GitHub:\n\n")
+cat("Thanks to everyone who has [contributed new content and fixes on GitHub](https://github.com/nicercode/EnvironmentalComputing/graphs/contributors):\n\n")
 cat(paste0("- ", contributors$desc, collapse = "\n"), "\n")
 ```
 

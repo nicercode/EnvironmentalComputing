@@ -105,6 +105,22 @@ main.content:has(.hero) img.quarto-cover-image { display: none; }
   .hero > p { flex-basis: auto; }
 }
 
+/* About page: supporters' logos, all the same height and kept small. The
+   logos are dark on white, so they sit on a white card in dark mode too. */
+.supporter-logos p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2rem;
+}
+.supporter-logos img {
+  height: 48px;
+  width: auto;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+
 /* Part pages: chapter listings show only title and description, so drop
    the empty date/author column Quarto reserves on the right of each row. */
 #listing-chapters div.quarto-post .metadata { display: none; }

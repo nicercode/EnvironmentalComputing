@@ -44,6 +44,17 @@ Resources were developed initially to assist with teaching quantitative skills t
 
 ## Acknowledgments
 
+Environmental Computing has been supported by:
+
+- the [School of Biological, Earth and Environmental Sciences](https://www.unsw.edu.au/science/our-schools/bees) at UNSW Sydney, where the site began and where it is used in teaching
+- a UNSW Learning and Teaching Innovation Grant to Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford, which funded the first version of the site
+- the [Evolution and Ecology Research Centre](https://www.unsw.edu.au/research/eerc) at UNSW, which funded the 2022 rebuild on GitHub and Hugo
+
+::: {.supporter-logos}
+![UNSW Sydney logo](../images/logos/unsw.png)
+![UNSW Evolution & Ecology Research Centre logo](../images/logos/eerc.png)
+:::
+
 ```{r}
 #| label: preface-2
 #| eval: false

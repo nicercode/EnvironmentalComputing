@@ -10,6 +10,9 @@ $ec-code-color: #323232 !default;
 $ec-code-link-underline: #ccc !default;
 $ec-pre-bg-start: #f8f8f8 !default;
 $ec-pre-bg-end: #f1f1f1 !default;
+$ec-tab-bg: #f1f1f1 !default;
+$ec-tab-border: #dee2e6 !default;
+$ec-tab-active-color: #fff !default;
 
 /*-- scss:rules --*/
 
@@ -63,6 +66,32 @@ code a:any-link {
 
 pre {
   background-image: linear-gradient(160deg,$ec-pre-bg-start 0,$ec-pre-bg-end 100%);
+}
+
+/* Tabsets ------------------------------------------------------- */
+
+/* Bootstrap's default tabs read as a heading and a link. Make them look
+   like switchable options: grey inactive tabs, a solid green active tab
+   sitting on a green rule. */
+.panel-tabset .nav-tabs {
+  border-bottom: 2px solid $ec-accent;
+  gap: .25rem;
+}
+.panel-tabset .nav-tabs .nav-link {
+  color: $ec-muted;
+  background: $ec-tab-bg;
+  border: 1px solid $ec-tab-border;
+  border-bottom: none;
+  font-weight: 500;
+}
+.panel-tabset .nav-tabs .nav-link:hover,
+.panel-tabset .nav-tabs .nav-link:focus-visible {
+  color: $ec-accent;
+}
+.panel-tabset .nav-tabs .nav-link.active {
+  color: $ec-tab-active-color;
+  background: $ec-accent;
+  border-color: $ec-accent;
 }
 
 main.content:has(.hero) h1 { margin-bottom: 1.25rem; }

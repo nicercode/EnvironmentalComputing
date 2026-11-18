@@ -24,7 +24,7 @@ This site is a brief introduction to techniques for data organisation, graphics,
 
 This site integrates different techniques used by researchers and postgraduates at the [University of New South Wales, Australia](https://www.unsw.edu.au/), who have provided their knowledge and skills to assist others develop skills for rigorous environmental science.
 
-Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](https://www.unsw.edu.au/science/our-schools/bees) at the University of New South Wales, supported by a Learning and Teaching Innovation Grant to Alistair Poore, Will Cornwell, Iain Suthers and Richard Kingsford. Development of the second generation of this site saw migration to GitHub and Hugo, led by Dr Fonti Kar and A/Prof Daniel Falster and with the support of the [Evolution and Ecology Research Centre](https://www.unsw.edu.au/research/eerc). In 2026 we undertook a major upgrade to Quarto and a new structure, led by A/Prof Daniel Falster, Prof Will Cornwell and Prof Alistair Poore.  
+Resources were developed initially to assist with teaching quantitative skills to undergraduate and postgraduate students in the [School of Biological, Earth and Environmental Sciences](https://www.unsw.edu.au/science/our-schools/bees) at the University of New South Wales. Development of the second generation of this site saw migration to GitHub and Hugo, led by Dr Fonti Kar and A/Prof Daniel Falster. In 2026 we undertook a major upgrade to Quarto and a new structure, led by A/Prof Daniel Falster, Prof Will Cornwell and Prof Alistair Poore.  
 
 ## Editors and authors
 

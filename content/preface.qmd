@@ -111,7 +111,7 @@ contributors <- contributors |>
     desc = ifelse(is.na(name), profile, paste0(name, " (", profile, ")"))
   )
 
-cat("Thanks to everyone who has contributed new content and fixes on GitHub:\n\n")
+cat("Thanks to everyone who has [contributed new content and fixes on GitHub](https://github.com/nicercode/EnvironmentalComputing/graphs/contributors):\n\n")
 cat(paste0("- ", contributors$desc, collapse = "\n"), "\n")
 ```
 

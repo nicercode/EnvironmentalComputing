@@ -2,7 +2,13 @@
 # This repo is public: student zIDs, rosters, marks, submissions and scans
 # must never be committed. Use fake zIDs in examples and tests: z9 numbers
 # (UNSW does not issue them), repeated digits (z1111111) or z1234567.
-# A deliberate exception goes on its own line in .github/privacy-allow.txt.
+# A deliberate exception is a single zID on its own line in
+# .github/privacy-allow.txt; it exempts that zID everywhere, nothing else.
+#
+# This is a backstop, not a gate: anything pushed to GitHub is public at once,
+# so check before you push. Binary files (spreadsheets, PDFs, images) are not
+# searched for zIDs; the file-name check is the only guard against those.
+# Both steps fail if their search itself errors, rather than passing silently.
 name: Privacy guard
 
 on:
@@ -22,13 +28,32 @@ jobs:
         shell: bash
         run: |
           allow=.github/privacy-allow.txt
-          hits=$(git grep -InowE 'z[0-9]{7}' -- . ':!.github/privacy-allow.txt' \
-            | grep -vE ':z9[0-9]{6}$|:z1234567$' \
-            | grep -vE ':z(0{7}|1{7}|2{7}|3{7}|4{7}|5{7}|6{7}|7{7}|8{7}|9{7})$' \
-            | { if [ -f "$allow" ]; then grep -vwFf <(grep -vE '^\s*(#|$)' "$allow"); else cat; fi; } \
-            || true)
+          # git grep exits 1 when nothing matches; anything higher is an error.
+          status=0
+          matches=$(git grep -IinowE 'z[0-9]{7}' -- . ":!$allow") || status=$?
+          if [ "$status" -gt 1 ]; then
+            echo "::error::git grep failed (exit $status); cannot check for zIDs."
+            exit 1
+          fi
+          # Each match is path:line:zID. Drop fakes and allowed zIDs (compared
+          # exactly, ignoring case), then report path:line only, so the log
+          # does not repeat the zID.
+          hits=$(printf '%s\n' "$matches" | awk -v allowfile="$allow" '
+            BEGIN {
+              while ((getline l < allowfile) > 0) {
+                gsub(/^[ \t]+|[ \t\r]+$/, "", l)
+                if (l != "" && l !~ /^#/) ok[tolower(l)] = 1
+              }
+            }
+            /./ {
+              n = split($0, f, ":"); id = tolower(f[n]); digits = substr(id, 2)
+              d = substr(digits, 1, 1)
+              if (id ~ /^z9/ || id == "z1234567" || digits == d d d d d d d) next
+              if (id in ok) next
+              sub(/:[^:]*$/, ""); print
+            }')
           if [ -n "$hits" ]; then
-            echo "::error::Real-looking zIDs found. Use fake ones (z9xxxxxx, z1111111, z1234567)."
+            echo "::error::Real-looking zIDs at the lines below. Use fake ones (z9xxxxxx, z1111111, z1234567)."
             echo "$hits"
             exit 1
           fi
@@ -36,11 +61,19 @@ jobs:
       - name: No student-data files
         shell: bash
         run: |
-          hits=$(git ls-files | grep -iE \
-            '(^|/)(roster|grades?|marks)[^/]*\.(csv|tsv|xlsx?)$|submission|(^|/)scans?_merged/|(^|/)completed_quiz|(^|/)responses/|\.eml$' \
-            || true)
+          # List files first: in a pipeline, grep's "no match" exit would mask
+          # a git failure. grep exits 1 when nothing matches; higher is an error.
+          files=$(git ls-files)
+          status=0
+          hits=$(printf '%s\n' "$files" | grep -iE \
+            '(^|/)(roster|grades?|marks|students?|enrol(l?ment)?s?|class_?lists?)[^/]*\.(csv|tsv|xlsx?)$|(^|/)[^/]*zids?[^/]*\.(csv|tsv|xlsx?)$|submission|(^|/)scans?_merged/|(^|/)completed_quiz|(^|/)responses/|\.eml$') \
+            || status=$?
+          if [ "$status" -gt 1 ]; then
+            echo "::error::grep failed (exit $status); cannot check file names."
+            exit 1
+          fi
           if [ -n "$hits" ]; then
-            echo "::error::Files that look like student data (rosters, marks, submissions, scans, email)."
+            echo "::error::Files that look like student data (rosters, marks, enrolments, submissions, scans, email)."
             echo "$hits"
             exit 1
           fi
